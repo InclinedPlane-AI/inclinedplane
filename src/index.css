@@ -141,10 +141,7 @@
 
   /* Tilt card */
   .tilt-card {
-    transition: transform 0.3s ease;
-  }
-  .tilt-card:hover {
-    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+    transition: box-shadow 0.3s ease;
   }
 
   /* Snap scroll */
@@ -153,6 +150,7 @@
     overflow-y: auto;
     height: 100vh;
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 
   .snap-section {
