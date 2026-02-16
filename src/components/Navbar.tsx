@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Percent } from "lucide-react";
 
 const navLinks = [
   { label: "Thesis", path: "/thesis" },
@@ -45,7 +45,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group" data-cursor-hover>
           <div className="w-8 h-8 bg-gradient-orange rounded-lg flex items-center justify-center font-bold text-primary-foreground text-sm">
-            IP
+            <Percent size={18} strokeWidth={2.5} />
           </div>
           <span className="font-semibold text-foreground text-sm tracking-tight">
             Inclined Plane

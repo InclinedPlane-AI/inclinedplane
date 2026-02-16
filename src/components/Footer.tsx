@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Percent } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -8,8 +9,8 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-orange rounded-lg flex items-center justify-center font-bold text-primary-foreground text-sm">
-                IP
+              <div className="w-8 h-8 bg-gradient-orange rounded-lg flex items-center justify-center text-primary-foreground">
+                <Percent size={18} strokeWidth={2.5} />
               </div>
               <span className="font-semibold text-foreground text-sm">
                 Inclined Plane
