@@ -44,8 +44,8 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group" data-cursor-hover>
-          <div className="w-8 h-8 bg-gradient-orange rounded-lg flex items-center justify-center font-bold text-primary-foreground text-sm">
-            <Percent size={18} strokeWidth={2.5} />
+          <div className="w-8 h-8 flex items-center justify-center text-primary drop-shadow-[0_0_8px_hsl(25,100%,50%,0.6)]">
+            <Percent size={22} strokeWidth={2.5} />
           </div>
           <span className="font-semibold text-foreground text-sm tracking-tight">
             Inclined Plane

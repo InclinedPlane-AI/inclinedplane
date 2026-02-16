@@ -9,8 +9,8 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-orange rounded-lg flex items-center justify-center text-primary-foreground">
-                <Percent size={18} strokeWidth={2.5} />
+              <div className="w-8 h-8 flex items-center justify-center text-primary drop-shadow-[0_0_8px_hsl(25,100%,50%,0.6)]">
+                <Percent size={22} strokeWidth={2.5} />
               </div>
               <span className="font-semibold text-foreground text-sm">
                 Inclined Plane
