@@ -44,10 +44,17 @@
     --glass-bg: 0 0% 100%;
     --glass-opacity: 0.05;
     --glass-blur: 20px;
+    --glass-border: 0 0% 100% / 0.06;
+    --glass-strong-bg: 0 0% 100%;
+    --glass-strong-opacity: 0.08;
+    --glass-strong-border: 0 0% 100% / 0.1;
 
     --surface-1: 240 12% 6%;
     --surface-2: 240 10% 9%;
     --surface-3: 240 8% 12%;
+
+    --aurora-opacity: 0.12;
+    --aurora-overlay: var(--background) / 0.4;
 
     --sidebar-background: 240 18% 4.5%;
     --sidebar-foreground: 0 0% 95%;
@@ -57,6 +64,65 @@
     --sidebar-accent-foreground: 0 0% 85%;
     --sidebar-border: 240 8% 14%;
     --sidebar-ring: 25 100% 50%;
+  }
+
+  .light {
+    --background: 30 20% 96%;
+    --foreground: 240 15% 10%;
+
+    --card: 30 15% 98%;
+    --card-foreground: 240 15% 10%;
+
+    --popover: 30 15% 98%;
+    --popover-foreground: 240 15% 10%;
+
+    --primary: 25 95% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 30 10% 92%;
+    --secondary-foreground: 240 10% 35%;
+
+    --muted: 30 8% 90%;
+    --muted-foreground: 240 5% 42%;
+
+    --accent: 31 95% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 10% 86%;
+    --input: 30 10% 86%;
+    --ring: 25 95% 48%;
+
+    /* Custom tokens – light */
+    --orange-start: 25 95% 48%;
+    --orange-mid: 31 90% 50%;
+    --orange-end: 35 85% 55%;
+
+    --glass-bg: 0 0% 100%;
+    --glass-opacity: 0.55;
+    --glass-blur: 20px;
+    --glass-border: 240 10% 50% / 0.1;
+    --glass-strong-bg: 0 0% 100%;
+    --glass-strong-opacity: 0.7;
+    --glass-strong-border: 240 10% 50% / 0.15;
+
+    --surface-1: 30 15% 94%;
+    --surface-2: 30 12% 96%;
+    --surface-3: 30 10% 92%;
+
+    --aurora-opacity: 0.06;
+    --aurora-overlay: var(--background) / 0.5;
+
+    --sidebar-background: 30 20% 96%;
+    --sidebar-foreground: 240 15% 10%;
+    --sidebar-primary: 25 95% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 30 10% 92%;
+    --sidebar-accent-foreground: 240 10% 35%;
+    --sidebar-border: 30 10% 86%;
+    --sidebar-ring: 25 95% 48%;
   }
 }
 
@@ -76,6 +142,27 @@
     cursor: none;
   }
 
+  /* Smooth theme transitions */
+  html:not(.no-transitions) body,
+  html:not(.no-transitions) body * {
+    transition-property: background-color, border-color, color, box-shadow, opacity;
+    transition-duration: 400ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Exclude elements that have their own critical transitions */
+  html:not(.no-transitions) [data-no-theme-transition],
+  html:not(.no-transitions) .snap-container {
+    transition-property: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html body,
+    html body * {
+      transition-duration: 0ms !important;
+    }
+  }
+
   ::selection {
     background: hsl(25 100% 50% / 0.3);
     color: hsl(0 0% 100%);
@@ -88,14 +175,14 @@
     background: hsl(var(--glass-bg) / var(--glass-opacity));
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid hsl(0 0% 100% / 0.06);
+    border: 1px solid hsl(var(--glass-border));
   }
 
   .glass-panel-strong {
-    background: hsl(var(--glass-bg) / 0.08);
+    background: hsl(var(--glass-strong-bg) / var(--glass-strong-opacity));
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid hsl(0 0% 100% / 0.1);
+    border: 1px solid hsl(var(--glass-strong-border));
   }
 
   /* Orange gradient text */
@@ -120,12 +207,20 @@
     box-shadow: 0 0 30px hsl(25 100% 50% / 0.15), 0 0 60px hsl(25 100% 50% / 0.08);
   }
 
+  .light .glow-orange {
+    box-shadow: 0 0 20px hsl(25 95% 48% / 0.12), 0 0 40px hsl(25 95% 48% / 0.06);
+  }
+
   .glow-orange-strong {
     box-shadow: 0 0 40px hsl(25 100% 50% / 0.25), 0 0 80px hsl(25 100% 50% / 0.12);
   }
 
   .text-glow-orange {
     text-shadow: 0 0 40px hsl(25 100% 50% / 0.3);
+  }
+
+  .light .text-glow-orange {
+    text-shadow: 0 0 30px hsl(25 95% 48% / 0.2);
   }
 
   /* Grain overlay */
@@ -137,6 +232,10 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 1;
+  }
+
+  .light .grain-overlay::after {
+    opacity: 0.015;
   }
 
   /* Tilt card */
@@ -178,6 +277,10 @@
   /* Orange top border for footer */
   .border-top-orange {
     border-top: 1px solid hsl(25 100% 50% / 0.3);
+  }
+
+  .light .border-top-orange {
+    border-top: 1px solid hsl(25 95% 48% / 0.2);
   }
 }
 
