@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Percent } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { label: "Thesis", path: "/thesis" },
@@ -77,8 +78,9 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* CTA + Mobile toggle */}
+        {/* CTA + Theme + Mobile toggle */}
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           <Link
             to="/contact"
             data-cursor-hover
