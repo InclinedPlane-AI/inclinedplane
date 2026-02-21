@@ -93,7 +93,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* Separator + Bottom bar */}
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Inclined Plane. All rights reserved.
@@ -111,6 +111,29 @@ const Footer = () => {
               <span className="text-xs hover:text-foreground transition-colors cursor-pointer">GitHub</span>
             </div>
           </div>
+        </div>
+
+        {/* Giant fading wordmark */}
+        <div className="relative mt-12 overflow-hidden select-none pointer-events-none" aria-hidden="true">
+          <div className="text-center leading-none" style={{ fontSize: 'clamp(4rem, 12vw, 10rem)' }}>
+            <span className="font-black tracking-tighter text-foreground/[0.06]">
+              Inclined
+            </span>
+            {' '}
+            <span
+              className="font-black tracking-tighter"
+              style={{
+                background: 'linear-gradient(135deg, hsl(var(--orange-start) / 0.12), hsl(var(--orange-mid) / 0.08))',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Plane
+            </span>
+          </div>
+          {/* Bottom fade mask */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" style={{ height: '40%', bottom: 0, top: 'auto' }} />
         </div>
       </div>
     </footer>
