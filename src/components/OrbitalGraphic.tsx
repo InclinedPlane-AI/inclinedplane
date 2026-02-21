@@ -76,7 +76,7 @@ const OrbitalGraphic = () => {
   return (
     <div className="relative w-80 h-80">
       {/* Glow behind center */}
-      <div className="absolute inset-[25%] rounded-full bg-gradient-orange opacity-15 blur-3xl animate-pulse-glow will-change-[opacity]" />
+      <div className="absolute inset-[25%] rounded-full bg-gradient-orange opacity-[0.06] blur-3xl animate-pulse-glow will-change-[opacity]" />
 
       {/* Orbit rings */}
       <div className="absolute inset-[5%] rounded-full border border-muted/10" />
