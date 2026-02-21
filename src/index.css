@@ -41,12 +41,12 @@
     --orange-mid: 31 100% 55%;
     --orange-end: 35 100% 64%;
 
-    --glass-bg: 0 0% 100%;
-    --glass-opacity: 0.05;
+    --glass-bg: 240 12% 8%;
+    --glass-opacity: 0.85;
     --glass-blur: 20px;
     --glass-border: 0 0% 100% / 0.06;
-    --glass-strong-bg: 0 0% 100%;
-    --glass-strong-opacity: 0.08;
+    --glass-strong-bg: 240 10% 10%;
+    --glass-strong-opacity: 0.92;
     --glass-strong-border: 0 0% 100% / 0.1;
 
     --surface-1: 240 12% 6%;
@@ -100,12 +100,12 @@
     --orange-mid: 31 90% 50%;
     --orange-end: 35 85% 55%;
 
-    --glass-bg: 0 0% 100%;
-    --glass-opacity: 0.55;
+    --glass-bg: 30 10% 96%;
+    --glass-opacity: 0.8;
     --glass-blur: 20px;
     --glass-border: 240 10% 50% / 0.1;
-    --glass-strong-bg: 0 0% 100%;
-    --glass-strong-opacity: 0.7;
+    --glass-strong-bg: 30 8% 97%;
+    --glass-strong-opacity: 0.9;
     --glass-strong-border: 240 10% 50% / 0.15;
 
     --surface-1: 30 15% 94%;
@@ -164,19 +164,24 @@
 }
 
 @layer components {
-  /* Glass panel */
+  /* Glass panel — solid tinted bg, no backdrop-filter glitches */
   .glass-panel {
     background: hsl(var(--glass-bg) / var(--glass-opacity));
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
     border: 1px solid hsl(var(--glass-border));
+    /* Prevent compositor artifacts from backdrop-filter */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    isolation: isolate;
   }
 
   .glass-panel-strong {
     background: hsl(var(--glass-strong-bg) / var(--glass-strong-opacity));
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
     border: 1px solid hsl(var(--glass-strong-border));
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    isolation: isolate;
   }
 
   /* Orange gradient text */
