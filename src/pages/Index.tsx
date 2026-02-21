@@ -427,22 +427,22 @@ const Index = () => {
         </section>
 
         {/* SLIDE 7 — ARCHITECTURE SNAPSHOT */}
-        <section className="snap-section flex items-start lg:items-center relative overflow-hidden">
+        <section className="snap-section flex items-center relative overflow-hidden">
           <SectionGlow position="top-right" size={650} />
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full pt-20 lg:pt-0">
-            {/* Header + pipeline — pushed to top */}
-            <motion.div {...fadeUp()} className="mb-6">
-              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-3 text-center">Architecture</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-center">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+            {/* Header */}
+            <motion.div {...fadeUp()} className="mb-5">
+              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-2 text-center">Architecture</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3 text-center">
                 The Intelligence <span className="text-gradient-orange">Stack.</span>
               </h2>
-              <p className="text-muted-foreground text-center max-w-xl mx-auto mb-8 text-sm">
+              <p className="text-muted-foreground text-center max-w-xl mx-auto text-sm">
                 A modern, composable architecture designed for AI-readiness from day one.
               </p>
             </motion.div>
 
-            {/* Pipeline row — compact */}
-            <div className="flex flex-col md:flex-row items-stretch gap-2 justify-center mb-10">
+            {/* Pipeline row */}
+            <div className="flex flex-col md:flex-row items-stretch gap-2 justify-center mb-8">
               {[
                 { icon: Database, title: "Sources", desc: "APIs, DBs, Events", color: "border-muted/30" },
                 { icon: Layers, title: "Warehouse", desc: "Snowflake • BigQuery", color: "border-muted/30" },
@@ -464,9 +464,9 @@ const Index = () => {
               ))}
             </div>
 
-            {/* Tech stack interactive grid */}
+            {/* Auto-scrolling tech stack marquee */}
             <motion.div {...fadeUp(0.2)}>
-              <p className="text-center text-xs text-muted-foreground mb-5 tracking-wide uppercase font-mono">Tools & Platforms We Work With</p>
+              <p className="text-center text-xs text-muted-foreground mb-4 tracking-wide uppercase font-mono">Tools & Platforms We Work With</p>
               <TechStackGrid />
             </motion.div>
           </div>
