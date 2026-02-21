@@ -14,7 +14,7 @@ const navLinks = [
 
 const WavyLine = ({ animate = false, className = "" }: { animate?: boolean; className?: string }) => (
   <svg
-    className={`absolute bottom-0 left-3 right-3 h-[6px] overflow-visible ${className}`}
+    className={`absolute h-[6px] overflow-visible ${className}`}
     viewBox="0 0 100 6"
     preserveAspectRatio="none"
     fill="none"
@@ -66,24 +66,26 @@ const NavLinkItem = ({ link, isActive }: { link: typeof navLinks[0]; isActive: b
           : "text-muted-foreground hover:text-foreground"
       }`}
     >
-      {link.label}
-      {isActive && (
-        <motion.div layoutId="nav-underline" transition={{ type: "spring", stiffness: 500, damping: 30 }}>
-          <WavyLine animate className="bottom-0" />
-        </motion.div>
-      )}
-      <AnimatePresence>
-        {hovered && !isActive && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <WavyLine className="bottom-0" />
+      <span className="relative inline-block">
+        {link.label}
+        {isActive && (
+          <motion.div layoutId="nav-underline" transition={{ type: "spring", stiffness: 500, damping: 30 }}>
+            <WavyLine animate className="bottom-[-2px] left-0 right-0" />
           </motion.div>
         )}
-      </AnimatePresence>
+        <AnimatePresence>
+          {hovered && !isActive && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <WavyLine className="bottom-[-2px] left-0 right-0" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </span>
     </Link>
   );
 };
