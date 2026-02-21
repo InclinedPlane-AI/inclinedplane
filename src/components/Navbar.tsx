@@ -12,6 +12,82 @@ const navLinks = [
   { label: "About", path: "/about" },
 ];
 
+const WavyLine = ({ animate = false, className = "" }: { animate?: boolean; className?: string }) => (
+  <svg
+    className={`absolute bottom-0 left-3 right-3 h-[6px] overflow-visible ${className}`}
+    viewBox="0 0 100 6"
+    preserveAspectRatio="none"
+    fill="none"
+  >
+    <motion.path
+      d="M0 3 C8 0.5, 16 5.5, 25 3 S42 0.5, 50 3 S67 5.5, 75 3 S92 0.5, 100 3"
+      stroke="url(#wave-grad)"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      fill="none"
+      initial={{ pathLength: animate ? 1 : 0 }}
+      animate={
+        animate
+          ? { d: [
+              "M0 3 C8 0.5, 16 5.5, 25 3 S42 0.5, 50 3 S67 5.5, 75 3 S92 0.5, 100 3",
+              "M0 3 C8 5.5, 16 0.5, 25 3 S42 5.5, 50 3 S67 0.5, 75 3 S92 5.5, 100 3",
+              "M0 3 C8 0.5, 16 5.5, 25 3 S42 0.5, 50 3 S67 5.5, 75 3 S92 0.5, 100 3",
+            ] }
+          : { pathLength: 1 }
+      }
+      transition={
+        animate
+          ? { d: { duration: 1.2, repeat: Infinity, ease: "easeInOut" }, }
+          : { duration: 0.3, ease: "easeOut" }
+      }
+    />
+    <defs>
+      <linearGradient id="wave-grad" x1="0" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stopColor="hsl(25 100% 50%)" />
+        <stop offset="50%" stopColor="hsl(31 100% 55%)" />
+        <stop offset="100%" stopColor="hsl(35 100% 64%)" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
+const NavLinkItem = ({ link, isActive }: { link: typeof navLinks[0]; isActive: boolean }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <Link
+      to={link.path}
+      data-cursor-hover
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`relative px-3 py-2 text-sm transition-colors duration-200 ${
+        isActive
+          ? "text-foreground"
+          : "text-muted-foreground hover:text-foreground"
+      }`}
+    >
+      {link.label}
+      {isActive && (
+        <motion.div layoutId="nav-underline" transition={{ type: "spring", stiffness: 500, damping: 30 }}>
+          <WavyLine animate className="bottom-0" />
+        </motion.div>
+      )}
+      <AnimatePresence>
+        {hovered && !isActive && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <WavyLine className="bottom-0" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </Link>
+  );
+};
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -19,7 +95,6 @@ const Navbar = () => {
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
-    // Also check snap containers
     const snapContainer = document.querySelector('.snap-container');
     const snapHandler = () => {
       if (snapContainer) setScrolled(snapContainer.scrollTop > 40);
@@ -57,25 +132,7 @@ const Navbar = () => {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              data-cursor-hover
-              className={`relative px-3 py-2 text-sm transition-colors duration-200 ${
-                location.pathname === link.path
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {link.label}
-              {location.pathname === link.path && (
-                <motion.div
-                  layoutId="nav-underline"
-                  className="absolute bottom-0 left-3 right-3 h-px bg-gradient-orange"
-                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                />
-              )}
-            </Link>
+            <NavLinkItem key={link.path} link={link} isActive={location.pathname === link.path} />
           ))}
         </div>
 
