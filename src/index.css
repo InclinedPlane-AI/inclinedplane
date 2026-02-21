@@ -142,18 +142,12 @@
     cursor: none;
   }
 
-  /* Smooth theme transitions */
-  html:not(.no-transitions) body,
-  html:not(.no-transitions) body * {
-    transition-property: background-color, border-color, color, box-shadow, opacity;
+  /* Smooth theme transitions — only applied during theme toggle */
+  html.theme-transitioning body,
+  html.theme-transitioning body * {
+    transition-property: background-color, border-color, color, box-shadow;
     transition-duration: 400ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* Exclude elements that have their own critical transitions */
-  html:not(.no-transitions) [data-no-theme-transition],
-  html:not(.no-transitions) .snap-container {
-    transition-property: none;
   }
 
   @media (prefers-reduced-motion: reduce) {

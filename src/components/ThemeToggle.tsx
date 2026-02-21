@@ -12,12 +12,15 @@ const ThemeToggle = () => {
 
   useEffect(() => {
     const root = document.documentElement;
+    root.classList.add("theme-transitioning");
     if (theme === "light") {
       root.classList.add("light");
     } else {
       root.classList.remove("light");
     }
     localStorage.setItem("theme", theme);
+    const timer = setTimeout(() => root.classList.remove("theme-transitioning"), 500);
+    return () => clearTimeout(timer);
   }, [theme]);
 
   const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
