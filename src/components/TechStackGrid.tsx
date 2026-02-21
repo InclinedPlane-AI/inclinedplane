@@ -5,6 +5,12 @@ import tableauLogo from "@/assets/tableau-logo.svg";
 import azureLogo from "@/assets/azure-logo.png";
 import awsLogo from "@/assets/aws-logo.png";
 import openaiLogo from "@/assets/openai-logo.png";
+import dbtLogo from "@/assets/dbt-logo.png";
+import fabricLogo from "@/assets/fabric-logo.png";
+import clickhouseLogo from "@/assets/clickhouse-logo.svg";
+import claudeLogo from "@/assets/claude-logo.svg";
+import mistralLogo from "@/assets/mistral-logo.png";
+import githubLogo from "@/assets/github-logo.png";
 
 interface Tool {
   name: string;
@@ -25,7 +31,9 @@ const TOOLS: Tool[] = [
   { name: "Power BI", category: "analytics", logo: powerbiLogo },
   { name: "Tableau", category: "analytics", logo: tableauLogo },
   { name: "Looker", category: "analytics", logo: `${CDN}/looker/4285F4` },
-  { name: "dbt", category: "engineering", logo: `${CDN}/dbt/FF694B` },
+  { name: "dbt", category: "engineering", logo: dbtLogo },
+  { name: "Fabric", category: "data", logo: fabricLogo },
+  { name: "ClickHouse", category: "data", logo: clickhouseLogo },
   // Row 2
   { name: "Airflow", category: "engineering", logo: `${CDN}/apacheairflow/017CEE` },
   { name: "Spark", category: "engineering", logo: `${CDN}/apachespark/E25A1C` },
@@ -33,15 +41,18 @@ const TOOLS: Tool[] = [
   { name: "SQL", category: "engineering", logo: `${CDN}/postgresql/4169E1` },
   { name: "Terraform", category: "engineering", logo: `${CDN}/terraform/844FBA` },
   { name: "OpenAI", category: "ai", logo: openaiLogo },
+  { name: "Claude", category: "ai", logo: claudeLogo },
+  { name: "Mistral", category: "ai", logo: mistralLogo },
   { name: "LangChain", category: "ai", logo: `${CDN}/langchain/1C3C3C` },
   { name: "Hugging Face", category: "ai", logo: `${CDN}/huggingface/FFD21E` },
   { name: "n8n", category: "automation", logo: `${CDN}/n8n/EA4B71` },
   { name: "Kafka", category: "automation", logo: `${CDN}/apachekafka/fff` },
   { name: "Docker", category: "engineering", logo: `${CDN}/docker/2496ED` },
+  { name: "GitHub", category: "engineering", logo: githubLogo },
 ];
 
-const row1 = TOOLS.slice(0, 11);
-const row2 = TOOLS.slice(11);
+const row1 = TOOLS.slice(0, 12);
+const row2 = TOOLS.slice(12);
 
 const MarqueeRow = ({ tools, direction = "left", speed = 30 }: { tools: Tool[]; direction?: "left" | "right"; speed?: number }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
