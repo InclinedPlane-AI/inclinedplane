@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 interface SlideProgressProps {
   total: number;
@@ -20,9 +21,75 @@ const SLIDE_LABELS = [
   "Get Started",
 ];
 
+const DOT_GAP = 24; // matches gap-3 (12px gap) + dot size
+
 const SlideProgress = ({ total, current, onDotClick }: SlideProgressProps) => {
+  const [prev, setPrev] = useState(current);
+  const [showTrail, setShowTrail] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => {
+    if (current !== prev) {
+      setShowTrail(true);
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => {
+        setShowTrail(false);
+        setPrev(current);
+      }, 500);
+    }
+    return () => clearTimeout(timeoutRef.current);
+  }, [current, prev]);
+
+  const trailTop = Math.min(prev, current);
+  const trailBottom = Math.max(prev, current);
+  const goingDown = current > prev;
+
   return (
-    <div className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-3">
+    <div className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center gap-3">
+      {/* SVG trail line between dots */}
+      <svg
+        className="absolute pointer-events-none"
+        style={{
+          top: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: 12,
+          height: total * DOT_GAP,
+        }}
+        viewBox={`0 0 12 ${total * DOT_GAP}`}
+        fill="none"
+      >
+        {showTrail && (
+          <motion.path
+            d={(() => {
+              const startY = trailTop * DOT_GAP + DOT_GAP / 2;
+              const endY = trailBottom * DOT_GAP + DOT_GAP / 2;
+              const midY = (startY + endY) / 2;
+              return `M 6 ${startY} C 10 ${midY - (endY - startY) * 0.15}, 2 ${midY + (endY - startY) * 0.15}, 6 ${endY}`;
+            })()}
+            stroke="hsl(var(--primary))"
+            strokeWidth={2}
+            strokeLinecap="round"
+            fill="none"
+            initial={{
+              pathLength: 0,
+              opacity: 0.8,
+            }}
+            animate={{
+              pathLength: 1,
+              opacity: [0.8, 0.6, 0],
+            }}
+            transition={{
+              pathLength: { duration: 0.35, ease: "easeInOut" },
+              opacity: { duration: 0.5, ease: "easeOut" },
+            }}
+            style={{
+              pathOffset: goingDown ? 0 : 0,
+            }}
+          />
+        )}
+      </svg>
+
       {Array.from({ length: total }).map((_, i) => (
         <button
           key={i}
