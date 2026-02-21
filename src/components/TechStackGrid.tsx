@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
+import powerbiLogo from "@/assets/powerbi-logo.png";
+import tableauLogo from "@/assets/tableau-logo.svg";
 
 interface Tool {
   name: string;
@@ -17,8 +19,8 @@ const TOOLS: Tool[] = [
   { name: "Databricks", category: "data", logo: `${CDN}/databricks/FF3621` },
   { name: "Snowflake", category: "data", logo: `${CDN}/snowflake/29B5E8` },
   { name: "BigQuery", category: "data", logo: `${CDN}/googlebigquery/669DF6` },
-  { name: "Power BI", category: "analytics", logo: `${CDN}/powerbi/F2C811` },
-  { name: "Tableau", category: "analytics", logo: `${CDN}/tableau/E97627` },
+  { name: "Power BI", category: "analytics", logo: powerbiLogo },
+  { name: "Tableau", category: "analytics", logo: tableauLogo },
   { name: "Looker", category: "analytics", logo: `${CDN}/looker/4285F4` },
   { name: "dbt", category: "engineering", logo: `${CDN}/dbt/FF694B` },
   // Row 2
