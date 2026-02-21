@@ -332,13 +332,27 @@
     background-color: hsl(var(--surface-3));
   }
 
-  /* Footer orange tint */
+  /* Footer orange tint — stronger at bottom, fading up */
   .footer-tint {
-    background: linear-gradient(180deg, hsl(var(--background)), hsl(25 20% 6%));
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--background)) 0%,
+      hsl(25 15% 6%) 40%,
+      hsl(25 25% 8%) 70%,
+      hsl(25 35% 10%) 90%,
+      hsl(25 45% 12%) 100%
+    );
   }
 
   .light .footer-tint {
-    background: linear-gradient(180deg, hsl(var(--background)), hsl(30 30% 93%));
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--background)) 0%,
+      hsl(30 20% 94%) 40%,
+      hsl(30 35% 92%) 70%,
+      hsl(28 45% 90%) 90%,
+      hsl(26 50% 88%) 100%
+    );
   }
 
   /* Orange top border for footer */
