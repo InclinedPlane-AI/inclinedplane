@@ -7,6 +7,7 @@ import SlideProgress from "@/components/SlideProgress";
 import AuroraBackground from "@/components/AuroraBackground";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { Link } from "react-router-dom";
+import OrbitalGraphic from "@/components/OrbitalGraphic";
 import {
   ArrowRight, Database, BarChart3, Eye, Brain, Zap, Cloud,
   TrendingUp, Shield, Clock, Globe, Cpu, Layers, Activity,
@@ -103,34 +104,7 @@ const Index = () => {
                 </motion.div>
               </div>
               <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.6 }} className="hidden lg:flex items-center justify-center">
-                <div className="relative w-80 h-80">
-                  <div className="absolute inset-[30%] rounded-full bg-gradient-orange opacity-20 blur-2xl animate-pulse-glow will-change-[opacity]" />
-                  <div className="absolute inset-[35%] rounded-full glass-panel-strong flex items-center justify-center">
-                    <Brain className="text-primary" size={28} />
-                  </div>
-                  {[
-                    { label: "Ingest", icon: Database, angle: 0 },
-                    { label: "Model", icon: Cloud, angle: 72 },
-                    { label: "Observe", icon: Eye, angle: 144 },
-                    { label: "Predict", icon: BarChart3, angle: 216 },
-                    { label: "Automate", icon: Zap, angle: 288 },
-                  ].map(({ label, icon: Icon, angle }, i) => {
-                    const r = 130;
-                    const rad = (angle * Math.PI) / 180;
-                    const x = Math.cos(rad) * r;
-                    const y = Math.sin(rad) * r;
-                    return (
-                      <motion.div key={label} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5 + i * 0.08, duration: 0.3 }}
-                        className="absolute glass-panel rounded-xl px-3 py-2 flex items-center gap-2 text-xs group hover:glass-panel-strong transition-all"
-                        style={{ left: `calc(50% + ${x}px - 45px)`, top: `calc(50% + ${y}px - 16px)` }} data-cursor-hover>
-                        <Icon size={14} className="text-primary" />
-                        <span className="text-secondary-foreground group-hover:text-foreground transition-colors">{label}</span>
-                      </motion.div>
-                    );
-                  })}
-                  <div className="absolute inset-[15%] rounded-full border border-muted/20" />
-                  <div className="absolute inset-[5%] rounded-full border border-muted/10" />
-                </div>
+                <OrbitalGraphic />
               </motion.div>
             </div>
           </div>
