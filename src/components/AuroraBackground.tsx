@@ -1,6 +1,15 @@
 const AuroraBackground = () => {
   return (
     <div className="absolute inset-0 overflow-hidden">
+      {/* Subtle orange tint behind hero text — top-left */}
+      <div
+        className="absolute w-[700px] h-[600px] rounded-full blur-[160px] will-change-transform"
+        style={{
+          background: "radial-gradient(circle, hsl(var(--orange-start) / 0.18), hsl(var(--orange-mid) / 0.08), transparent 70%)",
+          top: "-5%",
+          left: "-8%",
+        }}
+      />
       {/* Large gradient band 1 */}
       <div
         className="absolute w-[800px] h-[800px] rounded-full animate-aurora-1 blur-[100px] will-change-transform opacity-[var(--aurora-opacity)]"
