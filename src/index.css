@@ -45,9 +45,9 @@
     --glass-opacity: 0.45;
     --glass-blur: 24px;
     --glass-border: 0 0% 100% / 0.08;
-    --glass-strong-bg: 240 10% 10%;
+    --glass-strong-bg: 25 30% 10%;
     --glass-strong-opacity: 0.55;
-    --glass-strong-border: 0 0% 100% / 0.12;
+    --glass-strong-border: 25 80% 50% / 0.1;
 
     --surface-1: 240 12% 6%;
     --surface-2: 240 10% 9%;
@@ -104,9 +104,9 @@
     --glass-opacity: 0.5;
     --glass-blur: 24px;
     --glass-border: 240 10% 50% / 0.12;
-    --glass-strong-bg: 30 8% 97%;
+    --glass-strong-bg: 30 40% 95%;
     --glass-strong-opacity: 0.6;
-    --glass-strong-border: 240 10% 50% / 0.18;
+    --glass-strong-border: 25 60% 50% / 0.15;
 
     --surface-1: 30 15% 94%;
     --surface-2: 30 12% 96%;
