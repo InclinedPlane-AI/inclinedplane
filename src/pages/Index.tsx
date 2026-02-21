@@ -114,6 +114,8 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Grain overlay for content sections (excludes hero & footer) */}
+        <div className="grain-overlay relative">
         {/* SLIDE 2 — AI TRANSFORMATION FACTS (Bento) */}
         <section className="snap-section flex items-center justify-center relative overflow-hidden">
           <SectionGlow position="top-left" size={700} />
@@ -642,6 +644,8 @@ const Index = () => {
             </motion.div>
           </div>
         </section>
+
+        </div>{/* end grain-overlay */}
 
         {/* Footer */}
         <div className="lg:snap-section lg:flex lg:flex-col lg:justify-end lg:min-h-screen">
