@@ -634,8 +634,8 @@ const Index = () => {
         </section>
 
         {/* Footer */}
-        <div className="snap-section flex flex-col justify-end">
-          <div className="flex-1" />
+        <div className="lg:snap-section lg:flex lg:flex-col lg:justify-end lg:min-h-screen">
+          <div className="hidden lg:block lg:flex-1" />
           <Footer />
         </div>
       </div>
