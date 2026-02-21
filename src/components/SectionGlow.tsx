@@ -34,7 +34,7 @@ const SectionGlow = ({ position = "center", size = 600, className = "" }: Sectio
       className="w-full h-full rounded-full blur-[120px]"
       style={{
         background:
-          "radial-gradient(circle, hsl(var(--orange-start) / 0.10), hsl(var(--orange-mid) / 0.05), transparent 70%)",
+          "radial-gradient(circle, hsl(var(--orange-start) / 0.25), hsl(var(--orange-mid) / 0.12), transparent 70%)",
       }}
     />
   </motion.div>
