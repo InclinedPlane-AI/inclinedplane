@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import powerbiLogo from "@/assets/powerbi-logo.png";
 import tableauLogo from "@/assets/tableau-logo.svg";
+import azureLogo from "@/assets/azure-logo.png";
+import awsLogo from "@/assets/aws-logo.png";
+import openaiLogo from "@/assets/openai-logo.png";
 
 interface Tool {
   name: string;
@@ -13,8 +16,8 @@ const CDN = "https://cdn.simpleicons.org";
 
 const TOOLS: Tool[] = [
   // Row 1
-  { name: "Azure", category: "cloud", logo: `${CDN}/microsoftazure/0078D4` },
-  { name: "AWS", category: "cloud", logo: `${CDN}/amazonwebservices/FF9900` },
+  { name: "Azure", category: "cloud", logo: azureLogo },
+  { name: "AWS", category: "cloud", logo: awsLogo },
   { name: "GCP", category: "cloud", logo: `${CDN}/googlecloud/4285F4` },
   { name: "Databricks", category: "data", logo: `${CDN}/databricks/FF3621` },
   { name: "Snowflake", category: "data", logo: `${CDN}/snowflake/29B5E8` },
@@ -29,7 +32,7 @@ const TOOLS: Tool[] = [
   { name: "Python", category: "engineering", logo: `${CDN}/python/3776AB` },
   { name: "SQL", category: "engineering", logo: `${CDN}/postgresql/4169E1` },
   { name: "Terraform", category: "engineering", logo: `${CDN}/terraform/844FBA` },
-  { name: "OpenAI", category: "ai", logo: `${CDN}/openai/fff` },
+  { name: "OpenAI", category: "ai", logo: openaiLogo },
   { name: "LangChain", category: "ai", logo: `${CDN}/langchain/1C3C3C` },
   { name: "Hugging Face", category: "ai", logo: `${CDN}/huggingface/FFD21E` },
   { name: "n8n", category: "automation", logo: `${CDN}/n8n/EA4B71` },
