@@ -234,9 +234,9 @@
   /* Grain overlay — matte texture */
   .grain-overlay::after {
     content: '';
-    position: fixed;
+    position: absolute;
     inset: 0;
-    opacity: 0.045;
+    opacity: 0.06;
     background-image: radial-gradient(circle, hsl(0 0% 60%) 0.6px, transparent 0.6px);
     background-size: 6px 6px;
     pointer-events: none;
@@ -244,8 +244,18 @@
     mix-blend-mode: overlay;
   }
 
+  /* Mobile: slightly less visible but still present */
+  @media (max-width: 1023px) {
+    .grain-overlay::after {
+      opacity: 0.035;
+    }
+    .light .grain-overlay::after {
+      opacity: 0.045;
+    }
+  }
+
   .light .grain-overlay::after {
-    opacity: 0.06;
+    opacity: 0.075;
     background-image: radial-gradient(circle, hsl(240 5% 30%) 0.5px, transparent 0.5px);
     background-size: 5px 5px;
     mix-blend-mode: multiply;
@@ -320,6 +330,15 @@
   }
   .surface-3 {
     background-color: hsl(var(--surface-3));
+  }
+
+  /* Footer orange tint */
+  .footer-tint {
+    background: linear-gradient(180deg, hsl(var(--background)), hsl(25 20% 6%));
+  }
+
+  .light .footer-tint {
+    background: linear-gradient(180deg, hsl(var(--background)), hsl(30 30% 93%));
   }
 
   /* Orange top border for footer */
