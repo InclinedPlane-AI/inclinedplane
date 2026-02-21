@@ -10,6 +10,7 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import { Link } from "react-router-dom";
 import OrbitalGraphic from "@/components/OrbitalGraphic";
 import SectionGlow from "@/components/SectionGlow";
+import TechStackGrid from "@/components/TechStackGrid";
 import {
   ArrowRight, ArrowUpRight, Database, BarChart3, Eye, Brain, Zap, Cloud,
   TrendingUp, Shield, Clock, Globe, Cpu, Layers, Activity,
@@ -426,39 +427,48 @@ const Index = () => {
         </section>
 
         {/* SLIDE 7 — ARCHITECTURE SNAPSHOT */}
-        <section className="snap-section flex items-center relative overflow-hidden">
+        <section className="snap-section flex items-start lg:items-center relative overflow-hidden">
           <SectionGlow position="top-right" size={650} />
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-            <motion.div {...fadeUp()}>
-              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Architecture</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6 text-center">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full pt-20 lg:pt-0">
+            {/* Header + pipeline — pushed to top */}
+            <motion.div {...fadeUp()} className="mb-6">
+              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-3 text-center">Architecture</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-center">
                 The Intelligence <span className="text-gradient-orange">Stack.</span>
               </h2>
-              <p className="text-muted-foreground text-center max-w-xl mx-auto mb-14">
+              <p className="text-muted-foreground text-center max-w-xl mx-auto mb-8 text-sm">
                 A modern, composable architecture designed for AI-readiness from day one.
               </p>
             </motion.div>
-            <div className="flex flex-col md:flex-row items-stretch gap-3 justify-center">
+
+            {/* Pipeline row — compact */}
+            <div className="flex flex-col md:flex-row items-stretch gap-2 justify-center mb-10">
               {[
-                { icon: Database, title: "Sources", desc: "APIs, Databases, Events, Files", color: "border-muted/30" },
-                { icon: Layers, title: "Warehouse", desc: "Snowflake • BigQuery • Databricks", color: "border-muted/30" },
-                { icon: Eye, title: "Observability", desc: "Quality • Lineage • Monitoring", color: "border-muted/30" },
-                { icon: BarChart3, title: "Intelligence", desc: "Forecasting • ML Models • BI", color: "border-primary/30" },
-                { icon: Brain, title: "AI Layer", desc: "LLMs • Agents • Decision Systems", color: "border-primary/40" },
-                { icon: Zap, title: "Automation", desc: "Workflows • Actions • Alerts", color: "border-primary/50" },
+                { icon: Database, title: "Sources", desc: "APIs, DBs, Events", color: "border-muted/30" },
+                { icon: Layers, title: "Warehouse", desc: "Snowflake • BigQuery", color: "border-muted/30" },
+                { icon: Eye, title: "Observability", desc: "Quality • Lineage", color: "border-muted/30" },
+                { icon: BarChart3, title: "Intelligence", desc: "Forecasting • BI", color: "border-primary/30" },
+                { icon: Brain, title: "AI Layer", desc: "LLMs • Agents", color: "border-primary/40" },
+                { icon: Zap, title: "Automation", desc: "Workflows • Alerts", color: "border-primary/50" },
               ].map(({ icon: Icon, title, desc, color }, i) => (
-                <motion.div key={title} {...fadeUp(i * 0.06)} className="flex items-center gap-3">
-                  <div className={`glass-panel rounded-xl p-5 flex-1 min-w-[140px] border ${color} group hover:glow-orange transition-shadow text-center`} data-cursor-hover>
-                    <div className="w-10 h-10 rounded-lg surface-3 flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/10 transition-colors">
-                      <Icon size={18} className="text-primary" />
+                <motion.div key={title} {...fadeUp(i * 0.04)} className="flex items-center gap-2">
+                  <div className={`glass-panel rounded-lg p-3 flex-1 min-w-[110px] border ${color} group hover:glow-orange transition-shadow text-center`} data-cursor-hover>
+                    <div className="w-8 h-8 rounded-md surface-3 flex items-center justify-center mx-auto mb-2 group-hover:bg-primary/10 transition-colors">
+                      <Icon size={15} className="text-primary" />
                     </div>
-                    <p className="font-semibold text-foreground text-sm mb-1">{title}</p>
-                    <p className="text-[10px] text-muted-foreground leading-relaxed">{desc}</p>
+                    <p className="font-semibold text-foreground text-xs mb-0.5">{title}</p>
+                    <p className="text-[9px] text-muted-foreground leading-tight">{desc}</p>
                   </div>
-                  {i < 5 && <ArrowRight size={14} className="text-muted-foreground/30 shrink-0 hidden md:block" />}
+                  {i < 5 && <ArrowRight size={12} className="text-muted-foreground/30 shrink-0 hidden md:block" />}
                 </motion.div>
               ))}
             </div>
+
+            {/* Tech stack interactive grid */}
+            <motion.div {...fadeUp(0.2)}>
+              <p className="text-center text-xs text-muted-foreground mb-5 tracking-wide uppercase font-mono">Tools & Platforms We Work With</p>
+              <TechStackGrid />
+            </motion.div>
           </div>
         </section>
 
