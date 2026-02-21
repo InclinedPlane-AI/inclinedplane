@@ -31,10 +31,11 @@ const NODES = [
 ];
 
 const RADIUS = 130;
-const ROTATION_SPEED = 0.012; // radians per frame (~0.7°/frame)
+const ROTATION_SPEED = 0.003; // radians per frame — slow, easy to hover
 
 const OrbitalGraphic = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [centerHovered, setCenterHovered] = useState(false);
   const angleRef = useRef(0);
   const rafRef = useRef<number>(0);
   const [positions, setPositions] = useState<{ x: number; y: number }[]>([]);
@@ -90,15 +91,23 @@ const OrbitalGraphic = () => {
             y1={line.y1}
             x2={line.x2}
             y2={line.y2}
-            stroke="hsl(var(--primary) / 0.15)"
-            strokeWidth="1"
+            stroke={centerHovered ? "hsl(var(--primary) / 0.45)" : "hsl(var(--primary) / 0.15)"}
+            strokeWidth={centerHovered ? "1.5" : "1"}
             strokeDasharray="4 4"
+            style={{ transition: "stroke 0.3s, stroke-width 0.3s" }}
           />
         ))}
       </svg>
 
       {/* Center node */}
-      <div className="absolute inset-[35%] rounded-full glass-panel-strong flex items-center justify-center z-10">
+      <div
+        className={`absolute inset-[35%] rounded-full glass-panel-strong flex items-center justify-center z-10 transition-shadow duration-300 cursor-default ${
+          centerHovered ? "glow-orange shadow-[0_0_30px_hsl(var(--primary)/0.4)]" : ""
+        }`}
+        onMouseEnter={() => setCenterHovered(true)}
+        onMouseLeave={() => setCenterHovered(false)}
+        data-cursor-hover
+      >
         <Brain className="text-primary" size={28} />
       </div>
 
@@ -122,16 +131,16 @@ const OrbitalGraphic = () => {
               data-cursor-hover
             >
               <motion.div
-                className={`glass-panel rounded-xl px-3 py-2 flex items-center gap-2 text-xs cursor-default select-none transition-shadow duration-200 ${
+                className={`glass-panel rounded-xl px-3 py-2 flex items-center gap-2 text-xs cursor-default select-none transition-all duration-300 ${
                   isHovered ? "glow-orange shadow-lg" : ""
-                }`}
+                } ${centerHovered && !isHovered ? "shadow-[0_0_12px_hsl(var(--primary)/0.3)] border-primary/40" : ""}`}
                 animate={{
-                  scale: isHovered ? 1.12 : 1,
+                  scale: isHovered ? 1.12 : centerHovered ? 1.06 : 1,
                 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
               >
-                <Icon size={14} className="text-primary shrink-0" />
-                <span className="text-secondary-foreground whitespace-nowrap">{label}</span>
+                <Icon size={14} className={`shrink-0 transition-colors duration-300 ${centerHovered || isHovered ? "text-primary" : "text-primary"}`} />
+                <span className={`whitespace-nowrap transition-colors duration-300 ${centerHovered ? "text-foreground" : "text-secondary-foreground"}`}>{label}</span>
               </motion.div>
 
               {/* Tooltip */}
