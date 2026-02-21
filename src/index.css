@@ -164,7 +164,7 @@
 }
 
 @layer components {
-  /* Glass panel — liquid glass translucent */
+  /* Glass panel — liquid glass translucent (isolated from grain overlay) */
   .glass-panel {
     background: hsl(var(--glass-bg) / var(--glass-opacity));
     backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
@@ -173,6 +173,9 @@
     box-shadow: inset 0 1px 0 0 hsl(0 0% 100% / 0.04), 0 4px 24px -4px hsl(0 0% 0% / 0.2);
     will-change: transform;
     transform: translateZ(0);
+    isolation: isolate;
+    position: relative;
+    z-index: 2;
   }
 
   .light .glass-panel {
@@ -187,6 +190,9 @@
     box-shadow: inset 0 1px 0 0 hsl(0 0% 100% / 0.06), 0 8px 32px -8px hsl(0 0% 0% / 0.25);
     will-change: transform;
     transform: translateZ(0);
+    isolation: isolate;
+    position: relative;
+    z-index: 2;
   }
 
   .light .glass-panel-strong {
