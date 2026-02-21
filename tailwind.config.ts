@@ -118,8 +118,8 @@ export default {
           "50%": { transform: "translate(8%, -4%) rotate(5deg)" },
         },
         "pulse-glow": {
-          "0%, 100%": { opacity: "0.4" },
-          "50%": { opacity: "0.8" },
+          "0%, 100%": { opacity: "0.3" },
+          "50%": { opacity: "0.5" },
         },
         "count-up": {
           "0%": { opacity: "0", transform: "translateY(20px)" },
