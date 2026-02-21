@@ -12,8 +12,9 @@ const Footer = () => {
               <div className="w-8 h-8 flex items-center justify-center text-primary drop-shadow-[0_0_8px_hsl(25,100%,50%,0.6)]">
                 <Percent size={22} strokeWidth={2.5} />
               </div>
-              <span className="font-semibold text-foreground text-sm">
-                Inclined Plane
+              <span className="font-semibold text-sm">
+                <span className="text-foreground">Inclined</span>
+                <span className="text-gradient-orange">Plane</span>
               </span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
@@ -96,7 +97,7 @@ const Footer = () => {
         {/* Separator + Bottom bar */}
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Inclined Plane. All rights reserved.
+            © {new Date().getFullYear()} InclinedPlane. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
@@ -116,10 +117,7 @@ const Footer = () => {
         {/* Giant fading wordmark */}
         <div className="relative mt-12 overflow-hidden select-none pointer-events-none" aria-hidden="true">
           <div className="text-center leading-none" style={{ fontSize: 'clamp(4rem, 12vw, 10rem)' }}>
-            <span className="font-black tracking-tighter text-foreground/[0.06]">
-              Inclined
-            </span>
-            {' '}
+            <span className="font-black tracking-tighter text-foreground/[0.06]">Inclined</span>
             <span
               className="font-black tracking-tighter"
               style={{
@@ -128,9 +126,7 @@ const Footer = () => {
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
               }}
-            >
-              Plane
-            </span>
+            >Plane</span>
           </div>
           {/* Bottom fade mask */}
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" style={{ height: '40%', bottom: 0, top: 'auto' }} />
