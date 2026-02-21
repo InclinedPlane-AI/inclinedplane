@@ -3,7 +3,7 @@ import { Percent } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-background relative">
+    <footer className="relative footer-tint">
       {/* Giant wordmark sitting on top of footer border */}
       <div className="relative overflow-hidden select-none pointer-events-none" aria-hidden="true">
         <div className="text-center leading-none pb-0 pt-8" style={{ fontSize: 'clamp(5rem, 14vw, 12rem)', marginBottom: '-0.15em' }}>

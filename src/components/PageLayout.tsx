@@ -6,7 +6,7 @@ import CustomCursor from "./CustomCursor";
 
 const PageLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="min-h-screen bg-background grain-overlay">
+    <div className="min-h-screen bg-background">
       <CustomCursor />
       <Navbar />
       <motion.main
@@ -14,7 +14,7 @@ const PageLayout = ({ children }: { children: ReactNode }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -12 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative z-10"
+        className="relative z-10 grain-overlay"
       >
         {children}
       </motion.main>
