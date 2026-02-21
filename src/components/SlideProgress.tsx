@@ -108,7 +108,11 @@ const SlideProgress = ({ total, current, onDotClick }: SlideProgressProps) => {
             <motion.div
               layoutId="progress-glow"
               className="absolute inset-0 rounded-full glow-orange"
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{
+                layout: { type: "spring", stiffness: 400, damping: 25 },
+                opacity: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+              }}
             />
           )}
           {/* Tooltip */}
