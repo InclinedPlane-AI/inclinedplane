@@ -81,18 +81,18 @@ const Index = () => {
                 <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
                   <p className="font-mono text-xs text-primary tracking-widest uppercase mb-6">AI-Native Data Engineering</p>
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.08] tracking-tight mb-6">
-                    Engineering Momentum for the{" "}
-                    <span className="text-gradient-orange">Intelligence Era.</span>
+                    Data Leveraged.{" "}
+                    <span className="text-gradient-orange">Growth Accelerated.</span>
                   </h1>
                   <p className="text-lg text-muted-foreground leading-relaxed max-w-lg mb-8">
-                    AI-ready data platforms, observability-first pipelines, and decision systems that turn complexity into operational intelligence.
+                    We don't just engineer data — we operationalize intelligence. InclinedPlane provides the architectural backbone and AI implementation required for high-velocity enterprises to make smarter decisions, faster.
                   </p>
                   <div className="flex flex-wrap gap-4">
                     <Link to="/contact" data-cursor-hover className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-7 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity glow-orange">
-                      Start a Build <ArrowRight size={16} />
+                      Book a Strategy Consultation <ArrowRight size={16} />
                     </Link>
-                    <Link to="/case-studies" data-cursor-hover className="inline-flex items-center gap-2 glass-panel px-7 py-3 rounded-lg font-medium text-foreground hover:bg-muted/20 transition-colors">
-                      View Case Studies
+                    <Link to="/services" data-cursor-hover className="inline-flex items-center gap-2 glass-panel px-7 py-3 rounded-lg font-medium text-foreground hover:bg-muted/20 transition-colors">
+                      Explore Our Capabilities
                     </Link>
                   </div>
                 </motion.div>
@@ -235,113 +235,147 @@ const Index = () => {
           </div>
         </section>
 
-        {/* SLIDE 4 — THE SHIFT */}
+        {/* SLIDE 4 — THE EVOLUTION */}
         <section className="snap-section flex items-center relative">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-            <motion.div {...fadeUp()}>
-              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">The Shift</p>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6 text-center">
-                From Reporting to{" "}<span className="text-gradient-orange">Decision Intelligence.</span>
-              </h2>
-              <p className="text-muted-foreground text-center max-w-xl mx-auto mb-16">
-                The maturity curve from basic reporting to autonomous AI decision systems.
-              </p>
-            </motion.div>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0">
-              {[
-                { stage: "Reporting", desc: "Static dashboards", pct: "20%" },
-                { stage: "Monitoring", desc: "Alerts & thresholds", pct: "35%" },
-                { stage: "Prediction", desc: "ML-driven forecasts", pct: "55%" },
-                { stage: "Automation", desc: "Event-driven pipelines", pct: "75%" },
-                { stage: "AI Decisions", desc: "Autonomous systems", pct: "95%" },
-              ].map(({ stage, desc, pct }, i) => (
-                <motion.div key={stage} {...fadeUp(i * 0.1)} className="flex items-center gap-2 md:gap-0">
-                  <div className={`glass-panel rounded-xl px-6 py-5 text-center min-w-[160px] transition-shadow relative overflow-hidden ${i === 4 ? "glow-orange border border-primary/30" : ""}`}>
-                    <p className={`font-semibold text-sm mb-1 relative z-10 ${i === 4 ? "text-gradient-orange" : "text-foreground"}`}>{stage}</p>
-                    <p className="text-xs text-muted-foreground relative z-10">{desc}</p>
-                    <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-orange opacity-40" style={{ width: pct }} />
-                  </div>
-                  {i < 4 && <ArrowRight size={16} className="text-muted-foreground/40 mx-2 hidden md:block" />}
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <motion.div {...fadeUp()}>
+                  <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">The Evolution</p>
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-8">
+                    From Sail to{" "}<span className="text-gradient-orange">Leverage.</span>
+                  </h2>
                 </motion.div>
-              ))}
+                <motion.div {...fadeUp(0.1)}>
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    For years, as <span className="text-foreground font-medium">Sail Analytics</span>, we built a foundation of enterprise trust by delivering high-stakes data analytics and engineering services to complex organizations. We helped our clients navigate the vast seas of information with precision and reliability.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    But in the age of Artificial Intelligence, <span className="text-foreground font-medium">navigation isn't enough — you need momentum.</span>
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    <span className="text-gradient-orange font-semibold">InclinedPlane</span> represents a fundamental shift: providing the strategic leverage your business needs. We transform raw data into a sophisticated lever that multiplies your team's efforts and accelerates your trajectory.
+                  </p>
+                </motion.div>
+              </div>
+              <motion.div {...fadeUp(0.15)}>
+                <div className="flex flex-col gap-4">
+                  {[
+                    { before: "Sail Analytics", after: "InclinedPlane", desc: "Brand evolution" },
+                    { before: "Data Navigation", after: "Data Leverage", desc: "Strategic shift" },
+                    { before: "Analytics Services", after: "AI Implementation", desc: "Capability upgrade" },
+                    { before: "Reporting Focus", after: "Decision Intelligence", desc: "Value delivery" },
+                  ].map(({ before, after, desc }, i) => (
+                    <motion.div key={desc} {...fadeUp(0.2 + i * 0.06)}
+                      className="glass-panel rounded-xl p-5 flex items-center gap-4 group hover:glow-orange transition-shadow" data-cursor-hover>
+                      <div className="flex-1">
+                        <p className="text-sm text-muted-foreground line-through opacity-60">{before}</p>
+                      </div>
+                      <ArrowRight size={14} className="text-primary shrink-0" />
+                      <div className="flex-1">
+                        <p className="text-sm text-foreground font-semibold">{after}</p>
+                      </div>
+                      <span className="text-[10px] text-muted-foreground font-mono hidden sm:block">{desc}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* SLIDE 5 — SERVICES BENTO GRID */}
+        {/* SLIDE 5 — CORE CAPABILITIES */}
         <section className="snap-section flex items-center relative">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
-              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">What We Build</p>
+              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Core Capabilities</p>
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-center">
-                End-to-End <span className="text-gradient-orange">Data Systems.</span>
+                How We <span className="text-gradient-orange">Deliver.</span>
               </h2>
-              <p className="text-muted-foreground text-center max-w-xl mx-auto mb-12">
-                From raw data ingestion to autonomous AI workflows — everything your intelligence stack needs.
+              <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
+                Three pillars of capability engineered for the AI-driven enterprise.
               </p>
             </motion.div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[140px] lg:auto-rows-[160px]">
+            <div className="grid lg:grid-cols-3 gap-6">
               {[
-                { icon: Database, title: "Data Platform Engineering", desc: "Modern lakehouse and warehouse architectures built for scale and AI readiness.", span: "col-span-2 row-span-2" },
-                { icon: Cloud, title: "Cloud Warehouse", desc: "Snowflake, BigQuery, Redshift — optimized for performance.", span: "col-span-1 row-span-1" },
-                { icon: BarChart3, title: "BI Modernization", desc: "Real-time embedded analytics and self-serve intelligence.", span: "col-span-1 row-span-1" },
-                { icon: Eye, title: "DataOps & Observability", desc: "Pipeline monitoring, data quality gates, and automated incident response.", span: "col-span-2 row-span-1" },
-                { icon: Brain, title: "Forecasting Systems", desc: "Demand planning and predictive models with production-grade MLOps.", span: "col-span-1 row-span-1" },
-                { icon: Zap, title: "AI Automation", desc: "n8n, LangChain, and custom agents orchestrating decisions.", span: "col-span-1 row-span-1" },
-              ].map(({ icon: Icon, title, desc, span }, i) => (
-                <motion.div key={title} {...fadeUp(i * 0.05)}
-                  className={`${span} glass-panel rounded-xl p-5 lg:p-6 group flex flex-col justify-between hover:glow-orange transition-shadow`} data-cursor-hover>
-                  <div>
-                    <div className="w-9 h-9 rounded-lg surface-3 flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
-                      <Icon size={16} className="text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-foreground text-sm mb-1.5">{title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
+                {
+                  icon: Database,
+                  title: "Enterprise Data Architecture & AI-Readiness",
+                  headline: "Foundations Built for Scale and Intelligence.",
+                  desc: "Modern growth requires more than just storage — it requires flow and foresight. We design and implement enterprise-grade data pipelines and architectures that ensure your organization is AI-ready.",
+                  bullets: ["AI-Ready Infrastructure", "Legacy Integration", "Real-Time Sync", "Cloud-Native Warehousing"],
+                },
+                {
+                  icon: BarChart3,
+                  title: "Automated Intelligence & BI",
+                  headline: "Decision-Making, De-risked.",
+                  desc: "Stop looking in the rearview mirror. We build automated reporting environments that provide leadership and operations with the clarity they need to act, not just react.",
+                  bullets: ["Executive KPI Dashboards", "Operational Reporting", "Automated Workflows", "Self-Serve Analytics"],
+                },
+                {
+                  icon: Brain,
+                  title: "AI, Predictive & Agentic Implementation",
+                  headline: "Predicting the Future by Engineering It.",
+                  desc: "The leap from analytics to AI is where competitive advantages are won. We implement cutting-edge predictive solutions and autonomous agents that turn 'what if' into 'what's next.'",
+                  bullets: ["Agentic AI Systems", "Operational Risk Mitigation", "Predictive Maintenance", "Growth Modeling"],
+                },
+              ].map(({ icon: Icon, title, headline, desc, bullets }, i) => (
+                <motion.div key={title} {...fadeUp(i * 0.08)}
+                  className="glass-panel rounded-xl p-7 group flex flex-col hover:glow-orange transition-shadow" data-cursor-hover>
+                  <div className="w-11 h-11 rounded-lg surface-3 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
+                    <Icon size={20} className="text-primary" />
                   </div>
-                  <span className="text-[10px] text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity mt-2">
-                    Learn more <ArrowRight size={10} />
-                  </span>
+                  <p className="text-xs text-primary font-mono mb-2">{headline}</p>
+                  <h3 className="font-semibold text-foreground text-base mb-3">{title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">{desc}</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {bullets.map((b) => (
+                      <div key={b} className="flex items-center gap-1.5 text-xs text-secondary-foreground">
+                        <CheckCircle2 size={11} className="text-primary shrink-0" />
+                        <span>{b}</span>
+                      </div>
+                    ))}
+                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* SLIDE 6 — OUTCOMES & METRICS */}
+        {/* SLIDE 6 — VALUE PROPOSITION / IMPACT */}
         <section className="snap-section flex items-center relative">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
-              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Outcomes & Proof</p>
+              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Impact</p>
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6 text-center">
-                Numbers That <span className="text-gradient-orange">Move.</span>
+                Turn Data Gravity into{" "}<span className="text-gradient-orange">Growth Momentum.</span>
               </h2>
-              <p className="text-muted-foreground text-center max-w-xl mx-auto mb-14">
-                Real results from production deployments across retail, SaaS, and financial services.
+              <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-14">
+                Data can be a weight or a lever. Without the right architecture, it's a liability that slows you down. With InclinedPlane, it becomes the force multiplier that lifts your enterprise to its next stage of growth.
               </p>
             </motion.div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <div className="grid sm:grid-cols-3 gap-6 mb-10">
               {[
-                { value: 24, suffix: "%", label: "Stock-Out Reduction", detail: "Retail & CPG" },
-                { value: 15, suffix: "%", label: "Sales Efficiency Lift", detail: "B2B SaaS" },
-                { value: 98, suffix: "%+", label: "Data Freshness SLA", detail: "Financial Services" },
-                { value: 17, suffix: "%", label: "Inventory Value Reduction", detail: "Supply Chain" },
-              ].map(({ value, suffix, label, detail }, i) => (
+                { value: 70, suffix: "%", label: "Faster Time-to-Insight", desc: "Reduce the gap between raw data and actionable intelligence." },
+                { value: 100, suffix: "%", label: "Pipeline Automation", desc: "Eliminate manual error through full pipeline automation." },
+                { value: 3, suffix: "x", label: "Team Leverage", desc: "Reallocate human capital from data entry to strategic AI-driven initiatives." },
+              ].map(({ value, suffix, label, desc }, i) => (
                 <motion.div key={label} {...fadeUp(i * 0.08)}
                   className="glass-panel rounded-xl p-8 text-center group hover:glow-orange transition-shadow">
                   <p className="text-4xl lg:text-5xl font-bold mb-3">
-                    <AnimatedCounter end={value} suffix={suffix} />
+                    <AnimatedCounter end={value} suffix={suffix} prefix={suffix === "x" ? "" : "Up to "} />
                   </p>
-                  <p className="text-sm text-foreground font-medium mb-1">{label}</p>
-                  <p className="text-xs text-muted-foreground font-mono">{detail}</p>
+                  <p className="text-sm text-foreground font-medium mb-2">{label}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
                 </motion.div>
               ))}
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { value: "60%", label: "Faster incident resolution" },
-                { value: "3x", label: "Faster lead response time" },
-                { value: "50+", label: "Production pipelines managed" },
-                { value: "<2hr", label: "Average deployment time" },
+                { value: "Speed", label: "Time-to-insight reduction" },
+                { value: "Accuracy", label: "Full pipeline automation" },
+                { value: "Growth", label: "AI-driven strategic initiatives" },
+                { value: "Scale", label: "Enterprise-grade architecture" },
               ].map(({ value, label }, i) => (
                 <motion.div key={label} {...fadeUp(0.3 + i * 0.05)}
                   className="surface-2 rounded-lg px-5 py-4 text-center">
@@ -482,16 +516,19 @@ const Index = () => {
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
               <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Why Us</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-14 text-center">
-                Engineering <span className="text-gradient-orange">Advantage.</span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6 text-center">
+                Why Modern Enterprises{" "}<span className="text-gradient-orange">Partner With Us.</span>
               </h2>
+              <p className="text-muted-foreground text-center max-w-xl mx-auto mb-14">
+                The InclinedPlane advantage — purpose-built for the AI era.
+              </p>
             </motion.div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {[
-                { icon: Sparkles, title: "AI-Native Thinking", desc: "We don't bolt AI on. We architect for it from day one. Every pipeline, every schema, every workflow." },
-                { icon: Eye, title: "Observability-First", desc: "Data quality isn't a feature — it's the foundation. We instrument everything and monitor continuously." },
-                { icon: Clock, title: "Speed to Production", desc: "We ship in weeks, not quarters. Production-grade systems with CI/CD, testing, and monitoring built in." },
-                { icon: Cpu, title: "Full-Stack Data", desc: "From ingestion to AI-powered automation. We own the entire stack so nothing falls through the cracks." },
+                { icon: Brain, title: "Intelligence-First Approach", desc: "We don't just deliver dashboards — we deliver the AI models that make sense of them." },
+                { icon: Globe, title: "US Market Expertise", desc: "Restructured specifically to handle the regulatory and scaling needs of American enterprise sectors." },
+                { icon: Cpu, title: "Full-Stack Implementation", desc: "We aren't just consultants. We are the engineers who build, deploy, and manage your data's lifecycle." },
+                { icon: Sparkles, title: "AI-Native Architecture", desc: "Every pipeline, every schema, every workflow — designed for AI from day one." },
               ].map(({ icon: Icon, title, desc }, i) => (
                 <motion.div key={title} {...fadeUp(i * 0.06)}
                   className="glass-panel rounded-xl p-6 text-center group hover:glow-orange transition-shadow" data-cursor-hover>
@@ -527,17 +564,17 @@ const Index = () => {
           </div>
           <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-8 text-center">
             <motion.div {...fadeUp()}>
-              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-6">Let's Build</p>
+              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-6">Ready to Apply Leverage?</p>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
-                Build Systems That{" "}<span className="text-gradient-orange">Move.</span>
+                Let's Restructure Your Data for an{" "}<span className="text-gradient-orange">AI-Driven Future.</span>
               </h2>
               <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">
-                If you're serious about AI-ready architecture and operational intelligence, let's build.
+                Let's discuss how we can restructure your data environment for an AI-driven future.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link to="/contact" data-cursor-hover
                   className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-8 py-4 rounded-lg font-medium text-lg hover:opacity-90 transition-opacity glow-orange-strong">
-                  Start the Conversation <ArrowRight size={18} />
+                  Contact Our Team <ArrowRight size={18} />
                 </Link>
                 <Link to="/thesis" data-cursor-hover
                   className="inline-flex items-center gap-2 glass-panel px-8 py-4 rounded-lg font-medium text-foreground hover:bg-muted/20 transition-colors">
