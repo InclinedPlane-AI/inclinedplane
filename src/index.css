@@ -164,24 +164,23 @@
 }
 
 @layer components {
-  /* Glass panel — solid tinted bg, no backdrop-filter glitches */
+  /* Glass panel */
   .glass-panel {
     background: hsl(var(--glass-bg) / var(--glass-opacity));
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     border: 1px solid hsl(var(--glass-border));
-    /* Prevent compositor artifacts from backdrop-filter */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    will-change: transform;
     transform: translateZ(0);
-    isolation: isolate;
   }
 
   .glass-panel-strong {
     background: hsl(var(--glass-strong-bg) / var(--glass-strong-opacity));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border: 1px solid hsl(var(--glass-strong-border));
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    will-change: transform;
     transform: translateZ(0);
-    isolation: isolate;
   }
 
   /* Orange gradient text */
