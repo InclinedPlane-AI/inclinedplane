@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import SlideProgress from "@/components/SlideProgress";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 import AuroraBackground from "@/components/AuroraBackground";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { Link } from "react-router-dom";
@@ -72,6 +73,7 @@ const Index = () => {
       <CustomCursor />
       <Navbar />
       <SlideProgress total={SLIDE_COUNT} current={currentSlide} onDotClick={scrollToSlide} />
+      <ScrollProgressBar containerRef={containerRef} />
 
       <div ref={containerRef} className="snap-container scrollbar-hide">
         {/* SLIDE 1 — HERO */}
