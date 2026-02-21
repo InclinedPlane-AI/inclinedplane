@@ -1,132 +1,97 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 
 interface Tool {
   name: string;
   category: "cloud" | "data" | "analytics" | "automation" | "ai" | "engineering";
-  icon: string;
+  logo: string;
 }
 
+const CDN = "https://cdn.simpleicons.org";
+
 const TOOLS: Tool[] = [
-  // Cloud
-  { name: "Azure", category: "cloud", icon: "☁️" },
-  { name: "AWS", category: "cloud", icon: "⚡" },
-  { name: "GCP", category: "cloud", icon: "🌐" },
-  // Data & Engineering
-  { name: "Databricks", category: "data", icon: "🔶" },
-  { name: "Snowflake", category: "data", icon: "❄️" },
-  { name: "BigQuery", category: "data", icon: "📊" },
-  { name: "dbt", category: "engineering", icon: "🔧" },
-  { name: "Airflow", category: "engineering", icon: "🌀" },
-  { name: "Spark", category: "engineering", icon: "✨" },
-  // Analytics & BI
-  { name: "Power BI", category: "analytics", icon: "📈" },
-  { name: "Tableau", category: "analytics", icon: "📉" },
-  { name: "Looker", category: "analytics", icon: "🔍" },
-  // Languages & Core
-  { name: "Python", category: "engineering", icon: "🐍" },
-  { name: "SQL", category: "engineering", icon: "🗃️" },
-  { name: "Terraform", category: "engineering", icon: "🏗️" },
-  // AI & ML
-  { name: "OpenAI", category: "ai", icon: "🧠" },
-  { name: "LangChain", category: "ai", icon: "🔗" },
-  { name: "Hugging Face", category: "ai", icon: "🤗" },
-  // Automation
-  { name: "n8n", category: "automation", icon: "⚙️" },
-  { name: "Kafka", category: "automation", icon: "📡" },
-  { name: "Docker", category: "engineering", icon: "🐳" },
+  // Row 1
+  { name: "Azure", category: "cloud", logo: `${CDN}/microsoftazure/0078D4` },
+  { name: "AWS", category: "cloud", logo: `${CDN}/amazonwebservices/FF9900` },
+  { name: "GCP", category: "cloud", logo: `${CDN}/googlecloud/4285F4` },
+  { name: "Databricks", category: "data", logo: `${CDN}/databricks/FF3621` },
+  { name: "Snowflake", category: "data", logo: `${CDN}/snowflake/29B5E8` },
+  { name: "BigQuery", category: "data", logo: `${CDN}/googlebigquery/669DF6` },
+  { name: "Power BI", category: "analytics", logo: `${CDN}/powerbi/F2C811` },
+  { name: "Tableau", category: "analytics", logo: `${CDN}/tableau/E97627` },
+  { name: "Looker", category: "analytics", logo: `${CDN}/looker/4285F4` },
+  { name: "dbt", category: "engineering", logo: `${CDN}/dbt/FF694B` },
+  // Row 2
+  { name: "Airflow", category: "engineering", logo: `${CDN}/apacheairflow/017CEE` },
+  { name: "Spark", category: "engineering", logo: `${CDN}/apachespark/E25A1C` },
+  { name: "Python", category: "engineering", logo: `${CDN}/python/3776AB` },
+  { name: "SQL", category: "engineering", logo: `${CDN}/postgresql/4169E1` },
+  { name: "Terraform", category: "engineering", logo: `${CDN}/terraform/844FBA` },
+  { name: "OpenAI", category: "ai", logo: `${CDN}/openai/fff` },
+  { name: "LangChain", category: "ai", logo: `${CDN}/langchain/1C3C3C` },
+  { name: "Hugging Face", category: "ai", logo: `${CDN}/huggingface/FFD21E` },
+  { name: "n8n", category: "automation", logo: `${CDN}/n8n/EA4B71` },
+  { name: "Kafka", category: "automation", logo: `${CDN}/apachekafka/fff` },
+  { name: "Docker", category: "engineering", logo: `${CDN}/docker/2496ED` },
 ];
 
-const CATEGORIES = [
-  { key: "all", label: "All" },
-  { key: "cloud", label: "Cloud" },
-  { key: "data", label: "Data" },
-  { key: "engineering", label: "Engineering" },
-  { key: "analytics", label: "Analytics" },
-  { key: "ai", label: "AI / ML" },
-  { key: "automation", label: "Automation" },
-] as const;
+const row1 = TOOLS.slice(0, 11);
+const row2 = TOOLS.slice(11);
 
-const categoryColors: Record<string, string> = {
-  cloud: "from-blue-500/20 to-blue-600/5",
-  data: "from-amber-500/20 to-amber-600/5",
-  analytics: "from-emerald-500/20 to-emerald-600/5",
-  automation: "from-violet-500/20 to-violet-600/5",
-  ai: "from-rose-500/20 to-rose-600/5",
-  engineering: "from-cyan-500/20 to-cyan-600/5",
-};
+const MarqueeRow = ({ tools, direction = "left", speed = 30 }: { tools: Tool[]; direction?: "left" | "right"; speed?: number }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-const categoryBorders: Record<string, string> = {
-  cloud: "group-hover:border-blue-500/30",
-  data: "group-hover:border-amber-500/30",
-  analytics: "group-hover:border-emerald-500/30",
-  automation: "group-hover:border-violet-500/30",
-  ai: "group-hover:border-rose-500/30",
-  engineering: "group-hover:border-cyan-500/30",
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    let raf: number;
+    let pos = direction === "left" ? 0 : -el.scrollWidth / 2;
+
+    const step = () => {
+      pos += direction === "left" ? -0.4 : 0.4;
+      const half = el.scrollWidth / 2;
+      if (direction === "left" && pos <= -half) pos = 0;
+      if (direction === "right" && pos >= 0) pos = -half;
+      el.style.transform = `translateX(${pos}px)`;
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [direction]);
+
+  // Duplicate items for seamless loop
+  const items = [...tools, ...tools];
+
+  return (
+    <div className="overflow-hidden w-full">
+      <div ref={scrollRef} className="flex gap-3 w-max will-change-transform">
+        {items.map((tool, i) => (
+          <div
+            key={`${tool.name}-${i}`}
+            className="glass-panel rounded-xl px-4 py-3 flex items-center gap-3 border border-border/50 hover:glow-orange transition-all duration-300 group shrink-0 min-w-[140px]"
+            data-cursor-hover
+          >
+            <img
+              src={tool.logo}
+              alt={tool.name}
+              className="w-6 h-6 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+              loading="lazy"
+            />
+            <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors whitespace-nowrap">
+              {tool.name}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 const TechStackGrid = () => {
-  const [activeFilter, setActiveFilter] = useState<string>("all");
-
-  const filtered = activeFilter === "all"
-    ? TOOLS
-    : TOOLS.filter((t) => t.category === activeFilter);
-
   return (
-    <div className="w-full">
-      {/* Category filter pills */}
-      <div className="flex flex-wrap gap-2 justify-center mb-8">
-        {CATEGORIES.map(({ key, label }) => (
-          <button
-            key={key}
-            onClick={() => setActiveFilter(key)}
-            className={`px-3 py-1.5 rounded-full text-[11px] font-medium tracking-wide transition-all duration-200 border ${
-              activeFilter === key
-                ? "bg-primary text-primary-foreground border-primary"
-                : "glass-panel text-muted-foreground hover:text-foreground border-border"
-            }`}
-            data-cursor-hover
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-
-      {/* Honeycomb-style grid */}
-      <motion.div
-        layout
-        className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3"
-      >
-        {filtered.map((tool, i) => (
-          <motion.div
-            key={tool.name}
-            layout
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.25, delay: i * 0.02 }}
-            className={`group relative`}
-            data-cursor-hover
-          >
-            <div
-              className={`relative glass-panel rounded-xl p-4 flex flex-col items-center justify-center text-center
-                border border-border/50 ${categoryBorders[tool.category]}
-                hover:glow-orange transition-all duration-300 aspect-square`}
-            >
-              {/* Gradient overlay on hover */}
-              <div
-                className={`absolute inset-0 rounded-xl bg-gradient-to-br ${categoryColors[tool.category]} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-              />
-              <span className="relative text-2xl mb-2 group-hover:scale-110 transition-transform duration-200">
-                {tool.icon}
-              </span>
-              <span className="relative text-[10px] sm:text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors leading-tight">
-                {tool.name}
-              </span>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
+    <div className="w-full space-y-3">
+      <MarqueeRow tools={row1} direction="left" />
+      <MarqueeRow tools={row2} direction="right" />
     </div>
   );
 };
