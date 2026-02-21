@@ -14,13 +14,14 @@ const navLinks = [
 
 const WavyLine = ({ animate = false, className = "" }: { animate?: boolean; className?: string }) => (
   <svg
-    className={`absolute h-[6px] overflow-visible ${className}`}
+    className={`absolute w-full h-[6px] ${className}`}
     viewBox="0 0 100 6"
     preserveAspectRatio="none"
     fill="none"
+    style={{ overflow: "hidden" }}
   >
     <motion.path
-      d="M0 3 C8 0.5, 16 5.5, 25 3 S42 0.5, 50 3 S67 5.5, 75 3 S92 0.5, 100 3"
+      d="M0 3 Q12.5 1, 25 3 T50 3 T75 3 T100 3"
       stroke="url(#wave-grad)"
       strokeWidth="1.5"
       strokeLinecap="round"
@@ -29,15 +30,15 @@ const WavyLine = ({ animate = false, className = "" }: { animate?: boolean; clas
       animate={
         animate
           ? { d: [
-              "M0 3 C8 0.5, 16 5.5, 25 3 S42 0.5, 50 3 S67 5.5, 75 3 S92 0.5, 100 3",
-              "M0 3 C8 5.5, 16 0.5, 25 3 S42 5.5, 50 3 S67 0.5, 75 3 S92 5.5, 100 3",
-              "M0 3 C8 0.5, 16 5.5, 25 3 S42 0.5, 50 3 S67 5.5, 75 3 S92 0.5, 100 3",
+              "M0 3 Q12.5 0.5, 25 3 T50 3 T75 3 T100 3",
+              "M0 3 Q12.5 5.5, 25 3 T50 3 T75 3 T100 3",
+              "M0 3 Q12.5 0.5, 25 3 T50 3 T75 3 T100 3",
             ] }
           : { pathLength: 1 }
       }
       transition={
         animate
-          ? { d: { duration: 1.2, repeat: Infinity, ease: "easeInOut" }, }
+          ? { d: { duration: 1.2, repeat: Infinity, ease: "easeInOut" } }
           : { duration: 0.3, ease: "easeOut" }
       }
     />
