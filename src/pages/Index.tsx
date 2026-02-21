@@ -380,17 +380,16 @@ const Index = () => {
           </div>
         </section>
 
-        {/* SLIDE 6 — VALUE PROPOSITION / IMPACT (Bold orange) */}
-        <section className="snap-section flex items-center relative overflow-hidden bg-gradient-orange-full">
-          {/* Subtle dark overlay for depth */}
-          <div className="absolute inset-0 bg-black/10" />
-          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        {/* SLIDE 6 — VALUE PROPOSITION / IMPACT */}
+        <section className="snap-section flex items-center relative overflow-hidden">
+          <SectionGlow position="bottom-left" size={700} />
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
-              <p className="font-mono text-xs text-white/70 tracking-widest uppercase mb-4 text-center">Impact</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-center">
-                Turn Data Gravity into Growth Momentum.
+              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Impact</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6 text-center">
+                Turn Data Gravity into{" "}<span className="text-gradient-orange">Growth Momentum.</span>
               </h2>
-              <p className="text-white/75 text-center max-w-2xl mx-auto mb-14">
+              <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-14">
                 Data can be a weight or a lever. Without the right architecture, it's a liability that slows you down. With InclinedPlane, it becomes the force multiplier that lifts your enterprise to its next stage of growth.
               </p>
             </motion.div>
@@ -401,12 +400,12 @@ const Index = () => {
                 { value: 3, suffix: "x", label: "Team Leverage", desc: "Reallocate human capital from data entry to strategic AI-driven initiatives." },
               ].map(({ value, suffix, label, desc }, i) => (
                 <motion.div key={label} {...fadeUp(i * 0.08)}
-                  className="rounded-xl p-8 text-center group transition-shadow bg-white/10 backdrop-blur-sm border border-white/15 hover:bg-white/20">
-                  <p className="text-4xl lg:text-5xl font-bold mb-3 text-white">
+                  className="glass-panel rounded-xl p-8 text-center group hover:glow-orange transition-shadow">
+                  <p className="text-4xl lg:text-5xl font-bold mb-3">
                     <AnimatedCounter end={value} suffix={suffix} prefix={suffix === "x" ? "" : "Up to "} />
                   </p>
-                  <p className="text-sm text-white font-medium mb-2">{label}</p>
-                  <p className="text-xs text-white/65 leading-relaxed">{desc}</p>
+                  <p className="text-sm text-foreground font-medium mb-2">{label}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -418,9 +417,9 @@ const Index = () => {
                 { value: "Scale", label: "Enterprise-grade architecture" },
               ].map(({ value, label }, i) => (
                 <motion.div key={label} {...fadeUp(0.3 + i * 0.05)}
-                  className="rounded-lg px-5 py-4 text-center bg-black/15 backdrop-blur-sm border border-white/10">
-                  <p className="text-xl font-bold text-white mb-1">{value}</p>
-                  <p className="text-[11px] text-white/60">{label}</p>
+                  className="surface-2 rounded-lg px-5 py-4 text-center">
+                  <p className="text-xl font-bold text-gradient-orange mb-1">{value}</p>
+                  <p className="text-[11px] text-muted-foreground">{label}</p>
                 </motion.div>
               ))}
             </div>
@@ -609,32 +608,34 @@ const Index = () => {
           </div>
         </section>
 
-        {/* SLIDE 11 — FINAL CTA (Bold orange) */}
-        <section className="snap-section flex items-center relative overflow-hidden bg-gradient-orange-full">
-          <div className="absolute inset-0 bg-black/10" />
+        {/* SLIDE 11 — FINAL CTA */}
+        <section className="snap-section flex items-center relative overflow-hidden">
+          <div className="absolute inset-0">
+            <div className="absolute w-[600px] h-[600px] rounded-full opacity-[0.08] blur-[120px] bg-gradient-orange top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 will-change-transform" />
+          </div>
           <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-8 text-center">
             <motion.div {...fadeUp()}>
-              <p className="font-mono text-xs text-white/70 tracking-widest uppercase mb-6">Ready to Apply Leverage?</p>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                Let's Restructure Your Data for an AI-Driven Future.
+              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-6">Ready to Apply Leverage?</p>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
+                Let's Restructure Your Data for an{" "}<span className="text-gradient-orange">AI-Driven Future.</span>
               </h2>
-              <p className="text-lg text-white/75 mb-10 max-w-xl mx-auto">
+              <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">
                 Let's discuss how we can restructure your data environment for an AI-driven future.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link to="/contact" data-cursor-hover
-                  className="inline-flex items-center gap-2 bg-white text-orange-600 px-8 py-4 rounded-lg font-medium text-lg hover:bg-white/90 transition-colors shadow-lg">
+                  className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-8 py-4 rounded-lg font-medium text-lg hover:opacity-90 transition-opacity glow-orange-strong">
                   Contact Our Team <ArrowRight size={18} />
                 </Link>
                 <Link to="/thesis" data-cursor-hover
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-medium text-white border border-white/30 hover:bg-white/10 transition-colors backdrop-blur-sm">
+                  className="inline-flex items-center gap-2 glass-panel px-8 py-4 rounded-lg font-medium text-foreground hover:bg-muted/20 transition-colors">
                   Read Our Thesis
                 </Link>
               </div>
-              <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-xs font-mono text-white/50">
+              <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-xs font-mono text-muted-foreground/40">
                 {["Snowflake Partner", "AWS Partner", "dbt Certified", "SOC 2 Ready"].map((badge) => (
                   <span key={badge} className="flex items-center gap-1.5">
-                    <CheckCircle2 size={10} className="text-white/60" /> {badge}
+                    <CheckCircle2 size={10} className="text-primary/50" /> {badge}
                   </span>
                 ))}
               </div>
