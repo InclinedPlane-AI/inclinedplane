@@ -100,16 +100,20 @@ const OrbitalGraphic = () => {
       </svg>
 
       {/* Center node */}
-      <div
-        className={`absolute inset-[35%] rounded-full glass-panel-strong flex items-center justify-center z-10 transition-shadow duration-300 cursor-default ${
-          centerHovered ? "glow-orange shadow-[0_0_30px_hsl(var(--primary)/0.4)]" : ""
-        }`}
+      <motion.div
+        className="absolute inset-[35%] rounded-full glass-panel-strong flex items-center justify-center z-10 cursor-default"
+        animate={{
+          boxShadow: centerHovered
+            ? "0 0 24px hsl(25 100% 50% / 0.3), 0 0 48px hsl(25 100% 50% / 0.15)"
+            : "0 0 0px transparent",
+        }}
+        transition={{ duration: 0.3 }}
         onMouseEnter={() => setCenterHovered(true)}
         onMouseLeave={() => setCenterHovered(false)}
         data-cursor-hover
       >
         <Brain className="text-primary" size={28} />
-      </div>
+      </motion.div>
 
       {/* Orbiting nodes */}
       {positions.length === NODES.length &&
