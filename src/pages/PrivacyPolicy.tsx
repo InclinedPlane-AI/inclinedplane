@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Shield, Eye, Database, Lock, UserCheck, Globe, Mail, Clock } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
+import SEOHead from "@/components/SEOHead";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -111,6 +112,12 @@ const sections = [
 const PrivacyPolicy = () => {
   return (
     <PageLayout>
+      <SEOHead
+        title="Privacy Policy"
+        description="How Inclined Plane collects, uses, and protects your personal information. Read our commitment to data privacy and transparency."
+        path="/privacy"
+        noIndex
+      />
       <section className="relative pt-32 pb-20 overflow-hidden">
         {/* Background decoration */}
         <div className="absolute inset-0 pointer-events-none">

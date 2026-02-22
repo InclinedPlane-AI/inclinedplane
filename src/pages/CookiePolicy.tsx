@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Cookie, Settings, BarChart3, Target, ShieldCheck, ToggleRight, Info, Mail } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
+import SEOHead from "@/components/SEOHead";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -65,6 +66,12 @@ const managementSteps = [
 const CookiePolicy = () => {
   return (
     <PageLayout>
+      <SEOHead
+        title="Cookie Policy"
+        description="How Inclined Plane uses cookies and tracking technologies on our website. Manage your cookie preferences."
+        path="/cookies"
+        noIndex
+      />
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-24 left-1/3 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />

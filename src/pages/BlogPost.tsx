@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Clock, CalendarDays, Share2, ArrowUp, Linkedin } from "lucide-react";
 import { useState, useEffect } from "react";
 import PageLayout from "@/components/PageLayout";
+import SEOHead from "@/components/SEOHead";
 import { blogPosts, BlogSection, BlogImage } from "@/data/blogPosts";
 import { Badge } from "@/components/ui/badge";
 
@@ -111,6 +112,36 @@ const BlogPostPage = () => {
 
   return (
     <PageLayout>
+      <SEOHead
+        title={post.title}
+        description={post.subtitle}
+        path={`/blog/${post.slug}`}
+        ogType="article"
+        article={{
+          publishedTime: post.date,
+          author: post.author.name,
+          tags: post.tags,
+        }}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.subtitle,
+          datePublished: post.date,
+          author: {
+            "@type": "Person",
+            name: post.author.name,
+            ...(post.author.linkedin ? { url: post.author.linkedin } : {}),
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "Inclined Plane",
+            url: "https://inclinedplane.com",
+          },
+          mainEntityOfPage: `https://inclinedplane.com/blog/${post.slug}`,
+          keywords: post.tags.join(", "),
+        }}
+      />
       {/* Progress bar */}
       <div className="fixed top-16 left-0 right-0 z-40 h-[2px] bg-border/30">
         <motion.div

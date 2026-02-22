@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Scale, FileText, AlertTriangle, Handshake, Ban, RefreshCw, Gavel, MapPin, Mail } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
+import SEOHead from "@/components/SEOHead";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -77,6 +78,12 @@ const sections = [
 const Terms = () => {
   return (
     <PageLayout>
+      <SEOHead
+        title="Terms of Service"
+        description="Terms governing the use of Inclined Plane's data engineering and AI consulting services. Clear and fair business terms."
+        path="/terms"
+        noIndex
+      />
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-32 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />

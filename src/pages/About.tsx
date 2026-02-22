@@ -1,4 +1,5 @@
 import PageLayout from "@/components/PageLayout";
+import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import SectionGlow from "@/components/SectionGlow";
 import { motion } from "framer-motion";
@@ -52,6 +53,11 @@ const TimelineDot = ({ active = false }: { active?: boolean }) => (
 const About = () => {
   return (
     <PageLayout>
+      <SEOHead
+        title="About Inclined Plane"
+        description="From Sail Analytics to Inclined Plane — our evolution into an AI-native data engineering firm. Meet the team building decision systems for modern enterprises."
+        path="/about"
+      />
       <PageHero
         label="Our Story"
         title={

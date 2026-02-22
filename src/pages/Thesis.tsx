@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
+import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import SectionGlow from "@/components/SectionGlow";
 import { motion, AnimatePresence } from "framer-motion";
@@ -505,6 +506,11 @@ const Thesis = () => {
 
   return (
     <PageLayout>
+      <SEOHead
+        title="Our Thesis — The Architecture of Intelligence"
+        description="Why modern enterprises need observable, automated data platforms. Our thesis on building decision systems from source to intelligence."
+        path="/thesis"
+      />
       <ReadingProgressBar />
       <div className="overflow-x-hidden">
       <PageHero

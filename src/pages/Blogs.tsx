@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Clock, Linkedin } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
+import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import { blogPosts, allTags } from "@/data/blogPosts";
 
@@ -15,6 +16,11 @@ const Blogs = () => {
 
   return (
     <PageLayout>
+      <SEOHead
+        title="Blog — Insights on Data Engineering & AI"
+        description="Expert insights on data engineering, AI automation, DataOps, business intelligence, and building modern data platforms. By the Inclined Plane team."
+        path="/blog"
+      />
       <PageHero
         label="Blog"
         title={<>Thinking in <span className="text-gradient-orange">Systems</span></>}

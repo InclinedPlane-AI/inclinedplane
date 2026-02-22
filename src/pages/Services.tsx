@@ -1,4 +1,5 @@
 import PageLayout from "@/components/PageLayout";
+import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -268,6 +269,19 @@ const ServicesPage = () => {
 
   return (
     <PageLayout>
+      <SEOHead
+        title="Data Engineering Services"
+        description="Cloud data warehousing, BI modernization, DataOps, AI automation workflows, and observability-first pipeline engineering. Enterprise-grade data services."
+        path="/services"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          provider: { "@type": "Organization", name: "Inclined Plane" },
+          serviceType: "Data Engineering Consulting",
+          areaServed: "Worldwide",
+          description: "End-to-end data engineering services including cloud warehouse architecture, BI modernization, DataOps, and AI automation.",
+        }}
+      />
       <PageHero
         label="Services"
         title={<>What We <span className="text-gradient-orange">Build.</span></>}

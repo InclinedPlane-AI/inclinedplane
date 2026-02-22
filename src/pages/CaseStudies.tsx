@@ -1,4 +1,5 @@
 import PageLayout from "@/components/PageLayout";
+import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { ArrowRight, Database, BarChart3, Eye, TrendingUp, CheckCircle2, Layers } from "lucide-react";
@@ -86,6 +87,11 @@ const cases = [
 const CaseStudies = () => {
   return (
     <PageLayout>
+      <SEOHead
+        title="Case Studies"
+        description="Real-world results from AI-native data engineering. Demand forecasting, pipeline automation, executive dashboards, and churn prediction case studies."
+        path="/case-studies"
+      />
       <PageHero
         label="Case Studies"
         title={<>Proof in <span className="text-gradient-orange">Production.</span></>}

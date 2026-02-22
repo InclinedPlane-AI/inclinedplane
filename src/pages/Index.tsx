@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import CustomCursor from "@/components/CustomCursor";
 import SlideProgress from "@/components/SlideProgress";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
@@ -72,6 +73,21 @@ const Index = () => {
 
   return (
     <div className="bg-background">
+      <SEOHead
+        title="Inclined Plane — AI-Native Data Engineering"
+        description="AI-ready data platforms, observability-first pipelines, and decision systems that turn complexity into operational intelligence. Data engineering consultancy for modern enterprises."
+        path="/"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          name: "Inclined Plane",
+          description: "AI-native data engineering consultancy specializing in cloud data warehouses, BI modernization, DataOps, and AI automation workflows.",
+          url: "https://inclinedplane.com",
+          priceRange: "$$$$",
+          areaServed: "Worldwide",
+          serviceType: ["Data Engineering", "AI Automation", "Business Intelligence", "Cloud Data Warehousing", "DataOps"],
+        }}
+      />
       <CustomCursor />
       <Navbar />
       <SlideProgress total={SLIDE_COUNT} current={currentSlide} onDotClick={scrollToSlide} />
