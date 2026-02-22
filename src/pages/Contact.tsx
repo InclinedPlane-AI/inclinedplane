@@ -75,53 +75,13 @@ const Contact = () => {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-5">
             Let's <span className="text-gradient-orange">Build</span> Together.
           </h1>
-        </motion.div>
-
-        {/* ── Reach Out Options ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="max-w-3xl mx-auto px-6 mb-16"
-        >
-          <div className="grid sm:grid-cols-[1fr_auto_1fr] items-center gap-5">
-            {/* Option 1: Form */}
-            <div className="glass-panel rounded-2xl p-6 text-center h-full flex flex-col items-center justify-center">
-              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
-                <ArrowRight size={18} className="text-primary -rotate-90" />
-              </div>
-              <h3 className="text-sm font-semibold text-foreground mb-1.5">Drop us a message</h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Fill out the form below — we'll review it and get back to you within 24 hours.
-              </p>
-            </div>
-
-            {/* Divider */}
-            <div className="flex sm:flex-col items-center gap-3">
-              <div className="flex-1 sm:w-px sm:h-12 h-px w-12 bg-border" />
-              <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">or</span>
-              <div className="flex-1 sm:w-px sm:h-12 h-px w-12 bg-border" />
-            </div>
-
-            {/* Option 2: Email */}
-            <a
-              href="mailto:support@inclinedplane.ai"
-              data-cursor-hover
-              className="glass-panel rounded-2xl p-6 text-center h-full flex flex-col items-center justify-center group hover:border-primary/20 transition-colors"
-            >
-              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/15 transition-colors">
-                <Mail size={18} className="text-primary" />
-              </div>
-              <h3 className="text-sm font-semibold text-foreground mb-1.5">Email us directly</h3>
-              <p className="text-xs text-primary font-medium group-hover:underline underline-offset-4 transition-all">
-                support@inclinedplane.ai
-              </p>
-            </a>
-          </div>
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-xl mx-auto">
+            Have a project in mind or want to explore how data can transform your business? We'd love to hear from you.
+          </p>
         </motion.div>
 
         {/* ── Contact Form ── */}
-        <div className="max-w-2xl mx-auto px-6 lg:px-8 mb-28">
+        <div className="max-w-2xl mx-auto px-6 lg:px-8 mb-10">
           {submitted ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -234,6 +194,39 @@ const Contact = () => {
             </motion.form>
           )}
         </div>
+
+        {/* ── Or Email Us ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="max-w-2xl mx-auto px-6 lg:px-8 mb-28"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <div className="flex-1 h-px bg-border" />
+            <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">or</span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          <a
+            href="mailto:support@inclinedplane.ai"
+            data-cursor-hover
+            className="glass-panel rounded-2xl p-7 flex items-center gap-5 group hover:border-primary/20 transition-colors"
+          >
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/15 transition-colors">
+              <Mail size={20} className="text-primary" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-sm font-semibold text-foreground mb-1">Prefer email?</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Drop us a line and we'll get back to you within 24 hours.
+              </p>
+            </div>
+            <p className="text-sm text-primary font-medium group-hover:underline underline-offset-4 transition-all hidden sm:block">
+              support@inclinedplane.ai
+            </p>
+          </a>
+        </motion.div>
 
         {/* ── What Happens Next ── */}
         <div className="max-w-5xl mx-auto px-6 lg:px-8 mb-28">
