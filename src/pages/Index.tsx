@@ -82,7 +82,7 @@ const Index = () => {
         <section className="snap-section flex items-center relative overflow-hidden">
           <AuroraBackground />
           <InteractiveDotGrid />
-          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pointer-events-none">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
@@ -94,7 +94,7 @@ const Index = () => {
                   <p className="text-lg text-muted-foreground leading-relaxed max-w-lg mb-8">
                     We don't just engineer data — we operationalize intelligence. InclinedPlane provides the architectural backbone and AI implementation required for high-velocity enterprises to make smarter decisions, faster.
                   </p>
-                  <div className="flex flex-wrap gap-4">
+                  <div className="flex flex-wrap gap-4 pointer-events-auto">
                     <Link to="/contact" data-cursor-hover className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-7 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity glow-orange">
                       Book a Strategy Consultation <ArrowRight size={16} />
                     </Link>
@@ -109,7 +109,7 @@ const Index = () => {
                   ))}
                 </motion.div>
               </div>
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.6 }} className="hidden lg:flex items-center justify-center">
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.6 }} className="hidden lg:flex items-center justify-center pointer-events-auto">
                 <OrbitalGraphic />
               </motion.div>
             </div>
