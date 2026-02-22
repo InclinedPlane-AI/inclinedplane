@@ -1,5 +1,6 @@
 import PageLayout from "@/components/PageLayout";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   Database, Shield, BarChart3, Brain, Zap,
   Layers, CloudCog, Warehouse, GitBranch, FileCheck,
@@ -225,6 +226,7 @@ const ServiceContent = ({ pillar, isActive }: { pillar: ServicePillar; isActive:
 
 /* ── Main page ── */
 const ServicesPage = () => {
+  const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
   const isClickScrolling = useRef(false);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -368,6 +370,42 @@ const ServicesPage = () => {
               ))}
             </div>
           </div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5 }}
+            className="mt-16 lg:mt-24"
+          >
+            <div className="glass-panel-strong rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden border border-primary/10">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3 pointer-events-none" />
+              <div className="relative z-10">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-primary/60 mb-3">Ready to start?</p>
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
+                  Impressed? Let's <span className="text-gradient-orange">Build Together.</span>
+                </h2>
+                <p className="text-muted-foreground max-w-lg mx-auto mb-8 text-sm leading-relaxed">
+                  Whether you need a solid data foundation or autonomous decision systems — we'll design the roadmap and deliver results.
+                </p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                  <button
+                    onClick={() => navigate("/contact")}
+                    className="px-6 py-3 rounded-xl bg-gradient-orange text-white font-medium text-sm hover:opacity-90 transition-opacity"
+                  >
+                    Book a Discovery Call
+                  </button>
+                  <a
+                    href="mailto:support@inclinedplane.ai"
+                    className="px-6 py-3 rounded-xl border border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/30 font-medium text-sm transition-colors"
+                  >
+                    Or drop us an email →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </PageLayout>
