@@ -1,11 +1,9 @@
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SectionGlowProps {
-  /** Position preset */
   position?: "center" | "top-left" | "top-right" | "bottom-left" | "bottom-right";
-  /** Size in px */
   size?: number;
-  /** Extra className */
   className?: string;
 }
 
@@ -17,27 +15,34 @@ const positionStyles: Record<string, React.CSSProperties> = {
   "bottom-right": { bottom: "-10%", right: "-10%" },
 };
 
-const SectionGlow = ({ position = "center", size = 600, className = "" }: SectionGlowProps) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    transition={{ duration: 0.6, ease: "easeOut" }}
-    viewport={{ once: true, amount: 0.3 }}
-    className={`absolute pointer-events-none will-change-transform ${className}`}
-    style={{
-      width: size,
-      height: size,
-      ...positionStyles[position],
-    }}
-  >
-    <div
-      className="w-full h-full rounded-full blur-[120px]"
+const SectionGlow = ({ position = "center", size = 600, className = "" }: SectionGlowProps) => {
+  const isMobile = useIsMobile();
+
+  // Skip rendering on mobile for performance
+  if (isMobile) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.3 }}
+      className={`absolute pointer-events-none will-change-transform ${className}`}
       style={{
-        background:
-          "radial-gradient(circle, hsl(var(--orange-start) / 0.25), hsl(var(--orange-mid) / 0.12), transparent 70%)",
+        width: size,
+        height: size,
+        ...positionStyles[position],
       }}
-    />
-  </motion.div>
-);
+    >
+      <div
+        className="w-full h-full rounded-full blur-[120px]"
+        style={{
+          background:
+            "radial-gradient(circle, hsl(var(--orange-start) / 0.25), hsl(var(--orange-mid) / 0.12), transparent 70%)",
+        }}
+      />
+    </motion.div>
+  );
+};
 
 export default SectionGlow;

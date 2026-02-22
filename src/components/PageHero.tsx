@@ -71,28 +71,26 @@ interface PageHeroProps {
 }
 
 const PageHero = ({ label, title, subtitle, className = "", children }: PageHeroProps) => (
-  <section className={`relative overflow-hidden pt-32 pb-16 lg:pb-20 ${className}`}>
+  <section className={`relative overflow-hidden pt-24 sm:pt-32 pb-12 sm:pb-16 lg:pb-20 ${className}`}>
     <HeroDotGrid />
-    {/* Soft radial glow behind text */}
     <div
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full blur-[140px] pointer-events-none opacity-30"
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[250px] sm:h-[400px] rounded-full blur-[100px] sm:blur-[140px] pointer-events-none opacity-30"
       style={{
         background: "radial-gradient(circle, hsl(var(--orange-start) / 0.35), transparent 70%)",
       }}
     />
-    <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
+    <div className="relative z-10 max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-        <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">{label}</p>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-5">
+        <p className="font-mono text-[10px] sm:text-xs text-primary tracking-widest uppercase mb-3 sm:mb-4">{label}</p>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-4 sm:mb-5">
           {title}
         </h1>
         {subtitle && (
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{subtitle}</p>
+          <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto">{subtitle}</p>
         )}
       </motion.div>
       {children}
     </div>
-    {/* Bottom fade into page background */}
     <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none" />
   </section>
 );

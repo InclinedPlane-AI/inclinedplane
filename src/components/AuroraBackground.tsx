@@ -1,7 +1,27 @@
+import { useIsMobile } from "@/hooks/use-mobile";
+
 const AuroraBackground = () => {
+  const isMobile = useIsMobile();
+
+  // Mobile: single subtle glow, no animation
+  if (isMobile) {
+    return (
+      <div className="absolute inset-0 overflow-hidden">
+        <div
+          className="absolute w-[400px] h-[400px] rounded-full blur-[120px] will-change-transform"
+          style={{
+            background: "radial-gradient(circle, hsl(var(--orange-start) / 0.15), transparent 70%)",
+            top: "-10%",
+            left: "-5%",
+          }}
+        />
+        <div className="absolute inset-0 bg-background/50" />
+      </div>
+    );
+  }
+
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Subtle orange tint behind hero text — top-left */}
       <div
         className="absolute w-[700px] h-[600px] rounded-full blur-[160px] will-change-transform"
         style={{
@@ -10,7 +30,6 @@ const AuroraBackground = () => {
           left: "-8%",
         }}
       />
-      {/* Large gradient band 1 */}
       <div
         className="absolute w-[800px] h-[800px] rounded-full animate-aurora-1 blur-[100px] will-change-transform opacity-[var(--aurora-opacity)]"
         style={{
@@ -19,7 +38,6 @@ const AuroraBackground = () => {
           left: "-10%",
         }}
       />
-      {/* Large gradient band 2 */}
       <div
         className="absolute w-[600px] h-[600px] rounded-full animate-aurora-2 blur-[120px] will-change-transform opacity-[calc(var(--aurora-opacity)*0.85)]"
         style={{
@@ -28,7 +46,6 @@ const AuroraBackground = () => {
           right: "-5%",
         }}
       />
-      {/* Blob 3 — reduced size */}
       <div
         className="absolute w-[400px] h-[400px] rounded-full animate-aurora-3 blur-[80px] will-change-transform opacity-[calc(var(--aurora-opacity)*0.6)]"
         style={{
@@ -37,7 +54,6 @@ const AuroraBackground = () => {
           left: "30%",
         }}
       />
-      {/* Overlay for text readability */}
       <div className="absolute inset-0 bg-background/40" />
     </div>
   );

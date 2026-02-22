@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import powerbiLogo from "@/assets/powerbi-logo.png";
 import tableauLogo from "@/assets/tableau-logo.svg";
 import azureLogo from "@/assets/azure-logo.png";
@@ -21,7 +21,6 @@ interface Tool {
 const CDN = "https://cdn.simpleicons.org";
 
 const TOOLS: Tool[] = [
-  // Row 1
   { name: "Azure", category: "cloud", logo: azureLogo },
   { name: "AWS", category: "cloud", logo: awsLogo },
   { name: "GCP", category: "cloud", logo: `${CDN}/googlecloud/4285F4` },
@@ -34,7 +33,6 @@ const TOOLS: Tool[] = [
   { name: "dbt", category: "engineering", logo: dbtLogo },
   { name: "Fabric", category: "data", logo: fabricLogo },
   { name: "ClickHouse", category: "data", logo: clickhouseLogo },
-  // Row 2
   { name: "Airflow", category: "engineering", logo: `${CDN}/apacheairflow/017CEE` },
   { name: "Spark", category: "engineering", logo: `${CDN}/apachespark/E25A1C` },
   { name: "Python", category: "engineering", logo: `${CDN}/python/3776AB` },
@@ -54,7 +52,7 @@ const TOOLS: Tool[] = [
 const row1 = TOOLS.slice(0, 12);
 const row2 = TOOLS.slice(12);
 
-const MarqueeRow = ({ tools, direction = "left", speed = 30 }: { tools: Tool[]; direction?: "left" | "right"; speed?: number }) => {
+const MarqueeRow = ({ tools, direction = "left" }: { tools: Tool[]; direction?: "left" | "right" }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -75,7 +73,6 @@ const MarqueeRow = ({ tools, direction = "left", speed = 30 }: { tools: Tool[]; 
     return () => cancelAnimationFrame(raf);
   }, [direction]);
 
-  // Duplicate items for seamless loop
   const items = [...tools, ...tools];
 
   return (
@@ -87,15 +84,8 @@ const MarqueeRow = ({ tools, direction = "left", speed = 30 }: { tools: Tool[]; 
             className="glass-panel rounded-xl px-4 py-3 flex items-center gap-3 border border-border/50 hover:glow-orange transition-all duration-300 group shrink-0 min-w-[140px]"
             data-cursor-hover
           >
-            <img
-              src={tool.logo}
-              alt={tool.name}
-              className="w-6 h-6 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
-              loading="lazy"
-            />
-            <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors whitespace-nowrap">
-              {tool.name}
-            </span>
+            <img src={tool.logo} alt={tool.name} className="w-6 h-6 object-contain opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy" />
+            <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors whitespace-nowrap">{tool.name}</span>
           </div>
         ))}
       </div>
@@ -103,7 +93,32 @@ const MarqueeRow = ({ tools, direction = "left", speed = 30 }: { tools: Tool[]; 
   );
 };
 
+/* Mobile: static wrapping grid */
+const StaticGrid = ({ tools }: { tools: Tool[] }) => (
+  <div className="flex flex-wrap gap-2 justify-center">
+    {tools.map((tool) => (
+      <div
+        key={tool.name}
+        className="glass-panel rounded-lg px-3 py-2 flex items-center gap-2 border border-border/50 shrink-0"
+      >
+        <img src={tool.logo} alt={tool.name} className="w-5 h-5 object-contain opacity-80" loading="lazy" />
+        <span className="text-[11px] font-medium text-muted-foreground whitespace-nowrap">{tool.name}</span>
+      </div>
+    ))}
+  </div>
+);
+
 const TechStackGrid = () => {
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return (
+      <div className="w-full">
+        <StaticGrid tools={TOOLS.slice(0, 16)} />
+      </div>
+    );
+  }
+
   return (
     <div className="w-full space-y-3">
       <MarqueeRow tools={row1} direction="left" />

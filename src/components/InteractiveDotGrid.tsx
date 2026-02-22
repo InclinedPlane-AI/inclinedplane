@@ -11,8 +11,12 @@ const GLOW_ALPHA = 0.45;
 interface Dot {
   x: number;
   y: number;
-  brightness: number; // 0 = dim, 1 = full glow
+  brightness: number;
 }
+
+const isMobile = () =>
+  typeof window !== "undefined" &&
+  (window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768);
 
 const InteractiveDotGrid = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -22,12 +26,14 @@ const InteractiveDotGrid = () => {
   const initializedRef = useRef(false);
 
   const initDots = useCallback((width: number, height: number) => {
+    const mobile = isMobile();
+    const spacing = mobile ? 28 : DOT_SPACING;
     const dots: Dot[] = [];
-    const cols = Math.ceil(width / DOT_SPACING) + 1;
-    const rows = Math.ceil(height / DOT_SPACING) + 1;
+    const cols = Math.ceil(width / spacing) + 1;
+    const rows = Math.ceil(height / spacing) + 1;
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
-        dots.push({ x: c * DOT_SPACING, y: r * DOT_SPACING, brightness: 0 });
+        dots.push({ x: c * spacing, y: r * spacing, brightness: 0 });
       }
     }
     dotsRef.current = dots;
@@ -38,11 +44,12 @@ const InteractiveDotGrid = () => {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    const mobile = isMobile();
 
     const resize = () => {
       const parent = canvas.parentElement;
       if (!parent) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = mobile ? 1 : Math.min(window.devicePixelRatio || 1, 2);
       const w = parent.clientWidth;
       const h = parent.clientHeight;
       canvas.width = w * dpr;
@@ -57,6 +64,33 @@ const InteractiveDotGrid = () => {
     resize();
     window.addEventListener("resize", resize);
 
+    // On mobile: draw once statically, no animation loop
+    if (mobile) {
+      const drawStatic = () => {
+        const w = canvas.clientWidth;
+        const h = canvas.clientHeight;
+        ctx.clearRect(0, 0, w, h);
+        const isLight = document.documentElement.classList.contains("light");
+        const color = isLight ? "25, 95%, 48%" : "25, 100%, 50%";
+        const baseA = isLight ? 0.1 : BASE_ALPHA;
+        const dots = dotsRef.current;
+        for (let i = 0; i < dots.length; i++) {
+          ctx.beginPath();
+          ctx.arc(dots[i].x, dots[i].y, DOT_BASE_RADIUS, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${color}, ${baseA})`;
+          ctx.fill();
+        }
+      };
+      drawStatic();
+      const observer = new MutationObserver(() => { resize(); drawStatic(); });
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+      return () => {
+        window.removeEventListener("resize", resize);
+        observer.disconnect();
+      };
+    }
+
+    // Desktop: full interactive animation
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
@@ -68,7 +102,6 @@ const InteractiveDotGrid = () => {
     canvas.addEventListener("mousemove", handleMouseMove, { passive: true });
     canvas.addEventListener("mouseleave", handleMouseLeave);
 
-    // Check theme
     const getColor = () => {
       const isLight = document.documentElement.classList.contains("light");
       return isLight ? "25, 95%, 48%" : "25, 100%, 50%";
@@ -79,11 +112,9 @@ const InteractiveDotGrid = () => {
         rafRef.current = requestAnimationFrame(draw);
         return;
       }
-
       const w = canvas.clientWidth;
       const h = canvas.clientHeight;
       ctx.clearRect(0, 0, w, h);
-
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
       const dots = dotsRef.current;
@@ -96,31 +127,19 @@ const InteractiveDotGrid = () => {
         const dx = dot.x - mx;
         const dy = dot.y - my;
         const dist = Math.sqrt(dx * dx + dy * dy);
-
         if (dist < CURSOR_RADIUS) {
           const intensity = 1 - dist / CURSOR_RADIUS;
-          const target = intensity * intensity; // easeIn curve
-          if (target > dot.brightness) {
-            dot.brightness = target;
-          }
+          const target = intensity * intensity;
+          if (target > dot.brightness) dot.brightness = target;
         }
-
-        // Fade out smoothly
-        if (dot.brightness > 0) {
-          dot.brightness = Math.max(0, dot.brightness - FADE_SPEED);
-        }
-
+        if (dot.brightness > 0) dot.brightness = Math.max(0, dot.brightness - FADE_SPEED);
         const alpha = baseA + dot.brightness * (GLOW_ALPHA - baseA);
         const radius = DOT_BASE_RADIUS + dot.brightness * (DOT_GLOW_RADIUS - DOT_BASE_RADIUS);
-
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, radius, 0, Math.PI * 2);
         ctx.fillStyle = `hsla(${color}, ${alpha})`;
         ctx.fill();
-
-        // No outer glow layer
       }
-
       rafRef.current = requestAnimationFrame(draw);
     };
 
