@@ -197,13 +197,17 @@ const SlideProgress = ({ total, current, onDotClick }: SlideProgressProps) => {
             }`}
           />
 
-          {/* Subtle active glow — static, no infinite animation */}
+          {/* Subtle active glow */}
           {i === current && (
             <motion.div
               layoutId="progress-glow"
               className="absolute inset-0 rounded-full"
-              style={{ boxShadow: "0 0 8px hsl(25 100% 50% / 0.2)", opacity: 0.7 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              style={{ boxShadow: "0 0 8px hsl(25 100% 50% / 0.2)" }}
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{
+                layout: { type: "spring", stiffness: 400, damping: 25 },
+                opacity: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+              }}
             />
           )}
 

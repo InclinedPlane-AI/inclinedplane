@@ -186,7 +186,8 @@ const SweepOverlay = ({
         background: bg,
         clipPath: `circle(0px at ${x}px ${y}px)`,
         pointerEvents: "none",
-        /* backdrop-filter removed — too GPU-expensive for a full-screen element */
+        backdropFilter: "blur(1px)",
+        WebkitBackdropFilter: "blur(1px)",
       }}
     />
   );

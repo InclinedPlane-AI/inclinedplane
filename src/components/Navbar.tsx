@@ -28,8 +28,20 @@ const WavyLine = ({ animate = false, className = "" }: { animate?: boolean; clas
       strokeLinecap="round"
       fill="none"
       initial={{ pathLength: animate ? 1 : 0 }}
-      animate={{ pathLength: 1 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
+      animate={
+        animate
+          ? { d: [
+              "M0 3 Q12.5 0.5, 25 3 T50 3 T75 3 T100 3",
+              "M0 3 Q12.5 5.5, 25 3 T50 3 T75 3 T100 3",
+              "M0 3 Q12.5 0.5, 25 3 T50 3 T75 3 T100 3",
+            ] }
+          : { pathLength: 1 }
+      }
+      transition={
+        animate
+          ? { d: { duration: 1.2, repeat: Infinity, ease: "easeInOut" } }
+          : { duration: 0.3, ease: "easeOut" }
+      }
     />
     <defs>
       <linearGradient id="wave-grad" x1="0" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
