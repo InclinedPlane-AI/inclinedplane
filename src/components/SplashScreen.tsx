@@ -54,14 +54,14 @@ const SplashScreen = ({ contentReady, onComplete }: SplashScreenProps) => {
           {/* Logo text */}
           <div className="relative select-none">
             {/* Dim base text */}
-            <span className="text-3xl md:text-5xl font-bold tracking-tight">
+            <span className="text-3xl md:text-5xl font-extrabold tracking-tight">
               <span className="text-muted-foreground/30">Inclined</span>
               <span className="text-primary/20">Plane</span>
             </span>
 
             {/* Bright fill text clipped by progress */}
             <span
-              className="absolute inset-0 text-3xl md:text-5xl font-bold tracking-tight overflow-hidden"
+              className="absolute inset-0 text-3xl md:text-5xl font-extrabold tracking-tight overflow-hidden"
               style={{ clipPath: `inset(0 ${100 - progress}% 0 0)` }}
             >
               <span className="text-foreground">Inclined</span>
