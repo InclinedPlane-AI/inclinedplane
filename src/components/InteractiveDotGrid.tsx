@@ -122,22 +122,43 @@ const InteractiveDotGrid = () => {
       const isLight = document.documentElement.classList.contains("light");
       const baseA = isLight ? 0.1 : BASE_ALPHA;
 
+      // Batch base dots in one path, glowing dots separately
+      const basePath = new Path2D();
+      const glowDots: { x: number; y: number; alpha: number; radius: number }[] = [];
+
       for (let i = 0; i < dots.length; i++) {
         const dot = dots[i];
         const dx = dot.x - mx;
         const dy = dot.y - my;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < CURSOR_RADIUS) {
+        const distSq = dx * dx + dy * dy;
+        if (distSq < CURSOR_RADIUS * CURSOR_RADIUS) {
+          const dist = Math.sqrt(distSq);
           const intensity = 1 - dist / CURSOR_RADIUS;
           const target = intensity * intensity;
           if (target > dot.brightness) dot.brightness = target;
         }
         if (dot.brightness > 0) dot.brightness = Math.max(0, dot.brightness - FADE_SPEED);
-        const alpha = baseA + dot.brightness * (GLOW_ALPHA - baseA);
-        const radius = DOT_BASE_RADIUS + dot.brightness * (DOT_GLOW_RADIUS - DOT_BASE_RADIUS);
+
+        if (dot.brightness > 0.01) {
+          const alpha = baseA + dot.brightness * (GLOW_ALPHA - baseA);
+          const radius = DOT_BASE_RADIUS + dot.brightness * (DOT_GLOW_RADIUS - DOT_BASE_RADIUS);
+          glowDots.push({ x: dot.x, y: dot.y, alpha, radius });
+        } else {
+          basePath.arc(dot.x, dot.y, DOT_BASE_RADIUS, 0, Math.PI * 2);
+          basePath.closePath();
+        }
+      }
+
+      // Single fill call for all base dots
+      ctx.fillStyle = `hsla(${color}, ${baseA})`;
+      ctx.fill(basePath);
+
+      // Only individually draw glowing dots (usually <50)
+      for (let i = 0; i < glowDots.length; i++) {
+        const d = glowDots[i];
         ctx.beginPath();
-        ctx.arc(dot.x, dot.y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${color}, ${alpha})`;
+        ctx.arc(d.x, d.y, d.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${color}, ${d.alpha})`;
         ctx.fill();
       }
       rafRef.current = requestAnimationFrame(draw);
