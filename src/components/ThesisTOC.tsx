@@ -25,15 +25,13 @@ const ThesisTOC = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        // Find the entry most visible in viewport
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible.length > 0) {
-          setActiveId(visible[0].target.id);
-        }
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setActiveId(e.target.id);
+          }
+        });
       },
-      { rootMargin: "-20% 0px -60% 0px", threshold: [0, 0.25, 0.5] }
+      { rootMargin: "-80px 0px -70% 0px", threshold: 0 }
     );
 
     sections.forEach((s) => {

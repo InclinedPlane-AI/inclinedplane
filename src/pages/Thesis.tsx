@@ -506,6 +506,7 @@ const Thesis = () => {
   return (
     <PageLayout>
       <ReadingProgressBar />
+      <div className="overflow-x-hidden">
       <PageHero
         label="Our Thesis"
         title={<>Data Is Infrastructure.{" "}<span className="text-gradient-orange">Intelligence Is Product.</span></>}
@@ -923,6 +924,7 @@ const Thesis = () => {
           </section>
 
         </div>
+      </div>
       </div>
     </PageLayout>
   );
