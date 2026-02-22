@@ -242,8 +242,8 @@
     content: '';
     position: absolute;
     inset: 0;
-    opacity: 0.18;
-    background-image: radial-gradient(circle, hsl(0 0% 70%) 0.7px, transparent 0.7px);
+    opacity: 0.12;
+    background-image: radial-gradient(circle, hsl(0 0% 55%) 0.7px, transparent 0.7px);
     background-size: 6px 6px;
     pointer-events: none;
     z-index: 1;
