@@ -91,7 +91,7 @@ const Contact = () => {
                   <SelectContent className="max-h-72 bg-popover border border-border z-50">
                     {countryGroups.map((group) => (
                       <SelectGroup key={group.continent}>
-                        <SelectLabel className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3 py-2">
+                        <SelectLabel className={`text-xs font-semibold uppercase tracking-wider px-3 py-2 ${group.continent === "Featured" ? "text-primary" : "text-muted-foreground"}`}>
                           {group.continent}
                         </SelectLabel>
                         {group.countries.map((country) => (
