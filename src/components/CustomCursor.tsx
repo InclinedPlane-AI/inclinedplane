@@ -48,7 +48,7 @@ const CustomCursor = () => {
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference will-change-transform"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] will-change-transform"
         animate={{
           x: pos.x - 4,
           y: pos.y - 4,
@@ -56,7 +56,7 @@ const CustomCursor = () => {
         }}
         transition={{ type: "spring", damping: 30, stiffness: 500, mass: 0.5 }}
       >
-        <div className="w-2 h-2 rounded-full bg-foreground" />
+        <div className="w-2 h-2 rounded-full bg-foreground/80" />
       </motion.div>
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9998] will-change-transform"
@@ -71,7 +71,7 @@ const CustomCursor = () => {
       >
         <div
           className={`w-full h-full rounded-full border transition-colors duration-200 ${
-            hovering ? "border-primary glow-orange" : "border-foreground/20"
+            hovering ? "border-primary glow-orange" : "border-foreground/35"
           }`}
         />
       </motion.div>
