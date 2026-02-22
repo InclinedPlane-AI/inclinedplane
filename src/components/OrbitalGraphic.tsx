@@ -124,11 +124,12 @@ const OrbitalGraphic = () => {
           return (
             <div
               key={label}
-              className="absolute z-20 pointer-events-auto"
+              className="absolute pointer-events-auto"
               style={{
                 left: `calc(50% + ${x}px)`,
                 top: `calc(50% + ${y}px)`,
                 transform: "translate(-50%, -50%)",
+                zIndex: isHovered ? 40 : 20,
               }}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -155,7 +156,8 @@ const OrbitalGraphic = () => {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 6, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-52 glass-panel-strong rounded-lg p-3 text-xs text-muted-foreground leading-relaxed z-30 pointer-events-none"
+                    className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-52 glass-panel-strong rounded-lg p-3 text-xs text-muted-foreground leading-relaxed pointer-events-none"
+                    style={{ zIndex: 50 }}
                   >
                     <span className="text-foreground font-semibold block mb-1">{label}</span>
                     {desc}
