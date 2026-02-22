@@ -71,7 +71,7 @@ const CustomCursor = () => {
       >
         <div
           className={`w-full h-full rounded-full border transition-colors duration-200 ${
-            hovering ? "border-primary glow-orange" : "border-muted-foreground/30"
+            hovering ? "border-primary glow-orange" : "border-foreground/20"
           }`}
         />
       </motion.div>
