@@ -1,20 +1,18 @@
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 
 const About = () => {
   return (
     <PageLayout>
-      <div className="pt-32 pb-24">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <p className="font-mono text-xs text-primary tracking-widest uppercase mb-6">About Us</p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-8">
-              Built by Engineers.{" "}
-              <span className="text-gradient-orange">Driven by Outcomes.</span>
-            </h1>
-          </motion.div>
+      <PageHero
+        label="About Us"
+        title={<>Built by Engineers.{" "}<span className="text-gradient-orange">Driven by Outcomes.</span></>}
+      />
 
-          <div className="space-y-12 mt-12">
+      <div className="pb-24">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="space-y-12">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <h2 className="text-2xl font-bold text-foreground mb-4">Our Story</h2>
               <p className="text-muted-foreground leading-relaxed text-lg mb-4">

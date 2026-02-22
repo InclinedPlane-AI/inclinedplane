@@ -1,20 +1,18 @@
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 
 const Thesis = () => {
   return (
     <PageLayout>
-      <div className="pt-32 pb-24">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <p className="font-mono text-xs text-primary tracking-widest uppercase mb-6">Our Thesis</p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-8">
-              Data Is Infrastructure.{" "}
-              <span className="text-gradient-orange">Intelligence Is Product.</span>
-            </h1>
-          </motion.div>
+      <PageHero
+        label="Our Thesis"
+        title={<>Data Is Infrastructure.{" "}<span className="text-gradient-orange">Intelligence Is Product.</span></>}
+      />
 
-          <div className="space-y-16 mt-16">
+      <div className="pb-24">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="space-y-16">
             {[
               {
                 title: "The Old Model Is Broken",
