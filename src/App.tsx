@@ -16,6 +16,8 @@ import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import CookiePolicy from "./pages/CookiePolicy";
+import Blogs from "./pages/Blogs";
+import BlogPostPage from "./pages/BlogPost";
 import CookieConsent from "./components/CookieConsent";
 import SplashScreen from "./components/SplashScreen";
 import ScrollToTop from "./components/ScrollToTop";
@@ -63,6 +65,8 @@ const App = () => {
                   <Route path="/industries" element={<Industries />} />
                   <Route path="/case-studies" element={<CaseStudies />} />
                   <Route path="/about" element={<About />} />
+                  <Route path="/blog" element={<Blogs />} />
+                  <Route path="/blog/:slug" element={<BlogPostPage />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/privacy" element={<PrivacyPolicy />} />
                   <Route path="/terms" element={<Terms />} />
