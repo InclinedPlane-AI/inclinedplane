@@ -1,4 +1,5 @@
 import PageLayout from "@/components/PageLayout";
+import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import IndustryDetail from "@/components/IndustryDetail";
 import { motion } from "framer-motion";
@@ -53,6 +54,11 @@ const Industries = () => {
 
   return (
     <PageLayout>
+      <SEOHead
+        title="Industries We Serve"
+        description="AI-native data engineering for retail, finance, healthcare, manufacturing, energy, SaaS, BPO, and education. Industry-specific data solutions."
+        path="/industries"
+      />
       <PageHero
         label="Industries"
         title={<>Built for <span className="text-gradient-orange">Your Domain.</span></>}

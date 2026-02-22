@@ -1,4 +1,5 @@
 import PageLayout from "@/components/PageLayout";
+import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useMemo } from "react";
@@ -151,6 +152,11 @@ const Contact = () => {
 
   return (
     <PageLayout>
+      <SEOHead
+        title="Contact Us"
+        description="Get in touch with Inclined Plane for data engineering consulting, AI automation, and cloud warehouse architecture. Book a discovery call today."
+        path="/contact"
+      />
       <PageHero
         label="Contact"
         title={<>Let's <span className="text-gradient-orange">Build</span> Together.</>}
