@@ -150,29 +150,48 @@
     }
   }
 
-  /* Theme sweep — elements transition with staggered timing radiating from toggle */
-  html.theme-sweeping *,
-  html.theme-sweeping {
-    transition-property: background-color, border-color, color, box-shadow, fill, stroke, background;
-    transition-duration: 600ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  /* Theme sweep — top-to-bottom curtain cascade */
+  html.theme-sweeping,
+  html.theme-sweeping * {
+    transition-property: background-color, border-color, color, box-shadow, fill, stroke, background, opacity, background-image;
+    transition-duration: 700ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  /* Glass panels and surfaces get slightly longer transitions for a cascading feel */
+  /* Navbar transitions first */
+  html.theme-sweeping nav,
+  html.theme-sweeping nav * {
+    transition-delay: 0ms;
+    transition-duration: 500ms;
+  }
+
+  /* Main content transitions mid-cascade */
+  html.theme-sweeping main,
+  html.theme-sweeping main * {
+    transition-delay: 80ms;
+    transition-duration: 700ms;
+  }
+
+  /* Section dividers and gradient fades get extra-smooth treatment */
+  html.theme-sweeping [class*="gradient"],
+  html.theme-sweeping [class*="from-"],
+  html.theme-sweeping [class*="to-"],
+  html.theme-sweeping [class*="via-"],
   html.theme-sweeping .glass-panel,
   html.theme-sweeping .glass-panel-strong,
   html.theme-sweeping .surface-1,
   html.theme-sweeping .surface-2,
   html.theme-sweeping .surface-3 {
-    transition-duration: 750ms;
+    transition-duration: 800ms;
+    transition-delay: 60ms;
     transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  /* Footer transitions last for a top-to-bottom cascade feel */
+  /* Footer transitions last for top-to-bottom cascade */
   html.theme-sweeping footer,
   html.theme-sweeping footer * {
     transition-duration: 800ms;
-    transition-delay: 100ms;
+    transition-delay: 150ms;
   }
 
   @media (prefers-reduced-motion: reduce) {
