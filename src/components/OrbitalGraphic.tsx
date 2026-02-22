@@ -31,47 +31,62 @@ const NODES = [
 ];
 
 const RADIUS = 130;
-const ROTATION_SPEED = 0.003; // radians per frame — slow, easy to hover
+const ROTATION_SPEED = 0.003;
 
 const OrbitalGraphic = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [centerHovered, setCenterHovered] = useState(false);
   const angleRef = useRef(0);
   const rafRef = useRef<number>(0);
-  const [positions, setPositions] = useState<{ x: number; y: number }[]>([]);
-  const isPaused = hoveredIndex !== null;
+  const nodeRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const lineRefs = useRef<(SVGLineElement | null)[]>([]);
+  const isPausedRef = useRef(false);
 
-  const updatePositions = useCallback(() => {
-    const newPositions = NODES.map((_, i) => {
-      const baseAngle = (i / NODES.length) * Math.PI * 2;
-      const angle = baseAngle + angleRef.current;
-      return {
-        x: Math.cos(angle) * RADIUS,
-        y: Math.sin(angle) * RADIUS,
-      };
-    });
-    setPositions(newPositions);
-  }, []);
+  // Keep isPausedRef in sync
+  useEffect(() => {
+    isPausedRef.current = hoveredIndex !== null;
+  }, [hoveredIndex]);
 
+  // Single rAF loop that writes directly to DOM — zero React re-renders
   useEffect(() => {
     const animate = () => {
-      if (!isPaused) {
+      if (!isPausedRef.current) {
         angleRef.current += ROTATION_SPEED;
       }
-      updatePositions();
+
+      const positions: { x: number; y: number }[] = [];
+      for (let i = 0; i < NODES.length; i++) {
+        const baseAngle = (i / NODES.length) * Math.PI * 2;
+        const angle = baseAngle + angleRef.current;
+        const x = Math.cos(angle) * RADIUS;
+        const y = Math.sin(angle) * RADIUS;
+        positions.push({ x, y });
+
+        // Direct DOM write for node position
+        const el = nodeRefs.current[i];
+        if (el) {
+          el.style.left = `calc(50% + ${x}px)`;
+          el.style.top = `calc(50% + ${y}px)`;
+        }
+      }
+
+      // Direct DOM write for SVG lines
+      for (let i = 0; i < NODES.length; i++) {
+        const next = (i + 1) % NODES.length;
+        const line = lineRefs.current[i];
+        if (line) {
+          line.setAttribute("x1", String(positions[i].x));
+          line.setAttribute("y1", String(positions[i].y));
+          line.setAttribute("x2", String(positions[next].x));
+          line.setAttribute("y2", String(positions[next].y));
+        }
+      }
+
       rafRef.current = requestAnimationFrame(animate);
     };
     rafRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [isPaused, updatePositions]);
-
-  // Build connection lines between adjacent nodes
-  const lines = positions.length === NODES.length
-    ? NODES.map((_, i) => {
-        const next = (i + 1) % NODES.length;
-        return { x1: positions[i].x, y1: positions[i].y, x2: positions[next].x, y2: positions[next].y };
-      })
-    : [];
+  }, []);
 
   return (
     <div className="relative w-80 h-80 pointer-events-none">
@@ -84,13 +99,11 @@ const OrbitalGraphic = () => {
 
       {/* Connection lines SVG */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="-160 -160 320 320">
-        {lines.map((line, i) => (
+        {NODES.map((_, i) => (
           <line
             key={i}
-            x1={line.x1}
-            y1={line.y1}
-            x2={line.x2}
-            y2={line.y2}
+            ref={(el) => { lineRefs.current[i] = el; }}
+            x1="0" y1="0" x2="0" y2="0"
             stroke={centerHovered ? "hsl(var(--primary) / 0.45)" : "hsl(var(--primary) / 0.15)"}
             strokeWidth={centerHovered ? "1.5" : "1"}
             strokeDasharray="4 4"
@@ -115,58 +128,57 @@ const OrbitalGraphic = () => {
         <Brain className="text-primary" size={28} />
       </motion.div>
 
-      {/* Orbiting nodes */}
-      {positions.length === NODES.length &&
-        NODES.map(({ label, icon: Icon, desc }, i) => {
-          const { x, y } = positions[i];
-          const isHovered = hoveredIndex === i;
+      {/* Orbiting nodes — positioned via direct DOM writes, not React state */}
+      {NODES.map(({ label, icon: Icon, desc }, i) => {
+        const isHovered = hoveredIndex === i;
 
-          return (
-            <div
-              key={label}
-              className="absolute pointer-events-auto"
-              style={{
-                left: `calc(50% + ${x}px)`,
-                top: `calc(50% + ${y}px)`,
-                transform: "translate(-50%, -50%)",
-                zIndex: isHovered ? 40 : 20,
+        return (
+          <div
+            key={label}
+            ref={(el) => { nodeRefs.current[i] = el; }}
+            className="absolute pointer-events-auto"
+            style={{
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: isHovered ? 40 : 20,
+            }}
+            onMouseEnter={() => setHoveredIndex(i)}
+            onMouseLeave={() => setHoveredIndex(null)}
+            data-cursor-hover
+          >
+            <motion.div
+              className={`glass-panel rounded-xl px-3 py-2 flex items-center gap-2 text-xs cursor-default select-none transition-all duration-300 ${
+                isHovered ? "border-primary/60" : ""
+              } ${centerHovered && !isHovered ? "border-primary/40" : ""}`}
+              animate={{
+                scale: isHovered ? 1.12 : centerHovered ? 1.06 : 1,
               }}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              data-cursor-hover
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
-              <motion.div
-                className={`glass-panel rounded-xl px-3 py-2 flex items-center gap-2 text-xs cursor-default select-none transition-all duration-300 ${
-                  isHovered ? "border-primary/60" : ""
-                } ${centerHovered && !isHovered ? "border-primary/40" : ""}`}
-                animate={{
-                  scale: isHovered ? 1.12 : centerHovered ? 1.06 : 1,
-                }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              >
-                <Icon size={14} className={`shrink-0 transition-colors duration-300 ${centerHovered || isHovered ? "text-primary" : "text-primary"}`} />
-                <span className={`whitespace-nowrap transition-colors duration-300 ${centerHovered ? "text-foreground" : "text-secondary-foreground"}`}>{label}</span>
-              </motion.div>
+              <Icon size={14} className="shrink-0 text-primary" />
+              <span className={`whitespace-nowrap transition-colors duration-300 ${centerHovered ? "text-foreground" : "text-secondary-foreground"}`}>{label}</span>
+            </motion.div>
 
-              {/* Tooltip */}
-              <AnimatePresence>
-                {isHovered && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 6, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 6, scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-52 glass-panel-strong rounded-lg p-3 text-xs text-muted-foreground leading-relaxed pointer-events-none"
-                    style={{ zIndex: 50 }}
-                  >
-                    <span className="text-foreground font-semibold block mb-1">{label}</span>
-                    {desc}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
+            {/* Tooltip */}
+            <AnimatePresence>
+              {isHovered && (
+                <motion.div
+                  initial={{ opacity: 0, y: 6, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 6, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-52 glass-panel-strong rounded-lg p-3 text-xs text-muted-foreground leading-relaxed pointer-events-none"
+                  style={{ zIndex: 50 }}
+                >
+                  <span className="text-foreground font-semibold block mb-1">{label}</span>
+                  {desc}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+      })}
     </div>
   );
 };
