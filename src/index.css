@@ -144,7 +144,30 @@
     cursor: none;
   }
 
-  /* Theme wipe handles transitions — no CSS transition needed */
+  /* Theme sweep — elements transition with staggered timing radiating from toggle */
+  html.theme-sweeping *,
+  html.theme-sweeping {
+    transition-property: background-color, border-color, color, box-shadow, fill, stroke, background;
+    transition-duration: 600ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Glass panels and surfaces get slightly longer transitions for a cascading feel */
+  html.theme-sweeping .glass-panel,
+  html.theme-sweeping .glass-panel-strong,
+  html.theme-sweeping .surface-1,
+  html.theme-sweeping .surface-2,
+  html.theme-sweeping .surface-3 {
+    transition-duration: 750ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Footer transitions last for a top-to-bottom cascade feel */
+  html.theme-sweeping footer,
+  html.theme-sweeping footer * {
+    transition-duration: 800ms;
+    transition-delay: 100ms;
+  }
 
   @media (prefers-reduced-motion: reduce) {
     html body,

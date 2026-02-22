@@ -10,10 +10,11 @@ const ThemeToggle = () => {
     if (stored === "light" || stored === "dark") return stored;
     return "light";
   });
-  const [wipe, setWipe] = useState<{ x: number; y: number; target: "dark" | "light" } | null>(null);
+  const [sweep, setSweep] = useState<{ x: number; y: number; target: "dark" | "light" } | null>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
+  const cooldownRef = useRef(false);
 
-  // Apply theme class (no transition class needed — the wipe handles it)
+  // Apply theme class
   useEffect(() => {
     const root = document.documentElement;
     if (theme === "light") {
@@ -26,38 +27,36 @@ const ThemeToggle = () => {
 
   const toggle = useCallback(() => {
     const btn = btnRef.current;
-    if (!btn || wipe) return; // prevent double-click during animation
+    if (!btn || cooldownRef.current) return;
+    cooldownRef.current = true;
 
     const rect = btn.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
     const nextTheme = theme === "dark" ? "light" : "dark";
 
-    // Start wipe overlay
-    setWipe({ x, y, target: nextTheme });
+    // Set CSS custom properties for transition-delay calculation
+    document.documentElement.style.setProperty("--sweep-x", `${x}px`);
+    document.documentElement.style.setProperty("--sweep-y", `${y}px`);
 
-    // Halfway through the animation, swap the real theme
-    setTimeout(() => {
-      setTheme(nextTheme);
-    }, 420);
+    // Enable element transitions
+    document.documentElement.classList.add("theme-sweeping");
 
-    // Remove wipe overlay after animation completes
+    // Apply theme change IMMEDIATELY so elements start transitioning
+    setTheme(nextTheme);
+
+    // Show translucent sweep overlay for directional feel
+    setSweep({ x, y, target: nextTheme });
+
+    // Clean up
     setTimeout(() => {
-      setWipe(null);
-    }, 850);
-  }, [theme, wipe]);
+      setSweep(null);
+      document.documentElement.classList.remove("theme-sweeping");
+      cooldownRef.current = false;
+    }, 900);
+  }, [theme]);
 
   const isDark = theme === "dark";
-
-  // Calculate max radius needed to cover the entire viewport from the origin point
-  const maxRadius = wipe
-    ? Math.ceil(
-        Math.sqrt(
-          Math.max(wipe.x, window.innerWidth - wipe.x) ** 2 +
-          Math.max(wipe.y, window.innerHeight - wipe.y) ** 2
-        )
-      ) + 50
-    : 0;
 
   return (
     <>
@@ -74,7 +73,6 @@ const ThemeToggle = () => {
             whileTap={{ scale: 0.88 }}
             transition={{ type: "spring", stiffness: 500, damping: 25 }}
           >
-            {/* Orange accent ring on hover */}
             <motion.div
               className="absolute inset-0 rounded-full border border-primary/0 group-hover:border-primary/30"
               style={{ transition: "border-color 200ms ease" }}
@@ -122,21 +120,21 @@ const ThemeToggle = () => {
         </TooltipContent>
       </Tooltip>
 
-      {/* Wipe overlay — portal to body */}
-      {wipe &&
+      {/* Translucent sweep overlay */}
+      {sweep &&
         createPortal(
-          <WipeOverlay x={wipe.x} y={wipe.y} maxRadius={maxRadius} target={wipe.target} />,
+          <SweepOverlay x={sweep.x} y={sweep.y} target={sweep.target} />,
           document.body
         )}
     </>
   );
 };
 
-/* ── Wipe circle overlay ── */
-const WipeOverlay = ({
-  x, y, maxRadius, target,
+/* ── Translucent sweep — adds directional "flow" while real elements transition underneath ── */
+const SweepOverlay = ({
+  x, y, target,
 }: {
-  x: number; y: number; maxRadius: number; target: "dark" | "light";
+  x: number; y: number; target: "dark" | "light";
 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -144,27 +142,39 @@ const WipeOverlay = ({
     const el = ref.current;
     if (!el) return;
 
-    // Force reflow before starting animation
-    el.getBoundingClientRect();
+    const maxRadius = Math.ceil(
+      Math.sqrt(
+        Math.max(x, window.innerWidth - x) ** 2 +
+        Math.max(y, window.innerHeight - y) ** 2
+      )
+    ) + 100;
 
-    // Animate clip-path
-    el.animate(
+    // Phase 1: expand the translucent sweep
+    const expandAnim = el.animate(
       [
-        { clipPath: `circle(0px at ${x}px ${y}px)` },
-        { clipPath: `circle(${maxRadius}px at ${x}px ${y}px)` },
+        { clipPath: `circle(0px at ${x}px ${y}px)`, opacity: 1 },
+        { clipPath: `circle(${maxRadius}px at ${x}px ${y}px)`, opacity: 1 },
       ],
       {
-        duration: 750,
-        easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+        duration: 650,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
         fill: "forwards",
       }
     );
-  }, [x, y, maxRadius]);
 
-  // The overlay shows the TARGET theme's background color
+    // Phase 2: fade out once expanded
+    expandAnim.onfinish = () => {
+      el.animate(
+        [{ opacity: 1 }, { opacity: 0 }],
+        { duration: 250, easing: "ease-out", fill: "forwards" }
+      );
+    };
+  }, [x, y]);
+
+  // Semi-transparent tinted overlay — NOT opaque
   const bg = target === "light"
-    ? "hsl(30 20% 96%)"   // light --background
-    : "hsl(240 18% 4.5%)"; // dark --background
+    ? "radial-gradient(circle at 50% 50%, hsla(25, 90%, 55%, 0.12) 0%, hsla(30, 20%, 96%, 0.18) 40%, transparent 80%)"
+    : "radial-gradient(circle at 50% 50%, hsla(25, 100%, 50%, 0.12) 0%, hsla(240, 18%, 4.5%, 0.18) 40%, transparent 80%)";
 
   return (
     <div
@@ -173,9 +183,11 @@ const WipeOverlay = ({
         position: "fixed",
         inset: 0,
         zIndex: 99999,
-        backgroundColor: bg,
+        background: bg,
         clipPath: `circle(0px at ${x}px ${y}px)`,
         pointerEvents: "none",
+        backdropFilter: "blur(1px)",
+        WebkitBackdropFilter: "blur(1px)",
       }}
     />
   );
