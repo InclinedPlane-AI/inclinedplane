@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="relative footer-tint">
       {/* Giant wordmark sitting on top of footer border */}
       <div className="relative overflow-hidden select-none pointer-events-none" aria-hidden="true">
-        <div className="text-center leading-none pb-0 pt-8" style={{ fontSize: 'clamp(5rem, 14vw, 12rem)', marginBottom: '-0.15em' }}>
+        <div className="text-center leading-none pb-0 pt-4 sm:pt-8 px-4" style={{ fontSize: 'clamp(2.5rem, 12vw, 12rem)', marginBottom: '-0.1em' }}>
           <span className="font-black tracking-tighter text-foreground/[0.08]">Inclined</span>
           <span
             className="font-black tracking-tighter"

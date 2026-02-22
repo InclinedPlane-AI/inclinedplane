@@ -141,7 +141,13 @@
 
   body {
     @apply bg-background text-foreground;
-    cursor: none;
+  }
+
+  /* Custom cursor only on non-touch devices */
+  @media (pointer: fine) {
+    body {
+      cursor: none;
+    }
   }
 
   /* Theme sweep — elements transition with staggered timing radiating from toggle */
@@ -291,13 +297,20 @@
     mix-blend-mode: overlay;
   }
 
-  /* Mobile: slightly less visible but still present */
-  @media (max-width: 1023px) {
+  /* Mobile: disable grain entirely for performance */
+  @media (max-width: 767px) {
     .grain-overlay::after {
-      opacity: 0.07;
+      display: none;
+    }
+  }
+
+  /* Tablet: very subtle */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .grain-overlay::after {
+      opacity: 0.05;
     }
     .light .grain-overlay::after {
-      opacity: 0.08;
+      opacity: 0.06;
     }
   }
 
