@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import OrbitalGraphic from "@/components/OrbitalGraphic";
 import SectionGlow from "@/components/SectionGlow";
 import TechStackGrid from "@/components/TechStackGrid";
+import InteractiveDotGrid from "@/components/InteractiveDotGrid";
 import {
   ArrowRight, ArrowUpRight, Database, BarChart3, Eye, Brain, Zap, Cloud,
   TrendingUp, Shield, Clock, Globe, Cpu, Layers, Activity,
@@ -80,6 +81,7 @@ const Index = () => {
         {/* SLIDE 1 — HERO */}
         <section className="snap-section flex items-center relative overflow-hidden">
           <AuroraBackground />
+          <InteractiveDotGrid />
           <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
