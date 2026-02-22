@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Percent } from "lucide-react";
+
 
 const Footer = () => {
   return (
@@ -26,11 +26,8 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {/* Brand */}
             <div className="lg:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 flex items-center justify-center text-primary drop-shadow-[0_0_8px_hsl(25,100%,50%,0.6)]">
-                  <Percent size={22} strokeWidth={2.5} />
-                </div>
-                <span className="font-extrabold text-sm">
+              <div className="mb-4">
+                <span className="font-extrabold text-lg tracking-tight">
                   <span className="text-foreground">Inclined</span>
                   <span className="text-gradient-orange">Plane</span>
                 </span>
