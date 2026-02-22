@@ -102,7 +102,7 @@ const Index = () => {
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
                 <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
-                  <p className="font-mono text-[10px] sm:text-xs text-primary tracking-widest uppercase mb-4 sm:mb-6">AI-Native Data Engineering</p>
+                  <p className="font-mono text-[10px] sm:text-xs text-primary tracking-widest uppercase mb-4 sm:mb-6">The Architecture of Velocity Enterprises</p>
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] tracking-tight mb-4 sm:mb-6">
                     Data Leveraged.{" "}
                     <span className="text-gradient-orange">Growth Accelerated.</span>
