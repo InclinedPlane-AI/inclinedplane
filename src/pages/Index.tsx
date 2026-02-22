@@ -119,8 +119,8 @@ const Index = () => {
         {/* Grain overlay for content sections (excludes hero & footer) */}
         <div className="grain-overlay relative">
         {/* SLIDE 2 — AI TRANSFORMATION FACTS (Bento) */}
-        <section className="snap-section flex items-center justify-center relative overflow-hidden">
-          <SectionGlow position="top-left" size={700} />
+        <section className="snap-section flex items-center justify-center relative">
+          <SectionGlow position="bottom-right" size={700} />
           <div className="max-w-6xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
               <p className="font-mono text-xs text-primary tracking-widest uppercase mb-3 text-center">The AI Imperative</p>
@@ -213,8 +213,8 @@ const Index = () => {
         </section>
 
         {/* SLIDE 3 — THE PROBLEM */}
-        <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="bottom-right" size={600} />
+        <section className="snap-section flex items-center relative">
+          <SectionGlow position="top-right" size={600} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
@@ -276,8 +276,8 @@ const Index = () => {
         </section>
 
         {/* SLIDE 4 — THE EVOLUTION */}
-        <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="top-right" size={650} />
+        <section className="snap-section flex items-center relative">
+          <SectionGlow position="bottom-left" size={650} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
@@ -326,8 +326,8 @@ const Index = () => {
         </section>
 
         {/* SLIDE 5 — CORE CAPABILITIES */}
-        <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="bottom-left" size={700} />
+        <section className="snap-section flex items-center relative">
+          <SectionGlow position="top-left" size={700} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
               <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Core Capabilities</p>
@@ -385,8 +385,8 @@ const Index = () => {
         </section>
 
         {/* SLIDE 6 — VALUE PROPOSITION / IMPACT */}
-        <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="top-right" size={650} />
+        <section className="snap-section flex items-center relative">
+          <SectionGlow position="bottom-right" size={650} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
               <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Impact</p>
@@ -431,8 +431,8 @@ const Index = () => {
         </section>
 
         {/* SLIDE 7 — ARCHITECTURE SNAPSHOT */}
-        <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="bottom-left" size={650} />
+        <section className="snap-section flex items-center relative">
+          <SectionGlow position="top-right" size={700} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             {/* Header */}
             <motion.div {...fadeUp()} className="mb-5">
@@ -477,8 +477,8 @@ const Index = () => {
         </section>
 
         {/* SLIDE 8 — TESTIMONIALS */}
-        <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="top-left" size={600} />
+        <section className="snap-section flex items-center relative">
+          <SectionGlow position="bottom-left" size={650} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
               <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">What Leaders Say</p>
@@ -529,8 +529,8 @@ const Index = () => {
         </section>
 
         {/* SLIDE 9 — CASE STUDIES PREVIEW */}
-        <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="bottom-right" size={650} />
+        <section className="snap-section flex items-center relative">
+          <SectionGlow position="top-left" size={650} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
               <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Our Work</p>
@@ -566,8 +566,8 @@ const Index = () => {
         </section>
 
         {/* SLIDE 10 — WHY INCLINED PLANE */}
-        <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="top-left" size={700} />
+        <section className="snap-section flex items-center relative">
+          <SectionGlow position="bottom-right" size={700} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
               <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Why Us</p>
