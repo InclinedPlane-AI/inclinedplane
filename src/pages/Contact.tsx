@@ -2,7 +2,6 @@ import PageLayout from "@/components/PageLayout";
 import { motion } from "framer-motion";
 import { useState, useMemo } from "react";
 import { ArrowRight, Check, Mail, MapPin, Building2 } from "lucide-react";
-import contactStepsIllustration from "@/assets/contact-steps-illustration.png";
 import { countryGroups, getCountryByCode } from "@/data/countries";
 import {
   Select,
@@ -241,21 +240,6 @@ const Contact = () => {
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
               From message to <span className="text-gradient-orange">momentum.</span>
             </h2>
-          </motion.div>
-
-          {/* Illustration */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            className="mb-14 rounded-2xl overflow-hidden"
-          >
-            <img
-              src={contactStepsIllustration}
-              alt="Our process: Discovery, Strategy, and Execution workflow"
-              className="w-full h-auto rounded-2xl"
-              loading="lazy"
-            />
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-6 relative">
