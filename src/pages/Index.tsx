@@ -9,7 +9,6 @@ import AuroraBackground from "@/components/AuroraBackground";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { Link } from "react-router-dom";
 import OrbitalGraphic from "@/components/OrbitalGraphic";
-import HeroIllustrations from "@/components/HeroIllustrations";
 import SectionGlow from "@/components/SectionGlow";
 import TechStackGrid from "@/components/TechStackGrid";
 import {
@@ -81,7 +80,6 @@ const Index = () => {
         {/* SLIDE 1 — HERO */}
         <section className="snap-section flex items-center relative overflow-hidden">
           <AuroraBackground />
-          <HeroIllustrations />
           <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
