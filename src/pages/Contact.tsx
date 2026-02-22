@@ -50,16 +50,15 @@ const steps = [
 
 /* ── Progress milestones ── */
 const milestones = [
-  { label: "Name", icon: User, pct: 20 },
-  { label: "Email", icon: AtSign, pct: 40 },
-  { label: "Country", icon: Globe, pct: 55 },
-  { label: "Company", icon: Building2, pct: 70 },
-  { label: "Message", icon: MessageSquare, pct: 100 },
-];
+  { label: "Name", icon: User, key: "name" },
+  { label: "Email", icon: AtSign, key: "email" },
+  { label: "Country", icon: Globe, key: "country" },
+  { label: "Company", icon: Building2, key: "company" },
+  { label: "Message", icon: MessageSquare, key: "message" },
+] as const;
 
 /* ── Form Progress Bar ── */
-const FormProgress = ({ progress }: { progress: number }) => {
-  const currentMilestone = milestones.filter((m) => m.pct <= progress).length;
+const FormProgress = ({ progress, filled }: { progress: number; filled: Record<string, boolean> }) => {
 
   return (
     <div className="mb-8">
@@ -93,7 +92,7 @@ const FormProgress = ({ progress }: { progress: number }) => {
       {/* Milestone dots */}
       <div className="flex justify-between mt-3">
         {milestones.map((m, i) => {
-          const reached = currentMilestone > i;
+          const reached = filled[m.key];
           const Icon = m.icon;
           return (
             <div key={m.label} className="flex flex-col items-center gap-1.5">
@@ -209,7 +208,13 @@ const Contact = () => {
               onSubmit={handleSubmit}
               className="glass-panel rounded-2xl p-8 space-y-5"
             >
-              <FormProgress progress={progress} />
+              <FormProgress progress={progress} filled={{
+                name: name.trim().length >= 2,
+                email: isValidEmail(email),
+                country: !!selectedCountry,
+                company: company.trim().length > 0,
+                message: message.trim().length > 0,
+              }} />
 
               <div className="grid sm:grid-cols-2 gap-5">
                 <motion.div
