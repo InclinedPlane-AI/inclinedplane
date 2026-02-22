@@ -12,6 +12,16 @@ export interface ContinentGroup {
 
 export const countryGroups: ContinentGroup[] = [
   {
+    continent: "Featured",
+    countries: [
+      { name: "United States", code: "US", flag: "🇺🇸", dialCode: "+1" },
+      { name: "India", code: "IN", flag: "🇮🇳", dialCode: "+91" },
+      { name: "United Kingdom", code: "GB", flag: "🇬🇧", dialCode: "+44" },
+      { name: "United Arab Emirates", code: "AE", flag: "🇦🇪", dialCode: "+971" },
+      { name: "Germany", code: "DE", flag: "🇩🇪", dialCode: "+49" },
+    ],
+  },
+  {
     continent: "Americas",
     countries: [
       { name: "Argentina", code: "AR", flag: "🇦🇷", dialCode: "+54" },
