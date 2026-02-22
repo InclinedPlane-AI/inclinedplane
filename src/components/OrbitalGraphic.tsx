@@ -76,7 +76,7 @@ const OrbitalGraphic = () => {
   return (
     <div className="relative w-80 h-80 pointer-events-none">
       {/* Glow behind center */}
-      <div className="absolute inset-[25%] rounded-full bg-gradient-orange opacity-[0.06] blur-3xl animate-pulse-glow will-change-[opacity]" />
+      <div className="absolute inset-[25%] rounded-full bg-gradient-orange opacity-[0.025] blur-3xl animate-pulse-glow will-change-[opacity]" />
 
       {/* Orbit rings */}
       <div className="absolute inset-[5%] rounded-full border border-muted/10" />
@@ -104,7 +104,7 @@ const OrbitalGraphic = () => {
         className="absolute inset-[35%] rounded-full glass-panel-strong flex items-center justify-center z-10 cursor-default pointer-events-auto"
         animate={{
           boxShadow: centerHovered
-            ? "0 0 24px hsl(25 100% 50% / 0.3), 0 0 48px hsl(25 100% 50% / 0.15)"
+            ? "0 0 12px hsl(25 100% 50% / 0.12), 0 0 24px hsl(25 100% 50% / 0.06)"
             : "0 0 0px transparent",
         }}
         transition={{ duration: 0.3 }}
