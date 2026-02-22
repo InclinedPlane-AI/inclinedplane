@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight, Clock, Linkedin } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageHero from "@/components/PageHero";
 import { blogPosts, allTags } from "@/data/blogPosts";
@@ -69,7 +69,14 @@ const Blogs = () => {
                 {/* Text */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2 text-xs text-muted-foreground">
-                    <span className="font-medium text-foreground/80">{post.author.name}</span>
+                    <span className="font-medium text-foreground/80 flex items-center gap-1.5">
+                      {post.author.name}
+                      {post.author.linkedin && (
+                        <a href={post.author.linkedin} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="text-muted-foreground hover:text-primary transition-colors">
+                          <Linkedin size={12} />
+                        </a>
+                      )}
+                    </span>
                     <span>·</span>
                     <span>{post.date}</span>
                   </div>

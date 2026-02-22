@@ -1,6 +1,6 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Clock, CalendarDays, Share2, ArrowUp } from "lucide-react";
+import { ArrowLeft, Clock, CalendarDays, Share2, ArrowUp, Linkedin } from "lucide-react";
 import { useState, useEffect } from "react";
 import PageLayout from "@/components/PageLayout";
 import { blogPosts, BlogSection, BlogImage } from "@/data/blogPosts";
@@ -155,8 +155,13 @@ const BlogPostPage = () => {
             <span className="flex items-center gap-1.5">
               <Clock size={14} /> {post.readTime}
             </span>
-            <span>
+            <span className="flex items-center gap-1.5">
               By <span className="text-foreground font-medium">{post.author.name}</span>
+              {post.author.linkedin && (
+                <a href={post.author.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Linkedin size={14} />
+                </a>
+              )}
               {post.author.role && (
                 <span className="text-muted-foreground"> · {post.author.role}</span>
               )}
@@ -205,7 +210,14 @@ const BlogPostPage = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-muted-foreground mb-1">Written by</p>
-                <p className="text-foreground font-medium">{post.author.name}</p>
+                <p className="text-foreground font-medium flex items-center gap-2">
+                  {post.author.name}
+                  {post.author.linkedin && (
+                    <a href={post.author.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <Linkedin size={15} />
+                    </a>
+                  )}
+                </p>
                 <p className="text-sm text-muted-foreground">{post.author.role}</p>
               </div>
               <Link

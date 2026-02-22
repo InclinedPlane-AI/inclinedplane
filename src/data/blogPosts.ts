@@ -30,6 +30,7 @@ export interface BlogPost {
   author: {
     name: string;
     role: string;
+    linkedin?: string;
   };
   tags: string[];
   heroImage: BlogImage;
@@ -45,7 +46,8 @@ export const blogPosts: BlogPost[] = [
     readTime: "11 min read",
     author: {
       name: "Keerthana Vayyasi",
-      role: "Managing Director, InclinedPlane",
+      role: "Founder & CEO",
+      linkedin: "https://www.linkedin.com/in/keerthanavayyasi/",
     },
     tags: ["Strategy", "Business Intelligence", "Data Maturity", "Leadership"],
     heroImage: {
@@ -260,8 +262,9 @@ export const blogPosts: BlogPost[] = [
     date: "February 23, 2026",
     readTime: "14 min read",
     author: {
-      name: "InclinedPlane Engineering",
-      role: "Data Platform Team",
+      name: "Mohan Gowda T",
+      role: "Senior Data Engineer",
+      linkedin: "https://www.linkedin.com/in/mohangowdat/",
     },
     tags: ["Engineering", "DataOps", "Data Quality", "Observability", "Architecture"],
     heroImage: {
