@@ -117,17 +117,20 @@ const Footer = () => {
             <p className="text-xs text-muted-foreground">
               © {new Date().getFullYear()} InclinedPlane. All rights reserved.
             </p>
-            <div className="flex items-center gap-6">
-              <span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+            <div className="flex items-center gap-6 flex-wrap">
+              <Link to="/privacy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
                 Privacy Policy
-              </span>
-              <span className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+              </Link>
+              <Link to="/terms" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
                 Terms
-              </span>
+              </Link>
+              <Link to="/cookies" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                Cookie Policy
+              </Link>
               <div className="flex items-center gap-4 text-muted-foreground">
-                <span className="text-xs hover:text-foreground transition-colors cursor-pointer">LinkedIn</span>
-                <span className="text-xs hover:text-foreground transition-colors cursor-pointer">X</span>
-                <span className="text-xs hover:text-foreground transition-colors cursor-pointer">GitHub</span>
+                <a href="https://linkedin.com/company/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">LinkedIn</a>
+                <a href="https://x.com/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">X</a>
+                <a href="https://github.com/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">GitHub</a>
               </div>
             </div>
           </div>
