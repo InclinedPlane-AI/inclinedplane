@@ -74,15 +74,31 @@ const Industries = () => {
                   transition={{ duration: 0.5, delay: i * 0.06 }}
                   onClick={() => setSelected(ind.id)}
                   data-cursor-hover
-                  className="group relative glass-panel rounded-xl overflow-hidden text-left transition-all hover:scale-[1.02] hover:glow-orange"
+                  className="group relative rounded-xl overflow-hidden text-left transition-all hover:scale-[1.02]"
+                  style={{
+                    background: "hsl(var(--card) / 0.6)",
+                    backdropFilter: "blur(20px) saturate(1.4)",
+                    WebkitBackdropFilter: "blur(20px) saturate(1.4)",
+                    border: "1px solid hsl(25 100% 50% / 0.12)",
+                    boxShadow: "0 4px 24px -4px hsl(25 100% 50% / 0.08), 0 1px 3px hsl(25 100% 50% / 0.06), inset 0 1px 0 hsl(25 100% 80% / 0.06)",
+                  }}
                 >
+                  {/* Subtle orange gradient background */}
+                  <div
+                    className="absolute inset-0 pointer-events-none -z-0 opacity-[0.04]"
+                    style={{
+                      background: "radial-gradient(ellipse at 50% 0%, hsl(25 100% 50%), transparent 70%)",
+                    }}
+                  />
+
                   {/* Image */}
                   <div className="relative h-40 overflow-hidden">
                     <img
                       src={ind.image}
                       alt={ind.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
                       loading="lazy"
+                      style={{ minHeight: "100%", minWidth: "100%" }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
                     <div
@@ -94,7 +110,7 @@ const Industries = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="p-5">
+                  <div className="p-5 relative z-10">
                     <h3 className="font-bold text-foreground text-base mb-2 group-hover:text-primary transition-colors">
                       {ind.name}
                     </h3>
