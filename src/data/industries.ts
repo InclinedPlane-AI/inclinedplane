@@ -21,6 +21,8 @@ export interface IndustryData {
   techStack: string[];
   marketInsight: { stat: string; label: string }[];
   impactMetrics: { value: string; label: string }[];
+  references: { title: string; source: string; url: string; insight: string }[];
+  nextSteps: { title: string; description: string; icon: string }[];
 }
 
 export const industries: IndustryData[] = [
@@ -52,8 +54,6 @@ export const industries: IndustryData[] = [
       { title: "Price Optimization", description: "Dynamic pricing algorithms that maximize margin while maintaining competitive positioning, adjusting in real-time to market conditions." },
       { title: "Supply Chain Visibility", description: "End-to-end supply chain digital twin providing real-time tracking, bottleneck prediction, and automated reorder triggers." },
       { title: "Customer 360", description: "Unified customer profiles stitching anonymous browsing, purchase history, loyalty, and support interactions for hyper-personalized marketing." },
-      { title: "Assortment Planning", description: "AI-driven assortment optimization analyzing regional preferences, seasonality, and cannibalization effects to maximize shelf profitability." },
-      { title: "Fraud Detection", description: "Real-time transaction scoring using graph neural networks to detect promotional abuse, return fraud, and payment anomalies." },
     ],
     techStack: ["Snowflake", "Databricks", "Kafka", "dbt", "Airflow", "Power BI", "Python", "Spark"],
     marketInsight: [
@@ -65,7 +65,16 @@ export const industries: IndustryData[] = [
       { value: "35%", label: "Reduction in stockouts" },
       { value: "22%", label: "Increase in conversion rate" },
       { value: "18%", label: "Improvement in gross margin" },
-      { value: "4x", label: "Faster time-to-insight" },
+    ],
+    references: [
+      { title: "The State of AI in Retail", source: "McKinsey & Company", url: "https://www.mckinsey.com/industries/retail/our-insights", insight: "Retailers using AI-driven demand forecasting see 15–30% reductions in lost sales from stockouts while cutting excess inventory costs by up to 20%." },
+      { title: "Personalisation at Scale", source: "Harvard Business Review", url: "https://hbr.org/topic/retail", insight: "Companies that excel at personalization generate 40% more revenue from those activities than average players — data infrastructure is the bottleneck, not the algorithms." },
+      { title: "Global Retail Analytics Market Report", source: "Grand View Research, 2024", url: "https://www.grandviewresearch.com/industry-analysis/retail-analytics-market", insight: "The retail analytics market is projected to grow at a CAGR of 23.1% through 2028, driven by real-time pricing, omnichannel integration, and AI-powered supply chain optimization." },
+    ],
+    nextSteps: [
+      { title: "Data Maturity Assessment", description: "We audit your current data landscape — sources, quality, gaps — and deliver a prioritized roadmap for analytics readiness.", icon: "BarChart3" },
+      { title: "Proof of Concept", description: "Pick one high-impact use case (e.g., demand forecasting). We build a working prototype in 4–6 weeks to demonstrate measurable ROI.", icon: "Target" },
+      { title: "Book a Strategy Session", description: "30-minute call with our retail data leads to discuss your specific challenges and how we can accelerate your data journey.", icon: "ArrowUpRight" },
     ],
   },
   {
@@ -95,9 +104,7 @@ export const industries: IndustryData[] = [
       { title: "Risk Analytics", description: "Real-time VaR calculations, stress testing, and scenario analysis across multi-asset portfolios using Monte Carlo simulations and GPU-accelerated compute." },
       { title: "Fraud Detection", description: "Sub-100ms transaction scoring combining rule engines, anomaly detection, and graph neural networks to catch fraud while minimizing customer friction." },
       { title: "Regulatory Reporting", description: "Automated extraction, transformation, and submission of regulatory reports with full audit trails and data lineage tracking." },
-      { title: "Portfolio Optimization", description: "Quantitative models incorporating alternative data signals — satellite imagery, NLP sentiment, supply chain data — for alpha generation." },
       { title: "Credit Scoring", description: "Explainable AI models using SHAP values to provide transparent credit decisions, improving approval rates while maintaining risk thresholds." },
-      { title: "AML / KYC", description: "Entity resolution and network analysis identifying suspicious transaction patterns and beneficial ownership structures across complex corporate hierarchies." },
     ],
     techStack: ["Snowflake", "Databricks", "Kafka", "Flink", "Neo4j", "Python", "Tableau", "Airflow"],
     marketInsight: [
@@ -109,7 +116,16 @@ export const industries: IndustryData[] = [
       { value: "60%", label: "Reduction in false positives" },
       { value: "90%", label: "Automation in regulatory reporting" },
       { value: "sub-100ms", label: "Transaction scoring latency" },
-      { value: "3x", label: "Faster risk model deployment" },
+    ],
+    references: [
+      { title: "AI in Financial Services", source: "Deloitte Insights", url: "https://www2.deloitte.com/insights/us/en/industry/financial-services.html", insight: "Banks deploying AI-driven fraud detection see up to 50% reductions in false positives and $5.8B in annual loss prevention globally." },
+      { title: "The Future of Risk Management", source: "World Economic Forum", url: "https://www.weforum.org/reports", insight: "Real-time risk analytics can reduce regulatory reporting effort by 80%, freeing compliance teams to focus on strategic risk mitigation rather than data wrangling." },
+      { title: "Machine Learning in Credit Risk", source: "Bank for International Settlements, 2023", url: "https://www.bis.org/publ", insight: "Explainable ML models outperform traditional scorecards by 15–25% in default prediction accuracy while maintaining regulatory transparency requirements." },
+    ],
+    nextSteps: [
+      { title: "Compliance & Data Audit", description: "We assess your current data architecture against regulatory requirements and identify automation opportunities in your reporting workflows.", icon: "BarChart3" },
+      { title: "Fraud Detection PoC", description: "Deploy a pilot fraud detection model on a representative dataset — demonstrating false-positive reduction and catch-rate improvement in 6 weeks.", icon: "Target" },
+      { title: "Book a Strategy Session", description: "Connect with our financial services data architects to explore how we can strengthen your data infrastructure.", icon: "ArrowUpRight" },
     ],
   },
   {
@@ -139,9 +155,7 @@ export const industries: IndustryData[] = [
       { title: "Product Analytics", description: "Funnel analysis, cohort retention, and feature adoption tracking at scale — helping product teams understand what drives activation and engagement." },
       { title: "Churn Prediction", description: "ML models combining product usage decay, support sentiment, and billing patterns to flag at-risk accounts with actionable intervention playbooks." },
       { title: "Revenue Forecasting", description: "Bottom-up revenue models incorporating pipeline velocity, expansion signals, and seasonal patterns for accurate ARR projections." },
-      { title: "Usage Metering", description: "Real-time consumption tracking and billing infrastructure supporting hybrid pricing models — seats, API calls, compute, and storage." },
       { title: "PLG Analytics", description: "Self-serve onboarding funnels, activation milestones, and viral loop tracking to optimize product-led growth motions." },
-      { title: "Customer 360", description: "Unified view merging product usage, support interactions, billing history, and NPS data for proactive customer success." },
     ],
     techStack: ["ClickHouse", "Snowflake", "dbt", "Fivetran", "Airflow", "Python", "Looker", "Segment"],
     marketInsight: [
@@ -153,7 +167,16 @@ export const industries: IndustryData[] = [
       { value: "45%", label: "Reduction in churn rate" },
       { value: "30%", label: "Increase in expansion revenue" },
       { value: "10x", label: "Faster query performance" },
-      { value: "85%", label: "Self-serve analytics adoption" },
+    ],
+    references: [
+      { title: "Product-Led Growth Benchmarks", source: "OpenView Partners", url: "https://openviewpartners.com/product-benchmarks", insight: "PLG companies with mature data infrastructure grow 2.4x faster than sales-led peers — product analytics is the foundation of this advantage." },
+      { title: "The Net Revenue Retention Playbook", source: "Bessemer Venture Partners", url: "https://www.bvp.com/atlas/state-of-the-cloud", insight: "Top-quartile SaaS companies achieve 130%+ NRR by identifying expansion signals in product usage data — something impossible without proper analytics infrastructure." },
+      { title: "Churn Prediction in SaaS", source: "Journal of Machine Learning Research", url: "https://jmlr.org", insight: "Ensemble ML models that combine behavioral, transactional, and sentiment features can predict churn 60–90 days in advance with 85%+ accuracy." },
+    ],
+    nextSteps: [
+      { title: "Analytics Maturity Audit", description: "We evaluate your event tracking, data warehouse, and analytics tooling to identify gaps between where you are and where PLG leaders operate.", icon: "BarChart3" },
+      { title: "Churn Model Prototype", description: "Using your existing data, we build a churn prediction model in 4 weeks — complete with intervention triggers and playbook integration.", icon: "Target" },
+      { title: "Book a Strategy Session", description: "Talk to our SaaS analytics experts about building a data-driven product and revenue engine.", icon: "ArrowUpRight" },
     ],
   },
   {
@@ -183,8 +206,6 @@ export const industries: IndustryData[] = [
       { title: "Clinical Analytics", description: "Population health dashboards providing real-time visibility into disease prevalence, treatment efficacy, and care gaps across patient populations." },
       { title: "Patient Flow Optimization", description: "Predictive models for ED wait times, discharge planning, and bed turnover — reducing average length of stay by 15–20%." },
       { title: "Readmission Prevention", description: "Risk stratification models identifying high-risk patients at discharge, triggering automated care coordination and follow-up protocols." },
-      { title: "Resource Planning", description: "Demand forecasting for staffing, supplies, and equipment — balancing cost efficiency with quality of care." },
-      { title: "Clinical Trial Matching", description: "NLP-powered patient matching against trial eligibility criteria, accelerating enrollment and improving diversity in clinical research." },
       { title: "Revenue Cycle Optimization", description: "ML-driven claims analysis reducing denials, optimizing coding accuracy, and accelerating reimbursement cycles." },
     ],
     techStack: ["Azure", "Databricks", "FHIR", "Snowflake", "dbt", "Power BI", "Python", "Airflow"],
@@ -197,7 +218,16 @@ export const industries: IndustryData[] = [
       { value: "20%", label: "Reduction in readmission rates" },
       { value: "35%", label: "Improvement in bed utilization" },
       { value: "50%", label: "Faster clinical reporting" },
-      { value: "99.9%", label: "PHI compliance maintained" },
+    ],
+    references: [
+      { title: "AI and the Future of Health", source: "World Health Organization, 2024", url: "https://www.who.int/publications", insight: "AI-assisted diagnostics can match or exceed specialist performance in radiology and pathology — but require robust data infrastructure and governance to deploy safely at scale." },
+      { title: "The $300 Billion Opportunity", source: "McKinsey Center for US Health System Reform", url: "https://www.mckinsey.com/industries/healthcare", insight: "Up to $300 billion in annual US healthcare spending is recoverable through better data integration, predictive analytics, and operational optimization." },
+      { title: "Predictive Analytics in Hospital Readmissions", source: "JAMA Network, 2023", url: "https://jamanetwork.com", insight: "ML-based readmission models using EHR data outperform traditional LACE scores by 28%, enabling more targeted and cost-effective intervention programs." },
+    ],
+    nextSteps: [
+      { title: "HIPAA Readiness Assessment", description: "We evaluate your data architecture against HIPAA, HITRUST, and interoperability requirements — identifying compliance gaps and quick wins.", icon: "BarChart3" },
+      { title: "Clinical Analytics PoC", description: "Build a readmission risk model or patient flow dashboard on your data in 6 weeks — with full compliance documentation.", icon: "Target" },
+      { title: "Book a Strategy Session", description: "Discuss your healthcare data challenges with our team experienced in FHIR, clinical ML, and regulatory compliance.", icon: "ArrowUpRight" },
     ],
   },
   {
@@ -227,9 +257,7 @@ export const industries: IndustryData[] = [
       { title: "Predictive Maintenance", description: "ML models analyzing vibration, temperature, and acoustic signatures to predict equipment failures 2–4 weeks before occurrence." },
       { title: "Quality Control", description: "Computer vision systems inspecting 100% of production output at line speed — detecting defects invisible to the human eye." },
       { title: "Production Optimization", description: "Digital twins simulating production scenarios to identify optimal machine parameters, batch sequences, and changeover schedules." },
-      { title: "Supply Chain Analytics", description: "Demand-driven supply planning integrating supplier lead times, logistics constraints, and production capacity for just-in-time delivery." },
       { title: "Energy Management", description: "Real-time energy monitoring and optimization across production lines — reducing consumption by 15–25% through load balancing and peak shaving." },
-      { title: "Yield Optimization", description: "Statistical process control (SPC) and ML-driven root cause analysis identifying process variables most impactful to first-pass yield." },
     ],
     techStack: ["Azure IoT", "Databricks", "InfluxDB", "Spark", "Python", "Power BI", "TensorFlow", "Airflow"],
     marketInsight: [
@@ -241,7 +269,16 @@ export const industries: IndustryData[] = [
       { value: "45%", label: "Reduction in unplanned downtime" },
       { value: "30%", label: "Improvement in OEE" },
       { value: "99.2%", label: "Defect detection accuracy" },
-      { value: "20%", label: "Reduction in energy costs" },
+    ],
+    references: [
+      { title: "The Rise of the Digital Twin", source: "Gartner, 2024", url: "https://www.gartner.com/en/articles/digital-twin-technology", insight: "By 2027, over 70% of manufacturers will use digital twins for process optimization — companies with mature implementations report 20–30% improvements in production efficiency." },
+      { title: "Predictive Maintenance: From Promise to Practice", source: "McKinsey Global Institute", url: "https://www.mckinsey.com/capabilities/operations/our-insights", insight: "Predictive maintenance reduces machine downtime by 30–50% and extends equipment life by 20–40% — representing billions in savings across global manufacturing." },
+      { title: "Industry 4.0 and the Smart Factory", source: "Deloitte University Press", url: "https://www2.deloitte.com/insights/us/en/focus/industry-4-0.html", insight: "Smart factories could add $1.5–2.2 trillion in value to the global economy by 2030 — but require integrated data platforms as a foundation." },
+    ],
+    nextSteps: [
+      { title: "IoT Data Assessment", description: "We map your sensor landscape, data flows, and existing infrastructure to design a scalable industrial data platform architecture.", icon: "BarChart3" },
+      { title: "Predictive Maintenance Pilot", description: "Select one critical asset class. We deploy a predictive model in 6–8 weeks and measure downtime reduction.", icon: "Target" },
+      { title: "Book a Strategy Session", description: "Discuss Industry 4.0 data strategy with our manufacturing analytics team.", icon: "ArrowUpRight" },
     ],
   },
   {
@@ -270,10 +307,8 @@ export const industries: IndustryData[] = [
     useCases: [
       { title: "Grid Analytics", description: "Real-time monitoring and anomaly detection across transmission and distribution networks — predicting outages before they cascade." },
       { title: "Renewable Forecasting", description: "Hyper-local solar and wind generation predictions combining satellite imagery, numerical weather prediction, and on-site sensor data." },
-      { title: "Asset Management", description: "Condition-based monitoring for transformers, turbines, and lines — extending asset life by 20–30% while reducing maintenance costs." },
       { title: "Carbon Accounting", description: "Automated Scope 1, 2, and 3 emissions tracking with audit-ready reporting aligned to GHG Protocol, TCFD, and CSRD frameworks." },
       { title: "Demand Response", description: "ML-driven load forecasting and dynamic pricing enabling demand-side management and peak load reduction." },
-      { title: "EV Grid Integration", description: "Modeling the impact of EV charging on distribution networks — optimizing charging schedules and grid reinforcement planning." },
     ],
     techStack: ["AWS", "Snowflake", "TimescaleDB", "Spark", "dbt", "Python", "Tableau", "Airflow"],
     marketInsight: [
@@ -285,7 +320,16 @@ export const industries: IndustryData[] = [
       { value: "25%", label: "Reduction in grid outages" },
       { value: "95%", label: "Renewable forecast accuracy" },
       { value: "40%", label: "Faster ESG reporting cycles" },
-      { value: "18%", label: "Reduction in energy procurement costs" },
+    ],
+    references: [
+      { title: "World Energy Outlook 2024", source: "International Energy Agency (IEA)", url: "https://www.iea.org/reports/world-energy-outlook-2024", insight: "The global energy transition will require $4.5 trillion in annual clean energy investment by 2030 — data-driven grid management is critical to integrating intermittent renewables at scale." },
+      { title: "Digitalization & Energy", source: "IEA Digital Demand-Driven Electricity Networks", url: "https://www.iea.org/reports/digitalisation-and-energy", insight: "Digitalization could reduce global CO₂ emissions by 1.4 gigatonnes per year through smarter grid management, predictive maintenance, and demand response optimization." },
+      { title: "The Role of AI in Decarbonization", source: "Boston Consulting Group, 2024", url: "https://www.bcg.com/publications/2024/ai-and-climate-change", insight: "AI-powered energy management systems reduce energy consumption by 10–20% in commercial and industrial settings — representing massive emissions reduction potential." },
+    ],
+    nextSteps: [
+      { title: "Grid Data Assessment", description: "We audit your SCADA, AMI, and weather data infrastructure and design a roadmap for real-time grid intelligence.", icon: "BarChart3" },
+      { title: "Forecasting Model Pilot", description: "Deploy a solar or wind forecasting model on your generation assets — demonstrating accuracy improvement over current methods in 6 weeks.", icon: "Target" },
+      { title: "Book a Strategy Session", description: "Connect with our energy analytics team to discuss grid modernization and sustainability data strategy.", icon: "ArrowUpRight" },
     ],
   },
   {
@@ -315,9 +359,7 @@ export const industries: IndustryData[] = [
       { title: "Intelligent Document Processing", description: "AI pipelines extracting data from invoices, contracts, and forms with 98%+ accuracy — reducing manual data entry by 80%." },
       { title: "Agent Co-Pilots", description: "LLM-powered assistants providing real-time response suggestions, knowledge retrieval, and compliance guidance during customer interactions." },
       { title: "Process Mining", description: "Automated discovery and analysis of actual process flows — identifying bottlenecks, deviations, and automation candidates worth millions in savings." },
-      { title: "Workforce Analytics", description: "Predictive scheduling, performance benchmarking, and attrition risk modeling — optimizing the largest cost center in any BPO operation." },
       { title: "Quality Assurance", description: "Automated call and chat scoring using NLP sentiment analysis and compliance checking — scaling QA from 2% to 100% coverage." },
-      { title: "Client Reporting", description: "Automated SLA dashboards with predictive breach alerts and root cause analysis — turning reporting from a cost center into a value driver." },
     ],
     techStack: ["Azure", "OpenAI", "Claude", "Databricks", "Power BI", "Python", "Airflow", "Elasticsearch"],
     marketInsight: [
@@ -329,7 +371,16 @@ export const industries: IndustryData[] = [
       { value: "35%", label: "Reduction in average handle time" },
       { value: "80%", label: "Automation of document processing" },
       { value: "100%", label: "QA coverage (vs. 2% manual)" },
-      { value: "25%", label: "Improvement in agent satisfaction" },
+    ],
+    references: [
+      { title: "The Future of Business Process Outsourcing", source: "Everest Group, 2024", url: "https://www.everestgrp.com/bpo", insight: "BPO firms investing in AI augmentation see 40% higher margins than traditional labor-arbitrage players — the shift from cost center to value creator is driven by analytics." },
+      { title: "Intelligent Automation in Services", source: "Gartner Predicts 2024", url: "https://www.gartner.com/en/topics/intelligent-automation", insight: "By 2027, 50% of all customer service interactions will be handled or augmented by AI — but human agents supported by AI co-pilots outperform fully automated systems on complex issues." },
+      { title: "The LLM Revolution in Document Processing", source: "Forrester Research", url: "https://www.forrester.com/report/the-state-of-intelligent-document-processing", insight: "LLM-powered IDP reduces document processing costs by 60–80% while improving accuracy to 98%+ — transforming high-volume, low-margin operations into competitive advantages." },
+    ],
+    nextSteps: [
+      { title: "Process Automation Audit", description: "We analyze your workflows, document volumes, and agent interactions to identify the highest-ROI automation opportunities.", icon: "BarChart3" },
+      { title: "AI Co-Pilot Prototype", description: "Deploy an LLM-powered agent assistant on one process line in 4 weeks — measuring handle time reduction and quality improvement.", icon: "Target" },
+      { title: "Book a Strategy Session", description: "Discuss intelligent automation strategy with our BPO transformation specialists.", icon: "ArrowUpRight" },
     ],
   },
   {
@@ -360,8 +411,6 @@ export const industries: IndustryData[] = [
       { title: "Adaptive Learning", description: "AI-driven content recommendations adjusting difficulty, modality, and pacing based on individual learning patterns and mastery levels." },
       { title: "Enrollment Intelligence", description: "Predictive models for yield optimization — identifying which admitted students are most likely to enroll and which need additional engagement." },
       { title: "Curriculum Analytics", description: "Course-level and program-level analytics identifying which pedagogical approaches, content formats, and assessment strategies drive the best outcomes." },
-      { title: "Research Analytics", description: "Publication, citation, and grant analytics supporting faculty evaluation, research strategy, and institutional ranking optimization." },
-      { title: "Alumni & Outcomes", description: "Long-term outcome tracking connecting educational experiences to career success — demonstrating ROI and informing curriculum evolution." },
     ],
     techStack: ["Snowflake", "dbt", "Python", "Power BI", "Airflow", "LTI", "Canvas API", "Tableau"],
     marketInsight: [
@@ -373,7 +422,16 @@ export const industries: IndustryData[] = [
       { value: "30%", label: "Reduction in dropout rates" },
       { value: "15%", label: "Improvement in course completion" },
       { value: "20%", label: "Increase in enrollment yield" },
-      { value: "5x", label: "Faster institutional reporting" },
+    ],
+    references: [
+      { title: "Learning Analytics and the Future of Higher Education", source: "EDUCAUSE Review, 2024", url: "https://er.educause.edu/articles/learning-analytics", insight: "Institutions with mature learning analytics see 15–25% improvement in student retention — the key is integrating data across LMS, SIS, and student support systems." },
+      { title: "The State of AI in Education", source: "UNESCO, 2024", url: "https://www.unesco.org/en/digital-education", insight: "Adaptive learning systems powered by AI can improve learning outcomes by 20–30% — but require robust data infrastructure and ethical governance frameworks." },
+      { title: "Enrollment Management in Crisis", source: "National Student Clearinghouse Research Center", url: "https://nscresearchcenter.org", insight: "With undergraduate enrollment declining by 15% since 2010, data-driven enrollment optimization is no longer optional — predictive yield models can improve enrollment hit rates by 20–35%." },
+    ],
+    nextSteps: [
+      { title: "Data Landscape Assessment", description: "We map your LMS, SIS, and assessment data sources to identify integration opportunities and build a learning analytics roadmap.", icon: "BarChart3" },
+      { title: "Early Warning System Pilot", description: "Deploy a student success prediction model for one program in 6 weeks — demonstrating intervention impact on retention.", icon: "Target" },
+      { title: "Book a Strategy Session", description: "Connect with our education analytics team to discuss institutional intelligence and student success initiatives.", icon: "ArrowUpRight" },
     ],
   },
 ];
