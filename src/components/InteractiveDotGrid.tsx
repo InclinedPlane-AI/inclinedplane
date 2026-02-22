@@ -4,9 +4,9 @@ const DOT_SPACING = 18;
 const DOT_BASE_RADIUS = 1;
 const DOT_GLOW_RADIUS = 2.2;
 const CURSOR_RADIUS = 120;
-const FADE_SPEED = 0.012; // how fast dots fade back (lower = longer trail)
+const FADE_SPEED = 0.012;
 const BASE_ALPHA = 0.08;
-const GLOW_ALPHA = 0.7;
+const GLOW_ALPHA = 0.45;
 
 interface Dot {
   x: number;
@@ -118,13 +118,7 @@ const InteractiveDotGrid = () => {
         ctx.fillStyle = `hsla(${color}, ${alpha})`;
         ctx.fill();
 
-        // Add glow for bright dots
-        if (dot.brightness > 0.3) {
-          ctx.beginPath();
-          ctx.arc(dot.x, dot.y, radius + 3, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(${color}, ${dot.brightness * 0.12})`;
-          ctx.fill();
-        }
+        // No outer glow layer
       }
 
       rafRef.current = requestAnimationFrame(draw);
