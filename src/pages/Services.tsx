@@ -1,5 +1,5 @@
 import PageLayout from "@/components/PageLayout";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import {
   Database, Shield, BarChart3, Brain, Zap,
   Layers, CloudCog, Warehouse, GitBranch, FileCheck,
@@ -8,7 +8,7 @@ import {
   TrendingUp, Cpu, FlaskConical, MessageSquare, Bot,
   Workflow, Siren, Link2, FileText, Sparkles
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 
 interface ServiceItem {
   label: string;
@@ -18,11 +18,11 @@ interface ServiceItem {
 interface ServicePillar {
   number: string;
   title: string;
+  shortTitle: string;
   subtitle: string;
   positioning: string;
   tagline: string;
   icon: React.ElementType;
-  color: string;
   items: ServiceItem[];
   tools: string[];
   benefits: string[];
@@ -32,11 +32,11 @@ const pillars: ServicePillar[] = [
   {
     number: "01",
     title: "Data Foundation & Architecture Modernization",
+    shortTitle: "Foundation",
     subtitle: "Entry Point",
     positioning: "We unify and stabilize your data environment.",
     tagline: "Build once. Scale forever.",
     icon: Database,
-    color: "from-orange-500 to-amber-500",
     items: [
       { label: "Enterprise data architecture", icon: Layers },
       { label: "Data platform engineering", icon: Database },
@@ -52,11 +52,11 @@ const pillars: ServicePillar[] = [
   {
     number: "02",
     title: "Data Reliability, Observability & DataOps",
+    shortTitle: "Reliability",
     subtitle: "Differentiator",
     positioning: "Architecture before intelligence — reliability is not optional.",
     tagline: "If you can't trust it, you can't use it.",
     icon: Shield,
-    color: "from-emerald-500 to-teal-500",
     items: [
       { label: "Pipeline monitoring", icon: Activity },
       { label: "Data quality frameworks", icon: FileCheck },
@@ -72,11 +72,11 @@ const pillars: ServicePillar[] = [
   {
     number: "03",
     title: "Intelligence & Analytics Systems",
+    shortTitle: "Intelligence",
     subtitle: "Visibility Layer",
     positioning: "Automated intelligence & BI — de-risking every decision.",
     tagline: "From data to decisions in seconds.",
     icon: BarChart3,
-    color: "from-blue-500 to-indigo-500",
     items: [
       { label: "Executive dashboards", icon: LayoutDashboard },
       { label: "Operational reporting", icon: PieChart },
@@ -92,11 +92,11 @@ const pillars: ServicePillar[] = [
   {
     number: "04",
     title: "Predictive & AI Implementation",
+    shortTitle: "Predictive AI",
     subtitle: "High-Margin Layer",
     positioning: "AI, predictive & agentic implementation — from experimentation to production.",
     tagline: "Predict. Adapt. Outperform.",
     icon: Brain,
-    color: "from-violet-500 to-purple-500",
     items: [
       { label: "Forecasting systems", icon: TrendingUp },
       { label: "Growth & risk modeling", icon: FlaskConical },
@@ -112,11 +112,11 @@ const pillars: ServicePillar[] = [
   {
     number: "05",
     title: "Automation & Decision Systems",
+    shortTitle: "Automation",
     subtitle: "Future-Forward Layer",
     positioning: "From dashboards to decision systems — autonomous intelligence.",
     tagline: "Systems that think, act, and learn.",
     icon: Zap,
-    color: "from-rose-500 to-pink-500",
     items: [
       { label: "AI agents", icon: Bot },
       { label: "Workflow orchestration", icon: Workflow },
@@ -131,142 +131,152 @@ const pillars: ServicePillar[] = [
   },
 ];
 
-const ServiceCard = ({ pillar, index }: { pillar: ServicePillar; index: number }) => {
-  const [expanded, setExpanded] = useState(false);
+/* ── Single section observed by IntersectionObserver ── */
+const ServiceSection = ({
+  pillar,
+  index,
+  isActive,
+}: {
+  pillar: ServicePillar;
+  index: number;
+  isActive: boolean;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { margin: "-40% 0px -40% 0px", once: false });
+  const show = isActive || isInView;
   const Icon = pillar.icon;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.08, duration: 0.5 }}
-      viewport={{ once: true }}
-      className="glass-panel rounded-2xl overflow-hidden group"
-      data-cursor-hover
-    >
-      {/* Header */}
-      <div
-        className="p-6 sm:p-8 cursor-pointer"
-        onClick={() => setExpanded(!expanded)}
+    <div ref={ref} className="scroll-mt-32 min-h-[60vh] lg:min-h-[70vh] flex items-start py-8 lg:py-16" id={`service-${index}`}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: show ? 1 : 0.3, y: show ? 0 : 10 }}
+        transition={{ duration: 0.5 }}
+        className="w-full"
       >
-        <div className="flex items-start gap-5">
-          {/* Number + Icon */}
-          <div className="shrink-0 flex flex-col items-center gap-2">
-            <span className="font-mono text-xs text-muted-foreground/50">{pillar.number}</span>
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-              <Icon size={22} className="text-primary" />
-            </div>
-          </div>
+        {/* Top bar */}
+        <div className="flex items-center gap-3 mb-4">
+          <span className="font-mono text-xs text-muted-foreground/40">{pillar.number}</span>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-primary/70 bg-primary/5 px-2 py-0.5 rounded-full border border-primary/10">
+            {pillar.subtitle}
+          </span>
+        </div>
 
-          {/* Content */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-primary/70 bg-primary/5 px-2 py-0.5 rounded-full">
-                {pillar.subtitle}
-              </span>
-            </div>
-            <h2 className="text-lg sm:text-xl font-bold text-foreground mb-2 leading-tight">
+        {/* Title */}
+        <div className="flex items-start gap-4 mb-4">
+          <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 mt-1">
+            <Icon size={20} className="text-primary" />
+          </div>
+          <div>
+            <h2 className="text-xl sm:text-2xl font-bold text-foreground leading-tight mb-2">
               {pillar.title}
             </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              {pillar.positioning}
-            </p>
-            <p className="font-mono text-xs text-primary/60 mt-2 italic">
-              "{pillar.tagline}"
-            </p>
-          </div>
-
-          {/* Expand indicator */}
-          <div className="shrink-0 mt-2">
-            <motion.div
-              animate={{ rotate: expanded ? 180 : 0 }}
-              transition={{ duration: 0.2 }}
-              className="w-6 h-6 rounded-full surface-3 flex items-center justify-center"
-            >
-              <svg width="12" height="12" viewBox="0 0 12 12" className="text-muted-foreground">
-                <path d="M2 4L6 8L10 4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-              </svg>
-            </motion.div>
+            <p className="text-sm text-muted-foreground leading-relaxed">{pillar.positioning}</p>
+            <p className="font-mono text-xs text-primary/50 mt-1.5 italic">"{pillar.tagline}"</p>
           </div>
         </div>
-      </div>
 
-      {/* Expanded content */}
-      <motion.div
-        initial={false}
-        animate={{
-          height: expanded ? "auto" : 0,
-          opacity: expanded ? 1 : 0,
-        }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="overflow-hidden"
-      >
-        <div className="px-6 sm:px-8 pb-8 pt-0">
-          <div className="border-t border-border/50 pt-6">
-            {/* Capabilities grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-              {pillar.items.map(({ label, icon: ItemIcon }) => (
-                <div key={label} className="flex items-center gap-3 py-2">
-                  <div className="w-7 h-7 rounded-lg surface-2 flex items-center justify-center shrink-0">
-                    <ItemIcon size={14} className="text-primary/70" />
-                  </div>
-                  <span className="text-sm text-foreground/80">{label}</span>
-                </div>
-              ))}
+        {/* Expanded content — animated */}
+        <motion.div
+          initial={false}
+          animate={{ opacity: show ? 1 : 0, height: show ? "auto" : 0 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+          className="overflow-hidden"
+        >
+          <div className="pt-4 pl-0 lg:pl-[60px]">
+            {/* Capabilities */}
+            <div className="glass-panel rounded-xl p-5 sm:p-6 mb-4">
+              <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50 mb-4">Capabilities</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {pillar.items.map(({ label, icon: ItemIcon }, i) => (
+                  <motion.div
+                    key={label}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: show ? 1 : 0, x: show ? 0 : -8 }}
+                    transition={{ delay: show ? i * 0.04 : 0, duration: 0.3 }}
+                    className="flex items-center gap-2.5 py-1.5"
+                  >
+                    <div className="w-6 h-6 rounded-md surface-2 flex items-center justify-center shrink-0">
+                      <ItemIcon size={12} className="text-primary/70" />
+                    </div>
+                    <span className="text-sm text-foreground/80">{label}</span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
 
-            {/* Tools & Benefits */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* Tools */}
-              <div>
-                <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-3">
-                  Tools & Technologies
-                </h4>
+            {/* Tools + Benefits */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="glass-panel rounded-xl p-5">
+                <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50 mb-3">Stack</h4>
                 <div className="flex flex-wrap gap-1.5">
                   {pillar.tools.map((tool) => (
-                    <span
-                      key={tool}
-                      className="text-xs px-2.5 py-1 rounded-md surface-2 text-muted-foreground border border-border/30 font-mono"
-                    >
+                    <span key={tool} className="text-[11px] px-2 py-0.5 rounded-md surface-2 text-muted-foreground border border-border/30 font-mono">
                       {tool}
                     </span>
                   ))}
                 </div>
               </div>
-
-              {/* Benefits */}
-              <div>
-                <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-3">
-                  Key Outcomes
-                </h4>
+              <div className="glass-panel rounded-xl p-5">
+                <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50 mb-3">Outcomes</h4>
                 <div className="space-y-2">
-                  {pillar.benefits.map((benefit) => (
-                    <div key={benefit} className="flex items-center gap-2">
+                  {pillar.benefits.map((b) => (
+                    <div key={b} className="flex items-center gap-2">
                       <div className="w-1 h-1 rounded-full bg-primary shrink-0" />
-                      <span className="text-xs text-muted-foreground">{benefit}</span>
+                      <span className="text-xs text-muted-foreground">{b}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 
+/* ── Main page ── */
 const ServicesPage = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+  const isClickScrolling = useRef(false);
+
+  /* Observe which section is in viewport */
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (isClickScrolling.current) return;
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.getAttribute("data-index"));
+            if (!isNaN(idx)) setActiveIndex(idx);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -40% 0px" }
+    );
+
+    document.querySelectorAll("[data-index]").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollTo = useCallback((index: number) => {
+    setActiveIndex(index);
+    isClickScrolling.current = true;
+    const el = document.getElementById(`service-${index}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => { isClickScrolling.current = false; }, 800);
+    }
+  }, []);
+
   return (
     <PageLayout>
       <div className="pt-32 pb-24">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-6"
-          >
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12 lg:mb-16">
             <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Services</p>
             <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
               What We <span className="text-gradient-orange">Build.</span>
@@ -276,35 +286,92 @@ const ServicesPage = () => {
             </p>
           </motion.div>
 
-          {/* Pipeline visual */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="flex items-center justify-center gap-1 sm:gap-2 mb-16 overflow-x-auto py-4"
-          >
-            {pillars.map((p, i) => (
-              <div key={p.number} className="flex items-center gap-1 sm:gap-2 shrink-0">
-                <div className="flex flex-col items-center gap-1">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg surface-3 flex items-center justify-center">
-                    <p.icon size={16} className="text-primary" />
-                  </div>
-                  <span className="font-mono text-[8px] sm:text-[9px] text-muted-foreground/50 text-center max-w-[60px] sm:max-w-[80px] leading-tight">
-                    {p.title.split(" ").slice(0, 2).join(" ")}
-                  </span>
-                </div>
-                {i < pillars.length - 1 && (
-                  <div className="w-4 sm:w-8 h-px bg-border/50 mt-[-12px]" />
-                )}
-              </div>
-            ))}
-          </motion.div>
+          {/* Mobile: horizontal pill nav */}
+          <div className="lg:hidden mb-6 overflow-x-auto scrollbar-hide -mx-6 px-6">
+            <div className="flex gap-2 w-max">
+              {pillars.map((p, i) => (
+                <button
+                  key={p.number}
+                  onClick={() => scrollTo(i)}
+                  className={`shrink-0 flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                    activeIndex === i
+                      ? "bg-primary/10 text-primary border border-primary/20"
+                      : "surface-2 text-muted-foreground border border-border/30"
+                  }`}
+                >
+                  <p.icon size={14} />
+                  {p.shortTitle}
+                </button>
+              ))}
+            </div>
+          </div>
 
-          {/* Service cards */}
-          <div className="space-y-4">
-            {pillars.map((pillar, i) => (
-              <ServiceCard key={pillar.number} pillar={pillar} index={i} />
-            ))}
+          {/* Desktop: left nav + right content */}
+          <div className="flex gap-10">
+            {/* Left sticky nav — desktop only */}
+            <div className="hidden lg:block w-56 shrink-0">
+              <div className="sticky top-32">
+                <nav className="space-y-1">
+                  {pillars.map((p, i) => {
+                    const Icon = p.icon;
+                    const active = activeIndex === i;
+                    return (
+                      <button
+                        key={p.number}
+                        onClick={() => scrollTo(i)}
+                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all duration-300 group ${
+                          active
+                            ? "glass-panel-strong text-foreground"
+                            : "text-muted-foreground/60 hover:text-muted-foreground hover:bg-muted/30"
+                        }`}
+                      >
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                          active ? "bg-primary/15" : "surface-3 group-hover:bg-muted"
+                        }`}>
+                          <Icon size={15} className={active ? "text-primary" : "text-muted-foreground/50"} />
+                        </div>
+                        <div className="min-w-0">
+                          <span className={`font-mono text-[10px] block ${active ? "text-primary/60" : "text-muted-foreground/30"}`}>
+                            {p.number}
+                          </span>
+                          <span className={`text-sm font-medium truncate block ${active ? "text-foreground" : ""}`}>
+                            {p.shortTitle}
+                          </span>
+                        </div>
+                        {/* Active indicator line */}
+                        <div className={`ml-auto w-0.5 h-5 rounded-full transition-all ${active ? "bg-primary" : "bg-transparent"}`} />
+                      </button>
+                    );
+                  })}
+                </nav>
+
+                {/* Progress */}
+                <div className="mt-6 px-3">
+                  <div className="h-1 rounded-full surface-3 overflow-hidden">
+                    <motion.div
+                      className="h-full bg-gradient-orange rounded-full"
+                      animate={{ width: `${((activeIndex + 1) / pillars.length) * 100}%` }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                    />
+                  </div>
+                  <p className="font-mono text-[10px] text-muted-foreground/40 mt-2">
+                    {activeIndex + 1} / {pillars.length}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: content sections */}
+            <div className="flex-1 min-w-0">
+              {pillars.map((pillar, i) => (
+                <div key={pillar.number} data-index={i}>
+                  <ServiceSection pillar={pillar} index={i} isActive={activeIndex === i} />
+                  {i < pillars.length - 1 && (
+                    <div className="border-t border-border/30" />
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
