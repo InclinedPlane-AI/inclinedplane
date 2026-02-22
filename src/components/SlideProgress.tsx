@@ -116,7 +116,7 @@ const SlideProgress = ({ total, current, onDotClick }: SlideProgressProps) => {
               height: trackHeight + DOT_GAP,
               top: -DOT_GAP / 2 + 6,
               left: "50%",
-              transform: "translateX(-50%)",
+              marginLeft: -10,
               background: "linear-gradient(180deg, hsl(var(--orange-start) / 0.06), hsl(var(--orange-mid) / 0.03), hsl(var(--orange-end) / 0.06))",
             }}
           />
