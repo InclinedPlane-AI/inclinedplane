@@ -62,7 +62,7 @@ const Industries = () => {
       <div className="pb-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Industry Cards Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 relative z-[2]">
             {industries.map((ind, i) => {
               const Icon = iconMap[ind.icon] || Layers;
               return (
@@ -76,29 +76,27 @@ const Industries = () => {
                   data-cursor-hover
                   className="group relative rounded-xl overflow-hidden text-left transition-all hover:scale-[1.02]"
                   style={{
-                    background: "hsl(var(--card) / 0.6)",
-                    backdropFilter: "blur(20px) saturate(1.4)",
-                    WebkitBackdropFilter: "blur(20px) saturate(1.4)",
-                    border: "1px solid hsl(25 100% 50% / 0.12)",
-                    boxShadow: "0 4px 24px -4px hsl(25 100% 50% / 0.08), 0 1px 3px hsl(25 100% 50% / 0.06), inset 0 1px 0 hsl(25 100% 80% / 0.06)",
+                    background: "hsl(var(--card))",
+                    isolation: "isolate",
+                    border: "1px solid hsl(25 100% 50% / 0.15)",
+                    boxShadow: "0 8px 32px -8px hsl(25 100% 50% / 0.12), 0 2px 8px hsl(25 100% 50% / 0.08), inset 0 1px 0 hsl(25 100% 80% / 0.08)",
                   }}
                 >
-                  {/* Subtle orange gradient background */}
+                  {/* Subtle orange glow at top */}
                   <div
-                    className="absolute inset-0 pointer-events-none -z-0 opacity-[0.04]"
+                    className="absolute inset-0 pointer-events-none z-0 opacity-[0.05]"
                     style={{
-                      background: "radial-gradient(ellipse at 50% 0%, hsl(25 100% 50%), transparent 70%)",
+                      background: "radial-gradient(ellipse at 50% 0%, hsl(25 100% 50%), transparent 60%)",
                     }}
                   />
 
                   {/* Image */}
-                  <div className="relative h-40 overflow-hidden">
+                  <div className="relative h-40 overflow-hidden z-[1]">
                     <img
                       src={ind.image}
                       alt={ind.name}
-                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+                      className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
                       loading="lazy"
-                      style={{ minHeight: "100%", minWidth: "100%" }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
                     <div
@@ -110,7 +108,7 @@ const Industries = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="p-5 relative z-10">
+                  <div className="p-5 relative z-[1]">
                     <h3 className="font-bold text-foreground text-base mb-2 group-hover:text-primary transition-colors">
                       {ind.name}
                     </h3>
