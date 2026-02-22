@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -22,38 +22,57 @@ import SplashScreen from "./components/SplashScreen";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-  const handleSplashComplete = useCallback(() => setLoading(false), []);
+  const [contentReady, setContentReady] = useState(false);
+  const [splashDone, setSplashDone] = useState(false);
 
-  if (loading) {
-    return <SplashScreen onComplete={handleSplashComplete} />;
-  }
+  useEffect(() => {
+    // Wait for window load (all assets: images, fonts, styles)
+    const markReady = () => setContentReady(true);
+    if (document.readyState === "complete") {
+      markReady();
+    } else {
+      window.addEventListener("load", markReady);
+      return () => window.removeEventListener("load", markReady);
+    }
+  }, []);
+
+  const handleSplashComplete = useCallback(() => setSplashDone(true), []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <CookieConsent />
-          <AnimatePresence mode="wait">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/thesis" element={<Thesis />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/industries" element={<Industries />} />
-              <Route path="/case-studies" element={<CaseStudies />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/privacy" element={<PrivacyPolicy />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/cookies" element={<CookiePolicy />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </AnimatePresence>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <>
+      {!splashDone && (
+        <SplashScreen
+          contentReady={contentReady}
+          onComplete={handleSplashComplete}
+        />
+      )}
+      <div style={splashDone ? undefined : { visibility: "hidden", position: "fixed" }}>
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <CookieConsent />
+              <AnimatePresence mode="wait">
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/thesis" element={<Thesis />} />
+                  <Route path="/services" element={<ServicesPage />} />
+                  <Route path="/industries" element={<Industries />} />
+                  <Route path="/case-studies" element={<CaseStudies />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/privacy" element={<PrivacyPolicy />} />
+                  <Route path="/terms" element={<Terms />} />
+                  <Route path="/cookies" element={<CookiePolicy />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </AnimatePresence>
+            </BrowserRouter>
+          </TooltipProvider>
+        </QueryClientProvider>
+      </div>
+    </>
   );
 };
 
