@@ -30,30 +30,25 @@ const ThemeToggle = () => {
     if (!btn || cooldownRef.current) return;
     cooldownRef.current = true;
 
-    const rect = btn.getBoundingClientRect();
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
     const nextTheme = theme === "dark" ? "light" : "dark";
-
-    // Set CSS custom properties for transition-delay calculation
-    document.documentElement.style.setProperty("--sweep-x", `${x}px`);
-    document.documentElement.style.setProperty("--sweep-y", `${y}px`);
 
     // Enable element transitions
     document.documentElement.classList.add("theme-sweeping");
 
-    // Apply theme change IMMEDIATELY so elements start transitioning
-    setTheme(nextTheme);
+    // Show curtain sweep overlay BEFORE theme change
+    setSweep({ x: 0, y: 0, target: nextTheme });
 
-    // Show translucent sweep overlay for directional feel
-    setSweep({ x, y, target: nextTheme });
+    // Delay theme change slightly so curtain leads the transition
+    setTimeout(() => {
+      setTheme(nextTheme);
+    }, 80);
 
     // Clean up
     setTimeout(() => {
       setSweep(null);
       document.documentElement.classList.remove("theme-sweeping");
       cooldownRef.current = false;
-    }, 900);
+    }, 1100);
   }, [theme]);
 
   const isDark = theme === "dark";
@@ -130,9 +125,9 @@ const ThemeToggle = () => {
   );
 };
 
-/* ── Translucent sweep — adds directional "flow" while real elements transition underneath ── */
+/* ── Curtain sweep — top-to-bottom "falling curtain" transition ── */
 const SweepOverlay = ({
-  x, y, target,
+  target,
 }: {
   x: number; y: number; target: "dark" | "light";
 }) => {
@@ -142,39 +137,36 @@ const SweepOverlay = ({
     const el = ref.current;
     if (!el) return;
 
-    const maxRadius = Math.ceil(
-      Math.sqrt(
-        Math.max(x, window.innerWidth - x) ** 2 +
-        Math.max(y, window.innerHeight - y) ** 2
-      )
-    ) + 100;
+    const pageHeight = Math.max(
+      document.documentElement.scrollHeight,
+      window.innerHeight
+    );
 
-    // Phase 1: expand the translucent sweep
-    const expandAnim = el.animate(
+    // Phase 1: curtain falls from top to bottom
+    const fallAnim = el.animate(
       [
-        { clipPath: `circle(0px at ${x}px ${y}px)`, opacity: 1 },
-        { clipPath: `circle(${maxRadius}px at ${x}px ${y}px)`, opacity: 1 },
+        { transform: "translateY(-100%)" },
+        { transform: "translateY(0%)" },
       ],
       {
-        duration: 650,
+        duration: 700,
         easing: "cubic-bezier(0.22, 1, 0.36, 1)",
         fill: "forwards",
       }
     );
 
-    // Phase 2: fade out once expanded
-    expandAnim.onfinish = () => {
+    // Phase 2: fade out after curtain covers full page
+    fallAnim.onfinish = () => {
       el.animate(
         [{ opacity: 1 }, { opacity: 0 }],
-        { duration: 250, easing: "ease-out", fill: "forwards" }
+        { duration: 350, easing: "ease-out", fill: "forwards" }
       );
     };
-  }, [x, y]);
+  }, []);
 
-  // Semi-transparent tinted overlay — NOT opaque
   const bg = target === "light"
-    ? "radial-gradient(circle at 50% 50%, hsla(25, 90%, 55%, 0.12) 0%, hsla(30, 20%, 96%, 0.18) 40%, transparent 80%)"
-    : "radial-gradient(circle at 50% 50%, hsla(25, 100%, 50%, 0.12) 0%, hsla(240, 18%, 4.5%, 0.18) 40%, transparent 80%)";
+    ? "linear-gradient(180deg, hsla(30, 20%, 96%, 0.35) 0%, hsla(25, 90%, 55%, 0.08) 30%, hsla(30, 20%, 96%, 0.25) 60%, transparent 100%)"
+    : "linear-gradient(180deg, hsla(240, 18%, 4.5%, 0.4) 0%, hsla(25, 100%, 50%, 0.08) 30%, hsla(240, 18%, 4.5%, 0.3) 60%, transparent 100%)";
 
   return (
     <div
@@ -184,10 +176,10 @@ const SweepOverlay = ({
         inset: 0,
         zIndex: 99999,
         background: bg,
-        clipPath: `circle(0px at ${x}px ${y}px)`,
+        transform: "translateY(-100%)",
         pointerEvents: "none",
-        backdropFilter: "blur(1px)",
-        WebkitBackdropFilter: "blur(1px)",
+        backdropFilter: "blur(2px)",
+        WebkitBackdropFilter: "blur(2px)",
       }}
     />
   );
