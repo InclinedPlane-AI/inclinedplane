@@ -5,7 +5,6 @@ import { ArrowRight, Clock } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageHero from "@/components/PageHero";
 import { blogPosts, allTags } from "@/data/blogPosts";
-import { Badge } from "@/components/ui/badge";
 
 const Blogs = () => {
   const [activeTag, setActiveTag] = useState<string | null>(null);
@@ -23,26 +22,26 @@ const Blogs = () => {
       />
 
       {/* Tag filter */}
-      <section className="max-w-5xl mx-auto px-6 lg:px-8 -mt-4 mb-12">
-        <div className="flex flex-wrap gap-2">
+      <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-12">
+        <div className="flex flex-wrap gap-2 items-center">
           <button
             onClick={() => setActiveTag(null)}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+            className={`px-3.5 py-1 rounded-md text-xs font-medium transition-all ${
               !activeTag
-                ? "bg-primary text-primary-foreground border-primary"
-                : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/30"
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground hover:text-foreground"
             }`}
           >
-            All Posts
+            All
           </button>
           {allTags.map((tag) => (
             <button
               key={tag}
               onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+              className={`px-3.5 py-1 rounded-md text-xs font-medium transition-all ${
                 activeTag === tag
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/30"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-muted-foreground hover:text-foreground"
               }`}
             >
               {tag}
@@ -51,68 +50,60 @@ const Blogs = () => {
         </div>
       </section>
 
-      {/* Blog cards */}
-      <section className="max-w-5xl mx-auto px-6 lg:px-8 pb-24">
-        <div className="flex flex-col gap-10">
+      {/* Blog cards — Medium-style horizontal layout */}
+      <section className="max-w-4xl mx-auto px-6 lg:px-8 pb-24">
+        <div className="flex flex-col divide-y divide-border">
           {filtered.map((post, i) => (
             <motion.article
               key={post.slug}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="py-7 first:pt-0"
             >
               <Link
                 to={`/blog/${post.slug}`}
-                className="group block glass-panel overflow-hidden rounded-xl hover:border-primary/30 transition-all duration-300"
+                className="group flex gap-5 sm:gap-8 items-start"
               >
-                {/* Hero image */}
-                <div className="relative overflow-hidden aspect-[21/9]">
-                  <img
-                    src={post.heroImage.src}
-                    alt={post.heroImage.alt}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
-                  <div className="absolute bottom-4 left-5 right-5 flex items-center gap-3">
-                    <span className="text-xs text-muted-foreground font-mono">{post.date}</span>
-                    <span className="text-muted-foreground/40">·</span>
+                {/* Text */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-2 text-xs text-muted-foreground">
+                    <span className="font-medium text-foreground/80">{post.author.name}</span>
+                    <span>·</span>
+                    <span>{post.date}</span>
+                  </div>
+
+                  <h2 className="text-lg sm:text-xl font-bold text-foreground mb-1.5 group-hover:text-primary transition-colors leading-snug line-clamp-2">
+                    {post.title}
+                  </h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3 line-clamp-2 hidden sm:block">
+                    {post.subtitle}
+                  </p>
+
+                  <div className="flex items-center gap-3 flex-wrap">
+                    {post.tags.slice(0, 2).map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-0.5 rounded bg-muted text-[10px] font-medium text-muted-foreground tracking-wide uppercase"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                     <span className="text-xs text-muted-foreground flex items-center gap-1">
-                      <Clock size={12} /> {post.readTime}
+                      <Clock size={11} /> {post.readTime}
                     </span>
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-5 sm:p-7">
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {post.tags.map((tag) => (
-                      <Badge
-                        key={tag}
-                        variant="outline"
-                        className="text-[10px] font-mono tracking-wider uppercase"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors font-blog-heading">
-                    {post.title}
-                  </h2>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">
-                    {post.subtitle}
-                  </p>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">
-                      By <span className="text-foreground font-medium">{post.author.name}</span>
-                    </span>
-                    <span className="text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                      Read <ArrowRight size={14} />
-                    </span>
-                  </div>
+                {/* Thumbnail */}
+                <div className="shrink-0 w-24 h-24 sm:w-36 sm:h-28 rounded-lg overflow-hidden">
+                  <img
+                    src={post.heroImage.src}
+                    alt={post.heroImage.alt}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
                 </div>
               </Link>
             </motion.article>
