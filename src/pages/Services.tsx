@@ -21,6 +21,7 @@ interface ServicePillar {
   shortTitle: string;
   subtitle: string;
   positioning: string;
+  description: string;
   tagline: string;
   icon: React.ElementType;
   items: ServiceItem[];
@@ -32,9 +33,10 @@ const pillars: ServicePillar[] = [
   {
     number: "01",
     title: "Data Foundation & Architecture Modernization",
-    shortTitle: "Foundation",
+    shortTitle: "Data Architecture",
     subtitle: "Entry Point",
     positioning: "We unify and stabilize your data environment.",
+    description: "Every intelligent system starts with a solid foundation. We design and build modern data architectures that consolidate fragmented sources, eliminate silos, and create a single source of truth — whether you're migrating from legacy systems or building greenfield. Our approach ensures your data estate is scalable, governed, and ready for whatever comes next.",
     tagline: "Build once. Scale forever.",
     icon: Database,
     items: [
@@ -46,15 +48,16 @@ const pillars: ServicePillar[] = [
       { label: "Data modeling & schema design", icon: GitBranch },
       { label: "Governance frameworks", icon: Shield },
     ],
-    tools: ["Snowflake", "Databricks", "BigQuery", "Redshift", "Azure Synapse", "dbt", "Terraform"],
-    benefits: ["60% faster time-to-insight", "Single source of truth", "Future-proof architecture"],
+    tools: ["Azure", "AWS", "GCP", "Databricks", "Snowflake", "BigQuery", "Fabric", "ClickHouse", "dbt", "Terraform", "SQL"],
+    benefits: ["60% faster time-to-insight", "Single source of truth across all systems", "Future-proof, cloud-native architecture"],
   },
   {
     number: "02",
     title: "Data Reliability, Observability & DataOps",
-    shortTitle: "Reliability",
+    shortTitle: "Reliability & Ops",
     subtitle: "Differentiator",
     positioning: "Architecture before intelligence — reliability is not optional.",
+    description: "Most firms skip this layer entirely. We don't. Before any dashboard or model can be trusted, the pipelines feeding them must be bulletproof. We implement engineering-grade observability, automated testing, and CI/CD workflows that catch issues before they reach stakeholders — turning your data platform into a production-grade system.",
     tagline: "If you can't trust it, you can't use it.",
     icon: Shield,
     items: [
@@ -66,15 +69,16 @@ const pillars: ServicePillar[] = [
       { label: "SLA enforcement & alerting", icon: Bell },
       { label: "Performance & cost optimization", icon: DollarSign },
     ],
-    tools: ["Great Expectations", "Monte Carlo", "dbt Tests", "Airflow", "GitHub Actions", "Datadog"],
+    tools: ["Airflow", "dbt", "GitHub", "Python", "Docker", "Terraform", "Great Expectations", "Monte Carlo", "Datadog"],
     benefits: ["99.9% pipeline uptime", "Engineering-first credibility", "Proactive anomaly detection"],
   },
   {
     number: "03",
     title: "Intelligence & Analytics Systems",
-    shortTitle: "Intelligence",
+    shortTitle: "Analytics & Intelligence",
     subtitle: "Visibility Layer",
     positioning: "Automated intelligence & BI — de-risking every decision.",
+    description: "Data without visibility is just cost. We build analytics systems that put the right metrics in front of the right people — from C-suite dashboards to embedded operational views. Our semantic layers standardize KPIs across the business, while self-serve tooling empowers teams to answer their own questions without waiting on data teams.",
     tagline: "From data to decisions in seconds.",
     icon: BarChart3,
     items: [
@@ -86,15 +90,16 @@ const pillars: ServicePillar[] = [
       { label: "Real-time reporting", icon: Radio },
       { label: "Self-serve BI", icon: Users },
     ],
-    tools: ["Power BI", "Tableau", "Looker", "Metabase", "Cube.js", "dbt Semantic Layer"],
-    benefits: ["80% reduction in ad-hoc requests", "Real-time operational visibility", "Data-literate teams"],
+    tools: ["Power BI", "Tableau", "Looker", "dbt", "Snowflake", "BigQuery", "Cube.js", "Metabase"],
+    benefits: ["80% reduction in ad-hoc requests", "Real-time operational visibility", "Data-literate, self-sufficient teams"],
   },
   {
     number: "04",
     title: "Predictive & AI Implementation",
-    shortTitle: "Predictive AI",
+    shortTitle: "AI & ML Implementations",
     subtitle: "High-Margin Layer",
     positioning: "AI, predictive & agentic implementation — from experimentation to production.",
+    description: "We take AI from proof-of-concept to production. Whether it's demand forecasting, risk scoring, or natural language interfaces over your data — we build, deploy, and monitor ML systems that deliver measurable business impact. No science projects. Every model ships with monitoring, retraining pipelines, and clear ROI metrics.",
     tagline: "Predict. Adapt. Outperform.",
     icon: Brain,
     items: [
@@ -106,15 +111,16 @@ const pillars: ServicePillar[] = [
       { label: "LLM integration", icon: Brain },
       { label: "Natural language querying", icon: MessageSquare },
     ],
-    tools: ["Python", "Scikit-learn", "PyTorch", "MLflow", "SageMaker", "OpenAI", "LangChain", "Hugging Face"],
+    tools: ["Python", "OpenAI", "Claude", "Mistral", "LangChain", "Hugging Face", "Databricks", "AWS", "MLflow", "SageMaker", "PyTorch"],
     benefits: ["Production-grade ML in weeks", "Continuous model improvement", "AI-native competitive edge"],
   },
   {
     number: "05",
     title: "Automation & Decision Systems",
-    shortTitle: "Automation",
+    shortTitle: "Automation Systems",
     subtitle: "Future-Forward Layer",
     positioning: "From dashboards to decision systems — autonomous intelligence.",
+    description: "The final frontier of data maturity: systems that don't just inform, but act. We build autonomous decision pipelines — AI agents that monitor, reason, and execute. From intelligent alerting to cross-system orchestration, we help leadership move from reading dashboards to receiving action-ready intelligence summaries.",
     tagline: "Systems that think, act, and learn.",
     icon: Zap,
     items: [
@@ -126,7 +132,7 @@ const pillars: ServicePillar[] = [
       { label: "Automated anomaly response", icon: Shield },
       { label: "AI-assisted leadership summaries", icon: FileText },
     ],
-    tools: ["n8n", "LangChain", "Claude", "Mistral", "Kafka", "Temporal", "Custom Agents"],
+    tools: ["n8n", "Kafka", "LangChain", "Claude", "Mistral", "OpenAI", "Docker", "Python", "Temporal", "Custom Agents"],
     benefits: ["90% faster incident response", "Autonomous decision pipelines", "Leadership-ready intelligence"],
   },
 ];
@@ -159,7 +165,8 @@ const ServiceContent = ({ pillar, isActive }: { pillar: ServicePillar; isActive:
             {pillar.title}
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed">{pillar.positioning}</p>
-          <p className="font-mono text-xs text-primary/50 mt-1.5 italic">"{pillar.tagline}"</p>
+          <p className="text-sm text-muted-foreground/70 leading-relaxed mt-2">{pillar.description}</p>
+          <p className="font-mono text-xs text-primary/50 mt-2 italic">"{pillar.tagline}"</p>
         </div>
       </motion.div>
 
