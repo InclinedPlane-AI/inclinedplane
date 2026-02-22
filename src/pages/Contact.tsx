@@ -133,10 +133,12 @@ const Contact = () => {
     return country?.dialCode ?? "";
   }, [selectedCountry]);
 
+  const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+
   const progress = useMemo(() => {
     let p = 0;
-    if (name.trim().length > 0) p += 20;
-    if (email.trim().length > 0) p += 20;
+    if (name.trim().length >= 2) p += 20;
+    if (isValidEmail(email)) p += 20;
     if (selectedCountry) p += 15;
     if (company.trim().length > 0) p += 15;
     if (message.trim().length > 0) p += 30;
