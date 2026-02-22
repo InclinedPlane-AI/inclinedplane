@@ -144,13 +144,7 @@
     cursor: none;
   }
 
-  /* Smooth theme transitions — only applied during theme toggle */
-  html.theme-transitioning body,
-  html.theme-transitioning body * {
-    transition-property: background-color, border-color, color, box-shadow;
-    transition-duration: 400ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  /* Theme wipe handles transitions — no CSS transition needed */
 
   @media (prefers-reduced-motion: reduce) {
     html body,
