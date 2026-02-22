@@ -12,6 +12,7 @@ import {
   Download, ChevronDown, X as XIcon
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import ThesisTOC from "@/components/ThesisTOC";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -100,11 +101,11 @@ const ArchitectureDiagram = () => {
   const [activeLayer, setActiveLayer] = useState<number | null>(null);
 
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden">
       {/* Pipeline grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 relative">
         {/* Animated flow line (desktop) */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block z-0" preserveAspectRatio="none">
+        <svg className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block z-0 overflow-hidden" preserveAspectRatio="none">
           <defs>
             <linearGradient id="flow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="hsl(25 100% 50%)" stopOpacity="0.4" />
@@ -509,6 +510,8 @@ const Thesis = () => {
         subtitle="A deep technical manifesto on why modern enterprises need engineering-grade data systems — and how InclinedPlane builds them."
       />
 
+      <ThesisTOC />
+
       {/* PDF Download Bar */}
       <div className="max-w-6xl mx-auto px-6 lg:px-8 mb-8 print:hidden">
         <motion.div {...fadeUp} className="flex justify-end">
@@ -529,7 +532,7 @@ const Thesis = () => {
           {/* ════════════════════════════════════════════════════════════ */}
           {/* SECTION 1 — THE PROBLEM */}
           {/* ════════════════════════════════════════════════════════════ */}
-          <section className="relative mb-24">
+          <section id="the-problem" className="relative mb-24 scroll-mt-24">
             <SectionGlow position="top-left" size={500} />
 
             <motion.div {...fadeUp} className="max-w-3xl mb-10">
@@ -560,7 +563,7 @@ const Thesis = () => {
           {/* ════════════════════════════════════════════════════════════ */}
           {/* SECTION 2 — DATA MATURITY */}
           {/* ════════════════════════════════════════════════════════════ */}
-          <section className="relative mb-24">
+          <section id="data-maturity" className="relative mb-24 scroll-mt-24">
             <SectionGlow position="top-right" size={450} />
 
             <motion.div {...fadeUp} className="max-w-3xl mb-10">
@@ -582,7 +585,7 @@ const Thesis = () => {
           {/* ════════════════════════════════════════════════════════════ */}
           {/* SECTION 3 — THE ARCHITECTURE */}
           {/* ════════════════════════════════════════════════════════════ */}
-          <section className="relative mb-24">
+          <section id="the-architecture" className="relative mb-24 scroll-mt-24">
             <SectionGlow position="center" size={600} />
 
             <motion.div {...fadeUp} className="max-w-3xl mb-10">
@@ -630,7 +633,7 @@ const Thesis = () => {
           {/* ════════════════════════════════════════════════════════════ */}
           {/* SECTION 4 — BI & ANALYTICS REVOLUTION */}
           {/* ════════════════════════════════════════════════════════════ */}
-          <section className="relative mb-24">
+          <section id="analytics-bi" className="relative mb-24 scroll-mt-24">
             <SectionGlow position="bottom-left" size={400} />
 
             <motion.div {...fadeUp} className="max-w-3xl mb-10">
@@ -701,7 +704,7 @@ const Thesis = () => {
           {/* ════════════════════════════════════════════════════════════ */}
           {/* SECTION 5 — AI REVOLUTION */}
           {/* ════════════════════════════════════════════════════════════ */}
-          <section className="relative mb-24">
+          <section id="ai-revolution" className="relative mb-24 scroll-mt-24">
             <SectionGlow position="top-right" size={500} />
 
             <motion.div {...fadeUp} className="max-w-3xl mb-10">
@@ -773,7 +776,7 @@ const Thesis = () => {
           {/* ════════════════════════════════════════════════════════════ */}
           {/* SECTION 6 — ENTERPRISE PRINCIPLES */}
           {/* ════════════════════════════════════════════════════════════ */}
-          <section className="relative mb-24">
+          <section id="enterprise-principles" className="relative mb-24 scroll-mt-24">
             <SectionGlow position="center" size={550} />
 
             <motion.div {...fadeUp} className="max-w-3xl mb-10">
@@ -798,7 +801,7 @@ const Thesis = () => {
           {/* ════════════════════════════════════════════════════════════ */}
           {/* SECTION 7 — AUTOMATION & DECISION SYSTEMS */}
           {/* ════════════════════════════════════════════════════════════ */}
-          <section className="relative mb-24">
+          <section id="automation" className="relative mb-24 scroll-mt-24">
             <SectionGlow position="bottom-right" size={450} />
 
             <motion.div {...fadeUp} className="max-w-3xl mb-10">
@@ -874,7 +877,7 @@ const Thesis = () => {
           {/* ════════════════════════════════════════════════════════════ */}
           {/* SECTION 8 — WHY INCLINEDPLANE */}
           {/* ════════════════════════════════════════════════════════════ */}
-          <section className="relative mb-16">
+          <section id="why-inclinedplane" className="relative mb-16 scroll-mt-24">
             <motion.div {...fadeUp}>
               <div className="glass-panel-strong rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden border border-primary/10">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/3 pointer-events-none" />
