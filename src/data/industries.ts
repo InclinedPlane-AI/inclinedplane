@@ -67,9 +67,9 @@ export const industries: IndustryData[] = [
       { value: "18%", label: "Improvement in gross margin" },
     ],
     references: [
-      { title: "The State of AI in Retail", source: "McKinsey & Company", url: "https://www.mckinsey.com/industries/retail/our-insights", insight: "Retailers using AI-driven demand forecasting see 15–30% reductions in lost sales from stockouts while cutting excess inventory costs by up to 20%." },
-      { title: "Personalisation at Scale", source: "Harvard Business Review", url: "https://hbr.org/topic/retail", insight: "Companies that excel at personalization generate 40% more revenue from those activities than average players — data infrastructure is the bottleneck, not the algorithms." },
-      { title: "Global Retail Analytics Market Report", source: "Grand View Research, 2024", url: "https://www.grandviewresearch.com/industry-analysis/retail-analytics-market", insight: "The retail analytics market is projected to grow at a CAGR of 23.1% through 2028, driven by real-time pricing, omnichannel integration, and AI-powered supply chain optimization." },
+      { title: "How Agentic AI Transforms Retail Merchandising", source: "McKinsey & Company, 2026", url: "https://www.mckinsey.com/industries/retail/our-insights/merchants-unleashed-how-agentic-ai-transforms-retail-merchandising", insight: "AI-empowered merchants spend less time reporting and more time strategizing — agentic AI is transforming how retailers optimize pricing, assortment, and demand planning." },
+      { title: "LLM to ROI: Scaling Gen AI in Retail", source: "McKinsey & Company, 2024", url: "https://www.mckinsey.com/industries/retail/our-insights/llm-to-roi-how-to-scale-gen-ai-in-retail", insight: "Retailers deploying generative AI across merchandising and supply chain are seeing measurable ROI — but scaling requires robust data infrastructure and cross-functional adoption." },
+      { title: "Global Retail Analytics Market Report", source: "Grand View Research", url: "https://www.grandviewresearch.com/industry-analysis/retail-analytics-market", insight: "The global retail analytics market continues rapid expansion, driven by real-time pricing engines, omnichannel integration, and AI-powered supply chain optimization." },
     ],
     nextSteps: [
       { title: "Data Maturity Assessment", description: "We audit your current data landscape — sources, quality, gaps — and deliver a prioritized roadmap for analytics readiness.", icon: "BarChart3" },
@@ -118,9 +118,9 @@ export const industries: IndustryData[] = [
       { value: "sub-100ms", label: "Transaction scoring latency" },
     ],
     references: [
-      { title: "AI in Financial Services", source: "Deloitte Insights", url: "https://www2.deloitte.com/insights/us/en/industry/financial-services.html", insight: "Banks deploying AI-driven fraud detection see up to 50% reductions in false positives and $5.8B in annual loss prevention globally." },
-      { title: "The Future of Risk Management", source: "World Economic Forum", url: "https://www.weforum.org/reports", insight: "Real-time risk analytics can reduce regulatory reporting effort by 80%, freeing compliance teams to focus on strategic risk mitigation rather than data wrangling." },
-      { title: "Machine Learning in Credit Risk", source: "Bank for International Settlements, 2023", url: "https://www.bis.org/publ", insight: "Explainable ML models outperform traditional scorecards by 15–25% in default prediction accuracy while maintaining regulatory transparency requirements." },
+      { title: "Fraud Management Strategies in Banking", source: "Deloitte US", url: "https://www.deloitte.com/us/en/services/consulting/articles/why-fraud-management-is-important-in-banking.html", insight: "Banks deploying AI-driven fraud detection see significant reductions in false positives — intelligent fraud management is now a strategic imperative, not just a compliance checkbox." },
+      { title: "Global Risks Report 2026", source: "World Economic Forum, 2026", url: "https://www.weforum.org/publications/global-risks-report-2026/", insight: "Financial institutions face accelerating geopolitical and cyber risks — real-time risk analytics and AI-driven scenario planning are critical to navigating compounding global uncertainties." },
+      { title: "Artificial Intelligence and Relationship Lending", source: "Bank for International Settlements, 2025", url: "https://www.bis.org/publ/work1244.pdf", insight: "AI and machine learning are transforming credit risk assessment — enabling more accurate lending decisions while preserving relationship banking dynamics." },
     ],
     nextSteps: [
       { title: "Compliance & Data Audit", description: "We assess your current data architecture against regulatory requirements and identify automation opportunities in your reporting workflows.", icon: "BarChart3" },
@@ -169,9 +169,9 @@ export const industries: IndustryData[] = [
       { value: "10x", label: "Faster query performance" },
     ],
     references: [
-      { title: "Product-Led Growth Benchmarks", source: "OpenView Partners", url: "https://openviewpartners.com/product-benchmarks", insight: "PLG companies with mature data infrastructure grow 2.4x faster than sales-led peers — product analytics is the foundation of this advantage." },
-      { title: "The Net Revenue Retention Playbook", source: "Bessemer Venture Partners", url: "https://www.bvp.com/atlas/state-of-the-cloud", insight: "Top-quartile SaaS companies achieve 130%+ NRR by identifying expansion signals in product usage data — something impossible without proper analytics infrastructure." },
-      { title: "Churn Prediction in SaaS", source: "Journal of Machine Learning Research", url: "https://jmlr.org", insight: "Ensemble ML models that combine behavioral, transactional, and sentiment features can predict churn 60–90 days in advance with 85%+ accuracy." },
+      { title: "2023 Product Benchmarks Report", source: "OpenView Partners, 2023", url: "https://openviewpartners.com/2023-product-benchmarks/", insight: "PLG companies with mature data infrastructure grow significantly faster than sales-led peers — product analytics is the foundation of this advantage." },
+      { title: "State of the Cloud 2024", source: "Bessemer Venture Partners, 2024", url: "https://www.bvp.com/atlas/state-of-the-cloud-2024", insight: "Top-performing cloud companies leverage AI and product data to drive net revenue retention — vertical AI is emerging as the dominant growth vector in SaaS." },
+      { title: "Product Analytics for Product-Led Growth", source: "OpenView Partners", url: "https://openviewpartners.com/blog/the-definitive-guide-product-analytics-for-product-led-growth", insight: "Comprehensive product analytics is the backbone of PLG — companies that instrument usage data effectively can predict churn 60–90 days in advance and identify expansion opportunities." },
     ],
     nextSteps: [
       { title: "Analytics Maturity Audit", description: "We evaluate your event tracking, data warehouse, and analytics tooling to identify gaps between where you are and where PLG leaders operate.", icon: "BarChart3" },
@@ -220,9 +220,9 @@ export const industries: IndustryData[] = [
       { value: "50%", label: "Faster clinical reporting" },
     ],
     references: [
-      { title: "AI and the Future of Health", source: "World Health Organization, 2024", url: "https://www.who.int/publications", insight: "AI-assisted diagnostics can match or exceed specialist performance in radiology and pathology — but require robust data infrastructure and governance to deploy safely at scale." },
-      { title: "The $300 Billion Opportunity", source: "McKinsey Center for US Health System Reform", url: "https://www.mckinsey.com/industries/healthcare", insight: "Up to $300 billion in annual US healthcare spending is recoverable through better data integration, predictive analytics, and operational optimization." },
-      { title: "Predictive Analytics in Hospital Readmissions", source: "JAMA Network, 2023", url: "https://jamanetwork.com", insight: "ML-based readmission models using EHR data outperform traditional LACE scores by 28%, enabling more targeted and cost-effective intervention programs." },
+      { title: "Artificial Intelligence for Health", source: "World Health Organization", url: "https://www.who.int/publications/m/item/artificial-intelligence-for-health", insight: "AI-assisted diagnostics can match or exceed specialist performance in radiology and pathology — but require robust data infrastructure and governance to deploy safely at scale." },
+      { title: "The Big-Data Revolution in US Health Care", source: "McKinsey & Company", url: "https://www.mckinsey.com/industries/healthcare/our-insights/the-big-data-revolution-in-us-health-care", insight: "Big data analytics can unlock hundreds of billions in value across the US healthcare system — through better clinical decision support, operational efficiency, and population health management." },
+      { title: "ML Model for Postoperative Adverse Events", source: "JAMA Network Open, 2023", url: "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2807056", insight: "Machine learning models analyzing EHR data can identify high-risk patients for postoperative adverse events, enabling earlier intervention and reducing preventable complications." },
     ],
     nextSteps: [
       { title: "HIPAA Readiness Assessment", description: "We evaluate your data architecture against HIPAA, HITRUST, and interoperability requirements — identifying compliance gaps and quick wins.", icon: "BarChart3" },
@@ -271,9 +271,9 @@ export const industries: IndustryData[] = [
       { value: "99.2%", label: "Defect detection accuracy" },
     ],
     references: [
-      { title: "The Rise of the Digital Twin", source: "Gartner, 2024", url: "https://www.gartner.com/en/articles/digital-twin-technology", insight: "By 2027, over 70% of manufacturers will use digital twins for process optimization — companies with mature implementations report 20–30% improvements in production efficiency." },
-      { title: "Predictive Maintenance: From Promise to Practice", source: "McKinsey Global Institute", url: "https://www.mckinsey.com/capabilities/operations/our-insights", insight: "Predictive maintenance reduces machine downtime by 30–50% and extends equipment life by 20–40% — representing billions in savings across global manufacturing." },
-      { title: "Industry 4.0 and the Smart Factory", source: "Deloitte University Press", url: "https://www2.deloitte.com/insights/us/en/focus/industry-4-0.html", insight: "Smart factories could add $1.5–2.2 trillion in value to the global economy by 2030 — but require integrated data platforms as a foundation." },
+      { title: "Manufacturing Predicts 2026: Digital Twins & AI Agents", source: "Gartner, 2026", url: "https://www.gartner.com/en/webinar/797437/1795012-manufacturing-predicts-2026-digital-twins-ai-agents-and-the-race-to-autonomous-operations", insight: "By 2030, manufacturing will be fundamentally reshaped by digital twins and AI agents — companies with mature implementations report 20–30% improvements in production efficiency." },
+      { title: "Prediction at Scale: Getting More Value from Maintenance", source: "McKinsey & Company, 2021", url: "https://www.mckinsey.com/capabilities/operations/our-insights/prediction-at-scale-how-industry-can-get-more-value-out-of-maintenance", insight: "Predictive maintenance reduces machine downtime by 30–50% and extends equipment life by 20–40% — but scaling across full operations remains the key challenge." },
+      { title: "Manufacturing Analytics Unleashes Productivity", source: "McKinsey & Company", url: "https://www.mckinsey.com/capabilities/operations/our-insights/manufacturing-analytics-unleashes-productivity-and-profitability", insight: "Advanced analytics in manufacturing can unlock productivity gains of 20–30% — the next frontier is leveraging real-time sensor data for continuous process optimization." },
     ],
     nextSteps: [
       { title: "IoT Data Assessment", description: "We map your sensor landscape, data flows, and existing infrastructure to design a scalable industrial data platform architecture.", icon: "BarChart3" },
@@ -322,9 +322,9 @@ export const industries: IndustryData[] = [
       { value: "40%", label: "Faster ESG reporting cycles" },
     ],
     references: [
-      { title: "World Energy Outlook 2024", source: "International Energy Agency (IEA)", url: "https://www.iea.org/reports/world-energy-outlook-2024", insight: "The global energy transition will require $4.5 trillion in annual clean energy investment by 2030 — data-driven grid management is critical to integrating intermittent renewables at scale." },
-      { title: "Digitalization & Energy", source: "IEA Digital Demand-Driven Electricity Networks", url: "https://www.iea.org/reports/digitalisation-and-energy", insight: "Digitalization could reduce global CO₂ emissions by 1.4 gigatonnes per year through smarter grid management, predictive maintenance, and demand response optimization." },
-      { title: "The Role of AI in Decarbonization", source: "Boston Consulting Group, 2024", url: "https://www.bcg.com/publications/2024/ai-and-climate-change", insight: "AI-powered energy management systems reduce energy consumption by 10–20% in commercial and industrial settings — representing massive emissions reduction potential." },
+      { title: "World Energy Outlook 2024", source: "International Energy Agency (IEA)", url: "https://www.iea.org/reports/world-energy-outlook-2024", insight: "The global energy transition will require trillions in annual clean energy investment — data-driven grid management is critical to integrating intermittent renewables at scale." },
+      { title: "Digitalisation and Energy", source: "International Energy Agency (IEA)", url: "https://www.iea.org/reports/digitalisation-and-energy", insight: "Digitalization could significantly reduce global CO₂ emissions through smarter grid management, predictive maintenance, and demand response optimization." },
+      { title: "AI Adoption in Energy: Focus on Agility", source: "Boston Consulting Group, 2024", url: "https://www.bcg.com/publications/2024/ai-adoption-in-energy", insight: "AI and GenAI applications are poised to revolutionize the energy industry — but companies must focus on organizational agility, not just algorithms, to capture value." },
     ],
     nextSteps: [
       { title: "Grid Data Assessment", description: "We audit your SCADA, AMI, and weather data infrastructure and design a roadmap for real-time grid intelligence.", icon: "BarChart3" },
@@ -373,9 +373,9 @@ export const industries: IndustryData[] = [
       { value: "100%", label: "QA coverage (vs. 2% manual)" },
     ],
     references: [
-      { title: "The Future of Business Process Outsourcing", source: "Everest Group, 2024", url: "https://www.everestgrp.com/bpo", insight: "BPO firms investing in AI augmentation see 40% higher margins than traditional labor-arbitrage players — the shift from cost center to value creator is driven by analytics." },
-      { title: "Intelligent Automation in Services", source: "Gartner Predicts 2024", url: "https://www.gartner.com/en/topics/intelligent-automation", insight: "By 2027, 50% of all customer service interactions will be handled or augmented by AI — but human agents supported by AI co-pilots outperform fully automated systems on complex issues." },
-      { title: "The LLM Revolution in Document Processing", source: "Forrester Research", url: "https://www.forrester.com/report/the-state-of-intelligent-document-processing", insight: "LLM-powered IDP reduces document processing costs by 60–80% while improving accuracy to 98%+ — transforming high-volume, low-margin operations into competitive advantages." },
+      { title: "Generative AI Impact on GBS Workflows", source: "Everest Group, 2024", url: "https://www.everestgrp.com/market-insights/shared-services-global-business-services-centers/gbs-organizations-expect-generative-ai-to-have-a-material-impact-on-their-workflows.html", insight: "GBS organizations expect generative AI to have a material impact on their workflows — firms investing in AI augmentation are seeing significant margin improvements over traditional labor-arbitrage models." },
+      { title: "Customer Service Staff and AI Rehiring Trends", source: "Gartner, 2026", url: "https://www.gartner.com/en/newsroom/press-releases/2026-02-03-gartner-predicts-half-of-companies-that-cut-customer-service-staff-due-to-ai-will-rehire-by-2027", insight: "By 2027, 50% of companies that cut customer service staff due to AI will rehire — human agents supported by AI co-pilots outperform fully automated systems on complex issues." },
+      { title: "AI Changes the Intelligent Document Processing Market", source: "Forrester Research, 2025", url: "https://www.forrester.com/blogs/ai-changes-the-intelligent-document-processing-idp-market/", insight: "AI and LLMs are fundamentally reshaping the IDP market — reducing document processing costs dramatically while improving accuracy, transforming high-volume operations into competitive advantages." },
     ],
     nextSteps: [
       { title: "Process Automation Audit", description: "We analyze your workflows, document volumes, and agent interactions to identify the highest-ROI automation opportunities.", icon: "BarChart3" },
@@ -424,9 +424,9 @@ export const industries: IndustryData[] = [
       { value: "20%", label: "Increase in enrollment yield" },
     ],
     references: [
-      { title: "Learning Analytics and the Future of Higher Education", source: "EDUCAUSE Review, 2024", url: "https://er.educause.edu/articles/learning-analytics", insight: "Institutions with mature learning analytics see 15–25% improvement in student retention — the key is integrating data across LMS, SIS, and student support systems." },
-      { title: "The State of AI in Education", source: "UNESCO, 2024", url: "https://www.unesco.org/en/digital-education", insight: "Adaptive learning systems powered by AI can improve learning outcomes by 20–30% — but require robust data infrastructure and ethical governance frameworks." },
-      { title: "Enrollment Management in Crisis", source: "National Student Clearinghouse Research Center", url: "https://nscresearchcenter.org", insight: "With undergraduate enrollment declining by 15% since 2010, data-driven enrollment optimization is no longer optional — predictive yield models can improve enrollment hit rates by 20–35%." },
+      { title: "2024 EDUCAUSE Analytics Landscape Study", source: "EDUCAUSE, 2024", url: "https://library.educause.edu/resources/2024/9/2024-educause-analytics-landscape-study", insight: "Institutions with mature learning analytics see significant improvements in student retention — the key is integrating data across LMS, SIS, and student support systems." },
+      { title: "Use of AI in Education: Deciding the Future We Want", source: "UNESCO", url: "https://www.unesco.org/en/articles/use-ai-education-deciding-future-we-want", insight: "Adaptive learning systems powered by AI can improve learning outcomes substantially — but require robust data infrastructure and ethical governance frameworks to deploy responsibly." },
+      { title: "Final Fall Enrollment Trends", source: "National Student Clearinghouse Research Center, 2026", url: "https://nscresearchcenter.org/final-fall-enrollment-trends/", insight: "With shifting enrollment patterns across higher education, data-driven enrollment optimization is no longer optional — predictive yield models can significantly improve institutional enrollment outcomes." },
     ],
     nextSteps: [
       { title: "Data Landscape Assessment", description: "We map your LMS, SIS, and assessment data sources to identify integration opportunities and build a learning analytics roadmap.", icon: "BarChart3" },
