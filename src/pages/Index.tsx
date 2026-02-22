@@ -9,7 +9,7 @@ import AuroraBackground from "@/components/AuroraBackground";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { Link } from "react-router-dom";
 import OrbitalGraphic from "@/components/OrbitalGraphic";
-import SectionGlow from "@/components/SectionGlow";
+
 import TechStackGrid from "@/components/TechStackGrid";
 import InteractiveDotGrid from "@/components/InteractiveDotGrid";
 import {
@@ -118,9 +118,28 @@ const Index = () => {
 
         {/* Grain overlay for content sections (excludes hero & footer) */}
         <div className="grain-overlay relative">
+
+        {/* Continuous flowing orange tint across all sections */}
+        <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
+          {/* Top region — warm entry from hero */}
+          <div className="absolute w-full h-[50vh] top-0 left-0"
+            style={{ background: "radial-gradient(ellipse 80% 60% at 20% 0%, hsl(25 100% 50% / 0.06), transparent 70%)" }} />
+          {/* Mid-left flow */}
+          <div className="absolute w-full h-[60vh] top-[25%] left-0"
+            style={{ background: "radial-gradient(ellipse 70% 50% at 80% 50%, hsl(31 100% 55% / 0.05), transparent 70%)" }} />
+          {/* Center bloom */}
+          <div className="absolute w-full h-[70vh] top-[40%] left-0"
+            style={{ background: "radial-gradient(ellipse 60% 60% at 30% 50%, hsl(25 100% 50% / 0.055), transparent 65%)" }} />
+          {/* Lower-right warmth */}
+          <div className="absolute w-full h-[60vh] top-[60%] left-0"
+            style={{ background: "radial-gradient(ellipse 70% 50% at 75% 50%, hsl(31 100% 55% / 0.05), transparent 70%)" }} />
+          {/* Bottom region — build toward footer */}
+          <div className="absolute w-full h-[50vh] bottom-0 left-0"
+            style={{ background: "radial-gradient(ellipse 80% 60% at 40% 100%, hsl(25 100% 50% / 0.065), transparent 70%)" }} />
+        </div>
+
         {/* SLIDE 2 — AI TRANSFORMATION FACTS (Bento) */}
         <section className="snap-section flex items-center justify-center relative overflow-hidden">
-          <SectionGlow position="top-left" size={700} />
           <div className="max-w-6xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
               <p className="font-mono text-xs text-primary tracking-widest uppercase mb-3 text-center">The AI Imperative</p>
@@ -214,7 +233,6 @@ const Index = () => {
 
         {/* SLIDE 3 — THE PROBLEM */}
         <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="bottom-right" size={600} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
@@ -277,7 +295,6 @@ const Index = () => {
 
         {/* SLIDE 4 — THE EVOLUTION */}
         <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="top-right" size={650} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
@@ -327,7 +344,6 @@ const Index = () => {
 
         {/* SLIDE 5 — CORE CAPABILITIES */}
         <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="center" size={800} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
               <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Core Capabilities</p>
@@ -386,7 +402,6 @@ const Index = () => {
 
         {/* SLIDE 6 — VALUE PROPOSITION / IMPACT */}
         <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="bottom-left" size={700} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
               <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Impact</p>
@@ -432,7 +447,6 @@ const Index = () => {
 
         {/* SLIDE 7 — ARCHITECTURE SNAPSHOT */}
         <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="top-right" size={650} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             {/* Header */}
             <motion.div {...fadeUp()} className="mb-5">
@@ -530,7 +544,6 @@ const Index = () => {
 
         {/* SLIDE 9 — CASE STUDIES PREVIEW */}
         <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="bottom-right" size={650} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
               <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Our Work</p>
@@ -567,7 +580,6 @@ const Index = () => {
 
         {/* SLIDE 10 — WHY INCLINED PLANE */}
         <section className="snap-section flex items-center relative overflow-hidden">
-          <SectionGlow position="top-left" size={700} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div {...fadeUp()}>
               <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Why Us</p>
