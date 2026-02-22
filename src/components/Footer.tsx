@@ -30,7 +30,7 @@ const Footer = () => {
                 <div className="w-8 h-8 flex items-center justify-center text-primary drop-shadow-[0_0_8px_hsl(25,100%,50%,0.6)]">
                   <Percent size={22} strokeWidth={2.5} />
                 </div>
-                <span className="font-semibold text-sm">
+                <span className="font-extrabold text-sm">
                   <span className="text-foreground">Inclined</span>
                   <span className="text-gradient-orange">Plane</span>
                 </span>
