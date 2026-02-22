@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ThesisTOC from "@/components/ThesisTOC";
+import ReadingProgressBar from "@/components/ReadingProgressBar";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -504,6 +505,7 @@ const Thesis = () => {
 
   return (
     <PageLayout>
+      <ReadingProgressBar />
       <PageHero
         label="Our Thesis"
         title={<>Data Is Infrastructure.{" "}<span className="text-gradient-orange">Intelligence Is Product.</span></>}
