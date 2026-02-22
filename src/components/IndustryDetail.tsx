@@ -1,16 +1,18 @@
 import { motion } from "framer-motion";
 import {
   ShoppingCart, TrendingUp, Cloud, Heart, Factory, Zap, Headphones, GraduationCap,
-  ChevronRight, X, Cpu, BarChart3, Target, Layers, ArrowUpRight
+  ChevronRight, X, Cpu, BarChart3, Target, Layers, ArrowUpRight, BookOpen, Rocket, ExternalLink
 } from "lucide-react";
 import { IndustryData } from "@/data/industries";
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useNavigate } from "react-router-dom";
 
 const iconMap: Record<string, React.ElementType> = {
   ShoppingCart, TrendingUp, Cloud, Heart, Factory, Zap, Headphones, GraduationCap,
+  BarChart3, Target, ArrowUpRight, Rocket,
 };
 
 interface Props {
@@ -20,6 +22,7 @@ interface Props {
 }
 
 const IndustryDetail = ({ industry, open, onOpenChange }: Props) => {
+  const navigate = useNavigate();
   if (!industry) return null;
   const Icon = iconMap[industry.icon] || Layers;
 
@@ -71,7 +74,7 @@ const IndustryDetail = ({ industry, open, onOpenChange }: Props) => {
             {/* Impact Metrics */}
             <section>
               <SectionHeading icon={BarChart3} title="Impact Metrics" color={industry.color} />
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+              <div className="grid grid-cols-3 gap-3 mt-4">
                 {industry.impactMetrics.map((m) => (
                   <motion.div
                     key={m.label}
@@ -164,6 +167,80 @@ const IndustryDetail = ({ industry, open, onOpenChange }: Props) => {
                     <p className="text-xs text-muted-foreground mt-1">{m.label}</p>
                   </div>
                 ))}
+              </div>
+            </section>
+
+            {/* Research & References */}
+            <section>
+              <SectionHeading icon={BookOpen} title="Why Data & AI Matter Here" color={industry.color} />
+              <div className="mt-4 space-y-4">
+                {industry.references.map((ref, i) => (
+                  <motion.div
+                    key={ref.title}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.08 }}
+                    className="glass-panel rounded-xl p-5 border-l-2"
+                    style={{ borderLeftColor: `hsl(${industry.color})` }}
+                  >
+                    <p className="text-sm text-foreground leading-relaxed italic mb-3">
+                      "{ref.insight}"
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-xs font-semibold text-foreground">{ref.title}</p>
+                        <p className="text-[11px] text-muted-foreground">{ref.source}</p>
+                      </div>
+                      <a
+                        href={ref.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-[11px] text-primary hover:underline shrink-0"
+                      >
+                        Source <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+
+            {/* Next Steps */}
+            <section>
+              <SectionHeading icon={Rocket} title="Your Next Steps" color={industry.color} />
+              <div className="grid sm:grid-cols-3 gap-3 mt-4">
+                {industry.nextSteps.map((step, i) => {
+                  const StepIcon = iconMap[step.icon] || ArrowUpRight;
+                  const isLast = i === industry.nextSteps.length - 1;
+                  return (
+                    <motion.div
+                      key={step.title}
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      onClick={isLast ? () => { onOpenChange(false); navigate("/contact"); } : undefined}
+                      className={`rounded-xl p-5 border transition-all ${
+                        isLast
+                          ? "cursor-pointer border-primary/40 bg-primary/5 hover:bg-primary/10 hover:border-primary/60"
+                          : "glass-panel border-border/30"
+                      }`}
+                    >
+                      <div
+                        className="w-9 h-9 rounded-lg flex items-center justify-center mb-3"
+                        style={{ background: `hsl(${industry.color} / 0.1)` }}
+                      >
+                        <StepIcon className="w-4 h-4" style={{ color: `hsl(${industry.color})` }} />
+                      </div>
+                      <h4 className="font-semibold text-foreground text-sm mb-1">{step.title}</h4>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{step.description}</p>
+                      {isLast && (
+                        <p className="text-xs font-medium text-primary mt-3 flex items-center gap-1">
+                          Get in touch <ArrowUpRight className="w-3 h-3" />
+                        </p>
+                      )}
+                    </motion.div>
+                  );
+                })}
               </div>
             </section>
 
