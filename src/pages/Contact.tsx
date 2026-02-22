@@ -1,4 +1,5 @@
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { useState, useMemo } from "react";
 import { ArrowRight, Check, Mail, MapPin, Building2 } from "lucide-react";
@@ -64,21 +65,11 @@ const Contact = () => {
 
   return (
     <PageLayout>
-      <div className="pt-32 pb-24">
-        {/* ── Hero ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-6 max-w-3xl mx-auto px-6"
-        >
-          <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Contact</p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-5">
-            Let's <span className="text-gradient-orange">Build</span> Together.
-          </h1>
-          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-xl mx-auto">
-            Have a project in mind or want to explore how data can transform your business? We'd love to hear from you.
-          </p>
-        </motion.div>
+      <PageHero
+        label="Contact"
+        title={<>Let's <span className="text-gradient-orange">Build</span> Together.</>}
+        subtitle="Have a project in mind or want to explore how data can transform your business? We'd love to hear from you."
+      />
 
         {/* ── Contact Form ── */}
         <div className="max-w-2xl mx-auto px-6 lg:px-8 mb-10">
@@ -309,7 +300,6 @@ const Contact = () => {
             ))}
           </div>
         </div>
-      </div>
     </PageLayout>
   );
 };

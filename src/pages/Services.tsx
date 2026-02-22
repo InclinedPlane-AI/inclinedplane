@@ -1,4 +1,5 @@
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
@@ -267,18 +268,13 @@ const ServicesPage = () => {
 
   return (
     <PageLayout>
-      <div className="pt-32 pb-24">
+      <PageHero
+        label="Services"
+        title={<>What We <span className="text-gradient-orange">Build.</span></>}
+        subtitle="Five layers of data infrastructure — from foundation to autonomous intelligence."
+      />
+      <div className="pb-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {/* Header */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12 lg:mb-16">
-            <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Services</p>
-            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              What We <span className="text-gradient-orange">Build.</span>
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Five layers of data infrastructure — from foundation to autonomous intelligence.
-            </p>
-          </motion.div>
 
           {/* Mobile: horizontal pill nav */}
           <div className="lg:hidden mb-6 overflow-x-auto scrollbar-hide -mx-6 px-6 sticky top-16 z-20 py-2 bg-background/80 backdrop-blur-md">

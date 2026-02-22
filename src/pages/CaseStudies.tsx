@@ -1,4 +1,5 @@
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { ArrowRight, Database, BarChart3, Eye, TrendingUp, CheckCircle2, Layers } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
@@ -85,18 +86,13 @@ const cases = [
 const CaseStudies = () => {
   return (
     <PageLayout>
-      <div className="pt-32 pb-24">
+      <PageHero
+        label="Case Studies"
+        title={<>Proof in <span className="text-gradient-orange">Production.</span></>}
+        subtitle="Real outcomes from production deployments. Not proofs of concept — production systems that move the needle."
+      />
+      <div className="pb-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {/* Hero section */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-            <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Case Studies</p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-              Proof in <span className="text-gradient-orange">Production.</span>
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Real outcomes from production deployments. Not proofs of concept — production systems that move the needle.
-            </p>
-          </motion.div>
 
           {/* Aggregate stats strip */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}

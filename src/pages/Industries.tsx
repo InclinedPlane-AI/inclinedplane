@@ -1,4 +1,5 @@
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -15,14 +16,12 @@ const Industries = () => {
 
   return (
     <PageLayout>
-      <div className="pt-32 pb-24">
+      <PageHero
+        label="Industries"
+        title={<>Built for <span className="text-gradient-orange">Your Domain.</span></>}
+      />
+      <div className="pb-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
-            <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Industries</p>
-            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              Built for <span className="text-gradient-orange">Your Domain.</span>
-            </h1>
-          </motion.div>
 
           <div className="grid lg:grid-cols-[300px_1fr] gap-8">
             {/* Switcher */}
