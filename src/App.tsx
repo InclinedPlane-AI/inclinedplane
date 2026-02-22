@@ -18,6 +18,7 @@ import Terms from "./pages/Terms";
 import CookiePolicy from "./pages/CookiePolicy";
 import CookieConsent from "./components/CookieConsent";
 import SplashScreen from "./components/SplashScreen";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ const App = () => {
             <Toaster />
             <Sonner />
             <BrowserRouter>
+              <ScrollToTop />
               <CookieConsent />
               <AnimatePresence mode="wait">
                 <Routes>
