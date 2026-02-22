@@ -1,13 +1,15 @@
+import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import PageHero from "@/components/PageHero";
 import SectionGlow from "@/components/SectionGlow";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Database, Shield, BarChart3, Brain, Zap, Layers, Eye, Activity,
   GitBranch, FileCheck, Cloud, Lock, Workflow, Bot, Cpu, Terminal,
   TrendingUp, ArrowRight, CheckCircle2, AlertTriangle, Server,
   Gauge, Radio, RefreshCw, Search, LineChart, Sparkles, Target,
-  Building2, ShieldCheck, Cog, Network, Boxes, Rocket, LayoutDashboard
+  Building2, ShieldCheck, Cog, Network, Boxes, Rocket, LayoutDashboard,
+  Download, ChevronDown, X as XIcon
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -24,70 +26,131 @@ const stagger = {
   viewport: { once: true, margin: "-40px" },
 };
 
-/* ─── Architecture Flow Diagram ─── */
+/* ─── Architecture Flow Diagram — Interactive ─── */
+const layerDetails = [
+  {
+    label: "Sources", color: "from-orange-500/20 to-orange-500/5",
+    borderColor: "border-orange-500/30", activeColor: "border-orange-500/60 glow-orange",
+    items: ["CRM", "ERP", "APIs", "IoT", "SaaS", "Files"], icon: Database,
+    detail: {
+      title: "Data Source Integration",
+      description: "We connect to every system that generates value-bearing data — whether it's a SaaS API, an on-prem ERP, IoT sensor streams, or flat files on SFTP. Each connector is fault-tolerant, schema-aware, and version-controlled.",
+      tools: ["Fivetran", "Airbyte", "Custom CDC", "Debezium", "Singer Taps"],
+      metrics: ["50+ pre-built connectors", "< 5 min setup per source", "99.9% ingestion SLA"],
+    },
+  },
+  {
+    label: "Ingest & Transform", color: "from-orange-500/15 to-orange-400/5",
+    borderColor: "border-orange-400/25", activeColor: "border-orange-400/60 glow-orange",
+    items: ["CDC Streams", "Batch ETL", "dbt Models", "Quality Gates"], icon: GitBranch,
+    detail: {
+      title: "Transformation & Modeling",
+      description: "Raw data lands in a bronze layer. dbt models progressively clean, deduplicate, and enrich through silver to gold. Every model is tested, documented, and version-controlled. Quality gates validate schema, freshness, and statistical expectations at every layer transition.",
+      tools: ["dbt Core / Cloud", "Apache Spark", "Great Expectations", "Soda"],
+      metrics: ["100% test coverage on gold models", "< 30 min end-to-end latency", "Automated schema drift detection"],
+    },
+  },
+  {
+    label: "Storage & Compute", color: "from-orange-400/15 to-orange-300/5",
+    borderColor: "border-orange-400/20", activeColor: "border-orange-400/60 glow-orange",
+    items: ["Data Lake", "Warehouse", "Feature Store", "Vector DB"], icon: Server,
+    detail: {
+      title: "Storage & Compute Layer",
+      description: "A modern lakehouse architecture separating storage from compute. Data lives in columnar formats (Parquet/Delta) on object storage. Compute scales independently — from auto-suspending warehouses for BI to GPU clusters for ML training.",
+      tools: ["Snowflake", "BigQuery", "Databricks", "Delta Lake", "Pinecone"],
+      metrics: ["60% avg cost reduction vs. legacy", "Auto-scaling 0 → 128 nodes", "Sub-second query on TB-scale data"],
+    },
+  },
+  {
+    label: "Observe & Govern", color: "from-primary/15 to-primary/5",
+    borderColor: "border-primary/20", activeColor: "border-primary/60 glow-orange",
+    items: ["Lineage", "Quality", "Cost", "Access Control"], icon: Eye,
+    detail: {
+      title: "Observability & Governance",
+      description: "Every pipeline emits structured telemetry: row counts, schema diffs, freshness SLAs, and cost attribution. Column-level lineage traces every field from source to dashboard. Access control is policy-as-code — auditable and reproducible.",
+      tools: ["Monte Carlo", "Atlan", "OpenLineage", "Apache Atlas", "dbt Docs"],
+      metrics: ["End-to-end column lineage", "Real-time freshness monitoring", "SOC 2 / GDPR compliant"],
+    },
+  },
+  {
+    label: "Intelligence", color: "from-primary/20 to-accent/10",
+    borderColor: "border-primary/25", activeColor: "border-primary/60 glow-orange",
+    items: ["BI Dashboards", "ML Models", "LLM Agents", "Predictions"], icon: Brain,
+    detail: {
+      title: "Intelligence & AI Layer",
+      description: "The intelligence layer consumes curated data through semantic layers (for BI) and feature stores (for ML). Dashboards serve real-time KPIs. Predictive models score opportunities. LLM-powered agents query data in natural language and trigger workflows autonomously.",
+      tools: ["Tableau", "Power BI", "MLflow", "LangChain", "Feast"],
+      metrics: ["Real-time dashboard refresh", "Model serving < 100ms p99", "NL query accuracy > 92%"],
+    },
+  },
+  {
+    label: "Action", color: "from-accent/20 to-accent/5",
+    borderColor: "border-accent/30", activeColor: "border-accent/60 glow-orange",
+    items: ["Alerts", "Automations", "Decisions", "Workflows"], icon: Zap,
+    detail: {
+      title: "Action & Automation",
+      description: "The final mile: data doesn't just inform — it acts. Intelligent alerting surfaces anomalies with root cause analysis. Orchestrated workflows span pipelines, ML models, notifications, and external APIs. Self-healing infrastructure handles failures autonomously.",
+      tools: ["Airflow", "Dagster", "Prefect", "Temporal", "n8n"],
+      metrics: ["Zero manual intervention on 80% of incidents", "End-to-end orchestration", "AI-generated briefings"],
+    },
+  },
+];
+
 const ArchitectureDiagram = () => {
-  const layers = [
-    {
-      label: "Sources",
-      color: "from-orange-500/20 to-orange-500/5",
-      borderColor: "border-orange-500/30",
-      items: ["CRM", "ERP", "APIs", "IoT", "SaaS", "Files"],
-      icon: Database,
-    },
-    {
-      label: "Ingest & Transform",
-      color: "from-orange-500/15 to-orange-400/5",
-      borderColor: "border-orange-400/25",
-      items: ["CDC Streams", "Batch ETL", "dbt Models", "Quality Gates"],
-      icon: GitBranch,
-    },
-    {
-      label: "Storage & Compute",
-      color: "from-orange-400/15 to-orange-300/5",
-      borderColor: "border-orange-400/20",
-      items: ["Data Lake", "Warehouse", "Feature Store", "Vector DB"],
-      icon: Server,
-    },
-    {
-      label: "Observe & Govern",
-      color: "from-primary/15 to-primary/5",
-      borderColor: "border-primary/20",
-      items: ["Lineage", "Quality", "Cost", "Access Control"],
-      icon: Eye,
-    },
-    {
-      label: "Intelligence",
-      color: "from-primary/20 to-accent/10",
-      borderColor: "border-primary/25",
-      items: ["BI Dashboards", "ML Models", "LLM Agents", "Predictions"],
-      icon: Brain,
-    },
-    {
-      label: "Action",
-      color: "from-accent/20 to-accent/5",
-      borderColor: "border-accent/30",
-      items: ["Alerts", "Automations", "Decisions", "Workflows"],
-      icon: Zap,
-    },
-  ];
+  const [activeLayer, setActiveLayer] = useState<number | null>(null);
 
   return (
     <div className="relative">
-      {/* Flow connector line */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent hidden lg:block" />
+      {/* Pipeline grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 relative">
+        {/* Animated flow line (desktop) */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block z-0" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="flow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="hsl(25 100% 50%)" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="hsl(31 100% 55%)" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="hsl(35 100% 64%)" stopOpacity="0.4" />
+            </linearGradient>
+          </defs>
+          <motion.line
+            x1="8%" y1="50%" x2="92%" y2="50%"
+            stroke="url(#flow-grad)" strokeWidth="2" strokeLinecap="round"
+            strokeDasharray="6 8"
+            initial={{ strokeDashoffset: 0 }}
+            animate={{ strokeDashoffset: -28 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.circle
+            r="4" fill="hsl(25 100% 50%)" opacity="0.8"
+            initial={{ cx: "8%", cy: "50%" }}
+            animate={{ cx: "92%", cy: "50%" }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.circle
+            r="8" fill="hsl(25 100% 50%)" opacity="0.15"
+            initial={{ cx: "8%", cy: "50%" }}
+            animate={{ cx: "92%", cy: "50%" }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </svg>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        {layers.map((layer, i) => {
+        {layerDetails.map((layer, i) => {
           const Icon = layer.icon;
+          const isActive = activeLayer === i;
           return (
             <motion.div
               key={layer.label}
               {...stagger}
               transition={{ delay: i * 0.08, duration: 0.4 }}
-              className="relative group"
+              className="relative z-[1]"
             >
-              <div className={`glass-panel rounded-xl p-4 h-full border ${layer.borderColor} hover:scale-[1.03] transition-transform duration-300`}>
-                {/* Step number */}
+              <button
+                onClick={() => setActiveLayer(isActive ? null : i)}
+                className={`w-full text-left glass-panel rounded-xl p-4 h-full border transition-all duration-300 cursor-pointer ${
+                  isActive ? layer.activeColor : `${layer.borderColor} hover:scale-[1.03] hover:border-primary/30`
+                }`}
+                data-cursor-hover
+              >
                 <div className="flex items-center gap-2 mb-3">
                   <span className="font-mono text-[10px] text-primary/50">{String(i + 1).padStart(2, "0")}</span>
                   <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${layer.color} flex items-center justify-center`}>
@@ -103,18 +166,79 @@ const ArchitectureDiagram = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+                <div className="mt-3 flex items-center gap-1 text-primary/40">
+                  <motion.div animate={{ rotate: isActive ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                    <ChevronDown size={12} />
+                  </motion.div>
+                  <span className="text-[9px] font-mono">{isActive ? "collapse" : "details"}</span>
+                </div>
+              </button>
 
-              {/* Arrow connector */}
-              {i < layers.length - 1 && (
+              {i < layerDetails.length - 1 && (
                 <div className="hidden lg:flex absolute -right-2 top-1/2 -translate-y-1/2 z-10">
-                  <ArrowRight size={12} className="text-primary/30" />
+                  <motion.div animate={{ x: [0, 3, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>
+                    <ArrowRight size={12} className="text-primary/40" />
+                  </motion.div>
                 </div>
               )}
             </motion.div>
           );
         })}
       </div>
+
+      {/* Expanded detail panel */}
+      <AnimatePresence mode="wait">
+        {activeLayer !== null && (
+          <motion.div
+            key={activeLayer}
+            initial={{ opacity: 0, y: -10, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: "auto" }}
+            exit={{ opacity: 0, y: -10, height: 0 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="mt-4 overflow-hidden"
+          >
+            <div className="glass-panel-strong rounded-xl p-6 sm:p-8 relative border-primary/15">
+              <button onClick={() => setActiveLayer(null)} className="absolute top-4 right-4 text-muted-foreground/50 hover:text-foreground transition-colors" data-cursor-hover>
+                <XIcon size={16} />
+              </button>
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-orange rounded-t-xl" />
+
+              <div className="grid md:grid-cols-[1fr_auto] gap-6">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                      {(() => { const Icon = layerDetails[activeLayer].icon; return <Icon size={18} className="text-primary" />; })()}
+                    </div>
+                    <div>
+                      <span className="font-mono text-[10px] text-primary/50 uppercase tracking-widest">Stage {activeLayer + 1} of 6</span>
+                      <h3 className="text-lg font-bold text-foreground">{layerDetails[activeLayer].detail.title}</h3>
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-5">{layerDetails[activeLayer].detail.description}</p>
+                  <div className="space-y-2">
+                    {layerDetails[activeLayer].detail.metrics.map((m, i) => (
+                      <motion.div key={m} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 + 0.2, duration: 0.3 }} className="flex items-center gap-2">
+                        <CheckCircle2 size={13} className="text-primary shrink-0" />
+                        <span className="text-xs text-foreground/80">{m}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+                <div className="md:border-l md:border-border/20 md:pl-6 min-w-[180px]">
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50 mb-3">Technology Stack</p>
+                  <div className="flex flex-wrap gap-2">
+                    {layerDetails[activeLayer].detail.tools.map((tool, i) => (
+                      <motion.span key={tool} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.05 + 0.15, duration: 0.2 }}
+                        className="px-3 py-1.5 rounded-lg text-[11px] font-mono bg-primary/5 text-primary/80 border border-primary/10"
+                      >{tool}</motion.span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -384,6 +508,20 @@ const Thesis = () => {
         title={<>Data Is Infrastructure.{" "}<span className="text-gradient-orange">Intelligence Is Product.</span></>}
         subtitle="A deep technical manifesto on why modern enterprises need engineering-grade data systems — and how InclinedPlane builds them."
       />
+
+      {/* PDF Download Bar */}
+      <div className="max-w-6xl mx-auto px-6 lg:px-8 mb-8 print:hidden">
+        <motion.div {...fadeUp} className="flex justify-end">
+          <button
+            onClick={() => window.print()}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl glass-panel text-sm font-medium text-foreground hover:border-primary/30 transition-colors"
+            data-cursor-hover
+          >
+            <Download size={15} className="text-primary" />
+            <span>Download as PDF</span>
+          </button>
+        </motion.div>
+      </div>
 
       <div className="pb-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
