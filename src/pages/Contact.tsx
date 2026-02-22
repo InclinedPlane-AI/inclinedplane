@@ -1,10 +1,30 @@
 import PageLayout from "@/components/PageLayout";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { ArrowRight, Check } from "lucide-react";
+import { countryGroups, getCountryByCode } from "@/data/countries";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const inputClass =
+  "w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all";
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState("");
+
+  const dialCode = useMemo(() => {
+    if (!selectedCountry) return "";
+    const country = getCountryByCode(selectedCountry);
+    return country?.dialCode ?? "";
+  }, [selectedCountry]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,32 +63,88 @@ const Contact = () => {
               onSubmit={handleSubmit}
               className="glass-panel rounded-2xl p-8 space-y-5"
             >
+              {/* Name */}
               <div>
-                <label className="block text-sm text-foreground mb-1.5">Name</label>
-                <input
-                  required
-                  className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all"
-                  placeholder="Your name"
-                />
+                <label className="block text-sm text-foreground mb-1.5">
+                  Name <span className="text-primary">*</span>
+                </label>
+                <input required className={inputClass} placeholder="Your name" />
               </div>
+
+              {/* Email */}
               <div>
-                <label className="block text-sm text-foreground mb-1.5">Email</label>
-                <input
-                  required
-                  type="email"
-                  className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all"
-                  placeholder="you@company.com"
-                />
+                <label className="block text-sm text-foreground mb-1.5">
+                  Email <span className="text-primary">*</span>
+                </label>
+                <input required type="email" className={inputClass} placeholder="you@company.com" />
               </div>
+
+              {/* Country */}
               <div>
-                <label className="block text-sm text-foreground mb-1.5">Message</label>
+                <label className="block text-sm text-foreground mb-1.5">
+                  Country <span className="text-primary">*</span>
+                </label>
+                <Select required value={selectedCountry} onValueChange={setSelectedCountry}>
+                  <SelectTrigger className="w-full bg-background border border-border rounded-lg px-4 py-3 h-auto text-sm text-foreground focus:ring-2 focus:ring-primary/50 focus:border-primary">
+                    <SelectValue placeholder="Select your country" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-72 bg-popover border border-border z-50">
+                    {countryGroups.map((group) => (
+                      <SelectGroup key={group.continent}>
+                        <SelectLabel className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3 py-2">
+                          {group.continent}
+                        </SelectLabel>
+                        {group.countries.map((country) => (
+                          <SelectItem key={country.code} value={country.code} className="text-sm">
+                            <span className="mr-2">{country.flag}</span>
+                            {country.name}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Company (optional) */}
+              <div>
+                <label className="block text-sm text-foreground mb-1.5">
+                  Company <span className="text-muted-foreground text-xs">(optional)</span>
+                </label>
+                <input className={inputClass} placeholder="Your company name" />
+              </div>
+
+              {/* Contact Number (optional) */}
+              <div>
+                <label className="block text-sm text-foreground mb-1.5">
+                  Contact Number <span className="text-muted-foreground text-xs">(optional)</span>
+                </label>
+                <div className="flex gap-2">
+                  <div className="flex items-center bg-background border border-border rounded-lg px-3 py-3 text-sm text-muted-foreground min-w-[80px] justify-center shrink-0">
+                    {dialCode || "—"}
+                  </div>
+                  <input
+                    type="tel"
+                    className={inputClass}
+                    placeholder={selectedCountry ? "Your phone number" : "Select country first"}
+                    disabled={!selectedCountry}
+                  />
+                </div>
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="block text-sm text-foreground mb-1.5">
+                  Message <span className="text-primary">*</span>
+                </label>
                 <textarea
                   required
                   rows={4}
-                  className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all resize-none"
+                  className={`${inputClass} resize-none`}
                   placeholder="Tell us about your project..."
                 />
               </div>
+
               <button
                 type="submit"
                 data-cursor-hover
