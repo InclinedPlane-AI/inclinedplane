@@ -1,68 +1,113 @@
 import PageLayout from "@/components/PageLayout";
 import PageHero from "@/components/PageHero";
+import IndustryDetail from "@/components/IndustryDetail";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { industries } from "@/data/industries";
+import {
+  ShoppingCart, TrendingUp, Cloud, Heart, Factory, Zap, Headphones, GraduationCap,
+  ArrowRight, Layers
+} from "lucide-react";
 
-const industries = [
-  { name: "Retail & CPG", desc: "Demand forecasting, inventory optimization, and supply chain intelligence for modern retail.", useCases: ["Demand Forecasting", "Price Optimization", "Supply Chain Visibility", "Customer Segmentation"] },
-  { name: "Financial Services", desc: "Real-time data platforms, risk modeling, and regulatory compliance at scale.", useCases: ["Risk Analytics", "Fraud Detection", "Regulatory Reporting", "Portfolio Optimization"] },
-  { name: "B2B SaaS", desc: "Product analytics, customer health scoring, and revenue intelligence pipelines.", useCases: ["Product Analytics", "Churn Prediction", "Revenue Forecasting", "Usage Metering"] },
-  { name: "Healthcare", desc: "Clinical data pipelines, patient outcome modeling, and operational efficiency systems.", useCases: ["Clinical Analytics", "Patient Flow Optimization", "Resource Planning", "Outcomes Modeling"] },
-  { name: "Manufacturing", desc: "IoT data platforms, predictive maintenance, and production optimization systems.", useCases: ["Predictive Maintenance", "Quality Control", "Production Optimization", "Supply Chain Analytics"] },
-];
+const iconMap: Record<string, React.ElementType> = {
+  ShoppingCart, TrendingUp, Cloud, Heart, Factory, Zap, Headphones, GraduationCap,
+};
 
 const Industries = () => {
-  const [active, setActive] = useState(0);
+  const [selected, setSelected] = useState<string | null>(null);
+  const activeIndustry = industries.find((i) => i.id === selected) ?? null;
 
   return (
     <PageLayout>
       <PageHero
         label="Industries"
         title={<>Built for <span className="text-gradient-orange">Your Domain.</span></>}
+        subtitle="Deep vertical expertise meets world-class data engineering. We don't just understand your data — we understand your business."
       />
+
       <div className="pb-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-
-          <div className="grid lg:grid-cols-[300px_1fr] gap-8">
-            {/* Switcher */}
-            <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0">
-              {industries.map((ind, i) => (
-                <button
-                  key={ind.name}
-                  onClick={() => setActive(i)}
+          {/* Industry Cards Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {industries.map((ind, i) => {
+              const Icon = iconMap[ind.icon] || Layers;
+              return (
+                <motion.button
+                  key={ind.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.5, delay: i * 0.06 }}
+                  onClick={() => setSelected(ind.id)}
                   data-cursor-hover
-                  className={`text-left px-4 py-3 rounded-lg text-sm transition-all whitespace-nowrap ${
-                    i === active
-                      ? "glass-panel-strong text-foreground glow-orange"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className="group relative glass-panel rounded-xl overflow-hidden text-left transition-all hover:scale-[1.02] hover:glow-orange"
                 >
-                  {ind.name}
-                </button>
-              ))}
-            </div>
-
-            {/* Content */}
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4 }}
-              className="glass-panel rounded-xl p-8"
-            >
-              <h2 className="text-2xl font-bold text-foreground mb-4">{industries[active].name}</h2>
-              <p className="text-muted-foreground leading-relaxed mb-8">{industries[active].desc}</p>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {industries[active].useCases.map((uc) => (
-                  <div key={uc} className="surface-2 rounded-lg px-4 py-3 text-sm text-secondary-foreground">
-                    {uc}
+                  {/* Image */}
+                  <div className="relative h-40 overflow-hidden">
+                    <img
+                      src={ind.image}
+                      alt={ind.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+                    <div
+                      className="absolute top-3 left-3 w-9 h-9 rounded-lg flex items-center justify-center glass-panel"
+                      style={{ borderColor: `hsl(${ind.color} / 0.3)` }}
+                    >
+                      <Icon className="w-4 h-4" style={{ color: `hsl(${ind.color})` }} />
+                    </div>
                   </div>
-                ))}
-              </div>
-            </motion.div>
+
+                  {/* Content */}
+                  <div className="p-5">
+                    <h3 className="font-bold text-foreground text-base mb-2 group-hover:text-primary transition-colors">
+                      {ind.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2 mb-4">
+                      {ind.tagline}
+                    </p>
+
+                    {/* Quick stats preview */}
+                    <div className="flex items-center gap-4 mb-3">
+                      {ind.impactMetrics.slice(0, 2).map((m) => (
+                        <div key={m.label} className="text-center">
+                          <p className="text-sm font-bold text-gradient-orange">{m.value}</p>
+                          <p className="text-[10px] text-muted-foreground leading-tight">{m.label}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Use case pills */}
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {ind.useCases.slice(0, 3).map((uc) => (
+                        <span key={uc.title} className="px-2 py-0.5 rounded-full text-[10px] surface-2 text-secondary-foreground border border-border/30">
+                          {uc.title}
+                        </span>
+                      ))}
+                      {ind.useCases.length > 3 && (
+                        <span className="px-2 py-0.5 rounded-full text-[10px] text-muted-foreground">
+                          +{ind.useCases.length - 3} more
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-1 text-xs text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                      Explore <ArrowRight className="w-3 h-3" />
+                    </div>
+                  </div>
+                </motion.button>
+              );
+            })}
           </div>
         </div>
       </div>
+
+      <IndustryDetail
+        industry={activeIndustry}
+        open={!!selected}
+        onOpenChange={(v) => !v && setSelected(null)}
+      />
     </PageLayout>
   );
 };
