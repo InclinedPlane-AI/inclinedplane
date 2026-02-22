@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Industries", path: "/industries" },
   { label: "Case Studies", path: "/case-studies" },
   { label: "About", path: "/about" },
+  { label: "Contact", path: "/contact" },
 ];
 
 const WavyLine = ({ animate = false, className = "" }: { animate?: boolean; className?: string }) => (
