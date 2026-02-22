@@ -137,8 +137,8 @@ const OrbitalGraphic = () => {
             >
               <motion.div
                 className={`glass-panel rounded-xl px-3 py-2 flex items-center gap-2 text-xs cursor-default select-none transition-all duration-300 ${
-                  isHovered ? "glow-orange shadow-lg" : ""
-                } ${centerHovered && !isHovered ? "shadow-[0_0_12px_hsl(var(--primary)/0.3)] border-primary/40" : ""}`}
+                  isHovered ? "border-primary/60" : ""
+                } ${centerHovered && !isHovered ? "border-primary/40" : ""}`}
                 animate={{
                   scale: isHovered ? 1.12 : centerHovered ? 1.06 : 1,
                 }}
