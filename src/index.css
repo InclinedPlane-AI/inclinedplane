@@ -535,3 +535,24 @@
     max-width: 100% !important;
   }
 }
+
+/* Navbar wavy line — CSS-only animation (zero JS overhead) */
+@keyframes wave-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes wavy-undulate {
+  0%, 100% { d: path("M0 3 Q12.5 0.5, 25 3 T50 3 T75 3 T100 3"); }
+  50% { d: path("M0 3 Q12.5 5.5, 25 3 T50 3 T75 3 T100 3"); }
+}
+
+.navbar-wavy-active {
+  animation: wavy-undulate 1.2s ease-in-out infinite;
+}
+
+/* Disable wavy animation on mobile for performance */
+@media (max-width: 767px) {
+  .navbar-wavy-active {
+    animation: none;
+  }
+}

@@ -22,27 +22,14 @@ const WavyLine = ({ animate = false, className = "" }: { animate?: boolean; clas
     fill="none"
     style={{ overflow: "hidden" }}
   >
-    <motion.path
+    <path
       d="M0 3 Q12.5 1, 25 3 T50 3 T75 3 T100 3"
       stroke="url(#wave-grad)"
       strokeWidth="1.5"
       strokeLinecap="round"
       fill="none"
-      initial={{ pathLength: animate ? 1 : 0 }}
-      animate={
-        animate
-          ? { d: [
-              "M0 3 Q12.5 0.5, 25 3 T50 3 T75 3 T100 3",
-              "M0 3 Q12.5 5.5, 25 3 T50 3 T75 3 T100 3",
-              "M0 3 Q12.5 0.5, 25 3 T50 3 T75 3 T100 3",
-            ] }
-          : { pathLength: 1 }
-      }
-      transition={
-        animate
-          ? { d: { duration: 1.2, repeat: Infinity, ease: "easeInOut" } }
-          : { duration: 0.3, ease: "easeOut" }
-      }
+      className={animate ? "navbar-wavy-active" : ""}
+      style={!animate ? { strokeDasharray: 200, strokeDashoffset: 200, animation: "wave-draw 0.3s ease-out forwards" } : undefined}
     />
     <defs>
       <linearGradient id="wave-grad" x1="0" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
