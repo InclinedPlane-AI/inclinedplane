@@ -31,16 +31,12 @@ const WavyLine = ({ animate = false, className = "" }: { animate?: boolean; clas
       initial={{ pathLength: animate ? 1 : 0 }}
       animate={
         animate
-          ? { d: [
-              "M0 3 Q12.5 0.5, 25 3 T50 3 T75 3 T100 3",
-              "M0 3 Q12.5 5.5, 25 3 T50 3 T75 3 T100 3",
-              "M0 3 Q12.5 0.5, 25 3 T50 3 T75 3 T100 3",
-            ] }
+          ? { pathOffset: [0, 1] }
           : { pathLength: 1 }
       }
       transition={
         animate
-          ? { d: { duration: 1.2, repeat: Infinity, ease: "easeInOut" } }
+          ? { pathOffset: { duration: 2, repeat: Infinity, ease: "linear" } }
           : { duration: 0.3, ease: "easeOut" }
       }
     />
