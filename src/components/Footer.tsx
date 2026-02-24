@@ -23,7 +23,7 @@ const Footer = () => {
       {/* Footer content */}
       <div className="border-top-orange">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {/* Brand */}
             <div className="lg:col-span-1">
               <div className="mb-4">
@@ -69,46 +69,18 @@ const Footer = () => {
               </h4>
               <ul className="space-y-2.5">
                 {[
-                  "Data Architecture",
-                  "Reliability & DataOps",
-                  "Analytics & Intelligence",
-                  "AI & ML Implementation",
-                  "Automation Systems",
+                  { label: "Data Architecture", hash: "data-architecture" },
+                  { label: "Reliability & DataOps", hash: "reliability-ops" },
+                  { label: "Analytics & Intelligence", hash: "analytics-intelligence" },
+                  { label: "AI & ML Implementation", hash: "ai-ml-implementations" },
+                  { label: "Automation Systems", hash: "automation-systems" },
                 ].map((service) => (
-                  <li key={service}>
+                  <li key={service.hash}>
                     <Link
-                      to="/services"
+                      to={`/services#${service.hash}`}
                       className="text-sm text-secondary-foreground hover:text-foreground transition-colors"
                     >
-                      {service}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Industries */}
-            <div>
-              <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
-                Industries
-              </h4>
-              <ul className="space-y-2.5">
-                {[
-                  "Retail & E-commerce",
-                  "Financial Services",
-                  "B2B SaaS",
-                  "Healthcare",
-                  "Manufacturing",
-                  "Energy & Utilities",
-                  "BPO & Shared Services",
-                  "Education",
-                ].map((industry) => (
-                  <li key={industry}>
-                    <Link
-                      to="/industries"
-                      className="text-sm text-secondary-foreground hover:text-foreground transition-colors"
-                    >
-                      {industry}
+                      {service.label}
                     </Link>
                   </li>
                 ))}
