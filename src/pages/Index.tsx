@@ -103,7 +103,7 @@ const Index = () => {
               <div>
                 <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
                   <motion.p
-                    className="font-mono text-[10px] sm:text-xs tracking-widest uppercase mb-4 sm:mb-6 inline-block"
+                    className="font-mono text-[11px] sm:text-[13px] tracking-widest uppercase mb-4 sm:mb-6 inline-block font-semibold"
                     style={{
                       backgroundImage: "linear-gradient(90deg, hsl(var(--orange-start)) 0%, hsl(var(--orange-start)) 40%, hsl(0 0% 100% / 0.9) 50%, hsl(var(--orange-start)) 60%, hsl(var(--orange-start)) 100%)",
                       backgroundSize: "400% 100%",
