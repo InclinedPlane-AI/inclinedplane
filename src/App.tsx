@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Index from "./pages/Index";
 import Thesis from "./pages/Thesis";
 import ServicesPage from "./pages/Services";
@@ -79,6 +80,7 @@ const App = () => {
               </AnimatePresence>
             </BrowserRouter>
             <Analytics />
+            <SpeedInsights />
           </TooltipProvider>
         </QueryClientProvider>
       </div>
