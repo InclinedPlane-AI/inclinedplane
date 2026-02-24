@@ -3,6 +3,9 @@ import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import SectionGlow from "@/components/SectionGlow";
 import { motion } from "framer-motion";
+import awsLogo from "@/assets/aws-logo.png";
+import azureLogo from "@/assets/azure-logo.png";
+import fabricLogo from "@/assets/fabric-logo.png";
 import {
   Compass,
   Anchor,
@@ -426,11 +429,11 @@ const About = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
             {[
-              { name: "AWS Certified", icon: "☁️", detail: "Solutions Architect & Data Analytics", color: "from-[hsl(30_100%_50%/0.15)] to-[hsl(30_100%_50%/0.03)]" },
-              { name: "Azure Certified", icon: "⬡", detail: "Data Engineer & AI Engineer Associate", color: "from-[hsl(210_90%_55%/0.15)] to-[hsl(210_90%_55%/0.03)]" },
-              { name: "Databricks Certified", icon: "⚡", detail: "Data Engineer & ML Professional", color: "from-[hsl(0_85%_55%/0.15)] to-[hsl(0_85%_55%/0.03)]" },
-              { name: "Fabric Certified", icon: "◆", detail: "Analytics Engineer & Data Engineer", color: "from-[hsl(25_90%_50%/0.15)] to-[hsl(25_90%_50%/0.03)]" },
-            ].map(({ name, icon, detail, color }, i) => (
+              { name: "AWS Certified", logo: awsLogo, detail: "Solutions Architect & Data Analytics", color: "from-[hsl(30_100%_50%/0.15)] to-[hsl(30_100%_50%/0.03)]" },
+              { name: "Azure Certified", logo: azureLogo, detail: "Data Engineer & AI Engineer Associate", color: "from-[hsl(210_90%_55%/0.15)] to-[hsl(210_90%_55%/0.03)]" },
+              { name: "Databricks Certified", logo: "https://cdn.simpleicons.org/databricks/FF3621", detail: "Data Engineer & ML Professional", color: "from-[hsl(0_85%_55%/0.15)] to-[hsl(0_85%_55%/0.03)]" },
+              { name: "Fabric Certified", logo: fabricLogo, detail: "Analytics Engineer & Data Engineer", color: "from-[hsl(25_90%_50%/0.15)] to-[hsl(25_90%_50%/0.03)]" },
+            ].map(({ name, logo, detail, color }, i) => (
               <motion.div
                 key={name}
                 {...stagger}
@@ -439,7 +442,7 @@ const About = () => {
               >
                 <div className={`absolute inset-0 bg-gradient-to-b ${color} pointer-events-none`} />
                 <div className="relative z-10">
-                  <span className="text-3xl mb-3 block">{icon}</span>
+                  <img src={logo} alt={name} className="w-10 h-10 object-contain mx-auto mb-3 opacity-85 group-hover:opacity-100 transition-opacity" />
                   <h4 className="font-bold text-foreground text-sm mb-1">{name}</h4>
                   <p className="text-[11px] text-muted-foreground leading-snug">{detail}</p>
                 </div>
