@@ -119,7 +119,7 @@ const Footer = () => {
             <div className="flex items-center gap-4 text-muted-foreground">
               <a href="https://linkedin.com/company/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">LinkedIn</a>
               <a href="https://x.com/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">X</a>
-              <a href="https://github.com/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">GitHub</a>
+              <a href="https://github.com/InclinedPlane-AI" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">GitHub</a>
             </div>
           </div>
         </div>
