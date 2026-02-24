@@ -19,6 +19,7 @@ import {
   Zap,
   Eye,
   Cpu,
+  Award,
 } from "lucide-react";
 
 const fadeUp = {
@@ -397,6 +398,73 @@ const About = () => {
                     </p>
                   </div>
                 </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ CERTIFICATIONS ═══════════════ */}
+      <section className="relative py-20 overflow-hidden">
+        <SectionGlow position="center" size={500} />
+        <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-[2]">
+          <motion.div {...fadeUp} className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 glass-panel rounded-full px-4 py-1.5 mb-6">
+              <Award className="w-3.5 h-3.5 text-primary" />
+              <span className="font-mono text-xs text-primary tracking-widest uppercase">
+                Certified Expertise
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
+              Brains <span className="text-gradient-orange">&amp; Brawn</span>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Our engineers don't just write code — they carry industry-recognized certifications 
+              that prove mastery across every layer of the modern data stack.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+            {[
+              { name: "AWS Certified", icon: "☁️", detail: "Solutions Architect & Data Analytics", color: "from-[hsl(30_100%_50%/0.15)] to-[hsl(30_100%_50%/0.03)]" },
+              { name: "Azure Certified", icon: "⬡", detail: "Data Engineer & AI Engineer Associate", color: "from-[hsl(210_90%_55%/0.15)] to-[hsl(210_90%_55%/0.03)]" },
+              { name: "Databricks Certified", icon: "⚡", detail: "Data Engineer & ML Professional", color: "from-[hsl(0_85%_55%/0.15)] to-[hsl(0_85%_55%/0.03)]" },
+              { name: "Fabric Certified", icon: "◆", detail: "Analytics Engineer & Data Engineer", color: "from-[hsl(25_90%_50%/0.15)] to-[hsl(25_90%_50%/0.03)]" },
+            ].map(({ name, icon, detail, color }, i) => (
+              <motion.div
+                key={name}
+                {...stagger}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="glass-panel rounded-2xl p-6 text-center relative overflow-hidden group hover:glow-orange transition-all duration-300"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-b ${color} pointer-events-none`} />
+                <div className="relative z-10">
+                  <span className="text-3xl mb-3 block">{icon}</span>
+                  <h4 className="font-bold text-foreground text-sm mb-1">{name}</h4>
+                  <p className="text-[11px] text-muted-foreground leading-snug">{detail}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+            {[
+              { title: "Data Engineers", icon: Layers },
+              { title: "Data Analysts", icon: Eye },
+              { title: "System Architects", icon: Cpu },
+              { title: "System Designers", icon: Compass },
+              { title: "AI Engineers", icon: Sparkles },
+            ].map(({ title, icon: RoleIcon }, i) => (
+              <motion.div
+                key={title}
+                {...stagger}
+                transition={{ duration: 0.4, delay: 0.3 + i * 0.06 }}
+                className="glass-panel rounded-xl px-4 py-3 flex items-center gap-3 group hover:border-primary/20 transition-colors"
+              >
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/15 transition-colors">
+                  <RoleIcon className="w-4 h-4 text-primary" />
+                </div>
+                <span className="text-xs font-semibold text-foreground">{title}</span>
               </motion.div>
             ))}
           </div>
