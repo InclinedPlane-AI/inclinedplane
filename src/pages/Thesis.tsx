@@ -10,7 +10,7 @@ import {
   TrendingUp, ArrowRight, CheckCircle2, AlertTriangle, Server,
   Gauge, Radio, RefreshCw, Search, LineChart, Sparkles, Target,
   Building2, ShieldCheck, Cog, Network, Boxes, Rocket, LayoutDashboard,
-  Download, ChevronDown, X as XIcon
+  ChevronDown, X as XIcon
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ThesisTOC from "@/components/ThesisTOC";
@@ -521,19 +521,6 @@ const Thesis = () => {
 
       <ThesisTOC />
 
-      {/* PDF Download Bar */}
-      <div className="max-w-6xl mx-auto px-6 lg:px-8 mb-8 print:hidden">
-        <motion.div {...fadeUp} className="flex justify-end">
-          <button
-            onClick={() => window.print()}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl glass-panel text-sm font-medium text-foreground hover:border-primary/30 transition-colors"
-            data-cursor-hover
-          >
-            <Download size={15} className="text-primary" />
-            <span>Download as PDF</span>
-          </button>
-        </motion.div>
-      </div>
 
       <div className="pb-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
