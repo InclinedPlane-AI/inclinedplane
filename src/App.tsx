@@ -61,25 +61,23 @@ const App = () => {
             <BrowserRouter>
               <ScrollToTop />
               <CookieConsent />
-              <Suspense fallback={null}>
-                <AnimatePresence mode="wait">
-                  <Routes>
-                    <Route path="/" element={<Index />} />
-                    <Route path="/thesis" element={<Thesis />} />
-                    <Route path="/services" element={<ServicesPage />} />
-                    <Route path="/industries" element={<Industries />} />
-                    <Route path="/case-studies" element={<CaseStudies />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/blog" element={<Blogs />} />
-                    <Route path="/blog/:slug" element={<BlogPostPage />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/privacy" element={<PrivacyPolicy />} />
-                    <Route path="/terms" element={<Terms />} />
-                    <Route path="/cookies" element={<CookiePolicy />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </AnimatePresence>
-              </Suspense>
+              <AnimatePresence mode="wait">
+                <Routes>
+                  <Route path="/" element={<Suspense fallback={null}><Index /></Suspense>} />
+                  <Route path="/thesis" element={<Suspense fallback={null}><Thesis /></Suspense>} />
+                  <Route path="/services" element={<Suspense fallback={null}><ServicesPage /></Suspense>} />
+                  <Route path="/industries" element={<Suspense fallback={null}><Industries /></Suspense>} />
+                  <Route path="/case-studies" element={<Suspense fallback={null}><CaseStudies /></Suspense>} />
+                  <Route path="/about" element={<Suspense fallback={null}><About /></Suspense>} />
+                  <Route path="/blog" element={<Suspense fallback={null}><Blogs /></Suspense>} />
+                  <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPostPage /></Suspense>} />
+                  <Route path="/contact" element={<Suspense fallback={null}><Contact /></Suspense>} />
+                  <Route path="/privacy" element={<Suspense fallback={null}><PrivacyPolicy /></Suspense>} />
+                  <Route path="/terms" element={<Suspense fallback={null}><Terms /></Suspense>} />
+                  <Route path="/cookies" element={<Suspense fallback={null}><CookiePolicy /></Suspense>} />
+                  <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />
+                </Routes>
+              </AnimatePresence>
             </BrowserRouter>
           </TooltipProvider>
         </QueryClientProvider>
