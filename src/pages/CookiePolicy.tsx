@@ -185,9 +185,9 @@ const CookiePolicy = () => {
             <p className="text-sm text-muted-foreground mb-4 max-w-lg mx-auto">
               If you have questions about our use of cookies or want to update your preferences, we're here to help.
             </p>
-            <a href="mailto:contact@inclinedplane.com" className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity glow-orange">
+            <a href="mailto:support@inclinedplane.com" className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity glow-orange">
               <Mail className="w-4 h-4" />
-              contact@inclinedplane.com
+              support@inclinedplane.com
             </a>
           </motion.div>
         </div>
