@@ -217,18 +217,115 @@ const Contact = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="glass-panel rounded-2xl p-12 text-center"
+              transition={{ type: "spring", stiffness: 150, damping: 20 }}
+              className="glass-panel rounded-2xl p-10 sm:p-14 text-center relative overflow-hidden"
             >
+              {/* Ambient glow */}
               <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
+                className="absolute inset-0 pointer-events-none"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 1 }}
+                style={{
+                  background: "radial-gradient(ellipse at 50% 40%, hsl(var(--orange-start) / 0.12), transparent 70%)",
+                }}
+              />
+
+              {/* Check icon */}
+              <motion.div
+                initial={{ scale: 0, rotate: -90 }}
+                animate={{ scale: 1, rotate: 0 }}
                 transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-                className="w-16 h-16 rounded-full bg-gradient-orange mx-auto mb-6 flex items-center justify-center glow-orange-strong"
+                className="w-20 h-20 rounded-full bg-gradient-orange mx-auto mb-6 flex items-center justify-center glow-orange-strong relative"
               >
-                <Check size={28} className="text-primary-foreground" />
+                <motion.div
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: 1, opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
+                >
+                  <Check size={34} className="text-primary-foreground" strokeWidth={3} />
+                </motion.div>
               </motion.div>
-              <h2 className="text-2xl font-bold text-foreground mb-3">Message Sent</h2>
-              <p className="text-muted-foreground">We'll be in touch within 24 hours.</p>
+
+              {/* Title */}
+              <motion.h2
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="text-2xl sm:text-3xl font-bold text-foreground mb-2"
+              >
+                Data Pipeline <span className="text-gradient-orange">Connected</span>
+              </motion.h2>
+
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="text-muted-foreground text-sm mb-8 max-w-xs mx-auto"
+              >
+                Your message has been successfully ingested into our pipeline.
+              </motion.p>
+
+              {/* Animated pipeline stages */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="space-y-3 max-w-sm mx-auto mb-8"
+              >
+                {[
+                  { label: "Data Received", delay: 0.7 },
+                  { label: "Validated & Enriched", delay: 1.0 },
+                  { label: "Routed to Team", delay: 1.3 },
+                  { label: "Response Queued", delay: 1.6 },
+                ].map((stage, i) => (
+                  <div key={stage.label} className="flex items-center gap-3">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", stiffness: 300, delay: stage.delay }}
+                      className="w-6 h-6 rounded-full bg-gradient-orange flex items-center justify-center shrink-0"
+                    >
+                      <Check size={12} className="text-primary-foreground" strokeWidth={3} />
+                    </motion.div>
+                    <div className="flex-1 h-2 rounded-full bg-secondary overflow-hidden">
+                      <motion.div
+                        className="h-full rounded-full bg-gradient-orange"
+                        initial={{ width: 0 }}
+                        animate={{ width: "100%" }}
+                        transition={{ delay: stage.delay, duration: 0.5, ease: "easeOut" }}
+                        style={{
+                          boxShadow: "0 0 12px hsl(25 100% 50% / 0.5)",
+                        }}
+                      />
+                    </div>
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: stage.delay + 0.3 }}
+                      className="text-xs font-mono text-foreground min-w-[130px] text-left"
+                    >
+                      {stage.label}
+                    </motion.span>
+                  </div>
+                ))}
+              </motion.div>
+
+              {/* ETA */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2.0 }}
+                className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-5 py-2.5"
+              >
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
+                </span>
+                <span className="text-xs font-mono text-primary font-semibold tracking-wide">
+                  ETA: Response within 24 hrs
+                </span>
+              </motion.div>
             </motion.div>
           ) : (
             <motion.form
