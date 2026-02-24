@@ -102,19 +102,20 @@ const Index = () => {
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
                 <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
-                  <p className="font-mono text-[10px] sm:text-xs text-primary tracking-widest uppercase mb-4 sm:mb-6 relative overflow-hidden inline-block">
-                    <span className="relative z-10">The Architects of Enterprise Velocity</span>
-                    <motion.span
-                      className="absolute inset-0 z-20 pointer-events-none"
-                      style={{
-                        background: "linear-gradient(90deg, transparent 0%, hsl(var(--orange-start) / 0.45) 45%, hsl(var(--primary) / 0.7) 50%, hsl(var(--orange-start) / 0.45) 55%, transparent 100%)",
-                        backgroundSize: "200% 100%",
-                      }}
-                      initial={{ backgroundPosition: "200% 0" }}
-                      animate={{ backgroundPosition: ["-100% 0", "200% 0"] }}
-                      transition={{ duration: 1.2, repeat: Infinity, repeatDelay: 3, ease: "easeInOut" }}
-                    />
-                  </p>
+                  <motion.p
+                    className="font-mono text-[10px] sm:text-xs tracking-widest uppercase mb-4 sm:mb-6 inline-block"
+                    style={{
+                      backgroundImage: "linear-gradient(90deg, hsl(var(--orange-start)) 0%, hsl(var(--orange-start)) 35%, hsl(0 0% 100%) 50%, hsl(var(--orange-start)) 65%, hsl(var(--orange-start)) 100%)",
+                      backgroundSize: "300% 100%",
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                    animate={{ backgroundPosition: ["100% 0%", "-100% 0%"] }}
+                    transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 3, ease: "easeInOut" }}
+                  >
+                    The Architects of Enterprise Velocity
+                  </motion.p>
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] tracking-tight mb-4 sm:mb-6">
                     Data Leveraged.{" "}
                     <span className="text-gradient-orange">Growth Accelerated.</span>
