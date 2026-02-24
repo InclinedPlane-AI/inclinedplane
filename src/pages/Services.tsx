@@ -407,7 +407,7 @@ const ServicesPage = () => {
                     Book a Discovery Call
                   </button>
                   <a
-                    href="mailto:contact@inclinedplane.com"
+                    href="mailto:support@inclinedplane.com"
                     className="px-6 py-3 rounded-xl border border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/30 font-medium text-sm transition-colors"
                   >
                     Or drop us an email →

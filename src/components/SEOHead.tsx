@@ -113,7 +113,7 @@ const SEOHead = ({
       ],
       contactPoint: {
         "@type": "ContactPoint",
-        email: "contact@inclinedplane.com",
+        email: "support@inclinedplane.com",
         contactType: "sales",
       },
     };

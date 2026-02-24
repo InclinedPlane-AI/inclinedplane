@@ -358,7 +358,7 @@ const Contact = () => {
         </div>
 
         <a
-          href="mailto:contact@inclinedplane.com"
+          href="mailto:support@inclinedplane.com"
           data-cursor-hover
           className="glass-panel rounded-2xl p-7 flex items-center gap-5 group hover:border-primary/20 transition-colors"
         >
@@ -372,7 +372,7 @@ const Contact = () => {
             </p>
           </div>
           <p className="text-sm text-primary font-medium group-hover:underline underline-offset-4 transition-all hidden sm:block">
-            contact@inclinedplane.com
+            support@inclinedplane.com
           </p>
         </a>
       </motion.div>
