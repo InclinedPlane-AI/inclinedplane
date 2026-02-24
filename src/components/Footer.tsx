@@ -23,7 +23,7 @@ const Footer = () => {
       {/* Footer content */}
       <div className="border-top-orange">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
             {/* Brand */}
             <div className="lg:col-span-1">
               <div className="mb-4">
@@ -46,6 +46,8 @@ const Footer = () => {
                 {[
                   { label: "About", path: "/about" },
                   { label: "Thesis", path: "/thesis" },
+                  { label: "Blogs", path: "/blogs" },
+                  { label: "Case Studies", path: "/case-studies" },
                   { label: "Contact", path: "/contact" },
                 ].map((link) => (
                   <li key={link.path}>
@@ -67,12 +69,11 @@ const Footer = () => {
               </h4>
               <ul className="space-y-2.5">
                 {[
-                  "Data Platform Engineering",
-                  "Cloud Warehouse Architecture",
-                  "BI Modernization",
-                  "DataOps & Observability",
-                  "Forecasting Systems",
-                  "AI Automation Workflows",
+                  "Data Architecture",
+                  "Reliability & DataOps",
+                  "Analytics & Intelligence",
+                  "AI & ML Implementation",
+                  "Automation Systems",
                 ].map((service) => (
                   <li key={service}>
                     <Link
@@ -86,15 +87,44 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Work */}
+            {/* Industries */}
             <div>
               <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
-                Work
+                Industries
               </h4>
               <ul className="space-y-2.5">
                 {[
-                  { label: "Case Studies", path: "/case-studies" },
-                  { label: "Industries", path: "/industries" },
+                  "Retail & E-commerce",
+                  "Financial Services",
+                  "B2B SaaS",
+                  "Healthcare",
+                  "Manufacturing",
+                  "Energy & Utilities",
+                  "BPO & Shared Services",
+                  "Education",
+                ].map((industry) => (
+                  <li key={industry}>
+                    <Link
+                      to="/industries"
+                      className="text-sm text-secondary-foreground hover:text-foreground transition-colors"
+                    >
+                      {industry}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div>
+              <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+                Legal
+              </h4>
+              <ul className="space-y-2.5">
+                {[
+                  { label: "Privacy Policy", path: "/privacy" },
+                  { label: "Terms of Service", path: "/terms" },
+                  { label: "Cookie Policy", path: "/cookies" },
                 ].map((link) => (
                   <li key={link.path}>
                     <Link
@@ -114,21 +144,10 @@ const Footer = () => {
             <p className="text-xs text-muted-foreground">
               © {new Date().getFullYear()} InclinedPlane. All rights reserved.
             </p>
-            <div className="flex items-center gap-6 flex-wrap">
-              <Link to="/privacy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-                Privacy Policy
-              </Link>
-              <Link to="/terms" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-                Terms
-              </Link>
-              <Link to="/cookies" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-                Cookie Policy
-              </Link>
-              <div className="flex items-center gap-4 text-muted-foreground">
-                <a href="https://linkedin.com/company/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">LinkedIn</a>
-                <a href="https://x.com/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">X</a>
-                <a href="https://github.com/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">GitHub</a>
-              </div>
+            <div className="flex items-center gap-4 text-muted-foreground">
+              <a href="https://linkedin.com/company/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">LinkedIn</a>
+              <a href="https://x.com/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">X</a>
+              <a href="https://github.com/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">GitHub</a>
             </div>
           </div>
         </div>
