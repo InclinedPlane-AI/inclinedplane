@@ -152,6 +152,8 @@ const Navbar = () => {
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden text-foreground"
             data-cursor-hover
+            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
