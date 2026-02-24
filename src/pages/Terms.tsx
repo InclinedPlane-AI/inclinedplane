@@ -150,9 +150,9 @@ const Terms = () => {
             <p className="text-sm text-muted-foreground mb-4 max-w-lg mx-auto">
               We're happy to clarify any aspect of our terms. Reach out and we'll get back to you promptly.
             </p>
-            <a href="mailto:legal@inclinedplane.com" className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity glow-orange">
+            <a href="mailto:contact@inclinedplane.com" className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity glow-orange">
               <Mail className="w-4 h-4" />
-              legal@inclinedplane.com
+              contact@inclinedplane.com
             </a>
           </motion.div>
         </div>
