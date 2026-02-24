@@ -279,12 +279,12 @@ const Contact = () => {
                   { label: "Routed to Team", delay: 1.3 },
                   { label: "Response Queued", delay: 1.6 },
                 ].map((stage, i) => (
-                  <div key={stage.label} className="flex items-center gap-3">
+                  <div key={stage.label} className="flex items-center gap-2 sm:gap-3">
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ type: "spring", stiffness: 300, delay: stage.delay }}
-                      className="w-6 h-6 rounded-full bg-gradient-orange flex items-center justify-center shrink-0"
+                      className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-orange flex items-center justify-center shrink-0"
                     >
                       <Check size={12} className="text-primary-foreground" strokeWidth={3} />
                     </motion.div>
@@ -303,7 +303,7 @@ const Contact = () => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: stage.delay + 0.3 }}
-                      className="text-xs font-mono text-foreground min-w-[130px] text-left"
+                      className="text-[10px] sm:text-xs font-mono text-foreground min-w-[100px] sm:min-w-[130px] text-left"
                     >
                       {stage.label}
                     </motion.span>
@@ -335,7 +335,7 @@ const Contact = () => {
               exit={{ opacity: 0, y: -20 }}
               transition={{ delay: 0.25, duration: 0.5 }}
               onSubmit={handleSubmit}
-              className="glass-panel rounded-2xl p-8 space-y-5"
+              className="glass-panel rounded-2xl p-5 sm:p-8 space-y-5"
             >
               <FormProgress
                 progress={progress}
