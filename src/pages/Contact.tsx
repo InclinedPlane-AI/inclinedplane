@@ -22,7 +22,7 @@ const offices = [
   {
     flag: "🇮🇳",
     label: "Bengaluru, India",
-    address: "InclinedPlane, Wework Salarpuria Symbiosis, Ground Floor, Bannerghatta Road, Bengaluru, Karnataka 560076, India",
+    address: "InclinedPlane, Wework Salarpuria Symbiosis, Bannerghatta Road, Bengaluru, Karnataka 560076, India",
   },
   {
     flag: "🇺🇸",
@@ -60,13 +60,10 @@ const milestones = [
 
 /* ── Form Progress Bar ── */
 const FormProgress = ({ progress, filled }: { progress: number; filled: Record<string, boolean> }) => {
-
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-3">
-        <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-          Data Maturity Progress
-        </p>
+        <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">Data Maturity Progress</p>
         <motion.span
           key={progress}
           initial={{ scale: 1.3, opacity: 0 }}
@@ -159,7 +156,11 @@ const Contact = () => {
       />
       <PageHero
         label="Contact"
-        title={<>Let's <span className="text-gradient-orange">Build</span> Together.</>}
+        title={
+          <>
+            Let's <span className="text-gradient-orange">Build</span> Together.
+          </>
+        }
         subtitle="Have a project in mind or want to explore how data can transform your business? We'd love to hear from you."
       />
 
@@ -169,7 +170,8 @@ const Contact = () => {
         <div
           className="absolute -inset-4 rounded-3xl pointer-events-none -z-10 blur-[80px] opacity-[0.15]"
           style={{
-            background: "radial-gradient(ellipse at center, hsl(var(--orange-start)), hsl(var(--orange-mid) / 0.5), transparent 70%)",
+            background:
+              "radial-gradient(ellipse at center, hsl(var(--orange-start)), hsl(var(--orange-mid) / 0.5), transparent 70%)",
           }}
         />
         <motion.div
@@ -214,20 +216,19 @@ const Contact = () => {
               onSubmit={handleSubmit}
               className="glass-panel rounded-2xl p-8 space-y-5"
             >
-              <FormProgress progress={progress} filled={{
-                name: name.trim().length >= 2,
-                email: isValidEmail(email),
-                country: !!selectedCountry,
-                company: company.trim().length > 0,
-                message: message.trim().length > 0,
-              }} />
+              <FormProgress
+                progress={progress}
+                filled={{
+                  name: name.trim().length >= 2,
+                  email: isValidEmail(email),
+                  country: !!selectedCountry,
+                  company: company.trim().length > 0,
+                  message: message.trim().length > 0,
+                }}
+              />
 
               <div className="grid sm:grid-cols-2 gap-5">
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 }}
-                >
+                <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
                   <label className="block text-sm text-foreground mb-1.5">
                     Name <span className="text-primary">*</span>
                   </label>
@@ -239,11 +240,7 @@ const Contact = () => {
                     onChange={(e) => setName(e.target.value)}
                   />
                 </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.35 }}
-                >
+                <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.35 }}>
                   <label className="block text-sm text-foreground mb-1.5">
                     Email <span className="text-primary">*</span>
                   </label>
@@ -259,11 +256,7 @@ const Contact = () => {
               </div>
 
               <div className="grid sm:grid-cols-2 gap-5">
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 }}
-                >
+                <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}>
                   <label className="block text-sm text-foreground mb-1.5">
                     Country <span className="text-primary">*</span>
                   </label>
@@ -292,11 +285,7 @@ const Contact = () => {
                     </SelectContent>
                   </Select>
                 </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.45 }}
-                >
+                <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.45 }}>
                   <label className="block text-sm text-foreground mb-1.5">
                     Company <span className="text-primary">*</span>
                   </label>
@@ -310,11 +299,7 @@ const Contact = () => {
                 </motion.div>
               </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-              >
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
                 <label className="block text-sm text-foreground mb-1.5">
                   Contact Number <span className="text-muted-foreground text-xs">(optional)</span>
                 </label>
@@ -331,11 +316,7 @@ const Contact = () => {
                 </div>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.55 }}
-              >
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}>
                 <label className="block text-sm text-foreground mb-1.5">
                   Message <span className="text-primary">*</span>
                 </label>
