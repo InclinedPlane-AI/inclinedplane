@@ -1,28 +1,26 @@
-import { useState, useEffect, useCallback, lazy, Suspense } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import Index from "./pages/Index";
+import Thesis from "./pages/Thesis";
+import ServicesPage from "./pages/Services";
+import Industries from "./pages/Industries";
+import CaseStudies from "./pages/CaseStudies";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Terms from "./pages/Terms";
+import CookiePolicy from "./pages/CookiePolicy";
+import Blogs from "./pages/Blogs";
+import BlogPostPage from "./pages/BlogPost";
 import CookieConsent from "./components/CookieConsent";
 import SplashScreen from "./components/SplashScreen";
 import ScrollToTop from "./components/ScrollToTop";
-
-// Route-level code splitting
-const Index = lazy(() => import("./pages/Index"));
-const Thesis = lazy(() => import("./pages/Thesis"));
-const ServicesPage = lazy(() => import("./pages/Services"));
-const Industries = lazy(() => import("./pages/Industries"));
-const CaseStudies = lazy(() => import("./pages/CaseStudies"));
-const About = lazy(() => import("./pages/About"));
-const Contact = lazy(() => import("./pages/Contact"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
-const Terms = lazy(() => import("./pages/Terms"));
-const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
-const Blogs = lazy(() => import("./pages/Blogs"));
-const BlogPostPage = lazy(() => import("./pages/BlogPost"));
 
 const queryClient = new QueryClient();
 
@@ -63,19 +61,19 @@ const App = () => {
               <CookieConsent />
               <AnimatePresence mode="wait">
                 <Routes>
-                  <Route path="/" element={<Suspense fallback={null}><Index /></Suspense>} />
-                  <Route path="/thesis" element={<Suspense fallback={null}><Thesis /></Suspense>} />
-                  <Route path="/services" element={<Suspense fallback={null}><ServicesPage /></Suspense>} />
-                  <Route path="/industries" element={<Suspense fallback={null}><Industries /></Suspense>} />
-                  <Route path="/case-studies" element={<Suspense fallback={null}><CaseStudies /></Suspense>} />
-                  <Route path="/about" element={<Suspense fallback={null}><About /></Suspense>} />
-                  <Route path="/blog" element={<Suspense fallback={null}><Blogs /></Suspense>} />
-                  <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPostPage /></Suspense>} />
-                  <Route path="/contact" element={<Suspense fallback={null}><Contact /></Suspense>} />
-                  <Route path="/privacy" element={<Suspense fallback={null}><PrivacyPolicy /></Suspense>} />
-                  <Route path="/terms" element={<Suspense fallback={null}><Terms /></Suspense>} />
-                  <Route path="/cookies" element={<Suspense fallback={null}><CookiePolicy /></Suspense>} />
-                  <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />
+                  <Route path="/" element={<Index />} />
+                  <Route path="/thesis" element={<Thesis />} />
+                  <Route path="/services" element={<ServicesPage />} />
+                  <Route path="/industries" element={<Industries />} />
+                  <Route path="/case-studies" element={<CaseStudies />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/blog" element={<Blogs />} />
+                  <Route path="/blog/:slug" element={<BlogPostPage />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/privacy" element={<PrivacyPolicy />} />
+                  <Route path="/terms" element={<Terms />} />
+                  <Route path="/cookies" element={<CookiePolicy />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </AnimatePresence>
             </BrowserRouter>
