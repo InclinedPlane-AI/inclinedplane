@@ -177,6 +177,40 @@ const Contact = () => {
         title="Contact Us"
         description="Get in touch with Inclined Plane for data engineering consulting, AI automation, and cloud warehouse architecture. Book a discovery call today."
         path="/contact"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            name: "Contact Inclined Plane",
+            url: "https://inclinedplane.com/contact",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            name: "Inclined Plane",
+            description: "AI-native data engineering consultancy",
+            email: "support@inclinedplane.com",
+            url: "https://inclinedplane.com",
+            address: [
+              {
+                "@type": "PostalAddress",
+                streetAddress: "Wework Salarpuria Symbiosis, Bannerghatta Road",
+                addressLocality: "Bengaluru",
+                addressRegion: "Karnataka",
+                postalCode: "560076",
+                addressCountry: "IN",
+              },
+              {
+                "@type": "PostalAddress",
+                streetAddress: "838 Walker Rd, Suite 21-2",
+                addressLocality: "Dover",
+                addressRegion: "Delaware",
+                postalCode: "19904",
+                addressCountry: "US",
+              },
+            ],
+          },
+        ]}
       />
       <PageHero
         label="Contact"
