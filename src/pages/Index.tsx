@@ -105,14 +105,14 @@ const Index = () => {
                   <motion.p
                     className="font-mono text-[10px] sm:text-xs tracking-widest uppercase mb-4 sm:mb-6 inline-block"
                     style={{
-                      backgroundImage: "linear-gradient(90deg, hsl(var(--orange-start)) 0%, hsl(var(--orange-start)) 35%, hsl(0 0% 100%) 50%, hsl(var(--orange-start)) 65%, hsl(var(--orange-start)) 100%)",
-                      backgroundSize: "300% 100%",
+                      backgroundImage: "linear-gradient(90deg, hsl(var(--orange-start)) 0%, hsl(var(--orange-start)) 40%, hsl(0 0% 100% / 0.9) 50%, hsl(var(--orange-start)) 60%, hsl(var(--orange-start)) 100%)",
+                      backgroundSize: "400% 100%",
                       WebkitBackgroundClip: "text",
                       backgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                     }}
-                    animate={{ backgroundPosition: ["100% 0%", "-100% 0%"] }}
-                    transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 3, ease: "easeInOut" }}
+                    animate={{ backgroundPosition: ["150% center", "-50% center"] }}
+                    transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 3, ease: "linear" }}
                   >
                     The Architects of Enterprise Velocity
                   </motion.p>
