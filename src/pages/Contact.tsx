@@ -22,7 +22,7 @@ const offices = [
   {
     flag: "🇮🇳",
     label: "Bengaluru, India",
-    address: "InclinedPlane Office, Salarpuria Symbiosis, Ground Floor, Bannerghatta Road, Bengaluru, Karnataka 560076, India",
+    address: "InclinedPlane, Wework Salarpuria Symbiosis, Ground Floor, Bannerghatta Road, Bengaluru, Karnataka 560076, India",
   },
   {
     flag: "🇺🇸",
