@@ -5,10 +5,10 @@ import { createPortal } from "react-dom";
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState<"dark" | "light">(() => {
-    if (typeof window === "undefined") return "light";
+    if (typeof window === "undefined") return "dark";
     const stored = localStorage.getItem("theme");
     if (stored === "light" || stored === "dark") return stored;
-    return "light";
+    return "dark";
   });
   const [sweep, setSweep] = useState<{ x: number; y: number; target: "dark" | "light" } | null>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
