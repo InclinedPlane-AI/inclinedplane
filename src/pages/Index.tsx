@@ -320,19 +320,19 @@ const Index = () => {
                   {[
                     { before: "Sail Analytics", after: "InclinedPlane", desc: "Brand evolution" },
                     { before: "Data Navigation", after: "Data Leverage", desc: "Strategic shift" },
-                    { before: "Analytics Services", after: "AI Implementation", desc: "Capability upgrade" },
+                    { before: "Legacy BI Services", after: "AI-Native Engineering & Analytics", desc: "Capability upgrade" },
                     { before: "Reporting Focus", after: "Decision Intelligence", desc: "Value delivery" },
                   ].map(({ before, after, desc }, i) => (
                     <motion.div key={desc} {...fadeUp(0.2 + i * 0.06)}
-                      className="glass-panel rounded-xl p-5 flex items-center gap-4 group hover:glow-orange transition-shadow" data-cursor-hover>
-                      <div className="flex-1">
-                        <p className="text-sm text-muted-foreground line-through opacity-60">{before}</p>
+                      className="glass-panel rounded-xl p-4 sm:p-5 flex items-center gap-3 sm:gap-4 group hover:glow-orange transition-shadow" data-cursor-hover>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs sm:text-sm text-muted-foreground/40 italic truncate">{before}</p>
                       </div>
                       <ArrowRight size={14} className="text-primary shrink-0" />
-                      <div className="flex-1">
-                        <p className="text-sm text-foreground font-semibold">{after}</p>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs sm:text-sm text-primary font-semibold truncate">{after}</p>
                       </div>
-                      <span className="text-[10px] text-muted-foreground font-mono hidden sm:block">{desc}</span>
+                      <span className="text-[9px] sm:text-[10px] text-muted-foreground font-mono hidden sm:block shrink-0">{desc}</span>
                     </motion.div>
                   ))}
                 </div>
