@@ -369,6 +369,7 @@ const ServicesPage = () => {
               {pillars.map((pillar, i) => (
                 <div
                   key={pillar.number}
+                  id={pillar.shortTitle.toLowerCase().replace(/[\s&]+/g, '-')}
                   ref={(el) => { sectionRefs.current[i] = el; }}
                   className="py-10 lg:py-14"
                 >
