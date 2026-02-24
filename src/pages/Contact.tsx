@@ -2,7 +2,8 @@ import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
+import { toast } from "sonner";
 import { ArrowRight, Check, Mail, MapPin, User, AtSign, Globe, Building2, Phone, MessageSquare } from "lucide-react";
 import { countryGroups, getCountryByCode } from "@/data/countries";
 import {
@@ -118,11 +119,13 @@ const FormProgress = ({ progress, filled }: { progress: number; filled: Record<s
 /* ── Contact Page ── */
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [message, setMessage] = useState("");
+  const [phone, setPhone] = useState("");
 
   const dialCode = useMemo(() => {
     if (!selectedCountry) return "";
@@ -142,10 +145,31 @@ const Contact = () => {
     return p;
   }, [name, email, selectedCountry, company, message]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-  };
+    setSubmitting(true);
+    try {
+      const countryInfo = getCountryByCode(selectedCountry);
+      const res = await fetch("https://formspree.io/f/xwvnakbz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          country: countryInfo?.name ?? selectedCountry,
+          company: company.trim(),
+          phone: phone ? `${dialCode} ${phone}` : "",
+          message: message.trim(),
+        }),
+      });
+      if (!res.ok) throw new Error("Submission failed");
+      setSubmitted(true);
+    } catch {
+      toast.error("Something went wrong. Please try again or email us directly.");
+    } finally {
+      setSubmitting(false);
+    }
+  }, [name, email, selectedCountry, company, phone, dialCode, message]);
 
   return (
     <PageLayout>
@@ -312,6 +336,8 @@ const Contact = () => {
                     className={inputClass}
                     placeholder={selectedCountry ? "Your phone number" : "Select country first"}
                     disabled={!selectedCountry}
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
               </motion.div>
@@ -335,9 +361,10 @@ const Contact = () => {
                 data-cursor-hover
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-orange text-primary-foreground py-3.5 rounded-lg font-medium transition-opacity glow-orange flex items-center justify-center gap-2 text-sm"
+                disabled={submitting}
+                className="w-full bg-gradient-orange text-primary-foreground py-3.5 rounded-lg font-medium transition-opacity glow-orange flex items-center justify-center gap-2 text-sm disabled:opacity-60"
               >
-                Send Message <ArrowRight size={16} />
+                {submitting ? "Sending…" : "Send Message"} {!submitting && <ArrowRight size={16} />}
               </motion.button>
             </motion.form>
           )}
