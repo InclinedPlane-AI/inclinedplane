@@ -19,7 +19,7 @@ import {
   CheckCircle2, Quote, Sparkles, Target, Rocket
 } from "lucide-react";
 
-const SLIDE_COUNT = 11;
+const SLIDE_COUNT = 12;
 
 // Shared viewport config for all whileInView — only animate once
 const vp = { once: true, amount: 0.2 } as const;
@@ -638,7 +638,52 @@ const Index = () => {
           </div>
         </section>
 
-        {/* SLIDE 11 — FINAL CTA */}
+        {/* SLIDE 11 — CAREERS TEASER */}
+        <section className="snap-section flex items-center relative overflow-hidden">
+          <SectionGlow position="top-right" size={650} />
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+            <motion.div {...fadeUp()} className="text-center mb-10 sm:mb-12">
+              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Careers</p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-5">
+                Build What <span className="text-gradient-orange">Comes Next.</span>
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
+                A small, senior team building AI-native data systems for high-velocity enterprises.
+                Remote-first. Ownership-driven. Engineering rigor over headcount.
+              </p>
+            </motion.div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+              {[
+                { icon: Brain, title: "Engineering Rigor" },
+                { icon: Sparkles, title: "AI-Native Default" },
+                { icon: Globe, title: "Remote-First" },
+                { icon: Rocket, title: "Real Ownership" },
+              ].map(({ icon: Icon, title }, i) => (
+                <motion.div key={title} {...fadeUp(i * 0.06)}
+                  className="glass-panel rounded-xl p-5 flex items-center gap-3 group hover:glow-orange transition-shadow" data-cursor-hover>
+                  <div className="w-10 h-10 rounded-lg surface-3 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
+                    <Icon size={16} className="text-primary" />
+                  </div>
+                  <span className="text-sm font-semibold text-foreground">{title}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div {...fadeUp(0.2)} className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+              <Link to="/careers" data-cursor-hover
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-orange text-primary-foreground px-7 py-3.5 rounded-lg font-medium text-sm sm:text-base hover:opacity-90 transition-opacity glow-orange">
+                See Open Roles <ArrowRight size={16} />
+              </Link>
+              <a href="mailto:careers@inclinedplane.com" data-cursor-hover
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 glass-panel px-7 py-3.5 rounded-lg font-medium text-sm sm:text-base text-foreground hover:bg-muted/20 transition-colors">
+                careers@inclinedplane.com
+              </a>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* SLIDE 12 — FINAL CTA */}
         <section className="snap-section flex items-center relative overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] rounded-full opacity-[0.08] blur-[120px] bg-gradient-orange top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 will-change-transform" />

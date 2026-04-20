@@ -48,6 +48,7 @@ const Footer = () => {
                   { label: "Thesis", path: "/thesis" },
                   { label: "Blog", path: "/blog" },
                   { label: "Case Studies", path: "/case-studies" },
+                  { label: "Careers", path: "/careers" },
                   { label: "Contact", path: "/contact" },
                 ].map((link) => (
                   <li key={link.path}>
