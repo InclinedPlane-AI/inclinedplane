@@ -395,7 +395,7 @@ const Index = () => {
                   </div>
                   <p className="text-xs text-primary font-mono mb-2">{headline}</p>
                   <h3 className="font-semibold text-foreground text-base mb-3">{title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">{desc}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1 text-justify">{desc}</p>
                   <div className="grid grid-cols-2 gap-2">
                     {bullets.map((b) => (
                       <div key={b} className="flex items-center gap-1.5 text-xs text-secondary-foreground">
