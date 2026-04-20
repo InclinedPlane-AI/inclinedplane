@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
-import CustomCursor from "@/components/CustomCursor";
+
 import SlideProgress from "@/components/SlideProgress";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import AuroraBackground from "@/components/AuroraBackground";
@@ -88,7 +88,6 @@ const Index = () => {
           serviceType: ["Data Engineering", "AI Automation", "Business Intelligence", "Cloud Data Warehousing", "DataOps"],
         }}
       />
-      <CustomCursor />
       <Navbar />
       <SlideProgress total={SLIDE_COUNT} current={currentSlide} onDotClick={scrollToSlide} />
       <ScrollProgressBar containerRef={containerRef} />
