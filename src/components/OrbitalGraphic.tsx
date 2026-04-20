@@ -4,27 +4,32 @@ import { Database, Cloud, Eye, BarChart3, Zap, Brain } from "lucide-react";
 
 const NODES = [
   {
-    label: "Ingest",
+     label: "High-Velocity Ingestion",
     icon: Database,
     desc: "Enterprise-grade data pipelines that unify disparate sources into a single, real-time stream.",
   },
+   {
+     label: "High-Velocity Ingestion",
+     icon: Database,
+     desc: "Enterprise-grade data pipelines that unify disparate sources into a single, real-time stream.",
+   },
   {
-    label: "Model",
+     label: "Self-Architecting Pipelines",
     icon: Cloud,
     desc: "Cloud-native warehousing on AWS, Azure, or Snowflake optimized for heavy-compute AI workloads.",
   },
   {
-    label: "Observe",
+     label: "Operational Intelligence",
     icon: Eye,
     desc: "Full-stack observability covering pipeline health, data quality, and model drift detection.",
   },
   {
-    label: "Predict",
+     label: "Predictive Foresight",
     icon: BarChart3,
     desc: "ML-powered forecasting for demand, risk, and growth — turning 'what if' into 'what's next.'",
   },
   {
-    label: "Automate",
+     label: "Agentic Execution",
     icon: Zap,
     desc: "Agentic AI systems that execute multi-step workflows and interact with enterprise tools autonomously.",
   },
