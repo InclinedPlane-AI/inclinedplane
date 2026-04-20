@@ -8,6 +8,11 @@ const NODES = [
     icon: Database,
     desc: "Enterprise-grade data pipelines that unify disparate sources into a single, real-time stream.",
   },
+   {
+     label: "High-Velocity Ingestion",
+     icon: Database,
+     desc: "Enterprise-grade data pipelines that unify disparate sources into a single, real-time stream.",
+   },
   {
     label: "Model",
     icon: Cloud,
