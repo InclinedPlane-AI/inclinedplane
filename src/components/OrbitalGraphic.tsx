@@ -87,7 +87,7 @@ const OrbitalGraphic = () => {
   }, [animate]);
 
   return (
-    <div className="relative w-80 h-80 pointer-events-none">
+    <div className="relative w-[28rem] h-[28rem] pointer-events-none">
       {/* Glow behind center */}
       <div className="absolute inset-[25%] rounded-full bg-gradient-orange opacity-[0.025] blur-3xl animate-pulse-glow will-change-[opacity]" />
 
@@ -96,7 +96,7 @@ const OrbitalGraphic = () => {
       <div className="absolute inset-[15%] rounded-full border border-muted/20" />
 
       {/* Connection lines SVG */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="-160 -160 320 320">
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="-224 -224 448 448">
         {NODES.map((_, i) => (
           <line
             key={i}
