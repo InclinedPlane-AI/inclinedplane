@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
+  { label: "Home", path: "/" },
   { label: "Thesis", path: "/thesis" },
   { label: "Services", path: "/services" },
   { label: "Industries", path: "/industries" },
