@@ -119,7 +119,7 @@ const Index = () => {
                     Data Leveraged.{" "}
                     <span className="text-gradient-orange">Growth Accelerated.</span>
                   </h1>
-                  <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-lg mb-6 sm:mb-8">
+                  <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-lg mb-6 sm:mb-8 text-justify">
                     We don't just engineer data — we operationalize intelligence. InclinedPlane provides the architectural backbone and AI implementation required for high-velocity enterprises to make smarter decisions, faster.
                   </p>
                   <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pointer-events-auto">
