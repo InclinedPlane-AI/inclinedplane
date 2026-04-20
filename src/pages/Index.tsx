@@ -226,8 +226,8 @@ const Index = () => {
               <motion.a {...fadeUp(0.24)} href="https://www.microsoft.com/en-us/microsoft-fabric/blog/2024/06/03/forrester-total-economic-impact-study-microsoft-fabric-delivers-379-roi-over-three-years/" target="_blank" rel="noopener noreferrer" className="col-span-2 lg:col-span-3 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer" data-cursor-hover>
                 <div>
                   <TrendingUp size={16} className="text-primary mb-2" />
-                  <p className="text-2xl font-bold text-gradient-orange mb-1">379% ROI</p>
-                  <p className="text-[11px] text-muted-foreground leading-relaxed">Over 3 years for orgs with mature, unified data platforms.</p>
+                  <p className="text-2xl font-bold text-gradient-orange mb-1 pl-3">379% ROI</p>
+                  <p className="text-[11px] text-muted-foreground leading-relaxed pl-3">Over 3 years for orgs with mature, unified data platforms.</p>
                 </div>
                 <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
                   <span className="font-mono text-[8px] text-muted-foreground/50 uppercase">Forrester</span>
