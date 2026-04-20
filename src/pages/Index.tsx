@@ -100,7 +100,7 @@ const Index = () => {
           <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full pointer-events-none">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
-                <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
+                <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="pointer-events-auto">
                   <motion.p
                     className="font-mono text-[11px] sm:text-[13px] tracking-widest uppercase mb-4 sm:mb-6 inline-block font-medium"
                     style={{
