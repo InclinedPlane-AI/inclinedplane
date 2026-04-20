@@ -54,41 +54,6 @@ const values = [
   },
 ];
 
-const roles = [
-  {
-    title: "Senior Data Engineer",
-    type: "Full-time · Remote",
-    location: "Global",
-    summary:
-      "Design and ship production-grade data platforms on Snowflake, BigQuery, or Databricks. Lead architecture for client engagements.",
-    tags: ["Snowflake", "dbt", "Python", "Airflow"],
-  },
-  {
-    title: "AI / ML Engineer",
-    type: "Full-time · Remote",
-    location: "Global",
-    summary:
-      "Build and deploy production ML systems — from RAG pipelines and agent workflows to forecasting models — embedded in client environments.",
-    tags: ["Python", "LLMs", "PyTorch", "MLOps"],
-  },
-  {
-    title: "Analytics Engineer",
-    type: "Full-time · Remote",
-    location: "Global",
-    summary:
-      "Translate business logic into trustworthy data models. Own the semantic layer and make analytics a first-class product.",
-    tags: ["dbt", "SQL", "Looker", "Metabase"],
-  },
-  {
-    title: "Founding Solutions Architect",
-    type: "Full-time · Remote",
-    location: "US / EU",
-    summary:
-      "Partner with clients to scope, architect, and deliver high-leverage data + AI engagements end-to-end.",
-    tags: ["Architecture", "Cloud", "AI Strategy"],
-  },
-];
-
 const perks = [
   { icon: Laptop, title: "Top-tier Hardware", desc: "MacBook Pro, monitor stipend, and the tools you need." },
   { icon: GraduationCap, title: "Learning Budget", desc: "Annual budget for courses, books, and conferences." },
