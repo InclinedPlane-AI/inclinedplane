@@ -537,7 +537,7 @@ const Index = () => {
                   className="glass-panel rounded-xl p-7 flex flex-col justify-between group hover:glow-orange transition-shadow" data-cursor-hover>
                   <div>
                     <Quote size={20} className="text-primary/40 mb-4" />
-                    <p className="text-sm text-secondary-foreground leading-relaxed mb-6">{quote}</p>
+                    <p className="text-sm text-secondary-foreground leading-relaxed mb-6 text-justify">{quote}</p>
                   </div>
                   <div>
                     <div className="border-t border-border pt-4 flex items-center justify-between">
