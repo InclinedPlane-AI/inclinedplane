@@ -10,8 +10,6 @@ import {
   Heart,
   Zap,
   Shield,
-  ArrowRight,
-  ArrowUpRight,
   GraduationCap,
   Coffee,
   Laptop,
@@ -53,41 +51,6 @@ const values = [
     icon: Globe,
     title: "Remote-First, Async-Friendly",
     desc: "Distributed team across time zones. Documentation over meetings. Deep work over performative busy.",
-  },
-];
-
-const roles = [
-  {
-    title: "Senior Data Engineer",
-    type: "Full-time · Remote",
-    location: "Global",
-    summary:
-      "Design and ship production-grade data platforms on Snowflake, BigQuery, or Databricks. Lead architecture for client engagements.",
-    tags: ["Snowflake", "dbt", "Python", "Airflow"],
-  },
-  {
-    title: "AI / ML Engineer",
-    type: "Full-time · Remote",
-    location: "Global",
-    summary:
-      "Build and deploy production ML systems — from RAG pipelines and agent workflows to forecasting models — embedded in client environments.",
-    tags: ["Python", "LLMs", "PyTorch", "MLOps"],
-  },
-  {
-    title: "Analytics Engineer",
-    type: "Full-time · Remote",
-    location: "Global",
-    summary:
-      "Translate business logic into trustworthy data models. Own the semantic layer and make analytics a first-class product.",
-    tags: ["dbt", "SQL", "Looker", "Metabase"],
-  },
-  {
-    title: "Founding Solutions Architect",
-    type: "Full-time · Remote",
-    location: "US / EU",
-    summary:
-      "Partner with clients to scope, architect, and deliver high-leverage data + AI engagements end-to-end.",
-    tags: ["Architecture", "Cloud", "AI Strategy"],
   },
 ];
 
@@ -163,54 +126,55 @@ const Careers = () => {
         </div>
       </section>
 
-      {/* Open Roles */}
+      {/* Talent Network — Not Currently Hiring */}
       <section className="relative py-20 sm:py-24">
         <SectionGlow position="bottom-right" size={650} />
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div {...fadeUp} className="mb-12">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+          <motion.div {...fadeUp} className="mb-10 text-center">
             <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Open Roles</p>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Currently <span className="text-gradient-orange">Hiring.</span>
+              No open positions <span className="text-gradient-orange">right now.</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl leading-relaxed">
-              Don't see your role? We're always open to exceptional engineers. Email us with what you'd want to build.
+            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              We're not actively hiring at the moment — but we're always interested in meeting exceptional engineers,
+              architects, and AI builders. When the right person reaches out, we make room.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-5">
-            {roles.map((role, i) => (
-              <motion.a
-                key={role.title}
-                href={`mailto:${CAREERS_EMAIL}?subject=Application — ${encodeURIComponent(role.title)}`}
-                {...fadeUp}
-                transition={{ duration: 0.5, delay: i * 0.06, ease: "easeOut" }}
-                className="glass-panel rounded-xl p-6 sm:p-7 group hover:glow-orange transition-shadow block"
-                data-cursor-hover
-              >
-                <div className="flex items-start justify-between gap-4 mb-3">
-                  <div>
-                    <p className="font-mono text-[10px] text-primary tracking-widest uppercase mb-2">{role.type}</p>
-                    <h3 className="text-lg sm:text-xl font-semibold text-foreground">{role.title}</h3>
+          <motion.div
+            {...fadeUp}
+            transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+            className="glass-panel rounded-2xl p-8 sm:p-10"
+          >
+            <div className="grid sm:grid-cols-3 gap-6 sm:gap-8 mb-8">
+              {[
+                { icon: Brain, title: "Data & AI Engineering", desc: "Snowflake, Databricks, dbt, LLMs, agents." },
+                { icon: Shield, title: "Architecture & Strategy", desc: "Cloud-native platforms and AI roadmaps." },
+                { icon: Zap, title: "Founding-Team Roles", desc: "Senior generalists who own outcomes." },
+              ].map(({ icon: Icon, title, desc }) => (
+                <div key={title} className="flex flex-col">
+                  <div className="w-10 h-10 rounded-xl surface-3 flex items-center justify-center mb-3">
+                    <Icon size={16} className="text-primary" />
                   </div>
-                  <ArrowUpRight
-                    size={20}
-                    className="text-muted-foreground group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all flex-shrink-0"
-                  />
+                  <h3 className="font-semibold text-foreground text-sm mb-1.5">{title}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-5">{role.summary}</p>
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-border">
-                  {role.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[10px] font-mono text-muted-foreground bg-muted/30 px-2.5 py-1 rounded-md"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.a>
-            ))}
-          </div>
+              ))}
+            </div>
+
+            <div className="pt-6 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Introduce yourself, share what you've built, and tell us what you'd want to work on.
+              </p>
+              <a
+                href={`mailto:${CAREERS_EMAIL}?subject=Introduction — Talent Network`}
+                data-cursor-hover
+                className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-5 py-2.5 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity flex-shrink-0"
+              >
+                <Mail size={15} /> Join our talent network
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
