@@ -208,7 +208,7 @@ const Index = () => {
               </motion.a>
 
               {/* Card 4 */}
-              <motion.a {...fadeUp(0.18)} href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025" target="_blank" rel="noopener noreferrer" className="relative lg:w-[calc(175%+0.75rem)] z-10 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer" data-cursor-hover>
+              <motion.a {...fadeUp(0.18)} href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025" target="_blank" rel="noopener noreferrer" className="col-span-2 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer" data-cursor-hover>
                 <div>
                   <Shield size={16} className="text-primary mb-3" />
                   <p className="text-2xl font-bold text-gradient-orange mb-1">63%</p>
@@ -223,7 +223,7 @@ const Index = () => {
               </motion.a>
 
               {/* Wide card 5 — spans 2 cols */}
-              <motion.a {...fadeUp(0.24)} href="https://www.microsoft.com/en-us/microsoft-fabric/blog/2024/06/03/forrester-total-economic-impact-study-microsoft-fabric-delivers-379-roi-over-three-years/" target="_blank" rel="noopener noreferrer" className="col-span-2 lg:col-span-3 lg:w-[75%] lg:ml-auto glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer" data-cursor-hover>
+              <motion.a {...fadeUp(0.24)} href="https://www.microsoft.com/en-us/microsoft-fabric/blog/2024/06/03/forrester-total-economic-impact-study-microsoft-fabric-delivers-379-roi-over-three-years/" target="_blank" rel="noopener noreferrer" className="col-span-2 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer" data-cursor-hover>
                 <div>
                   <TrendingUp size={16} className="text-primary mb-2 ml-3" />
                   <p className="text-2xl font-bold text-gradient-orange mb-1 pl-3">379% ROI</p>
