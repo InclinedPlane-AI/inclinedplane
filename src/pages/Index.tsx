@@ -208,7 +208,7 @@ const Index = () => {
               </motion.a>
 
               {/* Card 4 */}
-              <motion.a {...fadeUp(0.18)} href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025" target="_blank" rel="noopener noreferrer" className="relative lg:w-[125%] z-10 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer" data-cursor-hover>
+              <motion.a {...fadeUp(0.18)} href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025" target="_blank" rel="noopener noreferrer" className="relative lg:w-[calc(125%-0.75rem)] z-10 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer" data-cursor-hover>
                 <div>
                   <Shield size={16} className="text-primary mb-3" />
                   <p className="text-2xl font-bold text-gradient-orange mb-1">63%</p>
