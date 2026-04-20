@@ -143,12 +143,6 @@
     @apply bg-background text-foreground;
   }
 
-  /* Custom cursor only on non-touch devices */
-  @media (pointer: fine) {
-    body {
-      cursor: none;
-    }
-  }
 
   /* Theme sweep — top-to-bottom curtain cascade */
   html.theme-sweeping,
