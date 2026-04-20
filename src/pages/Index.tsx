@@ -244,29 +244,27 @@ const Index = () => {
         <section className="snap-section flex items-center relative">
           <SectionGlow position="top-right" size={600} />
            <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full">
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <div>
-                <motion.div {...fadeUp()}>
-                  <p className="font-mono text-[10px] sm:text-xs text-primary tracking-widest uppercase mb-3 sm:mb-4">The Problem</p>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6 sm:mb-8">
-                    Dashboards Are Not{" "}<span className="text-gradient-orange">Competitive Advantage.</span>
-                  </h2>
-                </motion.div>
-                <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
-                  {[
-                    "[WARN] Pipeline failed: stale data — 47min lag",
-                    "[ERR]  Model drift detected — no retraining trigger",
-                    "[WARN] Dashboard refresh: manual, weekly cadence",
-                    "[ERR]  No observability — blind spot in pipeline health",
-                    "[INFO] Business asking: 'Can we predict demand?'",
-                    "[ERR]  68% of AI projects fail from bad data infra",
-                  ].map((log, i) => (
-                    <motion.div key={i} {...fadeUp(0.1 + i * 0.06)}
-                      className={`px-4 py-2 rounded surface-2 ${log.includes("[ERR]") ? "text-destructive/80 border-l-2 border-destructive/50" : log.includes("[WARN]") ? "text-orange-300 border-l-2 border-orange-500/30" : "text-muted-foreground border-l-2 border-muted-foreground/40"}`}>
-                      {log}
-                    </motion.div>
-                  ))}
-                </div>
+            <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+              <p className="font-mono text-[10px] sm:text-xs text-primary tracking-widest uppercase mb-3 sm:mb-4">The Problem</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+                Dashboards Are Not{" "}<span className="text-gradient-orange">Competitive Advantage.</span>
+              </h2>
+            </motion.div>
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+              <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
+                {[
+                  "[WARN] Pipeline failed: stale data — 47min lag",
+                  "[ERR]  Model drift detected — no retraining trigger",
+                  "[WARN] Dashboard refresh: manual, weekly cadence",
+                  "[ERR]  No observability — blind spot in pipeline health",
+                  "[INFO] Business asking: 'Can we predict demand?'",
+                  "[ERR]  68% of AI projects fail from bad data infra",
+                ].map((log, i) => (
+                  <motion.div key={i} {...fadeUp(0.1 + i * 0.06)}
+                    className={`px-4 py-2 rounded surface-2 ${log.includes("[ERR]") ? "text-destructive/80 border-l-2 border-destructive/50" : log.includes("[WARN]") ? "text-orange-300 border-l-2 border-orange-500/30" : "text-muted-foreground border-l-2 border-muted-foreground/40"}`}>
+                    {log}
+                  </motion.div>
+                ))}
               </div>
               <motion.div {...fadeUp(0.15)}>
                 <div className="glass-panel rounded-2xl p-8">
