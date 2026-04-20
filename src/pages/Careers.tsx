@@ -110,6 +110,7 @@ const process = [
 const Careers = () => {
   return (
     <PageLayout>
+      <div className="overflow-x-clip">
       <SEOHead
         title="Careers — Build the Future of Data & AI | InclinedPlane"
         description="Join InclinedPlane to build AI-native data systems for high-velocity enterprises. Remote-first, ownership-driven, engineering rigor."
