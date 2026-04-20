@@ -1,41 +1,36 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Database, Cloud, Eye, BarChart3, Zap, Brain } from "lucide-react";
+import { Waves, Workflow, Activity, TrendingUp, Bot, Brain } from "lucide-react";
 
 const NODES = [
   {
      label: "High-Velocity Ingestion",
-    icon: Database,
+    icon: Waves,
     desc: "Enterprise-grade data pipelines that unify disparate sources into a single, real-time stream.",
   },
-   {
-     label: "High-Velocity Ingestion",
-     icon: Database,
-     desc: "Enterprise-grade data pipelines that unify disparate sources into a single, real-time stream.",
-   },
   {
      label: "Self-Architecting Pipelines",
-    icon: Cloud,
+    icon: Workflow,
     desc: "Cloud-native warehousing on AWS, Azure, or Snowflake optimized for heavy-compute AI workloads.",
   },
   {
      label: "Operational Intelligence",
-    icon: Eye,
+    icon: Activity,
     desc: "Full-stack observability covering pipeline health, data quality, and model drift detection.",
   },
   {
      label: "Predictive Foresight",
-    icon: BarChart3,
+    icon: TrendingUp,
     desc: "ML-powered forecasting for demand, risk, and growth — turning 'what if' into 'what's next.'",
   },
   {
      label: "Agentic Execution",
-    icon: Zap,
+    icon: Bot,
     desc: "Agentic AI systems that execute multi-step workflows and interact with enterprise tools autonomously.",
   },
 ];
 
-const RADIUS = 130;
+const RADIUS = 180;
 const ROTATION_SPEED = 0.003;
 
 const OrbitalGraphic = () => {
