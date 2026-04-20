@@ -262,7 +262,7 @@ const Index = () => {
                     "[ERR]  68% of AI projects fail from bad data infra",
                   ].map((log, i) => (
                     <motion.div key={i} {...fadeUp(0.1 + i * 0.06)}
-                      className={`px-4 py-2 rounded surface-2 ${log.includes("[ERR]") ? "text-destructive/80 border-l-2 border-destructive/50" : log.includes("[WARN]") ? "text-orange-300 border-l-2 border-orange-500/30" : "text-muted-foreground"}`}>
+                      className={`px-4 py-2 rounded surface-2 ${log.includes("[ERR]") ? "text-destructive/80 border-l-2 border-destructive/50" : log.includes("[WARN]") ? "text-orange-300 border-l-2 border-orange-500/30" : "text-muted-foreground border-l-2 border-muted-foreground/40"}`}>
                       {log}
                     </motion.div>
                   ))}
