@@ -164,7 +164,7 @@ const Index = () => {
             {/* Bento grid — compact */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {/* Hero card — spans 2 cols on lg */}
-              <motion.div {...fadeUp(0)} className="col-span-2 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between" data-cursor-hover>
+              <motion.a {...fadeUp(0)} href="https://www.pwc.com/gx/en/issues/artificial-intelligence/publications/artificial-intelligence-study.html" target="_blank" rel="noopener noreferrer" className="col-span-2 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer" data-cursor-hover>
                 <div>
                   <Globe size={18} className="text-primary mb-3" />
                   <p className="text-4xl font-bold text-gradient-orange text-glow-orange mb-1">$15.7T</p>
@@ -172,14 +172,14 @@ const Index = () => {
                 </div>
                 <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
                   <span className="font-mono text-[9px] text-muted-foreground/50 uppercase">PwC, 2024</span>
-                  <a href="https://www.pwc.com/gx/en/issues/artificial-intelligence/publications/artificial-intelligence-study.html" target="_blank" rel="noopener noreferrer" className="w-6 h-6 rounded-md surface-3 flex items-center justify-center hover:bg-primary/20 transition-colors" data-cursor-hover>
+                  <span className="w-6 h-6 rounded-md surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                     <ArrowUpRight size={11} className="text-primary" />
-                  </a>
+                  </span>
                 </div>
-              </motion.div>
+              </motion.a>
 
               {/* Card 2 */}
-              <motion.div {...fadeUp(0.06)} className="glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between" data-cursor-hover>
+              <motion.a {...fadeUp(0.06)} href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener noreferrer" className="glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer" data-cursor-hover>
                 <div>
                   <Target size={16} className="text-primary mb-3" />
                   <p className="text-2xl font-bold text-gradient-orange mb-1">72%</p>
@@ -187,14 +187,14 @@ const Index = () => {
                 </div>
                 <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
                   <span className="font-mono text-[8px] text-muted-foreground/50 uppercase">McKinsey</span>
-                  <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener noreferrer" className="w-5 h-5 rounded surface-3 flex items-center justify-center hover:bg-primary/20 transition-colors" data-cursor-hover>
+                  <span className="w-5 h-5 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                     <ArrowUpRight size={10} className="text-primary" />
-                  </a>
+                  </span>
                 </div>
-              </motion.div>
+              </motion.a>
 
               {/* Card 3 */}
-              <motion.div {...fadeUp(0.12)} className="glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between" data-cursor-hover>
+              <motion.a {...fadeUp(0.12)} href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025" target="_blank" rel="noopener noreferrer" className="glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer" data-cursor-hover>
                 <div>
                   <Activity size={16} className="text-primary mb-3" />
                   <p className="text-2xl font-bold text-gradient-orange mb-1">30%</p>
@@ -202,14 +202,14 @@ const Index = () => {
                 </div>
                 <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
                   <span className="font-mono text-[8px] text-muted-foreground/50 uppercase">Gartner</span>
-                  <a href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025" target="_blank" rel="noopener noreferrer" className="w-5 h-5 rounded surface-3 flex items-center justify-center hover:bg-primary/20 transition-colors" data-cursor-hover>
+                  <span className="w-5 h-5 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                     <ArrowUpRight size={10} className="text-primary" />
-                  </a>
+                  </span>
                 </div>
-              </motion.div>
+              </motion.a>
 
               {/* Card 4 */}
-              <motion.div {...fadeUp(0.18)} className="glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between" data-cursor-hover>
+              <motion.a {...fadeUp(0.18)} href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025" target="_blank" rel="noopener noreferrer" className="glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer" data-cursor-hover>
                 <div>
                   <Shield size={16} className="text-primary mb-3" />
                   <p className="text-2xl font-bold text-gradient-orange mb-1">63%</p>
@@ -217,26 +217,26 @@ const Index = () => {
                 </div>
                 <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
                   <span className="font-mono text-[8px] text-muted-foreground/50 uppercase">Gartner</span>
-                  <a href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025" target="_blank" rel="noopener noreferrer" className="w-5 h-5 rounded surface-3 flex items-center justify-center hover:bg-primary/20 transition-colors" data-cursor-hover>
+                  <span className="w-5 h-5 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                     <ArrowUpRight size={10} className="text-primary" />
-                  </a>
+                  </span>
                 </div>
-              </motion.div>
+              </motion.a>
 
               {/* Wide card 5 — spans 2 cols */}
-              <motion.div {...fadeUp(0.24)} className="col-span-2 lg:col-span-3 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex items-center gap-5" data-cursor-hover>
-                <div className="flex-1">
+              <motion.a {...fadeUp(0.24)} href="https://www.microsoft.com/en-us/microsoft-fabric/blog/2024/06/03/forrester-total-economic-impact-study-microsoft-fabric-delivers-379-roi-over-three-years/" target="_blank" rel="noopener noreferrer" className="col-span-2 lg:col-span-3 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer" data-cursor-hover>
+                <div>
                   <TrendingUp size={16} className="text-primary mb-2" />
                   <p className="text-2xl font-bold text-gradient-orange mb-1">379% ROI</p>
                   <p className="text-[11px] text-muted-foreground leading-relaxed">Over 3 years for orgs with mature, unified data platforms.</p>
                 </div>
-                <div className="flex flex-col items-end gap-1 shrink-0">
+                <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
                   <span className="font-mono text-[8px] text-muted-foreground/50 uppercase">Forrester</span>
-                  <a href="https://www.microsoft.com/en-us/microsoft-fabric/blog/2024/06/03/forrester-total-economic-impact-study-microsoft-fabric-delivers-379-roi-over-three-years/" target="_blank" rel="noopener noreferrer" className="w-5 h-5 rounded surface-3 flex items-center justify-center hover:bg-primary/20 transition-colors" data-cursor-hover>
+                  <span className="w-5 h-5 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                     <ArrowUpRight size={10} className="text-primary" />
-                  </a>
+                  </span>
                 </div>
-              </motion.div>
+              </motion.a>
             </div>
           </div>
         </section>
