@@ -10,8 +10,6 @@ import {
   Heart,
   Zap,
   Shield,
-  ArrowRight,
-  ArrowUpRight,
   GraduationCap,
   Coffee,
   Laptop,
