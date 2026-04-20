@@ -19,7 +19,7 @@ import {
   CheckCircle2, Quote, Sparkles, Target, Rocket
 } from "lucide-react";
 
-const SLIDE_COUNT = 11;
+const SLIDE_COUNT = 12;
 
 // Shared viewport config for all whileInView — only animate once
 const vp = { once: true, amount: 0.2 } as const;
