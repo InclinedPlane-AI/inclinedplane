@@ -94,12 +94,12 @@ const Careers = () => {
       <section className="relative py-20 sm:py-24">
         <SectionGlow position="top-left" size={600} />
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div {...fadeUp} className="max-w-3xl mb-14">
+          <motion.div {...fadeUp} className="max-w-3xl mx-auto mb-14 text-center">
             <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Why InclinedPlane</p>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-5">
               A team built for <span className="text-gradient-orange">leverage</span>, not headcount.
             </h2>
-            <p className="text-muted-foreground leading-relaxed text-justify">
+            <p className="text-muted-foreground leading-relaxed">
               We don't optimize for size — we optimize for the quality of the engineers in the room. Every person here
               is expected to set direction, ship production work, and raise the bar. In return, you get autonomy,
               ownership, and the chance to work on problems that matter to the businesses we partner with.
@@ -211,12 +211,12 @@ const Careers = () => {
       <section className="relative py-20 sm:py-24">
         <SectionGlow position="bottom-left" size={650} />
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div {...fadeUp} className="mb-14">
+          <motion.div {...fadeUp} className="mb-14 text-center max-w-3xl mx-auto">
             <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Hiring Process</p>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
               Fast, respectful, <span className="text-gradient-orange">no theatre.</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl leading-relaxed">
+            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Four steps over two to three weeks. We respect your time and aim to give you a clear answer either way.
             </p>
           </motion.div>
