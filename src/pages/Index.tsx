@@ -314,13 +314,13 @@ const Index = () => {
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <motion.div {...fadeUp(0.1)}>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
+                  <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
                     For years, as <span className="text-foreground font-medium">Sail Analytics</span>, we built a foundation of enterprise trust by delivering high-stakes data analytics and engineering services to complex organizations. We helped our clients navigate the vast seas of information with precision and reliability.
                   </p>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
+                  <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
                     But in the age of Artificial Intelligence, <span className="text-foreground font-medium">navigation isn't enough — you need momentum.</span>
                   </p>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed text-justify">
                     <span className="text-gradient-orange font-semibold">InclinedPlane</span> represents a fundamental shift: providing the strategic leverage your business needs. We transform raw data into a sophisticated lever that multiplies your team's efforts and accelerates your trajectory.
                   </p>
                 </motion.div>
