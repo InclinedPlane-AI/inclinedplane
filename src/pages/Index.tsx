@@ -305,14 +305,14 @@ const Index = () => {
         <section className="snap-section flex items-center relative">
           <SectionGlow position="bottom-left" size={650} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+            <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">The Evolution</p>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+                From Sail to{" "}<span className="text-gradient-orange">Leverage.</span>
+              </h2>
+            </motion.div>
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
-                <motion.div {...fadeUp()}>
-                  <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">The Evolution</p>
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-8">
-                    From Sail to{" "}<span className="text-gradient-orange">Leverage.</span>
-                  </h2>
-                </motion.div>
                 <motion.div {...fadeUp(0.1)}>
                   <p className="text-muted-foreground leading-relaxed mb-6">
                     For years, as <span className="text-foreground font-medium">Sail Analytics</span>, we built a foundation of enterprise trust by delivering high-stakes data analytics and engineering services to complex organizations. We helped our clients navigate the vast seas of information with precision and reliability.
