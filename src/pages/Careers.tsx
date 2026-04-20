@@ -305,6 +305,7 @@ const Careers = () => {
           </motion.div>
         </div>
       </section>
+      </div>
     </PageLayout>
   );
 };
