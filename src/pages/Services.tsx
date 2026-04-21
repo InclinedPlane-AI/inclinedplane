@@ -92,7 +92,7 @@ const pillars: ServicePillar[] = [
     benefits: [
       "60% faster time-to-insight",
       "Single source of truth across all systems",
-      "Future-proof, cloud-native architecture",
+      " AI-ready by design — every architecture decision we make accounts for the data demands of future AI and ML systems.",
     ],
   },
   {
