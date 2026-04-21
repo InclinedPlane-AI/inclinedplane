@@ -77,7 +77,7 @@ const process = [
   {
     icon: Code2,
     title: "Practical Exercise",
-    desc: "A short, paid take-home (or live pairing session) on a problem close to what you'd do day-one.",
+    desc: "A short, take-home (or live pairing session) on a problem close to what you'd do day-one.",
   },
   {
     icon: Handshake,
