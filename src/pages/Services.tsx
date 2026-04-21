@@ -191,7 +191,7 @@ const pillars: ServicePillar[] = [
     number: "05",
     title: "Automation & Decision Systems",
     shortTitle: "Automation Systems",
-    subtitle: "Future-Forward Layer",
+    subtitle: "Autonomy Layer",
     positioning: "From dashboards to decision systems — autonomous intelligence.",
     description:
       "The final frontier of data maturity: systems that don't just inform, but act. We build autonomous decision pipelines — AI agents that monitor, reason, and execute. From intelligent alerting to cross-system orchestration, we help leadership move from reading dashboards to receiving action-ready intelligence summaries.",
