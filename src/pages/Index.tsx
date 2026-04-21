@@ -316,7 +316,7 @@ const Index = () => {
                   href="https://www.microsoft.com/en-us/microsoft-fabric/blog/2024/06/03/forrester-total-economic-impact-study-microsoft-fabric-delivers-379-roi-over-three-years/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="col-span-2 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
+                  className="col-span-2 lg:col-span-3 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
                   data-cursor-hover
                 >
                   <div>
