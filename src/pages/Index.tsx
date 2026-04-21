@@ -212,9 +212,9 @@ const Index = () => {
                 </p>
               </motion.div>
 
-              {/* Bento grid — compact */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                {/* Hero card — spans 2 cols on lg */}
+              {/* Bento grid — reference layout: top (2 + 1 + 1), bottom (1 + 3) */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:auto-rows-[11rem]">
+                {/* Hero card — top-left large (spans 2 cols) */}
                 <motion.a
                   {...fadeUp(0)}
                   href="https://www.pwc.com/gx/en/issues/artificial-intelligence/publications/artificial-intelligence-study.html"
