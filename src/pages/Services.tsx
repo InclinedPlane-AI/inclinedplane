@@ -157,7 +157,7 @@ const pillars: ServicePillar[] = [
     number: "04",
     title: "Predictive & AI Implementation",
     shortTitle: "AI & ML Implementations",
-    subtitle: "High-Margin Layer",
+    subtitle: "Intelligence Layer",
     positioning: "AI, predictive & agentic implementation — from experimentation to production.",
     description:
       "We take AI from proof-of-concept to production. Whether it's demand forecasting, risk scoring, or natural language interfaces over your data — we build, deploy, and monitor ML systems that deliver measurable business impact. No science projects. Every model ships with monitoring, retraining pipelines, and clear ROI metrics.",
