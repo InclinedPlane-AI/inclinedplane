@@ -194,7 +194,7 @@ const Careers = () => {
           </div>
         </section>
 
-        {/* Perks */}
+        {/* Perks — commented out for now
         <section className="relative py-20 sm:py-24">
           <SectionGlow position="top-right" size={600} />
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -222,6 +222,7 @@ const Careers = () => {
             </div>
           </div>
         </section>
+        */}
 
         {/* Hiring Process */}
         <section className="relative py-20 sm:py-24">
