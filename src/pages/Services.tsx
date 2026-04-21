@@ -285,7 +285,7 @@ const ServicesPage = () => {
       <PageHero
         label="Services"
         title={<>What We <span className="text-gradient-orange">Build.</span></>}
-        subtitle="Five layers of data infrastructure — from foundation to autonomous intelligence."
+        subtitle="Five layers of data infrastructure — from foundation to autonomous intelligence.Every layer we build is AI-enabled in delivery and AI-ready in design — so your data infrastructure doesn't just work today, it supports whatever you build tomorrow.
       />
       <div className="pb-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
