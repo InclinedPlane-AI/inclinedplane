@@ -68,7 +68,7 @@ const pillars: ServicePillar[] = [
     tagline: "Build once. Scale forever.",
     icon: Database,
     items: [
-      { label: "Enterprise data architecture", icon: Layers },
+      { label: "AI-ready enterprise data architecture", icon: Layers },
       { label: "Data platform engineering", icon: Database },
       { label: "Cloud migration & redesign", icon: CloudCog },
       { label: "Lakehouse & warehouse design", icon: Warehouse },
