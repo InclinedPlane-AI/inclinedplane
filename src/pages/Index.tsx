@@ -212,9 +212,9 @@ const Index = () => {
                 </p>
               </motion.div>
 
-              {/* Bento grid — compact */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                {/* Hero card — spans 2 cols on lg */}
+              {/* Bento grid — reference layout: top (2 + 1 + 1), bottom (1 + 3) */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:auto-rows-[11rem]">
+                {/* Hero card — top-left large (spans 2 cols) */}
                 <motion.a
                   {...fadeUp(0)}
                   href="https://www.pwc.com/gx/en/issues/artificial-intelligence/publications/artificial-intelligence-study.html"
@@ -286,13 +286,13 @@ const Index = () => {
                   </div>
                 </motion.a>
 
-                {/* Card 4 */}
+                {/* Card 4 — bottom-left small (1 col) */}
                 <motion.a
                   {...fadeUp(0.18)}
                   href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="col-span-2 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
+                  className="glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
                   data-cursor-hover
                 >
                   <div>
@@ -310,13 +310,13 @@ const Index = () => {
                   </div>
                 </motion.a>
 
-                {/* Wide card 5 — spans 2 cols */}
+                {/* Wide card 5 — bottom-right large (spans 3 cols) */}
                 <motion.a
                   {...fadeUp(0.24)}
                   href="https://www.microsoft.com/en-us/microsoft-fabric/blog/2024/06/03/forrester-total-economic-impact-study-microsoft-fabric-delivers-379-roi-over-three-years/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="col-span-2 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
+                  className="col-span-2 lg:col-span-3 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
                   data-cursor-hover
                 >
                   <div>
