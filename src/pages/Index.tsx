@@ -292,12 +292,12 @@ const Index = () => {
                   href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="col-span-2 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
                   data-cursor-hover
                 >
                   <div>
                     <Shield size={16} className="text-primary mb-3" />
                     <p className="text-2xl font-bold text-gradient-orange mb-1">63%</p>
+                    className="lg:col-span-1 col-span-2 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
                     <p className="text-[11px] text-muted-foreground leading-relaxed">
                       Of orgs lack data management for AI initiatives.
                     </p>
