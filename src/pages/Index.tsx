@@ -292,7 +292,7 @@ const Index = () => {
                   href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="col-span-2 lg:col-span-1 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
+                  className="col-span-2 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
                   data-cursor-hover
                 >
                   <div>
@@ -316,7 +316,7 @@ const Index = () => {
                   href="https://www.microsoft.com/en-us/microsoft-fabric/blog/2024/06/03/forrester-total-economic-impact-study-microsoft-fabric-delivers-379-roi-over-three-years/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="col-span-2 lg:col-span-3 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
+                  className="col-span-2 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
                   data-cursor-hover
                 >
                   <div>
