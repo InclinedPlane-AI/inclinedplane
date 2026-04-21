@@ -64,7 +64,7 @@ const pillars: ServicePillar[] = [
     subtitle: "AI-Readiness Foundation",
     positioning: "We unify and stabilize your data environment.",
     description:
-      "Every intelligent system starts with a solid foundation. We design and build modern data architectures that consolidate fragmented sources, eliminate silos, and create a single source of truth — whether you're migrating from legacy systems or building greenfield. Our approach ensures your data estate is scalable, governed, and ready for whatever comes next.",
+      "Every intelligent system starts with a solid foundation. We design and build modern data architectures that consolidate fragmented sources, eliminate silos, and create a single source of truth — whether you're migrating from legacy systems or building greenfield. Our approach ensures your data estate is scalable, governed, and ready for whatever comes next. AI-assisted architecture design means faster scoping, fewer blind spots — and a foundation that's ready for your future AI ambitions, not just your current ones.",
     tagline: "Build once. Scale forever.",
     icon: Database,
     items: [
