@@ -720,7 +720,7 @@ const Thesis = () => {
                 <p className="text-muted-foreground leading-relaxed">
                   Most organizations still treat data as a reporting function — static dashboards built on fragile
                   pipelines, monthly cadences that lag behind market shifts, and analytics teams buried in ad-hoc
-                  requests. There is no observability. No testing. No CI/CD. No governance beyond a shared Google Sheet.
+                  requests. There is no observability. No testing. No CI/CD. No governance beyond a shared Spreadsheet.
                 </p>
                 <p className="text-muted-foreground leading-relaxed mt-4">
                   This was adequate when markets moved slowly and "data-driven" meant having a BI tool. It is{" "}
