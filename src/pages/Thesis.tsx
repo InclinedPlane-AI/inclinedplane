@@ -1095,7 +1095,11 @@ const Thesis = () => {
                     </p>
                     <p className="text-sm text-muted-foreground/70 max-w-2xl mx-auto mb-8">
                       This isn't consulting. This is engineering. Production-grade systems, not slide decks. Observable
-                      infrastructure, not black boxes. AI that ships, not AI that demos.
+                      infrastructure, not black boxes. AI that ships, not AI that demos. We are a small, deliberate
+                      team. We take on fewer clients than we could, because the work we do demands it. Every system we
+                      build is one we'd stake our reputation on — because we do. If you want a partner who will tell you
+                      the truth about your data estate, sequence your investments correctly, and build infrastructure
+                      that compounds over time — we should talk.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
