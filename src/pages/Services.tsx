@@ -384,7 +384,7 @@ const ServicesPage = () => {
             What We <span className="text-gradient-orange">What We Do.</span>
           </>
         }
-        subtitle={`Five layers of data infrastructure — from foundation to autonomous intelligence. Every layer we build is AI-enabled in delivery and AI-ready in design — so your data infrastructure doesn't just work today, it supports whatever you build tomorrow.`}
+        subtitle={`Five layers of data infrastructure — from foundation to autonomous intelligence. Every layer we build is AI-enabled in delivery and AI-ready in design — so your data infrastructure doesn't just work today, it supports whatever you build tomorrow. Every layer we build is AI-enabled in delivery and AI-ready in design — so your data infrastructure doesn't just work today, it supports whatever you build tomorrow.`}
       />
       <div className="pb-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
