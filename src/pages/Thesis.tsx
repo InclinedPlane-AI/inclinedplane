@@ -1035,7 +1035,7 @@ const Thesis = () => {
                   {
                     icon: Brain,
                     title: "AI Leadership Summaries",
-                    desc: "Executive dashboards are dead. We build AI systems that generate natural-language briefings — summarizing what changed, why it matters, and what to do about it. Delivered via email, Slack, or embedded in your tools.",
+                    desc: "Executive dashboards tell you what happened. We build AI systems that generate natural-language briefings — summarizing what changed, why it matters, and what to do about it. Delivered via email, Slack, or embedded in your tools.",
                     examples: [
                       "Weekly AI-generated board report: key metrics, notable movements, risk flags",
                       "Daily ops briefing: pipeline health, model performance, anomaly digest",
