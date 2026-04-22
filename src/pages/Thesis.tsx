@@ -723,10 +723,18 @@ const Thesis = () => {
                   requests. There is no observability. No testing. No CI/CD. No governance beyond a shared Spreadsheet.
                 </p>
                 <p className="text-muted-foreground leading-relaxed mt-4">
-                  This was adequate when markets moved slowly and "data-driven" meant having a BI tool. It is{" "}
-                  <strong className="text-foreground">catastrophically inadequate</strong> in the age of AI, where your
-                  competitors are deploying autonomous agents that make decisions in milliseconds while your team is
-                  still waiting for last month's revenue reconciliation.
+                  That was acceptable when markets moved slowly and "data-driven" meant having a BI tool.{" "}
+                  <strong className="text-foreground">It isn't anymore.</strong>
+                </p>
+                <p className="text-muted-foreground leading-relaxed mt-4">
+                  Your competitors are deploying autonomous agents that make decisions in milliseconds. Supply chains
+                  are being optimised in real-time. Revenue anomalies are being detected and resolved before anyone
+                  notices. The gap between organisations that have engineering-grade data infrastructure and those that
+                  don't is widening — fast.
+                </p>
+                <p className="text-muted-foreground leading-relaxed mt-4">
+                  The question isn't whether to modernise. It's whether you do it before or after the cost becomes
+                  visible.
                 </p>
               </motion.div>
 
