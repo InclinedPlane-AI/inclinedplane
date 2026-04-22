@@ -715,7 +715,7 @@ const Thesis = () => {
               <motion.div {...fadeUp} className="max-w-3xl mb-10">
                 <p className="font-mono text-xs text-primary tracking-widest uppercase mb-3">The Problem</p>
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-                  The Old Model Is <span className="text-gradient-orange">Catastrophically</span> Inadequate
+                  The market <span className="text-gradient-orange">moved</span>. Most data stacks didn't.
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
                   Most organizations still treat data as a reporting function — static dashboards built on fragile
