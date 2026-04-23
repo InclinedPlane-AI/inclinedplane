@@ -123,7 +123,16 @@ const OrbitalGraphic = () => {
         onMouseLeave={() => setCenterHovered(false)}
         data-cursor-hover
       >
-        <span className="text-primary font-bold text-sm tracking-wide">AI-Native</span>
+        <span
+          className="font-bold text-base tracking-[0.15em] uppercase bg-gradient-orange bg-clip-text text-transparent transition-all duration-300"
+          style={{
+            filter: centerHovered
+              ? "drop-shadow(0 0 8px hsl(25 100% 50% / 0.6))"
+              : "drop-shadow(0 0 2px hsl(25 100% 50% / 0.2))",
+          }}
+        >
+          AI-Native
+        </span>
       </motion.div>
 
       {/* Orbiting nodes */}
