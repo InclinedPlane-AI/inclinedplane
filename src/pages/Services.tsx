@@ -34,6 +34,12 @@ import {
   Link2,
   FileText,
   Sparkles,
+  Compass,
+  Target,
+  Map,
+  Briefcase,
+  ClipboardCheck,
+  Lightbulb,
 } from "lucide-react";
 import { useState, useEffect, useCallback, useRef } from "react";
 
