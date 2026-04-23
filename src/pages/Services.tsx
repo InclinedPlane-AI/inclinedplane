@@ -260,13 +260,6 @@ const ServiceContent = ({ pillar, isActive }: { pillar: ServicePillar; isActive:
 
   return (
     <div className="w-full">
-      {/* Top bar */}
-      <div className="flex items-center gap-3 mb-4">
-        <span className="font-mono text-[10px] uppercase tracking-widest text-primary/70 bg-primary/5 px-2 py-0.5 rounded-full border border-primary/10">
-          {pillar.subtitle}
-        </span>
-      </div>
-
       {/* Title — always visible */}
       <motion.div
         animate={{ opacity: isActive ? 1 : 0.3 }}
