@@ -455,40 +455,57 @@ const ServicesPage = () => {
             <div className="hidden lg:block w-56 shrink-0">
               <div className="sticky top-32">
                 <nav className="space-y-1">
-                  {pillars.map((p, i) => {
+                  {allPillars.map((p, i) => {
                     const Icon = p.icon;
                     const active = activeIndex === i;
+                    const isAdvisory = i === 0;
+                    const showDeliveryLabel = i === 1;
                     return (
-                      <button
-                        key={p.number}
-                        onClick={() => scrollTo(i)}
-                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all duration-300 group ${
-                          active
-                            ? "glass-panel-strong text-foreground"
-                            : "text-muted-foreground/60 hover:text-muted-foreground hover:bg-muted/30"
-                        }`}
-                      >
-                        <div
-                          className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-                            active ? "bg-primary/15" : "surface-3 group-hover:bg-muted"
+                      <div key={p.number}>
+                        {isAdvisory && (
+                          <div className="px-3 pb-2 pt-1">
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-primary/60">
+                              — Advisory
+                            </span>
+                          </div>
+                        )}
+                        {showDeliveryLabel && (
+                          <div className="px-3 pb-2 pt-4 border-t border-border/30 mt-2">
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-primary/60">
+                              — Delivery
+                            </span>
+                          </div>
+                        )}
+                        <button
+                          onClick={() => scrollTo(i)}
+                          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all duration-300 group ${
+                            active
+                              ? "glass-panel-strong text-foreground"
+                              : "text-muted-foreground/60 hover:text-muted-foreground hover:bg-muted/30"
                           }`}
                         >
-                          <Icon size={15} className={active ? "text-primary" : "text-muted-foreground/50"} />
-                        </div>
-                        <div className="min-w-0">
-                          <span
-                            className={`font-mono text-[10px] block ${active ? "text-primary/60" : "text-muted-foreground/30"}`}
+                          <div
+                            className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                              active ? "bg-primary/15" : "surface-3 group-hover:bg-muted"
+                            }`}
                           >
-                            {p.number}
-                          </span>
-                          <span className={`text-sm font-medium truncate block ${active ? "text-foreground" : ""}`}>
-                            {p.shortTitle}
-                          </span>
-                        </div>
-                        <div
-                          className={`ml-auto w-0.5 h-5 rounded-full transition-all ${active ? "bg-primary" : "bg-transparent"}`}
-                        />
-                      </button>
+                            <Icon size={15} className={active ? "text-primary" : "text-muted-foreground/50"} />
+                          </div>
+                          <div className="min-w-0">
+                            <span
+                              className={`font-mono text-[10px] block ${active ? "text-primary/60" : "text-muted-foreground/30"}`}
+                            >
+                              {p.number}
+                            </span>
+                            <span className={`text-sm font-medium truncate block ${active ? "text-foreground" : ""}`}>
+                              {p.shortTitle}
+                            </span>
+                          </div>
+                          <div
+                            className={`ml-auto w-0.5 h-5 rounded-full transition-all ${active ? "bg-primary" : "bg-transparent"}`}
+                          />
+                        </button>
+                      </div>
                     );
                   })}
                 </nav>
@@ -498,12 +515,12 @@ const ServicesPage = () => {
                   <div className="h-1 rounded-full surface-3 overflow-hidden">
                     <motion.div
                       className="h-full bg-gradient-orange rounded-full"
-                      animate={{ width: `${((activeIndex + 1) / pillars.length) * 100}%` }}
+                      animate={{ width: `${((activeIndex + 1) / allPillars.length) * 100}%` }}
                       transition={{ duration: 0.4, ease: "easeOut" }}
                     />
                   </div>
                   <p className="font-mono text-[10px] text-muted-foreground/40 mt-2">
-                    {activeIndex + 1} / {pillars.length}
+                    {activeIndex + 1} / {allPillars.length}
                   </p>
                 </div>
               </div>
