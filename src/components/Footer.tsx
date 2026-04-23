@@ -68,24 +68,44 @@ const Footer = () => {
               <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
                 Services
               </h4>
-              <ul className="space-y-2.5">
+              <div className="space-y-4">
                 {[
-                  { label: "Data Architecture", hash: "data-architecture" },
-                  { label: "Reliability & DataOps", hash: "reliability-ops" },
-                  { label: "Analytics & Intelligence", hash: "analytics-intelligence" },
-                  { label: "AI & ML Implementation", hash: "ai-ml-implementations" },
-                  { label: "Automation Systems", hash: "automation-systems" },
-                ].map((service) => (
-                  <li key={service.hash}>
-                    <Link
-                      to={`/services#${service.hash}`}
-                      className="text-sm text-secondary-foreground hover:text-foreground transition-colors"
-                    >
-                      {service.label}
-                    </Link>
-                  </li>
+                  {
+                    group: "Advisory",
+                    items: [
+                      { label: "Clarity Layer", hash: "clarity-layer" },
+                    ],
+                  },
+                  {
+                    group: "Delivery",
+                    items: [
+                      { label: "AI-Readiness Foundation", hash: "data-architecture" },
+                      { label: "Reliability Layer", hash: "reliability-ops" },
+                      { label: "Analytics Layer", hash: "analytics-intelligence" },
+                      { label: "Predictive Layer", hash: "ai-ml-implementations" },
+                      { label: "Intelligence Layer", hash: "automation-systems" },
+                    ],
+                  },
+                ].map((section) => (
+                  <div key={section.group}>
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-primary/70 mb-2">
+                      — {section.group}
+                    </p>
+                    <ul className="space-y-2.5">
+                      {section.items.map((service) => (
+                        <li key={service.hash}>
+                          <Link
+                            to={`/services#${service.hash}`}
+                            className="text-sm text-secondary-foreground hover:text-foreground transition-colors"
+                          >
+                            {service.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
 
             {/* Legal */}
