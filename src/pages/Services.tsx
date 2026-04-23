@@ -62,6 +62,39 @@ interface ServicePillar {
   benefits: string[];
 }
 
+const advisoryPillar: ServicePillar = {
+  number: "00",
+  title: "Data & AI Consultancy",
+  shortTitle: "Clarity Layer",
+  subtitle: "Advisory",
+  positioning: "Know before you build.",
+  description:
+    "Most enterprises are sitting on fragmented data, half-adopted tools, and AI ambitions with no clear path forward. We change that. We work with leadership and data teams to cut through the noise — auditing what you have, identifying what's holding you back, and building a roadmap that turns AI from a boardroom talking point into a funded, sequenced plan of action. No fluff. No generic frameworks. Just a clear view of where you are, where you need to go, and exactly how to get there.",
+  tagline: "Clarity before code.",
+  icon: Compass,
+  items: [
+    { label: "Data & AI maturity assessment", icon: ClipboardCheck },
+    { label: "AI opportunity identification & prioritisation", icon: Lightbulb },
+    { label: "Technology & vendor selection", icon: Target },
+    { label: "Data & AI strategy & roadmap", icon: Map },
+    { label: "Business case development for AI initiatives", icon: FileText },
+    { label: "Operating model & team design for AI-readiness", icon: Users },
+  ],
+  tools: [
+    "Maturity Frameworks",
+    "ROI Modeling",
+    "Vendor Scorecards",
+    "Capability Mapping",
+    "Roadmapping",
+    "Workshops",
+  ],
+  benefits: [
+    "A boardroom-ready AI roadmap your leadership can fund and act on",
+    "Clarity on which AI bets will deliver ROI — and which to avoid",
+    "A data foundation sequenced for your AI ambitions, not just today's reporting needs",
+  ],
+};
+
 const pillars: ServicePillar[] = [
   {
     number: "01",
