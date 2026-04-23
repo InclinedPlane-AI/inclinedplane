@@ -262,7 +262,6 @@ const ServiceContent = ({ pillar, isActive }: { pillar: ServicePillar; isActive:
     <div className="w-full">
       {/* Top bar */}
       <div className="flex items-center gap-3 mb-4">
-        <span className="font-mono text-xs text-muted-foreground/40">{pillar.number}</span>
         <span className="font-mono text-[10px] uppercase tracking-widest text-primary/70 bg-primary/5 px-2 py-0.5 rounded-full border border-primary/10">
           {pillar.subtitle}
         </span>
@@ -485,11 +484,6 @@ const ServicesPage = () => {
                             <Icon size={15} className={active ? "text-primary" : "text-muted-foreground/50"} />
                           </div>
                           <div className="min-w-0">
-                            <span
-                              className={`font-mono text-[10px] block ${active ? "text-primary/60" : "text-muted-foreground/30"}`}
-                            >
-                              {p.number}
-                            </span>
                             <span className={`text-sm font-medium truncate block ${active ? "text-foreground" : ""}`}>
                               {p.shortTitle}
                             </span>
