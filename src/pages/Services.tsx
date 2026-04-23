@@ -508,12 +508,19 @@ const ServicesPage = () => {
                   <div className="h-1 rounded-full surface-3 overflow-hidden">
                     <motion.div
                       className="h-full bg-gradient-orange rounded-full"
-                      animate={{ width: `${((activeIndex + 1) / allPillars.length) * 100}%` }}
+                      animate={{
+                        width:
+                          activeIndex === 0
+                            ? "0%"
+                            : `${(activeIndex / pillars.length) * 100}%`,
+                      }}
                       transition={{ duration: 0.4, ease: "easeOut" }}
                     />
                   </div>
                   <p className="font-mono text-[10px] text-muted-foreground/40 mt-2">
-                    {activeIndex + 1} / {allPillars.length}
+                    {activeIndex === 0
+                      ? "Advisory"
+                      : `${activeIndex} / ${pillars.length}`}
                   </p>
                 </div>
               </div>
