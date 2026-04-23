@@ -131,7 +131,7 @@ const pillars: ServicePillar[] = [
     number: "02",
     title: "Data Reliability, Observability & DataOps",
     shortTitle: "Reliability & Ops",
-    subtitle: "Differentiator",
+    subtitle: "Reliability Layer",
     positioning: "Architecture before intelligence — reliability is not optional.",
     description:
       "Most firms skip this layer entirely. We don't. Before any dashboard or model can be trusted, the pipelines feeding them must be bulletproof. We implement engineering-grade observability, automated testing, and CI/CD workflows that catch issues before they reach stakeholders — turning your data platform into a production-grade system. We use AI-powered monitoring tools to detect anomalies faster than any manual process — because reliable pipelines aren't just good engineering, they're a prerequisite for any AI system you'll build on top.",
