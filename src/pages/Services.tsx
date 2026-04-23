@@ -80,14 +80,7 @@ const advisoryPillar: ServicePillar = {
     { label: "Business case development for AI initiatives", icon: FileText },
     { label: "Operating model & team design for AI-readiness", icon: Users },
   ],
-  tools: [
-    "Maturity Frameworks",
-    "ROI Modeling",
-    "Vendor Scorecards",
-    "Capability Mapping",
-    "Roadmapping",
-    "Workshops",
-  ],
+  tools: ["Maturity Frameworks", "ROI Modeling", "Vendor Scorecards", "Capability Mapping", "Roadmapping", "Workshops"],
   benefits: [
     "A boardroom-ready AI roadmap your leadership can fund and act on",
     "Clarity on which AI bets will deliver ROI — and which to avoid",
@@ -194,7 +187,7 @@ const pillars: ServicePillar[] = [
   },
   {
     number: "04",
-    title: "Predictive & AI Implementation",
+    title: "Predictive Layer",
     shortTitle: "AI & ML Implementations",
     subtitle: "Intelligence Layer",
     positioning: "AI, predictive & agentic implementation — from experimentation to production.",
@@ -228,7 +221,7 @@ const pillars: ServicePillar[] = [
   },
   {
     number: "05",
-    title: "Automation & Decision Systems",
+    title: "Intelligence Layer",
     shortTitle: "Automation Systems",
     subtitle: "Autonomy Layer",
     positioning: "From dashboards to decision systems — autonomous intelligence.",
