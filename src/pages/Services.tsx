@@ -34,6 +34,12 @@ import {
   Link2,
   FileText,
   Sparkles,
+  Compass,
+  Target,
+  Map,
+  Briefcase,
+  ClipboardCheck,
+  Lightbulb,
 } from "lucide-react";
 import { useState, useEffect, useCallback, useRef } from "react";
 
@@ -55,6 +61,39 @@ interface ServicePillar {
   tools: string[];
   benefits: string[];
 }
+
+const advisoryPillar: ServicePillar = {
+  number: "00",
+  title: "Data & AI Consultancy",
+  shortTitle: "Clarity Layer",
+  subtitle: "Advisory",
+  positioning: "Know before you build.",
+  description:
+    "Most enterprises are sitting on fragmented data, half-adopted tools, and AI ambitions with no clear path forward. We change that. We work with leadership and data teams to cut through the noise — auditing what you have, identifying what's holding you back, and building a roadmap that turns AI from a boardroom talking point into a funded, sequenced plan of action. No fluff. No generic frameworks. Just a clear view of where you are, where you need to go, and exactly how to get there.",
+  tagline: "Clarity before code.",
+  icon: Compass,
+  items: [
+    { label: "Data & AI maturity assessment", icon: ClipboardCheck },
+    { label: "AI opportunity identification & prioritisation", icon: Lightbulb },
+    { label: "Technology & vendor selection", icon: Target },
+    { label: "Data & AI strategy & roadmap", icon: Map },
+    { label: "Business case development for AI initiatives", icon: FileText },
+    { label: "Operating model & team design for AI-readiness", icon: Users },
+  ],
+  tools: [
+    "Maturity Frameworks",
+    "ROI Modeling",
+    "Vendor Scorecards",
+    "Capability Mapping",
+    "Roadmapping",
+    "Workshops",
+  ],
+  benefits: [
+    "A boardroom-ready AI roadmap your leadership can fund and act on",
+    "Clarity on which AI bets will deliver ROI — and which to avoid",
+    "A data foundation sequenced for your AI ambitions, not just today's reporting needs",
+  ],
+};
 
 const pillars: ServicePillar[] = [
   {
@@ -324,6 +363,8 @@ const ServicesPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const isClickScrolling = useRef(false);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  // Combined list: index 0 = advisory, 1..N = delivery pillars
+  const allPillars: ServicePillar[] = [advisoryPillar, ...pillars];
 
   /* Track scroll position to update active index */
   useEffect(() => {
@@ -391,7 +432,7 @@ const ServicesPage = () => {
           {/* Mobile: horizontal pill nav */}
           <div className="lg:hidden mb-6 overflow-x-auto scrollbar-hide -mx-6 px-6 sticky top-16 z-20 py-2 bg-background/80 backdrop-blur-md">
             <div className="flex gap-2 w-max">
-              {pillars.map((p, i) => (
+              {allPillars.map((p, i) => (
                 <button
                   key={p.number}
                   onClick={() => scrollTo(i)}
@@ -414,40 +455,57 @@ const ServicesPage = () => {
             <div className="hidden lg:block w-56 shrink-0">
               <div className="sticky top-32">
                 <nav className="space-y-1">
-                  {pillars.map((p, i) => {
+                  {allPillars.map((p, i) => {
                     const Icon = p.icon;
                     const active = activeIndex === i;
+                    const isAdvisory = i === 0;
+                    const showDeliveryLabel = i === 1;
                     return (
-                      <button
-                        key={p.number}
-                        onClick={() => scrollTo(i)}
-                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all duration-300 group ${
-                          active
-                            ? "glass-panel-strong text-foreground"
-                            : "text-muted-foreground/60 hover:text-muted-foreground hover:bg-muted/30"
-                        }`}
-                      >
-                        <div
-                          className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-                            active ? "bg-primary/15" : "surface-3 group-hover:bg-muted"
+                      <div key={p.number}>
+                        {isAdvisory && (
+                          <div className="px-3 pb-2 pt-1">
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-primary/60">
+                              — Advisory
+                            </span>
+                          </div>
+                        )}
+                        {showDeliveryLabel && (
+                          <div className="px-3 pb-2 pt-4 border-t border-border/30 mt-2">
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-primary/60">
+                              — Delivery
+                            </span>
+                          </div>
+                        )}
+                        <button
+                          onClick={() => scrollTo(i)}
+                          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all duration-300 group ${
+                            active
+                              ? "glass-panel-strong text-foreground"
+                              : "text-muted-foreground/60 hover:text-muted-foreground hover:bg-muted/30"
                           }`}
                         >
-                          <Icon size={15} className={active ? "text-primary" : "text-muted-foreground/50"} />
-                        </div>
-                        <div className="min-w-0">
-                          <span
-                            className={`font-mono text-[10px] block ${active ? "text-primary/60" : "text-muted-foreground/30"}`}
+                          <div
+                            className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                              active ? "bg-primary/15" : "surface-3 group-hover:bg-muted"
+                            }`}
                           >
-                            {p.number}
-                          </span>
-                          <span className={`text-sm font-medium truncate block ${active ? "text-foreground" : ""}`}>
-                            {p.shortTitle}
-                          </span>
-                        </div>
-                        <div
-                          className={`ml-auto w-0.5 h-5 rounded-full transition-all ${active ? "bg-primary" : "bg-transparent"}`}
-                        />
-                      </button>
+                            <Icon size={15} className={active ? "text-primary" : "text-muted-foreground/50"} />
+                          </div>
+                          <div className="min-w-0">
+                            <span
+                              className={`font-mono text-[10px] block ${active ? "text-primary/60" : "text-muted-foreground/30"}`}
+                            >
+                              {p.number}
+                            </span>
+                            <span className={`text-sm font-medium truncate block ${active ? "text-foreground" : ""}`}>
+                              {p.shortTitle}
+                            </span>
+                          </div>
+                          <div
+                            className={`ml-auto w-0.5 h-5 rounded-full transition-all ${active ? "bg-primary" : "bg-transparent"}`}
+                          />
+                        </button>
+                      </div>
                     );
                   })}
                 </nav>
@@ -457,12 +515,12 @@ const ServicesPage = () => {
                   <div className="h-1 rounded-full surface-3 overflow-hidden">
                     <motion.div
                       className="h-full bg-gradient-orange rounded-full"
-                      animate={{ width: `${((activeIndex + 1) / pillars.length) * 100}%` }}
+                      animate={{ width: `${((activeIndex + 1) / allPillars.length) * 100}%` }}
                       transition={{ duration: 0.4, ease: "easeOut" }}
                     />
                   </div>
                   <p className="font-mono text-[10px] text-muted-foreground/40 mt-2">
-                    {activeIndex + 1} / {pillars.length}
+                    {activeIndex + 1} / {allPillars.length}
                   </p>
                 </div>
               </div>
@@ -470,19 +528,48 @@ const ServicesPage = () => {
 
             {/* Right: content sections */}
             <div className="flex-1 min-w-0">
-              {pillars.map((pillar, i) => (
-                <div
-                  key={pillar.number}
-                  id={pillar.shortTitle.toLowerCase().replace(/[\s&]+/g, "-")}
-                  ref={(el) => {
-                    sectionRefs.current[i] = el;
-                  }}
-                  className="py-10 lg:py-14"
-                >
-                  <ServiceContent pillar={pillar} isActive={activeIndex === i} />
-                  {i < pillars.length - 1 && <div className="border-t border-border/30 mt-10 lg:mt-14" />}
+              {/* Advisory section — subtly distinct background */}
+              <div className="relative -mx-4 sm:-mx-6 mb-10 lg:mb-14">
+                <div className="absolute inset-0 rounded-2xl bg-primary/[0.025] border border-primary/10 pointer-events-none" />
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/[0.04] via-transparent to-transparent pointer-events-none" />
+                <div className="relative px-4 sm:px-6 py-8 lg:py-10">
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-primary/70">— Advisory</span>
+                    <div className="flex-1 h-px bg-gradient-to-r from-primary/30 via-border/40 to-transparent" />
+                  </div>
+                  <div
+                    id={advisoryPillar.shortTitle.toLowerCase().replace(/[\s&]+/g, "-")}
+                    ref={(el) => {
+                      sectionRefs.current[0] = el;
+                    }}
+                  >
+                    <ServiceContent pillar={advisoryPillar} isActive={activeIndex === 0} />
+                  </div>
                 </div>
-              ))}
+              </div>
+
+              {/* Delivery divider */}
+              <div className="flex items-center gap-3 mb-2">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-primary/70">— Delivery</span>
+                <div className="flex-1 h-px bg-gradient-to-r from-primary/30 via-border/40 to-transparent" />
+              </div>
+
+              {pillars.map((pillar, i) => {
+                const idx = i + 1; // offset for advisory at 0
+                return (
+                  <div
+                    key={pillar.number}
+                    id={pillar.shortTitle.toLowerCase().replace(/[\s&]+/g, "-")}
+                    ref={(el) => {
+                      sectionRefs.current[idx] = el;
+                    }}
+                    className="py-10 lg:py-14"
+                  >
+                    <ServiceContent pillar={pillar} isActive={activeIndex === idx} />
+                    {i < pillars.length - 1 && <div className="border-t border-border/30 mt-10 lg:mt-14" />}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
