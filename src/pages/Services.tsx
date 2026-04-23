@@ -163,7 +163,7 @@ const pillars: ServicePillar[] = [
     number: "03",
     title: "Intelligence & Analytics Systems",
     shortTitle: "Analytics & Intelligence",
-    subtitle: "Visibility Layer",
+    subtitle: "Analytics Layer",
     positioning: "Automated intelligence & BI — de-risking every decision.",
     description:
       "Data without visibility is just cost. We build analytics systems that put the right metrics in front of the right people — from C-suite dashboards to embedded operational views. Our semantic layers standardize KPIs across the business, while self-serve tooling empowers teams to answer their own questions without waiting on data teams.",
@@ -189,7 +189,7 @@ const pillars: ServicePillar[] = [
     number: "04",
     title: "Predictive Layer",
     shortTitle: "AI & ML Implementations",
-    subtitle: "Intelligence Layer",
+    subtitle: "Predictive Layer",
     positioning: "AI, predictive & agentic implementation — from experimentation to production.",
     description:
       "We take AI from proof-of-concept to production. Whether it's demand forecasting, risk scoring, or natural language interfaces over your data — we build, deploy, and monitor ML systems that deliver measurable business impact. No science projects. Every model ships with monitoring, retraining pipelines, and clear ROI metrics.",
@@ -223,7 +223,7 @@ const pillars: ServicePillar[] = [
     number: "05",
     title: "Intelligence Layer",
     shortTitle: "Automation Systems",
-    subtitle: "Autonomy Layer",
+    subtitle: "Intelligence Layer",
     positioning: "From dashboards to decision systems — autonomous intelligence.",
     description:
       "The final frontier of data maturity: systems that don't just inform, but act. We build autonomous decision pipelines — AI agents that monitor, reason, and execute. From intelligent alerting to cross-system orchestration, we help leadership move from reading dashboards to receiving action-ready intelligence summaries.",
