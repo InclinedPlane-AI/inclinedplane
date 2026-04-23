@@ -363,6 +363,8 @@ const ServicesPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const isClickScrolling = useRef(false);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  // Combined list: index 0 = advisory, 1..N = delivery pillars
+  const allPillars: ServicePillar[] = [advisoryPillar, ...pillars];
 
   /* Track scroll position to update active index */
   useEffect(() => {
