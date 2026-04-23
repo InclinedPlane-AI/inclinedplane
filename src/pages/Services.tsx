@@ -415,7 +415,7 @@ const ServicesPage = () => {
         label="Services"
         title={
           <>
-            What We <span className="text-gradient-orange">What We Do.</span>
+            What We <span className="text-gradient-orange">Do.</span>
           </>
         }
         subtitle={`Five layers of data infrastructure — from foundation to autonomous intelligence. Every layer we build is AI-enabled in delivery and AI-ready in design — so your data infrastructure doesn't just work today, it supports whatever you build tomorrow.`}
@@ -509,18 +509,13 @@ const ServicesPage = () => {
                     <motion.div
                       className="h-full bg-gradient-orange rounded-full"
                       animate={{
-                        width:
-                          activeIndex === 0
-                            ? "0%"
-                            : `${(activeIndex / pillars.length) * 100}%`,
+                        width: activeIndex === 0 ? "0%" : `${(activeIndex / pillars.length) * 100}%`,
                       }}
                       transition={{ duration: 0.4, ease: "easeOut" }}
                     />
                   </div>
                   <p className="font-mono text-[10px] text-muted-foreground/40 mt-2">
-                    {activeIndex === 0
-                      ? "Advisory"
-                      : `${activeIndex} / ${pillars.length}`}
+                    {activeIndex === 0 ? "Advisory" : `${activeIndex} / ${pillars.length}`}
                   </p>
                 </div>
               </div>
