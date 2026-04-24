@@ -79,11 +79,44 @@ const CaseStudies = () => {
 
   return (
     <PageLayout>
-      <SEOHead
-        title="Case Studies"
-        description="13 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector and renewables — real outcomes from AI-native data engineering."
-        path="/case-studies"
-      />
+      {active ? (
+        <SEOHead
+          key={active.id}
+          title={`${active.title} — Case Study`}
+          description={active.summary}
+          path={`/case-studies?study=${active.id}`}
+          ogImage={toAbsoluteUrl(active.image)}
+          ogType="article"
+          jsonLd={{
+            "@context": "https://schema.org",
+            "@type": "CaseStudy",
+            name: active.title,
+            about: active.industry,
+            description: active.summary,
+            image: toAbsoluteUrl(active.image),
+            url: `${SITE_URL}/case-studies?study=${active.id}`,
+            provider: { "@type": "Organization", name: "Inclined Plane", url: SITE_URL },
+            ...(active.stack ? { keywords: active.stack } : {}),
+          }}
+        />
+      ) : (
+        <SEOHead
+          title="Case Studies"
+          description="13 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector and renewables — real outcomes from AI-native data engineering."
+          path="/case-studies"
+          jsonLd={{
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            itemListElement: ordered.map((cs, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `${SITE_URL}/case-studies?study=${cs.id}`,
+              name: cs.title,
+              image: toAbsoluteUrl(cs.image),
+            })),
+          }}
+        />
+      )}
       <PageHero
         label="Case Studies"
         title={<>Proof in <span className="text-gradient-orange">Production.</span></>}
