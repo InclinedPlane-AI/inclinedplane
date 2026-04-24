@@ -281,10 +281,7 @@ const Index = () => {
                       </div>
                       <p className="text-sm text-secondary-foreground">{col.sub}</p>
                     </div>
-                    {col.stats.map((s, i) => (
-                    ))
-                      .map((s) => s)
-                      .map((s, i) => {
+                    {col.stats.map((s, i) => {
                         const CardTag: any = s.link ? "a" : "div";
                         const linkProps = s.link
                           ? { href: s.link, target: "_blank", rel: "noopener noreferrer" }
