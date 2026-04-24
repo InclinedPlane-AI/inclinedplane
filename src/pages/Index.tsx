@@ -205,135 +205,99 @@ const Index = () => {
                   The AI Imperative
                 </p>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-3 text-center">
-                  AI Is Rewriting the <span className="text-gradient-orange">Rules.</span>
+                  The AI Imperative — <span className="text-gradient-orange">In Numbers.</span>
                 </h2>
                 <p className="text-sm text-muted-foreground text-center max-w-xl mx-auto mb-8">
-                  Companies that fail to build AI-ready infrastructure today will be irrelevant tomorrow.
+                  The opportunity is real. The intent is there. The infrastructure isn't.
                 </p>
               </motion.div>
 
-              {/* Bento grid — reference layout: top (2 + 1 + 1), bottom (1 + 3) */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:auto-rows-[11rem]">
-                {/* Hero card — top-left large (spans 2 cols) */}
-                <motion.a
-                  {...fadeUp(0)}
-                  href="https://www.pwc.com/gx/en/issues/artificial-intelligence/publications/artificial-intelligence-study.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="col-span-2 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
-                  data-cursor-hover
-                >
-                  <div>
-                    <Globe size={18} className="text-primary mb-3" />
-                    <p className="text-4xl font-bold text-gradient-orange text-glow-orange mb-1">$15.7T</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      Projected AI contribution to global GDP by 2030.
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
-                    <span className="font-mono text-[9px] text-muted-foreground/50 uppercase">PwC, 2024</span>
-                    <span className="w-6 h-6 rounded-md surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <ArrowUpRight size={11} className="text-primary" />
-                    </span>
-                  </div>
-                </motion.a>
-
-                {/* Card 2 */}
-                <motion.a
-                  {...fadeUp(0.06)}
-                  href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
-                  data-cursor-hover
-                >
-                  <div>
-                    <Target size={16} className="text-primary mb-3" />
-                    <p className="text-2xl font-bold text-gradient-orange mb-1">72%</p>
-                    <p className="text-[11px] text-muted-foreground leading-relaxed">
-                      Of orgs adopted AI in at least one function.
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
-                    <span className="font-mono text-[8px] text-muted-foreground/50 uppercase">McKinsey</span>
-                    <span className="w-5 h-5 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <ArrowUpRight size={10} className="text-primary" />
-                    </span>
-                  </div>
-                </motion.a>
-
-                {/* Card 3 */}
-                <motion.a
-                  {...fadeUp(0.12)}
-                  href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
-                  data-cursor-hover
-                >
-                  <div>
-                    <Activity size={16} className="text-primary mb-3" />
-                    <p className="text-2xl font-bold text-gradient-orange mb-1">30%</p>
-                    <p className="text-[11px] text-muted-foreground leading-relaxed">
-                      Of GenAI projects abandoned post proof-of-concept.
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
-                    <span className="font-mono text-[8px] text-muted-foreground/50 uppercase">Gartner</span>
-                    <span className="w-5 h-5 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <ArrowUpRight size={10} className="text-primary" />
-                    </span>
-                  </div>
-                </motion.a>
-
-                {/* Card 4 — bottom-left (spans 2 cols to match $15.7T width) */}
-                <motion.a
-                  {...fadeUp(0.18)}
-                  href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="col-span-2 lg:col-span-1 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
-                  data-cursor-hover
-                >
-                  <div>
-                    <Shield size={16} className="text-primary mb-3" />
-                    <p className="text-2xl font-bold text-gradient-orange mb-1">63%</p>
-                    <p className="text-[11px] text-muted-foreground leading-relaxed">
-                      Of orgs lack data management for AI initiatives.
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
-                    <span className="font-mono text-[8px] text-muted-foreground/50 uppercase">Gartner</span>
-                    <span className="w-5 h-5 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <ArrowUpRight size={10} className="text-primary" />
-                    </span>
-                  </div>
-                </motion.a>
-
-                {/* Wide card 5 — bottom-right (spans 2 cols) */}
-                <motion.a
-                  {...fadeUp(0.24)}
-                  href="https://www.microsoft.com/en-us/microsoft-fabric/blog/2024/06/03/forrester-total-economic-impact-study-microsoft-fabric-delivers-379-roi-over-three-years/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="col-span-2 lg:col-span-3 glass-panel rounded-xl p-5 group hover:glow-orange transition-shadow flex flex-col justify-between cursor-pointer"
-                  data-cursor-hover
-                >
-                  <div>
-                    <TrendingUp size={16} className="text-primary mb-2 ml-3" />
-                    <p className="text-2xl font-bold text-gradient-orange mb-1 pl-3">379% ROI</p>
-                    <p className="text-[11px] text-muted-foreground leading-relaxed pl-3">
-                      Over 3 years for orgs with mature, unified data platforms.
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
-                    <span className="font-mono text-[8px] text-muted-foreground/50 uppercase pl-3">Forrester</span>
-                    <span className="w-5 h-5 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <ArrowUpRight size={10} className="text-primary" />
-                    </span>
-                  </div>
-                </motion.a>
+              {/* Three-column narrative: Opportunity → Intent → Gap */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                {[
+                  {
+                    key: "opportunity",
+                    label: "The Opportunity",
+                    sub: "The prize is enormous.",
+                    dot: "bg-green-400",
+                    tint: "",
+                    stats: [
+                      { num: "$15.7T", desc: "Projected AI contribution to global GDP by 2030.", src: "PwC, 2024" },
+                      { num: "25–40%", desc: "Productivity uplift unlocked by enterprise AI adoption.", src: "McKinsey, 2025" },
+                      { num: "370%", desc: "Average ROI from mature, unified data + AI platforms.", src: "Industry Sources, 2025" },
+                    ],
+                  },
+                  {
+                    key: "intent",
+                    label: "The Intent",
+                    sub: "Enterprises are moving.",
+                    dot: "bg-amber-400",
+                    tint: "bg-amber-500/[0.04]",
+                    stats: [
+                      { num: "78%", desc: "Of organizations now use AI in at least one business function.", src: "McKinsey, 2025" },
+                      { num: "#1", desc: "AI ranked the top strategic tech priority for CEOs.", src: "Gartner, 2024" },
+                      { num: "$53B", desc: "Forecast enterprise spend on generative AI by 2026.", src: "Gartner, 2026" },
+                    ],
+                  },
+                  {
+                    key: "gap",
+                    label: "The Gap",
+                    sub: "Most aren't ready.",
+                    dot: "bg-red-400",
+                    tint: "bg-primary/[0.06]",
+                    stats: [
+                      { num: "23%", desc: "Of enterprises are AI-ready in data, talent, and governance.", src: "Gartner, 2025" },
+                      { num: "70–85%", desc: "Of AI initiatives fail to deliver expected business value.", src: "Industry Sources, 2025" },
+                      { num: "1 in 5", desc: "Companies have scaled AI beyond initial proofs-of-concept.", src: "Deloitte, 2025" },
+                    ],
+                  },
+                ].map((col, colIdx) => (
+                  <motion.div
+                    key={col.key}
+                    {...fadeUp(colIdx * 0.08)}
+                    className="flex flex-col gap-3"
+                  >
+                    <div className={`glass-panel rounded-xl p-4 ${col.tint}`}>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`w-2 h-2 rounded-full ${col.dot} shadow-[0_0_8px_currentColor]`} />
+                        <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase">
+                          {col.label}
+                        </p>
+                      </div>
+                      <p className="text-sm text-secondary-foreground">{col.sub}</p>
+                    </div>
+                    {col.stats.map((s, i) => (
+                      <div
+                        key={i}
+                        className={`glass-panel rounded-xl p-5 flex flex-col justify-between flex-1 ${col.tint}`}
+                      >
+                        <div>
+                          <p className="text-3xl lg:text-4xl font-bold text-gradient-orange mb-2">
+                            {s.num}
+                          </p>
+                          <p className="text-xs text-secondary-foreground leading-relaxed">
+                            {s.desc}
+                          </p>
+                        </div>
+                        <p className="font-mono text-[9px] text-muted-foreground/60 uppercase mt-3 pt-2 border-t border-border/40">
+                          {s.src}
+                        </p>
+                      </div>
+                    ))}
+                  </motion.div>
+                ))}
               </div>
+
+              {/* Closing banner */}
+              <motion.div
+                {...fadeUp(0.3)}
+                className="mt-10 glass-panel rounded-xl px-6 py-6 lg:py-7 text-center bg-background/60 shadow-2xl"
+              >
+                <p className="text-base sm:text-lg lg:text-xl font-semibold text-foreground leading-relaxed max-w-3xl mx-auto">
+                  "Most enterprises can't get to agentic AI because they haven't fixed the foundation.{" "}
+                  <span className="text-gradient-orange">We do both.</span>"
+                </p>
+              </motion.div>
             </div>
           </section>
 
