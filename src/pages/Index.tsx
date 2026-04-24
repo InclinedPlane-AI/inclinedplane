@@ -269,7 +269,7 @@ const Index = () => {
                     {col.stats.map((s, i) => (
                       <div
                         key={i}
-                        className={`glass-panel rounded-xl p-5 flex flex-col justify-between flex-1 ${col.tint}`}
+                        className={`glass-panel rounded-xl p-5 flex flex-col justify-between min-h-[10.5rem] ${col.tint}`}
                       >
                         <div>
                           <p className="text-3xl lg:text-4xl font-bold text-gradient-orange mb-2">
