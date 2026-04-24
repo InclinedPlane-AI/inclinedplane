@@ -282,24 +282,41 @@ const Index = () => {
                       <p className="text-sm text-secondary-foreground">{col.sub}</p>
                     </div>
                     {col.stats.map((s, i) => (
-                      <div
-                        key={i}
-                        className={`glass-panel rounded-xl p-5 flex flex-col justify-between min-h-[10.5rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 cursor-default ${col.tint}`}
-                        data-cursor-hover
-                      >
-                        <div>
-                          <p className="text-3xl lg:text-4xl font-bold text-gradient-orange mb-2">
-                            {s.num}
-                          </p>
-                          <p className="text-xs text-secondary-foreground leading-relaxed">
-                            {s.desc}
-                          </p>
-                        </div>
-                        <p className="font-mono text-[9px] text-muted-foreground/60 uppercase mt-3 pt-2 border-t border-border/40">
-                          {s.src}
-                        </p>
-                      </div>
-                    ))}
+                    ))
+                      .map((s) => s)
+                      .map((s, i) => {
+                        const CardTag: any = s.link ? "a" : "div";
+                        const linkProps = s.link
+                          ? { href: s.link, target: "_blank", rel: "noopener noreferrer" }
+                          : {};
+                        return (
+                          <CardTag
+                            key={i}
+                            {...linkProps}
+                            className={`glass-panel rounded-xl p-5 flex flex-col justify-between min-h-[10.5rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 ${s.link ? "group cursor-pointer" : "cursor-default"} ${col.tint}`}
+                            data-cursor-hover
+                          >
+                            <div>
+                              <p className="text-3xl lg:text-4xl font-bold text-gradient-orange mb-2">
+                                {s.num}
+                              </p>
+                              <p className="text-xs text-secondary-foreground leading-relaxed">
+                                {s.desc}
+                              </p>
+                            </div>
+                            <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
+                              <span className="font-mono text-[9px] text-muted-foreground/60 uppercase">
+                                {s.src}
+                              </span>
+                              {s.link && (
+                                <span className="w-5 h-5 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                                  <ArrowUpRight size={10} className="text-primary" />
+                                </span>
+                              )}
+                            </div>
+                          </CardTag>
+                        );
+                      })}
                   </motion.div>
                 ))}
               </div>
