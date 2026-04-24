@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
 import { caseStudies, type CaseStudy } from "@/data/caseStudies";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Heuristic "content weight" so denser case studies rise to the top of the grid.
 const weightOf = (c: CaseStudy) => {
@@ -17,6 +18,31 @@ const weightOf = (c: CaseStudy) => {
     return acc + bodyLen + bulletsLen;
   }, 0);
   return sectionWeight + c.summary.length + (c.metrics?.length ?? 0) * 40;
+};
+
+// Image with skeleton placeholder while loading.
+const ImageWithSkeleton = ({
+  src,
+  alt,
+  className,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) => {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <>
+      {!loaded && <Skeleton className="absolute inset-0 w-full h-full rounded-none" />}
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        onLoad={() => setLoaded(true)}
+        className={`${className ?? ""} ${loaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
+      />
+    </>
+  );
 };
 
 const CaseStudies = () => {
@@ -87,10 +113,9 @@ const CaseStudies = () => {
                   >
                     {/* Image banner */}
                     <div className="relative h-40 overflow-hidden">
-                      <img
+                      <ImageWithSkeleton
                         src={cs.image}
                         alt={cs.title}
-                        loading="lazy"
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
@@ -174,7 +199,7 @@ const CaseStudies = () => {
             <>
               {/* Hero image */}
               <div className="relative h-56 sm:h-64 overflow-hidden">
-                <img
+                <ImageWithSkeleton
                   src={active.image}
                   alt={active.title}
                   className="absolute inset-0 w-full h-full object-cover"
