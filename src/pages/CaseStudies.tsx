@@ -120,7 +120,7 @@ const CaseStudies = () => {
                   <motion.button
                     key={cs.id}
                     type="button"
-                    onClick={() => setActive(cs)}
+                    onClick={() => openStudy(cs)}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: Math.min(i * 0.04, 0.4), duration: 0.5 }}
@@ -210,7 +210,7 @@ const CaseStudies = () => {
       </div>
 
       {/* Detail modal */}
-      <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
+      <Dialog open={!!active} onOpenChange={(o) => !o && closeStudy()}>
         <DialogContent className="max-w-3xl max-h-[88vh] overflow-y-auto glass-panel border-border/60 p-0 gap-0">
           {active && (
             <>
@@ -246,7 +246,7 @@ const CaseStudies = () => {
                     )}
                   </div>
                   <button
-                    onClick={() => setActive(null)}
+                    onClick={closeStudy}
                     aria-label="Close"
                     className="text-muted-foreground hover:text-foreground transition-colors shrink-0"
                     data-cursor-hover
