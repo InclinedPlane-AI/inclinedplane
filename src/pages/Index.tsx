@@ -249,9 +249,24 @@ const Index = () => {
                     dot: "bg-amber-400",
                     tint: "bg-amber-500/[0.04]",
                     stats: [
-                      { num: "78%", desc: "Of organizations now use AI in at least one business function.", src: "McKinsey, 2025", link: null },
-                      { num: "#1", desc: "AI ranked the top strategic tech priority for CEOs.", src: "Gartner, 2024", link: null },
-                      { num: "$53B", desc: "Forecast enterprise spend on generative AI by 2026.", src: "Gartner, 2026", link: null },
+                      {
+                        num: "78%",
+                        desc: "Of organizations now use AI in at least one business function.",
+                        src: "McKinsey, 2025",
+                        link: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
+                      },
+                      {
+                        num: "#1",
+                        desc: "AI/GenAI ranked the top digital supply chain investment priority.",
+                        src: "Gartner, 2024",
+                        link: "https://www.gartner.com/en/newsroom/press-releases/2024-10-30-gartner-survey-shows-ai-and-generative-ai-top-digital-supply-chain-investment-priorities",
+                      },
+                      {
+                        num: "$53B",
+                        desc: "Forecast spend on agentic AI in supply chain software by 2030.",
+                        src: "Gartner, 2026",
+                        link: "https://www.gartner.com/en/newsroom/press-releases/2026-04-07-gartner-forecasts-supply-chain-management-software-with-agentic-ai-will-grow-to-53-billion-in-spend-by-2030",
+                      },
                     ],
                   },
                   {
