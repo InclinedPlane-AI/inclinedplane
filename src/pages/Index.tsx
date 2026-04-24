@@ -222,9 +222,24 @@ const Index = () => {
                     dot: "bg-green-400",
                     tint: "",
                     stats: [
-                      { num: "$15.7T", desc: "Projected AI contribution to global GDP by 2030.", src: "PwC, 2024" },
-                      { num: "25–40%", desc: "Productivity uplift unlocked by enterprise AI adoption.", src: "McKinsey, 2025" },
-                      { num: "370%", desc: "Average ROI from mature, unified data + AI platforms.", src: "Industry Sources, 2025" },
+                      {
+                        num: "$15.7T",
+                        desc: "Projected AI contribution to global GDP by 2030.",
+                        src: "PwC, 2024",
+                        link: "https://www.pwc.com/gx/en/issues/analytics/assets/pwc-ai-analysis-sizing-the-prize-report.pdf",
+                      },
+                      {
+                        num: "25–40%",
+                        desc: "Maintenance cost reduction unlocked by enterprise AI adoption.",
+                        src: "McKinsey, 2025",
+                        link: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
+                      },
+                      {
+                        num: "370%",
+                        desc: "ROI for GenAI early adopters; top performers report up to 1030%.",
+                        src: "Industry Sources, 2025",
+                        link: "https://www.fullview.io/blog/ai-statistics",
+                      },
                     ],
                   },
                   {
@@ -234,9 +249,9 @@ const Index = () => {
                     dot: "bg-amber-400",
                     tint: "bg-amber-500/[0.04]",
                     stats: [
-                      { num: "78%", desc: "Of organizations now use AI in at least one business function.", src: "McKinsey, 2025" },
-                      { num: "#1", desc: "AI ranked the top strategic tech priority for CEOs.", src: "Gartner, 2024" },
-                      { num: "$53B", desc: "Forecast enterprise spend on generative AI by 2026.", src: "Gartner, 2026" },
+                      { num: "78%", desc: "Of organizations now use AI in at least one business function.", src: "McKinsey, 2025", link: null },
+                      { num: "#1", desc: "AI ranked the top strategic tech priority for CEOs.", src: "Gartner, 2024", link: null },
+                      { num: "$53B", desc: "Forecast enterprise spend on generative AI by 2026.", src: "Gartner, 2026", link: null },
                     ],
                   },
                   {
@@ -246,9 +261,9 @@ const Index = () => {
                     dot: "bg-red-400",
                     tint: "bg-primary/[0.06]",
                     stats: [
-                      { num: "23%", desc: "Of enterprises are AI-ready in data, talent, and governance.", src: "Gartner, 2025" },
-                      { num: "70–85%", desc: "Of AI initiatives fail to deliver expected business value.", src: "Industry Sources, 2025" },
-                      { num: "1 in 5", desc: "Companies have scaled AI beyond initial proofs-of-concept.", src: "Deloitte, 2025" },
+                      { num: "23%", desc: "Of enterprises are AI-ready in data, talent, and governance.", src: "Gartner, 2025", link: null },
+                      { num: "70–85%", desc: "Of AI initiatives fail to deliver expected business value.", src: "Industry Sources, 2025", link: null },
+                      { num: "1 in 5", desc: "Companies have scaled AI beyond initial proofs-of-concept.", src: "Deloitte, 2025", link: null },
                     ],
                   },
                 ].map((col, colIdx) => (
@@ -266,25 +281,39 @@ const Index = () => {
                       </div>
                       <p className="text-sm text-secondary-foreground">{col.sub}</p>
                     </div>
-                    {col.stats.map((s, i) => (
-                      <div
-                        key={i}
-                        className={`glass-panel rounded-xl p-5 flex flex-col justify-between min-h-[10.5rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 cursor-default ${col.tint}`}
-                        data-cursor-hover
-                      >
-                        <div>
-                          <p className="text-3xl lg:text-4xl font-bold text-gradient-orange mb-2">
-                            {s.num}
-                          </p>
-                          <p className="text-xs text-secondary-foreground leading-relaxed">
-                            {s.desc}
-                          </p>
-                        </div>
-                        <p className="font-mono text-[9px] text-muted-foreground/60 uppercase mt-3 pt-2 border-t border-border/40">
-                          {s.src}
-                        </p>
-                      </div>
-                    ))}
+                    {col.stats.map((s, i) => {
+                        const CardTag: any = s.link ? "a" : "div";
+                        const linkProps = s.link
+                          ? { href: s.link, target: "_blank", rel: "noopener noreferrer" }
+                          : {};
+                        return (
+                          <CardTag
+                            key={i}
+                            {...linkProps}
+                            className={`glass-panel rounded-xl p-5 flex flex-col justify-between min-h-[10.5rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 ${s.link ? "group cursor-pointer" : "cursor-default"} ${col.tint}`}
+                            data-cursor-hover
+                          >
+                            <div>
+                              <p className="text-3xl lg:text-4xl font-bold text-gradient-orange mb-2">
+                                {s.num}
+                              </p>
+                              <p className="text-xs text-secondary-foreground leading-relaxed">
+                                {s.desc}
+                              </p>
+                            </div>
+                            <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
+                              <span className="font-mono text-[9px] text-muted-foreground/60 uppercase">
+                                {s.src}
+                              </span>
+                              {s.link && (
+                                <span className="w-5 h-5 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                                  <ArrowUpRight size={10} className="text-primary" />
+                                </span>
+                              )}
+                            </div>
+                          </CardTag>
+                        );
+                      })}
                   </motion.div>
                 ))}
               </div>
