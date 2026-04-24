@@ -54,7 +54,7 @@ const Footer = () => {
                   <li key={link.path}>
                     <Link
                       to={link.path}
-                      className="text-sm text-secondary-foreground hover:text-foreground transition-colors"
+                      className="text-sm text-secondary-foreground hover:text-primary transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -96,7 +96,7 @@ const Footer = () => {
                         <li key={service.hash}>
                           <Link
                             to={`/services#${service.hash}`}
-                            className="text-xs text-secondary-foreground hover:text-foreground transition-colors"
+                            className="text-xs text-secondary-foreground hover:text-primary transition-colors"
                           >
                             {service.label}
                           </Link>
@@ -122,7 +122,7 @@ const Footer = () => {
                   <li key={link.path}>
                     <Link
                       to={link.path}
-                      className="text-sm text-secondary-foreground hover:text-foreground transition-colors"
+                      className="text-sm text-secondary-foreground hover:text-primary transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -138,9 +138,9 @@ const Footer = () => {
               © {new Date().getFullYear()} InclinedPlane. All rights reserved.
             </p>
             <div className="flex items-center gap-4 text-muted-foreground">
-              <a href="https://linkedin.com/company/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">LinkedIn</a>
-              <a href="https://x.com/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">X</a>
-              <a href="https://github.com/InclinedPlane-AI" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-foreground transition-colors">GitHub</a>
+              <a href="https://linkedin.com/company/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-primary transition-colors">LinkedIn</a>
+              <a href="https://x.com/inclinedplane" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-primary transition-colors">X</a>
+              <a href="https://github.com/InclinedPlane-AI" target="_blank" rel="noopener noreferrer" className="text-xs hover:text-primary transition-colors">GitHub</a>
             </div>
           </div>
         </div>
