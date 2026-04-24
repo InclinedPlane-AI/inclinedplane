@@ -167,8 +167,10 @@ const CaseStudies = () => {
                     <active.icon size={22} className="text-primary" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-1">
-                      <span className="font-mono text-[10px] text-primary tracking-widest">{active.number}</span>
+                     <div className="flex items-center gap-3 mb-1">
+                      <span className="font-mono text-[10px] text-primary tracking-widest">
+                        {String(ordered.findIndex(c => c.id === active.id) + 1).padStart(2, "0")}
+                      </span>
                       <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">{active.industry}</span>
                     </div>
                     <DialogTitle className="text-xl sm:text-2xl font-bold text-foreground leading-tight">
