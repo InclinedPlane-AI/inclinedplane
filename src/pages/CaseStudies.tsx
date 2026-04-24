@@ -2,94 +2,43 @@ import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
-import { ArrowRight, Database, BarChart3, Eye, TrendingUp, CheckCircle2, Layers } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { Link } from "react-router-dom";
+import { useMemo, useState, useEffect } from "react";
+import { caseStudies, type CaseStudy } from "@/data/caseStudies";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
-const cases = [
-  {
-    title: "Demand Forecasting Engine",
-    industry: "Retail & CPG",
-    challenge: "Chronic stock-outs and overstock costing millions annually. No automated demand signals. Manual spreadsheet-based planning cycles.",
-    approach: "Built an ML-driven demand forecasting platform with automated retraining, real-time inventory signals, and POS data integration across 200+ stores.",
-    impact: "24% stock-out reduction, 17% inventory value reduction.",
-    stack: "Snowflake, dbt, Python, Airflow, Looker",
-    metrics: [
-      { value: 24, suffix: "%", label: "Stock-out reduction" },
-      { value: 17, suffix: "%", label: "Inventory value reduction" },
-      { value: 200, suffix: "+", label: "Stores integrated" },
-    ],
-    icon: Database,
-    featured: true,
-  },
-  {
-    title: "Real-Time Sales Intelligence",
-    industry: "B2B SaaS",
-    challenge: "Sales teams relying on stale CRM data and gut instinct. No visibility into product usage patterns or engagement signals.",
-    approach: "Built a real-time pipeline aggregating product usage, CRM, and engagement data into a unified scoring model with automated alerts.",
-    impact: "15% pipeline efficiency lift, 3x faster lead response.",
-    stack: "BigQuery, Fivetran, dbt, Metabase, n8n",
-    metrics: [
-      { value: 15, suffix: "%", label: "Pipeline efficiency lift" },
-      { value: 3, suffix: "x", label: "Faster lead response" },
-      { value: 50, suffix: "K+", label: "Leads scored daily" },
-    ],
-    icon: BarChart3,
-    featured: true,
-  },
-  {
-    title: "Observability-First Data Platform",
-    industry: "Financial Services",
-    challenge: "No visibility into data pipeline health. Failures discovered hours later by downstream consumers. Regulatory risk from stale data.",
-    approach: "Implemented end-to-end observability with data quality gates, lineage tracking, automated alerting, and compliance monitoring.",
-    impact: "98%+ data freshness SLA, 60% reduction in incident resolution time.",
-    stack: "Databricks, Great Expectations, Monte Carlo, PagerDuty",
-    metrics: [
-      { value: 98, suffix: "%+", label: "Data freshness SLA" },
-      { value: 60, suffix: "%", label: "Faster incidents" },
-      { value: 400, suffix: "+", label: "Tables monitored" },
-    ],
-    icon: Eye,
-    featured: true,
-  },
-  {
-    title: "Supply Chain Intelligence Hub",
-    industry: "Manufacturing",
-    challenge: "Fragmented data across ERP, WMS, and logistics systems. No unified view of supply chain performance or predictive capabilities.",
-    approach: "Unified 12+ data sources into a cloud-native warehouse with real-time dashboards, anomaly detection, and supplier risk scoring.",
-    impact: "30% reduction in lead time variability, $4M annual savings.",
-    stack: "Snowflake, Fivetran, dbt, Sigma, Python",
-    metrics: [
-      { value: 30, suffix: "%", label: "Lead time improvement" },
-      { value: 4, suffix: "M", label: "Annual savings", prefix: "$" },
-      { value: 12, suffix: "+", label: "Sources unified" },
-    ],
-    icon: Layers,
-    featured: false,
-  },
-  {
-    title: "Customer Churn Prediction System",
-    industry: "Telecom",
-    challenge: "High churn rates with no early warning system. Retention campaigns were reactive and untargeted, wasting marketing spend.",
-    approach: "Deployed a churn prediction model with feature engineering from usage, billing, and support data. Integrated with campaign automation.",
-    impact: "22% churn reduction, 35% improvement in retention campaign ROI.",
-    stack: "BigQuery, Vertex AI, dbt, Looker, n8n",
-    metrics: [
-      { value: 22, suffix: "%", label: "Churn reduction" },
-      { value: 35, suffix: "%", label: "Better campaign ROI" },
-      { value: 2, suffix: "M+", label: "Customers scored" },
-    ],
-    icon: TrendingUp,
-    featured: false,
-  },
-];
+// Heuristic "content weight" so denser case studies rise to the top of the grid.
+const weightOf = (c: CaseStudy) => {
+  const sectionWeight = c.sections.reduce((acc, s) => {
+    const bodyLen = s.body?.length ?? 0;
+    const bulletsLen = (s.bullets ?? []).reduce((a, b) => a + b.length, 0);
+    return acc + bodyLen + bulletsLen;
+  }, 0);
+  return sectionWeight + c.summary.length + (c.metrics?.length ?? 0) * 40;
+};
 
 const CaseStudies = () => {
+  const [active, setActive] = useState<CaseStudy | null>(null);
+
+  const ordered = useMemo(
+    () => [...caseStudies].sort((a, b) => weightOf(b) - weightOf(a)),
+    []
+  );
+
+  // Lock background scroll when modal is open
+  useEffect(() => {
+    if (active) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => { document.body.style.overflow = ""; };
+  }, [active]);
+
   return (
     <PageLayout>
       <SEOHead
         title="Case Studies"
-        description="Real-world results from AI-native data engineering. Demand forecasting, pipeline automation, executive dashboards, and churn prediction case studies."
+        description="13 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector and renewables — real outcomes from AI-native data engineering."
         path="/case-studies"
       />
       <PageHero
@@ -104,10 +53,10 @@ const CaseStudies = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
             {[
-              { value: "5+", label: "Production Deployments" },
-              { value: "98%+", label: "Average SLA Achievement" },
-              { value: "$10M+", label: "Client Value Created" },
-              { value: "4", label: "Industries Served" },
+              { value: "13", label: "Production Case Studies" },
+              { value: "98%+", label: "Best-in-Class Model Accuracy" },
+              { value: "30+ yrs", label: "Of Data Consolidated" },
+              { value: "10+", label: "Industries Served" },
             ].map(({ value, label }, i) => (
               <motion.div key={label} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 + i * 0.1 }}
@@ -118,106 +67,79 @@ const CaseStudies = () => {
             ))}
           </motion.div>
 
-          {/* Featured cases — bento grid */}
+          {/* Case studies — 3 col grid, denser cards first */}
           <div className="mb-20">
             <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-              className="font-mono text-xs text-primary tracking-widest uppercase mb-8">Featured Work</motion.p>
-            
-            <div className="grid md:grid-cols-2 gap-6">
-              {cases.filter(c => c.featured).map(({ title, industry, challenge, approach, impact, stack, metrics, icon: Icon }, i) => (
-                <motion.div key={title}
-                  initial={{ opacity: 0, y: 30, scale: 0.97 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ delay: i * 0.15, duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className={`glass-panel rounded-2xl p-8 group hover:glow-orange transition-all ${i === 0 ? "md:col-span-2" : ""}`}>
-                  <div className={`${i === 0 ? "grid md:grid-cols-2 gap-8" : ""}`}>
-                    <div>
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 rounded-lg surface-3 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-                          <Icon size={18} className="text-primary" />
-                        </div>
-                        <div>
-                          <p className="font-mono text-[10px] text-primary uppercase">{industry}</p>
-                          <h2 className="text-xl font-bold text-foreground">{title}</h2>
-                        </div>
-                      </div>
-                      <div className="space-y-4 mb-6">
-                        <div>
-                          <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Challenge</h3>
-                          <p className="text-sm text-secondary-foreground leading-relaxed">{challenge}</p>
-                        </div>
-                        <div>
-                          <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Approach</h3>
-                          <p className="text-sm text-secondary-foreground leading-relaxed">{approach}</p>
-                        </div>
-                      </div>
-                      <p className="font-mono text-[10px] text-muted-foreground/60">{stack}</p>
+              className="font-mono text-xs text-primary tracking-widest uppercase mb-8">
+              All 13 Case Studies
+            </motion.p>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {ordered.map((cs, i) => {
+                const Icon = cs.icon;
+                return (
+                  <motion.button
+                    key={cs.id}
+                    type="button"
+                    onClick={() => setActive(cs)}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: Math.min(i * 0.04, 0.4), duration: 0.5 }}
+                    viewport={{ once: true }}
+                    data-cursor-hover
+                    className="glass-panel rounded-2xl p-6 text-left group hover:glow-orange transition-all flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary/40"
+                  >
+                    {/* Top row: number + industry */}
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="font-mono text-[10px] text-primary/80 tracking-widest">{cs.number}</span>
+                      <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider truncate max-w-[60%] text-right">
+                        {cs.industry}
+                      </span>
                     </div>
-                    <div className={`${i === 0 ? "flex flex-col justify-center" : "mt-6"}`}>
-                      <div className="grid grid-cols-3 gap-3">
-                        {metrics.map(({ value, suffix, label, prefix }, j) => (
-                          <motion.div key={label} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 + j * 0.1 }} viewport={{ once: true }}
-                            className="surface-2 rounded-xl p-4 text-center">
-                            <p className="text-2xl font-bold text-gradient-orange text-glow-orange mb-1">
-                              <AnimatedCounter end={value} suffix={suffix} prefix={prefix || ""} />
+
+                    {/* Icon + title */}
+                    <div className="flex items-start gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-lg surface-3 flex items-center justify-center group-hover:bg-primary/10 transition-colors shrink-0">
+                        <Icon size={18} className="text-primary" />
+                      </div>
+                      <h2 className="text-base font-bold text-foreground leading-snug">{cs.title}</h2>
+                    </div>
+
+                    {/* Summary */}
+                    <p className="text-sm text-secondary-foreground leading-relaxed mb-4">
+                      {cs.summary}
+                    </p>
+
+                    {/* Metrics */}
+                    {cs.metrics && cs.metrics.length > 0 && (
+                      <div className={`grid gap-2 mb-4 ${cs.metrics.length === 1 ? "grid-cols-1" : cs.metrics.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
+                        {cs.metrics.map((m) => (
+                          <div key={m.label} className="surface-2 rounded-lg p-3 text-center">
+                            <p className="text-base font-bold text-gradient-orange mb-0.5 leading-none">
+                              {typeof m.value === "number" ? (
+                                <AnimatedCounter end={m.value} suffix={m.suffix || ""} prefix={m.prefix || ""} />
+                              ) : (
+                                <>{m.prefix || ""}{m.value}{m.suffix || ""}</>
+                              )}
                             </p>
-                            <p className="text-[10px] text-muted-foreground">{label}</p>
-                          </motion.div>
+                            <p className="text-[9px] text-muted-foreground mt-1 leading-tight">{m.label}</p>
+                          </div>
                         ))}
                       </div>
-                      <div className="mt-4 surface-2 rounded-lg p-4">
-                        <p className="text-sm font-semibold text-gradient-orange mb-1">Impact</p>
-                        <p className="text-sm text-secondary-foreground">{impact}</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+                    )}
 
-          {/* More case studies */}
-          <div className="mb-20">
-            <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-              className="font-mono text-xs text-primary tracking-widest uppercase mb-8">More Work</motion.p>
-            <div className="grid md:grid-cols-2 gap-6">
-              {cases.filter(c => !c.featured).map(({ title, industry, challenge, impact, stack, metrics, icon: Icon }, i) => (
-                <motion.div key={title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.15 }}
-                  viewport={{ once: true }}
-                  className="glass-panel rounded-xl p-7 group hover:glow-orange transition-all">
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="w-9 h-9 rounded-lg surface-3 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-                      <Icon size={16} className="text-primary" />
+                    {/* Footer: stack + read more */}
+                    <div className="mt-auto pt-3 border-t border-border/40 flex items-center justify-between gap-3">
+                      <p className="font-mono text-[10px] text-muted-foreground/70 truncate">
+                        {cs.stack || "—"}
+                      </p>
+                      <span className="text-xs text-primary flex items-center gap-1 shrink-0 group-hover:gap-2 transition-all">
+                        Read more <ArrowRight size={12} />
+                      </span>
                     </div>
-                    <div>
-                      <p className="font-mono text-[10px] text-primary uppercase">{industry}</p>
-                      <h2 className="text-lg font-bold text-foreground">{title}</h2>
-                    </div>
-                  </div>
-                  <p className="text-sm text-secondary-foreground mb-4 leading-relaxed">{challenge}</p>
-                  <div className="grid grid-cols-3 gap-2 mb-4">
-                    {metrics.map(({ value, suffix, label, prefix }) => (
-                      <div key={label} className="surface-2 rounded-lg p-3 text-center">
-                        <p className="text-lg font-bold text-gradient-orange mb-0.5">
-                          <AnimatedCounter end={value} suffix={suffix} prefix={prefix || ""} />
-                        </p>
-                        <p className="text-[9px] text-muted-foreground">{label}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <p className="font-mono text-[10px] text-muted-foreground/60">{stack}</p>
-                    <span className="text-xs text-primary flex items-center gap-1">
-                      <CheckCircle2 size={10} /> In Production
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.button>
+                );
+              })}
             </div>
           </div>
 
@@ -237,6 +159,96 @@ const CaseStudies = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Detail modal */}
+      <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
+        <DialogContent className="max-w-3xl max-h-[88vh] overflow-y-auto glass-panel border-border/60 p-0 gap-0">
+          {active && (
+            <>
+              <DialogHeader className="p-7 pb-5 border-b border-border/40 sticky top-0 z-10 backdrop-blur-xl bg-background/70">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl surface-3 flex items-center justify-center shrink-0">
+                    <active.icon size={22} className="text-primary" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 mb-1">
+                      <span className="font-mono text-[10px] text-primary tracking-widest">{active.number}</span>
+                      <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">{active.industry}</span>
+                    </div>
+                    <DialogTitle className="text-xl sm:text-2xl font-bold text-foreground leading-tight">
+                      {active.title}
+                    </DialogTitle>
+                    {active.stack && (
+                      <DialogDescription className="font-mono text-[10px] text-muted-foreground/80 mt-2">
+                        {active.stack}
+                      </DialogDescription>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => setActive(null)}
+                    aria-label="Close"
+                    className="text-muted-foreground hover:text-foreground transition-colors shrink-0"
+                    data-cursor-hover
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+              </DialogHeader>
+
+              <div className="p-7 pt-6 space-y-7">
+                {/* Summary lead */}
+                <p className="text-base text-secondary-foreground leading-relaxed border-l-2 border-primary/40 pl-4">
+                  {active.summary}
+                </p>
+
+                {/* Metrics */}
+                {active.metrics && active.metrics.length > 0 && (
+                  <div className={`grid gap-3 ${active.metrics.length === 1 ? "grid-cols-1" : active.metrics.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
+                    {active.metrics.map((m) => (
+                      <div key={m.label} className="surface-2 rounded-xl p-4 text-center">
+                        <p className="text-2xl font-bold text-gradient-orange text-glow-orange mb-1">
+                          {typeof m.value === "number" ? (
+                            <AnimatedCounter end={m.value} suffix={m.suffix || ""} prefix={m.prefix || ""} />
+                          ) : (
+                            <>{m.prefix || ""}{m.value}{m.suffix || ""}</>
+                          )}
+                        </p>
+                        <p className="text-[10px] text-muted-foreground">{m.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Sections */}
+                <div className="space-y-6">
+                  {active.sections.map((s) => (
+                    <div key={s.heading}>
+                      <h3 className="text-xs font-semibold text-primary uppercase tracking-widest mb-2">
+                        {s.heading}
+                      </h3>
+                      {s.body && (
+                        <p className="text-sm text-secondary-foreground leading-relaxed mb-3">
+                          {s.body}
+                        </p>
+                      )}
+                      {s.bullets && (
+                        <ul className="space-y-2">
+                          {s.bullets.map((b, idx) => (
+                            <li key={idx} className="text-sm text-secondary-foreground leading-relaxed flex gap-3">
+                              <span className="text-primary shrink-0 mt-2 w-1 h-1 rounded-full bg-primary" />
+                              <span className="flex-1">{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </PageLayout>
   );
 };
