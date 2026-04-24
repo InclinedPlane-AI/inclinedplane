@@ -1,6 +1,20 @@
 import { Database, BarChart3, Eye, TrendingUp, Layers, Factory, GraduationCap, Pill, Zap, Truck, Battery, Droplet, Cog, Route, Landmark, Sun } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+import imgRetailMfg from "@/assets/case-retail-manufacturing.jpg";
+import imgPharmaErp from "@/assets/case-pharma-erp.jpg";
+import imgEnergyAudit from "@/assets/case-energy-audit.jpg";
+import imgEdtech from "@/assets/case-edtech.jpg";
+import imgCapitalEquipment from "@/assets/case-capital-equipment.jpg";
+import imgPharmaSalesBi from "@/assets/case-pharma-sales-bi.jpg";
+import imgEcomInventory from "@/assets/case-ecom-inventory.jpg";
+import imgEvBattery from "@/assets/case-ev-battery.jpg";
+import imgFmcgEdibleOil from "@/assets/case-fmcg-edible-oil.jpg";
+import imgEngineForecast from "@/assets/case-engine-forecast.jpg";
+import imgEvFleet from "@/assets/case-ev-fleet.jpg";
+import imgCulturalHeritage from "@/assets/case-cultural-heritage.jpg";
+import imgSolarBi from "@/assets/case-solar-bi.jpg";
+
 export interface CaseStudyMetric {
   value: number | string;
   suffix?: string;
@@ -21,6 +35,7 @@ export interface CaseStudy {
   industry: string;
   summary: string; // 2-3 line teaser shown on the card
   icon: LucideIcon;
+  image: string;
   stack?: string;
   metrics?: CaseStudyMetric[];
   sections: CaseStudySection[]; // shown in modal
