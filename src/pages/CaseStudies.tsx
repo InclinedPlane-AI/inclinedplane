@@ -172,6 +172,16 @@ const CaseStudies = () => {
         <DialogContent className="max-w-3xl max-h-[88vh] overflow-y-auto glass-panel border-border/60 p-0 gap-0">
           {active && (
             <>
+              {/* Hero image */}
+              <div className="relative h-56 sm:h-64 overflow-hidden">
+                <img
+                  src={active.image}
+                  alt={active.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/10" />
+              </div>
+
               <DialogHeader className="p-7 pb-5 border-b border-border/40 sticky top-0 z-10 backdrop-blur-xl bg-background/70">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl surface-3 flex items-center justify-center shrink-0">
