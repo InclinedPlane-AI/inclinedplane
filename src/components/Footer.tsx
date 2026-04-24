@@ -89,7 +89,7 @@ const Footer = () => {
                 ].map((section) => (
                   <div key={section.group}>
                     <p className="font-mono uppercase tracking-widest text-muted-foreground mb-2 text-sm font-semibold">
-                      — {section.group}
+                      {section.group}
                     </p>
                     <ul className="space-y-2.5">
                       {section.items.map((service) => (
@@ -98,7 +98,7 @@ const Footer = () => {
                             to={`/services#${service.hash}`}
                             className="text-xs text-secondary-foreground hover:text-primary transition-colors"
                           >
-                            {service.label}
+                            — {service.label}
                           </Link>
                         </li>
                       ))}
