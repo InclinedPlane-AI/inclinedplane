@@ -143,10 +143,10 @@ const Index = () => {
                     animate={{ backgroundPosition: ["150% center", "-50% center"] }}
                     transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 3, ease: "linear" }}
                   >
-                    The Architecture of Enterprise Velocity
+                    Data Leveraged. Growth Accelerated.
                   </motion.p>
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] tracking-tight mb-4 sm:mb-6">
-                    Data Leveraged. <span className="text-gradient-orange">Growth Accelerated.</span>
+                    The Architecture of <span className="text-gradient-orange">Enterprise Velocity.</span>
                   </h1>
                   <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-lg mb-6 sm:mb-8 text-justify">
                     We don't just engineer data — we operationalize intelligence. InclinedPlane architects the data
