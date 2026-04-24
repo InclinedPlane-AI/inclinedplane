@@ -96,7 +96,7 @@ const Footer = () => {
                         <li key={service.hash}>
                           <Link
                             to={`/services#${service.hash}`}
-                            className="text-xs text-secondary-foreground hover:text-foreground transition-colors"
+                            className="text-xs text-secondary-foreground hover:text-primary transition-colors"
                           >
                             {service.label}
                           </Link>
