@@ -536,7 +536,7 @@ const ServicesPage = () => {
                 <div className="flex-1 h-px bg-gradient-to-r from-primary/30 via-border/40 to-transparent" />
               </div>
 
-              <div className="glass-panel rounded-2xl -mx-4 sm:-mx-6 mb-10 lg:mb-14">
+              <div className="glass-panel rounded-2xl -mx-4 sm:-mx-6 mb-10 lg:mb-14 overflow-hidden">
                 {pillars.map((pillar, i) => {
                   const idx = i + 1; // offset for advisory at 0
                   return (
@@ -546,10 +546,11 @@ const ServicesPage = () => {
                       ref={(el) => {
                         sectionRefs.current[idx] = el;
                       }}
-                      className="px-4 sm:px-6 py-8 lg:py-10"
                     >
-                      <ServiceContent pillar={pillar} isActive={activeIndex === idx} />
-                      {i < pillars.length - 1 && <div className="border-t border-border/30 mt-10 lg:mt-14" />}
+                      <div className="px-4 sm:px-6 py-8 lg:py-10">
+                        <ServiceContent pillar={pillar} isActive={activeIndex === idx} />
+                      </div>
+                      {i < pillars.length - 1 && <div className="border-t border-border/30" />}
                     </div>
                   );
                 })}
