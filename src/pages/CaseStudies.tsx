@@ -69,11 +69,6 @@ const CaseStudies = () => {
 
           {/* Case studies — 3 col grid, denser cards first */}
           <div className="mb-20">
-            <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-              className="font-mono text-xs text-primary tracking-widest uppercase mb-8">
-              All 13 Case Studies
-            </motion.p>
-
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {ordered.map((cs, i) => {
                 const Icon = cs.icon;
