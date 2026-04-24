@@ -88,7 +88,7 @@ const Footer = () => {
                   },
                 ].map((section) => (
                   <div key={section.group}>
-                    <p className="font-mono uppercase tracking-widest text-muted-foreground mb-2 text-sm font-semibold">
+                    <p className="text-sm text-secondary-foreground mb-2">
                       {section.group}
                     </p>
                     <ul className="space-y-2.5">
