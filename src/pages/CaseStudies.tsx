@@ -72,6 +72,7 @@ const CaseStudies = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {ordered.map((cs, i) => {
                 const Icon = cs.icon;
+                const displayNumber = String(i + 1).padStart(2, "0");
                 return (
                   <motion.button
                     key={cs.id}
@@ -86,7 +87,7 @@ const CaseStudies = () => {
                   >
                     {/* Top row: number + industry */}
                     <div className="flex items-center justify-between mb-4">
-                      <span className="font-mono text-[10px] text-primary/80 tracking-widest">{cs.number}</span>
+                      <span className="font-mono text-[10px] text-primary/80 tracking-widest">{displayNumber}</span>
                       <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider truncate max-w-[60%] text-right">
                         {cs.industry}
                       </span>
@@ -166,8 +167,10 @@ const CaseStudies = () => {
                     <active.icon size={22} className="text-primary" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-1">
-                      <span className="font-mono text-[10px] text-primary tracking-widest">{active.number}</span>
+                     <div className="flex items-center gap-3 mb-1">
+                      <span className="font-mono text-[10px] text-primary tracking-widest">
+                        {String(ordered.findIndex(c => c.id === active.id) + 1).padStart(2, "0")}
+                      </span>
                       <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">{active.industry}</span>
                     </div>
                     <DialogTitle className="text-xl sm:text-2xl font-bold text-foreground leading-tight">
