@@ -269,7 +269,8 @@ const Index = () => {
                     {col.stats.map((s, i) => (
                       <div
                         key={i}
-                        className={`glass-panel rounded-xl p-5 flex flex-col justify-between min-h-[10.5rem] ${col.tint}`}
+                        className={`glass-panel rounded-xl p-5 flex flex-col justify-between min-h-[10.5rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 cursor-default ${col.tint}`}
+                        data-cursor-hover
                       >
                         <div>
                           <p className="text-3xl lg:text-4xl font-bold text-gradient-orange mb-2">
