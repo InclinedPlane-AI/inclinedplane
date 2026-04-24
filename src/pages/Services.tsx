@@ -545,13 +545,9 @@ const ServicesPage = () => {
                     ref={(el) => {
                       sectionRefs.current[idx] = el;
                     }}
-                    className="relative -mx-4 sm:-mx-6 mb-10 lg:mb-14"
+                    className="py-10 lg:py-14"
                   >
-                    <div className="absolute inset-0 rounded-2xl bg-primary/[0.025] border border-primary/10 pointer-events-none" />
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/[0.04] via-transparent to-transparent pointer-events-none" />
-                    <div className="relative px-4 sm:px-6 py-8 lg:py-10">
-                      <ServiceContent pillar={pillar} isActive={activeIndex === idx} />
-                    </div>
+                    <ServiceContent pillar={pillar} isActive={activeIndex === idx} />
                     {i < pillars.length - 1 && <div className="border-t border-border/30 mt-10 lg:mt-14" />}
                   </div>
                 );
