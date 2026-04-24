@@ -4,11 +4,15 @@ import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { ArrowRight, X } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
 import { caseStudies, type CaseStudy } from "@/data/caseStudies";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
+
+const SITE_URL = "https://inclinedplane.com";
+const toAbsoluteUrl = (assetPath: string) =>
+  assetPath.startsWith("http") ? assetPath : `${SITE_URL}${assetPath.startsWith("/") ? "" : "/"}${assetPath}`;
 
 // Heuristic "content weight" so denser case studies rise to the top of the grid.
 const weightOf = (c: CaseStudy) => {
@@ -46,12 +50,25 @@ const ImageWithSkeleton = ({
 };
 
 const CaseStudies = () => {
-  const [active, setActive] = useState<CaseStudy | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeId = searchParams.get("study");
 
   const ordered = useMemo(
     () => [...caseStudies].sort((a, b) => weightOf(b) - weightOf(a)),
     []
   );
+
+  const active = useMemo(
+    () => (activeId ? ordered.find((c) => c.id === activeId) ?? null : null),
+    [activeId, ordered]
+  );
+
+  const openStudy = (cs: CaseStudy) => {
+    setSearchParams({ study: cs.id });
+  };
+  const closeStudy = () => {
+    setSearchParams({}, { replace: false });
+  };
 
   // Lock background scroll when modal is open
   useEffect(() => {
@@ -62,11 +79,44 @@ const CaseStudies = () => {
 
   return (
     <PageLayout>
-      <SEOHead
-        title="Case Studies"
-        description="13 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector and renewables — real outcomes from AI-native data engineering."
-        path="/case-studies"
-      />
+      {active ? (
+        <SEOHead
+          key={active.id}
+          title={`${active.title} — Case Study`}
+          description={active.summary}
+          path={`/case-studies?study=${active.id}`}
+          ogImage={toAbsoluteUrl(active.image)}
+          ogType="article"
+          jsonLd={{
+            "@context": "https://schema.org",
+            "@type": "CaseStudy",
+            name: active.title,
+            about: active.industry,
+            description: active.summary,
+            image: toAbsoluteUrl(active.image),
+            url: `${SITE_URL}/case-studies?study=${active.id}`,
+            provider: { "@type": "Organization", name: "Inclined Plane", url: SITE_URL },
+            ...(active.stack ? { keywords: active.stack } : {}),
+          }}
+        />
+      ) : (
+        <SEOHead
+          title="Case Studies"
+          description="13 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector and renewables — real outcomes from AI-native data engineering."
+          path="/case-studies"
+          jsonLd={{
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            itemListElement: ordered.map((cs, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `${SITE_URL}/case-studies?study=${cs.id}`,
+              name: cs.title,
+              image: toAbsoluteUrl(cs.image),
+            })),
+          }}
+        />
+      )}
       <PageHero
         label="Case Studies"
         title={<>Proof in <span className="text-gradient-orange">Production.</span></>}
@@ -103,7 +153,7 @@ const CaseStudies = () => {
                   <motion.button
                     key={cs.id}
                     type="button"
-                    onClick={() => setActive(cs)}
+                    onClick={() => openStudy(cs)}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: Math.min(i * 0.04, 0.4), duration: 0.5 }}
@@ -193,7 +243,7 @@ const CaseStudies = () => {
       </div>
 
       {/* Detail modal */}
-      <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
+      <Dialog open={!!active} onOpenChange={(o) => !o && closeStudy()}>
         <DialogContent className="max-w-3xl max-h-[88vh] overflow-y-auto glass-panel border-border/60 p-0 gap-0">
           {active && (
             <>
@@ -229,7 +279,7 @@ const CaseStudies = () => {
                     )}
                   </div>
                   <button
-                    onClick={() => setActive(null)}
+                    onClick={closeStudy}
                     aria-label="Close"
                     className="text-muted-foreground hover:text-foreground transition-colors shrink-0"
                     data-cursor-hover
