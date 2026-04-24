@@ -50,6 +50,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Modernized data operations end-to-end — from real-time executive reporting to dealer intelligence, scheme automation, market basket analysis, and dealer attrition prediction.",
     icon: Factory,
+    image: imgRetailMfg,
     metrics: [
       { value: 30, suffix: "%", label: "Reporting time freed" },
     ],
@@ -74,6 +75,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Built a robust analytics layer on top of Sales ERP — transforming raw transactional data into strategic intelligence across operations, tactics, and strategy.",
     icon: Pill,
+    image: imgPharmaErp,
     stack: "Tableau",
     sections: [
       {
@@ -105,6 +107,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Brought data-driven precision to one of the industry's hardest problems — minimizing equipment losses and detecting infrastructure failures before they become costly disasters.",
     icon: Zap,
+    image: imgEnergyAudit,
     stack: "Cloud Data Warehouse, Tableau, Audio Analytics",
     metrics: [
       { value: 11, label: "Aberration types" },
@@ -133,6 +136,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Established a solid Business Intelligence foundation — bringing structure, clarity, and foresight to data that was previously scattered, manual, and impossible to act on at speed.",
     icon: GraduationCap,
+    image: imgEdtech,
     stack: "Tableau, Data Warehouse",
     sections: [
       {
@@ -166,6 +170,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Laid the data management groundwork demanded by growth — ERP implementation, process mapping, and the governance structures needed to sustain data quality at scale.",
     icon: Cog,
+    image: imgCapitalEquipment,
     stack: "Tableau, OpenRefine, Data Wrangler",
     sections: [
       {
@@ -199,6 +204,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Replaced manual, weekly Excel reporting with an automated Tableau BI platform — cutting cost, accelerating decisions, and unlocking field-force intelligence at the rep level.",
     icon: BarChart3,
+    image: imgPharmaSalesBi,
     stack: "Tableau",
     sections: [
       {
@@ -234,6 +240,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Hundreds of thousands of SKUs, multiple vendors, volatile demand. We built an Inventory Ageing & PO dashboard on AWS + Power BI that reshaped procurement strategy.",
     icon: Layers,
+    image: imgEcomInventory,
     stack: "AWS, Power BI",
     metrics: [
       { value: 24, suffix: "%", label: "Stock-out reduction" },
@@ -274,6 +281,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Built a multi-class classifier on IoT vitals from a Battery-as-a-Service fleet — predicting failures before they occur with 98%+ accuracy and balanced precision/recall.",
     icon: Battery,
+    image: imgEvBattery,
     stack: "IoT, Python, SMOTE, Multi-class Classification",
     metrics: [
       { value: 98, suffix: "%+", label: "Overall accuracy" },
@@ -313,6 +321,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Unified SAP, DMS and SFA into a single AWS Redshift warehouse with Tableau — refreshed 4× daily — giving the Sales Head one view of primary, secondary and field-force performance.",
     icon: Droplet,
+    image: imgFmcgEdibleOil,
     stack: "AWS Redshift, Tableau",
     metrics: [
       { value: 15, suffix: "%", label: "Sales efficiency" },
@@ -354,6 +363,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Benchmarked ARIMA, LSTM and ML methods against MAPE/RMSE/MAD — DeepAR+ on AWS won. Monthly forecasts now feed production planning and procurement directly.",
     icon: TrendingUp,
+    image: imgEngineForecast,
     stack: "AWS, DeepAR+, Power BI",
     metrics: [
       { value: 17, suffix: "%", label: "Inventory cost cut" },
@@ -391,6 +401,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "A hybrid optimization engine — Genetic Algorithms, Tabu Search, and Simulated Annealing — that allocates EV cabs across pick-up/drop trips while respecting battery, driver, and operational constraints in real time.",
     icon: Route,
+    image: imgEvFleet,
     stack: "Genetic Algorithms, Tabu Search, Simulated Annealing",
     sections: [
       {
@@ -437,6 +448,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Dynamic geographic visualizations correlating population, historical landmarks, and proposed sites — turning intuition-led cultural site planning into evidence-based strategy.",
     icon: Landmark,
+    image: imgCulturalHeritage,
     sections: [
       {
         heading: "The challenge",
@@ -461,6 +473,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "A Tableau BI solution unifying Engineering, Procurement, Construction, and Net Metering data — giving leadership real-time delay impact, supplier dependency, and target-vs-actual visibility.",
     icon: Sun,
+    image: imgSolarBi,
     stack: "Tableau",
     sections: [
       {
