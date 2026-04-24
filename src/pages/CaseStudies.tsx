@@ -4,11 +4,15 @@ import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { ArrowRight, X } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
 import { caseStudies, type CaseStudy } from "@/data/caseStudies";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
+
+const SITE_URL = "https://inclinedplane.com";
+const toAbsoluteUrl = (assetPath: string) =>
+  assetPath.startsWith("http") ? assetPath : `${SITE_URL}${assetPath.startsWith("/") ? "" : "/"}${assetPath}`;
 
 // Heuristic "content weight" so denser case studies rise to the top of the grid.
 const weightOf = (c: CaseStudy) => {
@@ -46,12 +50,25 @@ const ImageWithSkeleton = ({
 };
 
 const CaseStudies = () => {
-  const [active, setActive] = useState<CaseStudy | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeId = searchParams.get("study");
 
   const ordered = useMemo(
     () => [...caseStudies].sort((a, b) => weightOf(b) - weightOf(a)),
     []
   );
+
+  const active = useMemo(
+    () => (activeId ? ordered.find((c) => c.id === activeId) ?? null : null),
+    [activeId, ordered]
+  );
+
+  const openStudy = (cs: CaseStudy) => {
+    setSearchParams({ study: cs.id });
+  };
+  const closeStudy = () => {
+    setSearchParams({}, { replace: false });
+  };
 
   // Lock background scroll when modal is open
   useEffect(() => {
