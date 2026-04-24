@@ -254,18 +254,13 @@ const pillars: ServicePillar[] = [
   },
 ];
 
-/* ── Section content — always full height, details fade in/out ── */
+/* ── Section content ── */
 const ServiceContent = ({ pillar, isActive }: { pillar: ServicePillar; isActive: boolean }) => {
   const Icon = pillar.icon;
 
   return (
     <div className="w-full">
-      {/* Title — always visible */}
-      <motion.div
-        animate={{ opacity: isActive ? 1 : 0.3 }}
-        transition={{ duration: 0.35 }}
-        className="flex items-start gap-4 mb-4"
-      >
+      <div className="flex items-start gap-4 mb-4">
         <div
           className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 mt-1 transition-colors duration-300 ${isActive ? "bg-primary/10" : "surface-3"}`}
         >
@@ -280,64 +275,54 @@ const ServiceContent = ({ pillar, isActive }: { pillar: ServicePillar; isActive:
           <p className="text-sm text-muted-foreground/70 leading-relaxed mt-2">{pillar.description}</p>
           <p className="font-mono text-xs text-primary/50 mt-2 italic">"{pillar.tagline}"</p>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Details — fade in/out but keep layout space */}
-      <motion.div
-        animate={{ opacity: isActive ? 1 : 0.08 }}
-        transition={{ duration: 0.35 }}
-        className="pointer-events-auto"
-        style={{ pointerEvents: isActive ? "auto" : "none" }}
-      >
-        <div className="pt-4 pl-0 lg:pl-[60px]">
-          {/* Capabilities */}
-          <div className="glass-panel rounded-xl p-5 sm:p-6 mb-4">
-            <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50 mb-4">
-              Capabilities
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {pillar.items.map(({ label, icon: ItemIcon }) => (
-                <div key={label} className="flex items-center gap-2.5 py-1.5">
-                  <div className="w-6 h-6 rounded-md surface-2 flex items-center justify-center shrink-0">
-                    <ItemIcon size={12} className="text-primary/70" />
-                  </div>
-                  <span className="text-sm text-foreground/80">{label}</span>
+      <div className="pt-4 pl-0 lg:pl-[60px]">
+        {/* Capabilities */}
+        <div className="glass-panel rounded-xl p-5 sm:p-6 mb-4">
+          <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50 mb-4">
+            Capabilities
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            {pillar.items.map(({ label, icon: ItemIcon }) => (
+              <div key={label} className="flex items-center gap-2.5 py-1.5">
+                <div className="w-6 h-6 rounded-md surface-2 flex items-center justify-center shrink-0">
+                  <ItemIcon size={12} className="text-primary/70" />
+                </div>
+                <span className="text-sm text-foreground/80">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tools + Benefits */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="glass-panel rounded-xl p-5">
+            <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50 mb-3">Stack</h4>
+            <div className="flex flex-wrap gap-1.5">
+              {pillar.tools.map((tool) => (
+                <span
+                  key={tool}
+                  className="text-[11px] px-2 py-0.5 rounded-md surface-2 text-muted-foreground border border-border/30 font-mono"
+                >
+                  {tool}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="glass-panel rounded-xl p-5">
+            <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50 mb-3">Outcomes</h4>
+            <div className="space-y-2">
+              {pillar.benefits.map((b) => (
+                <div key={b} className="flex items-center gap-2">
+                  <div className="w-1 h-1 rounded-full bg-primary shrink-0" />
+                  <span className="text-xs text-muted-foreground">{b}</span>
                 </div>
               ))}
             </div>
           </div>
-
-          {/* Tools + Benefits */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="glass-panel rounded-xl p-5">
-              <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50 mb-3">Stack</h4>
-              <div className="flex flex-wrap gap-1.5">
-                {pillar.tools.map((tool) => (
-                  <span
-                    key={tool}
-                    className="text-[11px] px-2 py-0.5 rounded-md surface-2 text-muted-foreground border border-border/30 font-mono"
-                  >
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="glass-panel rounded-xl p-5">
-              <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50 mb-3">
-                Outcomes
-              </h4>
-              <div className="space-y-2">
-                {pillar.benefits.map((b) => (
-                  <div key={b} className="flex items-center gap-2">
-                    <div className="w-1 h-1 rounded-full bg-primary shrink-0" />
-                    <span className="text-xs text-muted-foreground">{b}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
@@ -346,7 +331,6 @@ const ServiceContent = ({ pillar, isActive }: { pillar: ServicePillar; isActive:
 const ServicesPage = () => {
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
-  const isClickScrolling = useRef(false);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   // Combined list: index 0 = advisory, 1..N = delivery pillars
   const allPillars: ServicePillar[] = [advisoryPillar, ...pillars];
@@ -354,36 +338,38 @@ const ServicesPage = () => {
   /* Track scroll position to update active index */
   useEffect(() => {
     const handleScroll = () => {
-      if (isClickScrolling.current) return;
-
-      const scrollY = window.scrollY + window.innerHeight * 0.35;
+      const threshold = 160;
       let current = 0;
 
       for (let i = 0; i < sectionRefs.current.length; i++) {
         const el = sectionRefs.current[i];
-        if (el && el.offsetTop <= scrollY) {
+        if (!el) continue;
+
+        const top = el.getBoundingClientRect().top;
+        if (top <= threshold) {
           current = i;
         }
       }
 
-      setActiveIndex(current);
+      setActiveIndex((prev) => (prev === current ? prev : current));
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   const scrollTo = useCallback((index: number) => {
     setActiveIndex(index);
-    isClickScrolling.current = true;
     const el = sectionRefs.current[index];
     if (el) {
       const top = el.getBoundingClientRect().top + window.scrollY - 128;
       window.scrollTo({ top, behavior: "smooth" });
-      setTimeout(() => {
-        isClickScrolling.current = false;
-      }, 1200);
     }
   }, []);
 
