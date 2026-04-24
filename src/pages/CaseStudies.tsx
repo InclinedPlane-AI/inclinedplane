@@ -83,23 +83,33 @@ const CaseStudies = () => {
                     transition={{ delay: Math.min(i * 0.04, 0.4), duration: 0.5 }}
                     viewport={{ once: true }}
                     data-cursor-hover
-                    className="glass-panel rounded-2xl p-6 text-left group hover:glow-orange transition-all flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary/40"
+                    className="glass-panel rounded-2xl text-left group hover:glow-orange transition-all flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary/40 overflow-hidden"
                   >
+                    {/* Image banner */}
+                    <div className="relative h-40 overflow-hidden">
+                      <img
+                        src={cs.image}
+                        alt={cs.title}
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+                      <div className="absolute top-3 left-3 w-9 h-9 rounded-lg surface-3 backdrop-blur-md flex items-center justify-center border border-primary/20">
+                        <Icon size={16} className="text-primary" />
+                      </div>
+                    </div>
+
+                    <div className="p-6 flex flex-col flex-1">
                     {/* Top row: number + industry */}
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center justify-between mb-3">
                       <span className="font-mono text-[10px] text-primary/80 tracking-widest">{displayNumber}</span>
                       <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider truncate max-w-[60%] text-right">
                         {cs.industry}
                       </span>
                     </div>
 
-                    {/* Icon + title */}
-                    <div className="flex items-start gap-3 mb-3">
-                      <div className="w-10 h-10 rounded-lg surface-3 flex items-center justify-center group-hover:bg-primary/10 transition-colors shrink-0">
-                        <Icon size={18} className="text-primary" />
-                      </div>
-                      <h2 className="text-base font-bold text-foreground leading-snug">{cs.title}</h2>
-                    </div>
+                    {/* Title */}
+                    <h2 className="text-base font-bold text-foreground leading-snug mb-3 group-hover:text-primary transition-colors">{cs.title}</h2>
 
                     {/* Summary */}
                     <p className="text-sm text-secondary-foreground leading-relaxed mb-4">
@@ -133,6 +143,7 @@ const CaseStudies = () => {
                         Read more <ArrowRight size={12} />
                       </span>
                     </div>
+                    </div>
                   </motion.button>
                 );
               })}
@@ -161,6 +172,16 @@ const CaseStudies = () => {
         <DialogContent className="max-w-3xl max-h-[88vh] overflow-y-auto glass-panel border-border/60 p-0 gap-0">
           {active && (
             <>
+              {/* Hero image */}
+              <div className="relative h-56 sm:h-64 overflow-hidden">
+                <img
+                  src={active.image}
+                  alt={active.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/10" />
+              </div>
+
               <DialogHeader className="p-7 pb-5 border-b border-border/40 sticky top-0 z-10 backdrop-blur-xl bg-background/70">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl surface-3 flex items-center justify-center shrink-0">
