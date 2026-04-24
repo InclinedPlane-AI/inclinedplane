@@ -122,7 +122,7 @@ const Footer = () => {
                   <li key={link.path}>
                     <Link
                       to={link.path}
-                      className="text-sm text-secondary-foreground hover:text-foreground transition-colors"
+                      className="text-sm text-secondary-foreground hover:text-primary transition-colors"
                     >
                       {link.label}
                     </Link>
