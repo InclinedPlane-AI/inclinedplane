@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
 import { caseStudies, type CaseStudy } from "@/data/caseStudies";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Heuristic "content weight" so denser case studies rise to the top of the grid.
 const weightOf = (c: CaseStudy) => {
