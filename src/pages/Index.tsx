@@ -276,9 +276,24 @@ const Index = () => {
                     dot: "bg-red-400",
                     tint: "bg-primary/[0.06]",
                     stats: [
-                      { num: "23%", desc: "Of enterprises are AI-ready in data, talent, and governance.", src: "Gartner, 2025", link: null },
-                      { num: "70–85%", desc: "Of AI initiatives fail to deliver expected business value.", src: "Industry Sources, 2025", link: null },
-                      { num: "1 in 5", desc: "Companies have scaled AI beyond initial proofs-of-concept.", src: "Deloitte, 2025", link: null },
+                      {
+                        num: "23%",
+                        desc: "Of supply chain organizations have a formal AI strategy.",
+                        src: "Gartner, 2025",
+                        link: "https://www.gartner.com/en/newsroom/2025-06-11-gartner-survey-shows-just-23-percent-of-supply-chain-organizations-have-a-formal-ai-strategy",
+                      },
+                      {
+                        num: "70–85%",
+                        desc: "Of AI projects fail to deliver expected business value.",
+                        src: "Industry Sources, 2025",
+                        link: "https://www.fullview.io/blog/ai-statistics",
+                      },
+                      {
+                        num: "1 in 5",
+                        desc: "Companies have mature AI governance in place.",
+                        src: "Deloitte, 2025",
+                        link: "https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html",
+                      },
                     ],
                   },
                 ].map((col, colIdx) => (
