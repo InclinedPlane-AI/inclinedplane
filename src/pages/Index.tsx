@@ -291,7 +291,7 @@ const Index = () => {
               {/* Closing banner */}
               <motion.div
                 {...fadeUp(0.3)}
-                className="mt-10 glass-panel rounded-xl px-6 py-6 lg:py-7 text-center bg-background/60 shadow-2xl"
+                className="mt-10 text-center"
               >
                 <p className="text-base sm:text-lg lg:text-xl font-semibold text-foreground leading-relaxed max-w-3xl mx-auto">
                   "Most enterprises can't get to agentic AI because they haven't fixed the foundation.{" "}
