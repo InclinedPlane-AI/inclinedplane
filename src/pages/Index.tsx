@@ -297,11 +297,7 @@ const Index = () => {
                     ],
                   },
                 ].map((col, colIdx) => (
-                  <motion.div
-                    key={col.key}
-                    {...fadeUp(colIdx * 0.08)}
-                    className="flex flex-col gap-3"
-                  >
+                  <motion.div key={col.key} {...fadeUp(colIdx * 0.08)} className="flex flex-col gap-3">
                     <div className={`glass-panel rounded-xl p-3 lg:p-4 ${col.tint}`}>
                       <div className="flex items-center gap-2 mb-1">
                         <span className={`w-2 h-2 rounded-full ${col.dot} shadow-[0_0_8px_currentColor]`} />
@@ -312,49 +308,41 @@ const Index = () => {
                       <p className="text-sm text-secondary-foreground">{col.sub}</p>
                     </div>
                     {col.stats.map((s, i) => {
-                        const CardTag: any = s.link ? "a" : "div";
-                        const linkProps = s.link
-                          ? { href: s.link, target: "_blank", rel: "noopener noreferrer" }
-                          : {};
-                        return (
-                          <CardTag
-                            key={i}
-                            {...linkProps}
-                            className={`glass-panel rounded-xl p-4 lg:p-5 flex flex-col justify-between min-h-[8.5rem] lg:min-h-[10rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 ${s.link ? "group cursor-pointer" : "cursor-default"} ${col.tint}`}
-                            data-cursor-hover
-                          >
-                            <div>
-                              <p className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gradient-orange mb-2">
-                                {s.num}
-                              </p>
-                              <p className="text-xs text-secondary-foreground leading-relaxed">
-                                {s.desc}
-                              </p>
-                            </div>
-                            <div className="flex items-center justify-between mt-2 lg:mt-3 pt-2 border-t border-border/40">
-                              <span className="font-mono text-[9px] text-muted-foreground/60 uppercase">
-                                {s.src}
+                      const CardTag: any = s.link ? "a" : "div";
+                      const linkProps = s.link ? { href: s.link, target: "_blank", rel: "noopener noreferrer" } : {};
+                      return (
+                        <CardTag
+                          key={i}
+                          {...linkProps}
+                          className={`glass-panel rounded-xl p-4 lg:p-5 flex flex-col justify-between min-h-[8.5rem] lg:min-h-[10rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 ${s.link ? "group cursor-pointer" : "cursor-default"} ${col.tint}`}
+                          data-cursor-hover
+                        >
+                          <div>
+                            <p className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gradient-orange mb-2">
+                              {s.num}
+                            </p>
+                            <p className="text-xs text-secondary-foreground leading-relaxed">{s.desc}</p>
+                          </div>
+                          <div className="flex items-center justify-between mt-2 lg:mt-3 pt-2 border-t border-border/40">
+                            <span className="font-mono text-[9px] text-muted-foreground/60 uppercase">{s.src}</span>
+                            {s.link && (
+                              <span className="w-5 h-5 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                                <ArrowUpRight size={10} className="text-primary" />
                               </span>
-                              {s.link && (
-                                <span className="w-5 h-5 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                                  <ArrowUpRight size={10} className="text-primary" />
-                                </span>
-                              )}
-                            </div>
-                          </CardTag>
-                        );
-                      })}
+                            )}
+                          </div>
+                        </CardTag>
+                      );
+                    })}
                   </motion.div>
                 ))}
               </div>
 
               {/* Closing banner */}
-              <motion.div
-                {...fadeUp(0.3)}
-                className="mt-6 lg:mt-8 text-center"
-              >
+              <motion.div {...fadeUp(0.3)} className="mt-6 lg:mt-8 text-center">
                 <p className="text-base sm:text-lg lg:text-xl font-semibold text-foreground leading-relaxed max-w-3xl mx-auto">
-                  "Most enterprises can't get to agentic AI because they haven't fixed the foundation.{" "}
+                  "The gap between AI ambition and AI reality almost always starts with data infrastructure. We close
+                  that gap — and build everything on top of it.{" "}
                   <span className="text-gradient-orange">We do both.</span>"
                 </p>
               </motion.div>
