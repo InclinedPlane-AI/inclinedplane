@@ -204,10 +204,7 @@ const Index = () => {
                 <p className="font-mono text-xs text-primary tracking-widest uppercase mb-2 text-center">
                   The AI Imperative — In Numbers
                 </p>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-2 text-center">
-                  The AI Imperative — <span className="text-gradient-orange">In Numbers.</span>
-                </h2>
-                <p className="text-sm text-muted-foreground text-center max-w-xl mx-auto mb-6 lg:mb-8">
+                <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight text-center max-w-3xl mx-auto mb-6 lg:mb-8">
                   The opportunity is real. The intent is there. The infrastructure isn't.
                 </p>
               </motion.div>
