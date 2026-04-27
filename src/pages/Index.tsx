@@ -202,7 +202,7 @@ const Index = () => {
             <div className="max-w-6xl mx-auto px-6 lg:px-8 w-full">
               <motion.div {...fadeUp()}>
                 <p className="font-mono text-xs text-primary tracking-widest uppercase mb-2 text-center">
-                  The AI Imperative
+                  The AI Imperative — In Numbers
                 </p>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-2 text-center">
                   The AI Imperative — <span className="text-gradient-orange">In Numbers.</span>
