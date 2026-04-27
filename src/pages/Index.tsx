@@ -295,14 +295,14 @@ const Index = () => {
                   },
                 ].map((col, colIdx) => (
                   <motion.div key={col.key} {...fadeUp(colIdx * 0.08)} className="flex flex-col gap-3">
-                    <div className={`glass-panel rounded-xl p-3 lg:p-4 ${col.tint}`}>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className={`w-2 h-2 rounded-full ${col.dot} shadow-[0_0_8px_currentColor]`} />
-                        <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase">
+                    <div className={`glass-panel rounded-xl p-5 lg:p-6 ${col.tint}`}>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className={`w-2.5 h-2.5 rounded-full ${col.dot} shadow-[0_0_8px_currentColor]`} />
+                        <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase">
                           {col.label}
                         </p>
                       </div>
-                      <p className="text-sm text-secondary-foreground">{col.sub}</p>
+                      <p className="text-base lg:text-lg font-semibold text-secondary-foreground">{col.sub}</p>
                     </div>
                     {col.stats.map((s, i) => {
                       const CardTag: any = s.link ? "a" : "div";
@@ -311,20 +311,20 @@ const Index = () => {
                         <CardTag
                           key={i}
                           {...linkProps}
-                          className={`glass-panel rounded-xl p-4 lg:p-5 flex flex-col justify-between min-h-[8.5rem] lg:min-h-[10rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 ${s.link ? "group cursor-pointer" : "cursor-default"} ${col.tint}`}
+                          className={`glass-panel rounded-xl p-2.5 lg:p-3 flex flex-col justify-between min-h-[4.5rem] lg:min-h-[5rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 ${s.link ? "group cursor-pointer" : "cursor-default"} ${col.tint}`}
                           data-cursor-hover
                         >
                           <div>
-                            <p className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gradient-orange mb-2">
+                            <p className="text-base lg:text-lg xl:text-xl font-bold text-gradient-orange mb-1">
                               {s.num}
                             </p>
-                            <p className="text-xs text-secondary-foreground leading-relaxed">{s.desc}</p>
+                            <p className="text-[10px] text-secondary-foreground leading-snug">{s.desc}</p>
                           </div>
-                          <div className="flex items-center justify-between mt-2 lg:mt-3 pt-2 border-t border-border/40">
-                            <span className="font-mono text-[9px] text-muted-foreground/60 uppercase">{s.src}</span>
+                          <div className="flex items-center justify-between mt-1.5 pt-1.5 border-t border-border/40">
+                            <span className="font-mono text-[8px] text-muted-foreground/60 uppercase">{s.src}</span>
                             {s.link && (
-                              <span className="w-5 h-5 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                                <ArrowUpRight size={10} className="text-primary" />
+                              <span className="w-4 h-4 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                                <ArrowUpRight size={8} className="text-primary" />
                               </span>
                             )}
                           </div>
