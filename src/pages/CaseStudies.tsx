@@ -7,6 +7,7 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import { Link, useSearchParams } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
 import { caseStudies, type CaseStudy } from "@/data/caseStudies";
+import { caseStudyDetails } from "@/data/caseStudyDetails";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -149,18 +150,11 @@ const CaseStudies = () => {
               {ordered.map((cs, i) => {
                 const Icon = cs.icon;
                 const displayNumber = String(i + 1).padStart(2, "0");
-                return (
-                  <motion.button
-                    key={cs.id}
-                    type="button"
-                    onClick={() => openStudy(cs)}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: Math.min(i * 0.04, 0.4), duration: 0.5 }}
-                    viewport={{ once: true }}
-                    data-cursor-hover
-                    className="glass-panel rounded-2xl text-left group hover:glow-orange transition-all flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary/40 overflow-hidden"
-                  >
+                const hasDedicatedPage = !!caseStudyDetails[cs.id];
+                const cardClassName =
+                  "glass-panel rounded-2xl text-left group hover:glow-orange transition-all flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary/40 overflow-hidden";
+                const cardInner = (
+                  <>
                     {/* Image banner */}
                     <div className="relative h-40 overflow-hidden">
                       <ImageWithSkeleton
@@ -219,6 +213,36 @@ const CaseStudies = () => {
                       </span>
                     </div>
                     </div>
+                  </>
+                );
+
+                const motionProps = {
+                  initial: { opacity: 0, y: 20 },
+                  whileInView: { opacity: 1, y: 0 },
+                  transition: { delay: Math.min(i * 0.04, 0.4), duration: 0.5 },
+                  viewport: { once: true },
+                };
+
+                return hasDedicatedPage ? (
+                  <motion.div key={cs.id} {...motionProps}>
+                    <Link
+                      to={`/case-studies/${cs.id}`}
+                      data-cursor-hover
+                      className={`${cardClassName} block`}
+                    >
+                      {cardInner}
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.button
+                    key={cs.id}
+                    type="button"
+                    onClick={() => openStudy(cs)}
+                    {...motionProps}
+                    data-cursor-hover
+                    className={cardClassName}
+                  >
+                    {cardInner}
                   </motion.button>
                 );
               })}

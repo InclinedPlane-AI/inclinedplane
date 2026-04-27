@@ -1,66 +1,62 @@
+## Goal
 
+Replicate the McKinsey case study layout for case study **#01 — Retail & Manufacturing Chain**:
+- Open in its **own page** (not a modal)
+- **Glass video hero** at the top (using the provided MP4)
+- A McKinsey-style **section navigation** ("The opportunity", "The solution", "The impact") that smooth-scrolls to those sections
+- Same typography, spacing rhythm and structure as the McKinsey reference
 
-## The AI Imperative — Three-Column Narrative Redesign
+The other 12 case studies keep the current modal behavior for now.
 
-Replace the current 5-card bento grid in the homepage's "AI Imperative" slide with a three-column narrative structure: **Opportunity → Intent → Gap**, following the design brief.
+## What the user will see
 
-### Section Header (centred)
-- Eyebrow: `THE AI IMPERATIVE` (existing mono primary tag, kept)
-- Headline: **The AI Imperative — In Numbers** (orange accent on "In Numbers")
-- Subheadline: *The opportunity is real. The intent is there. The infrastructure isn't.*
+1. On `/case-studies`, clicking card **#01** navigates to a new page `/case-studies/retail-manufacturing-chain`.
+2. The new page opens with a full-bleed **video hero** (looping, muted, autoplay) overlaid with:
+   - Eyebrow pill: `Case Study · 01 · Retail & Manufacturing`
+   - Large headline: the case study title
+   - Short subtitle drawn from the summary
+   - Two CTAs: "Read the full story" (scrolls to first section) and "Talk to us" (→ /contact)
+3. Below the hero, a **sticky section nav** appears with three pills:
+   - The Opportunity
+   - The Solution
+   - The Impact
+   Clicking any pill smooth-scrolls to that section; the active section's pill is highlighted as the user scrolls.
+4. Three full sections follow, each with a number, label, large heading, body copy, and supporting bullets/metrics — matching McKinsey's generous spacing and serif/sans hierarchy already used on the site.
+5. A closing CTA block ("Ready to build your success story?") and a back link to all case studies.
 
-### Layout
+## Content mapping for #01
 
-```text
-+----------------------------------------------------------+
-|  THE OPPORTUNITY  |    THE INTENT     |     THE GAP      |
-|  (green dot)      |    (amber dot)    |     (red dot)    |
-|  prize is enormous|  enterprises move |  most aren't ready|
-+----------------------------------------------------------+
-|   $15.7T          |       78%         |       23%        |
-|   PwC, 2024       |   McKinsey, 2025  |   Gartner, 2025  |
-+-------------------+-------------------+------------------+
-|   25–40%          |       #1          |     70–85%       |
-|  McKinsey, 2025   |   Gartner, 2024   |  Sources, 2025   |
-+-------------------+-------------------+------------------+
-|   370%            |      $53B         |     1 in 5       |
-|  Sources, 2025    |   Gartner, 2026   |  Deloitte, 2025  |
-+----------------------------------------------------------+
-| "Most enterprises can't get to agentic AI because they   |
-|  haven't fixed the foundation. We do both."              |
-+----------------------------------------------------------+
-```
+The existing data only has one bullet section. Re-shape into the three McKinsey buckets (no copy invented — derived from the existing summary + bullets):
 
-- Desktop: 3 columns side-by-side, each containing a column header + 3 stacked stat cards.
-- Mobile: stacks vertically — Opportunity → Intent → Gap.
-- Below the columns: full-width dark glass banner with the closing quote (centred, no CTA).
+- **The Opportunity** — Manual reporting drained 30% of senior personnel's time; dealer intelligence, scheme rollout and attrition were managed reactively.
+- **The Solution** — Real-time reporting across Sales/Marketing, Inventory and Production; dealer intelligence at point of engagement; automated scheme implementation; market basket analysis; dealer attrition prediction model.
+- **The Impact** — 30% of reporting time freed, sharper dealer conversations, faster scheme rollout, improved sell-through, proactive retention before revenue loss.
 
-### Column Tone (subtle traffic-light progression)
+The existing card on `/case-studies` keeps its image, title, summary and metric.
 
-| Column | Surface tint | Indicator dot |
-|---|---|---|
-| The Opportunity | Lightest (`surface-1`/glass base) | Green (`bg-green-400`) |
-| The Intent | Mid-warm (slight amber tint via `bg-amber-500/[0.04]` overlay) | Amber (`bg-amber-400`) |
-| The Gap | Darker / faint orange (`bg-primary/[0.06]` overlay) | Red (`bg-red-400`) |
+## Technical changes
 
-All cards keep the existing **glass-panel** treatment, brand-orange numbers, mono source line — visually consistent with existing impact metrics (Up to 70%, 3x, etc.).
+**New files**
+- `src/components/case-study/CaseStudyVideoHero.tsx` — adapted from the provided `glass-video-hero.tsx` snippet. Uses the supplied CloudFront MP4, glass pill, headline, subtext, two CTAs. Removes the fit/full-bleed toggle (not needed in our context). Styled with existing tokens (`text-gradient-orange`, `glass-panel`, `bg-gradient-orange`).
+- `src/components/case-study/SectionNav.tsx` — sticky pill nav with smooth-scroll + IntersectionObserver-based active state.
+- `src/pages/CaseStudyDetail.tsx` — the new full-page layout (hero → nav → 3 sections → CTA). Uses `PageLayout`, `SEOHead`, framer-motion for section reveals.
+- `src/data/caseStudyDetails.ts` — structured "opportunity / solution / impact" content for #01 only (extensible for the rest later).
 
-### Stat Card Anatomy
-- **Number** — XL, bold, `text-gradient-orange` (matches existing impact metric treatment)
-- **Descriptor** — small, `text-secondary-foreground`, 1–2 lines
-- **Source** — XS, mono, `text-muted-foreground/60`, bottom of card
-- Cards keep equal heights within each column.
-- Cards are not links anymore (brief specifies plain stat cards); existing source links can be moved into the source line as subtle underlines if desired — defaulting to non-link to match brief.
+**Edited files**
+- `src/App.tsx` — add route `/case-studies/:slug` → `CaseStudyDetail`.
+- `src/pages/CaseStudies.tsx` — for case study `id === "retail-manufacturing-chain"`, render the card as a `Link` to `/case-studies/retail-manufacturing-chain` instead of opening the modal. All other cards keep current modal behavior.
 
-### Closing Banner
-- Full-width dark band (`bg-background/80` + `glass-panel` border, deeper shadow)
-- Centred quote in semibold, medium-large, white with orange emphasis on "We do both."
-- Sits inside the same section, below the 3-column grid with `mt-10` spacing.
+**Dependencies** — none new. `lucide-react`, `framer-motion`, `react-router-dom` are already installed.
 
-### Files to edit
-- `src/pages/Index.tsx` — replace the entire bento grid block (lines ~199–338) with the new three-column structure + closing banner. Reuse `SectionGlow`, `motion` fadeUp, `glass-panel`, `text-gradient-orange` utilities. No new dependencies.
+**Video** — uses the URL from the snippet:
+`https://d8j0ntlcm91z4.cloudfront.net/...d87182fb-b0af-4273-84d1-c6fd17d6bf0f.mp4`
+Attributes: `autoPlay muted loop playsInline preload="metadata"` with the existing case image as `poster` for fast first paint and graceful fallback.
 
-### Out of scope
-- No changes to other slides, navbar, or global styles.
-- No new icons added beyond a small coloured indicator dot per column header.
+**SEO** — `SEOHead` with case-study title, summary as description, `ogImage` from the case image, `CaseStudy` JSON-LD (mirrors what `CaseStudies.tsx` already does for the modal view).
 
+## Out of scope (for this round)
+- Building dedicated pages for case studies #02–#13 (they keep modals).
+- Any change to the video asset itself.
+- Sitemap regeneration for the new route (can follow up).
+
+Once approved, I'll implement the above end-to-end.
