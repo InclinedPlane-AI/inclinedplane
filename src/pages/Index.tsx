@@ -887,8 +887,7 @@ const Index = () => {
                   Build What <span className="text-gradient-orange">Comes Next.</span>
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
-                  A small, senior team building AI-native data systems for high-velocity enterprises. Remote-first.
-                  Ownership-driven. Engineering rigor over headcount.
+                  We don't optimize for size — we optimize for the quality of the engineers in the room. Every person here is expected to set direction, ship production work, and raise the bar. In return, you get autonomy, ownership, and the chance to work on problems that matter to the businesses we partner with.
                 </p>
               </motion.div>
 
