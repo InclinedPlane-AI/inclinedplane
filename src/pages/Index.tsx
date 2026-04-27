@@ -197,23 +197,23 @@ const Index = () => {
         {/* Grain overlay for content sections (excludes hero & footer) */}
         <div className="grain-overlay relative">
           {/* SLIDE 2 — AI TRANSFORMATION FACTS (Bento) */}
-          <section className="snap-section flex items-center justify-center relative">
+          <section className="snap-section flex items-center justify-center relative py-16 sm:py-20 lg:py-12">
             <SectionGlow position="bottom-right" size={700} />
             <div className="max-w-6xl mx-auto px-6 lg:px-8 w-full">
               <motion.div {...fadeUp()}>
-                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-3 text-center">
+                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-2 text-center">
                   The AI Imperative
                 </p>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-3 text-center">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-2 text-center">
                   The AI Imperative — <span className="text-gradient-orange">In Numbers.</span>
                 </h2>
-                <p className="text-sm text-muted-foreground text-center max-w-xl mx-auto mb-8">
+                <p className="text-sm text-muted-foreground text-center max-w-xl mx-auto mb-6 lg:mb-8">
                   The opportunity is real. The intent is there. The infrastructure isn't.
                 </p>
               </motion.div>
 
               {/* Three-column narrative: Opportunity → Intent → Gap */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-4">
                 {[
                   {
                     key: "opportunity",
@@ -302,7 +302,7 @@ const Index = () => {
                     {...fadeUp(colIdx * 0.08)}
                     className="flex flex-col gap-3"
                   >
-                    <div className={`glass-panel rounded-xl p-4 ${col.tint}`}>
+                    <div className={`glass-panel rounded-xl p-3 lg:p-4 ${col.tint}`}>
                       <div className="flex items-center gap-2 mb-1">
                         <span className={`w-2 h-2 rounded-full ${col.dot} shadow-[0_0_8px_currentColor]`} />
                         <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase">
@@ -320,18 +320,18 @@ const Index = () => {
                           <CardTag
                             key={i}
                             {...linkProps}
-                            className={`glass-panel rounded-xl p-5 flex flex-col justify-between min-h-[10.5rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 ${s.link ? "group cursor-pointer" : "cursor-default"} ${col.tint}`}
+                            className={`glass-panel rounded-xl p-4 lg:p-5 flex flex-col justify-between min-h-[8.5rem] lg:min-h-[10rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 ${s.link ? "group cursor-pointer" : "cursor-default"} ${col.tint}`}
                             data-cursor-hover
                           >
                             <div>
-                              <p className="text-3xl lg:text-4xl font-bold text-gradient-orange mb-2">
+                              <p className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gradient-orange mb-2">
                                 {s.num}
                               </p>
                               <p className="text-xs text-secondary-foreground leading-relaxed">
                                 {s.desc}
                               </p>
                             </div>
-                            <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/40">
+                            <div className="flex items-center justify-between mt-2 lg:mt-3 pt-2 border-t border-border/40">
                               <span className="font-mono text-[9px] text-muted-foreground/60 uppercase">
                                 {s.src}
                               </span>
@@ -351,7 +351,7 @@ const Index = () => {
               {/* Closing banner */}
               <motion.div
                 {...fadeUp(0.3)}
-                className="mt-10 text-center"
+                className="mt-6 lg:mt-8 text-center"
               >
                 <p className="text-base sm:text-lg lg:text-xl font-semibold text-foreground leading-relaxed max-w-3xl mx-auto">
                   "Most enterprises can't get to agentic AI because they haven't fixed the foundation.{" "}
