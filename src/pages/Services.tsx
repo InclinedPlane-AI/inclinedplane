@@ -564,7 +564,7 @@ const ServicesPage = () => {
             <div className="glass-panel-strong rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden border border-primary/10">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3 pointer-events-none" />
               <div className="relative z-10">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-primary/60 mb-3">Ready to start?</p>
+                <p className="font-mono text-[10px] uppercase tracking-widest text-primary/60 mb-3">Let's talk</p>
                       <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
                         Find your starting point.
                       </h2>
