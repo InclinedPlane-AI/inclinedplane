@@ -300,9 +300,9 @@ const Index = () => {
                     <div className={`glass-panel rounded-xl p-5 lg:p-6 ${col.tint}`}>
                       <div className="flex items-center gap-2 mb-2">
                         <span className={`w-2.5 h-2.5 rounded-full ${col.dot} shadow-[0_0_8px_currentColor]`} />
-                        <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase">{col.label}</p>
+                        <p className="font-mono tracking-widest uppercase text-xl font-semibold text-black">{col.label}</p>
                       </div>
-                      <p className="text-base lg:text-lg font-semibold text-secondary-foreground">{col.sub}</p>
+                      <p className="text-base lg:text-lg text-secondary-foreground font-normal">{col.sub}</p>
                     </div>
                     {col.stats.map((s, i) => {
                       const CardTag: any = s.link ? "a" : "div";
