@@ -205,7 +205,7 @@ const Index = () => {
                   The AI Imperative — In Numbers
                 </p>
                 <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight text-center max-w-3xl mx-auto mb-6 lg:mb-8">
-                  The opportunity is real. The intent is there. The infrastructure isn't.
+                  The opportunity is real. The intent is there. <span className="text-gradient-orange">The infrastructure isn't.</span>
                 </p>
               </motion.div>
 
