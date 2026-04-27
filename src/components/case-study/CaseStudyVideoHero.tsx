@@ -1,5 +1,3 @@
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
 import GradientBlinds from "./GradientBlinds";
 
 interface CaseStudyVideoHeroProps {
@@ -20,10 +18,6 @@ const CaseStudyVideoHero = ({
   eyebrow,
   title,
   subtitle,
-  primaryCtaLabel = "Read the full story",
-  onPrimaryCta,
-  secondaryCtaLabel = "Talk to us",
-  secondaryCtaHref = "/contact",
 }: CaseStudyVideoHeroProps) => {
   return (
     <section className="relative w-full min-h-[88vh] overflow-hidden">
@@ -67,25 +61,6 @@ const CaseStudyVideoHero = ({
         <p className="text-base sm:text-lg text-white/85 leading-relaxed max-w-2xl mb-10 drop-shadow">
           {subtitle}
         </p>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-wrap items-center gap-3">
-          <button
-            type="button"
-            onClick={onPrimaryCta}
-            data-cursor-hover
-            className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity glow-orange"
-          >
-            {primaryCtaLabel} <ArrowRight size={16} />
-          </button>
-          <Link
-            to={secondaryCtaHref}
-            data-cursor-hover
-            className="inline-flex items-center gap-2 border border-white/30 bg-white/10 backdrop-blur-md text-white px-6 py-3 rounded-lg font-medium hover:bg-white/20 transition-colors"
-          >
-            {secondaryCtaLabel}
-          </Link>
-        </div>
       </div>
     </section>
   );
