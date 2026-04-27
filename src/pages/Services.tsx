@@ -469,6 +469,9 @@ const ServicesPage = () => {
                             <Icon size={15} className={active ? "text-primary" : "text-muted-foreground/50"} />
                           </div>
                           <div className="min-w-0">
+                            <span className="font-mono text-[9px] text-primary/60 block leading-none mb-0.5">
+                              {p.number}
+                            </span>
                             <span className={`text-sm font-medium truncate block ${active ? "text-foreground" : ""}`}>
                               {p.shortTitle}
                             </span>
