@@ -205,7 +205,8 @@ const Index = () => {
                   The AI Imperative — In Numbers
                 </p>
                 <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight text-center max-w-3xl mx-auto mb-6 lg:mb-8">
-                  The opportunity is real. The intent is there. <span className="text-gradient-orange">The infrastructure isn't.</span>
+                  The opportunity is real. The intent is there.{" "}
+                  <span className="text-gradient-orange">The infrastructure isn't.</span>
                 </p>
               </motion.div>
 
@@ -296,13 +297,11 @@ const Index = () => {
                 ].map((col, colIdx) => (
                   <motion.div key={col.key} {...fadeUp(colIdx * 0.08)} className="flex flex-col gap-3">
                     <div className={`glass-panel rounded-xl p-5 lg:p-6 ${col.tint}`}>
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className={`w-3 h-3 rounded-full ${col.dot} shadow-[0_0_10px_currentColor]`} />
-                        <p className="font-mono text-lg lg:text-xl tracking-widest uppercase font-bold text-black">
-                          {col.label}
-                        </p>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className={`w-2.5 h-2.5 rounded-full ${col.dot} shadow-[0_0_8px_currentColor]`} />
+                        <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase">{col.label}</p>
                       </div>
-                      <p className="text-sm font-semibold text-foreground">{col.sub}</p>
+                      <p className="text-base lg:text-lg font-semibold text-secondary-foreground">{col.sub}</p>
                     </div>
                     {col.stats.map((s, i) => {
                       const CardTag: any = s.link ? "a" : "div";
@@ -887,16 +886,17 @@ const Index = () => {
                   Build What <span className="text-gradient-orange">Comes Next.</span>
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
-                  We don't optimize for size — we optimize for the quality of the engineers in the room. Every person here is expected to set direction, ship production work, and raise the bar. In return, you get autonomy, ownership, and the chance to work on problems that matter to the businesses we partner with.
+                  A small, senior team building AI-native data systems for high-velocity enterprises. Remote-first.
+                  Ownership-driven. Engineering rigor over headcount.
                 </p>
               </motion.div>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
                 {[
                   { icon: Brain, title: "Engineering Rigor" },
-                  { icon: Sparkles, title: "AI-Native Default" },
-                  { icon: Globe, title: "Remote-First" },
-                  { icon: Rocket, title: "Real Ownership" },
+                  { icon: Sparkles, title: "AI-Native by Default" },
+                  { icon: Globe, title: "Ownership & Craft" },
+                  { icon: Rocket, title: "Remote-First, Async-Friendly" },
                 ].map(({ icon: Icon, title }, i) => (
                   <motion.div
                     key={title}
