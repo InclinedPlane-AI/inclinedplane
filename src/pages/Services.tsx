@@ -505,15 +505,17 @@ const ServicesPage = () => {
 
             {/* Right: content sections */}
             <div className="flex-1 min-w-0">
+              {/* Advisory divider */}
+              <div className="flex items-center gap-3 mb-2">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-primary/70">— Advisory</span>
+                <div className="flex-1 h-px bg-gradient-to-r from-primary/30 via-border/40 to-transparent" />
+              </div>
+
               {/* Advisory section — subtly distinct background */}
               <div className="relative -mx-4 sm:-mx-6 mb-10 lg:mb-14">
                 <div className="absolute inset-0 rounded-2xl bg-primary/[0.025] border border-primary/10 pointer-events-none" />
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/[0.04] via-transparent to-transparent pointer-events-none" />
                 <div className="relative px-4 sm:px-6 py-8 lg:py-10">
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-primary/70">— Advisory</span>
-                    <div className="flex-1 h-px bg-gradient-to-r from-primary/30 via-border/40 to-transparent" />
-                  </div>
                   <div
                     id={advisoryPillar.shortTitle.toLowerCase().replace(/[\s&]+/g, "-")}
                     ref={(el) => {
