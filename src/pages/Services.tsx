@@ -66,7 +66,7 @@ const advisoryPillar: ServicePillar = {
   number: "00",
   title: "Data & AI Consultancy",
   shortTitle: "Clarity Layer",
-  subtitle: "Advisory",
+  subtitle: "Clarity Layer",
   positioning: "Know before you build.",
   description:
     "Most enterprises are sitting on fragmented data, half-adopted tools, and AI ambitions with no clear path forward. We change that. We work with leadership and data teams to cut through the noise — auditing what you have, identifying what's holding you back, and building a roadmap that turns AI from a boardroom talking point into a funded, sequenced plan of action. No fluff. No generic frameworks. Just a clear view of where you are, where you need to go, and exactly how to get there.",
