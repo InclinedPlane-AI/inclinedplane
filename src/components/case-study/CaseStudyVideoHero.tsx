@@ -1,4 +1,5 @@
 import GradientBlinds from "./GradientBlinds";
+import { ChevronDown } from "lucide-react";
 
 interface CaseStudyVideoHeroProps {
   videoUrl: string;
@@ -42,25 +43,28 @@ const CaseStudyVideoHero = ({
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent pointer-events-none" />
       </div>
 
-      {/* Hero Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-24 sm:pt-40 sm:pb-32 flex flex-col items-start min-h-[88vh] justify-end pointer-events-none [&_*]:pointer-events-auto">
-        {/* Eyebrow Pill */}
-        <div className="inline-flex items-center gap-2 mb-6 rounded-full pl-1 pr-4 py-1 border border-white/20 bg-white/10 backdrop-blur-md">
-          <span className="bg-gradient-orange text-primary-foreground text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full">
-            Case Study
-          </span>
-          <span className="text-xs text-white/90 font-medium">{eyebrow}</span>
-        </div>
+      {/* Hero Content — centered McKinsey-style layout */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 min-h-[88vh] flex flex-col items-center justify-center text-center">
+        {/* Eyebrow */}
+        <p className="text-sm sm:text-base text-white/90 font-normal mb-6 drop-shadow">
+          Case Study
+        </p>
 
         {/* Headline */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight max-w-4xl mb-6 drop-shadow-lg">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light text-white leading-[1.15] tracking-tight max-w-5xl mb-12 drop-shadow-lg">
           {title}
         </h1>
 
-        {/* Subtext */}
-        <p className="text-base sm:text-lg text-white/85 leading-relaxed max-w-2xl mb-10 drop-shadow">
-          {subtitle}
-        </p>
+        {/* Scroll-down arrow */}
+        <button
+          aria-label="Scroll down"
+          onClick={() =>
+            window.scrollTo({ top: window.innerHeight * 0.88, behavior: "smooth" })
+          }
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/90 hover:text-white transition-colors animate-bounce"
+        >
+          <ChevronDown className="w-8 h-8 stroke-[1.5]" />
+        </button>
       </div>
     </section>
   );
