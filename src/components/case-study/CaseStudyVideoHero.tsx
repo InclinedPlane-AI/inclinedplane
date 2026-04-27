@@ -46,7 +46,7 @@ const CaseStudyVideoHero = ({
       {/* Hero Content — centered McKinsey-style layout */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 min-h-[88vh] flex flex-col items-center justify-center text-center">
         {/* Eyebrow */}
-        <p className="text-sm sm:text-base text-white/90 font-normal mb-6 drop-shadow">
+        <p className="text-sm sm:text-base text-[#FF7A18] font-normal mb-6 drop-shadow">
           Case Study
         </p>
 
