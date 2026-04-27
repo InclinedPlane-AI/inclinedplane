@@ -260,6 +260,12 @@ const ServiceContent = ({ pillar, isActive }: { pillar: ServicePillar; isActive:
 
   return (
     <div className="w-full">
+      <div className="flex items-center gap-2 mb-3 pl-0 lg:pl-[60px]">
+        <span className="font-mono text-[10px] text-muted-foreground/60 tracking-wider">{pillar.number}</span>
+        <span className="font-mono text-[10px] uppercase tracking-widest px-2 py-1 rounded-md border border-primary/30 text-primary/80 bg-primary/5">
+          {pillar.subtitle}
+        </span>
+      </div>
       <div className="flex items-start gap-4 mb-4">
         <div
           className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 mt-1 transition-colors duration-300 ${isActive ? "bg-primary/10" : "surface-3"}`}
