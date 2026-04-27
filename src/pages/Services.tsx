@@ -565,9 +565,9 @@ const ServicesPage = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3 pointer-events-none" />
               <div className="relative z-10">
                 <p className="font-mono text-[10px] uppercase tracking-widest text-primary/60 mb-3">Ready to start?</p>
-                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-                  Ready to start? <span className="text-gradient-orange">Let's talk.</span>
-                </h2>
+                      <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
+                        Find your starting point.
+                      </h2>
                 <p className="text-muted-foreground max-w-lg mx-auto mb-8 text-sm leading-relaxed">
                   Whether you need a solid data foundation or autonomous decision systems — we'll design the roadmap and
                   deliver results.
