@@ -296,13 +296,13 @@ const Index = () => {
                 ].map((col, colIdx) => (
                   <motion.div key={col.key} {...fadeUp(colIdx * 0.08)} className="flex flex-col gap-3">
                     <div className={`glass-panel rounded-xl p-5 lg:p-6 ${col.tint}`}>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className={`w-2.5 h-2.5 rounded-full ${col.dot} shadow-[0_0_8px_currentColor]`} />
-                        <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className={`w-3 h-3 rounded-full ${col.dot} shadow-[0_0_10px_currentColor]`} />
+                        <p className="font-mono text-sm text-muted-foreground tracking-widest uppercase font-semibold">
                           {col.label}
                         </p>
                       </div>
-                      <p className="text-base lg:text-lg font-semibold text-secondary-foreground">{col.sub}</p>
+                      <p className="text-lg lg:text-xl font-bold text-foreground">{col.sub}</p>
                     </div>
                     {col.stats.map((s, i) => {
                       const CardTag: any = s.link ? "a" : "div";
