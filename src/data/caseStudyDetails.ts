@@ -33,9 +33,9 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         id: "opportunity",
         label: "The Opportunity",
         number: "01",
-        heading: "Manual reporting was draining senior talent and slowing decisions.",
+        heading: "The prize is enormous.",
         body:
-          "Across Sales & Marketing, Inventory and Production, leaders were waiting on weekly Excel cycles assembled by hand. Roughly 30% of senior personnel's time was lost to reporting tasks, dealer conversations were happening without context, scheme rollouts were error-prone, and at-risk dealers were only recognized after revenue had already moved away.",
+          "Manual reporting was draining senior talent and slowing decisions. Across Sales & Marketing, Inventory and Production, leaders were waiting on weekly Excel cycles assembled by hand. Roughly 30% of senior personnel's time was lost to reporting tasks, dealer conversations were happening without context, scheme rollouts were error-prone, and at-risk dealers were only recognized after revenue had already moved away.",
       },
       {
         id: "solution",
