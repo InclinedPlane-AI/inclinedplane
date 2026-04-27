@@ -34,6 +34,7 @@ import {
   Sparkles,
   Target,
   Rocket,
+  Heart,
 } from "lucide-react";
 
 const SLIDE_COUNT = 12;
@@ -895,8 +896,8 @@ const Index = () => {
                 {[
                   { icon: Brain, title: "Engineering Rigor" },
                   { icon: Sparkles, title: "AI-Native by Default" },
-                  { icon: Globe, title: "Ownership & Craft" },
-                  { icon: Rocket, title: "Remote-First, Async-Friendly" },
+                  { icon: Heart, title: "Ownership & Craft" },
+                  { icon: Globe, title: "Remote-First, Async-Friendly" },
                 ].map(({ icon: Icon, title }, i) => (
                   <motion.div
                     key={title}
