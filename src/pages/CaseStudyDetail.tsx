@@ -87,14 +87,11 @@ const CaseStudyDetail = () => {
 
       {detail.slug === "ev-battery-predictive" && (
         <CaseStudyIntroStats
-          intro="Partnering with a leading Battery-as-a-Service operator, we engineered a predictive intelligence layer on top of real-time IoT vitals — shifting EV battery maintenance from reactive servicing to preemptive intervention before failures occur in the field."
+          intro={detail.heroSubtitle}
           stats={[
-            { value: 98, suffix: "%+", label: "Overall prediction accuracy" },
-            { value: "0.80", label: "Avg. Precision / Recall / F1" },
-            { value: 3, label: "Battery health states classified" },
+            { value: 98, suffix: "%+", label: "Overall accuracy" },
+            { value: "0.78–0.82", label: "Precision / Recall / F1" },
           ]}
-          referenceLabel="mckinsey.com — Toshiba Tec × NVIDIA"
-          referenceUrl="https://www.mckinsey.com/industries/industrials/how-we-help-clients/how-toshiba-tec-and-mckinsey-are-turning-retail-data-into-real-time-decisions-with-nvidia"
         />
       )}
 
