@@ -6,6 +6,7 @@ import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import CaseStudyVideoHero from "@/components/case-study/CaseStudyVideoHero";
 import CaseStudyAnomalousHero from "@/components/case-study/CaseStudyAnomalousHero";
+import CaseStudyIntroStats from "@/components/case-study/CaseStudyIntroStats";
 import SectionNav from "@/components/case-study/SectionNav";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { caseStudies } from "@/data/caseStudies";
@@ -84,11 +85,24 @@ const CaseStudyDetail = () => {
         />
       )}
 
+      {detail.slug === "ev-battery-predictive" && (
+        <CaseStudyIntroStats
+          intro="Partnering with a leading Battery-as-a-Service operator, we engineered a predictive intelligence layer on top of real-time IoT vitals — shifting EV battery maintenance from reactive servicing to preemptive intervention before failures occur in the field."
+          stats={[
+            { value: 98, suffix: "%+", label: "Overall prediction accuracy" },
+            { value: "0.80", label: "Avg. Precision / Recall / F1" },
+            { value: 3, label: "Battery health states classified" },
+          ]}
+          referenceLabel="mckinsey.com — Toshiba Tec × NVIDIA"
+          referenceUrl="https://www.mckinsey.com/industries/industrials/how-we-help-clients/how-toshiba-tec-and-mckinsey-are-turning-retail-data-into-real-time-decisions-with-nvidia"
+        />
+      )}
+
       <SectionNav items={navItems} />
 
       <article className="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-24">
         {/* Metrics strip */}
-        {cs.metrics && cs.metrics.length > 0 && (
+        {cs.metrics && cs.metrics.length > 0 && detail.slug !== "ev-battery-predictive" && (
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
