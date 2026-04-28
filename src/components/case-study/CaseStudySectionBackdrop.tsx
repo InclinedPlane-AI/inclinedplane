@@ -20,7 +20,7 @@ const CaseStudySectionBackdrop = ({
   title,
   children,
   dotColor = "#ffffff",
-  bgColor = "#FF7A18",
+  bgColor = "#1a1a1a",
 }: CaseStudySectionBackdropProps) => {
   return (
     <section
