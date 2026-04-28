@@ -39,7 +39,7 @@ const SectionNav = ({ items }: SectionNavProps) => {
 
   return (
     <div className="sticky top-16 z-30 backdrop-blur-xl bg-background/75 border-y border-border/40">
-      <nav className="max-w-7xl mx-auto px-6 lg:px-8 py-3 flex items-center gap-2 overflow-x-auto">
+      <nav className="max-w-7xl mx-auto px-6 lg:px-8 py-3 gap-2 overflow-x-auto flex items-center justify-center">
         {items.map((it, i) => {
           const isActive = active === it.id;
           return (
