@@ -6,6 +6,7 @@ import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import CaseStudyVideoHero from "@/components/case-study/CaseStudyVideoHero";
 import CaseStudyAnomalousHero from "@/components/case-study/CaseStudyAnomalousHero";
+import CaseStudyEVVideoHero from "@/components/case-study/CaseStudyEVVideoHero";
 import CaseStudyIntroStats from "@/components/case-study/CaseStudyIntroStats";
 import CaseStudySectionBackdrop from "@/components/case-study/CaseStudySectionBackdrop";
 import SectionNav from "@/components/case-study/SectionNav";
@@ -71,7 +72,12 @@ const CaseStudyDetail = () => {
         }}
       />
 
-      {useAnomalousStyle ? (
+      {detail.slug === "ev-battery-predictive" ? (
+        <CaseStudyEVVideoHero
+          title={detail.heroTitle}
+          onPrimaryCta={scrollToFirstSection}
+        />
+      ) : useAnomalousStyle ? (
         <CaseStudyAnomalousHero
           eyebrow={detail.heroEyebrow}
           title={detail.heroTitle}
