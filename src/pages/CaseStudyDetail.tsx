@@ -68,21 +68,12 @@ const CaseStudyDetail = () => {
       />
 
       {detail.slug === "ev-battery-predictive" ? (
-        <div className="relative bg-[#0a0a0a]">
-          <CaseStudyAnomalousHero
-            eyebrow={detail.heroEyebrow}
-            title={detail.heroTitle}
-            subtitle={detail.heroSubtitle}
-            onPrimaryCta={scrollToFirstSection}
-          />
-          <CaseStudyIntroStats
-            intro={detail.heroSubtitle}
-            stats={[
-              { value: 98, suffix: "%+", label: "Overall accuracy" },
-              { value: "0.78–0.82", label: "Precision / Recall / F1" },
-            ]}
-          />
-        </div>
+        <CaseStudyAnomalousHero
+          eyebrow={detail.heroEyebrow}
+          title={detail.heroTitle}
+          subtitle={detail.heroSubtitle}
+          onPrimaryCta={scrollToFirstSection}
+        />
       ) : (
         <CaseStudyVideoHero
           videoUrl={detail.videoUrl}
@@ -91,6 +82,16 @@ const CaseStudyDetail = () => {
           title={detail.heroTitle}
           subtitle={detail.heroSubtitle}
           onPrimaryCta={scrollToFirstSection}
+        />
+      )}
+
+      {detail.slug === "ev-battery-predictive" && (
+        <CaseStudyIntroStats
+          intro={detail.heroSubtitle}
+          stats={[
+            { value: 98, suffix: "%+", label: "Overall accuracy" },
+            { value: "0.78–0.82", label: "Precision / Recall / F1" },
+          ]}
         />
       )}
 
