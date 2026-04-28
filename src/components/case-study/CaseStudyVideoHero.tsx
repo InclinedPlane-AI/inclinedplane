@@ -44,7 +44,7 @@ const CaseStudyVideoHero = ({
       </div>
 
       {/* Hero Content — centered McKinsey-style layout */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 min-h-[88vh] flex flex-col items-center justify-center text-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 min-h-[88vh] flex flex-col items-center justify-center text-center pointer-events-none">
         {/* Eyebrow */}
         <p className="text-sm sm:text-base text-[#FF7A18] font-normal mb-6 drop-shadow">
           Case Study
@@ -61,7 +61,7 @@ const CaseStudyVideoHero = ({
           onClick={() =>
             window.scrollTo({ top: window.innerHeight * 0.88, behavior: "smooth" })
           }
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/90 hover:text-white transition-colors animate-bounce"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/90 hover:text-white transition-colors animate-bounce pointer-events-auto"
         >
           <ChevronDown className="w-8 h-8 stroke-[1.5]" />
         </button>
