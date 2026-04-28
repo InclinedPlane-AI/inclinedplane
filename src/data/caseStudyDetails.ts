@@ -70,6 +70,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
     ],
   },
   "ev-battery-predictive": {
+    // placeholder anchor
     slug: "ev-battery-predictive",
     caseStudyId: "ev-battery-predictive",
     videoUrl: "",
