@@ -11,7 +11,7 @@ interface CaseStudyAnomalousHeroProps {
 
 const CaseStudyAnomalousHero = ({ title }: CaseStudyAnomalousHeroProps) => {
   return (
-    <section className="relative w-full min-h-[88vh] overflow-hidden">
+    <section className="relative w-full min-h-screen overflow-hidden">
       {/* Anomalous Matter WebGL background — fixed dark canvas, theme-independent */}
       <div className="absolute inset-0 z-0 bg-[#0a0a0a]">
         <Suspense fallback={<div className="w-full h-full bg-[#0a0a0a]" />}>
@@ -23,7 +23,7 @@ const CaseStudyAnomalousHero = ({ title }: CaseStudyAnomalousHeroProps) => {
       </div>
 
       {/* Hero Content — centered McKinsey-style layout */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 min-h-[88vh] flex flex-col items-center justify-center text-center pointer-events-none">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 min-h-screen flex flex-col items-center justify-center text-center pointer-events-none">
         {/* Eyebrow */}
         <p className="text-sm sm:text-base text-[#FF7A18] font-normal mb-6 drop-shadow">
           Case Study
