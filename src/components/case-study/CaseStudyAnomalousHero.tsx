@@ -18,8 +18,8 @@ const CaseStudyAnomalousHero = ({ title }: CaseStudyAnomalousHeroProps) => {
           <GenerativeArtScene />
         </Suspense>
         {/* Legibility gradients — fixed dark, not theme-dependent */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.45)_75%)] pointer-events-none" />
       </div>
 
       {/* Hero Content — centered McKinsey-style layout */}
