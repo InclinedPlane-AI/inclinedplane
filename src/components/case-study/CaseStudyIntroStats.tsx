@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 
@@ -22,20 +23,32 @@ const CaseStudyIntroStats = ({
   referenceLabel,
   referenceUrl,
 }: CaseStudyIntroStatsProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Track scroll over a tall container so the panel rises slowly over the hero.
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Panel slides up from below the viewport and overlays the sticky hero.
+  const y = useTransform(scrollYProgress, [0, 0.5, 1], ["60%", "0%", "-10%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.5], [0, 0.6, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [0.96, 1]);
+
   return (
-    <section className="relative w-full">
-      {/* Sticky glass panel that locks while scrolling through the section */}
-      <div className="sticky top-0 min-h-screen flex items-center justify-center px-6 lg:px-8 py-20">
+    // Tall scroll container — defines the scroll distance over which the panel rises.
+    <section ref={containerRef} className="relative w-full h-[180vh] -mt-[88vh]">
+      {/* Sticky stage that pins the overlay panel within the hero viewport */}
+      <div className="sticky top-0 h-screen w-full flex items-end justify-center pointer-events-none">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative w-full max-w-6xl mx-auto rounded-3xl overflow-hidden
+          style={{ y, opacity, scale }}
+          className="pointer-events-auto relative w-[92%] max-w-6xl mx-auto rounded-t-[2.5rem] sm:rounded-t-[3rem] overflow-hidden
                      bg-white/5 backdrop-blur-2xl backdrop-saturate-150
-                     border border-white/10
-                     shadow-[0_20px_80px_-20px_rgba(0,0,0,0.5)]
-                     p-8 sm:p-12 lg:p-16"
+                     border border-white/15 border-b-0
+                     shadow-[0_-20px_80px_-20px_rgba(0,0,0,0.6)]
+                     p-8 sm:p-12 lg:p-16
+                     min-h-[70vh] flex flex-col justify-center"
         >
           {/* Intro paragraph */}
           <p className="text-xl sm:text-2xl lg:text-3xl text-foreground/90 font-light leading-snug max-w-4xl mx-auto text-center">
