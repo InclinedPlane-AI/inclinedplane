@@ -23,9 +23,9 @@ const CaseStudyIntroStats = ({
   referenceUrl,
 }: CaseStudyIntroStatsProps) => {
   return (
-    <section className="relative w-full">
-      {/* Sticky glass panel that locks while scrolling through the section */}
-      <div className="sticky top-0 min-h-screen flex items-center justify-center px-6 lg:px-8 py-20">
+    <section className="relative w-full bg-background">
+      {/* Glass panel sits cleanly below the hero with generous breathing room */}
+      <div className="flex items-center justify-center px-6 lg:px-8 py-24 sm:py-32">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
