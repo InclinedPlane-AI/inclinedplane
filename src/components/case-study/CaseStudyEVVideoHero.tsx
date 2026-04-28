@@ -32,7 +32,7 @@ const CaseStudyEVVideoHero = ({ title, onPrimaryCta }: Props) => {
   };
 
   return (
-    <section className="relative w-full min-h-[88vh] overflow-hidden bg-[#0a0a0a]">
+    <section className="relative w-full min-h-screen overflow-hidden bg-[#0a0a0a]">
       <video
         ref={videoRef}
         src={videoSrc}
@@ -46,7 +46,7 @@ const CaseStudyEVVideoHero = ({ title, onPrimaryCta }: Props) => {
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70 pointer-events-none z-10" />
 
       {/* Headline */}
-      <div className="relative z-20 max-w-6xl mx-auto px-6 lg:px-8 min-h-[88vh] flex flex-col items-center justify-center text-center pointer-events-none">
+      <div className="relative z-20 max-w-6xl mx-auto px-6 lg:px-8 min-h-screen flex flex-col items-center justify-center text-center pointer-events-none">
         <p className="text-sm sm:text-base text-[#FF7A18] font-normal mb-6 drop-shadow">
           Case Study
         </p>
