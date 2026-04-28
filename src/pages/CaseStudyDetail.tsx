@@ -7,6 +7,7 @@ import SEOHead from "@/components/SEOHead";
 import CaseStudyVideoHero from "@/components/case-study/CaseStudyVideoHero";
 import CaseStudyAnomalousHero from "@/components/case-study/CaseStudyAnomalousHero";
 import CaseStudyIntroStats from "@/components/case-study/CaseStudyIntroStats";
+import CaseStudySectionBackdrop from "@/components/case-study/CaseStudySectionBackdrop";
 import SectionNav from "@/components/case-study/SectionNav";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { caseStudies } from "@/data/caseStudies";
@@ -97,7 +98,7 @@ const CaseStudyDetail = () => {
 
       <SectionNav items={navItems} />
 
-      <article className="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-24">
+      <article className={`mx-auto ${detail.slug === "ev-battery-predictive" ? "pt-0" : "max-w-7xl px-6 lg:px-8 pt-20"} pb-24`}>
         {/* Metrics strip */}
         {cs.metrics && cs.metrics.length > 0 && detail.slug !== "ev-battery-predictive" && (
           <motion.div
@@ -139,17 +140,16 @@ const CaseStudyDetail = () => {
         )}
 
         {/* Sections */}
-        <div className="space-y-28">
-          {detail.sections.map((s) => (
-            <motion.section
-              key={s.id}
-              id={s.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.55 }}
-              className="scroll-mt-28 grid lg:grid-cols-12 gap-10"
-            >
+        <div className={detail.slug === "ev-battery-predictive" ? "" : "space-y-28"}>
+          {detail.sections.map((s) => {
+            const inner = (
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.55 }}
+                className="grid lg:grid-cols-12 gap-10"
+              >
               <div className="lg:col-span-4">
                 <span className="font-mono text-[11px] text-primary tracking-widest uppercase">
                   {s.number} — {s.label}
@@ -181,9 +181,36 @@ const CaseStudyDetail = () => {
                   </ul>
                 )}
               </div>
-            </motion.section>
-          ))}
+              </motion.div>
+            );
+
+            if (detail.slug === "ev-battery-predictive") {
+              return (
+                <section key={s.id} id={s.id} className="scroll-mt-28">
+                  <CaseStudySectionBackdrop
+                    eyebrow={`${s.number} — ${s.label}`}
+                    title={s.heading}
+                  />
+                  <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
+                    {inner}
+                  </div>
+                </section>
+              );
+            }
+
+            return (
+              <section
+                key={s.id}
+                id={s.id}
+                className="scroll-mt-28"
+              >
+                {inner}
+              </section>
+            );
+          })}
         </div>
+
+        <div className={detail.slug === "ev-battery-predictive" ? "max-w-7xl mx-auto px-6 lg:px-8" : ""}>
 
         {/* CTA */}
         <motion.div
@@ -217,6 +244,7 @@ const CaseStudyDetail = () => {
           >
             <ArrowLeft size={14} /> Back to all case studies
           </Link>
+        </div>
         </div>
       </article>
     </PageLayout>
