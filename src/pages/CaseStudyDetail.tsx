@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import CaseStudyVideoHero from "@/components/case-study/CaseStudyVideoHero";
+import CaseStudyAnomalousHero from "@/components/case-study/CaseStudyAnomalousHero";
 import SectionNav from "@/components/case-study/SectionNav";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { caseStudies } from "@/data/caseStudies";
@@ -65,14 +66,23 @@ const CaseStudyDetail = () => {
         }}
       />
 
-      <CaseStudyVideoHero
-        videoUrl={detail.videoUrl}
-        poster={cs.image}
-        eyebrow={detail.heroEyebrow}
-        title={detail.heroTitle}
-        subtitle={detail.heroSubtitle}
-        onPrimaryCta={scrollToFirstSection}
-      />
+      {detail.slug === "ev-battery-predictive" ? (
+        <CaseStudyAnomalousHero
+          eyebrow={detail.heroEyebrow}
+          title={detail.heroTitle}
+          subtitle={detail.heroSubtitle}
+          onPrimaryCta={scrollToFirstSection}
+        />
+      ) : (
+        <CaseStudyVideoHero
+          videoUrl={detail.videoUrl}
+          poster={cs.image}
+          eyebrow={detail.heroEyebrow}
+          title={detail.heroTitle}
+          subtitle={detail.heroSubtitle}
+          onPrimaryCta={scrollToFirstSection}
+        />
+      )}
 
       <SectionNav items={navItems} />
 
