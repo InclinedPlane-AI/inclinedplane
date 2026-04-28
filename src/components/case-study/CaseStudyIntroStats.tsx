@@ -43,7 +43,15 @@ const CaseStudyIntroStats = ({
           </p>
 
           {/* Stats row with vertical dividers */}
-          <div className="mt-14 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-0">
+          <div
+            className={`mt-14 sm:mt-20 grid grid-cols-1 gap-10 sm:gap-0 max-w-4xl mx-auto ${
+              stats.length === 2
+                ? "sm:grid-cols-2"
+                : stats.length === 3
+                ? "sm:grid-cols-3"
+                : "sm:grid-cols-4"
+            }`}
+          >
             {stats.map((s, idx) => (
               <div
                 key={s.label}
