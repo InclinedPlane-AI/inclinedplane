@@ -34,6 +34,9 @@ const CaseStudyDetail = () => {
 
   if (!detail || !cs) return null;
 
+  const useAnomalousStyle =
+    detail.slug === "ev-battery-predictive" || detail.slug === "ecom-inventory";
+
   const navItems = detail.sections.map((s) => ({ id: s.id, label: s.label }));
 
   const scrollToFirstSection = () => {
@@ -68,7 +71,7 @@ const CaseStudyDetail = () => {
         }}
       />
 
-      {detail.slug === "ev-battery-predictive" ? (
+      {useAnomalousStyle ? (
         <CaseStudyAnomalousHero
           eyebrow={detail.heroEyebrow}
           title={detail.heroTitle}
@@ -86,21 +89,23 @@ const CaseStudyDetail = () => {
         />
       )}
 
-      {detail.slug === "ev-battery-predictive" && (
+      {useAnomalousStyle && cs.metrics && cs.metrics.length > 0 && (
         <CaseStudyIntroStats
           intro={detail.heroSubtitle}
-          stats={[
-            { value: 98, suffix: "%+", label: "Overall accuracy" },
-            { value: "0.78–0.82", label: "Precision / Recall / F1" },
-          ]}
+          stats={cs.metrics.map((m) => ({
+            value: m.value as number | string,
+            suffix: m.suffix,
+            prefix: m.prefix,
+            label: m.label,
+          }))}
         />
       )}
 
       <SectionNav items={navItems} />
 
-      <article className={`mx-auto ${detail.slug === "ev-battery-predictive" ? "pt-0" : "max-w-7xl px-6 lg:px-8 pt-20"} pb-24`}>
+      <article className={`mx-auto ${useAnomalousStyle ? "pt-0" : "max-w-7xl px-6 lg:px-8 pt-20"} pb-24`}>
         {/* Metrics strip */}
-        {cs.metrics && cs.metrics.length > 0 && detail.slug !== "ev-battery-predictive" && (
+        {cs.metrics && cs.metrics.length > 0 && !useAnomalousStyle && (
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -140,7 +145,7 @@ const CaseStudyDetail = () => {
         )}
 
         {/* Sections */}
-        <div className={detail.slug === "ev-battery-predictive" ? "" : "space-y-28"}>
+        <div className={useAnomalousStyle ? "" : "space-y-28"}>
           {detail.sections.map((s) => {
             const inner = (
               <motion.div
@@ -184,7 +189,7 @@ const CaseStudyDetail = () => {
               </motion.div>
             );
 
-            if (detail.slug === "ev-battery-predictive") {
+            if (useAnomalousStyle) {
               return (
                 <section key={s.id} id={s.id} className="scroll-mt-28">
                   <CaseStudySectionBackdrop
@@ -210,7 +215,7 @@ const CaseStudyDetail = () => {
           })}
         </div>
 
-        <div className={detail.slug === "ev-battery-predictive" ? "max-w-7xl mx-auto px-6 lg:px-8" : ""}>
+        <div className={useAnomalousStyle ? "max-w-7xl mx-auto px-6 lg:px-8" : ""}>
 
         {/* CTA */}
         <motion.div

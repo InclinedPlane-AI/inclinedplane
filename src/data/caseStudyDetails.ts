@@ -69,6 +69,53 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
       },
     ],
   },
+  "ecom-inventory": {
+    slug: "ecom-inventory",
+    caseStudyId: "ecom-inventory",
+    videoUrl: "",
+    heroEyebrow: "07 · E-Commerce",
+    heroTitle:
+      "Inventory & Procurement Optimization for an E-Commerce leader — at the scale of hundreds of thousands of SKUs",
+    heroSubtitle:
+      "Hundreds of thousands of SKUs, multiple vendors, volatile demand. We built an Inventory Ageing & PO dashboard on AWS + Power BI that reshaped procurement strategy.",
+    sections: [
+      {
+        id: "opportunity",
+        label: "The Opportunity",
+        number: "01",
+        heading: "The prize is enormous.",
+        body:
+          "Operating at the scale of hundreds of thousands of SKUs — across private label and third-party brands — the company needed to forecast demand and place POs precisely, while accounting for seasonality, promos, and varying lead times. They also needed clarity on vendor quality (sellable vs. unsellable) and inventory ageing cost.",
+      },
+      {
+        id: "solution",
+        label: "The Solution",
+        number: "02",
+        heading: "A unified Inventory Ageing & PO dashboard on AWS + Power BI.",
+        body:
+          "A comprehensive Inventory Ageing and Purchase Order Dashboard. Data unified through a best-in-class warehouse on AWS, with a Power BI front-end delivering real-time visibility across procurement.",
+        bullets: [
+          "Sellable vs. non-sellable inventory at vendor and SKU level.",
+          "Inventory ageing by quantity and cost — bucketed to prioritize action on slow-moving stock.",
+          "Historically non-performing SKUs to inform smarter future purchases.",
+          "Pareto analysis of the long-tail SKU base — vendor consolidation and PO rationalization.",
+        ],
+      },
+      {
+        id: "impact",
+        label: "The Impact",
+        number: "03",
+        heading: "From reactive firefighting to proactive procurement strategy.",
+        body:
+          "Real-time visibility across procurement reshaped how the team made buying decisions — freeing working capital while protecting availability across the long tail.",
+        bullets: [
+          "Stock-outs reduced by 24% across the portfolio.",
+          "Holding inventory value reduced by 17% — significant working capital freed.",
+          "Procurement operations streamlined through automation — reactive firefighting replaced with proactive strategy.",
+        ],
+      },
+    ],
+  },
   "ev-battery-predictive": {
     slug: "ev-battery-predictive",
     caseStudyId: "ev-battery-predictive",
