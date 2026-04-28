@@ -95,7 +95,7 @@ const CaseStudyDetail = () => {
         />
       )}
 
-      {useAnomalousStyle && cs.metrics && cs.metrics.length > 0 && (
+      {useAnomalousStyle && detail.slug !== "ev-battery-predictive" && cs.metrics && cs.metrics.length > 0 && (
         <CaseStudyIntroStats
           intro={detail.heroSubtitle}
           stats={cs.metrics.map((m) => ({
