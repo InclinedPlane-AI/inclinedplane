@@ -69,4 +69,49 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
       },
     ],
   },
+  "ev-battery-predictive": {
+    slug: "ev-battery-predictive",
+    caseStudyId: "ev-battery-predictive",
+    videoUrl: "",
+    heroEyebrow: "08 · Mobility / IoT",
+    heroTitle:
+      "Predicting EV battery failures before they happen — with 98%+ accuracy",
+    heroSubtitle:
+      "Built a multi-class classifier on IoT vitals from a Battery-as-a-Service fleet — predicting failures before they occur with 98%+ accuracy and balanced precision/recall.",
+    sections: [
+      {
+        id: "opportunity",
+        label: "The Opportunity",
+        number: "01",
+        heading: "The prize is enormous.",
+        body:
+          "A leading Battery-as-a-Service operator partnered with us to predict battery failures before they occur — anchored on real-time IoT vitals and pre-determined safe-operation thresholds.",
+      },
+      {
+        id: "solution",
+        label: "The Solution",
+        number: "02",
+        heading: "A multi-class classifier trained on engineered IoT features.",
+        body:
+          "We engineered predictive features from raw IoT data — recharge cycles, threshold breach frequency, intervals between breaches, and breach durations. Every data point was labeled Healthy, Warning, or Breached, creating a supervised dataset capturing the full spectrum of battery behavior. A multi-class classifier was trained to identify at-risk batteries in real time.",
+        bullets: [
+          "Visualizing breach patterns confirmed the core hypothesis — Warning carries a statistically significant relationship with Breached.",
+          "Severe class imbalance was addressed using SMOTE — synthetically enriching the minority class without compromising integrity.",
+        ],
+      },
+      {
+        id: "impact",
+        label: "The Impact",
+        number: "03",
+        heading: "From reactive to preemptive battery maintenance.",
+        body:
+          "The model delivered conclusive proof that failures are predictable — enabling the operator to shift from reactive servicing to preemptive intervention before batteries fail in the field.",
+        bullets: [
+          "98%+ overall accuracy — best-in-class for imbalanced datasets.",
+          "Precision, Recall, F1 in the 0.78–0.82 range — real-world reliability without false-alarm overload.",
+          "Conclusive proof: failures are predictable, enabling a shift from reactive to preemptive maintenance.",
+        ],
+      },
+    ],
+  },
 };
