@@ -116,6 +116,60 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
       },
     ],
   },
+  "solar-bi": {
+    slug: "solar-bi",
+    caseStudyId: "solar-bi",
+    videoUrl: "",
+    heroEyebrow: "13 · Renewables",
+    heroTitle:
+      "Project Intelligence for solar infrastructure — unifying EPC and Net Metering in real time",
+    heroSubtitle:
+      "A Tableau BI solution unifying Engineering, Procurement, Construction, and Net Metering data — giving leadership real-time delay impact, supplier dependency, and target-vs-actual visibility.",
+    sections: [
+      {
+        id: "opportunity",
+        label: "The Opportunity",
+        number: "01",
+        heading: "Large-scale solar runs on precision across EPC and Net Metering.",
+        body:
+          "A high-growth solar infrastructure company executing large-scale renewable projects for state and federal governments needed precision across Engineering, Procurement, Construction, and Net Metering — with leadership lacking a single, real-time view of delay impact, supplier dependency, and progress against targets.",
+        bullets: [
+          "Procurement and construction risk with knock-on effects on project timelines.",
+          "Supplier dependency and concentration of procurement value.",
+          "Live status of every material in the procurement pipeline.",
+          "Target vs. actual completion at week, month, and quarter level.",
+        ],
+      },
+      {
+        id: "solution",
+        label: "The Solution",
+        number: "02",
+        heading: "A Tableau-based BI solution purpose-built for infrastructure cadence.",
+        body:
+          "We unified disparate EPC and Net Metering data sources into a single Tableau-based BI environment — engineered for the operational rhythm of large-scale infrastructure project management.",
+        bullets: [
+          "Delay impact analysis — real-time view of expected delays and cascading effects.",
+          "Supplier dependency mapping — concentration risks and strategic sourcing decisions.",
+          "Procurement stage tracking — activity-level visibility from order to delivery.",
+          "Target vs. actual progress monitoring — week, month, and quarter cadence.",
+          "Cost & quality dashboards — speed of execution never at the expense of standards.",
+        ],
+      },
+      {
+        id: "impact",
+        label: "The Impact",
+        number: "03",
+        heading: "From fragmented project data to executive-grade project intelligence.",
+        body:
+          "Leadership moved from chasing status updates to steering execution — with a single source of truth across EPC and Net Metering driving faster, more confident decisions on every active project.",
+        bullets: [
+          "Real-time delay impact and supplier concentration visible at the executive level.",
+          "Activity-level procurement tracking from order to site delivery.",
+          "Target vs. actual reviews standardized across week, month, and quarter cadence.",
+        ],
+      },
+    ],
+  },
   "ev-battery-predictive": {
     slug: "ev-battery-predictive",
     caseStudyId: "ev-battery-predictive",

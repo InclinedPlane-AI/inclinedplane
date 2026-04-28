@@ -7,7 +7,9 @@ import SEOHead from "@/components/SEOHead";
 import CaseStudyVideoHero from "@/components/case-study/CaseStudyVideoHero";
 import CaseStudyAnomalousHero from "@/components/case-study/CaseStudyAnomalousHero";
 import CaseStudyEVVideoHero from "@/components/case-study/CaseStudyEVVideoHero";
+import CaseStudyImageHero from "@/components/case-study/CaseStudyImageHero";
 import CaseStudyIntroStats from "@/components/case-study/CaseStudyIntroStats";
+import solarHeroImage from "@/assets/project-intelligence-solar.jpg";
 import CaseStudySectionBackdrop from "@/components/case-study/CaseStudySectionBackdrop";
 import SectionNav from "@/components/case-study/SectionNav";
 import AnimatedCounter from "@/components/AnimatedCounter";
@@ -36,7 +38,9 @@ const CaseStudyDetail = () => {
   if (!detail || !cs) return null;
 
   const useAnomalousStyle =
-    detail.slug === "ev-battery-predictive" || detail.slug === "ecom-inventory";
+    detail.slug === "ev-battery-predictive" ||
+    detail.slug === "ecom-inventory" ||
+    detail.slug === "solar-bi";
 
   const navItems = detail.sections.map((s) => ({ id: s.id, label: s.label }));
 
@@ -75,6 +79,12 @@ const CaseStudyDetail = () => {
       {detail.slug === "ev-battery-predictive" ? (
         <CaseStudyEVVideoHero
           title={detail.heroTitle}
+          onPrimaryCta={scrollToFirstSection}
+        />
+      ) : detail.slug === "solar-bi" ? (
+        <CaseStudyImageHero
+          title={detail.heroTitle}
+          imageSrc={solarHeroImage}
           onPrimaryCta={scrollToFirstSection}
         />
       ) : useAnomalousStyle ? (
