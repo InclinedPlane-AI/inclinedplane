@@ -1,12 +1,52 @@
-import React, { useRef, useEffect, Suspense } from "react";
+import React, { useRef, useEffect, useState, Suspense } from "react";
 import * as THREE from "three";
+
+function isWebGLAvailable() {
+  try {
+    const canvas = document.createElement("canvas");
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+    );
+  } catch {
+    return false;
+  }
+}
+
+function FallbackBackground() {
+  return (
+    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#0a0a0a]">
+      <div
+        className="absolute inset-0 opacity-70"
+        style={{
+          background:
+            "radial-gradient(circle at 30% 40%, rgba(255,122,24,0.35), transparent 55%), radial-gradient(circle at 70% 60%, rgba(56,189,248,0.25), transparent 55%), radial-gradient(circle at 50% 80%, rgba(255,122,24,0.2), transparent 60%)",
+          animation: "anomalous-pulse 12s ease-in-out infinite",
+        }}
+      />
+      <style>{`
+        @keyframes anomalous-pulse {
+          0%, 100% { transform: scale(1); opacity: 0.7; }
+          50% { transform: scale(1.15); opacity: 1; }
+        }
+      `}</style>
+    </div>
+  );
+}
 
 export function GenerativeArtScene() {
   const mountRef = useRef(null);
   const lightRef = useRef(null);
+  const [supported, setSupported] = useState<boolean | null>(null);
 
   useEffect(() => {
+    if (!isWebGLAvailable()) {
+      setSupported(false);
+      return;
+    }
+    setSupported(true);
     const currentMount = mountRef.current;
+    if (!currentMount) return;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -16,7 +56,13 @@ export function GenerativeArtScene() {
     );
     camera.position.z = 3;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    } catch (e) {
+      setSupported(false);
+      return;
+    }
     renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
     currentMount.appendChild(renderer.domElement);
@@ -149,9 +195,16 @@ export function GenerativeArtScene() {
       cancelAnimationFrame(frameId);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
-      currentMount.removeChild(renderer.domElement);
+      if (renderer.domElement.parentNode === currentMount) {
+        currentMount.removeChild(renderer.domElement);
+      }
+      renderer.dispose();
     };
   }, []);
+
+  if (supported === false) {
+    return <FallbackBackground />;
+  }
 
   return <div ref={mountRef} className="absolute inset-0 w-full h-full z-0" />;
 }
