@@ -358,6 +358,9 @@ const Index = () => {
                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
                   The Old Model Is <span className="text-gradient-orange">No Longer Enough.</span>
                 </h2>
+                <p className="mt-5 sm:mt-6 text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
+                  Most organisations still treat data as a reporting function — static dashboards, fragile pipelines, and analytics teams buried in ad-hoc requests. Meanwhile, your competitors are deploying autonomous agents that make decisions in milliseconds. The gap between organisations that have engineering-grade data infrastructure and those that don't is widening — fast.
+                </p>
               </motion.div>
               <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
                 <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
@@ -414,6 +417,14 @@ const Index = () => {
                   </div>
                 </motion.div>
               </div>
+              <motion.div {...fadeUp(0.3)} className="mt-10 sm:mt-12 text-center">
+                <Link
+                  to="/thesis"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-panel text-foreground font-medium hover:text-primary transition-colors"
+                >
+                  Read our full thesis <ArrowRight size={16} />
+                </Link>
+              </motion.div>
             </div>
           </section>
 
