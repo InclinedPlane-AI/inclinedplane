@@ -150,8 +150,8 @@ const Index = () => {
                     Data Engineered. <span className="text-gradient-orange">Intelligence Deployed.</span>
                   </h1>
                   <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-lg mb-6 sm:mb-8 text-justify">
-                    We build the data infrastructure and AI systems that power high-velocity enterprises — from a
-                    solid foundation all the way to autonomous decision-making.
+                    We build the data infrastructure and AI systems that power high-velocity enterprises — from a solid
+                    foundation all the way to autonomous decision-making.
                   </p>
                   <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pointer-events-auto">
                     <Link
@@ -300,7 +300,9 @@ const Index = () => {
                     <div className={`glass-panel rounded-xl p-5 lg:p-6 ${col.tint}`}>
                       <div className="flex items-center gap-2 mb-2">
                         <span className={`w-2.5 h-2.5 rounded-full ${col.dot} shadow-[0_0_8px_currentColor]`} />
-                        <p className="font-mono tracking-widest uppercase text-xl font-semibold text-foreground">{col.label}</p>
+                        <p className="font-mono tracking-widest uppercase text-xl font-semibold text-foreground">
+                          {col.label}
+                        </p>
                       </div>
                       <p className="text-base lg:text-lg text-secondary-foreground font-normal">{col.sub}</p>
                     </div>
@@ -354,7 +356,7 @@ const Index = () => {
                   The Problem
                 </p>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                  Dashboards Are Not <span className="text-gradient-orange">Competitive Advantage.</span>
+                  The Old Model Is <span className="text-gradient-orange">No Longer Enough.</span>
                 </h2>
               </motion.div>
               <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
