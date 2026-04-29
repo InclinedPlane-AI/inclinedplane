@@ -10,6 +10,7 @@ import CaseStudyEVVideoHero from "@/components/case-study/CaseStudyEVVideoHero";
 import CaseStudyImageHero from "@/components/case-study/CaseStudyImageHero";
 import CaseStudyIntroStats from "@/components/case-study/CaseStudyIntroStats";
 import solarHeroImage from "@/assets/project-intelligence-solar.jpg";
+import fleetHeroImage from "@/assets/ai-driven-fleet.png";
 import CaseStudySectionBackdrop from "@/components/case-study/CaseStudySectionBackdrop";
 import SectionNav from "@/components/case-study/SectionNav";
 import AnimatedCounter from "@/components/AnimatedCounter";
@@ -40,7 +41,8 @@ const CaseStudyDetail = () => {
   const useAnomalousStyle =
     detail.slug === "ev-battery-predictive" ||
     detail.slug === "ecom-inventory" ||
-    detail.slug === "solar-bi";
+    detail.slug === "solar-bi" ||
+    detail.slug === "ev-fleet-scheduling";
 
   const navItems = detail.sections.map((s) => ({ id: s.id, label: s.label }));
 
@@ -85,6 +87,12 @@ const CaseStudyDetail = () => {
         <CaseStudyImageHero
           title={detail.heroTitle}
           imageSrc={solarHeroImage}
+          onPrimaryCta={scrollToFirstSection}
+        />
+      ) : detail.slug === "ev-fleet-scheduling" ? (
+        <CaseStudyImageHero
+          title={detail.heroTitle}
+          imageSrc={fleetHeroImage}
           onPrimaryCta={scrollToFirstSection}
         />
       ) : useAnomalousStyle ? (

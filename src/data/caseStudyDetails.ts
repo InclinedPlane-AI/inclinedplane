@@ -215,4 +215,61 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
       },
     ],
   },
+  "ev-fleet-scheduling": {
+    slug: "ev-fleet-scheduling",
+    caseStudyId: "ev-fleet-scheduling",
+    videoUrl: "",
+    heroEyebrow: "11 · Logistics & Mobility",
+    heroTitle:
+      "AI-Driven Fleet Scheduling for Electric Cabs — optimized in real time",
+    heroSubtitle:
+      "A hybrid optimization engine — Genetic Algorithms, Tabu Search, and Simulated Annealing — that allocates EV cabs across pick-up/drop trips while respecting battery, driver, and operational constraints in real time.",
+    sections: [
+      {
+        id: "opportunity",
+        label: "The Opportunity",
+        number: "01",
+        heading: "Every EV cab assignment is a multi-constraint decision.",
+        body:
+          "Allocate EV cabs across a continuous stream of pick-up/drop trips — at depot and in transit — to maximize fleet utilization and minimize dead miles. Battery charge is a primary driver of every allocation: no cab is assigned a trip it can't physically complete.",
+        bullets: [
+          "Battery sufficiency for full journey.",
+          "Driver working hours — every allocation within scheduled shift.",
+          "Vehicle type compliance and campus-specific designations.",
+          "Escort trips originate from campus; cab returns immediately after drop.",
+          "Company-mandated occupancy limits respected per trip.",
+          "5-minute pick-up buffer for boarding.",
+          "Equitable distance distribution across the fleet.",
+          "Mid-schedule disruption minimization on cab unavailability.",
+          "Intelligent fast/slow charging scheduling.",
+        ],
+      },
+      {
+        id: "solution",
+        label: "The Solution",
+        number: "02",
+        heading: "A hybrid optimization engine built for real-world complexity.",
+        body:
+          "We combined mathematical programming with advanced heuristics — engineered to converge on globally optimal allocations within the operational tempo of a live cab fleet.",
+        bullets: [
+          "Genetic Algorithms — evolutionary search across large solution spaces.",
+          "Tabu Search — memory-based local search avoiding revisits to explored solutions.",
+          "Simulated Annealing — probabilistic moves to escape local optima and converge globally.",
+        ],
+      },
+      {
+        id: "impact",
+        label: "The Impact",
+        number: "03",
+        heading: "From manual dispatch to autonomous, constraint-aware scheduling.",
+        body:
+          "A fully automated, optimized scheduling engine handling real-world complexity — live telematics, dynamic repositioning, and multi-constraint allocation — at the speed and scale operations demand.",
+        bullets: [
+          "Battery-aware allocations eliminate mid-trip range failures.",
+          "Equitable distance distribution extends fleet life and driver fairness.",
+          "Disruption-resilient re-planning on cab unavailability or charging events.",
+        ],
+      },
+    ],
+  },
 };
