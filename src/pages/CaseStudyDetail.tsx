@@ -12,6 +12,7 @@ import CaseStudyIntroStats from "@/components/case-study/CaseStudyIntroStats";
 import solarHeroImage from "@/assets/project-intelligence-solar.jpg";
 import fleetHeroImage from "@/assets/ai-driven-fleet.png";
 import fmcgVideoSrc from "@/assets/fmcg-sap-dms.mp4";
+import pharmaHeroImage from "@/assets/pharma-sales-process.jpeg";
 import CaseStudySectionBackdrop from "@/components/case-study/CaseStudySectionBackdrop";
 import SectionNav from "@/components/case-study/SectionNav";
 import AnimatedCounter from "@/components/AnimatedCounter";
@@ -44,7 +45,8 @@ const CaseStudyDetail = () => {
     detail.slug === "ecom-inventory" ||
     detail.slug === "solar-bi" ||
     detail.slug === "ev-fleet-scheduling" ||
-    detail.slug === "fmcg-edible-oil";
+    detail.slug === "fmcg-edible-oil" ||
+    detail.slug === "pharma-sales-bi";
 
   const navItems = detail.sections.map((s) => ({ id: s.id, label: s.label }));
 
@@ -101,6 +103,12 @@ const CaseStudyDetail = () => {
         <CaseStudyImageHero
           title={detail.heroTitle}
           imageSrc={fleetHeroImage}
+          onPrimaryCta={scrollToFirstSection}
+        />
+      ) : detail.slug === "pharma-sales-bi" ? (
+        <CaseStudyImageHero
+          title={detail.heroTitle}
+          imageSrc={pharmaHeroImage}
           onPrimaryCta={scrollToFirstSection}
         />
       ) : useAnomalousStyle ? (
