@@ -353,7 +353,7 @@ const Index = () => {
             <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full">
               <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
                 <p className="font-mono text-[10px] sm:text-xs text-primary tracking-widest uppercase mb-3 sm:mb-4">
-                  The Problem
+                  Why This Matters
                 </p>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
                   The Old Model Is <span className="text-gradient-orange">No Longer Enough.</span>
