@@ -326,4 +326,61 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
       },
     ],
   },
+  "pharma-sales-bi": {
+    slug: "pharma-sales-bi",
+    caseStudyId: "pharma-sales-bi",
+    videoUrl: "",
+    heroEyebrow: "06 · Pharmaceuticals",
+    heroTitle:
+      "Sales Process Optimization — from manual Excel to automated, rep-level Tableau intelligence",
+    heroSubtitle:
+      "Replaced manual, weekly Excel reporting with an end-to-end Tableau BI platform — cutting cost, accelerating decisions, and unlocking field-force intelligence at the rep level.",
+    sections: [
+      {
+        id: "opportunity",
+        label: "The Opportunity",
+        number: "01",
+        heading:
+          "Senior employees crunching weekly Excel — leadership acting on stale data.",
+        body:
+          "A pharmaceutical leader was running its sales review on manual, weekly Excel reporting — consuming the time of senior employees, compromising data accuracy at every manual stage, and leaving leadership consistently acting on outdated numbers. Analytical depth was limited; there was no clean way to slice across departments, territories, or reps.",
+        bullets: [
+          "Manual, time-consuming weekly Excel reporting consuming senior employees' time.",
+          "Data accuracy compromised by manual crunching at every stage.",
+          "Delayed decision-making — leadership consistently acting on outdated data.",
+          "No slice-and-dice across departments, territories, or reps.",
+        ],
+      },
+      {
+        id: "solution",
+        label: "The Solution",
+        number: "02",
+        heading:
+          "An end-to-end BI platform on Tableau — living, actionable intelligence.",
+        body:
+          "We delivered an end-to-end BI solution — requirement gathering, multi-source data integration, dynamic visualization, and automated refresh. Tableau served as the BI platform of choice, replacing static spreadsheets with living, actionable intelligence aligned to how the business actually runs.",
+        bullets: [
+          "Multi-source data integration replacing manual Excel pulls.",
+          "Dynamic Tableau visualizations modeled on real sales workflows.",
+          "Automated refresh — KPIs aligned to operational and strategic cadences.",
+          "Drill-down from leadership rollup to individual rep activity.",
+        ],
+      },
+      {
+        id: "impact",
+        label: "The Impact",
+        number: "03",
+        heading:
+          "From weekly retrospection to rep-level, right-time decisioning.",
+        body:
+          "Sales leadership moved from weekly Excel retrospection to right-time, rep-level visibility — measurable productivity gains and hundreds of senior-talent hours reclaimed for strategic work.",
+        bullets: [
+          "Deeper sales intelligence — customer-facing days, F2F calls, remote calls, and coaching days, drillable to rep level.",
+          "Right-time KPI delivery — real-time for operational, scheduled for strategic.",
+          "Measurable productivity gains from daily visibility and proactive decisions.",
+          "Hundreds of senior-talent hours reclaimed from manual data processing.",
+        ],
+      },
+    ],
+  },
 };

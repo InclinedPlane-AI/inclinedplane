@@ -206,6 +206,12 @@ export const caseStudies: CaseStudy[] = [
     icon: BarChart3,
     image: imgPharmaSalesBi,
     stack: "Tableau",
+    metrics: [
+      { value: "100%", label: "Automated weekly reporting" },
+      { value: "Rep-level", label: "Field-force drill-down" },
+      { value: "Real-time", label: "KPI refresh cadence" },
+      { value: "100s", label: "Senior hours reclaimed" },
+    ],
     sections: [
       {
         heading: "The challenges",
