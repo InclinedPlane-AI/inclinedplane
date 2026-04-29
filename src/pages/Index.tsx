@@ -144,14 +144,14 @@ const Index = () => {
                     animate={{ backgroundPosition: ["150% center", "-50% center"] }}
                     transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 3, ease: "linear" }}
                   >
-                    Data Leveraged. Growth Accelerated.
+                    The Architecture of Enterprise Velocity
                   </motion.p>
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] tracking-tight mb-4 sm:mb-6">
-                    The Architecture of <span className="text-gradient-orange">Enterprise Velocity.</span>
+                    Data Engineered. <span className="text-gradient-orange">Intelligence Deployed.</span>
                   </h1>
                   <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-lg mb-6 sm:mb-8 text-justify">
-                    We don't just engineer data — we operationalize intelligence. InclinedPlane architects the data
-                    backbone and AI systems that power high performance and rapid growth.
+                    We build the data infrastructure and AI systems that power high-velocity enterprises — from a
+                    solid foundation all the way to autonomous decision-making.
                   </p>
                   <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pointer-events-auto">
                     <Link
@@ -159,14 +159,14 @@ const Index = () => {
                       data-cursor-hover
                       className="inline-flex items-center justify-center gap-2 bg-gradient-orange text-primary-foreground px-6 sm:px-7 py-3 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity glow-orange"
                     >
-                      Book a Strategy Consultation <ArrowRight size={16} />
+                      Book a Discovery Call <ArrowRight size={16} />
                     </Link>
                     <Link
-                      to="/services"
+                      to="/thesis"
                       data-cursor-hover
                       className="inline-flex items-center justify-center gap-2 glass-panel px-6 sm:px-7 py-3 rounded-lg font-medium text-sm text-foreground hover:bg-muted/20 transition-colors"
                     >
-                      Explore Our Capabilities
+                      Read Our Thesis <ArrowRight size={16} />
                     </Link>
                   </div>
                 </motion.div>
