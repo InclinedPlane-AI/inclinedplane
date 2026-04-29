@@ -37,7 +37,7 @@ import {
   Heart,
 } from "lucide-react";
 
-const SLIDE_COUNT = 12;
+const SLIDE_COUNT = 13;
 
 // Shared viewport config for all whileInView — only animate once
 const vp = { once: true, amount: 0.2 } as const;
@@ -365,7 +365,10 @@ const Index = () => {
                     {...fadeUp(0.05)}
                     className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed"
                   >
-                    Most organisations still treat data as a reporting function — static dashboards, fragile pipelines, and analytics teams buried in ad-hoc requests. Meanwhile, your competitors are deploying autonomous agents that make decisions in milliseconds. The gap between organisations that have engineering-grade data infrastructure and those that don't is widening — fast.
+                    Most organisations still treat data as a reporting function — static dashboards, fragile pipelines,
+                    and analytics teams buried in ad-hoc requests. Meanwhile, your competitors are deploying autonomous
+                    agents that make decisions in milliseconds. The gap between organisations that have
+                    engineering-grade data infrastructure and those that don't is widening — fast.
                   </motion.p>
                   <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
                     {[
@@ -433,7 +436,88 @@ const Index = () => {
             </div>
           </section>
 
-          {/* SLIDE 4 — THE EVOLUTION */}
+          {/* SLIDE 4 — OUR SERVICES */}
+          <section className="snap-section flex items-center relative">
+            <SectionGlow position="top-right" size={600} />
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+              <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">OUR SERVICES</p>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                  From Foundation to <span className="text-gradient-orange">Intelligence.</span>
+                </h2>
+                <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+                  Five layers. One continuous journey. Every layer AI-enabled in delivery and AI-ready in design.
+                </p>
+              </motion.div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 sm:mb-12">
+                {[
+                  {
+                    title: "Data & AI Consultancy",
+                    label: "Clarity Layer",
+                    desc: "Know what to build, in what order, and why — before you spend a pound on infrastructure.",
+                    icon: Target,
+                  },
+                  {
+                    title: "Data Foundation & Architecture",
+                    label: "AI-Readiness Foundation",
+                    desc: "The base everything else sits on. Built for your current needs and your future AI ambitions.",
+                    icon: Database,
+                  },
+                  {
+                    title: "Data Reliability & DataOps",
+                    label: "Reliability Layer",
+                    desc: "Engineering-grade pipelines, observability, and CI/CD. If you can't trust it, you can't use it.",
+                    icon: Shield,
+                  },
+                  {
+                    title: "Analytics & BI",
+                    label: "Analytics Layer",
+                    desc: "From executive dashboards to self-serve analytics. Data your stakeholders stop questioning.",
+                    icon: BarChart3,
+                  },
+                  {
+                    title: "Predictive & AI Implementation",
+                    label: "Predictive Layer",
+                    desc: "Forecasting, risk scoring, ML in production. No science projects. Just production.",
+                    icon: TrendingUp,
+                  },
+                  {
+                    title: "Automation & Decision Systems",
+                    label: "Intelligence Layer",
+                    desc: "AI agents that monitor, reason, and act. From reading dashboards to receiving intelligence.",
+                    icon: Brain,
+                  },
+                ].map(({ title, label, desc, icon: Icon }, i) => (
+                  <motion.div
+                    key={title}
+                    {...fadeUp(i * 0.08)}
+                    className="glass-panel rounded-xl p-7 group flex flex-col hover:glow-orange transition-shadow"
+                    data-cursor-hover
+                  >
+                    <div className="w-11 h-11 rounded-lg surface-3 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
+                      <Icon size={20} className="text-primary" />
+                    </div>
+                    <p className="text-[10px] sm:text-xs text-primary font-mono mb-2 uppercase tracking-wider">
+                      {label}
+                    </p>
+                    <h3 className="font-semibold text-foreground text-base mb-3">{title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed flex-1">{desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+              <motion.div {...fadeUp(0.4)} className="text-center">
+                <Link
+                  to="/services"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-panel text-foreground font-medium hover:text-primary transition-colors group"
+                >
+                  Explore all services{" "}
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* SLIDE 5 — THE EVOLUTION */}
           <section className="snap-section flex items-center relative">
             <SectionGlow position="bottom-left" size={650} />
             <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
