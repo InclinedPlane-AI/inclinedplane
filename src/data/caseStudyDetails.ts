@@ -215,6 +215,60 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
       },
     ],
   },
+  "fmcg-edible-oil": {
+    slug: "fmcg-edible-oil",
+    caseStudyId: "fmcg-edible-oil",
+    videoUrl: "",
+    heroEyebrow: "09 · FMCG",
+    heroTitle:
+      "Primary, Secondary & Field Efforts unified — one view of FMCG sales performance",
+    heroSubtitle:
+      "Unified SAP, DMS and SFA into a single AWS Redshift warehouse with Tableau — refreshed 4× daily — giving the Sales Head one view of primary, secondary and field-force performance.",
+    sections: [
+      {
+        id: "opportunity",
+        label: "The Opportunity",
+        number: "01",
+        heading: "Three disconnected systems, one Sales Head, zero unified view.",
+        body:
+          "India's foremost producer of sunflower oil — 50+ years of heritage, 1,000+ employees, FMCG distribution across multiple states. Sales data lived in three disconnected systems — SAP (primary sales), DMS (secondary), and SFA (field). The Sales Head had no unified view: primary-to-secondary conversion, fulfilment efficiency, TAT, field productivity, and route adherence all went unanswered daily.",
+        bullets: [
+          "Primary-to-secondary sales conversion invisible day-to-day.",
+          "Order fulfilment efficiency and turnaround time unmeasured.",
+          "Field-force productivity and route adherence untracked.",
+          "No single source of truth for the Sales Head.",
+        ],
+      },
+      {
+        id: "solution",
+        label: "The Solution",
+        number: "02",
+        heading: "A unified Data Warehouse on AWS Redshift, refreshed 4× daily.",
+        body:
+          "We integrated SAP, DMS, and SFA into a single AWS Redshift warehouse with a robust data engineering pipeline ensuring seamless flow. Tableau dashboards were modeled on existing business processes — refreshed four times a day so the Sales Head and field leadership could act on the same numbers.",
+        bullets: [
+          "AWS Redshift warehouse unifying SAP, DMS, and SFA.",
+          "Engineering pipeline with quality checks and 4× daily refresh cadence.",
+          "Tableau dashboards mirrored to existing primary, secondary, and field workflows.",
+          "Drill-down from national rollup to individual rep, route, and outlet.",
+        ],
+      },
+      {
+        id: "impact",
+        label: "The Impact",
+        number: "03",
+        heading: "From fragmented sales data to proactive field-force intervention.",
+        body:
+          "Real-time visibility into field force efforts and attendance enabled proactive intervention — replacing weekly retrospection with same-day course correction across primary, secondary, and field operations.",
+        bullets: [
+          "15% increase in sales efficiency through real-time field-force visibility.",
+          "25% improvement in route adherence and customer-visit consistency.",
+          "15% improvement in order fulfilment rate.",
+          "27% reduction in order fulfilment turnaround time.",
+        ],
+      },
+    ],
+  },
   "ev-fleet-scheduling": {
     slug: "ev-fleet-scheduling",
     caseStudyId: "ev-fleet-scheduling",
