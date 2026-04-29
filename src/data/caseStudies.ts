@@ -403,6 +403,11 @@ export const caseStudies: CaseStudy[] = [
     icon: Route,
     image: imgEvFleet,
     stack: "Genetic Algorithms, Tabu Search, Simulated Annealing",
+    metrics: [
+      { value: 9, suffix: "+", label: "Hard constraints solved per allocation" },
+      { value: 100, suffix: "%", label: "Battery-aware trip assignments" },
+      { value: 24, suffix: "/7", label: "Live telematics-driven scheduling" },
+    ],
     sections: [
       {
         heading: "The challenge",
