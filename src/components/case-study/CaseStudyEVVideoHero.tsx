@@ -1,13 +1,14 @@
 import { useRef, useState, useEffect } from "react";
 import { Play, Pause, ChevronDown } from "lucide-react";
-import videoSrc from "@/assets/predicting-ev-battery.mp4";
+import defaultVideoSrc from "@/assets/predicting-ev-battery.mp4";
 
 interface Props {
   title: string;
   onPrimaryCta?: () => void;
+  videoSrc?: string;
 }
 
-const CaseStudyEVVideoHero = ({ title, onPrimaryCta }: Props) => {
+const CaseStudyEVVideoHero = ({ title, onPrimaryCta, videoSrc }: Props) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(true);
 
@@ -35,7 +36,7 @@ const CaseStudyEVVideoHero = ({ title, onPrimaryCta }: Props) => {
     <section className="relative w-full min-h-screen overflow-hidden bg-[#0a0a0a]">
       <video
         ref={videoRef}
-        src={videoSrc}
+        src={videoSrc || defaultVideoSrc}
         autoPlay
         muted
         loop
