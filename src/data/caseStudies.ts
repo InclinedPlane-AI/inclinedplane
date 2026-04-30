@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import imgRetailMfg from "@/assets/case-retail-manufacturing.jpg";
+import imgRetailMfg from "@/assets/retail-manufacturing-chain.jpg";
 import imgPharmaErp from "@/assets/case-pharma-erp.jpg";
 import imgEnergyAudit from "@/assets/case-energy-audit.jpg";
 import imgEdtech from "@/assets/case-edtech.jpg";
