@@ -25,7 +25,7 @@ import imgEnergyAudit from "@/assets/case-energy-audit.jpg";
 import imgEdtech from "@/assets/case-edtech.jpg";
 import imgCapitalEquipment from "@/assets/case-capital-equipment.jpg";
 import imgPharmaSalesBi from "@/assets/pharma-sales-process.jpeg";
-import imgEcomInventory from "@/assets/case-ecom-inventory.jpg";
+import imgEcomInventory from "@/assets/ecom-inventory-procurement.jpg";
 import imgEnergyIndustrial from "@/assets/08_Energy_&_Industrial_Energy.jpg";
 import imgEdtechIndustrial from "@/assets/09_EdTech_VC-Funded_Educational_Products.jpg";
 import imgPharmaMnc from "@/assets/10_Pharmaceuticals_Pharmaceutical_MNC.jpg";
