@@ -24,7 +24,7 @@ import imgPharmaErp from "@/assets/case-pharma-erp.jpg";
 import imgEnergyAudit from "@/assets/case-energy-audit.jpg";
 import imgEdtech from "@/assets/case-edtech.jpg";
 import imgCapitalEquipment from "@/assets/case-capital-equipment.jpg";
-import imgPharmaSalesBi from "@/assets/case-pharma-sales-bi.jpg";
+import imgPharmaSalesBi from "@/assets/pharma-sales-process.jpeg";
 import imgEcomInventory from "@/assets/case-ecom-inventory.jpg";
 import imgEnergyIndustrial from "@/assets/08_Energy_&_Industrial_Energy.jpg";
 import imgEdtechIndustrial from "@/assets/09_EdTech_VC-Funded_Educational_Products.jpg";
@@ -33,9 +33,9 @@ import imgCapitalIndus from "@/assets/11_Manufacturing_Leading_Capital_Equipment
 import imgEvBattery from "@/assets/case-ev-battery.jpg";
 import imgFmcgEdibleOil from "@/assets/case-fmcg-edible-oil.jpg";
 import imgEngineForecast from "@/assets/02_Manufacturing_Demand_Forecasting.jpg";
-import imgEvFleet from "@/assets/case-ev-fleet.jpg";
+import imgEvFleet from "@/assets/ai-driven-fleet.png";
 import imgPublicSector from "@/assets/13_Public_Sector_Cultural_Heritage.jpg";
-import imgSolarBi from "@/assets/case-solar-bi.jpg";
+import imgSolarBi from "@/assets/project-intelligence-solar.jpg";
 import imgErpUnification from "@/assets/14_Industrial_Manufacturing_ERP_Unification.jpg";
 
 export interface CaseStudyMetric {
