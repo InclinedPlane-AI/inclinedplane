@@ -264,7 +264,7 @@ const CaseStudyDetail = () => {
               Ready to build your <span className="text-gradient-orange">success story?</span>
             </h2>
             <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
-              Let's discuss how we can engineer the same level of impact for your data infrastructure.
+              The next phase of your data story starts here.
             </p>
             <Link
               to="/contact"
