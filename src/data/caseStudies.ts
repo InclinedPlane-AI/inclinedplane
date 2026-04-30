@@ -32,7 +32,7 @@ import imgPharmaMnc from "@/assets/10_Pharmaceuticals_Pharmaceutical_MNC.jpg";
 import imgCapitalIndus from "@/assets/11_Manufacturing_Leading_Capital_Equipment.jpg";
 import imgEvBattery from "@/assets/case-ev-battery.jpg";
 import imgFmcgEdibleOil from "@/assets/case-fmcg-edible-oil.jpg";
-import imgEngineForecast from "@/assets/Manufacturing_Demand_Forecasting.jpg";
+import imgEngineForecast from "@/assets/02_Manufacturing_Demand_Forecasting.jpg";
 import imgEvFleet from "@/assets/case-ev-fleet.jpg";
 import imgPublicSector from "@/assets/13_Public_Sector_Cultural_Heritage.jpg";
 import imgSolarBi from "@/assets/case-solar-bi.jpg";

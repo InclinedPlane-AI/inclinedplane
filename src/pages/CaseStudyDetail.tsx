@@ -13,7 +13,7 @@ import solarHeroImage from "@/assets/project-intelligence-solar.jpg";
 import fleetHeroImage from "@/assets/ai-driven-fleet.png";
 import fmcgVideoSrc from "@/assets/fmcg-sap-dms.mp4";
 import pharmaHeroImage from "@/assets/pharma-sales-process.jpeg";
-import engineHeroImage from "@/assets/Manufacturing_Demand_Forecasting.jpg";
+import engineHeroImage from "@/assets/02_Manufacturing_Demand_Forecasting.jpg";
 import energyHeroImage from "@/assets/08_Energy_&_Industrial_Energy.jpg";
 import edtechHeroImage from "@/assets/09_EdTech_VC-Funded_Educational_Products.jpg";
 import pharmaMncHeroImage from "@/assets/10_Pharmaceuticals_Pharmaceutical_MNC.jpg";
