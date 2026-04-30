@@ -11,13 +11,11 @@ const SLIDE_LABELS = [
   "Hero",
   "AI Imperative",
   "The Problem",
-  "Evolution",
-  "Capabilities",
+  "Services",
+  "Focus",
   "Impact",
-  "Intelligence Stack",
-  "Testimonials",
-  "Case Studies",
   "Why Us",
+  "Careers",
   "Get Started",
 ];
 
@@ -49,13 +47,16 @@ const SlideProgress = ({ total, current, onDotClick }: SlideProgressProps) => {
   const trailBottom = Math.max(prev, current);
   const goingDown = current > prev;
 
-  const getSlideFromY = useCallback((clientY: number) => {
-    if (!containerRef.current) return current;
-    const rect = containerRef.current.getBoundingClientRect();
-    const relativeY = clientY - rect.top;
-    const index = Math.round(relativeY / DOT_GAP);
-    return Math.max(0, Math.min(total - 1, index));
-  }, [total, current]);
+  const getSlideFromY = useCallback(
+    (clientY: number) => {
+      if (!containerRef.current) return current;
+      const rect = containerRef.current.getBoundingClientRect();
+      const relativeY = clientY - rect.top;
+      const index = Math.round(relativeY / DOT_GAP);
+      return Math.max(0, Math.min(total - 1, index));
+    },
+    [total, current],
+  );
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
@@ -98,7 +99,10 @@ const SlideProgress = ({ total, current, onDotClick }: SlideProgressProps) => {
       ref={containerRef}
       className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center gap-3"
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setHovered(false); setDragging(false); }}
+      onMouseLeave={() => {
+        setHovered(false);
+        setDragging(false);
+      }}
       onMouseDown={handleMouseDown}
       style={{ cursor: dragging ? "grabbing" : "default" }}
     >
@@ -117,7 +121,8 @@ const SlideProgress = ({ total, current, onDotClick }: SlideProgressProps) => {
               top: -DOT_GAP / 2 + 6,
               left: "50%",
               marginLeft: -10,
-              background: "linear-gradient(180deg, hsl(var(--orange-start) / 0.06), hsl(var(--orange-mid) / 0.03), hsl(var(--orange-end) / 0.06))",
+              background:
+                "linear-gradient(180deg, hsl(var(--orange-start) / 0.06), hsl(var(--orange-mid) / 0.03), hsl(var(--orange-end) / 0.06))",
             }}
           />
         )}
@@ -128,8 +133,8 @@ const SlideProgress = ({ total, current, onDotClick }: SlideProgressProps) => {
         className="absolute pointer-events-none"
         style={{
           top: 0,
-          left: '50%',
-          transform: 'translateX(-50%)',
+          left: "50%",
+          transform: "translateX(-50%)",
           width: 12,
           height: total * DOT_GAP,
         }}
@@ -191,9 +196,7 @@ const SlideProgress = ({ total, current, onDotClick }: SlideProgressProps) => {
           {/* Dot */}
           <div
             className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-              i === current
-                ? "bg-primary scale-150"
-                : "bg-muted-foreground/30 group-hover:bg-primary/50"
+              i === current ? "bg-primary scale-150" : "bg-muted-foreground/30 group-hover:bg-primary/50"
             }`}
           />
 

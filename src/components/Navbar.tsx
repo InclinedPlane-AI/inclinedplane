@@ -10,10 +10,10 @@ const navLinks = [
   { label: "Services", path: "/services" },
   { label: "Industries", path: "/industries" },
   { label: "Case Studies", path: "/case-studies" },
-  { label: "Blog", path: "/blog" },
   { label: "About", path: "/about" },
   { label: "Careers", path: "/careers" },
   { label: "Contact", path: "/contact" },
+  { label: "Blog", path: "/blog" },
 ];
 
 const WavyLine = ({ animate = false, className = "" }: { animate?: boolean; className?: string }) => (
@@ -31,7 +31,11 @@ const WavyLine = ({ animate = false, className = "" }: { animate?: boolean; clas
       strokeLinecap="round"
       fill="none"
       className={animate ? "navbar-wavy-active" : ""}
-      style={!animate ? { strokeDasharray: 200, strokeDashoffset: 200, animation: "wave-draw 0.3s ease-out forwards" } : undefined}
+      style={
+        !animate
+          ? { strokeDasharray: 200, strokeDashoffset: 200, animation: "wave-draw 0.3s ease-out forwards" }
+          : undefined
+      }
     />
     <defs>
       <linearGradient id="wave-grad" x1="0" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
@@ -43,7 +47,7 @@ const WavyLine = ({ animate = false, className = "" }: { animate?: boolean; clas
   </svg>
 );
 
-const NavLinkItem = ({ link, isActive }: { link: typeof navLinks[0]; isActive: boolean }) => {
+const NavLinkItem = ({ link, isActive }: { link: (typeof navLinks)[0]; isActive: boolean }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -53,9 +57,7 @@ const NavLinkItem = ({ link, isActive }: { link: typeof navLinks[0]; isActive: b
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={`relative px-3 py-2 text-sm transition-colors duration-200 ${
-        isActive
-          ? "text-foreground"
-          : "text-muted-foreground hover:text-foreground"
+        isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
       }`}
     >
       <span className="relative inline-block">
@@ -82,14 +84,14 @@ const NavLinkItem = ({ link, isActive }: { link: typeof navLinks[0]; isActive: b
   );
 };
 
-const Navbar = () => {
+const Navbar = ({ activeOverride }: { activeOverride?: string }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
-    const snapContainer = document.querySelector('.snap-container');
+    const snapContainer = document.querySelector(".snap-container");
     const snapHandler = () => {
       if (snapContainer) setScrolled(snapContainer.scrollTop > 40);
     };
@@ -123,7 +125,11 @@ const Navbar = () => {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
-            <NavLinkItem key={link.path} link={link} isActive={location.pathname === link.path} />
+            <NavLinkItem
+              key={link.path}
+              link={link}
+              isActive={activeOverride ? activeOverride === link.path : location.pathname === link.path}
+            />
           ))}
         </div>
 
@@ -164,9 +170,7 @@ const Navbar = () => {
                   key={link.path}
                   to={link.path}
                   className={`py-2 text-sm ${
-                    location.pathname === link.path
-                      ? "text-foreground"
-                      : "text-muted-foreground"
+                    location.pathname === link.path ? "text-foreground" : "text-muted-foreground"
                   }`}
                 >
                   {link.label}
