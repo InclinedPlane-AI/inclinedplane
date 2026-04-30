@@ -36,7 +36,7 @@ import imgEngineForecast from "@/assets/02_Manufacturing_Demand_Forecasting.jpg"
 import imgEvFleet from "@/assets/case-ev-fleet.jpg";
 import imgPublicSector from "@/assets/13_Public_Sector_Cultural_Heritage.jpg";
 import imgSolarBi from "@/assets/case-solar-bi.jpg";
-import imgErpUnification from "@/assets/14_case study.jpg";
+import imgErpUnification from "@/assets/14_Industrial_Manufacturing_ERP_Unification.jpg";
 
 export interface CaseStudyMetric {
   value: number | string;
