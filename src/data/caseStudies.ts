@@ -31,7 +31,7 @@ import imgEdtechIndustrial from "@/assets/09_EdTech_VC-Funded_Educational_Produc
 import imgPharmaMnc from "@/assets/10_Pharmaceuticals_Pharmaceutical_MNC.jpg";
 import imgCapitalIndus from "@/assets/11_Manufacturing_Leading_Capital_Equipment.jpg";
 import imgEvBattery from "@/assets/case-ev-battery.jpg";
-import imgFmcgEdibleOil from "@/assets/case-fmcg-edible-oil.jpg";
+import imgFmcgEdibleOil from "@/assets/fmcg-sunflower-oil.png";
 import imgEngineForecast from "@/assets/02_Manufacturing_Demand_Forecasting.jpg";
 import imgEvFleet from "@/assets/ai-driven-fleet.png";
 import imgPublicSector from "@/assets/13_Public_Sector_Cultural_Heritage.jpg";
