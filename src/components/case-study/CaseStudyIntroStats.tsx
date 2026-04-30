@@ -16,12 +16,7 @@ interface CaseStudyIntroStatsProps {
   referenceUrl?: string;
 }
 
-const CaseStudyIntroStats = ({
-  intro,
-  stats,
-  referenceLabel,
-  referenceUrl,
-}: CaseStudyIntroStatsProps) => {
+const CaseStudyIntroStats = ({ intro, stats, referenceLabel, referenceUrl }: CaseStudyIntroStatsProps) => {
   return (
     <section className="relative w-full bg-background">
       {/* Glass panel sits cleanly below the hero with generous breathing room */}
@@ -45,27 +40,20 @@ const CaseStudyIntroStats = ({
           {/* Stats row with vertical dividers */}
           <div
             className={`mt-14 sm:mt-20 grid grid-cols-1 gap-10 sm:gap-0 max-w-4xl mx-auto ${
-              stats.length === 2
-                ? "sm:grid-cols-2"
-                : stats.length === 3
-                ? "sm:grid-cols-3"
-                : "sm:grid-cols-4"
+              stats.length === 1
+                ? "sm:grid-cols-1"
+                : stats.length === 2
+                  ? "sm:grid-cols-2"
+                  : stats.length === 3
+                    ? "sm:grid-cols-3"
+                    : "sm:grid-cols-4"
             }`}
           >
             {stats.map((s, idx) => (
-              <div
-                key={s.label}
-                className={`text-center px-4 ${
-                  idx > 0 ? "sm:border-l sm:border-white/15" : ""
-                }`}
-              >
+              <div key={s.label} className={`text-center px-4 ${idx > 0 ? "sm:border-l sm:border-white/15" : ""}`}>
                 <p className="text-5xl sm:text-6xl lg:text-7xl font-light text-foreground tracking-tight leading-none">
                   {typeof s.value === "number" ? (
-                    <AnimatedCounter
-                      end={s.value}
-                      prefix={s.prefix || ""}
-                      suffix={s.suffix || ""}
-                    />
+                    <AnimatedCounter end={s.value} prefix={s.prefix || ""} suffix={s.suffix || ""} />
                   ) : (
                     <>
                       {s.prefix || ""}
@@ -74,9 +62,7 @@ const CaseStudyIntroStats = ({
                     </>
                   )}
                 </p>
-                <p className="mt-4 text-sm sm:text-base text-foreground/70 font-light">
-                  {s.label}
-                </p>
+                <p className="mt-4 text-sm sm:text-base text-foreground/70 font-light">{s.label}</p>
               </div>
             ))}
           </div>
