@@ -265,8 +265,8 @@ const CaseStudyDetail = () => {
           className="glass-panel rounded-2xl p-10 text-center glow-orange mt-28"
         >
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-            Ready to build your{" "}
-            <span className="text-gradient-orange">success story?</span>
+            The next phase of your{" "}
+            <span className="text-gradient-orange">data story</span> starts here.
           </h2>
           <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
             Let's discuss how we can engineer the same level of impact for your
