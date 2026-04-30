@@ -19,7 +19,7 @@ import edtechHeroImage from "@/assets/09_EdTech_VC-Funded_Educational_Products.j
 import pharmaMncHeroImage from "@/assets/10_Pharmaceuticals_Pharmaceutical_MNC.jpg";
 import capitalHeroImage from "@/assets/11_Manufacturing_Leading_Capital_Equipment.jpg";
 import publicSectorHeroImage from "@/assets/13_Public_Sector_Cultural_Heritage.jpg";
-import erpHeroImage from "@/assets/14_case study.jpg";
+import erpHeroImage from "@/assets/14_case_study.jpg";
 import CaseStudySectionBackdrop from "@/components/case-study/CaseStudySectionBackdrop";
 import SectionNav from "@/components/case-study/SectionNav";
 import AnimatedCounter from "@/components/AnimatedCounter";
