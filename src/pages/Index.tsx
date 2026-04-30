@@ -35,9 +35,13 @@ import {
   Target,
   Rocket,
   Heart,
+  Factory,
+  Truck,
+  Package,
+  Store,
 } from "lucide-react";
 
-const SLIDE_COUNT = 13;
+const SLIDE_COUNT = 9;
 
 // Shared viewport config for all whileInView — only animate once
 const vp = { once: true, amount: 0.2 } as const;
@@ -89,6 +93,30 @@ const Index = () => {
     return () => window.removeEventListener("keydown", handleKey);
   }, [currentSlide, scrollToSlide]);
 
+  const getActiveNavOverride = () => {
+    switch (currentSlide) {
+      case 0:
+      case 1:
+        return "/"; // Home
+      case 2:
+        return "/thesis"; // The Problem
+      case 3:
+        return "/services"; // Our Services
+      case 4:
+        return "/industries"; // Our Focus
+      case 5:
+        return "/case-studies"; // Proven Results
+      case 6:
+        return "/about"; // Why Us
+      case 7:
+        return "/careers"; // Careers Teaser
+      case 8:
+        return "/contact"; // Final CTA
+      default:
+        return "/";
+    }
+  };
+
   return (
     <div className="bg-background">
       <SEOHead
@@ -113,7 +141,7 @@ const Index = () => {
           ],
         }}
       />
-      <Navbar />
+      <Navbar activeOverride={getActiveNavOverride()} />
       <SlideProgress total={SLIDE_COUNT} current={currentSlide} onDotClick={scrollToSlide} />
       <ScrollProgressBar containerRef={containerRef} />
 
@@ -517,149 +545,67 @@ const Index = () => {
             </div>
           </section>
 
-          {/* SLIDE 5 — THE EVOLUTION */}
+          {/* SLIDE 5 — ARCHITECTURE SNAPSHOT */}
           <section className="snap-section flex items-center relative">
-            <SectionGlow position="bottom-left" size={650} />
+            <SectionGlow position="top-right" size={700} />
             <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-              <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">The Evolution</p>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                  From Sail to <span className="text-gradient-orange">Leverage.</span>
+              {/* Header */}
+              <motion.div {...fadeUp()} className="mb-5">
+                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-2 text-center">OUR FOCUS</p>
+                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3 text-center">
+                  Built for Complex, <span className="text-gradient-orange">High-Stakes Enterprises.</span>
                 </h2>
+                <p className="text-muted-foreground text-center max-w-xl mx-auto text-sm">
+                  We work with mid-to-large enterprises where data infrastructure isn't a nice-to-have — it's
+                  operational-critical.
+                </p>
               </motion.div>
-              <div className="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
-                  <motion.div {...fadeUp(0.1)}>
-                    <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
-                      For years, as <span className="text-foreground font-medium">Sail Analytics</span>, we built a
-                      foundation of enterprise trust by delivering high-stakes data analytics and engineering services
-                      to complex organizations. We helped our clients navigate the vast seas of information with
-                      precision and reliability.
-                    </p>
-                    <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
-                      But in the age of Artificial Intelligence,{" "}
-                      <span className="text-foreground font-medium">navigation isn't enough — you need momentum.</span>
-                    </p>
-                    <p className="text-muted-foreground leading-relaxed text-justify">
-                      <span className="text-gradient-orange font-semibold">InclinedPlane</span> represents a fundamental
-                      shift: providing the strategic leverage your business needs. We transform raw data into a
-                      sophisticated lever that multiplies your team's efforts and accelerates your trajectory.
-                    </p>
-                  </motion.div>
-                </div>
-                <motion.div {...fadeUp(0.15)}>
-                  <div className="flex flex-col gap-4">
-                    {[
-                      { before: "Sail Analytics", after: "InclinedPlane", desc: "Brand evolution" },
-                      { before: "Data Navigation", after: "Data Leverage", desc: "Strategic shift" },
-                      {
-                        before: "Legacy BI Services",
-                        after: "AI-Native Engineering & Analytics",
-                        desc: "Capability upgrade",
-                      },
-                      { before: "Reporting Focus", after: "Decision Intelligence", desc: "Value delivery" },
-                    ].map(({ before, after, desc }, i) => (
-                      <motion.div
-                        key={desc}
-                        {...fadeUp(0.2 + i * 0.06)}
-                        className="glass-panel rounded-xl p-4 sm:p-5 flex items-center gap-3 sm:gap-4 group hover:glow-orange transition-shadow"
-                        data-cursor-hover
-                      >
-                        <div className="w-[38%] shrink-0">
-                          <p className="text-xs sm:text-sm text-muted-foreground/40 italic">{before}</p>
-                        </div>
-                        <ArrowRight size={14} className="text-primary shrink-0" />
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs sm:text-sm text-foreground font-semibold">{after}</p>
-                        </div>
-                        <span className="text-[9px] sm:text-[10px] text-muted-foreground font-mono hidden sm:block shrink-0">
-                          {desc}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </section>
 
-          {/* SLIDE 5 — CORE CAPABILITIES */}
-          <section className="snap-section flex items-center relative">
-            <SectionGlow position="top-left" size={700} />
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-              <motion.div {...fadeUp()}>
-                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">
-                  Core Capabilities
-                </p>
-                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-center">
-                  How We <span className="text-gradient-orange">Deliver.</span>
-                </h2>
-                <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
-                  Three pillars of capability engineered for the AI-driven enterprise.
-                </p>
-              </motion.div>
-              <div className="grid lg:grid-cols-3 gap-6">
+              {/* Verticals row */}
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
                 {[
-                  {
-                    icon: Database,
-                    title: "Enterprise Data Architecture & AI-Readiness",
-                    headline: "Foundations Built for Scale and Intelligence.",
-                    desc: "Modern growth requires more than just storage — it requires flow and foresight. We design and implement enterprise-grade data pipelines and architectures that ensure your organization is AI-ready.",
-                    bullets: [
-                      "AI-Ready Infrastructure",
-                      "Legacy Integration",
-                      "Real-Time Sync",
-                      "Cloud-Native Warehousing",
-                    ],
-                  },
-                  {
-                    icon: BarChart3,
-                    title: "Automated Intelligence & BI",
-                    headline: "Decision-Making, De-risked.",
-                    desc: "Stop looking in the rearview mirror. We build automated reporting environments that provide leadership and operations with the clarity they need to act, not just react.",
-                    bullets: [
-                      "Executive KPI Dashboards",
-                      "Operational Reporting",
-                      "Automated Workflows",
-                      "Self-Serve Analytics",
-                    ],
-                  },
-                  {
-                    icon: Brain,
-                    title: "AI, Predictive & Agentic Implementation",
-                    headline: "Predicting the Future by Engineering It.",
-                    desc: "The leap from analytics to AI is where competitive advantages are won. We implement cutting-edge predictive solutions and autonomous agents that turn 'what if' into 'what's next.'",
-                    bullets: [
-                      "Agentic AI Systems",
-                      "Operational Risk Mitigation",
-                      "Predictive Maintenance",
-                      "Growth Modeling",
-                    ],
-                  },
-                ].map(({ icon: Icon, title, headline, desc, bullets }, i) => (
-                  <motion.div
-                    key={title}
-                    {...fadeUp(i * 0.08)}
-                    className="glass-panel rounded-xl p-7 group flex flex-col hover:glow-orange transition-shadow"
-                    data-cursor-hover
-                  >
-                    <div className="w-11 h-11 rounded-lg surface-3 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
-                      <Icon size={20} className="text-primary" />
-                    </div>
-                    <p className="text-xs text-primary font-mono mb-2">{headline}</p>
-                    <h3 className="font-semibold text-foreground text-base mb-3">{title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1 text-justify">{desc}</p>
-                    <div className="grid grid-cols-2 gap-2">
-                      {bullets.map((b) => (
-                        <div key={b} className="flex items-center gap-1.5 text-xs text-secondary-foreground">
-                          <CheckCircle2 size={11} className="text-primary shrink-0" />
-                          <span>{b}</span>
-                        </div>
-                      ))}
+                  { icon: Factory, title: "Manufacturing" },
+                  { icon: Zap, title: "Energy & Utilities" },
+                  { icon: Truck, title: "Logistics & Supply Chain" },
+                  { icon: Package, title: "FMCG" },
+                  { icon: Store, title: "Enterprise Retail" },
+                ].map(({ icon: Icon, title }, i) => (
+                  <motion.div key={title} {...fadeUp(i * 0.05)} className="flex items-center">
+                    <div
+                      className="glass-panel rounded-lg p-3 sm:px-5 flex items-center gap-3 border border-muted/30 group hover:glow-orange transition-shadow"
+                      data-cursor-hover
+                    >
+                      <div className="w-8 h-8 rounded-md surface-3 flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors">
+                        <Icon size={16} className="text-primary" />
+                      </div>
+                      <p className="font-semibold text-foreground text-sm">{title}</p>
                     </div>
                   </motion.div>
                 ))}
               </div>
+
+              {/* Target Audience Stats */}
+              <motion.div {...fadeUp(0.3)} className="text-center mb-12">
+                <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 px-6 py-3 rounded-full surface-2 border border-border/50 shadow-sm">
+                  <p className="text-sm font-medium text-foreground">
+                    <span className="text-primary mr-1">500–10,000</span> employees
+                  </p>
+                  <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-muted-foreground/40" />
+                  <p className="text-sm font-medium text-foreground">
+                    <span className="text-primary mr-1">$100M–$2B</span> revenue
+                  </p>
+                  <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-muted-foreground/40" />
+                  <p className="text-sm font-medium text-foreground">US and UK markets</p>
+                </div>
+              </motion.div>
+
+              {/* Auto-scrolling tech stack marquee */}
+              <motion.div {...fadeUp(0.2)}>
+                <p className="text-center text-xs text-muted-foreground mb-4 tracking-wide uppercase font-mono">
+                  Tools & Platforms We Work With
+                </p>
+                <TechStackGrid />
+              </motion.div>
             </div>
           </section>
 
@@ -668,51 +614,58 @@ const Index = () => {
             <SectionGlow position="bottom-right" size={650} />
             <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
               <motion.div {...fadeUp()}>
-                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Impact</p>
+                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">
+                  PROVEN RESULTS
+                </p>
                 <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6 text-center">
-                  Turn Data Gravity into <span className="text-gradient-orange">Growth Momentum.</span>
+                  Results <span className="text-gradient-orange">That Compound.</span>
                 </h2>
                 <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-14">
-                  Data can be a weight or a lever. Without the right architecture, it's a liability that slows you down.
-                  With InclinedPlane, it becomes the force multiplier that lifts your enterprise to its next stage of
-                  growth.
+                  Every system we build is one we'd stake our reputation on — because we do.
                 </p>
               </motion.div>
               <div className="grid sm:grid-cols-3 gap-6 mb-10">
                 {[
                   {
-                    value: 70,
+                    value: 24,
                     suffix: "%",
-                    label: "Faster Time-to-Insight",
-                    desc: "Reduce the gap between raw data and actionable intelligence.",
-                  },
-                  {
-                    value: 100,
-                    suffix: "%",
-                    label: "Pipeline Automation",
-                    desc: "Eliminate manual error through full pipeline automation.",
+                    prefix: "",
+                    sector: "Global Manufacturer",
+                    desc: "Stock-out reduction through AI-powered demand forecasting",
                   },
                   {
                     value: 3,
                     suffix: "x",
-                    label: "Team Leverage",
-                    desc: "Reallocate human capital from data entry to strategic AI-driven initiatives.",
+                    prefix: "",
+                    sector: "B2B SaaS",
+                    desc: "Pipeline velocity improvement for sales intelligence platform",
                   },
-                ].map(({ value, suffix, label, desc }, i) => (
+                  {
+                    value: 2,
+                    suffix: "M+",
+                    prefix: "$",
+                    sector: "Financial Services",
+                    desc: "In bad decisions prevented by observability layer catching critical data quality issue",
+                  },
+                ].map(({ value, suffix, prefix, sector, desc }, i) => (
                   <motion.div
-                    key={label}
+                    key={sector}
                     {...fadeUp(i * 0.08)}
-                    className="glass-panel rounded-xl p-8 text-center group hover:glow-orange transition-shadow"
+                    className="glass-panel rounded-xl p-8 text-center group hover:glow-orange transition-shadow flex flex-col justify-between"
                   >
-                    <p className="text-4xl lg:text-5xl font-bold mb-3">
-                      <AnimatedCounter end={value} suffix={suffix} prefix={suffix === "x" ? "" : "Up to "} />
+                    <div>
+                      <p className="text-4xl lg:text-5xl font-bold mb-4 text-gradient-orange">
+                        <AnimatedCounter end={value} suffix={suffix} prefix={prefix} />
+                      </p>
+                      <p className="text-sm text-foreground font-medium leading-relaxed mb-6">{desc}</p>
+                    </div>
+                    <p className="text-[10px] text-primary font-mono uppercase tracking-widest pt-4 border-t border-border/50">
+                      {sector}
                     </p>
-                    <p className="text-sm text-foreground font-medium mb-2">{label}</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
                   </motion.div>
                 ))}
               </div>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
                 {[
                   { value: "Speed", label: "Time-to-insight reduction" },
                   { value: "Accuracy", label: "Full pipeline automation" },
@@ -729,225 +682,63 @@ const Index = () => {
                   </motion.div>
                 ))}
               </div>
-            </div>
-          </section>
-
-          {/* SLIDE 7 — ARCHITECTURE SNAPSHOT */}
-          <section className="snap-section flex items-center relative">
-            <SectionGlow position="top-right" size={700} />
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-              {/* Header */}
-              <motion.div {...fadeUp()} className="mb-5">
-                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-2 text-center">
-                  Architecture
-                </p>
-                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3 text-center">
-                  The Intelligence <span className="text-gradient-orange">Stack.</span>
-                </h2>
-                <p className="text-muted-foreground text-center max-w-xl mx-auto text-sm">
-                  A modern, composable architecture designed for AI-readiness from day one.
-                </p>
-              </motion.div>
-
-              {/* Pipeline row */}
-              <div className="flex flex-col md:flex-row items-stretch gap-2 justify-center mb-8">
-                {[
-                  { icon: Database, title: "Sources", desc: "APIs, DBs, Events", color: "border-muted/30" },
-                  { icon: Layers, title: "Warehouse", desc: "Snowflake • BigQuery", color: "border-muted/30" },
-                  { icon: Eye, title: "Observability", desc: "Quality • Lineage", color: "border-muted/30" },
-                  { icon: BarChart3, title: "Intelligence", desc: "Forecasting • BI", color: "border-primary/30" },
-                  { icon: Brain, title: "AI Layer", desc: "LLMs • Agents", color: "border-primary/40" },
-                  { icon: Zap, title: "Automation", desc: "Workflows • Alerts", color: "border-primary/50" },
-                ].map(({ icon: Icon, title, desc, color }, i) => (
-                  <motion.div key={title} {...fadeUp(i * 0.04)} className="flex items-center gap-2">
-                    <div
-                      className={`glass-panel rounded-lg p-3 flex-1 min-w-[110px] border ${color} group hover:glow-orange transition-shadow text-center`}
-                      data-cursor-hover
-                    >
-                      <div className="w-8 h-8 rounded-md surface-3 flex items-center justify-center mx-auto mb-2 group-hover:bg-primary/10 transition-colors">
-                        <Icon size={15} className="text-primary" />
-                      </div>
-                      <p className="font-semibold text-foreground text-xs mb-0.5">{title}</p>
-                      <p className="text-[9px] text-muted-foreground leading-tight">{desc}</p>
-                    </div>
-                    {i < 5 && <ArrowRight size={12} className="text-muted-foreground/30 shrink-0 hidden md:block" />}
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Auto-scrolling tech stack marquee */}
-              <motion.div {...fadeUp(0.2)}>
-                <p className="text-center text-xs text-muted-foreground mb-4 tracking-wide uppercase font-mono">
-                  Tools & Platforms We Work With
-                </p>
-                <TechStackGrid />
-              </motion.div>
-            </div>
-          </section>
-
-          {/* SLIDE 8 — TESTIMONIALS */}
-          <section className="snap-section flex items-center relative">
-            <SectionGlow position="bottom-left" size={650} />
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-              <motion.div {...fadeUp()}>
-                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">
-                  What Leaders Say
-                </p>
-                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-14 text-center">
-                  Trusted by <span className="text-gradient-orange">Decision Makers.</span>
-                </h2>
-              </motion.div>
-              <div className="grid md:grid-cols-3 gap-6">
-                {[
-                  {
-                    quote:
-                      "Inclined Plane didn't just build us a data platform — they built the foundation for our entire AI strategy. Our forecasting accuracy went from guesswork to 98%.",
-                    name: "Sarah Chen",
-                    title: "VP of Data, Retail Co.",
-                    metric: "98% forecast accuracy",
-                  },
-                  {
-                    quote:
-                      "Within 6 weeks, our sales team had real-time intelligence that previously took analysts days to compile. Pipeline velocity increased 3x.",
-                    name: "Marcus Williams",
-                    title: "CRO, B2B SaaS Platform",
-                    metric: "3x pipeline velocity",
-                  },
-                  {
-                    quote:
-                      "The observability layer they implemented caught a critical data quality issue that would have cost us $2M in bad decisions. It paid for itself day one.",
-                    name: "Dr. Priya Sharma",
-                    title: "Chief Data Officer, FinServ",
-                    metric: "$2M+ saved",
-                  },
-                ].map(({ quote, name, title, metric }, i) => (
-                  <motion.div
-                    key={name}
-                    {...fadeUp(i * 0.1)}
-                    className="glass-panel rounded-xl p-7 flex flex-col justify-between group hover:glow-orange transition-shadow"
-                    data-cursor-hover
-                  >
-                    <div>
-                      <Quote size={20} className="text-primary/40 mb-4" />
-                      <p className="text-sm text-secondary-foreground leading-relaxed mb-6 text-justify">{quote}</p>
-                    </div>
-                    <div>
-                      <div className="border-t border-border pt-4 flex items-center justify-between">
-                        <div>
-                          <p className="text-sm font-semibold text-foreground">{name}</p>
-                          <p className="text-xs text-muted-foreground">{title}</p>
-                        </div>
-                        <span className="text-xs font-mono text-gradient-orange font-semibold">{metric}</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* SLIDE 9 — CASE STUDIES PREVIEW */}
-          <section className="snap-section flex items-center relative">
-            <SectionGlow position="top-left" size={650} />
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-              <motion.div {...fadeUp()}>
-                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Our Work</p>
-                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-12 text-center">
-                  Case <span className="text-gradient-orange">Studies.</span>
-                </h2>
-              </motion.div>
-              <div className="grid md:grid-cols-3 gap-6">
-                {[
-                  {
-                    title: "Demand Forecasting Engine",
-                    industry: "Retail & CPG",
-                    result: "24% stock-out reduction",
-                    stack: "Snowflake • dbt • Python",
-                  },
-                  {
-                    title: "Real-Time Sales Intelligence",
-                    industry: "B2B SaaS",
-                    result: "15% pipeline efficiency lift",
-                    stack: "BigQuery • Fivetran • Metabase",
-                  },
-                  {
-                    title: "Observability-First Platform",
-                    industry: "Financial Services",
-                    result: "98%+ data freshness SLA",
-                    stack: "Databricks • Monte Carlo",
-                  },
-                ].map(({ title, industry, result, stack }, i) => (
-                  <motion.div
-                    key={title}
-                    {...fadeUp(i * 0.08)}
-                    className="glass-panel rounded-xl p-6 group hover:glow-orange transition-shadow"
-                    data-cursor-hover
-                  >
-                    <p className="font-mono text-xs text-primary mb-3">{industry}</p>
-                    <h3 className="font-semibold text-foreground mb-2">{title}</h3>
-                    <p className="text-sm text-gradient-orange font-semibold mb-3">{result}</p>
-                    <p className="text-[10px] text-muted-foreground font-mono mb-4">{stack}</p>
-                    <span className="text-xs text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
-                      Read more <ArrowRight size={12} />
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-              <div className="text-center mt-10">
+              <motion.div {...fadeUp(0.4)} className="text-center">
                 <Link
                   to="/case-studies"
-                  data-cursor-hover
-                  className="inline-flex items-center gap-2 glass-panel px-6 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-muted/20 transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-panel text-foreground font-medium hover:text-primary transition-colors group"
                 >
-                  View All Case Studies <ArrowRight size={14} />
+                  See our case studies{" "}
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
-              </div>
+              </motion.div>
             </div>
           </section>
 
-          {/* SLIDE 10 — WHY INCLINED PLANE */}
+          {/* SLIDE 7 — WHY INCLINED PLANE */}
           <section className="snap-section flex items-center relative">
             <SectionGlow position="bottom-right" size={700} />
             <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
               <motion.div {...fadeUp()}>
-                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">Why Us</p>
+                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">
+                  THE INCLINEDPLANE DIFFERENCE
+                </p>
                 <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6 text-center">
-                  Why Modern Enterprises <span className="text-gradient-orange">Partner With Us.</span>
+                  We Don't Just Build Pipelines. <span className="text-gradient-orange">We Build Leverage.</span>
                 </h2>
                 <p className="text-muted-foreground text-center max-w-xl mx-auto mb-14">
                   The InclinedPlane advantage — purpose-built for the AI era.
                 </p>
               </motion.div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
                 {[
                   {
-                    icon: Brain,
-                    title: "Intelligence-First Approach",
-                    desc: "We don't just deliver dashboards — we deliver the AI models that make sense of them.",
-                  },
-                  {
-                    icon: Globe,
-                    title: "US Market Expertise",
-                    desc: "Restructured specifically to handle the regulatory and scaling needs of American enterprise sectors.",
-                  },
-                  {
                     icon: Cpu,
-                    title: "Full-Stack Implementation",
-                    desc: "We aren't just consultants. We are the engineers who build, deploy, and manage your data's lifecycle.",
+                    title: "Engineers, not consultants",
+                    desc: "Every engagement ends with production-grade systems in your hands — not a deck, not a roadmap to a roadmap.",
                   },
                   {
                     icon: Sparkles,
-                    title: "AI-Native Architecture",
-                    desc: "Every pipeline, every schema, every workflow — designed for AI from day one.",
+                    title: "AI-native by default",
+                    desc: "Every pipeline, schema, and workflow is designed for AI from day one — not retrofitted when you're ready to scale.",
+                  },
+                  {
+                    icon: Rocket,
+                    title: "Full-journey partners",
+                    desc: "We take you from data foundation to autonomous intelligence — you don't need five different vendors to get there.",
+                  },
+                  {
+                    icon: Shield,
+                    title: "Deliberate and selective",
+                    desc: "We take on fewer clients than we could. Every system we build is one we'd stake our reputation on — because we do.",
                   },
                 ].map(({ icon: Icon, title, desc }, i) => (
                   <motion.div
                     key={title}
                     {...fadeUp(i * 0.06)}
-                    className="glass-panel rounded-xl p-6 text-center group hover:glow-orange transition-shadow"
+                    className="glass-panel rounded-xl p-6 text-center group hover:glow-orange transition-shadow flex flex-col items-center"
                     data-cursor-hover
                   >
-                    <div className="w-12 h-12 rounded-xl surface-3 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/10 transition-colors">
+                    <div className="w-12 h-12 rounded-xl surface-3 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
                       <Icon size={20} className="text-primary" />
                     </div>
                     <h3 className="font-semibold text-foreground text-sm mb-2">{title}</h3>
@@ -955,30 +746,234 @@ const Index = () => {
                   </motion.div>
                 ))}
               </div>
-              <motion.div
-                {...fadeUp(0.3)}
-                className="mt-8 sm:mt-10 glass-panel rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-              >
-                <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-                  {["SOC 2 Ready", "Multi-Cloud", "24/7 Monitoring"].map((badge, i) => (
-                    <div key={i} className="flex items-center gap-2 text-xs sm:text-sm text-secondary-foreground">
-                      <CheckCircle2 size={14} className="text-primary" />
-                      <span>{badge}</span>
-                    </div>
-                  ))}
-                </div>
+              <motion.div {...fadeUp(0.3)} className="text-center">
                 <Link
                   to="/about"
-                  data-cursor-hover
-                  className="text-sm text-primary flex items-center gap-1 hover:gap-2 transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-panel text-foreground font-medium hover:text-primary transition-colors group"
                 >
-                  Learn about our approach <ArrowRight size={14} />
+                  Learn about our approach{" "}
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
             </div>
           </section>
 
-          {/* SLIDE 11 — CAREERS TEASER */}
+          {/* SLIDE 8 — THE EVOLUTION (Commented out) */}
+          {false && (
+            <section className="snap-section flex items-center relative">
+              <SectionGlow position="bottom-left" size={650} />
+              <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+                <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+                  <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">The Evolution</p>
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+                    From Sail to <span className="text-gradient-orange">Leverage.</span>
+                  </h2>
+                </motion.div>
+                <div className="grid lg:grid-cols-2 gap-16 items-center">
+                  <div>
+                    <motion.div {...fadeUp(0.1)}>
+                      <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
+                        For years, as <span className="text-foreground font-medium">Sail Analytics</span>, we built a
+                        foundation of enterprise trust by delivering high-stakes data analytics and engineering services
+                        to complex organizations. We helped our clients navigate the vast seas of information with
+                        precision and reliability.
+                      </p>
+                      <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
+                        But in the age of Artificial Intelligence,{" "}
+                        <span className="text-foreground font-medium">
+                          navigation isn't enough — you need momentum.
+                        </span>
+                      </p>
+                      <p className="text-muted-foreground leading-relaxed text-justify">
+                        <span className="text-gradient-orange font-semibold">InclinedPlane</span> represents a
+                        fundamental shift: providing the strategic leverage your business needs. We transform raw data
+                        into a sophisticated lever that multiplies your team's efforts and accelerates your trajectory.
+                      </p>
+                    </motion.div>
+                  </div>
+                  <motion.div {...fadeUp(0.15)}>
+                    <div className="flex flex-col gap-4">
+                      {[
+                        { before: "Sail Analytics", after: "InclinedPlane", desc: "Brand evolution" },
+                        { before: "Data Navigation", after: "Data Leverage", desc: "Strategic shift" },
+                        {
+                          before: "Legacy BI Services",
+                          after: "AI-Native Engineering & Analytics",
+                          desc: "Capability upgrade",
+                        },
+                        { before: "Reporting Focus", after: "Decision Intelligence", desc: "Value delivery" },
+                      ].map(({ before, after, desc }, i) => (
+                        <motion.div
+                          key={desc}
+                          {...fadeUp(0.2 + i * 0.06)}
+                          className="glass-panel rounded-xl p-4 sm:p-5 flex items-center gap-3 sm:gap-4 group hover:glow-orange transition-shadow"
+                          data-cursor-hover
+                        >
+                          <div className="w-[38%] shrink-0">
+                            <p className="text-xs sm:text-sm text-muted-foreground/40 italic">{before}</p>
+                          </div>
+                          <ArrowRight size={14} className="text-primary shrink-0" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs sm:text-sm text-foreground font-semibold">{after}</p>
+                          </div>
+                          <span className="text-[9px] sm:text-[10px] text-muted-foreground font-mono hidden sm:block shrink-0">
+                            {desc}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* SLIDE 9 — CORE CAPABILITIES (Commented out) */}
+          {false && (
+            <section className="snap-section flex items-center relative">
+              <SectionGlow position="top-left" size={700} />
+              <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+                <motion.div {...fadeUp()}>
+                  <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">
+                    Core Capabilities
+                  </p>
+                  <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-center">
+                    How We <span className="text-gradient-orange">Deliver.</span>
+                  </h2>
+                  <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
+                    Three pillars of capability engineered for the AI-driven enterprise.
+                  </p>
+                </motion.div>
+                <div className="grid lg:grid-cols-3 gap-6">
+                  {[
+                    {
+                      icon: Database,
+                      title: "Enterprise Data Architecture & AI-Readiness",
+                      headline: "Foundations Built for Scale and Intelligence.",
+                      desc: "Modern growth requires more than just storage — it requires flow and foresight. We design and implement enterprise-grade data pipelines and architectures that ensure your organization is AI-ready.",
+                      bullets: [
+                        "AI-Ready Infrastructure",
+                        "Legacy Integration",
+                        "Real-Time Sync",
+                        "Cloud-Native Warehousing",
+                      ],
+                    },
+                    {
+                      icon: BarChart3,
+                      title: "Automated Intelligence & BI",
+                      headline: "Decision-Making, De-risked.",
+                      desc: "Stop looking in the rearview mirror. We build automated reporting environments that provide leadership and operations with the clarity they need to act, not just react.",
+                      bullets: [
+                        "Executive KPI Dashboards",
+                        "Operational Reporting",
+                        "Automated Workflows",
+                        "Self-Serve Analytics",
+                      ],
+                    },
+                    {
+                      icon: Brain,
+                      title: "AI, Predictive & Agentic Implementation",
+                      headline: "Predicting the Future by Engineering It.",
+                      desc: "The leap from analytics to AI is where competitive advantages are won. We implement cutting-edge predictive solutions and autonomous agents that turn 'what if' into 'what's next.'",
+                      bullets: [
+                        "Agentic AI Systems",
+                        "Operational Risk Mitigation",
+                        "Predictive Maintenance",
+                        "Growth Modeling",
+                      ],
+                    },
+                  ].map(({ icon: Icon, title, headline, desc, bullets }, i) => (
+                    <motion.div
+                      key={title}
+                      {...fadeUp(i * 0.08)}
+                      className="glass-panel rounded-xl p-7 group flex flex-col hover:glow-orange transition-shadow"
+                      data-cursor-hover
+                    >
+                      <div className="w-11 h-11 rounded-lg surface-3 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
+                        <Icon size={20} className="text-primary" />
+                      </div>
+                      <p className="text-xs text-primary font-mono mb-2">{headline}</p>
+                      <h3 className="font-semibold text-foreground text-base mb-3">{title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1 text-justify">{desc}</p>
+                      <div className="grid grid-cols-2 gap-2">
+                        {bullets.map((b) => (
+                          <div key={b} className="flex items-center gap-1.5 text-xs text-secondary-foreground">
+                            <CheckCircle2 size={11} className="text-primary shrink-0" />
+                            <span>{b}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* SLIDE 10 — TESTIMONIALS (Commented out) */}
+          {false && (
+            <section className="snap-section flex items-center relative">
+              <SectionGlow position="bottom-left" size={650} />
+              <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+                <motion.div {...fadeUp()}>
+                  <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">
+                    What Leaders Say
+                  </p>
+                  <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-14 text-center">
+                    Trusted by <span className="text-gradient-orange">Decision Makers.</span>
+                  </h2>
+                </motion.div>
+                <div className="grid md:grid-cols-3 gap-6">
+                  {[
+                    {
+                      quote:
+                        "Inclined Plane didn't just build us a data platform — they built the foundation for our entire AI strategy. Our forecasting accuracy went from guesswork to 98%.",
+                      name: "Sarah Chen",
+                      title: "VP of Data, Retail Co.",
+                      metric: "98% forecast accuracy",
+                    },
+                    {
+                      quote:
+                        "Within 6 weeks, our sales team had real-time intelligence that previously took analysts days to compile. Pipeline velocity increased 3x.",
+                      name: "Marcus Williams",
+                      title: "CRO, B2B SaaS Platform",
+                      metric: "3x pipeline velocity",
+                    },
+                    {
+                      quote:
+                        "The observability layer they implemented caught a critical data quality issue that would have cost us $2M in bad decisions. It paid for itself day one.",
+                      name: "Dr. Priya Sharma",
+                      title: "Chief Data Officer, FinServ",
+                      metric: "$2M+ saved",
+                    },
+                  ].map(({ quote, name, title, metric }, i) => (
+                    <motion.div
+                      key={name}
+                      {...fadeUp(i * 0.1)}
+                      className="glass-panel rounded-xl p-7 flex flex-col justify-between group hover:glow-orange transition-shadow"
+                      data-cursor-hover
+                    >
+                      <div>
+                        <Quote size={20} className="text-primary/40 mb-4" />
+                        <p className="text-sm text-secondary-foreground leading-relaxed mb-6 text-justify">{quote}</p>
+                      </div>
+                      <div>
+                        <div className="border-t border-border pt-4 flex items-center justify-between">
+                          <div>
+                            <p className="text-sm font-semibold text-foreground">{name}</p>
+                            <p className="text-xs text-muted-foreground">{title}</p>
+                          </div>
+                          <span className="text-xs font-mono text-gradient-orange font-semibold">{metric}</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* SLIDE 8 — CAREERS TEASER */}
           <section className="snap-section flex items-center relative overflow-hidden">
             <SectionGlow position="top-right" size={650} />
             <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
@@ -1037,7 +1032,7 @@ const Index = () => {
             </div>
           </section>
 
-          {/* SLIDE 12 — FINAL CTA */}
+          {/* SLIDE 9 — FINAL CTA */}
           <section className="snap-section flex items-center relative overflow-hidden">
             <div className="absolute inset-0">
               <div className="absolute w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] rounded-full opacity-[0.08] blur-[120px] bg-gradient-orange top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 will-change-transform" />
@@ -1051,7 +1046,8 @@ const Index = () => {
                   Let's Restructure Your Data for an <span className="text-gradient-orange">AI-Driven Future.</span>
                 </h2>
                 <p className="text-sm sm:text-lg text-muted-foreground mb-8 sm:mb-10 max-w-xl mx-auto">
-                  Let's discuss how we can restructure your data environment for an AI-driven future.
+                  Most engagements start with a single conversation. No pitch deck. No proposal. Just an honest
+                  assessment of where you are and what's possible.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                   <Link
@@ -1059,14 +1055,14 @@ const Index = () => {
                     data-cursor-hover
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-orange text-primary-foreground px-8 py-3.5 sm:py-4 rounded-lg font-medium text-base sm:text-lg hover:opacity-90 transition-opacity glow-orange-strong"
                   >
-                    Contact Our Team <ArrowRight size={18} />
+                    Book a Discovery Call <ArrowRight size={18} />
                   </Link>
                   <Link
                     to="/thesis"
                     data-cursor-hover
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 glass-panel px-8 py-3.5 sm:py-4 rounded-lg font-medium text-foreground hover:bg-muted/20 transition-colors"
                   >
-                    Read Our Thesis
+                    Read Our Thesis <ArrowRight size={18} />
                   </Link>
                 </div>
                 <div className="mt-10 sm:mt-16 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-[10px] sm:text-xs font-mono text-muted-foreground/40">
