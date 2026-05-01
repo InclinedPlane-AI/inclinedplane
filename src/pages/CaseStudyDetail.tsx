@@ -210,9 +210,6 @@ const CaseStudyDetail = () => {
                   </h2>
                 </div>
                 <div className="lg:col-span-8">
-                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-4">
-                    {s.heading}
-                  </h3>
                   <p className="text-sm sm:text-base text-secondary-foreground leading-relaxed mb-6 max-w-3xl">
                     {s.body}
                   </p>
