@@ -103,7 +103,7 @@ const CaseStudies = () => {
       ) : (
         <SEOHead
           title="Case Studies"
-          description="13 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector and renewables — real outcomes from AI-native data engineering."
+          description="14 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector and renewables — real outcomes from AI-native data engineering."
           path="/case-studies"
           jsonLd={{
             "@context": "https://schema.org",
