@@ -1,45 +1,55 @@
-# Case Study 08 — Anomalous Matter Hero
 
-Wire up Case Study 08 ("Predictive Maintenance of EV Batteries", slug `ev-battery-predictive`) so it has the same detail-page structure as Case Study 12, but with the **Anomalous Matter Hero** (from `21st.dev/r/dhileepkumargm/anomalous-matter-hero`) replacing the GradientBlinds video hero. All existing copy is preserved verbatim.
+# Expand Content Across All 14 Case Studies
 
-## What you'll see
+## Overview
+Enrich the body text and bullet points for every case study in `src/data/caseStudyDetails.ts`. Each case study is unique — expansions will be tailored to the specific domain, client context, and technical approach.
 
-- Visiting `/case-studies/ev-battery-predictive` opens a full detail page (same layout as case study 12: Opportunity → Solution → Impact, sticky section nav, metrics strip, footer CTA).
-- The hero section renders the Anomalous Matter (WebGL particle/shader) background instead of the gradient blinds.
-- Centered "Case Study" eyebrow in orange, white headline, and the bouncing chevron-down arrow remain identical to case study 12.
-- Content (eyebrow, title, subtitle, sections) is taken from the existing `caseStudies.ts` entry — nothing rewritten.
+## What's being expanded per section
 
-## Implementation
+**The Opportunity** — Deepen business context: industry pressures, scale of the problem, what was at stake. Add bullets where missing.
 
-1. **Install the registry component**
-   - Run: `npx shadcn@latest add https://21st.dev/r/dhileepkumargm/anomalous-matter-hero`
-   - This drops the component file(s) into the project (typically under `src/components/ui/` per `components.json`).
-   - Install any new deps it pulls in (e.g. `three`, `@react-three/fiber`) if the CLI prompts.
+**The Solution** — Expand on methodology, architecture decisions, why specific tools were chosen. Add bullets where missing, enrich existing ones.
 
-2. **Create `src/components/case-study/CaseStudyAnomalousHero.tsx`**
-   - Same prop shape as `CaseStudyVideoHero` (`eyebrow`, `title`, `subtitle`, `onPrimaryCta`).
-   - Layout = exact copy of `CaseStudyVideoHero.tsx`:
-     - `min-h-[88vh]`, fixed dark `#0a0a0a` canvas behind.
-     - Replace the `<GradientBlinds />` block with the new Anomalous Matter component, full-bleed absolute.
-     - Keep the two black gradient overlays for legibility.
-     - Keep `pointer-events-none` content wrapper + `pointer-events-auto` chevron button (so mouse interactions reach the WebGL canvas, matching the lag fix from case study 12).
-     - Keep eyebrow `text-[#FF7A18]` "Case Study", same headline classes, same `ChevronDown` scroll button.
+**The Impact** — Strengthen with more specific outcomes and downstream effects. Add bullets where thin.
 
-3. **Add Case Study 08 detail data** in `src/data/caseStudyDetails.ts`
-   - New key `"ev-battery-predictive"` mirroring the case study 12 shape.
-   - Reuse the existing `caseStudies.ts` content for 08 verbatim:
-     - `heroEyebrow`: `"08 · Mobility / IoT"`
-     - `heroTitle`: from `caseStudies[].title` / summary (kept as-is, no rewrite)
-     - `heroSubtitle`: existing `summary` field
-     - Three sections (`opportunity`, `solution`, `impact`) populated from the existing `Background`, `Our approach`, and outcomes copy already in `caseStudies.ts` — content moved, not changed.
-   - `videoUrl` field kept as empty string (unused by the new hero).
+## All 14 case studies
 
-4. **Wire the hero into `CaseStudyDetail.tsx`**
-   - Detect when `slug === "ev-battery-predictive"` and render `<CaseStudyAnomalousHero />` instead of `<CaseStudyVideoHero />`. Everything else on the page (SectionNav, metrics, sections, CTA) stays identical.
+1. **Retail & Manufacturing Chain** — Add depth to opportunity (dealer network scale, competitive pressure). Expand impact bullets (dealer satisfaction, reporting cadence shift).
 
-## Technical notes
+2. **Engine Demand Forecast** — Opportunity has no bullets — add product line complexity, planning horizon, cost of forecast errors. Expand solution on benchmarking rigor and retraining. Add impact bullets on production alignment.
 
-- The new component is rendered behind the centered text with the same z-index stack (`z-0` canvas / `z-10` content) used in case study 12.
-- Mouse-pass-through fix is preserved (`pointer-events-none` on wrapper, `pointer-events-auto` on chevron) so the shader stays interactive over the headline.
-- If the registry component fails to mount (e.g. WebGL unavailable), the dark `#0a0a0a` background remains — same graceful fallback approach used for `GradientBlinds`.
-- No changes to `caseStudies.ts` content, no copy edits anywhere.
+3. **EV Battery Predictive** — Opportunity has no bullets — add fleet scale, safety risk, IoT data volume, cost of reactive maintenance. Expand solution on feature engineering and scoring pipeline. Expand impact on scheduling transformation.
+
+4. **FMCG Edible Oil** — Expand opportunity on distribution complexity. Deepen solution on pipeline engineering. Add impact context on decision cadence.
+
+5. **EV Fleet Scheduling** — Expand opportunity on real-time dispatch complexity. Deepen solution on how the three algorithms complement each other. Add impact bullets on utilization and driver fairness.
+
+6. **Pharma Sales BI** — Expand opportunity on field force scale and regulatory context. Deepen solution on integration complexity. Add impact bullets on territory optimization.
+
+7. **E-Commerce Inventory & Procurement** — Expand opportunity on working capital pressure. Deepen solution on AWS architecture. Add impact bullets on vendor negotiation leverage.
+
+8. **Energy Audit** — Opportunity has no bullets — add industry context (compressed air/steam/gas), scale of losses, regulatory drivers. Expand solution on audio analytics methodology. Add impact bullets on quantified savings.
+
+9. **VC EdTech** — Opportunity has no bullets — add growth-stage chaos, investor reporting needs, student outcome tracking. Expand solution on warehouse architecture. Add impact bullets on investor confidence.
+
+10. **Pharma MNC** — Opportunity has no bullets — add multi-geography complexity, field force coordination. Expand solution on route optimization logic. Add impact bullets on brand-level intelligence.
+
+11. **Capital Equipment** — Opportunity has no bullets — add BOM complexity, manufacturing scale. Expand solution on ERP rollout and change management. Add impact bullets on adoption metrics.
+
+12. **Solar BI** — Expand opportunity on government project stakes. Deepen solution on Tableau modeling. Add impact bullets on timeline adherence.
+
+13. **Cultural Heritage** — Opportunity has no bullets — add government mandate, tourism economics, heritage stakes. Expand solution on geospatial methodology. Add impact bullets on policy influence.
+
+14. **ERP Unification** — Already the strongest entry; light enrichment to opportunity context on legacy system technical debt and impact on onboarding speed and global rollout momentum.
+
+## Content rules
+- Domain-accurate, professional language — no filler.
+- Each case study keeps its unique voice and technical specificity.
+- Bullets: action-led, specific, outcome-oriented (matching existing pattern).
+- Body paragraphs: narrative context setting the stage for bullets.
+- No invented metrics — only expand on what's contextually defensible.
+
+## Technical details
+- Single file edit: `src/data/caseStudyDetails.ts`
+- No component, layout, routing, or structural changes.
+- All existing slugs, IDs, hero content, and section structure preserved.
