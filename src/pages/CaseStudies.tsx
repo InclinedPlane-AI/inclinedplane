@@ -130,7 +130,7 @@ const CaseStudies = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
             {[
-              { value: "13", label: "Production Case Studies" },
+              { value: "14", label: "Production Case Studies" },
               { value: "98%+", label: "Best-in-Class Model Accuracy" },
               { value: "30+ yrs", label: "Of Data Consolidated" },
               { value: "10+", label: "Industries Served" },
