@@ -103,7 +103,7 @@ const CaseStudies = () => {
       ) : (
         <SEOHead
           title="Case Studies"
-          description="13 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector and renewables — real outcomes from AI-native data engineering."
+          description="14 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector and renewables — real outcomes from AI-native data engineering."
           path="/case-studies"
           jsonLd={{
             "@context": "https://schema.org",
@@ -130,7 +130,7 @@ const CaseStudies = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
             {[
-              { value: "13", label: "Production Case Studies" },
+              { value: "14", label: "Production Case Studies" },
               { value: "98%+", label: "Best-in-Class Model Accuracy" },
               { value: "30+ yrs", label: "Of Data Consolidated" },
               { value: "10+", label: "Industries Served" },
@@ -256,7 +256,7 @@ const CaseStudies = () => {
               Ready to Build Your <span className="text-gradient-orange">Success Story?</span>
             </h2>
             <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
-              Let's discuss how we can engineer the same level of impact for your data infrastructure.
+              The next phase of your data story starts here.
             </p>
             <Link to="/contact" data-cursor-hover
               className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-8 py-3.5 rounded-lg font-medium hover:opacity-90 transition-opacity glow-orange">
