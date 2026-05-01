@@ -256,7 +256,7 @@ const CaseStudies = () => {
               Ready to Build Your <span className="text-gradient-orange">Success Story?</span>
             </h2>
             <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
-              Let's discuss how we can engineer the same level of impact for your data infrastructure.
+              The next phase of your data story starts here.
             </p>
             <Link to="/contact" data-cursor-hover
               className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-8 py-3.5 rounded-lg font-medium hover:opacity-90 transition-opacity glow-orange">
