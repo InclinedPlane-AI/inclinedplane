@@ -493,7 +493,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     id: "cultural-heritage",
-    number: "13",
+    number: "14",
     title: "Cultural Heritage Analytics — Govt. (Middle East)",
     industry: "Public Sector",
     summary:
