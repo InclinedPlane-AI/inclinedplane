@@ -444,7 +444,7 @@ const Index = () => {
                         </div>
                       ))}
                     </div>
-                    <div className="mt-3 sm:mt-6 pt-2.5 sm:pt-4 border-t border-border">
+                    <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-border">
                       <p className="text-[10px] sm:text-xs text-destructive/70 font-mono flex items-center gap-2">
                         <Activity size={12} /> Overall: Critical — Infrastructure not AI-ready
                       </p>
