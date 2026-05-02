@@ -342,7 +342,7 @@ const Index = () => {
                         <CardTag
                           key={i}
                           {...linkProps}
-                          className={`glass-panel rounded-xl p-2.5 lg:p-3 flex flex-col justify-between min-h-[4.5rem] lg:min-h-[5rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 ${s.link ? "group cursor-pointer" : "cursor-default"} ${col.tint}`}
+                          className={`glass-panel rounded-xl p-2.5 lg:p-3 flex flex-col justify-between min-h-[4.5rem] lg:min-h-[5rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 ${s.link ? "group cursor-pointer" : "cursor-default"}`}
                           data-cursor-hover
                         >
                           <div>
