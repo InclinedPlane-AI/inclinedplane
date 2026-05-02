@@ -474,7 +474,7 @@ const Index = () => {
                   Engineered for <span className="text-gradient-orange">Intelligence.</span>
                 </h2>
                 <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-                  Five layers. One continuous journey. Every layer AI-enabled in delivery and AI-ready in design.
+                  A continuous journey from clarity to intelligence — every service AI-enabled in delivery and AI-ready in design.
                 </p>
               </motion.div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 sm:mb-12">
