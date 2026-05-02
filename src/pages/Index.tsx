@@ -471,7 +471,7 @@ const Index = () => {
               <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
                 <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">OUR SERVICES</p>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                  From Foundation to <span className="text-gradient-orange">Intelligence.</span>
+                  Engineered for <span className="text-gradient-orange">Intelligence.</span>
                 </h2>
                 <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-8 sm:mb-12">
                   Five layers. One continuous journey. Every layer AI-enabled in delivery and AI-ready in design.
