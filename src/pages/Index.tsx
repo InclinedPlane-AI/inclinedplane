@@ -531,16 +531,16 @@ const Index = () => {
           <section className="snap-section flex items-center relative">
             <SectionGlow position="top-right" size={600} />
             <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-              <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">OUR SERVICES</p>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+              <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-5 sm:mb-8">
+                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-2 sm:mb-3">OUR SERVICES</p>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3">
                   Engineered for <span className="text-gradient-orange">Intelligence.</span>
                 </h2>
-                <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+                <p className="text-sm sm:text-base text-muted-foreground text-center max-w-2xl mx-auto">
                   A continuous journey from clarity to intelligence — every service AI-enabled in delivery and AI-ready in design.
                 </p>
               </motion.div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 sm:mb-12">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-5 sm:mb-8">
                 {[
                   {
                     title: "Data & AI Consultancy",
@@ -582,24 +582,24 @@ const Index = () => {
                   <motion.div
                     key={title}
                     {...fadeUp(i * 0.08)}
-                    className="glass-panel rounded-xl p-7 group flex flex-col hover:glow-orange transition-shadow"
+                    className="glass-panel rounded-xl p-5 lg:p-6 group flex flex-col hover:glow-orange transition-shadow"
                     data-cursor-hover
                   >
-                    <div className="w-11 h-11 rounded-lg surface-3 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
-                      <Icon size={20} className="text-primary" />
+                    <div className="w-10 h-10 rounded-lg surface-3 flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
+                      <Icon size={18} className="text-primary" />
                     </div>
-                    <p className="text-[10px] sm:text-xs text-primary font-mono mb-2 uppercase tracking-wider">
+                    <p className="text-[10px] sm:text-xs text-primary font-mono mb-1.5 uppercase tracking-wider">
                       {label}
                     </p>
-                    <h3 className="font-semibold text-foreground text-base mb-3">{title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed flex-1">{desc}</p>
+                    <h3 className="font-semibold text-foreground text-base mb-2">{title}</h3>
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed flex-1">{desc}</p>
                   </motion.div>
                 ))}
               </div>
               <motion.div {...fadeUp(0.4)} className="text-center">
                 <Link
                   to="/services"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-panel text-foreground font-medium hover:text-primary transition-colors group"
+                  className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full glass-panel text-foreground font-medium text-sm hover:text-primary transition-colors group"
                 >
                   Explore all services{" "}
                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
