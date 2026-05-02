@@ -416,10 +416,10 @@ const Index = () => {
                       </motion.div>
                     ))}
                 </div>
-                <motion.div {...fadeUp(0.15)}>
-                  <div className="glass-panel rounded-2xl p-4 sm:p-6 lg:p-8">
-                    <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-6">Pipeline Health Score</p>
-                    <div className="space-y-2.5 sm:space-y-5">
+                <motion.div {...fadeUp(0.15)} className="lg:max-w-md lg:ml-auto w-full">
+                  <div className="glass-panel rounded-2xl p-4 sm:p-5 lg:p-6">
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">Pipeline Health Score</p>
+                    <div className="space-y-2.5 sm:space-y-3.5">
                       {[
                         { label: "Data Freshness", value: 34 },
                         { label: "Pipeline Reliability", value: 52 },
