@@ -377,7 +377,7 @@ const Index = () => {
           </section>
 
           {/* SLIDE 3 — THE PROBLEM */}
-          <section className="snap-section flex items-center relative py-8 sm:py-12 lg:py-0">
+          <section className="snap-section flex items-center relative py-8 sm:py-12">
             <SectionGlow position="top-right" size={600} />
             <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full">
               <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-5 sm:mb-10 lg:mb-12">

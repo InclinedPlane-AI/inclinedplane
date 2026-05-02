@@ -358,6 +358,7 @@
     .snap-container {
       height: 100vh;
       scroll-snap-type: y mandatory;
+      scroll-padding-top: 4rem; /* clears the fixed h-16 navbar on snap */
     }
   }
 
@@ -386,6 +387,17 @@
     .snap-section {
       min-height: 100vh;
       scroll-snap-align: start;
+      /* Reserve space for the fixed navbar so eyebrows/headings never
+         hide underneath, and tall content stays fully visible. */
+      padding-top: 5rem;
+      padding-bottom: 2rem;
+      box-sizing: border-box;
+    }
+
+    /* Hero is full-bleed (no eyebrow at top) — keep edge-to-edge */
+    .snap-section:first-child {
+      padding-top: 0;
+      padding-bottom: 0;
     }
   }
 
