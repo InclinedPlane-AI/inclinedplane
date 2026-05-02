@@ -203,7 +203,7 @@ const CaseStudyDetail = () => {
               >
                 <div className="lg:col-span-4">
                   <span className="font-mono text-[11px] text-primary tracking-widest uppercase">
-                    {s.number} — {s.label}
+                    {s.number}
                   </span>
                   <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-foreground leading-tight tracking-tight">
                     <span className="text-gradient-orange">{s.label}</span>
