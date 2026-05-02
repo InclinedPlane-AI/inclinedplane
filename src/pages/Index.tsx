@@ -377,19 +377,19 @@ const Index = () => {
           </section>
 
           {/* SLIDE 3 — THE PROBLEM */}
-          <section className="snap-section flex items-center relative">
+          <section className="snap-section flex items-center relative py-8 sm:py-12 lg:py-0">
             <SectionGlow position="top-right" size={600} />
             <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full">
-              <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-                <p className="font-mono text-[10px] sm:text-xs text-primary tracking-widest uppercase mb-3 sm:mb-4">
+              <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-5 sm:mb-10 lg:mb-12">
+                <p className="font-mono text-[10px] sm:text-xs text-primary tracking-widest uppercase mb-2 sm:mb-4">
                   Why This Matters
                 </p>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+                <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
                   The Old Model Is <span className="text-gradient-orange">No Longer Enough.</span>
                 </h2>
                 <motion.p
                   {...fadeUp(0.05)}
-                  className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed mt-6 sm:mt-8 text-center font-normal"
+                  className="text-xs sm:text-base lg:text-lg text-muted-foreground leading-relaxed mt-3 sm:mt-8 text-center font-normal"
                 >
                   Most organisations still treat data as a reporting function — static dashboards, fragile pipelines,
                   and analytics teams buried in ad-hoc requests. Meanwhile, your competitors are deploying autonomous
@@ -397,8 +397,8 @@ const Index = () => {
                   engineering-grade data infrastructure and those that don't is widening — fast.
                 </motion.p>
               </motion.div>
-              <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-                <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
+              <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-16 items-start">
+                <div className="space-y-1.5 sm:space-y-3 font-mono text-[10px] sm:text-sm">
                     {[
                       "[WARN] Pipeline failed: stale data — 47min lag",
                       "[ERR]  Model drift detected — no retraining trigger",
@@ -410,16 +410,16 @@ const Index = () => {
                       <motion.div
                         key={i}
                         {...fadeUp(0.1 + i * 0.06)}
-                        className={`px-4 py-2 rounded surface-2 ${log.includes("[ERR]") ? "text-destructive/80 border-l-2 border-destructive/50" : log.includes("[WARN]") ? "text-orange-300 border-l-2 border-orange-500/30" : "text-muted-foreground border-l-2 border-muted-foreground/40"}`}
+                        className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded surface-2 ${log.includes("[ERR]") ? "text-destructive/80 border-l-2 border-destructive/50" : log.includes("[WARN]") ? "text-orange-300 border-l-2 border-orange-500/30" : "text-muted-foreground border-l-2 border-muted-foreground/40"}`}
                       >
                         {log}
                       </motion.div>
                     ))}
                 </div>
                 <motion.div {...fadeUp(0.15)}>
-                  <div className="glass-panel rounded-2xl p-8">
-                    <p className="text-sm text-muted-foreground mb-6">Pipeline Health Score</p>
-                    <div className="space-y-5">
+                  <div className="glass-panel rounded-2xl p-4 sm:p-6 lg:p-8">
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-6">Pipeline Health Score</p>
+                    <div className="space-y-2.5 sm:space-y-5">
                       {[
                         { label: "Data Freshness", value: 34 },
                         { label: "Pipeline Reliability", value: 52 },
@@ -428,11 +428,11 @@ const Index = () => {
                         { label: "AI Readiness", value: 12 },
                       ].map(({ label, value }) => (
                         <div key={label}>
-                          <div className="flex justify-between text-sm mb-1.5">
+                          <div className="flex justify-between text-[11px] sm:text-sm mb-1 sm:mb-1.5">
                             <span className="text-secondary-foreground">{label}</span>
                             <span className="text-destructive/80 font-mono">{value}%</span>
                           </div>
-                          <div className="h-1.5 rounded-full surface-3">
+                          <div className="h-1 sm:h-1.5 rounded-full surface-3">
                             <motion.div
                               initial={{ width: 0 }}
                               whileInView={{ width: `${value}%` }}
@@ -444,18 +444,18 @@ const Index = () => {
                         </div>
                       ))}
                     </div>
-                    <div className="mt-6 pt-4 border-t border-border">
-                      <p className="text-xs text-destructive/70 font-mono flex items-center gap-2">
+                    <div className="mt-3 sm:mt-6 pt-2.5 sm:pt-4 border-t border-border">
+                      <p className="text-[10px] sm:text-xs text-destructive/70 font-mono flex items-center gap-2">
                         <Activity size={12} /> Overall: Critical — Infrastructure not AI-ready
                       </p>
                     </div>
                   </div>
                 </motion.div>
               </div>
-              <motion.div {...fadeUp(0.3)} className="mt-10 sm:mt-12 text-center">
+              <motion.div {...fadeUp(0.3)} className="mt-5 sm:mt-10 lg:mt-12 text-center">
                 <Link
                   to="/thesis"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-panel text-foreground font-medium hover:text-primary transition-colors"
+                  className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full glass-panel text-foreground font-medium text-xs sm:text-sm hover:text-primary transition-colors"
                 >
                   Read our full thesis <ArrowRight size={16} />
                 </Link>
