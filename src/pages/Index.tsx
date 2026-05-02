@@ -389,7 +389,7 @@ const Index = () => {
                 </h2>
                 <motion.p
                   {...fadeUp(0.05)}
-                  className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed mt-6 sm:mt-8 text-justify"
+                  className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed mt-6 sm:mt-8 text-center font-normal"
                 >
                   Most organisations still treat data as a reporting function — static dashboards, fragile pipelines,
                   and analytics teams buried in ad-hoc requests. Meanwhile, your competitors are deploying autonomous
