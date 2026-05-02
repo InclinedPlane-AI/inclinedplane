@@ -41,7 +41,7 @@ import {
   Store,
 } from "lucide-react";
 
-const SLIDE_COUNT = 9;
+const SLIDE_COUNT = 10;
 
 // Shared viewport config for all whileInView — only animate once
 const vp = { once: true, amount: 0.2 } as const;
@@ -101,16 +101,17 @@ const Index = () => {
       case 2:
         return "/thesis"; // The Problem
       case 3:
-        return "/services"; // Our Services
-      case 4:
         return "/industries"; // Our Focus
+      case 4:
+        return "/services"; // Our Services
       case 5:
         return "/case-studies"; // Proven Results
       case 6:
-        return "/about"; // Why Us
       case 7:
-        return "/careers"; // Careers Teaser
+        return "/about"; // Evolution + Why Us
       case 8:
+        return "/careers"; // Careers Teaser
+      case 9:
         return "/contact"; // Final CTA
       default:
         return "/";
