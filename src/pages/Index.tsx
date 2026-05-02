@@ -464,6 +464,70 @@ const Index = () => {
             </div>
           </section>
 
+          {/* SLIDE 5 — ARCHITECTURE SNAPSHOT */}
+          <section className="snap-section flex items-center relative">
+            <SectionGlow position="top-right" size={700} />
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+              {/* Header */}
+              <motion.div {...fadeUp()} className="mb-5">
+                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-2 text-center">OUR FOCUS</p>
+                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3 text-center">
+                  Built for Complex, <span className="text-gradient-orange">High-Stakes Enterprises.</span>
+                </h2>
+                <p className="text-muted-foreground text-center max-w-xl mx-auto text-sm">
+                  We work with mid-to-large enterprises where data infrastructure isn't a nice-to-have — it's
+                  operational-critical.
+                </p>
+              </motion.div>
+
+              {/* Verticals row */}
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
+                {[
+                  { icon: Factory, title: "Manufacturing" },
+                  { icon: Zap, title: "Energy & Utilities" },
+                  { icon: Truck, title: "Logistics & Supply Chain" },
+                  { icon: Package, title: "FMCG" },
+                  { icon: Store, title: "Enterprise Retail" },
+                ].map(({ icon: Icon, title }, i) => (
+                  <motion.div key={title} {...fadeUp(i * 0.05)} className="flex items-center">
+                    <div
+                      className="glass-panel rounded-lg p-3 sm:px-5 flex items-center gap-3 border border-muted/30 group hover:glow-orange transition-shadow"
+                      data-cursor-hover
+                    >
+                      <div className="w-8 h-8 rounded-md surface-3 flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors">
+                        <Icon size={16} className="text-primary" />
+                      </div>
+                      <p className="font-semibold text-foreground text-sm">{title}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Target Audience Stats */}
+              <motion.div {...fadeUp(0.3)} className="text-center mb-12">
+                <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 px-6 py-3 rounded-full surface-2 border border-border/50 shadow-sm">
+                  <p className="text-sm font-medium text-foreground">
+                    <span className="text-primary mr-1">500–10,000</span> employees
+                  </p>
+                  <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-muted-foreground/40" />
+                  <p className="text-sm font-medium text-foreground">
+                    <span className="text-primary mr-1">$100M–$2B</span> revenue
+                  </p>
+                  <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-muted-foreground/40" />
+                  <p className="text-sm font-medium text-foreground">US and UK markets</p>
+                </div>
+              </motion.div>
+
+              {/* Auto-scrolling tech stack marquee */}
+              <motion.div {...fadeUp(0.2)}>
+                <p className="text-center text-xs text-muted-foreground mb-4 tracking-wide uppercase font-mono">
+                  Tools & Platforms We Work With
+                </p>
+                <TechStackGrid />
+              </motion.div>
+            </div>
+          </section>
+
           {/* SLIDE 4 — OUR SERVICES */}
           <section className="snap-section flex items-center relative">
             <SectionGlow position="top-right" size={600} />
@@ -541,70 +605,6 @@ const Index = () => {
                   Explore all services{" "}
                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
-              </motion.div>
-            </div>
-          </section>
-
-          {/* SLIDE 5 — ARCHITECTURE SNAPSHOT */}
-          <section className="snap-section flex items-center relative">
-            <SectionGlow position="top-right" size={700} />
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-              {/* Header */}
-              <motion.div {...fadeUp()} className="mb-5">
-                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-2 text-center">OUR FOCUS</p>
-                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3 text-center">
-                  Built for Complex, <span className="text-gradient-orange">High-Stakes Enterprises.</span>
-                </h2>
-                <p className="text-muted-foreground text-center max-w-xl mx-auto text-sm">
-                  We work with mid-to-large enterprises where data infrastructure isn't a nice-to-have — it's
-                  operational-critical.
-                </p>
-              </motion.div>
-
-              {/* Verticals row */}
-              <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
-                {[
-                  { icon: Factory, title: "Manufacturing" },
-                  { icon: Zap, title: "Energy & Utilities" },
-                  { icon: Truck, title: "Logistics & Supply Chain" },
-                  { icon: Package, title: "FMCG" },
-                  { icon: Store, title: "Enterprise Retail" },
-                ].map(({ icon: Icon, title }, i) => (
-                  <motion.div key={title} {...fadeUp(i * 0.05)} className="flex items-center">
-                    <div
-                      className="glass-panel rounded-lg p-3 sm:px-5 flex items-center gap-3 border border-muted/30 group hover:glow-orange transition-shadow"
-                      data-cursor-hover
-                    >
-                      <div className="w-8 h-8 rounded-md surface-3 flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors">
-                        <Icon size={16} className="text-primary" />
-                      </div>
-                      <p className="font-semibold text-foreground text-sm">{title}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Target Audience Stats */}
-              <motion.div {...fadeUp(0.3)} className="text-center mb-12">
-                <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 px-6 py-3 rounded-full surface-2 border border-border/50 shadow-sm">
-                  <p className="text-sm font-medium text-foreground">
-                    <span className="text-primary mr-1">500–10,000</span> employees
-                  </p>
-                  <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-muted-foreground/40" />
-                  <p className="text-sm font-medium text-foreground">
-                    <span className="text-primary mr-1">$100M–$2B</span> revenue
-                  </p>
-                  <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-muted-foreground/40" />
-                  <p className="text-sm font-medium text-foreground">US and UK markets</p>
-                </div>
-              </motion.div>
-
-              {/* Auto-scrolling tech stack marquee */}
-              <motion.div {...fadeUp(0.2)}>
-                <p className="text-center text-xs text-muted-foreground mb-4 tracking-wide uppercase font-mono">
-                  Tools & Platforms We Work With
-                </p>
-                <TechStackGrid />
               </motion.div>
             </div>
           </section>
