@@ -694,72 +694,7 @@ const Index = () => {
             </div>
           </section>
 
-          {/* SLIDE 7 — WHY INCLINED PLANE */}
-          <section className="snap-section flex items-center relative">
-            <SectionGlow position="bottom-right" size={700} />
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-              <motion.div {...fadeUp()}>
-                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">
-                  THE INCLINEDPLANE DIFFERENCE
-                </p>
-                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6 text-center">
-                  We Don't Just Build Pipelines. <span className="text-gradient-orange">We Build Leverage.</span>
-                </h2>
-                <p className="text-muted-foreground text-center max-w-xl mx-auto mb-14">
-                  The InclinedPlane advantage — purpose-built for the AI era.
-                </p>
-              </motion.div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-                {[
-                  {
-                    icon: Cpu,
-                    title: "Engineers, not consultants",
-                    desc: "Every engagement ends with production-grade systems in your hands — not a deck, not a roadmap to a roadmap.",
-                  },
-                  {
-                    icon: Sparkles,
-                    title: "AI-native by default",
-                    desc: "Every pipeline, schema, and workflow is designed for AI from day one — not retrofitted when you're ready to scale.",
-                  },
-                  {
-                    icon: Rocket,
-                    title: "Full-journey partners",
-                    desc: "We take you from data foundation to autonomous intelligence — you don't need five different vendors to get there.",
-                  },
-                  {
-                    icon: Shield,
-                    title: "Deliberate and selective",
-                    desc: "We take on fewer clients than we could. Every system we build is one we'd stake our reputation on — because we do.",
-                  },
-                ].map(({ icon: Icon, title, desc }, i) => (
-                  <motion.div
-                    key={title}
-                    {...fadeUp(i * 0.06)}
-                    className="glass-panel rounded-xl p-6 text-center group hover:glow-orange transition-shadow flex flex-col items-center"
-                    data-cursor-hover
-                  >
-                    <div className="w-12 h-12 rounded-xl surface-3 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
-                      <Icon size={20} className="text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-foreground text-sm mb-2">{title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
-                  </motion.div>
-                ))}
-              </div>
-              <motion.div {...fadeUp(0.3)} className="text-center">
-                <Link
-                  to="/about"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-panel text-foreground font-medium hover:text-primary transition-colors group"
-                >
-                  Learn about our approach{" "}
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </motion.div>
-            </div>
-          </section>
-
-          {/* SLIDE 8 — THE EVOLUTION (Commented out) */}
-          {false && (
+          {/* SLIDE 8 — THE EVOLUTION */}
             <section className="snap-section flex items-center relative">
               <SectionGlow position="bottom-left" size={650} />
               <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
@@ -826,7 +761,71 @@ const Index = () => {
                 </div>
               </div>
             </section>
-          )}
+
+          {/* SLIDE 7 — WHY INCLINED PLANE */}
+          <section className="snap-section flex items-center relative">
+            <SectionGlow position="bottom-right" size={700} />
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+              <motion.div {...fadeUp()}>
+                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">
+                  THE INCLINEDPLANE DIFFERENCE
+                </p>
+                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6 text-center">
+                  We Don't Just Build Pipelines. <span className="text-gradient-orange">We Build Leverage.</span>
+                </h2>
+                <p className="text-muted-foreground text-center max-w-xl mx-auto mb-14">
+                  The InclinedPlane advantage — purpose-built for the AI era.
+                </p>
+              </motion.div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                {[
+                  {
+                    icon: Cpu,
+                    title: "Engineers, not consultants",
+                    desc: "Every engagement ends with production-grade systems in your hands — not a deck, not a roadmap to a roadmap.",
+                  },
+                  {
+                    icon: Sparkles,
+                    title: "AI-native by default",
+                    desc: "Every pipeline, schema, and workflow is designed for AI from day one — not retrofitted when you're ready to scale.",
+                  },
+                  {
+                    icon: Rocket,
+                    title: "Full-journey partners",
+                    desc: "We take you from data foundation to autonomous intelligence — you don't need five different vendors to get there.",
+                  },
+                  {
+                    icon: Shield,
+                    title: "Deliberate and selective",
+                    desc: "We take on fewer clients than we could. Every system we build is one we'd stake our reputation on — because we do.",
+                  },
+                ].map(({ icon: Icon, title, desc }, i) => (
+                  <motion.div
+                    key={title}
+                    {...fadeUp(i * 0.06)}
+                    className="glass-panel rounded-xl p-6 text-center group hover:glow-orange transition-shadow flex flex-col items-center"
+                    data-cursor-hover
+                  >
+                    <div className="w-12 h-12 rounded-xl surface-3 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
+                      <Icon size={20} className="text-primary" />
+                    </div>
+                    <h3 className="font-semibold text-foreground text-sm mb-2">{title}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+              <motion.div {...fadeUp(0.3)} className="text-center">
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-panel text-foreground font-medium hover:text-primary transition-colors group"
+                >
+                  Learn about our approach{" "}
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
+            </div>
+          </section>
+
 
           {/* SLIDE 9 — CORE CAPABILITIES (Commented out) */}
           {false && (
