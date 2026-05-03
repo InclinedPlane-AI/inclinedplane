@@ -28,9 +28,23 @@ import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
+// GUARDRAIL — DO NOT REMOVE. When scripts/prerender.mjs bakes a route's
+// body into static HTML, it stamps `data-prerendered="true"` on <body>;
+// src/main.tsx propagates that to <html> before React mounts. We read it
+// here via useState's lazy initializer to start with splashDone=true on
+// prerendered pages, so SplashScreen never mounts. The splash exists to
+// mask the JS-load gap on a fresh SPA — with prerendered HTML there's no
+// gap to mask, and showing the splash makes bot screenshots (Google Rich
+// Results, LinkedIn previews, Lighthouse) catch the splash mid-animation
+// instead of real content. In dev mode the marker is absent and the
+// splash renders normally. Last reviewed: 2026-05-03.
+const wasPrerendered = (): boolean =>
+  typeof document !== "undefined" &&
+  document.documentElement.getAttribute("data-prerendered") === "true";
+
 const App = () => {
-  const [contentReady, setContentReady] = useState(false);
-  const [splashDone, setSplashDone] = useState(false);
+  const [contentReady, setContentReady] = useState<boolean>(wasPrerendered);
+  const [splashDone, setSplashDone] = useState<boolean>(wasPrerendered);
 
   useEffect(() => {
     const markReady = () => setContentReady(true);
