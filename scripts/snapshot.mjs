@@ -37,8 +37,13 @@
 import { chromium } from "playwright";
 
 const READY_SELECTOR = 'html[data-app-ready="true"]';
-const NAV_TIMEOUT_MS = 25000;
-const READY_TIMEOUT_MS = 18000;
+// Timeouts are sized for slower CI runners (e.g. GitHub Actions 2-vCPU
+// Ubuntu) where splash-screen completion takes noticeably longer than on a
+// developer laptop. Locally these are overkill; on CI they prevent flaky
+// per-route timeouts that previously failed routes like /case-studies/
+// ecom-inventory at 18s.
+const NAV_TIMEOUT_MS = 45000;
+const READY_TIMEOUT_MS = 45000;
 const MIN_WORDS_OK = 50;
 const MAX_RETRIES = 3;
 
