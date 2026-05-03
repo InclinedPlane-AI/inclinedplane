@@ -174,8 +174,14 @@ npm run lint
 ### Full production build (locally)
 
 ```bash
-# First time only — downloads Playwright's bundled Chromium (~80 MB)
-npx playwright install chromium
+# First time only — downloads Playwright's bundled Chromium (~80 MB).
+# The Chromium install is intentionally NOT chained into `npm run build`
+# so build also works in environments where Playwright cannot install
+# binaries (Lovable's preview container, sandboxed CI, etc.). In those
+# environments the build still succeeds with head-only output (route
+# metadata + JSON-LD + sitemap + RSS) — only the Playwright body
+# snapshot pass is skipped.
+npm run install:chromium
 
 # Build everything: vite build + head injection + Playwright body
 # snapshot for all 28 routes + sitemap + RSS

@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "playwright install chromium && vite build && node scripts/prerender.mjs",
-    "build:dev": "playwright install chromium && vite build --mode development && node scripts/prerender.mjs",
+    "build": "vite build && node scripts/prerender.mjs",
+    "build:dev": "vite build --mode development && node scripts/prerender.mjs",
     "prerender": "node scripts/prerender.mjs",
+    "install:chromium": "playwright install chromium",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
