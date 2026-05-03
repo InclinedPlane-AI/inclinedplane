@@ -42,6 +42,16 @@ const App = () => {
     }
   }, []);
 
+  // GUARDRAIL — DO NOT REMOVE. Build-time signal consumed by
+  // scripts/snapshot.mjs (Puppeteer waits on html[data-app-ready="true"]
+  // before capturing body HTML). Behaviourally inert at runtime; removing it
+  // breaks crawler-visibility prerender. Last reviewed 2026-05-03.
+  useEffect(() => {
+    if (splashDone) {
+      document.documentElement.setAttribute("data-app-ready", "true");
+    }
+  }, [splashDone]);
+
   const handleSplashComplete = useCallback(() => setSplashDone(true), []);
 
   return (

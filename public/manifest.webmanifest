@@ -1,0 +1,22 @@
+{
+  "name": "Inclined Plane — AI-Native Data Engineering",
+  "short_name": "Inclined Plane",
+  "description": "AI-ready data platforms, observability-first pipelines, and decision systems that turn complexity into operational intelligence.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#FF6A00",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

@@ -1,8 +1,38 @@
+/* ============================================================================
+ *  ⚠️  GUARDRAIL — DO NOT REGENERATE THIS FILE
+ * ----------------------------------------------------------------------------
+ *  IMPORTANT: This component NO LONGER produces the SEO output that crawlers
+ *  read. As of 2026-05-03, all crawler-facing SEO (title, description,
+ *  canonical, OG/Twitter tags, JSON-LD) is baked into per-route static HTML
+ *  by scripts/prerender.mjs at build time.
+ *
+ *  This component now exists ONLY to keep the browser tab and document state
+ *  in sync during in-app SPA navigation (e.g. clicking a Link from /services
+ *  to /about should update the tab title for the user). It does not, and must
+ *  not, be relied on for crawler visibility.
+ *
+ *  The page-level `jsonLd` and `article` props are accepted for API
+ *  compatibility with existing pages but intentionally NOT applied at runtime
+ *  — duplicating them client-side would produce two competing JSON-LD
+ *  payloads when a crawler that does execute JS visits the page. The
+ *  build-time copy is canonical.
+ *
+ *  If Lovable / Cursor / any AI assistant proposes re-adding runtime JSON-LD
+ *  injection here: REJECT the change. The build-time output in
+ *  scripts/seo-config.mjs is the source of truth.
+ *
+ *  Pair file: scripts/seo-config.mjs (build-time per-route metadata)
+ *  Pair file: scripts/prerender.mjs (consumer)
+ *  Pair file: index.html (template with <!--SEO_HEAD--> placeholder)
+ *
+ *  Last reviewed: 2026-05-03
+ * ========================================================================== */
+
 import { useEffect } from "react";
 
 const SITE_URL = "https://inclinedplane.com";
 const SITE_NAME = "Inclined Plane";
-const DEFAULT_OG_IMAGE = "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a9557b79-de54-422b-bacb-6c7b74c357e7/id-preview-a5e21ba1--1228f53a-e5fb-41e3-8d0c-b7df46f1d6b5.lovable.app-1771220993949.png";
+const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 interface SEOHeadProps {
   title: string;
@@ -11,6 +41,8 @@ interface SEOHeadProps {
   ogImage?: string;
   ogType?: string;
   noIndex?: boolean;
+  // Accepted for backwards compatibility with existing page call sites; not
+  // applied at runtime. See guardrail header.
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   article?: {
     publishedTime: string;
@@ -46,8 +78,6 @@ const SEOHead = ({
   ogImage = DEFAULT_OG_IMAGE,
   ogType = "website",
   noIndex = false,
-  jsonLd,
-  article,
 }: SEOHeadProps) => {
   useEffect(() => {
     const fullTitle = path === "/" ? title : `${title} | ${SITE_NAME}`;
@@ -55,14 +85,11 @@ const SEOHead = ({
 
     document.title = fullTitle;
 
-    // Standard meta
     setMeta("name", "description", description);
     setMeta("name", "author", SITE_NAME);
 
-    // Canonical
     setLink("canonical", canonicalUrl);
 
-    // Open Graph
     setMeta("property", "og:title", fullTitle);
     setMeta("property", "og:description", description);
     setMeta("property", "og:url", canonicalUrl);
@@ -71,96 +98,21 @@ const SEOHead = ({
     setMeta("property", "og:site_name", SITE_NAME);
     setMeta("property", "og:locale", "en_US");
 
-    // Twitter
     setMeta("name", "twitter:card", "summary_large_image");
     setMeta("name", "twitter:title", fullTitle);
     setMeta("name", "twitter:description", description);
     setMeta("name", "twitter:image", ogImage);
 
-    // Article meta
-    if (article) {
-      setMeta("property", "article:published_time", article.publishedTime);
-      setMeta("property", "article:author", article.author);
-      article.tags.forEach((tag, i) => {
-        setMeta("property", `article:tag:${i}`, tag);
-      });
-    }
-
-    // Robots
     if (noIndex) {
       setMeta("name", "robots", "noindex, nofollow");
     } else {
-      setMeta("name", "robots", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
+      setMeta(
+        "name",
+        "robots",
+        "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      );
     }
-
-    // JSON-LD
-    const ldScriptId = "seo-json-ld";
-    let ldEl = document.getElementById(ldScriptId) as HTMLScriptElement | null;
-    const schemas = jsonLd
-      ? Array.isArray(jsonLd) ? jsonLd : [jsonLd]
-      : [];
-
-    // Always include Organization + WebSite
-    const orgSchema = {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-      logo: `${SITE_URL}/favicon.ico`,
-      description: "AI-native data engineering consultancy building decision systems, observability-first pipelines, and cloud warehouse platforms.",
-      sameAs: [
-        "https://www.linkedin.com/company/inclinedplane",
-      ],
-      contactPoint: {
-        "@type": "ContactPoint",
-        email: "support@inclinedplane.com",
-        contactType: "sales",
-      },
-    };
-
-    const webSiteSchema = {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: SITE_NAME,
-      url: SITE_URL,
-    };
-
-    const breadcrumbSchema = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-        ...(path !== "/"
-          ? [{
-              "@type": "ListItem",
-              position: 2,
-              name: title,
-              item: canonicalUrl,
-            }]
-          : []),
-      ],
-    };
-
-    const allSchemas = [orgSchema, webSiteSchema, breadcrumbSchema, ...schemas];
-
-    if (!ldEl) {
-      ldEl = document.createElement("script");
-      ldEl.id = ldScriptId;
-      ldEl.type = "application/ld+json";
-      document.head.appendChild(ldEl);
-    }
-    ldEl.textContent = JSON.stringify(allSchemas);
-
-    return () => {
-      // Cleanup article tags on unmount
-      if (article) {
-        article.tags.forEach((_, i) => {
-          const el = document.querySelector(`meta[property="article:tag:${i}"]`);
-          el?.remove();
-        });
-      }
-    };
-  }, [title, description, path, ogImage, ogType, noIndex, jsonLd, article]);
+  }, [title, description, path, ogImage, ogType, noIndex]);
 
   return null;
 };
