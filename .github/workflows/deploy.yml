@@ -95,23 +95,27 @@ jobs:
       - name: Build (vite + head/body/sitemap/rss prerender)
         run: npm run build
 
-      - name: Verify body prerender succeeded for all 28 routes
-        # If the body pass silently fell back to head-only (e.g., Chromium
-        # crashed mid-run), at least one prerendered HTML file will be
-        # missing the noscript fallback marker we always emit alongside a
-        # successful body merge. Spot-check a representative sample.
+      - name: Verify body prerender succeeded for ALL 28 routes
+        # Every successful body snapshot writes a <noscript> block alongside
+        # the captured DOM. If a route fell back to head-only (Chromium
+        # crashed, splash never completed, network hung, etc.) it will be
+        # missing that block. Walk every dist/**/index.html and fail the
+        # build if any is missing — catches partial body-pass failures that
+        # a sampled spot-check would miss.
         run: |
           set -e
-          for route in services about thesis blog/dashboards-are-not-competitive-advantage case-studies/ev-fleet-scheduling; do
-            file="dist/$route/index.html"
-            if [ ! -f "$file" ]; then
-              echo "::error::Missing prerendered file: $file"; exit 1;
-            fi
+          missing=0
+          for file in $(find dist -name index.html | sort); do
             if ! grep -q '<noscript>' "$file"; then
-              echo "::error::$file lacks <noscript> fallback — body pass likely fell back to head-only."; exit 1;
+              echo "::error::$file is missing <noscript> fallback — body snapshot for this route failed."
+              missing=$((missing + 1))
             fi
           done
-          echo "All sampled routes have prerendered body content."
+          if [ "$missing" -gt 0 ]; then
+            echo "::error::$missing route(s) failed body snapshot. See PRERENDER + SNAPSHOT SUMMARY above."
+            exit 1
+          fi
+          echo "All $(find dist -name index.html | wc -l) prerendered routes have body content."
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
@@ -119,12 +123,28 @@ jobs:
       - name: Pull Vercel project config
         run: vercel pull --yes --environment=production --token=${VERCEL_TOKEN}
 
-      - name: Build Vercel deployment artifact (prebuilt)
-        # `vercel build` here packages our existing dist/ into the format
-        # Vercel deploys (.vercel/output/). It does NOT re-run our prerender
-        # because it sees `vercel.json` and our static dist/ — the heavy
-        # work has already happened in the previous steps.
-        run: vercel build --prod --token=${VERCEL_TOKEN}
+      - name: Package prebuilt artifact for Vercel
+        # We already built dist/ above. Do NOT re-run `vercel build` (which
+        # would re-execute `npm run build` per vercel.json's buildCommand
+        # and waste 3+ minutes redoing the entire Playwright snapshot).
+        # Instead, hand-construct the .vercel/output/ directory per the
+        # Vercel Build Output API spec: static files in static/, plus a
+        # config.json carrying our routing rules from vercel.json.
+        # https://vercel.com/docs/build-output-api/v3
+        run: |
+          mkdir -p .vercel/output/static
+          cp -r dist/. .vercel/output/static/
+          cat > .vercel/output/config.json <<'JSON'
+          {
+            "version": 3,
+            "cleanUrls": true,
+            "trailingSlash": false,
+            "routes": [
+              { "handle": "filesystem" },
+              { "src": "/((?!api/).*)", "dest": "/index.html" }
+            ]
+          }
+          JSON
 
       - name: Deploy prebuilt artifact to Vercel
         run: vercel deploy --prebuilt --prod --token=${VERCEL_TOKEN}
