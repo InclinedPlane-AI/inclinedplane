@@ -198,42 +198,55 @@ async function main() {
   console.log(`[prerender] HEAD PASS done — wrote ${routes.length} files\n`);
 
   // ---------------------------------------------------------------------
-  // PASS 2 — Puppeteer body snapshot
+  // PASS 2 — Puppeteer body snapshot (best-effort, non-fatal)
+  //
+  // If this pass fails (Chromium can't launch in the build container,
+  // network port unavailable, etc.), we keep the head-only output and
+  // continue with sitemap/RSS. Crawlers will still see route-specific
+  // metadata + JSON-LD; only the body prose is missing. That's a graceful
+  // degradation, not a build failure. Build environments without Chromium
+  // (some CI/CD images) should still produce a deployable artifact.
   // ---------------------------------------------------------------------
-  let server, results;
+  let server = null;
+  let results = [];
+  let bodyPassOk = false;
   try {
     server = await startServer({ distDir });
     console.log(`[prerender] static server on ${server.url}`);
 
     results = await runSnapshot(routes, { baseUrl: server.url });
+    bodyPassOk = true;
   } catch (err) {
-    console.error(`[prerender] BODY PASS aborted: ${err.message}`);
-    console.error(
-      `[prerender] head-only files remain valid; crawlers will see metadata + JSON-LD but not body prose.`
+    console.warn(`[prerender] ⚠ BODY PASS failed: ${err?.message ?? err}`);
+    console.warn(
+      `[prerender] ⚠ continuing with head-only output — crawlers will see metadata + JSON-LD per route, but not body prose.`
     );
-    if (server) await server.close().catch(() => {});
-    process.exit(1);
+    console.warn(
+      `[prerender] ⚠ If this is a Vercel build, this is most likely Puppeteer's Chromium being unavailable. Run the body snapshot locally and commit dist/, or switch to puppeteer-core + @sparticuz/chromium for Vercel-friendly headless Chromium.`
+    );
   }
 
-  // Merge captured bodies into the head-baked files.
-  const routeByPath = new Map(routes.map((r) => [r.path, r]));
-  let merged = 0;
-  for (const r of results) {
-    if (!r.bodyHtml) continue; // failed snapshot — keep head-only file
-    const route = routeByPath.get(r.path);
-    if (!route) continue;
-    const outPath = outPathFor(r.path);
-    const headBaked = readFileSync(outPath, "utf8");
-    const noscriptBlock = renderNoscriptBlock(route);
-    const final = injectBody(headBaked, r.bodyHtml, noscriptBlock);
-    writeFileSync(outPath, final, "utf8");
-    merged++;
+  // Merge captured bodies into the head-baked files (skipped if BODY PASS failed).
+  if (bodyPassOk) {
+    const routeByPath = new Map(routes.map((r) => [r.path, r]));
+    let merged = 0;
+    for (const r of results) {
+      if (!r.bodyHtml) continue; // failed snapshot — keep head-only file
+      const route = routeByPath.get(r.path);
+      if (!route) continue;
+      const outPath = outPathFor(r.path);
+      const headBaked = readFileSync(outPath, "utf8");
+      const noscriptBlock = renderNoscriptBlock(route);
+      const final = injectBody(headBaked, r.bodyHtml, noscriptBlock);
+      writeFileSync(outPath, final, "utf8");
+      merged++;
+    }
+    console.log(
+      `[prerender] BODY PASS done — merged ${merged}/${results.length} routes`
+    );
   }
 
-  await server.close().catch(() => {});
-  console.log(
-    `[prerender] BODY PASS done — merged ${merged}/${results.length} routes`
-  );
+  if (server) await server.close().catch(() => {});
 
   // ---------------------------------------------------------------------
   // PASS 3 — sitemap + RSS
