@@ -3,19 +3,34 @@
   ============================================================================
   GUARDRAIL — DO NOT REGENERATE THIS FILE
   ----------------------------------------------------------------------------
-  This is the build template for every page on the site. The SEO_HEAD
-  placeholder marker (located in <head> below) is replaced by
-  scripts/prerender.mjs (run after vite build) with route-specific title,
-  meta, canonical, OG/Twitter tags, and JSON-LD. This is what makes the site
-  readable to crawlers (Googlebot, GPTBot, ClaudeBot, PerplexityBot) and
-  social-link previewers.
+  This is the build template for every page on the site. Two build-time
+  contracts depend on the markup here:
+
+    1. The SEO_HEAD placeholder marker (in <head>) is replaced by
+       scripts/prerender.mjs with route-specific title, meta, canonical,
+       OG/Twitter tags, and JSON-LD.
+
+    2. The full prerendered body is written into <body> by the Puppeteer
+       snapshot pass in scripts/prerender.mjs (via scripts/snapshot.mjs)
+       so crawlers (Googlebot, GPTBot, ClaudeBot, PerplexityBot) can read
+       the page prose without executing JavaScript.
+
+  The #root visibility veil + safety-net <script> below hide the prerendered
+  body from real users until React mounts (so users see the splash screen,
+  not a flash of unstyled prerendered content). The fallback timeout
+  guarantees content becomes visible even if the JS bundle fails to load.
 
   If Lovable / Cursor / any AI assistant proposes "fixing" or "modernizing"
-  this file, REJECT the change unless it preserves the SEO_HEAD placeholder
-  comment exactly. Removing it silently breaks every page's SEO output.
+  this file, REJECT the change unless it preserves:
+    - the SEO_HEAD placeholder comment
+    - the #root visibility veil <style>
+    - the safety-net reveal <script>
+  Removing any of these silently breaks SEO output OR user UX.
 
-  Pair file: scripts/prerender.mjs (replaces the placeholder)
+  Pair file: scripts/prerender.mjs (orchestrator)
   Pair file: scripts/seo-config.mjs (per-route metadata source)
+  Pair file: scripts/snapshot.mjs (Puppeteer body-capture pass)
+  Pair file: src/main.tsx (consumer of data-react-ready attribute)
 
   Last reviewed: 2026-05-03
   ============================================================================
@@ -25,6 +40,16 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.png" type="image/png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style id="prerender-veil">#root:not([data-react-ready]){visibility:hidden}</style>
+    <script>
+      // Safety net: if the JS bundle never executes (parse error, network
+      // failure), reveal #root after 5s so the prerendered content is shown
+      // instead of a permanently blank page.
+      setTimeout(function () {
+        var r = document.getElementById("root");
+        if (r && !r.hasAttribute("data-react-ready")) r.setAttribute("data-react-ready", "true");
+      }, 5000);
+    </script>
     <!--SEO_HEAD-->
   </head>
 
