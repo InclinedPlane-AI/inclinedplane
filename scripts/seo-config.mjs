@@ -248,20 +248,34 @@ function readData(relPath) {
 
 function parseBlogPosts() {
   const src = readData("src/data/blogPosts.ts");
-  // Capture each post object up to the closing brace before the next slug or array end.
+  // Capture each post object up to the closing brace before the next slug
+  // or array end. Author block is parsed in a second pass per match because
+  // its `linkedin` field is optional and adding it to the main regex makes
+  // the whole pattern fragile.
   const re =
-    /slug:\s*"([^"]+)",\s*\n\s*title:\s*"((?:[^"\\]|\\.)*)",\s*\n\s*subtitle:\s*"((?:[^"\\]|\\.)*)",\s*\n\s*date:\s*"([^"]+)"[\s\S]*?tags:\s*\[([\s\S]*?)\]/g;
+    /slug:\s*"([^"]+)",\s*\n\s*title:\s*"((?:[^"\\]|\\.)*)",\s*\n\s*subtitle:\s*"((?:[^"\\]|\\.)*)",\s*\n\s*date:\s*"([^"]+)"([\s\S]*?)tags:\s*\[([\s\S]*?)\]/g;
+  const authorRe =
+    /author:\s*\{\s*name:\s*"((?:[^"\\]|\\.)*)"\s*,\s*role:\s*"((?:[^"\\]|\\.)*)"(?:\s*,\s*linkedin:\s*"([^"]+)")?/;
   const out = [];
   for (const m of src.matchAll(re)) {
-    const [, slug, title, subtitle, date, tagsRaw] = m;
+    const [, slug, title, subtitle, date, between, tagsRaw] = m;
     if (slug === "string") continue; // skip the interface field declaration
     const tags = [...tagsRaw.matchAll(/"([^"]+)"/g)].map((t) => t[1]);
+    const am = between.match(authorRe);
+    const author = am
+      ? {
+          name: unescapeQuotes(am[1]),
+          role: unescapeQuotes(am[2]),
+          linkedin: am[3] || null,
+        }
+      : null;
     out.push({
       slug,
       title: unescapeQuotes(title),
       subtitle: unescapeQuotes(subtitle),
       date,
       tags,
+      author,
     });
   }
   return out;
@@ -352,7 +366,17 @@ export function getRoutes() {
           description: post.subtitle,
           datePublished: post.date,
           keywords: post.tags.join(", "),
-          author: { "@type": "Organization", name: SITE_NAME },
+          author: post.author
+            ? {
+                "@type": "Person",
+                name: post.author.name,
+                jobTitle: post.author.role,
+                worksFor: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+                ...(post.author.linkedin
+                  ? { sameAs: [post.author.linkedin] }
+                  : {}),
+              }
+            : { "@type": "Organization", name: SITE_NAME },
           publisher: {
             "@type": "Organization",
             name: SITE_NAME,

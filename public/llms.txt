@@ -1,0 +1,42 @@
+# Inclined Plane
+
+> AI-native data engineering consultancy. Inclined Plane builds cloud data warehouses, observability-first pipelines, BI platforms, and decision systems for modern enterprises. Services span data engineering, AI automation, business intelligence, cloud warehousing, and DataOps. Headquartered with operations across India and the United States.
+
+## Core pages
+
+- [Homepage](https://inclinedplane.com/): Overview of services, thesis, and approach.
+- [Our Thesis](https://inclinedplane.com/thesis): Deep technical manifesto on why modern enterprises need engineering-grade data systems and decision platforms built from source to intelligence.
+- [Services](https://inclinedplane.com/services): Five layers of data infrastructure — Clarity (data and AI advisory), Data Architecture (foundation modernization), Reliability and Ops, Analytics and Intelligence, AI/ML Implementations, and Automation Systems.
+- [Industries](https://inclinedplane.com/industries): Vertical expertise in retail, finance, healthcare, manufacturing, energy, SaaS, BPO, and education.
+- [Case Studies](https://inclinedplane.com/case-studies): 14 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector, and renewables.
+- [About](https://inclinedplane.com/about): Company evolution from Sail Analytics to Inclined Plane and the team building decision systems for high-velocity enterprises.
+- [Careers](https://inclinedplane.com/careers): Open roles for data, analytics, ML, BI, and platform engineers. Remote-first, ownership-driven.
+- [Contact](https://inclinedplane.com/contact): support@inclinedplane.com — book a discovery call.
+
+## Blog posts
+
+- [Dashboards Are Not a Competitive Advantage Anymore](https://inclinedplane.com/blog/dashboards-are-not-competitive-advantage): Why visibility alone won't move your business forward, and what the next generation of data-driven companies actually look like. By Keerthana Vayyasi, Founder & CEO. Published February 19, 2026.
+- [The Hidden Cost of 'Almost Reliable' Data Pipelines](https://inclinedplane.com/blog/hidden-cost-of-almost-reliable-data-pipelines): Silent failures are more dangerous than obvious ones. How "good enough" data infrastructure is quietly eroding competitive position. Published February 23, 2026.
+
+## Case studies
+
+- [Retail & Manufacturing Chain](https://inclinedplane.com/case-studies/retail-manufacturing-chain): Dealer-network analytics for a retail and manufacturing chain.
+- [Demand Forecasting — Engine & Power Solutions](https://inclinedplane.com/case-studies/engine-demand-forecast): Forecasting pipeline for engine and power-solutions manufacturer.
+- [Predictive Maintenance of EV Batteries](https://inclinedplane.com/case-studies/ev-battery-predictive): IoT-driven battery-failure prediction for an EV fleet operator.
+- [Primary, Secondary & Field Efforts — FMCG](https://inclinedplane.com/case-studies/fmcg-edible-oil): Distribution and field-effort analytics for an FMCG edible oil brand.
+- [AI-Driven Fleet Scheduling — Electric Cabs](https://inclinedplane.com/case-studies/ev-fleet-scheduling): Hybrid optimization (Genetic Algorithms + Tabu Search + Simulated Annealing) for real-time EV cab allocation.
+- [Sales Process Optimization — Pharmaceutical](https://inclinedplane.com/case-studies/pharma-sales-bi): Field-force BI for a pharma sales operation.
+- [Inventory & Procurement Optimization — E-Commerce](https://inclinedplane.com/case-studies/ecom-inventory): Inventory and procurement optimization on AWS for an e-commerce business.
+- [Energy Audit & Maintenance Engineering](https://inclinedplane.com/case-studies/energy-audit): Audio-analytics-driven energy-loss audit (compressed air, steam, gas).
+- [VC-Funded Educational Products Company](https://inclinedplane.com/case-studies/vc-edtech): Warehouse architecture and investor-grade reporting for a VC-backed EdTech.
+- [Pharma MNC](https://inclinedplane.com/case-studies/pharma-mnc): Multi-geography field-force coordination and brand-level intelligence for a pharma MNC.
+- [Capital Equipment](https://inclinedplane.com/case-studies/capital-equipment): BOM-complex ERP rollout for a capital-equipment manufacturer.
+- [Solar BI](https://inclinedplane.com/case-studies/solar-bi): Tableau modeling for a government solar project.
+- [Cultural Heritage](https://inclinedplane.com/case-studies/cultural-heritage): Geospatial analytics for a public-sector cultural heritage program.
+- [ERP Unification](https://inclinedplane.com/case-studies/erp-unification): Unified ERP rollout across global operations.
+
+## Discovery
+
+- [Sitemap](https://inclinedplane.com/sitemap.xml): Machine-readable list of all indexable URLs.
+- [RSS feed](https://inclinedplane.com/rss.xml): Updates from the blog.
+- [LinkedIn](https://www.linkedin.com/company/inclinedplane): Company profile and updates.

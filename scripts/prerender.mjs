@@ -46,6 +46,7 @@ import { startServer } from "./static-server.mjs";
 import { runSnapshot } from "./snapshot.mjs";
 import { printSummary } from "./summary.mjs";
 import { writeSitemap } from "./sitemap.mjs";
+import { writeRss } from "./rss.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, "..");
@@ -235,9 +236,10 @@ async function main() {
   );
 
   // ---------------------------------------------------------------------
-  // PASS 3 — sitemap
+  // PASS 3 — sitemap + RSS
   // ---------------------------------------------------------------------
   writeSitemap(routes, { distDir });
+  writeRss(routes, { distDir });
 
   printSummary(results);
 
