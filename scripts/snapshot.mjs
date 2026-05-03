@@ -1,7 +1,7 @@
 /* ============================================================================
  *  GUARDRAIL — DO NOT REGENERATE THIS FILE
  * ----------------------------------------------------------------------------
- *  Puppeteer body-snapshot pass. For each route, navigates a headless
+ *  Body-snapshot pass via Playwright. For each route, navigates a headless
  *  Chromium tab to the locally-served prerendered HTML, waits for the splash
  *  screen to complete (signalled by html[data-app-ready="true"], set in
  *  src/App.tsx), then captures document.body.innerHTML.
@@ -10,31 +10,31 @@
  *  ClaudeBot, PerplexityBot) that do not execute JavaScript. Without this
  *  pass, those crawlers see only the head metadata + JSON-LD, not the body.
  *
- *  ENVIRONMENT-AWARE CHROMIUM:
- *    - On Vercel / Linux build containers: @sparticuz/chromium ships a
- *      Chromium binary statically-linked for serverless environments
- *      (libnspr4, libnss3, etc. are bundled). Required because Vercel's
- *      build image lacks the system libraries that puppeteer's default
- *      Chromium download depends on.
- *    - On macOS local dev: use the system Google Chrome / Chromium binary
- *      (sparticuz ships a Linux binary only). Falls through a list of
- *      common install paths.
+ *  WHY PLAYWRIGHT (and not puppeteer / @sparticuz/chromium):
+ *    Playwright bundles its own Chromium build that runs reliably on
+ *    Vercel's build containers without missing-libnspr4-style errors.
+ *    @sparticuz/chromium hit ECONNRESET on Vercel's current build image
+ *    (glibc / shared-lib mismatch). Playwright's bundled binary tracks
+ *    Chromium versions explicitly and ships compatible libs.
+ *
+ *  REQUIRES: `npx playwright install chromium` to have run at least once.
+ *    package.json's `build` script chains this so every Vercel build (and
+ *    every local build) calls it before the prerender step. The install
+ *    is a no-op if chromium is already cached.
  *
  *  If Lovable / Cursor / any AI assistant proposes removing this pass:
  *  REJECT unless the change includes a replacement mechanism that puts
  *  body content into the static HTML output.
  *
  *  Pair file: scripts/prerender.mjs (orchestrator + body merge)
- *  Pair file: scripts/static-server.mjs (serves dist/ to Puppeteer)
+ *  Pair file: scripts/static-server.mjs (serves dist/ to Playwright)
  *  Pair file: src/App.tsx (sets html[data-app-ready="true"] when splash done)
+ *  Pair file: package.json (build script runs `playwright install chromium`)
  *
  *  Last reviewed: 2026-05-03
  * ========================================================================== */
 
-import { existsSync } from "node:fs";
-
-import puppeteer from "puppeteer-core";
-import sparticuzChromium from "@sparticuz/chromium";
+import { chromium } from "playwright";
 
 const READY_SELECTOR = 'html[data-app-ready="true"]';
 const NAV_TIMEOUT_MS = 25000;
@@ -42,64 +42,11 @@ const READY_TIMEOUT_MS = 18000;
 const MIN_WORDS_OK = 50;
 const MAX_RETRIES = 3;
 
-const COMMON_CHROME_PATHS_DARWIN = [
-  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  "/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary",
-  "/Applications/Chromium.app/Contents/MacOS/Chromium",
-  "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
-];
-
-const COMMON_CHROME_PATHS_LINUX = [
-  "/usr/bin/google-chrome-stable",
-  "/usr/bin/google-chrome",
-  "/usr/bin/chromium-browser",
-  "/usr/bin/chromium",
-];
-
-async function resolveLaunchOptions() {
-  const baseArgs = [
-    "--no-sandbox",
-    "--disable-setuid-sandbox",
-    "--disable-dev-shm-usage",
-    "--use-gl=swiftshader",
-    "--enable-webgl",
-    "--hide-scrollbars",
-    "--disable-features=IsolateOrigins,site-per-process",
-  ];
-
-  // macOS local dev: use system Chrome. @sparticuz/chromium is Linux-only.
-  if (process.platform === "darwin") {
-    const found = COMMON_CHROME_PATHS_DARWIN.find((p) => existsSync(p));
-    if (!found) {
-      throw new Error(
-        `No Chrome/Chromium found on macOS. Install Google Chrome from google.com/chrome (or set CHROME_EXECUTABLE_PATH env var to your binary).`
-      );
-    }
-    return { executablePath: found, args: baseArgs, headless: true };
-  }
-
-  // Linux/Vercel: try @sparticuz/chromium first (the canonical solution),
-  // fall back to a system Chrome if one is on PATH.
-  try {
-    const executablePath = await sparticuzChromium.executablePath();
-    return {
-      executablePath,
-      args: [...sparticuzChromium.args, ...baseArgs],
-      headless: sparticuzChromium.headless,
-    };
-  } catch (err) {
-    const found = COMMON_CHROME_PATHS_LINUX.find((p) => existsSync(p));
-    if (found) {
-      return { executablePath: found, args: baseArgs, headless: true };
-    }
-    throw new Error(
-      `Could not resolve Chromium binary: ${err?.message ?? err}. Tried @sparticuz/chromium and system paths.`
-    );
-  }
-}
-
 async function snapshotOnce(browser, baseUrl, route) {
-  const page = await browser.newPage();
+  const context = await browser.newContext({
+    viewport: { width: 1280, height: 900 },
+  });
+  const page = await context.newPage();
   const consoleErrors = [];
   const pageErrors = [];
   page.on("pageerror", (err) => pageErrors.push(err.message));
@@ -108,12 +55,12 @@ async function snapshotOnce(browser, baseUrl, route) {
   });
 
   try {
-    await page.setViewport({ width: 1280, height: 900 });
     await page.goto(`${baseUrl}${route.path}`, {
-      waitUntil: "networkidle0",
+      waitUntil: "networkidle",
       timeout: NAV_TIMEOUT_MS,
     });
     await page.waitForSelector(READY_SELECTOR, { timeout: READY_TIMEOUT_MS });
+    // Best-effort font readiness; not fatal if it rejects.
     await page
       .evaluate(() => (document.fonts ? document.fonts.ready : null))
       .catch(() => {});
@@ -136,21 +83,29 @@ async function snapshotOnce(browser, baseUrl, route) {
       pageErrors,
     };
   } finally {
-    await page.close().catch(() => {});
+    await context.close().catch(() => {});
   }
 }
 
 export async function runSnapshot(routes, { baseUrl, log = console.log } = {}) {
-  log(`[snapshot] resolving Chromium for platform=${process.platform}...`);
-  const launchOptions = await resolveLaunchOptions();
-  log(`[snapshot] launching headless Chromium at ${launchOptions.executablePath}`);
-
+  log(`[snapshot] launching headless Chromium via Playwright...`);
   let browser;
   try {
-    browser = await puppeteer.launch(launchOptions);
+    browser = await chromium.launch({
+      headless: true,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--use-gl=swiftshader",
+        "--enable-webgl",
+        "--hide-scrollbars",
+        "--disable-features=IsolateOrigins,site-per-process",
+      ],
+    });
   } catch (err) {
     throw new Error(
-      `Chromium failed to launch (${err?.message ?? err}). Path: ${launchOptions.executablePath}`
+      `Chromium failed to launch via Playwright (${err?.message ?? err}). Verify \`npx playwright install chromium\` has run.`
     );
   }
 

@@ -9,8 +9,17 @@ schema-validated at deploy time and unknown properties (including comment-style
 
 ## What each field does
 
-- `cleanUrls: true` — Vercel strips `.html` from URLs (e.g. `/services` serves
-  `/services.html` or `/services/index.html`).
+- `buildCommand: "npm run build"` — runs the full pipeline (vite build +
+  Playwright body snapshot + sitemap + RSS). Used by `vercel build` in the
+  GitHub Actions workflow (`.github/workflows/deploy.yml`). On Vercel's own
+  build container this command will FAIL because Vercel cannot run a
+  headless browser (missing libnspr4 etc.). For that reason Vercel's git
+  auto-deploy must be DISABLED for this project — see the workflow file for
+  the dashboard path. The CI builds the artifact; Vercel only hosts.
+- `outputDirectory: "dist"` — tells `vercel build` where the static
+  artifact lives. Required for `vercel deploy --prebuilt`.
+- `cleanUrls: true` — Vercel strips `.html` from URLs (e.g. `/services`
+  serves `/services/index.html`).
 - `trailingSlash: false` — `/services/` redirects to `/services`. Keeps
   canonical URLs consistent with `<link rel="canonical">` in our prerendered
   HTML, which never has trailing slashes.
