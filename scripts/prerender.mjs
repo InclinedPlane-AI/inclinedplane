@@ -143,6 +143,13 @@ function injectBody(headBakedHtml, capturedBody, noscriptBlock) {
   // <body> tag itself. We anchor the search AFTER </head> so literal
   // "<body>" strings appearing inside the HTML comment at the top of the
   // template do not get matched as the real body open tag.
+  //
+  // We also stamp `data-prerendered="true"` onto the <body> open tag.
+  // src/main.tsx reads this marker before mounting React, so src/App.tsx
+  // can skip the splash screen entirely on prerendered pages — the splash
+  // exists to mask the JS-load gap on a fresh SPA, but with prerendered
+  // HTML there is no gap to mask. Bots screenshotting at 2-5s now catch
+  // real content instead of the splash mid-animation.
   const headCloseMatch = headBakedHtml.match(HEAD_CLOSE_RE);
   if (!headCloseMatch) {
     throw new Error("[prerender] Could not locate </head> for body merge");
@@ -154,11 +161,15 @@ function injectBody(headBakedHtml, capturedBody, noscriptBlock) {
   if (!open || !close) {
     throw new Error("[prerender] Could not locate <body> tags for merge");
   }
-  const beforeEnd = searchFrom + open.index + open[0].length;
-  const afterStart = searchFrom + close.index;
-  const before = headBakedHtml.slice(0, beforeEnd);
-  const after = headBakedHtml.slice(afterStart);
-  return `${before}\n    ${noscriptBlock}\n    ${capturedBody}\n  ${after}`;
+  const bodyOpenAbsStart = searchFrom + open.index;
+  const bodyCloseAbsStart = searchFrom + close.index;
+  const newBodyOpen = open[0].replace(
+    /^<body/i,
+    '<body data-prerendered="true"'
+  );
+  const before = headBakedHtml.slice(0, bodyOpenAbsStart);
+  const after = headBakedHtml.slice(bodyCloseAbsStart);
+  return `${before}${newBodyOpen}\n    ${noscriptBlock}\n    ${capturedBody}\n  ${after}`;
 }
 
 async function main() {
