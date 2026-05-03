@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "_guardrail": "DO NOT REGENERATE. The rewrite below preserves Vercel's filesystem-first behaviour: prerendered routes (dist/services/index.html, dist/blog/<slug>/index.html, etc.) are served directly; only paths with no matching file fall back to /index.html so the SPA's NotFound route handles them. Removing this rewrite breaks deep-linked SPA fallback. Last reviewed 2026-05-03.",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
+}
