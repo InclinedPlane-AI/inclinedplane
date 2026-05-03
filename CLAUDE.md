@@ -80,7 +80,6 @@ Bingbot in many cases) would otherwise see only an empty `<div id="root">`.
 
 ```
 npm run build
-  └── playwright install chromium    (no-op if cached)
   └── vite build                     (Vite produces dist/index.html template + JS/CSS)
   └── node scripts/prerender.mjs
         ├── PASS 1 — HEAD INJECTION
