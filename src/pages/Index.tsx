@@ -369,8 +369,8 @@ const Index = () => {
               {/* Closing banner */}
               <motion.div {...fadeUp(0.3)} className="mt-6 lg:mt-8 text-center">
                 <p className="text-base sm:text-lg lg:text-xl font-semibold text-foreground leading-relaxed max-w-3xl mx-auto">
-                  "Most enterprises can't get to agentic AI because they haven't fixed the foundation.{" "}
-                  <span className="text-gradient-orange">We do both.</span>"
+                  "The gap between AI ambition and AI reality almost always starts with data infrastructure.{" "}
+                  <span className="text-gradient-orange">We close that gap — and build everything on top of it.</span>"
                 </p>
               </motion.div>
             </div>
