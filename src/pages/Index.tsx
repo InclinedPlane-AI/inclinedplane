@@ -248,7 +248,7 @@ const Index = () => {
                     label: "The Opportunity",
                     sub: "The prize is enormous.",
                     dot: "bg-green-400",
-                    tint: "",
+                    tint: "bg-primary/[0.10] border-primary/20",
                     stats: [
                       {
                         num: "$15.7T",
@@ -275,7 +275,7 @@ const Index = () => {
                     label: "The Intent",
                     sub: "Enterprises are moving.",
                     dot: "bg-amber-400",
-                    tint: "bg-amber-500/[0.04]",
+                    tint: "bg-primary/[0.10] border-primary/20",
                     stats: [
                       {
                         num: "78%",
@@ -302,7 +302,7 @@ const Index = () => {
                     label: "The Gap",
                     sub: "Most aren't ready.",
                     dot: "bg-red-400",
-                    tint: "bg-primary/[0.06]",
+                    tint: "bg-primary/[0.10] border-primary/20",
                     stats: [
                       {
                         num: "23%",
