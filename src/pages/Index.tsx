@@ -1075,7 +1075,7 @@ const Index = () => {
         {/* end grain-overlay */}
 
         {/* Footer */}
-        <div className="lg:snap-section lg:flex lg:flex-col lg:justify-end lg:min-h-screen">
+        <div className="lg:snap-section lg:flex lg:flex-col lg:justify-end lg:min-h-screen lg:!pb-0">
           <div className="hidden lg:block lg:flex-1" />
           <Footer />
         </div>
