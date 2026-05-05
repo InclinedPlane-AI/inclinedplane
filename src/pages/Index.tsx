@@ -227,14 +227,14 @@ const Index = () => {
         {/* Grain overlay for content sections (excludes hero & footer) */}
         <div className="grain-overlay relative">
           {/* SLIDE 2 — AI TRANSFORMATION FACTS (Bento) */}
-          <section className="snap-section flex items-center justify-center relative py-16 sm:py-20 lg:py-12">
+          <section className="snap-section flex flex-col relative">
             <SectionGlow position="bottom-right" size={700} />
-            <div className="max-w-6xl mx-auto px-6 lg:px-8 w-full">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8 w-full my-auto">
               <motion.div {...fadeUp()}>
                 <p className="font-mono text-xs text-primary tracking-widest uppercase mb-2 text-center">
                   The AI Imperative — In Numbers
                 </p>
-                <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight text-center max-w-3xl mx-auto mb-6 lg:mb-8">
+                <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight text-center max-w-3xl mx-auto mb-4 lg:mb-6">
                   The opportunity is real. The intent is there.{" "}
                   <span className="text-gradient-orange">The infrastructure isn't.</span>
                 </p>
@@ -326,7 +326,7 @@ const Index = () => {
                   },
                 ].map((col, colIdx) => (
                   <motion.div key={col.key} {...fadeUp(colIdx * 0.08)} className="flex flex-col gap-3">
-                    <div className={`glass-panel rounded-xl p-5 lg:p-6 ${col.tint}`}>
+                    <div className={`glass-panel rounded-xl p-4 lg:p-5 ${col.tint}`}>
                       <div className="flex items-center gap-2 mb-2">
                         <span className={`w-2.5 h-2.5 rounded-full ${col.dot} shadow-[0_0_8px_currentColor]`} />
                         <p className="font-mono tracking-widest uppercase text-xl font-semibold text-foreground">
@@ -367,7 +367,7 @@ const Index = () => {
               </div>
 
               {/* Closing banner */}
-              <motion.div {...fadeUp(0.3)} className="mt-6 lg:mt-8 text-center">
+              <motion.div {...fadeUp(0.3)} className="mt-4 lg:mt-5 text-center">
                 <p className="text-base sm:text-lg lg:text-xl font-semibold text-foreground leading-relaxed max-w-3xl mx-auto">
                   "The gap between AI ambition and AI reality almost always starts with data infrastructure.{" "}
                   <span className="text-gradient-orange">We close that gap — and build everything on top of it.</span>"
@@ -377,9 +377,9 @@ const Index = () => {
           </section>
 
           {/* SLIDE 3 — THE PROBLEM */}
-          <section className="snap-section flex items-center relative py-8 sm:py-12">
+          <section className="snap-section flex flex-col relative">
             <SectionGlow position="top-right" size={600} />
-            <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full">
+            <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full my-auto">
               <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-5 sm:mb-10 lg:mb-12">
                 <p className="font-mono text-[10px] sm:text-xs text-primary tracking-widest uppercase mb-2 sm:mb-4">
                   Why This Matters
@@ -393,28 +393,28 @@ const Index = () => {
                 >
                   Most organisations still treat data as a reporting function — static dashboards, fragile pipelines,
                   and analytics teams buried in ad-hoc requests. Meanwhile, your competitors are deploying autonomous
-                  agents that make decisions in milliseconds. The gap between organisations that have
-                  engineering-grade data infrastructure and those that don't is widening — fast.
+                  agents that make decisions in milliseconds. The gap between organisations that have engineering-grade
+                  data infrastructure and those that don't is widening — fast.
                 </motion.p>
               </motion.div>
               <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-16 items-start">
                 <div className="space-y-1.5 sm:space-y-3 font-mono text-[10px] sm:text-sm">
-                    {[
-                      "[WARN] Pipeline failed: stale data — 47min lag",
-                      "[ERR]  Model drift detected — no retraining trigger",
-                      "[WARN] Dashboard refresh: manual, weekly cadence",
-                      "[ERR]  No observability — blind spot in pipeline health",
-                      "[INFO] Business asking: 'Can we predict demand?'",
-                      "[ERR]  68% of AI projects fail from bad data infra",
-                    ].map((log, i) => (
-                      <motion.div
-                        key={i}
-                        {...fadeUp(0.1 + i * 0.06)}
-                        className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded surface-2 ${log.includes("[ERR]") ? "text-destructive/80 border-l-2 border-destructive/50" : log.includes("[WARN]") ? "text-orange-300 border-l-2 border-orange-500/30" : "text-muted-foreground border-l-2 border-muted-foreground/40"}`}
-                      >
-                        {log}
-                      </motion.div>
-                    ))}
+                  {[
+                    "[WARN] Pipeline failed: stale data — 47min lag",
+                    "[ERR]  Model drift detected — no retraining trigger",
+                    "[WARN] Dashboard refresh: manual, weekly cadence",
+                    "[ERR]  No observability — blind spot in pipeline health",
+                    "[INFO] Business asking: 'Can we predict demand?'",
+                    "[ERR]  68% of AI projects fail from bad data infra",
+                  ].map((log, i) => (
+                    <motion.div
+                      key={i}
+                      {...fadeUp(0.1 + i * 0.06)}
+                      className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded surface-2 ${log.includes("[ERR]") ? "text-destructive/80 border-l-2 border-destructive/50" : log.includes("[WARN]") ? "text-orange-300 border-l-2 border-orange-500/30" : "text-muted-foreground border-l-2 border-muted-foreground/40"}`}
+                    >
+                      {log}
+                    </motion.div>
+                  ))}
                 </div>
                 <motion.div {...fadeUp(0.15)} className="lg:max-w-md lg:ml-auto w-full">
                   <div className="glass-panel rounded-2xl p-4 sm:p-5 lg:p-6">
@@ -537,7 +537,8 @@ const Index = () => {
                   Engineered for <span className="text-gradient-orange">Intelligence.</span>
                 </h2>
                 <p className="text-sm sm:text-base text-muted-foreground text-center max-w-2xl mx-auto">
-                  A continuous journey from clarity to intelligence — every service AI-enabled in delivery and AI-ready in design.
+                  A continuous journey from clarity to intelligence — every service AI-enabled in delivery and AI-ready
+                  in design.
                 </p>
               </motion.div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-5 sm:mb-8">
@@ -694,72 +695,70 @@ const Index = () => {
           </section>
 
           {/* SLIDE 8 — THE EVOLUTION */}
-            <section className="snap-section flex items-center relative">
-              <SectionGlow position="bottom-left" size={650} />
-              <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-                <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-                  <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">The Evolution</p>
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                    From Sail to <span className="text-gradient-orange">Leverage.</span>
-                  </h2>
-                </motion.div>
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
-                  <div>
-                    <motion.div {...fadeUp(0.1)}>
-                      <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
-                        For years, as <span className="text-foreground font-medium">Sail Analytics</span>, we built a
-                        foundation of enterprise trust by delivering high-stakes data analytics and engineering services
-                        to complex organizations. We helped our clients navigate the vast seas of information with
-                        precision and reliability.
-                      </p>
-                      <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
-                        But in the age of Artificial Intelligence,{" "}
-                        <span className="text-foreground font-medium">
-                          navigation isn't enough — you need momentum.
-                        </span>
-                      </p>
-                      <p className="text-muted-foreground leading-relaxed text-justify">
-                        <span className="text-gradient-orange font-semibold">InclinedPlane</span> represents a
-                        fundamental shift: providing the strategic leverage your business needs. We transform raw data
-                        into a sophisticated lever that multiplies your team's efforts and accelerates your trajectory.
-                      </p>
-                    </motion.div>
-                  </div>
-                  <motion.div {...fadeUp(0.15)}>
-                    <div className="flex flex-col gap-4">
-                      {[
-                        { before: "Sail Analytics", after: "InclinedPlane", desc: "Brand evolution" },
-                        { before: "Data Navigation", after: "Data Leverage", desc: "Strategic shift" },
-                        {
-                          before: "Legacy BI Services",
-                          after: "AI-Native Engineering & Analytics",
-                          desc: "Capability upgrade",
-                        },
-                        { before: "Reporting Focus", after: "Decision Intelligence", desc: "Value delivery" },
-                      ].map(({ before, after, desc }, i) => (
-                        <motion.div
-                          key={desc}
-                          {...fadeUp(0.2 + i * 0.06)}
-                          className="glass-panel rounded-xl p-4 sm:p-5 flex items-center gap-3 sm:gap-4 group hover:glow-orange transition-shadow"
-                          data-cursor-hover
-                        >
-                          <div className="w-[38%] shrink-0">
-                            <p className="text-xs sm:text-sm text-muted-foreground/40 italic">{before}</p>
-                          </div>
-                          <ArrowRight size={14} className="text-primary shrink-0" />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-xs sm:text-sm text-foreground font-semibold">{after}</p>
-                          </div>
-                          <span className="text-[9px] sm:text-[10px] text-muted-foreground font-mono hidden sm:block shrink-0">
-                            {desc}
-                          </span>
-                        </motion.div>
-                      ))}
-                    </div>
+          <section className="snap-section flex items-center relative">
+            <SectionGlow position="bottom-left" size={650} />
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+              <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">The Evolution</p>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+                  From Sail to <span className="text-gradient-orange">Leverage.</span>
+                </h2>
+              </motion.div>
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                  <motion.div {...fadeUp(0.1)}>
+                    <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
+                      For years, as <span className="text-foreground font-medium">Sail Analytics</span>, we built a
+                      foundation of enterprise trust by delivering high-stakes data analytics and engineering services
+                      to complex organizations. We helped our clients navigate the vast seas of information with
+                      precision and reliability.
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
+                      But in the age of Artificial Intelligence,{" "}
+                      <span className="text-foreground font-medium">navigation isn't enough — you need momentum.</span>
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed text-justify">
+                      <span className="text-gradient-orange font-semibold">InclinedPlane</span> represents a fundamental
+                      shift: providing the strategic leverage your business needs. We transform raw data into a
+                      sophisticated lever that multiplies your team's efforts and accelerates your trajectory.
+                    </p>
                   </motion.div>
                 </div>
+                <motion.div {...fadeUp(0.15)}>
+                  <div className="flex flex-col gap-4">
+                    {[
+                      { before: "Sail Analytics", after: "InclinedPlane", desc: "Brand evolution" },
+                      { before: "Data Navigation", after: "Data Leverage", desc: "Strategic shift" },
+                      {
+                        before: "Legacy BI Services",
+                        after: "AI-Native Engineering & Analytics",
+                        desc: "Capability upgrade",
+                      },
+                      { before: "Reporting Focus", after: "Decision Intelligence", desc: "Value delivery" },
+                    ].map(({ before, after, desc }, i) => (
+                      <motion.div
+                        key={desc}
+                        {...fadeUp(0.2 + i * 0.06)}
+                        className="glass-panel rounded-xl p-4 sm:p-5 flex items-center gap-3 sm:gap-4 group hover:glow-orange transition-shadow"
+                        data-cursor-hover
+                      >
+                        <div className="w-[38%] shrink-0">
+                          <p className="text-xs sm:text-sm text-muted-foreground/40 italic">{before}</p>
+                        </div>
+                        <ArrowRight size={14} className="text-primary shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs sm:text-sm text-foreground font-semibold">{after}</p>
+                        </div>
+                        <span className="text-[9px] sm:text-[10px] text-muted-foreground font-mono hidden sm:block shrink-0">
+                          {desc}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
               </div>
-            </section>
+            </div>
+          </section>
 
           {/* SLIDE 7 — WHY INCLINED PLANE */}
           <section className="snap-section flex items-center relative">
@@ -824,7 +823,6 @@ const Index = () => {
               </motion.div>
             </div>
           </section>
-
 
           {/* SLIDE 9 — CORE CAPABILITIES (Commented out) */}
           {false && (
