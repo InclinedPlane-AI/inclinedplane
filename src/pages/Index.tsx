@@ -227,9 +227,9 @@ const Index = () => {
         {/* Grain overlay for content sections (excludes hero & footer) */}
         <div className="grain-overlay relative">
           {/* SLIDE 2 — AI TRANSFORMATION FACTS (Bento) */}
-          <section className="snap-section flex flex-col relative">
+          <section className="snap-section flex items-center justify-center relative">
             <SectionGlow position="bottom-right" size={700} />
-            <div className="max-w-6xl mx-auto px-6 lg:px-8 w-full my-auto">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8 w-full">
               <motion.div {...fadeUp()}>
                 <p className="font-mono text-xs text-primary tracking-widest uppercase mb-2 text-center">
                   The AI Imperative — In Numbers
@@ -377,9 +377,9 @@ const Index = () => {
           </section>
 
           {/* SLIDE 3 — THE PROBLEM */}
-          <section className="snap-section flex flex-col relative">
+          <section className="snap-section flex items-center relative">
             <SectionGlow position="top-right" size={600} />
-            <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full my-auto">
+            <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full">
               <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-5 sm:mb-10 lg:mb-12">
                 <p className="font-mono text-[10px] sm:text-xs text-primary tracking-widest uppercase mb-2 sm:mb-4">
                   Why This Matters
