@@ -4,12 +4,12 @@ import { Waves, Workflow, Activity, TrendingUp, Bot } from "lucide-react";
 
 const NODES = [
   {
-     label: "High-Velocity Ingestion",
+     label: "AI-Ready Architecture",
     icon: Waves,
     desc: "Enterprise-grade data pipelines that unify disparate sources into a single, real-time stream.",
   },
   {
-     label: "Self-Architecting Pipelines",
+     label: "Engineering-Grade Pipelines",
     icon: Workflow,
     desc: "Cloud-native warehousing on AWS, Azure, or Snowflake optimized for heavy-compute AI workloads.",
   },
