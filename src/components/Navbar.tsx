@@ -47,7 +47,15 @@ const WavyLine = ({ animate = false, className = "" }: { animate?: boolean; clas
   </svg>
 );
 
-const NavLinkItem = ({ link, isActive }: { link: (typeof navLinks)[0]; isActive: boolean }) => {
+const NavLinkItem = ({
+  link,
+  isActive,
+  forceLight,
+}: {
+  link: (typeof navLinks)[0];
+  isActive: boolean;
+  forceLight?: boolean;
+}) => {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -57,7 +65,13 @@ const NavLinkItem = ({ link, isActive }: { link: (typeof navLinks)[0]; isActive:
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={`relative px-3 py-2 text-sm transition-colors duration-200 ${
-        isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+        forceLight
+          ? isActive
+            ? "text-white"
+            : "text-white/70 hover:text-white"
+          : isActive
+            ? "text-foreground"
+            : "text-muted-foreground hover:text-foreground"
       }`}
     >
       <span className="relative inline-block">
@@ -84,7 +98,13 @@ const NavLinkItem = ({ link, isActive }: { link: (typeof navLinks)[0]; isActive:
   );
 };
 
-const Navbar = ({ activeOverride }: { activeOverride?: string }) => {
+const Navbar = ({
+  activeOverride,
+  forceLight = false,
+}: {
+  activeOverride?: string;
+  forceLight?: boolean;
+}) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
@@ -107,6 +127,8 @@ const Navbar = ({ activeOverride }: { activeOverride?: string }) => {
     setMobileOpen(false);
   }, [location]);
 
+  const lightMode = forceLight && !scrolled;
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -117,7 +139,7 @@ const Navbar = ({ activeOverride }: { activeOverride?: string }) => {
         {/* Logo */}
         <Link to="/" className="flex items-center group" data-cursor-hover>
           <span className="font-extrabold text-lg tracking-tight">
-            <span className="text-foreground">Inclined</span>
+            <span className={lightMode ? "text-white" : "text-foreground"}>Inclined</span>
             <span className="text-gradient-orange">Plane</span>
           </span>
         </Link>
@@ -129,6 +151,7 @@ const Navbar = ({ activeOverride }: { activeOverride?: string }) => {
               key={link.path}
               link={link}
               isActive={activeOverride ? activeOverride === link.path : location.pathname === link.path}
+              forceLight={lightMode}
             />
           ))}
         </div>
@@ -145,7 +168,7 @@ const Navbar = ({ activeOverride }: { activeOverride?: string }) => {
           </Link>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-foreground"
+            className={`md:hidden ${lightMode ? "text-white" : "text-foreground"}`}
             data-cursor-hover
             aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileOpen}

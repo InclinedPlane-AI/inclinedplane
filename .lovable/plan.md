@@ -1,55 +1,45 @@
+## Problem
 
-# Expand Content Across All 14 Case Studies
+Case study detail pages (Primary, Secondary, Field, and others using `CaseStudyAnomalousHero` / `CaseStudyImageHero` / `CaseStudyEVVideoHero`) all render a **fixed dark hero** (`bg-[#0a0a0a]` + dark image/video + dark gradient scrims), regardless of theme.
 
-## Overview
-Enrich the body text and bullet points for every case study in `src/data/caseStudyDetails.ts`. Each case study is unique — expansions will be tailored to the specific domain, client context, and technical approach.
+`Navbar.tsx` is theme-aware — in light mode the logo "Inclined" and the nav links resolve to `text-foreground` / `text-muted-foreground`, which are **dark colors**. Result: dark text on dark hero is unreadable until the user scrolls and the `glass-panel-strong` background kicks in.
 
-## What's being expanded per section
+## Goal
 
-**The Opportunity** — Deepen business context: industry pressures, scale of the problem, what was at stake. Add bullets where missing.
+Keep the dark hero exactly as it is. Make the navbar always readable on top of it (in both light and dark mode) without changing the navbar's structure or its behavior on the rest of the site.
 
-**The Solution** — Expand on methodology, architecture decisions, why specific tools were chosen. Add bullets where missing, enrich existing ones.
+## Approach
 
-**The Impact** — Strengthen with more specific outcomes and downstream effects. Add bullets where thin.
+Add a lightweight "force light text" mode to the navbar that activates **only** while the user is at the top of a case study detail page (i.e. while the hero is in view), and turns off as soon as they scroll past it (where the existing `glass-panel-strong` themed background already provides contrast).
 
-## All 14 case studies
+### Implementation outline
 
-1. **Retail & Manufacturing Chain** — Add depth to opportunity (dealer network scale, competitive pressure). Expand impact bullets (dealer satisfaction, reporting cadence shift).
+1. **`src/components/Navbar.tsx`** — add an optional `forceLight?: boolean` prop.
+   - When `forceLight && !scrolled`: override the logo "Inclined" word and the nav link colors to white / white-with-opacity.
+   - "Plane" stays orange gradient (already readable on dark).
+   - The "Build With Us" CTA (orange pill, white text) and the theme toggle already read fine on dark — leave them.
+   - Once `scrolled` is true, drop the override so the themed glass panel takes over normally.
 
-2. **Engine Demand Forecast** — Opportunity has no bullets — add product line complexity, planning horizon, cost of forecast errors. Expand solution on benchmarking rigor and retraining. Add impact bullets on production alignment.
+2. **`src/components/PageLayout.tsx`** — accept an optional `navbarProps` (or a simpler `forceLightNavbar` boolean) and forward to `<Navbar />`.
 
-3. **EV Battery Predictive** — Opportunity has no bullets — add fleet scale, safety risk, IoT data volume, cost of reactive maintenance. Expand solution on feature engineering and scoring pipeline. Expand impact on scheduling transformation.
+3. **`src/pages/CaseStudyDetail.tsx`** — pass `forceLightNavbar` to `PageLayout`. The page already knows it always shows a dark hero.
 
-4. **FMCG Edible Oil** — Expand opportunity on distribution complexity. Deepen solution on pipeline engineering. Add impact context on decision cadence.
+   Simple version: always `true` for case study detail pages.
+   Slightly nicer (optional): use a scroll listener already present in Navbar — the `scrolled` flag — which naturally turns the override off after ~40px scroll, so we don't need a second listener.
 
-5. **EV Fleet Scheduling** — Expand opportunity on real-time dispatch complexity. Deepen solution on how the three algorithms complement each other. Add impact bullets on utilization and driver fairness.
+4. **No changes** to the hero components, theme tokens, or any other page.
 
-6. **Pharma Sales BI** — Expand opportunity on field force scale and regulatory context. Deepen solution on integration complexity. Add impact bullets on territory optimization.
+### Why this approach
 
-7. **E-Commerce Inventory & Procurement** — Expand opportunity on working capital pressure. Deepen solution on AWS architecture. Add impact bullets on vendor negotiation leverage.
+- Doesn't touch the design system or semantic tokens (no risk to other pages).
+- Doesn't change the hero visuals.
+- Reverts cleanly to themed styling once the user scrolls, so dark-mode behavior on case study pages is unchanged.
+- Single prop, opt-in per page — won't accidentally affect Home, Services, etc.
 
-8. **Energy Audit** — Opportunity has no bullets — add industry context (compressed air/steam/gas), scale of losses, regulatory drivers. Expand solution on audio analytics methodology. Add impact bullets on quantified savings.
+### Files to edit
 
-9. **VC EdTech** — Opportunity has no bullets — add growth-stage chaos, investor reporting needs, student outcome tracking. Expand solution on warehouse architecture. Add impact bullets on investor confidence.
+- `src/components/Navbar.tsx` — add `forceLight` prop + conditional classes
+- `src/components/PageLayout.tsx` — forward the flag
+- `src/pages/CaseStudyDetail.tsx` — set the flag to `true`
 
-10. **Pharma MNC** — Opportunity has no bullets — add multi-geography complexity, field force coordination. Expand solution on route optimization logic. Add impact bullets on brand-level intelligence.
-
-11. **Capital Equipment** — Opportunity has no bullets — add BOM complexity, manufacturing scale. Expand solution on ERP rollout and change management. Add impact bullets on adoption metrics.
-
-12. **Solar BI** — Expand opportunity on government project stakes. Deepen solution on Tableau modeling. Add impact bullets on timeline adherence.
-
-13. **Cultural Heritage** — Opportunity has no bullets — add government mandate, tourism economics, heritage stakes. Expand solution on geospatial methodology. Add impact bullets on policy influence.
-
-14. **ERP Unification** — Already the strongest entry; light enrichment to opportunity context on legacy system technical debt and impact on onboarding speed and global rollout momentum.
-
-## Content rules
-- Domain-accurate, professional language — no filler.
-- Each case study keeps its unique voice and technical specificity.
-- Bullets: action-led, specific, outcome-oriented (matching existing pattern).
-- Body paragraphs: narrative context setting the stage for bullets.
-- No invented metrics — only expand on what's contextually defensible.
-
-## Technical details
-- Single file edit: `src/data/caseStudyDetails.ts`
-- No component, layout, routing, or structural changes.
-- All existing slugs, IDs, hero content, and section structure preserved.
+No new files, no structural changes, no token changes.
