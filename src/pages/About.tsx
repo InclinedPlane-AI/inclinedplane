@@ -458,64 +458,57 @@ const About = () => {
             </p>
           </motion.div>
 
-          <motion.div
-            {...fadeUp}
-            className="rounded-2xl p-8 sm:p-10 relative overflow-hidden"
-            style={{
-              background: "hsl(var(--card))",
-              border: "1px solid hsl(25 100% 50% / 0.1)",
-              boxShadow: "0 8px 32px -8px hsl(25 100% 50% / 0.08), inset 0 1px 0 hsl(0 0% 100% / 0.04)",
-            }}
-          >
-            <div
-              className="absolute inset-0 pointer-events-none opacity-[0.04]"
-              style={{
-                background: "radial-gradient(ellipse at 70% 30%, hsl(25 100% 50%), transparent 60%)",
-              }}
-            />
-            <div className="relative z-10 space-y-6">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Shield className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="font-bold text-foreground text-lg">Methodology Over Heroics</h3>
-              </div>
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                We don't rely on individuals to carry engagements. Every project runs on a defined framework. The
-                system is the safeguard, not the person.
-              </p>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-                {[
-                  {
-                    icon: Layers,
-                    label: "Architecture Reviews",
-                    text: "Every design decision is peer-reviewed before a single line of production code is written.",
-                  },
-                  {
-                    icon: Shield,
-                    label: "Quality Gates",
-                    text: "Tests, linting, and validation checks block anything substandard from reaching production.",
-                  },
-                  {
-                    icon: Zap,
-                    label: "CI/CD Workflows",
-                    text: "Automated pipelines deploy with the same rigor as a SaaS product — every time.",
-                  },
-                  {
-                    icon: Users,
-                    label: "Documented Handoffs",
-                    text: "Knowledge transfer is a deliverable, not an afterthought. Your team owns what we build.",
-                  },
-                ].map(({ icon: Icon, label, text }) => (
-                  <div key={label} className="glass-panel rounded-xl p-5">
-                    <Icon className="w-4 h-4 text-primary mb-2" />
-                    <h4 className="font-semibold text-foreground text-sm mb-1">{label}</h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{text}</p>
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              {
+                icon: Shield,
+                title: "Methodology over heroics",
+                text: "We don't rely on individuals to carry engagements. Every project runs on a defined framework — architecture reviews, quality gates, CI/CD workflows, and documented handoffs. The system is the safeguard, not the person.",
+              },
+              {
+                icon: Layers,
+                title: "Rigour at every layer",
+                text: "We apply the same engineering standards to a reporting pipeline as we do to a production ML system. Testing, versioning, observability — non-negotiable, regardless of project size or timeline pressure.",
+              },
+              {
+                icon: Zap,
+                title: "Transparent by default",
+                text: "No black boxes. No hidden complexity. Every system we build is documented, observable, and transferable. You should always know what you have, how it works, and why decisions were made.",
+              },
+              {
+                icon: Users,
+                title: "Built to last, not to impress",
+                text: "We optimise for systems that compound over time — not for delivery that looks good in a demo but degrades in production. The measure of our work is how it performs six months after we leave.",
+              },
+            ].map(({ icon: Icon, title, text }) => (
+              <motion.div
+                key={title}
+                {...fadeUp}
+                className="rounded-2xl p-8 relative overflow-hidden"
+                style={{
+                  background: "hsl(var(--card))",
+                  border: "1px solid hsl(25 100% 50% / 0.1)",
+                  boxShadow: "0 8px 32px -8px hsl(25 100% 50% / 0.08), inset 0 1px 0 hsl(0 0% 100% / 0.04)",
+                }}
+              >
+                <div
+                  className="absolute inset-0 pointer-events-none opacity-[0.04]"
+                  style={{
+                    background: "radial-gradient(ellipse at 70% 30%, hsl(25 100% 50%), transparent 60%)",
+                  }}
+                />
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <h3 className="font-bold text-foreground text-lg">{title}</h3>
                   </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+                  <p className="text-muted-foreground leading-relaxed">{text}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
