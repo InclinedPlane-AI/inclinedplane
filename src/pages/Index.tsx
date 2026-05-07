@@ -13,6 +13,7 @@ import OrbitalGraphic from "@/components/OrbitalGraphic";
 import SectionGlow from "@/components/SectionGlow";
 import TechStackGrid from "@/components/TechStackGrid";
 import InteractiveDotGrid from "@/components/InteractiveDotGrid";
+import RotatingText from "@/components/RotatingText";
 import {
   ArrowRight,
   ArrowUpRight,
