@@ -771,13 +771,13 @@ const Index = () => {
                         data-cursor-hover
                       >
                         <div className="w-[38%] shrink-0">
-                          <p className="text-xs sm:text-sm text-muted-foreground/80 italic line-through decoration-muted-foreground/40">{before}</p>
+                          <p className="text-xs sm:text-sm text-muted-foreground italic line-through decoration-muted-foreground/60">{before}</p>
                         </div>
                         <ArrowRight size={14} className="text-primary shrink-0" />
                         <div className="flex-1 min-w-0">
                           <p className="text-xs sm:text-sm text-foreground font-semibold">{after}</p>
                         </div>
-                        <span className="text-[9px] sm:text-[10px] text-muted-foreground font-mono hidden sm:block shrink-0">
+                        <span className="text-[10px] sm:text-xs text-muted-foreground font-mono hidden sm:block shrink-0">
                           {desc}
                         </span>
                       </motion.div>
