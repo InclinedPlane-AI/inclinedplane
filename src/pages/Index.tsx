@@ -191,20 +191,14 @@ const Index = () => {
                   <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-[1.25] tracking-tight mb-4 sm:mb-6 flex flex-wrap items-baseline gap-x-3">
                     <RotatingText
                       texts={rotatingWords}
-                      mainClassName="bg-gradient-orange text-primary-foreground inline-flex overflow-hidden px-3 sm:px-4 py-1 sm:py-1.5 rounded-lg glow-orange"
+                      mainClassName="bg-gradient-orange text-primary-foreground inline-flex justify-center overflow-hidden px-3 sm:px-4 py-1 sm:py-1.5 rounded-lg glow-orange min-w-[6.5ch] sm:min-w-[7ch]"
                       splitLevelClassName="overflow-hidden pb-1"
                       staggerFrom="last"
                       staggerDuration={0.025}
                       transition={{ type: "spring", damping: 32, stiffness: 220, mass: 0.9 }}
                       rotationInterval={2400}
                     />
-                    <motion.span
-                      layout
-                      transition={{ type: "spring", damping: 32, stiffness: 220, mass: 0.9 }}
-                      className="text-foreground"
-                    >
-                      Accelerated
-                    </motion.span>
+                    <span className="text-foreground">Accelerated</span>
                   </div>
                   <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-lg mb-6 sm:mb-8 text-justify">
                     We build the data infrastructure and AI systems that power high-velocity enterprises — from a solid
