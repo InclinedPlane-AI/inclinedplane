@@ -68,7 +68,7 @@ const CaseStudyDetail = () => {
   };
 
   return (
-    <PageLayout>
+    <PageLayout forceLightNavbar>
       <SEOHead
         title={`${cs.title} — Case Study`}
         description={cs.summary}
