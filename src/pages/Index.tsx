@@ -57,6 +57,15 @@ const fadeUp = (delay = 0) => ({
 const Index = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const rotatingWords = ["Growth", "Intelligence"];
+  const [rotatingIndex, setRotatingIndex] = useState(0);
+  const rotatingWord = rotatingWords[rotatingIndex];
+  useEffect(() => {
+    const id = setInterval(() => {
+      setRotatingIndex((i) => (i + 1) % rotatingWords.length);
+    }, 2400);
+    return () => clearInterval(id);
+  }, []);
 
   const scrollToSlide = useCallback((index: number) => {
     const container = containerRef.current;
