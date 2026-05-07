@@ -188,10 +188,10 @@ const Index = () => {
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] tracking-tight mb-4 sm:mb-6">
                     Data Leveraged.
                   </h1>
-                  <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-[1.25] tracking-tight mb-4 sm:mb-6 flex flex-nowrap items-baseline gap-x-3 whitespace-nowrap">
+                  <div className="text-xl sm:text-2xl md:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-semibold text-foreground leading-[1.25] tracking-tight mb-4 sm:mb-6 flex flex-nowrap items-baseline gap-x-2 sm:gap-x-3 whitespace-nowrap">
                     <RotatingText
                       texts={rotatingWords}
-                      mainClassName="bg-gradient-orange text-primary-foreground inline-flex justify-start overflow-hidden px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg glow-orange min-w-[10ch] sm:min-w-[10.5ch]"
+                      mainClassName="bg-gradient-orange text-primary-foreground inline-flex justify-start overflow-hidden px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg glow-orange min-w-[9ch] sm:min-w-[9.5ch]"
                       splitLevelClassName="overflow-hidden pb-1"
                       staggerFrom="last"
                       staggerDuration={0.025}
