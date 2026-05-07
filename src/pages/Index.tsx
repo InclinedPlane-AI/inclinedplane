@@ -124,7 +124,7 @@ const Index = () => {
       case 9:
         return "/contact"; // Final CTA
       default:
-        return "/";
+        return "/"; //close
     }
   };
 
@@ -765,7 +765,9 @@ const Index = () => {
                         data-cursor-hover
                       >
                         <div className="w-[38%] shrink-0">
-                          <p className="text-xs sm:text-sm text-muted-foreground italic line-through decoration-muted-foreground/60">{before}</p>
+                          <p className="text-xs sm:text-sm text-muted-foreground italic line-through decoration-muted-foreground/60">
+                            {before}
+                          </p>
                         </div>
                         <ArrowRight size={14} className="text-primary shrink-0" />
                         <div className="flex-1 min-w-0">
