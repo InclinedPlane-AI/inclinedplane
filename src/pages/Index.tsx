@@ -762,7 +762,7 @@ const Index = () => {
                         after: "AI-Native Engineering & Analytics",
                         desc: "Capability upgrade",
                       },
-                      { before: "Reporting Focus", after: "Decision Intelligence", desc: "Value delivery" },
+                      { before: "Reporting Focus", after: "Autonomous Decisions", desc: "Value delivery" },
                     ].map(({ before, after, desc }, i) => (
                       <motion.div
                         key={desc}
