@@ -195,10 +195,16 @@ const Index = () => {
                       splitLevelClassName="overflow-hidden pb-1"
                       staggerFrom="last"
                       staggerDuration={0.025}
-                      transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                      transition={{ type: "spring", damping: 32, stiffness: 220, mass: 0.9 }}
                       rotationInterval={2400}
                     />
-                    <span className="text-foreground">Accelerated</span>
+                    <motion.span
+                      layout
+                      transition={{ type: "spring", damping: 32, stiffness: 220, mass: 0.9 }}
+                      className="text-foreground"
+                    >
+                      Accelerated
+                    </motion.span>
                   </div>
                   <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-lg mb-6 sm:mb-8 text-justify">
                     We build the data infrastructure and AI systems that power high-velocity enterprises — from a solid
