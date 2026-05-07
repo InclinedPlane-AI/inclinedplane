@@ -185,12 +185,14 @@ const Index = () => {
                     The Architecture of Enterprise Velocity
                   </motion.p>
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] tracking-tight mb-4 sm:mb-6">
-                    Data Leveraged. <span className="text-gradient-orange">Intelligence Deployed.</span>
+                    Data Leveraged.
                   </h1>
                   <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight tracking-tight mb-4 sm:mb-6 flex flex-wrap items-baseline gap-x-3">
                     <span className="relative inline-flex items-baseline overflow-hidden">
                       {/* Sizer: invisible, holds the width of the widest word so layout never jumps */}
-                      <span aria-hidden className="invisible whitespace-nowrap">Intelligence</span>
+                      <span aria-hidden className="invisible whitespace-nowrap">
+                        Intelligence
+                      </span>
                       <AnimatePresence mode="wait">
                         <motion.span
                           key={rotatingWord}
