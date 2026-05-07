@@ -771,7 +771,7 @@ const Index = () => {
                         data-cursor-hover
                       >
                         <div className="w-[38%] shrink-0">
-                          <p className="text-xs sm:text-sm text-muted-foreground/40 italic">{before}</p>
+                          <p className="text-xs sm:text-sm text-muted-foreground/80 italic line-through decoration-muted-foreground/40">{before}</p>
                         </div>
                         <ArrowRight size={14} className="text-primary shrink-0" />
                         <div className="flex-1 min-w-0">
