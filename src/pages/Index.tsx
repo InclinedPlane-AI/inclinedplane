@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -57,6 +57,15 @@ const fadeUp = (delay = 0) => ({
 const Index = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const rotatingWords = ["Growth", "Intelligence"];
+  const [rotatingIndex, setRotatingIndex] = useState(0);
+  const rotatingWord = rotatingWords[rotatingIndex];
+  useEffect(() => {
+    const id = setInterval(() => {
+      setRotatingIndex((i) => (i + 1) % rotatingWords.length);
+    }, 2400);
+    return () => clearInterval(id);
+  }, []);
 
   const scrollToSlide = useCallback((index: number) => {
     const container = containerRef.current;
@@ -178,6 +187,25 @@ const Index = () => {
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] tracking-tight mb-4 sm:mb-6">
                     Data Leveraged. <span className="text-gradient-orange">Intelligence Deployed.</span>
                   </h1>
+                  <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight tracking-tight mb-4 sm:mb-6 flex flex-wrap items-baseline gap-x-3">
+                    <span className="relative inline-flex items-baseline overflow-hidden">
+                      {/* Sizer: invisible, holds the width of the widest word so layout never jumps */}
+                      <span aria-hidden className="invisible whitespace-nowrap">Intelligence</span>
+                      <AnimatePresence mode="wait">
+                        <motion.span
+                          key={rotatingWord}
+                          initial={{ y: "100%", opacity: 0 }}
+                          animate={{ y: "0%", opacity: 1 }}
+                          exit={{ y: "-100%", opacity: 0 }}
+                          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                          className="text-gradient-orange absolute left-0 top-0 whitespace-nowrap"
+                        >
+                          {rotatingWord}
+                        </motion.span>
+                      </AnimatePresence>
+                    </span>
+                    <span className="text-foreground">Accelerated</span>
+                  </div>
                   <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-lg mb-6 sm:mb-8 text-justify">
                     We build the data infrastructure and AI systems that power high-velocity enterprises — from a solid
                     foundation all the way to autonomous decision-making.
