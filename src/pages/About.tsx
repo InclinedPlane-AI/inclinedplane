@@ -453,6 +453,9 @@ const About = () => {
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
               Company <span className="text-gradient-orange">Culture</span>
             </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl">
+              Process-driven. Engineering-first. Built for the long term.
+            </p>
           </motion.div>
 
           <motion.div
@@ -473,31 +476,35 @@ const About = () => {
             <div className="relative z-10 space-y-6">
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Lightbulb className="w-5 h-5 text-primary" />
+                  <Shield className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="font-bold text-foreground text-lg">Innovation Over Convention</h3>
+                <h3 className="font-bold text-foreground text-lg">Methodology Over Heroics</h3>
               </div>
               <p className="text-muted-foreground leading-relaxed text-lg">
-                Our eyes are firmly set on adding enormous value to our clients. With such an end goal comes an
-                environment that is appreciative of out-of-the-box thinking and relentless innovation. We don't just
-                harbour creativity — we demand it.
+                We don't rely on individuals to carry engagements. Every project runs on a defined framework. The
+                system is the safeguard, not the person.
               </p>
-              <div className="grid sm:grid-cols-3 gap-4 pt-4">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
                 {[
                   {
+                    icon: Layers,
+                    label: "Architecture Reviews",
+                    text: "Every design decision is peer-reviewed before a single line of production code is written.",
+                  },
+                  {
+                    icon: Shield,
+                    label: "Quality Gates",
+                    text: "Tests, linting, and validation checks block anything substandard from reaching production.",
+                  },
+                  {
                     icon: Zap,
-                    label: "Bias to Action",
-                    text: "Ship fast, iterate faster. We value working systems over perfect proposals.",
+                    label: "CI/CD Workflows",
+                    text: "Automated pipelines deploy with the same rigor as a SaaS product — every time.",
                   },
                   {
                     icon: Users,
-                    label: "Radical Transparency",
-                    text: "Open communication, shared context, no information silos. Everyone sees the full picture.",
-                  },
-                  {
-                    icon: ArrowRight,
-                    label: "Grow With Clients",
-                    text: "We're not vendors — we're partners. Your growth trajectory is ours.",
+                    label: "Documented Handoffs",
+                    text: "Knowledge transfer is a deliverable, not an afterthought. Your team owns what we build.",
                   },
                 ].map(({ icon: Icon, label, text }) => (
                   <div key={label} className="glass-panel rounded-xl p-5">
