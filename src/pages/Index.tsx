@@ -124,7 +124,7 @@ const Index = () => {
       case 9:
         return "/contact"; // Final CTA
       default:
-        return "/"; //close
+        return "/"; //close section
     }
   };
 
