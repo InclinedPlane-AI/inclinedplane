@@ -758,7 +758,7 @@ const Index = () => {
                       { before: "Sail Analytics", after: "InclinedPlane", desc: "Brand evolution" },
                       { before: "Data Navigation", after: "Data Leverage", desc: "Strategic shift" },
                       {
-                        before: "Legacy BI Services",
+                        before: "BI Services",
                         after: "AI-Native Engineering & Analytics",
                         desc: "Capability upgrade",
                       },
