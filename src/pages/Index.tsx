@@ -191,8 +191,8 @@ const Index = () => {
                   <div className="text-xl sm:text-2xl md:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-semibold text-foreground leading-[1.25] tracking-tight mb-4 sm:mb-6 flex flex-nowrap items-baseline gap-x-2 sm:gap-x-3 whitespace-nowrap">
                     <RotatingText
                       texts={rotatingWords}
-                      mainClassName="bg-gradient-orange text-primary-foreground inline-flex justify-start overflow-hidden px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg glow-orange min-w-[9ch] sm:min-w-[9.5ch]"
-                      splitLevelClassName="overflow-hidden pb-1"
+                      mainClassName="bg-gradient-orange text-primary-foreground inline-flex justify-center overflow-hidden px-2 sm:px-2.5 py-1 sm:py-2 rounded-lg glow-orange min-w-[9ch] sm:min-w-[9.5ch]"
+                      splitLevelClassName="overflow-hidden pb-2"
                       staggerFrom="last"
                       staggerDuration={0.025}
                       transition={{ type: "spring", damping: 32, stiffness: 220, mass: 0.9 }}
