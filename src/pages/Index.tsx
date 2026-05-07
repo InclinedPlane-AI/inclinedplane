@@ -13,6 +13,7 @@ import OrbitalGraphic from "@/components/OrbitalGraphic";
 import SectionGlow from "@/components/SectionGlow";
 import TechStackGrid from "@/components/TechStackGrid";
 import InteractiveDotGrid from "@/components/InteractiveDotGrid";
+import RotatingText from "@/components/RotatingText";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -188,29 +189,15 @@ const Index = () => {
                     Data Leveraged.
                   </h1>
                   <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-[1.25] tracking-tight mb-4 sm:mb-6 flex flex-wrap items-baseline gap-x-3">
-                    <motion.span
-                      layout
-                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                      className="relative inline-block overflow-hidden align-baseline"
-                      style={{ paddingBottom: "0.15em" }}
-                    >
-                      {/* Sizer: invisible, sized to the CURRENT word so trailing space stays tight */}
-                      <span aria-hidden className="invisible whitespace-nowrap">
-                        {rotatingWord}
-                      </span>
-                      <AnimatePresence mode="wait">
-                        <motion.span
-                          key={rotatingWord}
-                          initial={{ y: "100%", opacity: 0 }}
-                          animate={{ y: "0%", opacity: 1 }}
-                          exit={{ y: "-100%", opacity: 0 }}
-                          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                          className="text-gradient-orange absolute left-0 top-0 whitespace-nowrap"
-                        >
-                          {rotatingWord}
-                        </motion.span>
-                      </AnimatePresence>
-                    </motion.span>
+                    <RotatingText
+                      texts={rotatingWords}
+                      mainClassName="text-gradient-orange inline-flex overflow-hidden py-[0.1em]"
+                      splitLevelClassName="overflow-hidden"
+                      staggerFrom="last"
+                      staggerDuration={0.025}
+                      transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                      rotationInterval={2400}
+                    />
                     <span className="text-foreground">Accelerated</span>
                   </div>
                   <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-lg mb-6 sm:mb-8 text-justify">
