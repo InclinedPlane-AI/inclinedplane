@@ -4,10 +4,16 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 
-const PageLayout = ({ children }: { children: ReactNode }) => {
+const PageLayout = ({
+  children,
+  forceLightNavbar = false,
+}: {
+  children: ReactNode;
+  forceLightNavbar?: boolean;
+}) => {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar forceLight={forceLightNavbar} />
       <motion.main
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
