@@ -248,29 +248,35 @@ const About = () => {
               Our <span className="text-gradient-orange">Values</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl">
-              These values underpin our code of conduct — the frame of reference for every decision we make, every
-              system we build, and every engagement we take on.
+              These aren't aspirational statements on a wall. They are the operating principles that govern every
+              engagement, every system, and every decision we make.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-2 gap-5">
             {[
               {
                 icon: Shield,
                 title: "Zero Compromise Excellence",
-                desc: 'Our steadfast commitment to quality is our key asset. We are a group of highly skilled engineers who don\'t ship "good enough." Every pipeline is production-grade, every model is validated, every architecture is built to scale.',
+                desc: "We don't ship good enough. Every pipeline is production-grade. Every model is validated. Every architecture is built to scale. We hold ourselves to the standard we'd want if we were the client — because eventually, we always are.",
                 accent: "from-primary/20 to-primary/5",
               },
               {
                 icon: Heart,
-                title: "Clients Come First",
-                desc: "We exhibit a deeply customer-centric approach — effective communication, consistent results, and an understanding that your data is your business. We don't just deliver insights; we grow alongside you.",
+                title: "Your Data Is Your Business",
+                desc: "We treat it that way. We don't parachute in, deliver, and disappear. We operate as an extension of your team — with the same stake in outcomes, the same intolerance for bad data, and the same urgency when something breaks at 3am.",
+                accent: "from-primary/15 to-primary/5",
+              },
+              {
+                icon: Target,
+                title: "Outcomes Over Outputs",
+                desc: "We measure success in business impact — revenue protected, decisions accelerated, costs reduced. Not pipelines built, dashboards delivered, or hours logged. If it doesn't move the needle, it doesn't count.",
                 accent: "from-primary/15 to-primary/5",
               },
               {
                 icon: Sparkles,
-                title: "Value Delivered, Not Promised",
-                desc: "Every member shares the need to create substantial impact. Our unwavering quest to add measurable value gives us the competitive edge. We measure success in business outcomes, not in slide decks.",
+                title: "We Say What We Think",
+                desc: "If your data estate has a problem, we'll tell you — even if it's uncomfortable. If a technology choice is wrong for your context, we'll say so. Honest counsel is more valuable than agreeable consulting.",
                 accent: "from-primary/15 to-primary/5",
               },
             ].map(({ icon: Icon, title, desc, accent }, i) => (
