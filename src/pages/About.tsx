@@ -96,7 +96,9 @@ const About = () => {
                       <Anchor className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-foreground text-lg">Sail Analytics LLP</h3>
+                      <h3 className="font-bold text-foreground text-lg">
+                        A decade of enterprise data delivery across four continents.
+                      </h3>
                       <p className="text-xs text-muted-foreground">
                         Bengaluru, India · Founded in the early days of the BI wave
                       </p>
