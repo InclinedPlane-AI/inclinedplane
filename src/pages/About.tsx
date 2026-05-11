@@ -194,16 +194,19 @@ const About = () => {
                       enterprises from data gravity — where data accumulates but doesn't move — to data leverage, where
                       every byte compounds into competitive advantage.
                     </p>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-muted-foreground leading-relaxed mb-4">
                       In physics, an inclined plane doesn't just move things up — it makes the impossible, possible.
                       Heavy loads that can't be lifted directly can be moved upward along a gentle slope. That's the
                       metaphor we live by: enterprise data transformation doesn't have to be a brute-force lift. With
                       the right architecture, the right automation, and the right intelligence — you ascend.
                     </p>
+                    <p className="text-muted-foreground leading-relaxed">
+                      We are a process-driven, engineering-first firm. Our delivery framework runs across five layers —
+                      from AI-Readiness Foundation through to autonomous Intelligence systems — each one observable,
+                      testable, and independently scalable. We take on fewer clients than we could, because the work
+                      demands it. Every system we build is one we'd stake our reputation on.
                     </p>
-                    <p className="text-muted-foreground leading-relaxed">We are a process-driven, engineering-first firm. Our delivery framework runs across five layers — from AI-Readiness Foundation through to autonomous Intelligence systems — each one observable, testable, and independently scalable. We take on fewer clients than we could, because the work demands it. Every system we build is one we'd stake our reputation on.
-                    </p>
-                    </div>
+                  </div>
                 </div>
               </motion.div>
             </div>
