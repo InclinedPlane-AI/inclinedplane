@@ -200,7 +200,10 @@ const About = () => {
                       metaphor we live by: enterprise data transformation doesn't have to be a brute-force lift. With
                       the right architecture, the right automation, and the right intelligence — you ascend.
                     </p>
-                  </div>
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed">We are a process-driven, engineering-first firm. Our delivery framework runs across five layers — from AI-Readiness Foundation through to autonomous Intelligence systems — each one observable, testable, and independently scalable. We take on fewer clients than we could, because the work demands it. Every system we build is one we'd stake our reputation on.
+                    </p>
+                    </div>
                 </div>
               </motion.div>
             </div>
