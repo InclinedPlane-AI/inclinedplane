@@ -105,24 +105,13 @@ const About = () => {
                     </div>
                   </div>
                   <p className="text-muted-foreground leading-relaxed mb-4">
-                    Sail Analytics was founded on a clear belief:{" "}
-                    <span className="text-foreground font-medium">
-                      data should cut through the haze of myths and biases.
-                    </span>{" "}
-                    We set out to help organizations across industries and geographies build analytical capabilities
-                    that would drive better decisions, greater innovation, and fairer workplaces.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    With a team of seasoned data scientists, statisticians, and business analysts, Sail grew into a
-                    trusted partner for Fortune 500 companies. We delivered robust analytics — from descriptive
-                    dashboards in Tableau and Power BI to predictive modelling and prescriptive recommendations — across
-                    retail, energy, manufacturing, healthcare, and financial services.
+                    We've worked inside the data estates of manufacturers, energy companies, logistics firms, and
+                    retailers — from initial BI build-outs to complex platform modernisations. Over time, one thing
+                    became clear: the bottleneck was never visualisation. It was always architecture, automation, and
+                    the complete absence of observability.
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    Our proprietary platform <span className="text-foreground font-medium">MeDaVi</span> became the
-                    backbone of our BI practice, offering performance monitoring dashboards, time-series forecasting,
-                    and advanced business analytics as managed services. We were proud of what we built. But we also saw
-                    what was coming.
+                    That realisation is what InclinedPlane is built on.
                   </p>
                 </div>
               </motion.div>
