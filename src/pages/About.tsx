@@ -55,7 +55,7 @@ const About = () => {
     <PageLayout>
       <SEOHead
         title="About Inclined Plane"
-        description="From Sail Analytics to Inclined Plane — our evolution into an AI-native data engineering firm. Meet the team building decision systems for modern enterprises."
+        description="Built for the AI Era — an engineering-first firm delivering production-grade data infrastructure and autonomous decision systems."
         path="/about"
       />
       <PageHero
@@ -518,15 +518,10 @@ const About = () => {
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
               The Rebrand Isn't Cosmetic. <span className="text-gradient-orange">It's Structural.</span>
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-6 max-w-3xl mx-auto">
-              The world doesn't need another BI consultancy. The AI era demands companies that can build the data
-              infrastructure to power autonomous decision-making — observable, automated, and production-hardened.
-            </p>
             <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto">
-              Sail Analytics gave us the foundation: deep domain expertise, Fortune 500 trust, and an obsession with
-              getting the answer right. Inclined Plane is what we're building on top: an engineering-first firm
-              structured for the US enterprise market, designed to move organizations upward — from raw data to real
-              intelligence — with less friction and more momentum.
+              The world doesn't need another BI consultancy. It needs firms that can build the data infrastructure to
+              power autonomous decision-making — observable, automated, and production-hardened. That's what
+              InclinedPlane is built to do.
             </p>
           </motion.div>
         </div>
