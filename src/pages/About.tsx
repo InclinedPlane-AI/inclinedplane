@@ -178,7 +178,7 @@ const About = () => {
                         <TrendingUp className="w-5 h-5 text-primary-foreground" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-foreground text-lg">Becoming Inclined Plane</h3>
+                        <h3 className="font-bold text-foreground text-lg">Why the Name?</h3>
                         <p className="text-xs text-primary font-mono">
                           Today · Restructured for the US enterprise market
                         </p>
