@@ -59,7 +59,7 @@ const About = () => {
         path="/about"
       />
       <PageHero
-        label="Our Story"
+        label="Who We Are"
         title={
           <>
             From Sail Analytics to <span className="text-gradient-orange">Inclined Plane.</span>
