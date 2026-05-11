@@ -62,7 +62,7 @@ const About = () => {
         label="Who We Are"
         title={
           <>
-            From Sail Analytics to <span className="text-gradient-orange">Inclined Plane.</span>
+            Built for the <span className="text-gradient-orange">AI Era.</span>
           </>
         }
         subtitle="A decade of data. A deliberate evolution. Built to move enterprises upward."
