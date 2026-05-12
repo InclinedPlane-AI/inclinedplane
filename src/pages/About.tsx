@@ -2,7 +2,7 @@ import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import SectionGlow from "@/components/SectionGlow";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { useRef } from "react";
 import awsLogo from "@/assets/aws-logo.png";
 import azureLogo from "@/assets/azure-logo.png";
@@ -66,7 +66,8 @@ const TimelineItem = ({
   forceActive?: boolean;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { margin: "0px 0px -40% 0px", once: false });
+  // Activate the dot precisely when the card's top crosses ~60% of viewport.
+  const inView = useInView(ref, { margin: "-60% 0px -30% 0px", once: false });
   const active = forceActive || inView;
   return (
     <motion.div
@@ -74,6 +75,7 @@ const TimelineItem = ({
       {...fadeUp}
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
       className="relative"
+      style={{ willChange: "transform, opacity" }}
     >
       <div className="absolute -left-14 top-1 hidden md:block z-10">
         <TimelineDot active={active} />
@@ -88,17 +90,31 @@ const TimelineTrack = ({ children }: { children: React.ReactNode }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 75%", "end 60%"],
+    // Start filling when the timeline's top reaches 80% of viewport,
+    // finish when its bottom reaches 40% of viewport.
+    offset: ["start 80%", "end 40%"],
   });
-  const fillHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  // Smooth the raw scroll value with a spring to remove jank on low-end devices.
+  const smooth = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    mass: 0.4,
+    restDelta: 0.001,
+  });
+  // Use scaleY (transform) instead of height (layout) — GPU-accelerated, no reflow.
+  const scaleY = useTransform(smooth, [0, 1], [0, 1]);
   return (
     <div ref={ref} className="relative">
       {/* Base line */}
       <div className="absolute left-[19px] top-0 bottom-0 w-px bg-muted-foreground/15 hidden md:block" />
-      {/* Progress line */}
+      {/* Progress line — transform-only animation, origin-top so it grows downward. */}
       <motion.div
-        style={{ height: fillHeight }}
-        className="absolute left-[19px] top-0 w-px bg-gradient-to-b from-primary via-primary/80 to-primary/30 hidden md:block shadow-[0_0_8px_hsl(25_100%_50%/0.6)]"
+        style={{
+          scaleY,
+          transformOrigin: "top",
+          willChange: "transform",
+        }}
+        className="absolute left-[19px] top-0 bottom-0 w-px bg-gradient-to-b from-primary via-primary/80 to-primary/30 hidden md:block shadow-[0_0_8px_hsl(25_100%_50%/0.6)]"
       />
       {children}
     </div>
