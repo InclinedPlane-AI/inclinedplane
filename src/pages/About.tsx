@@ -129,16 +129,20 @@ const About = () => {
                     <h3 className="font-bold text-foreground text-lg">What We've Built</h3>
                   </div>
                   <p className="text-muted-foreground leading-relaxed mb-4">
-                    Across hundreds of engagements, a pattern emerged. Organizations were drowning in dashboards but
-                    starving for <span className="text-foreground font-medium">decisions</span>. The bottleneck was
-                    never visualization — it was architecture, automation, and the complete absence of data
-                    observability. Enterprises had reporting layers built on fragile foundations.
+                    InclinedPlane is an AI-native data engineering and analytics firm — process-driven,
+                    engineering-first, and deliberate about the engagements we take on.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    We work with mid-to-large enterprises across manufacturing, energy, logistics, FMCG, and retail —
+                    organisations where data infrastructure isn't a nice-to-have, it's
+                    <span className="text-foreground font-medium"> operational-critical</span>. Our delivery framework
+                    runs across five layers — from AI-Readiness Foundation through to autonomous Intelligence systems —
+                    each one observable, testable, and independently scalable.
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    Meanwhile, the AI revolution was reshaping the landscape. LLMs, agentic systems, and autonomous
-                    decision engines demanded something BI firms weren't built to deliver: production-grade data
-                    infrastructure. We realized that to truly serve the enterprises of tomorrow, we needed to evolve —
-                    not incrementally, but fundamentally.
+                    We are certified across the modern data stack. We are structured for the US and UK enterprise
+                    market. And we measure our success in one way: how the systems we build perform six months after
+                    we leave.
                   </p>
                 </div>
               </motion.div>
