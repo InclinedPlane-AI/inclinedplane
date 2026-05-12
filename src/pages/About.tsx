@@ -2,7 +2,8 @@ import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import SectionGlow from "@/components/SectionGlow";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useRef } from "react";
 import awsLogo from "@/assets/aws-logo.png";
 import azureLogo from "@/assets/azure-logo.png";
 import fabricLogo from "@/assets/fabric-logo.png";
@@ -42,13 +43,67 @@ const stagger = {
 const TimelineDot = ({ active = false }: { active?: boolean }) => (
   <div className="relative flex items-center justify-center">
     <div
-      className={`w-4 h-4 rounded-full border-2 ${
-        active ? "border-primary bg-primary/20" : "border-muted-foreground/30 bg-muted/50"
+      className={`w-4 h-4 rounded-full border-2 transition-all duration-500 ${
+        active
+          ? "border-primary bg-primary shadow-[0_0_18px_hsl(25_100%_50%/0.7)]"
+          : "border-muted-foreground/40 bg-background"
       }`}
     />
-    {active && <div className="absolute w-8 h-8 rounded-full bg-primary/10 animate-pulse" />}
+    {active && (
+      <div className="absolute w-8 h-8 rounded-full bg-primary/20 animate-pulse pointer-events-none" />
+    )}
   </div>
 );
+
+/* ── Timeline item that activates its dot once scrolled into view ── */
+const TimelineItem = ({
+  children,
+  delay = 0,
+  forceActive = false,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  forceActive?: boolean;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { margin: "0px 0px -40% 0px", once: false });
+  const active = forceActive || inView;
+  return (
+    <motion.div
+      ref={ref}
+      {...fadeUp}
+      transition={{ duration: 0.5, delay, ease: "easeOut" }}
+      className="relative"
+    >
+      <div className="absolute -left-14 top-1 hidden md:block z-10">
+        <TimelineDot active={active} />
+      </div>
+      {children}
+    </motion.div>
+  );
+};
+
+/* ── Scroll-progress vertical line ── */
+const TimelineTrack = ({ children }: { children: React.ReactNode }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 75%", "end 60%"],
+  });
+  const fillHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  return (
+    <div ref={ref} className="relative">
+      {/* Base line */}
+      <div className="absolute left-[19px] top-0 bottom-0 w-px bg-muted-foreground/15 hidden md:block" />
+      {/* Progress line */}
+      <motion.div
+        style={{ height: fillHeight }}
+        className="absolute left-[19px] top-0 w-px bg-gradient-to-b from-primary via-primary/80 to-primary/30 hidden md:block shadow-[0_0_8px_hsl(25_100%_50%/0.6)]"
+      />
+      {children}
+    </div>
+  );
+};
 
 const About = () => {
   return (
@@ -80,16 +135,10 @@ const About = () => {
           </motion.div>
 
           {/* Timeline */}
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-[19px] top-0 bottom-0 w-px bg-gradient-to-b from-primary/40 via-primary/20 to-transparent hidden md:block" />
-
+          <TimelineTrack>
             <div className="space-y-12 md:pl-14">
               {/* Sail Analytics origin */}
-              <motion.div {...fadeUp} className="relative">
-                <div className="absolute -left-14 top-1 hidden md:block">
-                  <TimelineDot />
-                </div>
+              <TimelineItem>
                 <div className="glass-panel rounded-2xl p-8">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -114,13 +163,10 @@ const About = () => {
                     That realisation is what InclinedPlane is built on.
                   </p>
                 </div>
-              </motion.div>
+              </TimelineItem>
 
               {/* The inflection point */}
-              <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.1 }} className="relative">
-                <div className="absolute -left-14 top-1 hidden md:block">
-                  <TimelineDot />
-                </div>
+              <TimelineItem delay={0.1}>
                 <div className="glass-panel rounded-2xl p-8">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -145,13 +191,10 @@ const About = () => {
                     we leave.
                   </p>
                 </div>
-              </motion.div>
+              </TimelineItem>
 
               {/* The rebrand */}
-              <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.2 }} className="relative">
-                <div className="absolute -left-14 top-1 hidden md:block">
-                  <TimelineDot active />
-                </div>
+              <TimelineItem delay={0.2} forceActive>
                 <div
                   className="rounded-2xl p-8 relative overflow-hidden"
                   style={{
@@ -203,9 +246,9 @@ const About = () => {
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </TimelineItem>
             </div>
-          </div>
+          </TimelineTrack>
         </div>
       </section>
 
