@@ -24,6 +24,8 @@ import {
   Eye,
   Cpu,
   Award,
+  Telescope,
+  Flag,
 } from "lucide-react";
 
 const fadeUp = {
@@ -136,6 +138,91 @@ const About = () => {
         }
         subtitle="A decade of data. A deliberate evolution. Built to move enterprises upward."
       />
+
+      {/* ═══════════════ OUR PURPOSE (Vision + Mission highlight) ═══════════════ */}
+      <section className="relative py-24 overflow-hidden">
+        <SectionGlow position="top-right" size={600} />
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-[2]">
+          <motion.div {...fadeUp} className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 glass-panel rounded-full px-4 py-1.5 mb-6">
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
+              <span className="font-mono text-xs text-primary tracking-widest uppercase">Our Purpose</span>
+            </div>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight">
+              What drives <span className="text-gradient-orange">Inclined Plane</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+            {/* Vision */}
+            <motion.div
+              {...fadeUp}
+              transition={{ duration: 0.55, ease: "easeOut" }}
+              className="relative rounded-3xl p-10 sm:p-12 overflow-hidden group"
+              style={{
+                background: "hsl(var(--card))",
+                border: "1px solid hsl(25 100% 50% / 0.18)",
+                boxShadow:
+                  "0 16px 60px -16px hsl(25 100% 50% / 0.18), inset 0 1px 0 hsl(25 100% 80% / 0.06)",
+              }}
+            >
+              <div
+                className="absolute inset-0 pointer-events-none opacity-[0.07] group-hover:opacity-[0.1] transition-opacity duration-500"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at 20% 0%, hsl(25 100% 50%), transparent 65%)",
+                }}
+              />
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+                    <Telescope className="w-6 h-6 text-primary" />
+                  </div>
+                  <span className="font-mono text-xs text-primary tracking-[0.2em] uppercase">Vision</span>
+                </div>
+                <p className="text-2xl sm:text-3xl font-bold text-foreground leading-snug">
+                  Building the foundation for the{" "}
+                  <span className="text-gradient-orange">AI-native world</span>.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Mission */}
+            <motion.div
+              {...fadeUp}
+              transition={{ duration: 0.55, delay: 0.1, ease: "easeOut" }}
+              className="relative rounded-3xl p-10 sm:p-12 overflow-hidden group"
+              style={{
+                background: "hsl(var(--card))",
+                border: "1px solid hsl(25 100% 50% / 0.18)",
+                boxShadow:
+                  "0 16px 60px -16px hsl(25 100% 50% / 0.18), inset 0 1px 0 hsl(25 100% 80% / 0.06)",
+              }}
+            >
+              <div
+                className="absolute inset-0 pointer-events-none opacity-[0.07] group-hover:opacity-[0.1] transition-opacity duration-500"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at 80% 100%, hsl(25 100% 50%), transparent 65%)",
+                }}
+              />
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+                    <Flag className="w-6 h-6 text-primary" />
+                  </div>
+                  <span className="font-mono text-xs text-primary tracking-[0.2em] uppercase">Mission</span>
+                </div>
+                <p className="text-lg sm:text-xl font-medium text-foreground leading-relaxed">
+                  To be the firm that defines what{" "}
+                  <span className="text-gradient-orange">engineering-grade data infrastructure</span>{" "}
+                  means for the AI era — and the partner enterprises trust to build it.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* ═══════════════ ORIGIN STORY ═══════════════ */}
       <section className="relative py-20 overflow-hidden">
