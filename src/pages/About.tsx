@@ -143,12 +143,12 @@ const About = () => {
       <section className="relative py-24 overflow-hidden">
         <SectionGlow position="top-right" size={600} />
         <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-[2]">
-          <motion.div {...fadeUp} className="mb-12">
-            <div className="inline-flex items-center gap-2 mb-3">
+          <motion.div {...fadeUp} className="mb-12 text-center">
+            <div className="inline-flex items-center gap-2 mb-3 justify-center">
               <Sparkles className="w-3.5 h-3.5 text-primary" />
               <span className="font-mono text-[11px] text-primary tracking-[0.25em] uppercase">Our Purpose</span>
             </div>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl leading-relaxed">
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               The vision we're building toward, and the mission that guides every engagement.
             </p>
           </motion.div>
