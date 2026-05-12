@@ -322,7 +322,6 @@ const About = () => {
       <section className="relative py-20 overflow-hidden">
         <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-[2]">
           <motion.div {...fadeUp} className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 glass-panel rounded-full px-4 py-1.5 mb-8"></div>
             <div
               className="rounded-2xl p-10 sm:p-14 relative overflow-hidden"
               style={{
