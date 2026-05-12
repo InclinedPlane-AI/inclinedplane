@@ -186,20 +186,8 @@ const Index = () => {
                     The Architecture of Enterprise Velocity
                   </motion.p>
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] tracking-tight mb-4 sm:mb-6">
-                    Data Leveraged.
+                    Data Leveraged <span className="text-gradient-orange">Intelligence</span> deployed
                   </h1>
-                  <div className="text-xl sm:text-2xl md:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-semibold text-foreground leading-[1.25] tracking-tight mb-4 sm:mb-6 flex flex-nowrap items-baseline gap-x-2 sm:gap-x-3 whitespace-nowrap">
-                    <RotatingText
-                      texts={rotatingWords}
-                      mainClassName="bg-gradient-orange text-primary-foreground inline-flex justify-center overflow-hidden px-2 sm:px-2.5 py-1 sm:py-2 rounded-lg glow-orange min-w-[9ch] sm:min-w-[9.5ch]"
-                      splitLevelClassName="overflow-hidden pb-2"
-                      staggerFrom="last"
-                      staggerDuration={0.025}
-                      transition={{ type: "spring", damping: 32, stiffness: 220, mass: 0.9 }}
-                      rotationInterval={2400}
-                    />
-                    <span className="text-foreground">Accelerated</span>
-                  </div>
                   <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-lg mb-6 sm:mb-8 text-justify">
                     We build the data infrastructure and AI systems that power high-velocity enterprises — from a solid
                     foundation all the way to autonomous decision-making.
