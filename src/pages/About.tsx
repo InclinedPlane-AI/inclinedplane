@@ -165,8 +165,7 @@ const About = () => {
                 <span className="font-mono text-[11px] text-primary tracking-[0.25em] uppercase">Vision</span>
               </div>
               <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-[1.15] tracking-tight">
-                Building the foundation for the{" "}
-                <span className="text-gradient-orange">AI-native world</span>.
+                Building the foundation for the <span className="text-gradient-orange">AI-native world</span>.
               </p>
             </motion.div>
 
@@ -182,8 +181,8 @@ const About = () => {
               </div>
               <p className="text-2xl sm:text-3xl font-semibold text-foreground leading-snug tracking-tight">
                 To be the firm that defines what{" "}
-                <span className="text-gradient-orange">engineering-grade data infrastructure</span>{" "}
-                means for the AI era — and the partner enterprises trust to build it.
+                <span className="text-gradient-orange">engineering-grade data infrastructure</span> means for the AI era
+                — and the partner enterprises trust to build it.
               </p>
             </motion.div>
           </div>
@@ -325,7 +324,6 @@ const About = () => {
           <motion.div {...fadeUp} className="text-center max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 glass-panel rounded-full px-4 py-1.5 mb-8">
               <Target className="w-3.5 h-3.5 text-primary" />
-              <span className="font-mono text-xs text-primary tracking-widest uppercase">Our Mission</span>
             </div>
             <div
               className="rounded-2xl p-10 sm:p-14 relative overflow-hidden"
