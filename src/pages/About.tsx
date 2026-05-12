@@ -126,7 +126,7 @@ const About = () => {
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                       <Compass className="w-5 h-5 text-primary" />
                     </div>
-                    <h3 className="font-bold text-foreground text-lg">The Inflection Point</h3>
+                    <h3 className="font-bold text-foreground text-lg">What We've Built</h3>
                   </div>
                   <p className="text-muted-foreground leading-relaxed mb-4">
                     Across hundreds of engagements, a pattern emerged. Organizations were drowning in dashboards but
