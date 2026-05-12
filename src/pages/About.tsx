@@ -49,9 +49,7 @@ const TimelineDot = ({ active = false }: { active?: boolean }) => (
           : "border-muted-foreground/40 bg-background"
       }`}
     />
-    {active && (
-      <div className="absolute w-8 h-8 rounded-full bg-primary/20 animate-pulse pointer-events-none" />
-    )}
+    {active && <div className="absolute w-8 h-8 rounded-full bg-primary/20 animate-pulse pointer-events-none" />}
   </div>
 );
 
@@ -133,7 +131,7 @@ const About = () => {
         label="Who We Are"
         title={
           <>
-            Built for the <span className="text-gradient-orange">AI Era.</span>
+            Built for the <span className="text-gradient-orange">AI Era</span>
           </>
         }
         subtitle="A decade of data. A deliberate evolution. Built to move enterprises upward."
@@ -203,8 +201,8 @@ const About = () => {
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
                     We are certified across the modern data stack. We are structured for the US and UK enterprise
-                    market. And we measure our success in one way: how the systems we build perform six months after
-                    we leave.
+                    market. And we measure our success in one way: how the systems we build perform six months after we
+                    leave.
                   </p>
                 </div>
               </TimelineItem>
