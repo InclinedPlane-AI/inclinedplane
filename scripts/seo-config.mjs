@@ -99,7 +99,7 @@ const staticRoutes = [
     path: "/",
     title: "Inclined Plane — AI-Native Data Engineering",
     description:
-      "AI-ready data platforms, observability-first pipelines, and decision systems that turn complexity into operational intelligence. Data engineering consultancy for modern enterprises.",
+      "AI-ready data platforms, observability-first pipelines, and decision systems for modern enterprises. Data engineering consultancy.",
     titleTemplate: "raw", // homepage uses title verbatim, no " | Inclined Plane" suffix
     noscriptSummary:
       "Inclined Plane is an AI-native data engineering consultancy. We build cloud data warehouses, observability-first pipelines, BI platforms, and decision systems for modern enterprises. Services span data engineering, AI automation, business intelligence, cloud warehousing, and DataOps. Production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, and public sector.",
@@ -157,12 +157,32 @@ const staticRoutes = [
       "AI-native data engineering for retail, finance, healthcare, manufacturing, energy, SaaS, BPO, and education. Industry-specific data solutions.",
     noscriptSummary:
       "Industries served: retail and e-commerce, finance, healthcare, manufacturing, energy and industrial, SaaS, BPO and customer operations, and education. Deep vertical expertise paired with engineering-grade data infrastructure.",
+    pageJsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "Industries We Serve",
+        url: `${SITE_URL}/industries`,
+        description:
+          "Vertical expertise areas served by Inclined Plane: retail, finance, healthcare, manufacturing, energy, SaaS, BPO, and education.",
+        about: [
+          "Retail",
+          "Finance",
+          "Healthcare",
+          "Manufacturing",
+          "Energy",
+          "SaaS",
+          "BPO",
+          "Education",
+        ].map((name) => ({ "@type": "Thing", name })),
+      },
+    ],
   },
   {
     path: "/case-studies",
     title: "Case Studies",
     description:
-      "14 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector and renewables — real outcomes from AI-native data engineering.",
+      "14 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, and e-commerce — real outcomes from AI-native data engineering.",
     noscriptSummary:
       "14 production case studies: retail and manufacturing chain analytics, EV battery predictive maintenance, EV fleet scheduling, FMCG distribution, pharma sales BI, pharma MNC field force, e-commerce inventory and procurement, energy audit, VC-funded EdTech, demand forecasting, capital equipment ERP, solar BI, cultural heritage public sector, and ERP unification.",
   },
@@ -203,6 +223,17 @@ const staticRoutes = [
         "@type": "ContactPage",
         name: "Contact Inclined Plane",
         url: `${SITE_URL}/contact`,
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        name: SITE_NAME,
+        url: SITE_URL,
+        email: "support@inclinedplane.com",
+        priceRange: "$$$$",
+        areaServed: "Worldwide",
+        description:
+          "Data engineering, AI automation, cloud warehouse architecture, BI modernization, and DataOps consultancy.",
       },
     ],
   },
@@ -342,7 +373,10 @@ export function getRoutes() {
   const posts = parseBlogPosts();
   for (const post of posts) {
     const path = `/blog/${post.slug}`;
-    const fullTitle = `${post.title} | ${SITE_NAME}`;
+    // Blog post titles are long-form; appending " | Inclined Plane" pushes
+    // the SERP title past Google's ~60-char cutoff. Use the title verbatim
+    // — the brand still appears in the breadcrumb/site-name SERP feature.
+    const fullTitle = post.title;
     routes.push({
       path,
       fullTitle,
@@ -396,7 +430,8 @@ export function getRoutes() {
     const cs = csById.get(slug);
     if (!cs) continue; // detail without matching summary → skip
     const path = `/case-studies/${slug}`;
-    const fullTitle = `${cs.title} — Case Study | ${SITE_NAME}`;
+    // Same reasoning as blog posts — case study titles can be long.
+    const fullTitle = cs.title;
     routes.push({
       path,
       fullTitle,
@@ -411,16 +446,18 @@ export function getRoutes() {
         breadcrumbSchema(path, cs.title),
         {
           "@context": "https://schema.org",
-          "@type": "CaseStudy",
+          "@type": "Article",
           name: cs.title,
+          headline: cs.title,
           about: cs.industry,
           description: cs.summary,
           url: `${SITE_URL}${path}`,
-          provider: {
+          publisher: {
             "@type": "Organization",
             name: SITE_NAME,
             url: SITE_URL,
           },
+          mainEntityOfPage: `${SITE_URL}${path}`,
         },
       ],
     });
