@@ -373,7 +373,10 @@ export function getRoutes() {
   const posts = parseBlogPosts();
   for (const post of posts) {
     const path = `/blog/${post.slug}`;
-    const fullTitle = `${post.title} | ${SITE_NAME}`;
+    // Blog post titles are long-form; appending " | Inclined Plane" pushes
+    // the SERP title past Google's ~60-char cutoff. Use the title verbatim
+    // — the brand still appears in the breadcrumb/site-name SERP feature.
+    const fullTitle = post.title;
     routes.push({
       path,
       fullTitle,
@@ -427,7 +430,8 @@ export function getRoutes() {
     const cs = csById.get(slug);
     if (!cs) continue; // detail without matching summary → skip
     const path = `/case-studies/${slug}`;
-    const fullTitle = `${cs.title} | ${SITE_NAME}`;
+    // Same reasoning as blog posts — case study titles can be long.
+    const fullTitle = cs.title;
     routes.push({
       path,
       fullTitle,
