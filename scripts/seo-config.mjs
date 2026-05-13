@@ -427,7 +427,7 @@ export function getRoutes() {
     const cs = csById.get(slug);
     if (!cs) continue; // detail without matching summary → skip
     const path = `/case-studies/${slug}`;
-    const fullTitle = `${cs.title} — Case Study | ${SITE_NAME}`;
+    const fullTitle = `${cs.title} | ${SITE_NAME}`;
     routes.push({
       path,
       fullTitle,
@@ -442,16 +442,18 @@ export function getRoutes() {
         breadcrumbSchema(path, cs.title),
         {
           "@context": "https://schema.org",
-          "@type": "CaseStudy",
+          "@type": "Article",
           name: cs.title,
+          headline: cs.title,
           about: cs.industry,
           description: cs.summary,
           url: `${SITE_URL}${path}`,
-          provider: {
+          publisher: {
             "@type": "Organization",
             name: SITE_NAME,
             url: SITE_URL,
           },
+          mainEntityOfPage: `${SITE_URL}${path}`,
         },
       ],
     });
