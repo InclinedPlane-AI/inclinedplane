@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Bot, User, Loader2, ArrowRight, Sparkles } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 /* ── Types ── */
 interface Message {
@@ -100,20 +101,17 @@ const ChatWidget = () => {
       setLoading(true);
 
       try {
-        const res = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
+        const { data, error } = await supabase.functions.invoke("chat", {
+          body: {
             messages: newMessages.map((m) => ({
-              role: m.role === "assistant" ? "model" : "user",
+              role: m.role,
               content: m.content,
             })),
-          }),
+          },
         });
 
-        if (!res.ok) throw new Error("API error");
-
-        const data = await res.json();
+        if (error) throw error;
+        if (data?.error) throw new Error(data.error);
 
         const botMsg: Message = {
           id: uid(),
