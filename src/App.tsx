@@ -23,6 +23,7 @@ import Blogs from "./pages/Blogs";
 import BlogPostPage from "./pages/BlogPost";
 import Careers from "./pages/Careers";
 import CookieConsent from "./components/CookieConsent";
+import ChatWidget from "./components/ChatWidget";
 import SplashScreen from "./components/SplashScreen";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -39,8 +40,7 @@ const queryClient = new QueryClient();
 // instead of real content. In dev mode the marker is absent and the
 // splash renders normally. Last reviewed: 2026-05-03.
 const wasPrerendered = (): boolean =>
-  typeof document !== "undefined" &&
-  document.documentElement.getAttribute("data-prerendered") === "true";
+  typeof document !== "undefined" && document.documentElement.getAttribute("data-prerendered") === "true";
 
 const App = () => {
   const [contentReady, setContentReady] = useState<boolean>(wasPrerendered);
@@ -70,16 +70,8 @@ const App = () => {
 
   return (
     <>
-      {!splashDone && (
-        <SplashScreen
-          contentReady={contentReady}
-          onComplete={handleSplashComplete}
-        />
-      )}
-      <div
-        style={splashDone ? undefined : { visibility: "hidden", position: "fixed" }}
-        aria-hidden={!splashDone}
-      >
+      {!splashDone && <SplashScreen contentReady={contentReady} onComplete={handleSplashComplete} />}
+      <div style={splashDone ? undefined : { visibility: "hidden", position: "fixed" }} aria-hidden={!splashDone}>
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
             <Toaster />
@@ -87,6 +79,7 @@ const App = () => {
             <BrowserRouter>
               <ScrollToTop />
               <CookieConsent />
+              <ChatWidget />
               <AnimatePresence mode="wait">
                 <Routes>
                   <Route path="/" element={<Index />} />
