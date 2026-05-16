@@ -140,7 +140,7 @@ const Navbar = ({
         {/* Logo */}
         <Link to="/" className="flex items-center group" data-cursor-hover>
           <Logo
-            className="h-7 md:h-8 w-auto"
+            className="h-10 md:h-12 w-auto"
             forceVariant={lightMode ? "dark" : undefined}
           />
         </Link>
