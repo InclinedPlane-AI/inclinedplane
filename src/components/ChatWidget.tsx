@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Bot, User, Loader2, ArrowRight, Sparkles } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 
 /* ── Types ── */
 interface Message {
@@ -101,27 +100,66 @@ const ChatWidget = () => {
       setLoading(true);
 
       try {
-        const { data, error } = await supabase.functions.invoke("chat", {
-          body: {
-            messages: newMessages.map((m) => ({
-              role: m.role,
-              content: m.content,
-            })),
-          },
-        });
+        let replyText = "I'm sorry, I couldn't process that. Please try again.";
 
-        if (error) throw error;
-        if (data?.error) throw new Error(data.error);
+        // ── LOCAL DEV BYPASS: Call Gemini directly so we don't need Vercel CLI ──
+        if (import.meta.env.DEV) {
+          const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+          if (!apiKey) throw new Error("Missing VITE_GEMINI_API_KEY in .env.local");
+
+          const { SYSTEM_PROMPT } = await import("../data/chatbotKnowledge");
+          const geminiMessages = newMessages.map((m) => ({
+            role: m.role === "assistant" ? "model" : "user",
+            parts: [{ text: m.content }],
+          }));
+
+          const res = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+                contents: geminiMessages,
+                generationConfig: { temperature: 0.7, maxOutputTokens: 512 },
+              }),
+            },
+          );
+          if (!res.ok) {
+            const errBody = await res.text();
+            console.error("Gemini API Error Response:", errBody);
+            throw new Error("Gemini API error");
+          }
+          const data = await res.json();
+          replyText = data?.candidates?.[0]?.content?.parts?.[0]?.text || replyText;
+        }
+        // ── PRODUCTION: Call Vercel secure backend ──
+        else {
+          const res = await fetch("/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              messages: newMessages.map((m) => ({
+                role: m.role === "assistant" ? "model" : "user",
+                content: m.content,
+              })),
+            }),
+          });
+          if (!res.ok) throw new Error("API error");
+          const data = await res.json();
+          replyText = data.reply || replyText;
+        }
 
         const botMsg: Message = {
           id: uid(),
           role: "assistant",
-          content: data.reply || "I'm sorry, I couldn't process that. Please try again.",
+          content: replyText,
           timestamp: Date.now(),
         };
 
         setMessages((prev) => [...prev, botMsg]);
-      } catch {
+      } catch (error) {
+        console.error("Chatbot API Connection Error:", error);
         const errMsg: Message = {
           id: uid(),
           role: "assistant",
