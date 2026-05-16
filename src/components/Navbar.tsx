@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import Logo from "./Logo";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -138,10 +139,10 @@ const Navbar = ({
       <div className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center group" data-cursor-hover>
-          <span className="font-extrabold text-lg tracking-tight">
-            <span className={lightMode ? "text-white" : "text-foreground"}>Inclined</span>
-            <span className="text-gradient-orange">Plane</span>
-          </span>
+          <Logo
+            className="h-7 md:h-8 w-auto"
+            forceVariant={lightMode ? "dark" : undefined}
+          />
         </Link>
 
         {/* Desktop nav */}
