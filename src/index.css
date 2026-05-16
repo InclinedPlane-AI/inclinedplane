@@ -585,3 +585,8 @@
     animation: none;
   }
 }
+
+/* Theme-aware logo visibility — toggled by .light on <html> (dark is default) */
+.logo-light { display: none; }
+.light .logo-light { display: inline-block; }
+.light .logo-dark { display: none; }
