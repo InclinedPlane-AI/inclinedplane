@@ -102,53 +102,35 @@ const ChatWidget = () => {
       try {
         let replyText = "I'm sorry, I couldn't process that. Please try again.";
 
-        // ── LOCAL DEV BYPASS: Call Gemini directly so we don't need Vercel CLI ──
-        if (import.meta.env.DEV) {
-          const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-          if (!apiKey) throw new Error("Missing VITE_GEMINI_API_KEY in .env.local");
+        // Call Gemini directly (bypasses missing backend on Vercel)
+        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+        if (!apiKey) throw new Error("Missing VITE_GEMINI_API_KEY");
 
-          const { SYSTEM_PROMPT } = await import("../data/chatbotKnowledge");
-          const geminiMessages = newMessages.map((m) => ({
-            role: m.role === "assistant" ? "model" : "user",
-            parts: [{ text: m.content }],
-          }));
+        const { SYSTEM_PROMPT } = await import("../data/chatbotKnowledge");
+        const geminiMessages = newMessages.map((m) => ({
+          role: m.role === "assistant" ? "model" : "user",
+          parts: [{ text: m.content }],
+        }));
 
-          const res = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-                contents: geminiMessages,
-                generationConfig: { temperature: 0.7, maxOutputTokens: 512 },
-              }),
-            },
-          );
-          if (!res.ok) {
-            const errBody = await res.text();
-            console.error("Gemini API Error Response:", errBody);
-            throw new Error("Gemini API error");
-          }
-          const data = await res.json();
-          replyText = data?.candidates?.[0]?.content?.parts?.[0]?.text || replyText;
-        }
-        // ── PRODUCTION: Call Vercel secure backend ──
-        else {
-          const res = await fetch("/api/chat", {
+        const res = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+          {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              messages: newMessages.map((m) => ({
-                role: m.role === "assistant" ? "model" : "user",
-                content: m.content,
-              })),
+              system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+              contents: geminiMessages,
+              generationConfig: { temperature: 0.7, maxOutputTokens: 512 },
             }),
-          });
-          if (!res.ok) throw new Error("API error");
-          const data = await res.json();
-          replyText = data.reply || replyText;
+          },
+        );
+        if (!res.ok) {
+          const errBody = await res.text();
+          console.error("Gemini API Error Response:", errBody);
+          throw new Error("Gemini API error");
         }
+        const data = await res.json();
+        replyText = data?.candidates?.[0]?.content?.parts?.[0]?.text || replyText;
 
         const botMsg: Message = {
           id: uid(),
