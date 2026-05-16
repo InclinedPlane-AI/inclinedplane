@@ -45,7 +45,7 @@ name: Build and deploy to Vercel
 on:
   push:
     branches: [main]
-  workflow_dispatch: {}  # allow manual runs from the Actions tab
+  workflow_dispatch: {} # allow manual runs from the Actions tab
 
 concurrency:
   # Cancel in-progress runs on the same branch — only the latest commit
@@ -70,8 +70,8 @@ jobs:
       - name: Set up Node 20
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install Chromium runtime libraries
         # The exact libs Playwright's bundled Chromium needs at runtime.
@@ -93,6 +93,8 @@ jobs:
         run: npx playwright install chromium
 
       - name: Build (vite + head/body/sitemap/rss prerender)
+        env:
+          VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
         run: npm run build
 
       - name: Verify body prerender succeeded for ALL 28 routes
