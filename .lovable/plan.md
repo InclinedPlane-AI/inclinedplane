@@ -1,38 +1,43 @@
-# Migrate chat backend to Lovable Cloud + Lovable AI Gateway
+## Goal
+Replace the text wordmark ("InclinedPlane") with the new uploaded logo images across the site, swapping the variant based on light/dark theme.
 
-## Why
-The current `/api/chat` endpoint is a Vercel Serverless Function. It does not run in the Lovable preview sandbox (returns the SPA `index.html` instead of JSON), and the project's GitHub Actions deploy pipeline uploads only `dist/` via `vercel deploy --prebuilt` — so `api/` functions likely aren't deployed in production either.
+## Assets
+- `user-uploads://incpl_primarylogo_AW.png` → black text + orange mark (use in **light** theme)
+- `user-uploads://incpl_primarylogo_inverseAW.png` → white text + orange mark (use in **dark** theme)
 
-Switching to a Lovable Cloud edge function fixes both: it works in preview AND production, and the AI key (`LOVABLE_API_KEY`) is auto-provisioned — no Vercel env-var setup, no Gemini key needed.
+Copy both to `src/assets/` so Vite bundles + hashes them:
+- `src/assets/logo-light.png` (the AW / black version, shown on light backgrounds)
+- `src/assets/logo-dark.png` (the inverse / white version, shown on dark backgrounds)
 
-## Steps
+## Where the wordmark currently appears
+1. `src/components/Navbar.tsx` — `<span>Inclined</span><span>Plane</span>` in header (also has a `forceLight` mode for hero overlays)
+2. `src/components/Footer.tsx` — small wordmark in the brand column (the giant decorative "InclinedPlane" backdrop stays as-is, it's a design element)
+3. `src/components/SplashScreen.tsx` — animated fill wordmark
 
-1. **Enable Lovable Cloud** on the project (provisions the edge runtime + auto-injects `LOVABLE_API_KEY`).
+## Approach
+Create a small `<Logo />` component in `src/components/Logo.tsx` that:
+- Imports both PNGs
+- Renders both `<img>` tags, toggling visibility via Tailwind `dark:` classes (`block dark:hidden` / `hidden dark:block`)
+- Accepts a `className` for sizing (height-based; width auto) and an optional `forceVariant?: "light" | "dark"` prop for the navbar's `forceLight` hero state
+- `alt="Inclined Plane"`, `loading="eager"` for navbar/splash, `decoding="async"`
 
-2. **Create edge function** `supabase/functions/chat/index.ts`:
-   - CORS headers
-   - Accepts `{ messages: [{role, content}] }`
-   - Imports the existing `SYSTEM_PROMPT` content from `src/data/chatbotKnowledge.ts` (copy the prompt string into the function file — edge functions can't import from `src/`)
-   - Calls `https://ai.gateway.lovable.dev/v1/chat/completions` with model `google/gemini-3-flash-preview`, streams the response back as SSE
-   - Handles 429 (rate limited) and 402 (out of credits) with friendly errors
+Replace the three wordmark usages with `<Logo className="h-6 md:h-7 w-auto" />` (sizes tuned per location: ~24-28px navbar/footer, ~48-64px splash).
 
-3. **Update `src/components/ChatWidget.tsx`** to:
-   - Call the edge function via `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat` instead of `/api/chat`
-   - Stream tokens line-by-line and render incrementally (already-buffered `JSON.parse` will be replaced with the SSE parser pattern)
-   - Show toast on 429 / 402
+## Splash screen note
+The current splash animates a clip-path fill from 0→100% across the wordmark text. With an image we can't fill character-by-character the same way, but we can keep the identical effect by:
+- Stacking two `<img>` tags absolutely: a dim version (opacity ~0.25) underneath, and the full-color version on top clipped by `clipPath: inset(0 ${100-progress}% 0 0)`.
+- For the dim layer, reuse the dark/light logo with reduced opacity (no separate asset needed).
 
-4. **Delete the now-unused Vercel function** `api/chat.ts` (and the empty `api/` directory) so it doesn't confuse future deploys.
+This preserves the left-to-right "fill" reveal behavior exactly.
 
-5. **Verify** in preview: open the chat widget, send "What services do you offer?", confirm a streamed response appears.
+## Favicon / manifest
+Out of scope — favicon was already updated in the previous turn. Not touching `public/favicon.png` or the manifest.
 
-## Technical notes
+## Files changed
+- **Add**: `src/assets/logo-light.png`, `src/assets/logo-dark.png`, `src/components/Logo.tsx`
+- **Edit**: `src/components/Navbar.tsx` (replace wordmark span, keep `forceLight` behavior), `src/components/Footer.tsx` (replace small wordmark only — leave giant decorative text), `src/components/SplashScreen.tsx` (swap text for stacked image fill)
 
-- Edge function uses `verify_jwt = false` by default — fine for a public marketing-site chatbot.
-- The `SYSTEM_PROMPT` lives in `src/data/chatbotKnowledge.ts` today. Edge functions can't reach `src/`, so the prompt string will be duplicated into the function. Future edits need to update both — acceptable tradeoff vs adding a build step.
-- No database, no auth, no storage needed — pure stateless AI proxy.
-- `GEMINI_API_KEY` is no longer needed anywhere; can be removed from Vercel env if it was set.
-- Cost: Lovable AI has a free monthly allowance, then usage-based. `gemini-3-flash-preview` is the cheap default.
-
-## Out of scope
-- No conversation persistence (matches current behavior — chat history lives in component state).
-- No changes to the chat widget's visual design.
+## Verification
+- Visual check in preview at `/` (dark default) and after toggling theme via the existing ThemeToggle
+- Confirm the navbar logo in `forceLight` routes (hero overlays) still shows the white variant before scroll
+- Confirm splash fill animation still reads as a left-to-right reveal
