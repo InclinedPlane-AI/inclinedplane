@@ -28,7 +28,7 @@ const Footer = () => {
             {/* Brand */}
             <div className="lg:col-span-1">
               <div className="mb-4">
-                <Logo className="h-8 w-auto" eager={false} />
+                <Logo className="h-12 w-auto" eager={false} />
               </div>
               <p className="text-muted-foreground text-sm leading-relaxed">
                 AI-native data engineering. Turning complexity into operational intelligence.
