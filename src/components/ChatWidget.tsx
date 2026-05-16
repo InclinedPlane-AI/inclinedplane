@@ -51,6 +51,115 @@ const saveMessages = (msgs: Message[]) => {
 let _id = 0;
 const uid = () => `msg-${Date.now()}-${_id++}`;
 
+/* ── Lightweight markdown renderer for chat messages ── */
+const renderMarkdown = (text: string) => {
+  // Split into lines
+  const lines = text.split("\n");
+  const elements: React.ReactNode[] = [];
+  let key = 0;
+
+  // Helper: convert inline markdown (bold + links) to JSX
+  const renderInline = (str: string): React.ReactNode[] => {
+    const parts: React.ReactNode[] = [];
+    // Match **bold**, [text](url), and plain text
+    const regex = /(\*\*(.+?)\*\*)|\[([^\]]+)\]\(([^)]+)\)/g;
+    let lastIndex = 0;
+    let match;
+
+    while ((match = regex.exec(str)) !== null) {
+      // Add plain text before this match
+      if (match.index > lastIndex) {
+        parts.push(str.slice(lastIndex, match.index));
+      }
+      if (match[1]) {
+        // Bold text
+        parts.push(
+          <strong key={`b-${match.index}`} style={{ color: "hsl(0 0% 95%)", fontWeight: 600 }}>
+            {match[2]}
+          </strong>,
+        );
+      } else if (match[3]) {
+        // Link - convert relative paths to full navigation
+        const href = match[4].startsWith("/") ? match[4] : match[4];
+        parts.push(
+          <a
+            key={`a-${match.index}`}
+            href={href}
+            style={{ color: "hsl(25, 100%, 60%)", textDecoration: "underline", textUnderlineOffset: "2px" }}
+            target={match[4].startsWith("http") ? "_blank" : "_self"}
+            rel="noopener noreferrer"
+          >
+            {match[3]}
+          </a>,
+        );
+      }
+      lastIndex = match.index + match[0].length;
+    }
+    // Remaining plain text
+    if (lastIndex < str.length) {
+      parts.push(str.slice(lastIndex));
+    }
+    return parts.length > 0 ? parts : [str];
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    // Skip empty lines (add spacing)
+    if (trimmed === "") {
+      elements.push(<div key={key++} style={{ height: "8px" }} />);
+      continue;
+    }
+
+    // Horizontal rule (---)
+    if (/^-{3,}$/.test(trimmed)) {
+      elements.push(
+        <hr key={key++} style={{ border: "none", borderTop: "1px solid hsl(0 0% 100% / 0.1)", margin: "8px 0" }} />,
+      );
+      continue;
+    }
+
+    // Numbered list item (1. 2. 3. etc.)
+    const numberedMatch = trimmed.match(/^(\d+)\.\s+(.*)/);
+    if (numberedMatch) {
+      elements.push(
+        <div key={key++} style={{ display: "flex", gap: "8px", marginTop: "4px", marginBottom: "2px" }}>
+          <span style={{ color: "hsl(25, 100%, 60%)", fontWeight: 600, minWidth: "18px", flexShrink: 0 }}>
+            {numberedMatch[1]}.
+          </span>
+          <span>{renderInline(numberedMatch[2])}</span>
+        </div>,
+      );
+      continue;
+    }
+
+    // Dash bullet sub-point (- item)
+    const bulletMatch = trimmed.match(/^-\s+(.*)/);
+    if (bulletMatch) {
+      elements.push(
+        <div
+          key={key++}
+          style={{ display: "flex", gap: "8px", paddingLeft: "18px", marginTop: "2px", marginBottom: "2px" }}
+        >
+          <span style={{ color: "hsl(25, 100%, 55%)", flexShrink: 0 }}>•</span>
+          <span>{renderInline(bulletMatch[1])}</span>
+        </div>,
+      );
+      continue;
+    }
+
+    // Regular paragraph
+    elements.push(
+      <p key={key++} style={{ margin: "2px 0" }}>
+        {renderInline(trimmed)}
+      </p>,
+    );
+  }
+
+  return elements;
+};
+
 /* ═══════════════════════════════════════════════════════════════
    ChatWidget
    ═══════════════════════════════════════════════════════════════ */
@@ -333,13 +442,15 @@ const ChatWidget = () => {
                           }
                     }
                   >
-                    {/* Render line breaks */}
-                    {msg.content.split("\n").map((line, j) => (
-                      <span key={j}>
-                        {line}
-                        {j < msg.content.split("\n").length - 1 && <br />}
-                      </span>
-                    ))}
+                    {/* Render formatted markdown */}
+                    {msg.role === "user"
+                      ? msg.content.split("\n").map((line, j) => (
+                          <span key={j}>
+                            {line}
+                            {j < msg.content.split("\n").length - 1 && <br />}
+                          </span>
+                        ))
+                      : renderMarkdown(msg.content)}
                   </div>
                   {msg.role === "user" && (
                     <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
