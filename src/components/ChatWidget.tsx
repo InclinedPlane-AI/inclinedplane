@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, X, Send, Bot, User, Loader2, ArrowRight, Sparkles } from "lucide-react";
+import { MessageSquare, X, Send, Bot, User, Loader2, ArrowRight } from "lucide-react";
 
 /* ── Types ── */
 interface Message {
@@ -347,8 +347,12 @@ const ChatWidget = () => {
             {/* ── Header ── */}
             <div className="chatwidget-header flex items-center justify-between px-5 py-4 shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[hsl(var(--orange-start))] to-[hsl(var(--orange-mid))] flex items-center justify-center">
-                  <Sparkles size={16} className="text-white" />
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[hsl(var(--orange-start))] to-[hsl(var(--orange-mid))] flex items-center justify-center overflow-hidden p-1.5">
+                  <img
+                    src="/favicon.png"
+                    alt="Inclined Plane"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-foreground leading-tight">InclinedPlane AI</h3>
