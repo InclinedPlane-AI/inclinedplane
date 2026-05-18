@@ -25,11 +25,10 @@ const Footer = () => {
             draggable={false}
             style={{
               display: 'inline-block',
-              height: '0.65em',
+              height: '0.55em',
               width: 'auto',
-              verticalAlign: 'middle',
+              verticalAlign: 'baseline',
               marginLeft: '0.05em',
-              transform: 'translateY(-0.18em)',
               opacity: 0.18,
             }}
           />
