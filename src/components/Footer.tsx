@@ -8,7 +8,17 @@ const Footer = () => {
       {/* Giant wordmark sitting on top of footer border */}
       <div className="relative overflow-hidden select-none pointer-events-none" aria-hidden="true">
         <div className="text-center leading-none pb-0 pt-4 sm:pt-8 px-4" style={{ fontSize: 'clamp(2.5rem, 12vw, 12rem)', marginBottom: '-0.1em' }}>
-          <span className="font-black tracking-tighter text-foreground/[0.08]">Inclined</span>
+          <span className="font-black tracking-tighter text-foreground/[0.08]">
+            <img
+              src="/favicon.png"
+              alt=""
+              aria-hidden="true"
+              className="inline-block align-[-0.08em] opacity-[0.08]"
+              style={{ height: '0.85em', width: 'auto', marginRight: '0.02em' }}
+              draggable={false}
+            />
+            nclined
+          </span>
           <span
             className="font-black tracking-tighter"
             style={{
