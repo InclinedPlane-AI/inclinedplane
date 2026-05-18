@@ -730,6 +730,12 @@
     0 0 40px -20px hsl(var(--orange-start) / 0.08);
 }
 
+/* Theme-aware logo: default (dark theme) shows white wordmark; .light shows black wordmark */
+.logo-light { display: none; }
+.logo-dark { display: inline-block; }
+.light .logo-dark { display: none; }
+.light .logo-light { display: inline-block; }
+
 .light .chatwidget-user-icon {
   background: hsl(var(--primary) / 0.1);
   color: hsl(var(--primary));
