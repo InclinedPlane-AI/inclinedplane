@@ -611,6 +611,16 @@
   border-bottom: 1px solid hsl(var(--border));
 }
 
+/* ── Logo box (theme-aware so favicon stays visible) ── */
+.chatwidget-logo-box {
+  background: hsl(0 0% 12%);
+  border: 1px solid hsl(var(--border));
+}
+.light .chatwidget-logo-box {
+  background: hsl(0 0% 100%);
+  border: 1px solid hsl(var(--border));
+}
+
 /* ── Messages area ── */
 .chatwidget-messages {
   scrollbar-width: thin;
