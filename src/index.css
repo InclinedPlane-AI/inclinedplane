@@ -1,6 +1,6 @@
 /* CSS spec requires @import to precede all other statements (besides
    @charset and empty @layer), so the Google Fonts import sits above the
-   @tailwind directives. Moving it below produces a Vite builds warning. */
+   @tailwind directives. Moving it below produces a Vite build warning. */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400;1,8..60,500&display=swap");
 
 @tailwind base;
@@ -331,6 +331,7 @@
     .grain-overlay::after {
       opacity: 0.05;
     }
+
     .light .grain-overlay::after {
       opacity: 0.06;
     }
@@ -418,9 +419,11 @@
   .surface-1 {
     background-color: hsl(var(--surface-1));
   }
+
   .surface-2 {
     background-color: hsl(var(--surface-2));
   }
+
   .surface-3 {
     background-color: hsl(var(--surface-3));
   }
@@ -463,6 +466,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
@@ -570,6 +574,7 @@
   100% {
     d: path("M0 3 Q12.5 0.5, 25 3 T50 3 T75 3 T100 3");
   }
+
   50% {
     d: path("M0 3 Q12.5 5.5, 25 3 T50 3 T75 3 T100 3");
   }
@@ -586,7 +591,193 @@
   }
 }
 
-/* Theme-aware logo visibility — toggled by .light on <html> (dark is default) */
-.logo-light { display: none; }
-.light .logo-light { display: inline-block; }
-.light .logo-dark { display: none; }
+/* ══════════════════════════════════════════════════════════════
+   ChatWidget — Theme-aware styles (Dark + Light mode)
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Panel container ── */
+.chatwidget-panel {
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  box-shadow:
+    0 24px 80px -16px hsl(0 0% 0% / 0.5),
+    0 0 0 1px hsl(var(--border)),
+    0 0 60px -20px hsl(var(--orange-start) / 0.12);
+}
+
+/* ── Header ── */
+.chatwidget-header {
+  background: hsl(var(--card));
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+/* ── Messages area ── */
+.chatwidget-messages {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.2) transparent;
+}
+
+/* ── Bot message bubble ── */
+.chatwidget-bot-bubble {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--card-foreground) / 0.8);
+}
+
+/* ── User message bubble ── */
+.chatwidget-user-bubble {
+  background: linear-gradient(135deg, hsl(var(--orange-start)) 0%, hsl(var(--orange-mid)) 100%);
+  color: white;
+}
+
+/* ── User avatar icon ── */
+.chatwidget-user-icon {
+  background: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+}
+
+/* ── Suggestion chips ── */
+.chatwidget-chip {
+  color: hsl(var(--primary));
+  background: hsl(var(--primary) / 0.08);
+  border: 1px solid hsl(var(--primary) / 0.15);
+}
+
+.chatwidget-chip:hover {
+  background: hsl(var(--primary) / 0.14);
+  border-color: hsl(var(--primary) / 0.25);
+}
+
+/* ── Input area ── */
+.chatwidget-input-area {
+  background: hsl(var(--card));
+  border-top: 1px solid hsl(var(--border));
+}
+
+.chatwidget-input-box {
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+}
+
+.chatwidget-input-box:focus-within {
+  border-color: hsl(var(--primary) / 0.4);
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.08);
+}
+
+/* ── Markdown renderer elements ── */
+.chat-bold {
+  color: hsl(var(--foreground));
+  font-weight: 600;
+}
+
+.chat-link {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.15s;
+}
+
+.chat-link:hover {
+  opacity: 0.8;
+}
+
+.chat-spacer {
+  height: 8px;
+}
+
+.chat-hr {
+  border: none;
+  border-top: 1px solid hsl(var(--border));
+  margin: 8px 0;
+}
+
+.chat-numbered {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+.chat-number {
+  color: hsl(var(--primary));
+  font-weight: 600;
+  min-width: 18px;
+  flex-shrink: 0;
+}
+
+.chat-bullet {
+  display: flex;
+  gap: 8px;
+  padding-left: 18px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.chat-bullet-dot {
+  color: hsl(var(--primary));
+  flex-shrink: 0;
+}
+
+.chat-para {
+  margin: 2px 0;
+}
+
+/* ── Light mode refinements ── */
+.light .chatwidget-panel {
+  box-shadow:
+    0 24px 60px -16px hsl(0 0% 0% / 0.12),
+    0 0 0 1px hsl(var(--border)),
+    0 0 40px -20px hsl(var(--orange-start) / 0.08);
+}
+
+.light .chatwidget-user-icon {
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+}
+
+.light .chatwidget-bot-bubble {
+  color: hsl(var(--card-foreground) / 0.85);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ChatWidget — Animated Floating Bot FAB
+   ══════════════════════════════════════════════════════════════ */
+
+.chatwidget-bot-float {
+  animation: chatbot-float 1.5s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.chatwidget-bot-shadow {
+  width: 48px;
+  height: 8px;
+  background: radial-gradient(ellipse at center, hsl(0 0% 0% / 0.35) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: chatbot-shadow 1.5s ease-in-out infinite alternate;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+.light .chatwidget-bot-shadow {
+  background: radial-gradient(ellipse at center, hsl(0 0% 0% / 0.15) 0%, transparent 70%);
+}
+
+@keyframes chatbot-float {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes chatbot-shadow {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.6);
+    opacity: 0.3;
+  }
+}
