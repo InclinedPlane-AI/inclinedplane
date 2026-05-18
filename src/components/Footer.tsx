@@ -6,32 +6,24 @@ const Footer = () => {
   return (
     <footer className="relative footer-tint">
       {/* Giant wordmark sitting on top of footer border */}
-      <div className="relative overflow-hidden select-none pointer-events-none" aria-hidden="true">
-        <div className="text-center leading-none pb-0 pt-4 sm:pt-8 px-4" style={{ fontSize: 'clamp(2.5rem, 12vw, 12rem)', marginBottom: '-0.1em' }}>
-          <span className="font-black tracking-tighter text-foreground/[0.08]">Inclined</span>
-          <span
-            className="font-black tracking-tighter"
-            style={{
-              background: 'linear-gradient(135deg, hsl(var(--orange-start) / 0.2), hsl(var(--orange-mid) / 0.15), hsl(var(--orange-end) / 0.1))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >Plane</span>
+      <div className="relative overflow-hidden select-none pointer-events-none flex justify-center" aria-hidden="true">
+        <div className="text-center flex items-center leading-none pb-0 pt-4 sm:pt-8 px-4" style={{ fontSize: 'clamp(2.5rem, 12vw, 12rem)', marginBottom: '-0.1em' }}>
+          <div className="-translate-y-[0.08em]">
+            <span className="font-black tracking-tighter text-foreground/[0.08]">Inclined</span>
+            <span
+              className="font-black tracking-tighter"
+              style={{
+                background: 'linear-gradient(135deg, hsl(var(--orange-start) / 0.2), hsl(var(--orange-mid) / 0.15), hsl(var(--orange-end) / 0.1))',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >Plane</span>
+          </div>
           <img
-            src="/favicon.png"
-            alt=""
-            aria-hidden="true"
-            draggable={false}
-            style={{
-              display: 'inline-block',
-              height: '0.7em',
-              width: 'auto',
-              verticalAlign: 'bottom',
-              marginLeft: '0.05em',
-              marginBottom: '-0.05em',
-              opacity: 0.18,
-            }}
+            src="/incpl_favicon_AW.png"
+            alt="Logo"
+            className="w-[0.8em] h-[0.8em] ml-[0.1em] opacity-[0.12] translate-y-[0.02em]"
           />
         </div>
       </div>
