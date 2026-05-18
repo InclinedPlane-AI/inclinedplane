@@ -21,7 +21,7 @@ const Footer = () => {
             >Plane</span>
           </div>
           <img
-            src="/incpl_favicon_AW.png"
+            src="/favicon.png"
             alt="Logo"
             className="w-[0.8em] h-[0.8em] ml-[0.1em] opacity-[0.12] translate-y-[0.02em]"
           />
