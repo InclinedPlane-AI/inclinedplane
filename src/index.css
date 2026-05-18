@@ -724,6 +724,13 @@
 
 /* ── Light mode refinements ── */
 .light .chatwidget-panel {
+}
+
+/* Theme-aware logo: default (dark theme) shows white wordmark; .light shows black wordmark */
+.logo-light { display: none; }
+.logo-dark { display: inline-block; }
+.light .logo-dark { display: none; }
+.light .logo-light { display: inline-block; }
   box-shadow:
     0 24px 60px -16px hsl(0 0% 0% / 0.12),
     0 0 0 1px hsl(var(--border)),
