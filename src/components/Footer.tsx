@@ -18,6 +18,20 @@ const Footer = () => {
               backgroundClip: 'text',
             }}
           >Plane</span>
+          <img
+            src="/favicon.png"
+            alt=""
+            aria-hidden="true"
+            draggable={false}
+            style={{
+              display: 'inline-block',
+              height: '0.8em',
+              width: 'auto',
+              verticalAlign: 'baseline',
+              marginLeft: '0.05em',
+              opacity: 0.18,
+            }}
+          />
         </div>
       </div>
 
