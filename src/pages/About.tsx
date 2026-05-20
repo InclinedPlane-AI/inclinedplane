@@ -318,7 +318,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* ═══════════════ MISSION ═══════════════ */}
+      {/* ═══════════════ MISSION ═══════════════
       <section className="relative py-20 overflow-hidden">
         <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-[2]">
           <motion.div {...fadeUp} className="text-center max-w-3xl mx-auto">
@@ -343,6 +343,7 @@ const About = () => {
           </motion.div>
         </div>
       </section>
+      */}
 
       {/* ═══════════════ VALUES ═══════════════ */}
       <section className="relative py-20 overflow-hidden">
