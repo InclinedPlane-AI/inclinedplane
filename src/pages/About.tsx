@@ -165,7 +165,7 @@ const About = () => {
                 <span className="font-mono text-[11px] text-primary tracking-[0.25em] uppercase">Vision</span>
               </div>
               <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-[1.15] tracking-tight">
-                Building the foundation for the <span className="text-gradient-orange">AI-native world</span>.
+                Building the foundation for the <span className="text-gradient-orange">AI-native world</span> - one enterprise at a time.
               </p>
             </motion.div>
 
