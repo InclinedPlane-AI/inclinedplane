@@ -111,7 +111,7 @@ const Index = () => {
       case 2:
         return "/thesis"; // The Problem
       case 3:
-        return "/industries"; // Our Focus
+        return "/thesis"; // Our Focus (Industries page commented out — keep underline on Thesis)
       case 4:
         return "/services"; // Our Services
       case 5:
