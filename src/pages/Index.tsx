@@ -512,7 +512,8 @@ const Index = () => {
                 ))}
               </div>
 
-              {/* Target Audience Stats */}
+              {/* Target Audience Stats — removed per request */}
+              {/*
               <motion.div {...fadeUp(0.3)} className="text-center mb-12">
                 <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 px-6 py-3 rounded-full surface-2 border border-border/50 shadow-sm">
                   <p className="text-sm font-medium text-foreground">
@@ -526,6 +527,7 @@ const Index = () => {
                   <p className="text-sm font-medium text-foreground">US and UK markets</p>
                 </div>
               </motion.div>
+              */}
 
               {/* Auto-scrolling tech stack marquee */}
               <motion.div {...fadeUp(0.2)}>
