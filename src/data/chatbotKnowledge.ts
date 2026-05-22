@@ -36,7 +36,6 @@ When your answer relates to a specific topic, you MUST include a relevant page l
 - Contact / Getting started → /contact
 - Case studies → /case-studies
 - About the company → /about
-- Industries → /industries
 Write the link naturally, e.g.: "Learn more on our [Services](/services) page." or "Visit our [Case Studies](/case-studies) to see real results."
 
 ## FOLLOW-UP SUGGESTIONS (MANDATORY)
