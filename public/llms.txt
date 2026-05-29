@@ -1,6 +1,6 @@
-# Inclined Plane
+# InclinedPlane
 
-> AI-native data engineering consultancy. Inclined Plane builds cloud data warehouses, observability-first pipelines, BI platforms, and decision systems for modern enterprises. Services span data engineering, AI automation, business intelligence, cloud warehousing, and DataOps. Headquartered with operations across India and the United States.
+> AI-native data engineering consultancy. InclinedPlane builds cloud data warehouses, observability-first pipelines, BI platforms, and decision systems for modern enterprises. Services span data engineering, AI automation, business intelligence, cloud warehousing, and DataOps. Headquartered with operations across India and the United States.
 
 ## Core pages
 
@@ -9,7 +9,7 @@
 - [Services](https://inclinedplane.com/services): Five layers of data infrastructure — Clarity (data and AI advisory), Data Architecture (foundation modernization), Reliability and Ops, Analytics and Intelligence, AI/ML Implementations, and Automation Systems.
 - [Industries](https://inclinedplane.com/industries): Vertical expertise in retail, finance, healthcare, manufacturing, energy, SaaS, BPO, and education.
 - [Case Studies](https://inclinedplane.com/case-studies): 14 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector, and renewables.
-- [About](https://inclinedplane.com/about): Company evolution from Sail Analytics to Inclined Plane and the team building decision systems for high-velocity enterprises.
+- [About](https://inclinedplane.com/about): Company evolution from Sail Analytics to InclinedPlane and the team building decision systems for high-velocity enterprises.
 - [Careers](https://inclinedplane.com/careers): Open roles for data, analytics, ML, BI, and platform engineers. Remote-first, ownership-driven.
 - [Contact](https://inclinedplane.com/contact): support@inclinedplane.com — book a discovery call.
 
