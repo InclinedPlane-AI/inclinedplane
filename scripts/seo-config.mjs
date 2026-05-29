@@ -28,7 +28,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, "..");
 
 export const SITE_URL = "https://inclinedplane.com";
-export const SITE_NAME = "Inclined Plane";
+export const SITE_NAME = "InclinedPlane";
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 export const FALLBACK_OG_IMAGE = `${SITE_URL}/favicon.png`;
 
@@ -97,12 +97,12 @@ export function breadcrumbSchema(path, title) {
 const staticRoutes = [
   {
     path: "/",
-    title: "Inclined Plane — AI-Native Data Engineering",
+    title: "InclinedPlane — AI-Native Data Engineering",
     description:
       "AI-ready data platforms, observability-first pipelines, and decision systems for modern enterprises. Data engineering consultancy.",
-    titleTemplate: "raw", // homepage uses title verbatim, no " | Inclined Plane" suffix
+    titleTemplate: "raw", // homepage uses title verbatim, no " | InclinedPlane" suffix
     noscriptSummary:
-      "Inclined Plane is an AI-native data engineering consultancy. We build cloud data warehouses, observability-first pipelines, BI platforms, and decision systems for modern enterprises. Services span data engineering, AI automation, business intelligence, cloud warehousing, and DataOps. Production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, and public sector.",
+      "InclinedPlane is an AI-native data engineering consultancy. We build cloud data warehouses, observability-first pipelines, BI platforms, and decision systems for modern enterprises. Services span data engineering, AI automation, business intelligence, cloud warehousing, and DataOps. Production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, and public sector.",
     pageJsonLd: [
       {
         "@context": "https://schema.org",
@@ -129,7 +129,7 @@ const staticRoutes = [
     description:
       "Why modern enterprises need observable, automated data platforms. Our thesis on building decision systems from source to intelligence.",
     noscriptSummary:
-      "Our thesis: data is infrastructure, intelligence is product. Modern enterprises need engineering-grade data systems with first-class observability, automated pipelines, governed warehouses, and decision systems built from source to intelligence. This page is a deep technical manifesto on how Inclined Plane builds them.",
+      "Our thesis: data is infrastructure, intelligence is product. Modern enterprises need engineering-grade data systems with first-class observability, automated pipelines, governed warehouses, and decision systems built from source to intelligence. This page is a deep technical manifesto on how InclinedPlane builds them.",
   },
   {
     path: "/services",
@@ -164,7 +164,7 @@ const staticRoutes = [
         name: "Industries We Serve",
         url: `${SITE_URL}/industries`,
         description:
-          "Vertical expertise areas served by Inclined Plane: retail, finance, healthcare, manufacturing, energy, SaaS, BPO, and education.",
+          "Vertical expertise areas served by InclinedPlane: retail, finance, healthcare, manufacturing, energy, SaaS, BPO, and education.",
         about: [
           "Retail",
           "Finance",
@@ -188,19 +188,19 @@ const staticRoutes = [
   },
   {
     path: "/about",
-    title: "About Inclined Plane",
+    title: "About InclinedPlane",
     description:
-      "From Sail Analytics to Inclined Plane — our evolution into an AI-native data engineering firm. Meet the team building decision systems for modern enterprises.",
+      "From Sail Analytics to InclinedPlane — our evolution into an AI-native data engineering firm. Meet the team building decision systems for modern enterprises.",
     noscriptSummary:
-      "Inclined Plane evolved from Sail Analytics into an AI-native data engineering firm. Headquartered with operations across India and the United States, partnering with cloud platforms (AWS, Azure, Microsoft Fabric) to deliver decision systems for high-velocity enterprises.",
+      "InclinedPlane evolved from Sail Analytics into an AI-native data engineering firm. Headquartered with operations across India and the United States, partnering with cloud platforms (AWS, Azure, Microsoft Fabric) to deliver decision systems for high-velocity enterprises.",
   },
   {
     path: "/blog",
     title: "Blog — Insights on Data Engineering & AI",
     description:
-      "Expert insights on data engineering, AI automation, DataOps, business intelligence, and building modern data platforms. By the Inclined Plane team.",
+      "Expert insights on data engineering, AI automation, DataOps, business intelligence, and building modern data platforms. By the InclinedPlane team.",
     noscriptSummary:
-      "Long-form essays on data engineering strategy, AI automation, DataOps, business intelligence, observability, and the architecture of competitive advantage. Written by the Inclined Plane team.",
+      "Long-form essays on data engineering strategy, AI automation, DataOps, business intelligence, observability, and the architecture of competitive advantage. Written by the InclinedPlane team.",
   },
   {
     path: "/careers",
@@ -208,20 +208,20 @@ const staticRoutes = [
     description:
       "Join InclinedPlane to build AI-native data systems for high-velocity enterprises. Remote-first, ownership-driven, engineering rigor.",
     noscriptSummary:
-      "Careers at Inclined Plane. Remote-first, ownership-driven, engineering-rigor culture. We hire data engineers, analytics engineers, ML engineers, BI engineers, and platform engineers who want to build production AI-native data systems.",
+      "Careers at InclinedPlane. Remote-first, ownership-driven, engineering-rigor culture. We hire data engineers, analytics engineers, ML engineers, BI engineers, and platform engineers who want to build production AI-native data systems.",
   },
   {
     path: "/contact",
     title: "Contact Us",
     description:
-      "Get in touch with Inclined Plane for data engineering consulting, AI automation, and cloud warehouse architecture. Book a discovery call today.",
+      "Get in touch with InclinedPlane for data engineering consulting, AI automation, and cloud warehouse architecture. Book a discovery call today.",
     noscriptSummary:
-      "Contact Inclined Plane. Email support@inclinedplane.com for data engineering consulting, AI automation, cloud warehouse architecture, BI modernization, or DataOps engagements. Offices in India and Delaware, USA. Book a discovery call.",
+      "Contact InclinedPlane. Email support@inclinedplane.com for data engineering consulting, AI automation, cloud warehouse architecture, BI modernization, or DataOps engagements. Offices in India and Delaware, USA. Book a discovery call.",
     pageJsonLd: [
       {
         "@context": "https://schema.org",
         "@type": "ContactPage",
-        name: "Contact Inclined Plane",
+        name: "Contact InclinedPlane",
         url: `${SITE_URL}/contact`,
       },
       {
@@ -241,27 +241,27 @@ const staticRoutes = [
     path: "/privacy",
     title: "Privacy Policy",
     description:
-      "How Inclined Plane collects, uses, and protects your personal information. Read our commitment to data privacy and transparency.",
+      "How InclinedPlane collects, uses, and protects your personal information. Read our commitment to data privacy and transparency.",
     noscriptSummary:
-      "Privacy policy describing the personal information Inclined Plane collects, how it is used, how it is protected, and your rights as a data subject.",
+      "Privacy policy describing the personal information InclinedPlane collects, how it is used, how it is protected, and your rights as a data subject.",
     noIndex: true,
   },
   {
     path: "/terms",
     title: "Terms of Service",
     description:
-      "Terms governing the use of Inclined Plane's data engineering and AI consulting services. Clear and fair business terms.",
+      "Terms governing the use of InclinedPlane's data engineering and AI consulting services. Clear and fair business terms.",
     noscriptSummary:
-      "Terms of service governing the use of Inclined Plane's data engineering and AI consulting services and this website.",
+      "Terms of service governing the use of InclinedPlane's data engineering and AI consulting services and this website.",
     noIndex: true,
   },
   {
     path: "/cookies",
     title: "Cookie Policy",
     description:
-      "How Inclined Plane uses cookies and tracking technologies on our website. Manage your cookie preferences.",
+      "How InclinedPlane uses cookies and tracking technologies on our website. Manage your cookie preferences.",
     noscriptSummary:
-      "Cookie policy describing the cookies and tracking technologies Inclined Plane uses on this website and how to manage your preferences.",
+      "Cookie policy describing the cookies and tracking technologies InclinedPlane uses on this website and how to manage your preferences.",
     noIndex: true,
   },
 ];
@@ -373,7 +373,7 @@ export function getRoutes() {
   const posts = parseBlogPosts();
   for (const post of posts) {
     const path = `/blog/${post.slug}`;
-    // Blog post titles are long-form; appending " | Inclined Plane" pushes
+    // Blog post titles are long-form; appending " | InclinedPlane" pushes
     // the SERP title past Google's ~60-char cutoff. Use the title verbatim
     // — the brand still appears in the breadcrumb/site-name SERP feature.
     const fullTitle = post.title;
