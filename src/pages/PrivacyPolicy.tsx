@@ -1,4 +1,4 @@
-import {
+﻿import {
   LegalLayout,
   Section,
   H3,
@@ -42,7 +42,7 @@ const PrivacyPolicy = () => (
     </HighlightBox>
 
     <Section id="who-we-are" num="01" title="Who We Are">
-      <P>Inclined Plane is an AI-native data engineering consultancy. Our registered business addresses and contact details are listed in Section 14. We act as the data controller for personal data collected through this website.</P>
+      <P>Inclined Plane is an AI-first data engineering consultancy. Our registered business addresses and contact details are listed in Section 14. We act as the data controller for personal data collected through this website.</P>
       <P>We operate across the United States and India. Where applicable, we comply with global data protection standards, including relevant US state privacy laws such as the California Consumer Privacy Act (CCPA) as amended by the CPRA, and the UK/EU General Data Protection Regulation (GDPR) for visitors from those regions.</P>
     </Section>
 
@@ -86,8 +86,8 @@ const PrivacyPolicy = () => (
       <P>For visitors subject to UK/EU GDPR, we rely on the following lawful bases:</P>
       <ArrowList>
         <LI><strong>Contract:</strong> Processing necessary to take steps prior to or fulfil a contract with you</LI>
-        <LI><strong>Legitimate interests:</strong> Running our business, improving our services, and maintaining website security — balanced against your rights</LI>
-        <LI><strong>Consent:</strong> Marketing communications and non-essential cookies — where you have explicitly opted in</LI>
+        <LI><strong>Legitimate interests:</strong> Running our business, improving our services, and maintaining website security, balanced against your rights</LI>
+        <LI><strong>Consent:</strong> Marketing communications and non-essential cookies, where you have explicitly opted in</LI>
         <LI><strong>Legal obligation:</strong> Where we are required to process data to comply with law</LI>
       </ArrowList>
     </Section>
@@ -98,7 +98,7 @@ const PrivacyPolicy = () => (
         <LI><strong>Service providers:</strong> Hosting, CRM, analytics, email, and calendar platforms that process data on our behalf under data processing agreements</LI>
         <LI><strong>Professional advisers:</strong> Lawyers, accountants, or insurers where required</LI>
         <LI><strong>Authorities:</strong> Law enforcement or regulators where legally required</LI>
-        <LI><strong>Business transfers:</strong> In the event of a merger, acquisition, or asset sale — subject to standard confidentiality obligations</LI>
+        <LI><strong>Business transfers:</strong> In the event of a merger, acquisition, or asset sale, subject to standard confidentiality obligations</LI>
       </ArrowList>
       <P>All third-party processors are contractually required to handle your data securely and only for the specified purpose.</P>
     </Section>
@@ -165,7 +165,7 @@ const PrivacyPolicy = () => (
     </Section>
 
     <Section id="security" num="11" title="Security">
-      <P>We implement appropriate technical and organisational measures to protect your personal data against unauthorised access, alteration, disclosure, or destruction. These include encrypted data transmission (TLS), access controls, and regular security reviews. While we strive to protect your data, no internet transmission is completely secure — we cannot guarantee absolute security.</P>
+      <P>We implement appropriate technical and organisational measures to protect your personal data against unauthorised access, alteration, disclosure, or destruction. These include encrypted data transmission (TLS), access controls, and regular security reviews. While we strive to protect your data, no internet transmission is completely secure. We cannot guarantee absolute security.</P>
     </Section>
 
     <Section id="children" num="12" title="Children's Privacy">

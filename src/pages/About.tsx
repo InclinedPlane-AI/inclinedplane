@@ -1,4 +1,4 @@
-import PageLayout from "@/components/PageLayout";
+﻿import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import SectionGlow from "@/components/SectionGlow";
@@ -181,8 +181,8 @@ const About = () => {
               </div>
               <p className="text-2xl sm:text-3xl font-semibold text-foreground leading-snug tracking-tight">
                 To be the firm that defines what{" "}
-                <span className="text-gradient-orange">engineering-grade data infrastructure</span> means for the AI era
-                — and the partner enterprises trust to build it.
+                <span className="text-gradient-orange">production-grade data infrastructure</span> means for the AI era,
+                and the partner enterprises trust to build it.
               </p>
             </motion.div>
           </div>
@@ -221,7 +221,7 @@ const About = () => {
                   </div>
                   <p className="text-muted-foreground leading-relaxed mb-4">
                     We've worked inside the data estates of manufacturers, energy companies, logistics firms, and
-                    retailers — from initial BI build-outs to complex platform modernisations. Over time, one thing
+                    retailers, from initial BI build-outs to complex platform modernisations. Over time, one thing
                     became clear: the bottleneck was never visualisation. It was always architecture, automation, and
                     the complete absence of observability.
                   </p>
@@ -241,14 +241,13 @@ const About = () => {
                     <h3 className="font-bold text-foreground text-lg">What We've Built</h3>
                   </div>
                   <p className="text-muted-foreground leading-relaxed mb-4">
-                    InclinedPlane is an AI-native data engineering and analytics firm — process-driven,
+                    InclinedPlane is an AI-first data engineering and analytics firm, process-driven,
                     engineering-first, and deliberate about the engagements we take on.
                   </p>
                   <p className="text-muted-foreground leading-relaxed mb-4">
-                    We work with mid-to-large enterprises across manufacturing, energy, logistics, FMCG, and retail —
-                    organisations where data infrastructure isn't a nice-to-have, it's
+                    We work with mid-to-large enterprises across manufacturing, energy, logistics, FMCG, and retail. Organisations where data infrastructure isn't a nice-to-have, it's
                     <span className="text-foreground font-medium"> operational-critical</span>. Our delivery framework
-                    runs across five layers — from AI-Readiness Foundation through to autonomous Intelligence systems —
+                    runs across five layers, from AI-Readiness Foundation through to automated Intelligence systems,
                     each one observable, testable, and independently scalable.
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
@@ -290,23 +289,23 @@ const About = () => {
                     </div>
                     <p className="text-muted-foreground leading-relaxed mb-4">
                       The name is intentional. An <span className="text-foreground font-medium">inclined plane</span> is
-                      one of the six classical simple machines — a surface that lets you move upward with less force. It
+                      one of the six classical simple machines, a surface that lets you move upward with less force. It
                       transforms effort into elevation. That's exactly what we do with data.
                     </p>
                     <p className="text-muted-foreground leading-relaxed mb-4">
                       We reduce the friction between raw information and strategic action. We build the ramp that takes
-                      enterprises from data gravity — where data accumulates but doesn't move — to data leverage, where
+                      enterprises from data gravity, where data accumulates but doesn't move, to data leverage, where
                       every byte compounds into competitive advantage.
                     </p>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      In physics, an inclined plane doesn't just move things up — it makes the impossible, possible.
+                      In physics, an inclined plane doesn't just move things up. It makes the impossible, possible.
                       Heavy loads that can't be lifted directly can be moved upward along a gentle slope. That's the
                       metaphor we live by: enterprise data transformation doesn't have to be a brute-force lift. With
-                      the right architecture, the right automation, and the right intelligence — you ascend.
+                      the right architecture, the right automation, and the right intelligence. You ascend.
                     </p>
                     <p className="text-muted-foreground leading-relaxed">
-                      We are a process-driven, engineering-first firm. Our delivery framework runs across five layers —
-                      from AI-Readiness Foundation through to autonomous Intelligence systems — each one observable,
+                      We are a process-driven, engineering-first firm. Our delivery framework runs across five layers,
+                      from AI-Readiness Foundation through to automated Intelligence systems, each one observable,
                       testable, and independently scalable. We take on fewer clients than we could, because the work
                       demands it. Every system we build is one we'd stake our reputation on.
                     </p>
@@ -365,25 +364,25 @@ const About = () => {
               {
                 icon: Shield,
                 title: "Zero Compromise Excellence",
-                desc: "We don't ship good enough. Every pipeline is production-grade. Every model is validated. Every architecture is built to scale. We hold ourselves to the standard we'd want if we were the client — because eventually, we always are.",
+                desc: "We don't ship good enough. Every pipeline is production-grade. Every model is validated. Every architecture is built to scale. We hold ourselves to the standard we'd want if we were the client, because eventually, we always are.",
                 accent: "from-primary/20 to-primary/5",
               },
               {
                 icon: Heart,
                 title: "Your Data Is Your Business",
-                desc: "We treat it that way. We don't parachute in, deliver, and disappear. We operate as an extension of your team — with the same stake in outcomes, the same intolerance for bad data, and the same urgency when something breaks at 3am.",
+                desc: "We treat it that way. We don't parachute in, deliver, and disappear. We operate as an extension of your team, with the same stake in outcomes, the same intolerance for bad data, and the same urgency when something breaks at 3am.",
                 accent: "from-primary/15 to-primary/5",
               },
               {
                 icon: Target,
                 title: "Outcomes Over Outputs",
-                desc: "We measure success in business impact — revenue protected, decisions accelerated, costs reduced. Not pipelines built, dashboards delivered, or hours logged. If it doesn't move the needle, it doesn't count.",
+                desc: "We measure success in business impact: revenue protected, decisions accelerated, costs reduced. Not pipelines built, dashboards delivered, or hours logged. If it doesn't move the needle, it doesn't count.",
                 accent: "from-primary/15 to-primary/5",
               },
               {
                 icon: Sparkles,
                 title: "We Say What We Think",
-                desc: "If your data estate has a problem, we'll tell you — even if it's uncomfortable. If a technology choice is wrong for your context, we'll say so. Honest counsel is more valuable than agreeable consulting.",
+                desc: "If your data estate has a problem, we'll tell you, even if it's uncomfortable. If a technology choice is wrong for your context, we'll say so. Honest counsel is more valuable than agreeable consulting.",
                 accent: "from-primary/15 to-primary/5",
               },
             ].map(({ icon: Icon, title, desc, accent }, i) => (
@@ -434,7 +433,7 @@ const About = () => {
               {
                 icon: Target,
                 title: "Outcome-Driven",
-                desc: "We measure success in business impact — revenue uplift, cost reduction, time-to-insight. Not pipeline count, not dashboard count, not vanity metrics.",
+                desc: "We measure success in business impact: revenue uplift, cost reduction, time-to-insight. Not pipeline count, not dashboard count, not vanity metrics.",
               },
               {
                 icon: Cpu,
@@ -476,7 +475,7 @@ const About = () => {
               Brains <span className="text-gradient-orange">&amp; Brawn</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Our engineers don't just write code — they carry industry-recognized certifications that prove mastery
+              Our engineers don't just write code. They carry industry-recognized certifications that prove mastery
               across every layer of the modern data stack.
             </p>
           </motion.div>
@@ -570,12 +569,12 @@ const About = () => {
               {
                 icon: Shield,
                 title: "Methodology over heroics",
-                text: "We don't rely on individuals to carry engagements. Every project runs on a defined framework — architecture reviews, quality gates, CI/CD workflows, and documented handoffs. The system is the safeguard, not the person.",
+                text: "We don't rely on individuals to carry engagements. Every project runs on a defined framework: architecture reviews, quality gates, CI/CD workflows, and documented handoffs. The system is the safeguard, not the person.",
               },
               {
                 icon: Layers,
                 title: "Rigour at every layer",
-                text: "We apply the same engineering standards to a reporting pipeline as we do to a production ML system. Testing, versioning, observability — non-negotiable, regardless of project size or timeline pressure.",
+                text: "We apply the same engineering standards to a reporting pipeline as we do to a production ML system. Testing, versioning, observability, non-negotiable, regardless of project size or timeline pressure.",
               },
               {
                 icon: Zap,
@@ -585,7 +584,7 @@ const About = () => {
               {
                 icon: Users,
                 title: "Built to last, not to impress",
-                text: "We optimise for systems that compound over time — not for delivery that looks good in a demo but degrades in production. The measure of our work is how it performs six months after we leave.",
+                text: "We optimise for systems that compound over time, not for delivery that looks good in a demo but degrades in production. The measure of our work is how it performs six months after we leave.",
               },
             ].map(({ icon: Icon, title, text }) => (
               <motion.div
@@ -630,7 +629,7 @@ const About = () => {
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto">
               The world doesn't need another BI consultancy. It needs firms that can build the data infrastructure to
-              power autonomous decision-making — observable, automated, and production-hardened. That's what
+              power automated decision-making, observable, and production-hardened. That's what
               InclinedPlane is built to do.
             </p>
           </motion.div>

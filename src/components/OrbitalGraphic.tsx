@@ -26,7 +26,7 @@ const NODES = [
   {
      label: "Agentic Execution",
     icon: Bot,
-    desc: "Agentic AI systems that execute multi-step workflows and interact with enterprise tools autonomously.",
+    desc: "Agentic AI systems that execute multi-step workflows and interact with enterprise tools automatically.",
   },
 ];
 

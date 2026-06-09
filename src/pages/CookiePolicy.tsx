@@ -1,4 +1,4 @@
-import {
+﻿import {
   LegalLayout,
   Section,
   H3,
@@ -72,7 +72,7 @@ const CookiePolicy = () => (
 
     <Section id="what-are-cookies" num="01" title="What Are Cookies?">
       <P>Cookies are small text files placed on your device (computer, tablet, or smartphone) when you visit a website. They allow the website to recognise your device and store certain information about your preferences or behaviour. Cookies are widely used to make websites work more efficiently, improve user experience, and provide analytical information to site owners.</P>
-      <P>Similar technologies — including web beacons, pixels, local storage, and session storage — may also be used for similar purposes, and references to "cookies" in this policy cover these technologies too.</P>
+      <P>Similar technologies, including web beacons, pixels, local storage, and session storage, may also be used for similar purposes, and references to "cookies" in this policy cover these technologies too.</P>
     </Section>
 
     <Section id="why-we-use" num="02" title="Why We Use Cookies">
@@ -90,15 +90,15 @@ const CookiePolicy = () => (
     <Section id="types" num="03" title="Types of Cookies">
       <H3>By duration</H3>
       <ArrowList>
-        <LI><strong>Session cookies</strong> — exist only for the duration of your browser session and are deleted when you close your browser</LI>
-        <LI><strong>Persistent cookies</strong> — remain on your device for a set period or until you delete them manually</LI>
+        <LI><strong>Session cookies</strong>: exist only for the duration of your browser session and are deleted when you close your browser</LI>
+        <LI><strong>Persistent cookies</strong>: remain on your device for a set period or until you delete them manually</LI>
       </ArrowList>
       <H3>By purpose</H3>
       <ArrowList>
-        <LI><strong>Strictly necessary</strong> — required for the website to function. Cannot be disabled without breaking core functionality</LI>
-        <LI><strong>Functional / preference</strong> — remember your settings and choices (e.g., cookie consent preferences)</LI>
-        <LI><strong>Analytics / performance</strong> — help us understand site traffic and usage patterns anonymously</LI>
-        <LI><strong>Marketing / targeting</strong> — we do not currently use cookies for marketing or advertising purposes</LI>
+        <LI><strong>Strictly necessary</strong>: required for the website to function. Cannot be disabled without breaking core functionality</LI>
+        <LI><strong>Functional / preference</strong>: remember your settings and choices (e.g., cookie consent preferences)</LI>
+        <LI><strong>Analytics / performance</strong>: help us understand site traffic and usage patterns anonymously</LI>
+        <LI><strong>Marketing / targeting</strong>: we do not currently use cookies for marketing or advertising purposes</LI>
       </ArrowList>
     </Section>
 
@@ -148,7 +148,7 @@ const CookiePolicy = () => (
     <Section id="third-party" num="05" title="Third-Party Cookies">
       <P>Some cookies are placed by third-party services we use to operate our website:</P>
       <ArrowList>
-        <LI><strong>Google Analytics</strong> — we use Google Analytics to understand how visitors interact with our site. Data collected is anonymised (IP addresses are truncated) and is subject to <A href="https://policies.google.com/privacy" external>Google's Privacy Policy</A>. You can opt out using the <A href="https://tools.google.com/dlpage/gaoptout" external>Google Analytics Opt-out Browser Add-on</A>.</LI>
+        <LI><strong>Google Analytics</strong>: we use Google Analytics to understand how visitors interact with our site. Data collected is anonymised (IP addresses are truncated) and is subject to <A href="https://policies.google.com/privacy" external>Google's Privacy Policy</A>. You can opt out using the <A href="https://tools.google.com/dlpage/gaoptout" external>Google Analytics Opt-out Browser Add-on</A>.</LI>
       </ArrowList>
       <P>We do not permit third-party advertisers to place cookies on our website. If that changes, we will update this policy and seek consent where required.</P>
     </Section>
@@ -166,7 +166,7 @@ const CookiePolicy = () => (
         <LI><A href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" external>Microsoft Edge</A></LI>
       </ArrowList>
       <H3>California residents</H3>
-      <P>Under the CCPA/CPRA, California residents have the right to opt out of the "sale" or "sharing" of personal information. We do not sell personal information. The analytics cookies we use (Google Analytics) are configured with IP anonymisation and are used solely for internal analytics — not for cross-context behavioural advertising. If you wish to opt out of Google Analytics specifically, use the <A href="https://tools.google.com/dlpage/gaoptout" external>Google Analytics Opt-out Browser Add-on</A>. For broader CCPA rights, see our <A href="/privacy#california">Privacy Policy — California section</A>.</P>
+      <P>Under the CCPA/CPRA, California residents have the right to opt out of the "sale" or "sharing" of personal information. We do not sell personal information. The analytics cookies we use (Google Analytics) are configured with IP anonymisation and are used solely for internal analytics, not for cross-context behavioural advertising. If you wish to opt out of Google Analytics specifically, use the <A href="https://tools.google.com/dlpage/gaoptout" external>Google Analytics Opt-out Browser Add-on</A>. For broader CCPA rights, see our <A href="/privacy#california">Privacy Policy, California section</A>.</P>
       <H3>Do Not Track</H3>
       <P>Some browsers offer a "Do Not Track" (DNT) signal. Our website does not currently respond to DNT signals as there is no agreed industry standard for how they should be interpreted. We encourage you to use the cookie controls above to manage your preferences.</P>
     </Section>

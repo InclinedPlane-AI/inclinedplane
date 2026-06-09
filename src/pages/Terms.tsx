@@ -1,4 +1,4 @@
-import {
+﻿import {
   LegalLayout,
   Section,
   H3,
@@ -43,18 +43,18 @@ const Terms = () => (
 
     <Section id="acceptance" num="01" title="Acceptance of Terms">
       <P>By accessing or browsing our website, you confirm that you are at least 16 years of age (or the applicable age of digital consent in your jurisdiction), that you have read and understood these Terms of Service, and that you agree to comply with them and all applicable laws and regulations.</P>
-      <P>These terms apply to the website <strong>www.inclinedplane.com</strong> and any subdomains operated by Inclined Plane. They do not govern the terms of any professional services engagement — those are subject to separate written contracts agreed between Inclined Plane and the client.</P>
+      <P>These terms apply to the website <strong>www.inclinedplane.com</strong> and any subdomains operated by Inclined Plane. They do not govern the terms of any professional services engagement. Those are subject to separate written contracts agreed between Inclined Plane and the client.</P>
     </Section>
 
     <Section id="about-us" num="02" title="About Us">
-      <P>This website is operated by <strong>Inclined Plane</strong>, an AI-native data engineering consultancy. Our contact and entity details are provided in Section 13.</P>
+      <P>This website is operated by <strong>Inclined Plane</strong>, an AI-first data engineering consultancy. Our contact and entity details are provided in Section 13.</P>
       <P>References to "Inclined Plane", "we", "us", or "our" throughout these Terms refer to our operating entities.</P>
     </Section>
 
     <Section id="services" num="03" title="Website vs. Professional Services">
       <P>This website is an informational and marketing platform. It allows potential clients, partners, and candidates to learn about Inclined Plane, contact us, and access our published content.</P>
       <P>If you engage Inclined Plane for professional data engineering or AI consultancy services, those services are governed by a separate, bespoke written agreement. Nothing on this website constitutes an offer to provide professional services, and browsing this site does not create a client relationship.</P>
-      <P>Information on this website — including case studies, statistics, and service descriptions — is provided for general informational purposes and may not reflect the precise scope of services available to any particular client.</P>
+      <P>Information on this website, including case studies, statistics, and service descriptions, is provided for general informational purposes and may not reflect the precise scope of services available to any particular client.</P>
     </Section>
 
     <Section id="use-of-site" num="04" title="Acceptable Use of This Website">
@@ -74,7 +74,7 @@ const Terms = () => (
 
     <Section id="ip" num="05" title="Intellectual Property">
       <H3>Our content</H3>
-      <P>All content on this website — including text, graphics, logos, icons, images, case studies, blog articles, code samples, and the overall design — is the property of Inclined Plane or its licensors and is protected by applicable intellectual property laws.</P>
+      <P>All content on this website, including text, graphics, logos, icons, images, case studies, blog articles, code samples, and the overall design, is the property of Inclined Plane or its licensors and is protected by applicable intellectual property laws.</P>
       <P>You may access and view content on this website for personal, non-commercial purposes. You may share links to our content. You must not reproduce, modify, distribute, or create derivative works from our content without our express written permission.</P>
       <H3>Your submissions</H3>
       <P>If you submit any content to us via contact forms, email, or other channels (such as feedback, ideas, or enquiries), you grant Inclined Plane a non-exclusive, royalty-free licence to use that content for the purposes for which it was submitted. We will handle any personal data in accordance with our <A href="/privacy">Privacy Policy</A>.</P>
@@ -146,7 +146,7 @@ const Terms = () => (
 
     <Section id="changes" num="12" title="Changes to These Terms">
       <P>We may update these Terms of Service from time to time. When we do, the "Last Updated" date at the top of this page will be revised. Continued use of our website following any update constitutes acceptance of the revised Terms.</P>
-      <P>For material changes, we will make reasonable efforts to notify users — for example, by displaying a prominent notice on the website. We recommend checking this page periodically.</P>
+      <P>For material changes, we will make reasonable efforts to notify users, for example, by displaying a prominent notice on the website. We recommend checking this page periodically.</P>
     </Section>
 
     <Section id="contact" num="13" title="Contact Us" last>

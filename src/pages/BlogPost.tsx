@@ -1,4 +1,4 @@
-import { useParams, Navigate, Link } from "react-router-dom";
+﻿import { useParams, Navigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock, CalendarDays, Share2, ArrowUp, Linkedin } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -269,7 +269,7 @@ const BlogPostPage = () => {
                   <a href={img.creditUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                     {img.credit}
                   </a>
-                  {" "}— {img.alt} · via Unsplash
+                  {" "}, {img.alt} · via Unsplash
                 </li>
               ))}
             </ul>

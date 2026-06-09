@@ -1,4 +1,4 @@
-import PageLayout from "@/components/PageLayout";
+﻿import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
@@ -121,7 +121,7 @@ const CaseStudies = () => {
       <PageHero
         label="Case Studies"
         title={<>Proof in <span className="text-gradient-orange">Production.</span></>}
-        subtitle="Real outcomes from production deployments. Not proofs of concept — production systems that move the needle."
+        subtitle="Real outcomes from production deployments. Not proofs of concept. Production systems that move the needle."
       />
       <div className="pb-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">

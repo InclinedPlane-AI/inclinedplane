@@ -1,4 +1,4 @@
-import PageLayout from "@/components/PageLayout";
+﻿import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import IndustryDetail from "@/components/IndustryDetail";
@@ -20,7 +20,7 @@ const transformationSteps = [
     number: "01",
     icon: Search,
     title: "Discovery & Assessment",
-    description: "We begin with a deep-dive into your current data landscape — sources, quality, gaps, and maturity. No generic audits. We map your specific workflows, pain points, and opportunities to build a prioritized roadmap tailored to your business goals.",
+    description: "We begin with a deep-dive into your current data landscape: sources, quality, gaps, and maturity. No generic audits. We map your specific workflows, pain points, and opportunities to build a prioritized roadmap tailored to your business goals.",
     detail: "Typical duration: 2–3 weeks",
   },
   {
@@ -34,7 +34,7 @@ const transformationSteps = [
     number: "03",
     icon: Rocket,
     title: "Proof of Value",
-    description: "We pick the highest-impact use case and build a working prototype in 4–6 weeks. This isn't a slide deck — it's a deployed, functional solution demonstrating real ROI on your own data, so stakeholders can see the transformation in action.",
+    description: "We pick the highest-impact use case and build a working prototype in 4–6 weeks. This isn't a slide deck. It's a deployed, functional solution demonstrating real ROI on your own data, so stakeholders can see the transformation in action.",
     detail: "Timeline: 4–6 weeks to first results",
   },
   {
@@ -62,7 +62,7 @@ const Industries = () => {
       <PageHero
         label="Industries"
         title={<>Built for <span className="text-gradient-orange">Your Domain.</span></>}
-        subtitle="Deep vertical expertise meets world-class data engineering. We don't just understand your data — we understand your business."
+        subtitle="Deep vertical expertise meets world-class data engineering. We don't just understand your data. We understand your business."
       />
 
       <div className="pb-24">

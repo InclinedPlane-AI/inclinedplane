@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
@@ -72,7 +72,7 @@ const layerDetails = [
     detail: {
       title: "Data Source Integration",
       description:
-        "We connect to every system that generates value-bearing data — whether it's a SaaS API, an on-prem ERP, IoT sensor streams, or flat files on SFTP. Each connector is fault-tolerant, schema-aware, and version-controlled.",
+        "We connect to every system that generates value-bearing data, whether it's a SaaS API, an on-prem ERP, IoT sensor streams, or flat files on SFTP. Each connector is fault-tolerant, schema-aware, and version-controlled.",
       tools: ["Fivetran", "Airbyte", "Custom CDC", "Debezium", "Singer Taps"],
       metrics: ["50+ pre-built connectors", "< 5 min setup per source", "99.9% ingestion SLA"],
     },
@@ -102,7 +102,7 @@ const layerDetails = [
     detail: {
       title: "Storage & Compute Layer",
       description:
-        "A modern lakehouse architecture separating storage from compute. Data lives in columnar formats (Parquet/Delta) on object storage. Compute scales independently — from auto-suspending warehouses for BI to GPU clusters for ML training.",
+        "A modern lakehouse architecture separating storage from compute. Data lives in columnar formats (Parquet/Delta) on object storage. Compute scales independently, from auto-suspending warehouses for BI to GPU clusters for ML training.",
       tools: ["Snowflake", "BigQuery", "Databricks", "Delta Lake", "Pinecone"],
       metrics: ["60% avg cost reduction vs. legacy", "Auto-scaling 0 → 128 nodes", "Sub-second query on TB-scale data"],
     },
@@ -117,7 +117,7 @@ const layerDetails = [
     detail: {
       title: "Observability & Governance",
       description:
-        "Every pipeline emits structured telemetry: row counts, schema diffs, freshness SLAs, and cost attribution. Column-level lineage traces every field from source to dashboard. Access control is policy-as-code — auditable and reproducible.",
+        "Every pipeline emits structured telemetry: row counts, schema diffs, freshness SLAs, and cost attribution. Column-level lineage traces every field from source to dashboard. Access control is policy-as-code, auditable and reproducible.",
       tools: ["Monte Carlo", "Atlan", "OpenLineage", "Apache Atlas", "dbt Docs"],
       metrics: ["End-to-end column lineage", "Real-time freshness monitoring", "SOC 2 / GDPR compliant"],
     },
@@ -132,7 +132,7 @@ const layerDetails = [
     detail: {
       title: "Intelligence & AI Layer",
       description:
-        "The intelligence layer consumes curated data through semantic layers (for BI) and feature stores (for ML). Dashboards serve real-time KPIs. Predictive models score opportunities. LLM-powered agents query data in natural language and trigger workflows autonomously.",
+        "The intelligence layer consumes curated data through semantic layers (for BI) and feature stores (for ML). Dashboards serve real-time KPIs. Predictive models score opportunities. LLM-powered agents query data in natural language and trigger workflows automatically.",
       tools: ["Tableau", "Power BI", "MLflow", "LangChain", "Feast"],
       metrics: ["Real-time dashboard refresh", "Model serving < 100ms p99", "NL query accuracy > 92%"],
     },
@@ -147,7 +147,7 @@ const layerDetails = [
     detail: {
       title: "Action & Automation",
       description:
-        "The final mile: data doesn't just inform — it acts. Intelligent alerting surfaces anomalies with root cause analysis. Orchestrated workflows span pipelines, ML models, notifications, and external APIs. Self-healing infrastructure handles failures autonomously.",
+        "The final mile: data doesn't just inform. It acts. Intelligent alerting surfaces anomalies with root cause analysis. Orchestrated workflows span pipelines, ML models, notifications, and external APIs. Self-healing infrastructure handles failures automatically.",
       tools: ["Airflow", "Dagster", "Prefect", "Temporal", "n8n"],
       metrics: ["Zero manual intervention on 80% of incidents", "End-to-end orchestration", "AI-generated briefings"],
     },
@@ -478,7 +478,7 @@ const PrincipleCard = ({
 /* ─── Automation Visual ─── */
 const AutomationFlow = () => {
   const steps = [
-    { icon: Search, label: "Detect", desc: "Anomaly detected in revenue pipeline — 23% deviation from forecast" },
+    { icon: Search, label: "Detect", desc: "Anomaly detected in revenue pipeline, 23% deviation from forecast" },
     { icon: Brain, label: "Analyze", desc: "AI agent correlates with upstream schema change in CRM sync" },
     {
       icon: AlertTriangle,
@@ -533,7 +533,7 @@ const BeforeAfter = () => {
     },
     {
       dimension: "Pipeline Monitoring",
-      before: '"Did the job run?" — check manually',
+      before: '"Did the job run?" Check manually.',
       after: "Full observability, auto-alerting, SLA tracking",
     },
     {
@@ -544,7 +544,7 @@ const BeforeAfter = () => {
     {
       dimension: "Decision Making",
       before: "Gut feel + last quarter's numbers",
-      after: "AI-powered forecasts + autonomous agents",
+      after: "AI-powered forecasts + automated agents",
     },
     {
       dimension: "Incident Response",
@@ -599,28 +599,28 @@ const Thesis = () => {
       icon: Layers,
       title: "Modular by Design",
       description:
-        "Every component — pipeline, model, dashboard — is independently deployable, testable, and replaceable. No monoliths. No vendor lock-in.",
+        "Every component (pipeline, model, dashboard) is independently deployable, testable, and replaceable. No monoliths. No vendor lock-in.",
       example: "e.g. Swap Snowflake for BigQuery without touching your dbt models or BI layer",
     },
     {
       icon: Eye,
       title: "Observability-First",
       description:
-        "You cannot optimize what you cannot see. Lineage, quality metrics, pipeline health, and cost attribution are embedded from day one — not bolted on later.",
+        "You cannot optimize what you cannot see. Lineage, quality metrics, pipeline health, and cost attribution are embedded from day one, not bolted on later.",
       example: "e.g. Every pipeline run emits structured telemetry: row counts, schema diffs, freshness SLAs",
     },
     {
       icon: Shield,
       title: "Governance as Code",
       description:
-        "Access control, data classification, PII masking, and retention policies defined in version-controlled configuration — auditable and reproducible.",
+        "Access control, data classification, PII masking, and retention policies defined in version-controlled configuration, auditable and reproducible.",
       example: "e.g. Column-level masking policies in dbt that propagate through to every downstream consumer",
     },
     {
       icon: GitBranch,
       title: "Version Everything",
       description:
-        "Schemas, transformations, models, dashboards — all in git. Every change has a commit, a review, and a rollback path. Data infrastructure deserves the same rigor as application code.",
+        "Schemas, transformations, models, dashboards, all in git. Every change has a commit, a review, and a rollback path. Data infrastructure deserves the same rigor as application code.",
       example: "e.g. PR-based workflow: branch → transform → test → review → merge → deploy",
     },
     {
@@ -635,8 +635,8 @@ const Thesis = () => {
       icon: RefreshCw,
       title: "Idempotent & Replayable",
       description:
-        "Every pipeline is idempotent. Every transformation is deterministic. Re-run any job at any point in time and get the same result — critical for audits and debugging.",
-      example: "e.g. Backfill 6 months of data after a logic fix — same results, zero side effects",
+        "Every pipeline is idempotent. Every transformation is deterministic. Re-run any job at any point in time and get the same result, critical for audits and debugging.",
+      example: "e.g. Backfill 6 months of data after a logic fix, same results, zero side effects",
     },
     {
       icon: Lock,
@@ -644,7 +644,7 @@ const Thesis = () => {
       description:
         "Encryption at rest and in transit. Least-privilege access. Row-level security. SOC 2 and GDPR-aware design patterns baked into every layer.",
       example:
-        "e.g. Marketing sees aggregated metrics; Finance sees row-level transactions — same warehouse, different policies",
+        "e.g. Marketing sees aggregated metrics; Finance sees row-level transactions, same warehouse, different policies",
     },
     {
       icon: Gauge,
@@ -664,7 +664,7 @@ const Thesis = () => {
       icon: Rocket,
       title: "AI-Ready from Day One",
       description:
-        "Feature stores, vector databases, and embedding pipelines are built into the architecture — not retrofitted. When you're ready for AI, the infrastructure already is.",
+        "Feature stores, vector databases, and embedding pipelines are built into the architecture, not retrofitted. When you're ready for AI, the infrastructure already is.",
       example: "e.g. Your support tickets are already embedded in a vector DB, ready for semantic search and RAG",
     },
     {
@@ -679,7 +679,7 @@ const Thesis = () => {
       title: "Multi-Tenant & Multi-Region",
       description:
         "Data isolation, regional compliance, and tenant-aware architectures for organizations operating across geographies and business units.",
-      example: "e.g. EU customer data stays in eu-west-1; US data in us-east-1 — same codebase, policy-driven routing",
+      example: "e.g. EU customer data stays in eu-west-1; US data in us-east-1, same codebase, policy-driven routing",
     },
   ];
 
@@ -699,7 +699,7 @@ const Thesis = () => {
               Data Is Infrastructure. <span className="text-gradient-orange">Intelligence Is Product.</span>
             </>
           }
-          subtitle="A deep technical manifesto on why modern enterprises need engineering-grade data systems — and how InclinedPlane builds them."
+          subtitle="A deep technical manifesto on why modern enterprises need well-engineered data systems, and how InclinedPlane builds them."
         />
 
         <ThesisTOC />
@@ -718,7 +718,7 @@ const Thesis = () => {
                   The market <span className="text-gradient-orange">moved</span>. Most data stacks didn't.
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Most organizations still treat data as a reporting function — static dashboards built on fragile
+                  Most organizations still treat data as a reporting function: static dashboards built on fragile
                   pipelines, monthly cadences that lag behind market shifts, and analytics teams buried in ad-hoc
                   requests. There is no observability. No testing. No CI/CD. No governance beyond a shared spreadsheet.
                 </p>
@@ -727,10 +727,10 @@ const Thesis = () => {
                   <strong className="text-foreground">It isn't anymore.</strong>
                 </p>
                 <p className="text-muted-foreground leading-relaxed mt-4">
-                  Your competitors are deploying autonomous agents that make decisions in milliseconds. Supply chains
+                  Your competitors are deploying automated agents that make decisions in milliseconds. Supply chains
                   are being optimised in real-time. Revenue anomalies are being detected and resolved before anyone
-                  notices. The gap between organisations that have engineering-grade data infrastructure and those that
-                  don't is widening — fast.
+                  notices. The gap between organisations that have solid data infrastructure and those that
+                  don't is widening fast.
                 </p>
                 <p className="text-muted-foreground leading-relaxed mt-4">
                   The question isn't whether to modernise. It's whether you do it before or after the cost becomes
@@ -759,9 +759,9 @@ const Thesis = () => {
                   The Five Levels of <span className="text-gradient-orange">Data Maturity</span>
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Every organization sits somewhere on the data maturity spectrum. Most are stuck at Level 1 or 2 —
+                  Every organization sits somewhere on the data maturity spectrum. Most are stuck at Level 1 or 2,
                   reactive, manual, and fragile. The competitive edge isn't just having data; it's having{" "}
-                  <em>infrastructure</em> that turns data into autonomous, reliable, observable systems.
+                  <em>infrastructure</em> that turns data into automated, reliable, observable systems.
                 </p>
               </motion.div>
 
@@ -780,8 +780,8 @@ const Thesis = () => {
                   End-to-End <span className="text-gradient-orange">Intelligence Pipeline</span>
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  We don't build point solutions. We architect complete data systems — from raw source ingestion to
-                  autonomous decision-making. Every layer is observable, testable, and independently scalable. Here's
+                  We don't build point solutions. We architect complete data systems, from raw source ingestion to
+                  automated decision-making. Every layer is observable, testable, and independently scalable. Here's
                   the architecture we deploy:
                 </p>
               </motion.div>
@@ -795,7 +795,7 @@ const Thesis = () => {
                     <Database size={14} className="text-primary" /> How Data Flows
                   </h4>
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    Raw data enters through CDC streams, API connectors, and batch loaders — landing first in a raw zone
+                    Raw data enters through CDC streams, API connectors, and batch loaders, landing first in a raw zone
                     (bronze layer). dbt models clean, deduplicate, and enrich it through silver to gold. Quality gates
                     at every transition validate schema conformance, freshness SLAs, and statistical expectations. Only
                     clean, governed data reaches the intelligence layer.
@@ -808,7 +808,7 @@ const Thesis = () => {
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     The intelligence layer consumes curated data through semantic layers (for BI) and feature stores
                     (for ML). Dashboards serve real-time KPIs. Predictive models score opportunities, risks, and
-                    anomalies. LLM-powered agents sit on top — querying data in natural language, triggering workflows,
+                    anomalies. LLM-powered agents sit on top, querying data in natural language, triggering workflows,
                     and generating executive summaries without human intervention.
                   </p>
                 </div>
@@ -827,8 +827,8 @@ const Thesis = () => {
                   Beyond Dashboards: <span className="text-gradient-orange">Analytics That Act</span>
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Traditional BI is a mirror — it shows you what happened. We build analytics systems that are a compass
-                  — they show you what to <em>do</em>. The difference is semantic layers that standardize truth,
+                  Traditional BI is a mirror: it shows you what happened. We build analytics systems that are a compass.
+                  They show you what to <em>do</em>. The difference is semantic layers that standardize truth,
                   embedded analytics that live where decisions are made, and AI overlays that surface insights before
                   you ask.
                 </p>
@@ -844,12 +844,12 @@ const Thesis = () => {
                   {
                     icon: LineChart,
                     title: "Real-Time Operational BI",
-                    body: "Stream processing meets business intelligence. Live order volumes, inventory levels, support ticket SLAs — all updating in real-time. Not 'refreshed every 15 minutes' — genuinely real-time via streaming architectures.",
+                    body: "Stream processing meets business intelligence. Live order volumes, inventory levels, support ticket SLAs, all updating in real-time. Not 'refreshed every 15 minutes', genuinely real-time via streaming architectures.",
                   },
                   {
                     icon: Target,
                     title: "Embedded & Contextual",
-                    body: "Analytics embedded directly into the tools your teams already use — Slack, CRM, ERP, internal portals. The insight finds the decision-maker, not the other way around. 80% reduction in ad-hoc analyst requests.",
+                    body: "Analytics embedded directly into the tools your teams already use: Slack, CRM, ERP, internal portals. The insight finds the decision-maker, not the other way around. 80% reduction in ad-hoc analyst requests.",
                   },
                   {
                     icon: TrendingUp,
@@ -859,12 +859,12 @@ const Thesis = () => {
                   {
                     icon: Bot,
                     title: "Natural Language Querying",
-                    body: '"What was our top-performing channel last quarter, excluding brand?" — answered in seconds by an LLM that queries your semantic layer. Democratizes data access without compromising governance.',
+                    body: '"What was our top-performing channel last quarter, excluding brand?" Answered in seconds by an LLM that queries your semantic layer. Democratizes data access without compromising governance.',
                   },
                   {
                     icon: Building2,
                     title: "Enterprise KPI Frameworks",
-                    body: "North Star metrics cascade from board-level OKRs to team-level KPIs. Every metric has an owner, a threshold, an alert, and a drill-down path. Alignment isn't aspirational — it's architectural.",
+                    body: "North Star metrics cascade from board-level OKRs to team-level KPIs. Every metric has an owner, a threshold, an alert, and a drill-down path. Alignment isn't aspirational. It's architectural.",
                   },
                 ].map((card, i) => {
                   const CardIcon = card.icon;
@@ -900,7 +900,7 @@ const Thesis = () => {
                 <p className="text-muted-foreground leading-relaxed">
                   The AI revolution isn't about adding a chatbot. It's about fundamentally re-architecting your data
                   systems so that intelligence is a <em>product</em>, not a project. Models that ship with monitoring.
-                  Agents that act on data autonomously. Feature stores that serve real-time signals. This is the leap
+                  Agents that act on data automatically. Feature stores that serve real-time signals. This is the leap
                   from "we have AI" to "AI runs our operations."
                 </p>
               </motion.div>
@@ -996,8 +996,8 @@ const Thesis = () => {
                   Systems That <span className="text-gradient-orange">Think, Act, and Learn</span>
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  The final frontier of data maturity is automation — systems that don't just inform, but <em>act</em>.
-                  We build autonomous decision pipelines that monitor business metrics, reason about anomalies, execute
+                  The final frontier of data maturity is automation: systems that don't just inform, but <em>act</em>.
+                  We build automated decision pipelines that monitor business metrics, reason about anomalies, execute
                   corrective actions, and learn from outcomes. This is where data engineering becomes competitive
                   advantage.
                 </p>
@@ -1008,7 +1008,7 @@ const Thesis = () => {
                   {
                     icon: Workflow,
                     title: "Orchestrated Workflows",
-                    desc: "Complex, multi-system workflows that span data pipelines, ML models, notifications, and external APIs. Think: monthly close process automated end-to-end — from data ingestion to executive report delivery.",
+                    desc: "Complex, multi-system workflows that span data pipelines, ML models, notifications, and external APIs. Think: monthly close process automated end-to-end, from data ingestion to executive report delivery.",
                     examples: [
                       "Automated financial close: 14 pipeline stages, 23 quality gates, zero manual steps",
                       "Supply chain optimization: demand forecast → procurement trigger → vendor API call",
@@ -1019,8 +1019,8 @@ const Thesis = () => {
                     title: "Intelligent Alerting",
                     desc: "Not threshold-based noise. AI-powered anomaly detection that understands seasonality, trends, and context. Alerts come with root cause analysis, impact assessment, and recommended actions.",
                     examples: [
-                      '"Revenue dropped 12% — caused by payment gateway timeout in APAC region"',
-                      '"Customer churn risk increased — 3 high-value accounts showing disengagement patterns"',
+                      '"Revenue dropped 12%, caused by payment gateway timeout in APAC region"',
+                      '"Customer churn risk increased, 3 high-value accounts showing disengagement patterns"',
                     ],
                   },
                   {
@@ -1035,7 +1035,7 @@ const Thesis = () => {
                   {
                     icon: Brain,
                     title: "AI Leadership Summaries",
-                    desc: "Executive dashboards tell you what happened. We build AI systems that generate natural-language briefings — summarizing what changed, why it matters, and what to do about it. Delivered via email, Slack, or embedded in your tools.",
+                    desc: "Executive dashboards tell you what happened. We build AI systems that generate natural-language briefings, summarizing what changed, why it matters, and what to do about it. Delivered via email, Slack, or embedded in your tools.",
                     examples: [
                       "Weekly AI-generated board report: key metrics, notable movements, risk flags",
                       "Daily ops briefing: pipeline health, model performance, anomaly digest",
@@ -1088,18 +1088,18 @@ const Thesis = () => {
                       <span className="text-gradient-orange">We Build Leverage.</span>
                     </h2>
                     <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-6">
-                      An inclined plane is the oldest force multiplier — transforming effort into elevation. That's
+                      An inclined plane is the oldest force multiplier, transforming effort into elevation. That's
                       exactly what we do with data. We take the raw weight of your organization's information and build
-                      the infrastructure that converts it into upward momentum — better decisions, faster execution,
-                      autonomous intelligence.
+                      the infrastructure that converts it into upward momentum: better decisions, faster execution,
+                      automated intelligence.
                     </p>
                     <p className="text-sm text-muted-foreground/70 max-w-2xl mx-auto mb-8">
                       This isn't consulting. This is engineering. Production-grade systems, not slide decks. Observable
                       infrastructure, not black boxes. AI that ships, not AI that demos. We are a small, deliberate
                       team. We take on fewer clients than we could, because the work we do demands it. Every system we
-                      build is one we'd stake our reputation on — because we do. If you want a partner who will tell you
+                      build is one we'd stake our reputation on. Because we do. If you want a partner who will tell you
                       the truth about your data estate, sequence your investments correctly, and build infrastructure
-                      that compounds over time — we should talk.
+                      that compounds over time. We should talk.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">

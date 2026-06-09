@@ -1,4 +1,4 @@
-import PageLayout from "@/components/PageLayout";
+﻿import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
@@ -69,7 +69,7 @@ const advisoryPillar: ServicePillar = {
   subtitle: "Clarity Layer",
   positioning: "Know before you build.",
   description:
-    "Most enterprises are sitting on fragmented data, half-adopted tools, and AI ambitions with no clear path forward. We change that. We work with leadership and data teams to cut through the noise — auditing what you have, identifying what's holding you back, and building a roadmap that turns AI from a boardroom talking point into a funded, sequenced plan of action. No fluff. No generic frameworks. Just a clear view of where you are, where you need to go, and exactly how to get there.",
+    "Most enterprises are sitting on fragmented data, half-adopted tools, and AI ambitions with no clear path forward. We change that. We work with leadership and data teams to cut through the noise, auditing what you have, identifying what's holding you back, and building a roadmap that turns AI from a boardroom talking point into a funded, sequenced plan of action. No fluff. No generic frameworks. Just a clear view of where you are, where you need to go, and exactly how to get there.",
   tagline: "Clarity before code.",
   icon: Compass,
   items: [
@@ -83,7 +83,7 @@ const advisoryPillar: ServicePillar = {
   tools: ["Maturity Frameworks", "ROI Modeling", "Vendor Scorecards", "Capability Mapping", "Roadmapping", "Workshops"],
   benefits: [
     "A boardroom-ready AI roadmap your leadership can fund and act on",
-    "Clarity on which AI bets will deliver ROI — and which to avoid",
+    "Clarity on which AI bets will deliver ROI, and which to avoid",
     "A data foundation sequenced for your AI ambitions, not just today's reporting needs",
   ],
 };
@@ -96,7 +96,7 @@ const pillars: ServicePillar[] = [
     subtitle: "AI-Readiness Foundation",
     positioning: "We unify and stabilize your data environment.",
     description:
-      "Every intelligent system starts with a solid foundation. We design and build modern data architectures that consolidate fragmented sources, eliminate silos, and create a single source of truth — whether you're migrating from legacy systems or building greenfield. Our approach ensures your data estate is scalable, governed, and ready for whatever comes next. AI-assisted architecture design means faster scoping, fewer blind spots — and a foundation that's ready for your future AI ambitions, not just your current ones.",
+      "Every intelligent system starts with a solid foundation. We design and build modern data architectures that consolidate fragmented sources, eliminate silos, and create a single source of truth, whether you're migrating from legacy systems or building greenfield. Our approach ensures your data estate is scalable, governed, and ready for whatever comes next. AI-assisted architecture design means faster scoping, fewer blind spots, and a foundation that's ready for your future AI ambitions, not just your current ones.",
     tagline: "Build once. Scale forever.",
     icon: Database,
     items: [
@@ -124,7 +124,7 @@ const pillars: ServicePillar[] = [
     benefits: [
       "60% faster time-to-insight",
       "Single source of truth across all systems",
-      " AI-ready by design — every architecture decision we make accounts for the data demands of future AI and ML systems.",
+      " AI-ready by design: every architecture decision we make accounts for the data demands of future AI and ML systems.",
     ],
   },
   {
@@ -132,9 +132,9 @@ const pillars: ServicePillar[] = [
     title: "Data Reliability, Observability & DataOps",
     shortTitle: "Reliability & Ops",
     subtitle: "Reliability Layer",
-    positioning: "Architecture before intelligence — reliability is not optional.",
+    positioning: "Architecture before intelligence. Reliability is not optional.",
     description:
-      "Most firms skip this layer entirely. We don't. Before any dashboard or model can be trusted, the pipelines feeding them must be bulletproof. We implement engineering-grade observability, automated testing, and CI/CD workflows that catch issues before they reach stakeholders — turning your data platform into a production-grade system. We use AI-powered monitoring tools to detect anomalies faster than any manual process — because reliable pipelines aren't just good engineering, they're a prerequisite for any AI system you'll build on top.",
+      "Most firms skip this layer entirely. We don't. Before any dashboard or model can be trusted, the pipelines feeding them must be bulletproof. We implement production-grade observability, automated testing, and CI/CD workflows that catch issues before they reach stakeholders, turning your data platform into a production-grade system. We use AI-powered monitoring tools to detect anomalies faster than any manual process, because reliable pipelines aren't just good engineering, they're a prerequisite for any AI system you'll build on top.",
     tagline: "If you can't trust it, you can't use it.",
     icon: Shield,
     items: [
@@ -164,9 +164,9 @@ const pillars: ServicePillar[] = [
     title: "Intelligence & Analytics Systems",
     shortTitle: "Analytics & Intelligence",
     subtitle: "Analytics Layer",
-    positioning: "Automated intelligence & BI — de-risking every decision.",
+    positioning: "Automated intelligence & BI, de-risking every decision.",
     description:
-      "Data without visibility is just cost. We build analytics systems that put the right metrics in front of the right people — from C-suite dashboards to embedded operational views. Our semantic layers standardize KPIs across the business, while self-serve tooling empowers teams to answer their own questions without waiting on data teams.",
+      "Data without visibility is just cost. We build analytics systems that put the right metrics in front of the right people, from C-suite dashboards to embedded operational views. Our semantic layers standardize KPIs across the business, while self-serve tooling empowers teams to answer their own questions without waiting on data teams.",
     tagline: "From data to decisions in seconds.",
     icon: BarChart3,
     items: [
@@ -190,9 +190,9 @@ const pillars: ServicePillar[] = [
     title: "Predictive Layer",
     shortTitle: "AI & ML Implementations",
     subtitle: "Predictive Layer",
-    positioning: "AI, predictive & agentic implementation — from experimentation to production.",
+    positioning: "AI, predictive & agentic implementation, from experimentation to production.",
     description:
-      "We take AI from proof-of-concept to production. Whether it's demand forecasting, risk scoring, or natural language interfaces over your data — we build, deploy, and monitor ML systems that deliver measurable business impact. No science projects. Every model ships with monitoring, retraining pipelines, and clear ROI metrics.",
+      "We take AI from proof-of-concept to production. Whether it's demand forecasting, risk scoring, or natural language interfaces over your data. We build, deploy, and monitor ML systems that deliver measurable business impact. No science projects. Every model ships with monitoring, retraining pipelines, and clear ROI metrics.",
     tagline: "No science projects. Just production.",
     icon: Brain,
     items: [
@@ -217,16 +217,16 @@ const pillars: ServicePillar[] = [
       "SageMaker",
       "PyTorch",
     ],
-    benefits: ["Production-grade ML in weeks", "Continuous model improvement", "AI-native competitive edge"],
+    benefits: ["Production-grade ML in weeks", "Continuous model improvement", "AI-first competitive edge"],
   },
   {
     number: "05",
     title: "Intelligence Layer",
     shortTitle: "Automation Systems",
     subtitle: "Intelligence Layer",
-    positioning: "From dashboards to decision systems — autonomous intelligence.",
+    positioning: "From dashboards to decision systems: automated intelligence.",
     description:
-      "The final frontier of data maturity: systems that don't just inform, but act. We build autonomous decision pipelines — AI agents that monitor, reason, and execute. From intelligent alerting to cross-system orchestration, we help leadership move from reading dashboards to receiving action-ready intelligence summaries.",
+      "The final frontier of data maturity: systems that don't just inform, but act. We build automated decision pipelines. AI agents that monitor, reason, and execute. From intelligent alerting to cross-system orchestration, we help leadership move from reading dashboards to receiving action-ready intelligence summaries.",
     tagline: "Systems that think, act, and learn.",
     icon: Zap,
     items: [
@@ -250,7 +250,7 @@ const pillars: ServicePillar[] = [
       "Temporal",
       "Custom Agents",
     ],
-    benefits: ["90% faster incident response", "Autonomous decision pipelines", "Leadership-ready intelligence"],
+    benefits: ["90% faster incident response", "Automated decision pipelines", "Leadership-ready intelligence"],
   },
 ];
 
@@ -402,7 +402,7 @@ const ServicesPage = () => {
             What We <span className="text-gradient-orange">Do.</span>
           </>
         }
-        subtitle={`Five layers of data infrastructure — from foundation to autonomous intelligence. Every layer we build is AI-enabled in delivery and AI-ready in design — so your data infrastructure doesn't just work today, it supports whatever you build tomorrow.`}
+        subtitle={`Five layers of data infrastructure, from foundation to automated intelligence. Every layer we build is AI-enabled in delivery and AI-ready in design, so your data infrastructure doesn't just work today, it supports whatever you build tomorrow.`}
       />
       <div className="pb-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -571,7 +571,7 @@ const ServicesPage = () => {
                         Find your starting point.
                       </h2>
                 <p className="text-muted-foreground max-w-lg mx-auto mb-8 text-sm leading-relaxed">
-                  Whether you need a solid data foundation or autonomous decision systems — we'll design the roadmap and
+                  Whether you need a solid data foundation or automated decision systems, we'll design the roadmap and
                   deliver results.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">

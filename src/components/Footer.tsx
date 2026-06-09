@@ -38,7 +38,7 @@ const Footer = () => {
                 <Logo className="h-12 w-auto" eager={false} />
               </div>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                AI-native data engineering. Turning complexity into operational intelligence.
+                AI-first data engineering. Turning complexity into actionable intelligence.
               </p>
             </div>
 

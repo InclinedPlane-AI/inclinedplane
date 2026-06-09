@@ -1,4 +1,4 @@
-import PageLayout from "@/components/PageLayout";
+﻿import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import SectionGlow from "@/components/SectionGlow";
@@ -35,12 +35,12 @@ const values = [
   {
     icon: Brain,
     title: "Engineering Rigor",
-    desc: "We treat data systems like production software — versioned, observed, and tested. No band-aid pipelines, no hero culture.",
+    desc: "We treat data systems like production software, versioned, observed, and tested. No band-aid pipelines, no hero culture.",
   },
   {
     icon: Sparkles,
     title: "AI-Native by Default",
-    desc: "Every architecture decision is made with AI in mind. We build for models, agents, and intelligence — not just dashboards.",
+    desc: "Every architecture decision is made with AI in mind. We build for models, agents, and intelligence, not just dashboards.",
   },
   {
     icon: Heart,
@@ -57,7 +57,7 @@ const values = [
 const perks = [
   { icon: Laptop, title: "Top-tier Hardware", desc: "MacBook Pro, monitor stipend, and the tools you need." },
   { icon: GraduationCap, title: "Learning Budget", desc: "Annual budget for courses, books, and conferences." },
-  { icon: Coffee, title: "Flexible Hours", desc: "Work when you do your best work — async by default." },
+  { icon: Coffee, title: "Flexible Hours", desc: "Work when you do your best work, async by default." },
   { icon: TrendingUp, title: "Meaningful Equity", desc: "Real ownership in what we're building together." },
   { icon: Heart, title: "Health & Wellness", desc: "Health stipend and four weeks of paid time off." },
   { icon: Users, title: "Annual Offsites", desc: "We meet in person twice a year to build and ship together." },
@@ -72,7 +72,7 @@ const process = [
   {
     icon: ClipboardCheck,
     title: "Technical Deep-Dive",
-    desc: "Conversation about your past work — architecture decisions, trade-offs, and impact. No whiteboard puzzles.",
+    desc: "Conversation about your past work, architecture decisions, trade-offs, and impact. No whiteboard puzzles.",
   },
   {
     icon: Code2,
@@ -103,7 +103,7 @@ const Careers = () => {
               Build What <span className="text-gradient-orange">Comes Next.</span>
             </>
           }
-          subtitle="We build the data and AI infrastructure that powers high-velocity enterprises. If you care about leverage, craft, and outcomes — read on."
+          subtitle="We build the data and AI infrastructure that powers demanding enterprises. If you care about impact, craft, and outcomes, read on."
         />
 
         {/* Philosophy / Values */}
@@ -116,7 +116,7 @@ const Careers = () => {
                 A team built for <span className="text-gradient-orange">leverage</span>, not headcount.
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                We don't optimize for size — we optimize for the quality of the engineers in the room. Every person here
+                We don't optimize for size. We optimize for the quality of the engineers in the room. Every person here
                 is expected to set direction, ship production work, and raise the bar. In return, you get autonomy,
                 ownership, and the chance to work on problems that matter to the businesses we partner with.
               </p>
@@ -152,7 +152,7 @@ const Careers = () => {
                 No open positions <span className="text-gradient-orange">right now.</span>
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                We're not actively hiring at the moment — but we're always interested in meeting exceptional engineers,
+                We're not actively hiring at the moment, but we're always interested in meeting exceptional engineers,
                 architects, and AI builders. When the right person reaches out, we make room.
               </p>
             </motion.div>

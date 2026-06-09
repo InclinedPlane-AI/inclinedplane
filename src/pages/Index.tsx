@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+﻿import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -189,8 +189,8 @@ const Index = () => {
                     Data Leveraged <span className="text-gradient-orange">Intelligence Deployed</span>
                   </h1>
                   <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-lg mb-6 sm:mb-8 text-justify">
-                    We build the data infrastructure and AI systems that power high-velocity enterprises — from a solid
-                    foundation all the way to autonomous decision-making.
+                    We build the data infrastructure and AI systems that power demanding enterprises, from a solid
+                    foundation all the way to automated decision-making.
                   </p>
                   <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pointer-events-auto">
                     <Link
@@ -380,7 +380,7 @@ const Index = () => {
               <motion.div {...fadeUp(0.3)} className="mt-4 lg:mt-5 text-center">
                 <p className="text-base sm:text-lg lg:text-xl font-semibold text-foreground leading-relaxed max-w-3xl mx-auto">
                   "The gap between AI ambition and AI reality almost always starts with data infrastructure.{" "}
-                  <span className="text-gradient-orange">We close that gap — and build everything on top of it.</span>"
+                  <span className="text-gradient-orange">We close that gap and build everything on top of it.</span>"
                 </p>
               </motion.div>
             </div>
@@ -401,19 +401,19 @@ const Index = () => {
                   {...fadeUp(0.05)}
                   className="text-xs sm:text-base text-muted-foreground leading-relaxed mt-3 sm:mt-8 text-center font-normal lg:text-base"
                 >
-                  Most organisations still treat data as a reporting function — static dashboards, fragile pipelines,
-                  and analytics teams buried in ad-hoc requests. Meanwhile, your competitors are deploying autonomous
-                  agents that make decisions in milliseconds. The gap between organisations that have engineering-grade
-                  data infrastructure and those that don't is widening — fast.
+                  Most organisations still treat data as a reporting function: static dashboards, fragile pipelines,
+                  and analytics teams buried in ad-hoc requests. Meanwhile, your competitors are deploying automated
+                  agents that make decisions in milliseconds. The gap between organisations that have solid
+                  data infrastructure and those that don't is widening fast.
                 </motion.p>
               </motion.div>
               <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-16 items-start">
                 <div className="space-y-1.5 sm:space-y-3 font-mono text-[10px] sm:text-sm">
                   {[
-                    "[WARN] Pipeline failed: stale data — 47min lag",
-                    "[ERR]  Model drift detected — no retraining trigger",
+                    "[WARN] Pipeline failed: stale data, 47min lag",
+                    "[ERR]  Model drift detected, no retraining trigger",
                     "[WARN] Dashboard refresh: manual, weekly cadence",
-                    "[ERR]  No observability — blind spot in pipeline health",
+                    "[ERR]  No observability, blind spot in pipeline health",
                     "[INFO] Business asking: 'Can we predict demand?'",
                     "[ERR]  68% of AI projects fail from bad data infra",
                   ].map((log, i) => (
@@ -456,7 +456,7 @@ const Index = () => {
                     </div>
                     <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-border">
                       <p className="text-[10px] sm:text-xs text-destructive/70 font-mono flex items-center gap-2">
-                        <Activity size={12} /> Overall: Critical — Infrastructure not AI-ready
+                        <Activity size={12} /> Overall: Critical. Infrastructure not AI-ready
                       </p>
                     </div>
                   </div>
@@ -484,7 +484,7 @@ const Index = () => {
                   Built for Complex, <span className="text-gradient-orange">High-Stakes Enterprises.</span>
                 </h2>
                 <p className="text-muted-foreground text-center max-w-xl mx-auto text-sm">
-                  We work with mid-to-large enterprises where data infrastructure isn't a nice-to-have — it's
+                  We work with mid-to-large enterprises where data infrastructure isn't a nice-to-have. It's
                   operational-critical.
                 </p>
               </motion.div>
@@ -549,7 +549,7 @@ const Index = () => {
                   Engineered for <span className="text-gradient-orange">Intelligence.</span>
                 </h2>
                 <p className="text-sm sm:text-base text-muted-foreground text-center max-w-2xl mx-auto">
-                  A continuous journey from clarity to intelligence — every service AI-enabled in delivery and AI-ready
+                  A continuous journey from clarity to intelligence, every service AI-enabled in delivery and AI-ready
                   in design.
                 </p>
               </motion.div>
@@ -558,7 +558,7 @@ const Index = () => {
                   {
                     title: "Data & AI Consultancy",
                     label: "Clarity Layer",
-                    desc: "Know what to build, in what order, and why — before you spend a pound on infrastructure.",
+                    desc: "Know what to build, in what order, and why, before you spend a pound on infrastructure.",
                     icon: Target,
                   },
                   {
@@ -633,7 +633,7 @@ const Index = () => {
                   Results <span className="text-gradient-orange">That Compound.</span>
                 </h2>
                 <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-14">
-                  Every system we build is one we'd stake our reputation on — because we do.
+                  Every system we build is one we'd stake our reputation on. Because we do.
                 </p>
               </motion.div>
               <div className="grid sm:grid-cols-3 gap-6 mb-10">
@@ -727,7 +727,7 @@ const Index = () => {
                     </p>
                     <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
                       But in the age of Artificial Intelligence,{" "}
-                      <span className="text-foreground font-medium">navigation isn't enough — you need momentum.</span>
+                      <span className="text-foreground font-medium">navigation isn't enough. You need momentum.</span>
                     </p>
                     <p className="text-muted-foreground leading-relaxed text-justify">
                       <span className="text-gradient-orange font-semibold">InclinedPlane</span> represents a fundamental
@@ -786,7 +786,7 @@ const Index = () => {
                   We Don't Just Build Pipelines. <span className="text-gradient-orange">We Build Leverage.</span>
                 </h2>
                 <p className="text-muted-foreground text-center max-w-xl mx-auto mb-14">
-                  The InclinedPlane advantage — purpose-built for the AI era.
+                  The InclinedPlane advantage, purpose-built for the AI era.
                 </p>
               </motion.div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
@@ -794,22 +794,22 @@ const Index = () => {
                   {
                     icon: Cpu,
                     title: "Engineers, not consultants",
-                    desc: "Every engagement ends with production-grade systems in your hands — not a deck, not a roadmap to a roadmap.",
+                    desc: "Every engagement ends with production-grade systems in your hands, not a deck, not a roadmap to a roadmap.",
                   },
                   {
                     icon: Sparkles,
                     title: "AI-native by default",
-                    desc: "Every pipeline, schema, and workflow is designed for AI from day one — not retrofitted when you're ready to scale.",
+                    desc: "Every pipeline, schema, and workflow is designed for AI from day one, not retrofitted when you're ready to scale.",
                   },
                   {
                     icon: Rocket,
                     title: "Full-journey partners",
-                    desc: "We take you from data foundation to autonomous intelligence — you don't need five different vendors to get there.",
+                    desc: "We take you from data foundation to automated intelligence. You don't need five different vendors to get there.",
                   },
                   {
                     icon: Shield,
                     title: "Deliberate and selective",
-                    desc: "We take on fewer clients than we could. Every system we build is one we'd stake our reputation on — because we do.",
+                    desc: "We take on fewer clients than we could. Every system we build is one we'd stake our reputation on. Because we do.",
                   },
                 ].map(({ icon: Icon, title, desc }, i) => (
                   <motion.div
@@ -993,7 +993,7 @@ const Index = () => {
                   Build What <span className="text-gradient-orange">Comes Next.</span>
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
-                  We don't optimize for size — we optimize for the quality of the engineers in the room. Every person
+                  We don't optimize for size. We optimize for the quality of the engineers in the room. Every person
                   here is expected to set direction, ship production work, and raise the bar. In return, you get
                   autonomy, ownership, and the chance to work on problems that matter to the businesses we partner with.
                 </p>

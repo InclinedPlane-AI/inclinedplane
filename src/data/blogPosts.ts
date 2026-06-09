@@ -1,4 +1,4 @@
-import dashboardsHero from "@/assets/blog-dashboards-hero.jpg";
+﻿import dashboardsHero from "@/assets/blog-dashboards-hero.jpg";
 import dashboardsInline1 from "@/assets/blog-dashboards-inline1.jpg";
 import dashboardsInline2 from "@/assets/blog-dashboards-inline2.jpg";
 import pipelinesHero from "@/assets/blog-pipelines-hero.jpg";
@@ -41,7 +41,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "dashboards-are-not-competitive-advantage",
     title: "Dashboards Are Not a Competitive Advantage Anymore",
-    subtitle: "Why visibility alone won't move your business forward — and what the next generation of data-driven companies actually look like.",
+    subtitle: "Why visibility alone won't move your business forward, and what the next generation of data-driven companies actually look like.",
     date: "February 19, 2026",
     readTime: "11 min read",
     author: {
@@ -65,7 +65,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "Let's start with an uncomfortable truth: your dashboards are not special. The same Tableau workbook, the same Power BI report, the same Looker explore that you spent six months building — your competitor likely has something functionally identical. Maybe prettier. Maybe uglier. But fundamentally the same.",
+        content: "Let's start with an uncomfortable truth: your dashboards are not special. The same Tableau workbook, the same Power BI report, the same Looker explore that you spent six months building, your competitor likely has something functionally identical. Maybe prettier. Maybe uglier. But fundamentally the same.",
       },
       {
         type: "paragraph",
@@ -86,25 +86,25 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "There's a seductive logic to dashboards: if people can see the numbers, they'll make better decisions. This is the foundational assumption of every BI initiative since the late 1990s. And it's wrong — or at least, dramatically incomplete.",
+        content: "There's a seductive logic to dashboards: if people can see the numbers, they'll make better decisions. This is the foundational assumption of every BI initiative since the late 1990s. And it's wrong, or at least, dramatically incomplete.",
       },
       {
         type: "paragraph",
-        content: "Visibility gives you awareness. It tells you that revenue dipped last quarter, that customer churn is trending upward, that your supply chain lead times have increased. What it doesn't do is tell you why, what to do about it, or whether the pattern will continue. It certainly doesn't act on the insight autonomously.",
+        content: "Visibility gives you awareness. It tells you that revenue dipped last quarter, that customer churn is trending upward, that your supply chain lead times have increased. What it doesn't do is tell you why, what to do about it, or whether the pattern will continue. It certainly doesn't act on the insight automatically.",
       },
       {
         type: "image",
         image: {
           src: dashboardsInline1,
           alt: "Business analytics workspace with multiple screens showing marketing metrics and campaign performance data",
-          caption: "Modern analytics setups look sophisticated. But the question isn't what you can see — it's what you can do with what you see.",
+          caption: "Modern analytics setups look sophisticated. But the question isn't what you can see, it's what you can do with what you see.",
           credit: "Carlos Muza",
           creditUrl: "https://unsplash.com/@kmuza",
         },
       },
       {
         type: "paragraph",
-        content: "Consider a retail company that can see, in real time, that a particular product category is underperforming in the Midwest. That's visibility. Velocity would be a system that automatically adjusts regional pricing, reallocates marketing spend, and triggers a supply chain reconfiguration — before the quarterly review even happens.",
+        content: "Consider a retail company that can see, in real time, that a particular product category is underperforming in the Midwest. That's visibility. Velocity would be a system that automatically adjusts regional pricing, reallocates marketing spend, and triggers a supply chain reconfiguration, before the quarterly review even happens.",
       },
       {
         type: "paragraph",
@@ -117,21 +117,21 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "Every organization sits somewhere on a maturity curve. Understanding where you are — honestly — is the first step toward understanding what competitive advantage actually looks like in 2026.",
+        content: "Every organization sits somewhere on a maturity curve. Understanding where you are, honestly, is the first step toward understanding what competitive advantage actually looks like in 2026.",
       },
       {
         type: "heading",
         level: 3,
-        content: "Stage 1: Reporting — \"What happened?\"",
+        content: "Stage 1: Reporting, \"What happened?\"",
       },
       {
         type: "paragraph",
-        content: "This is where most companies started. Monthly reports. Excel exports. SQL queries run by an analyst who's the only person who knows where the data lives. The focus is purely retrospective: revenue last month, headcount last quarter, costs year-over-year. It's necessary, but it's archaeology — you're studying the past.",
+        content: "This is where most companies started. Monthly reports. Excel exports. SQL queries run by an analyst who's the only person who knows where the data lives. The focus is purely retrospective: revenue last month, headcount last quarter, costs year-over-year. It's necessary, but it's archaeology, you're studying the past.",
       },
       {
         type: "heading",
         level: 3,
-        content: "Stage 2: Monitoring — \"What's happening now?\"",
+        content: "Stage 2: Monitoring, \"What's happening now?\"",
       },
       {
         type: "paragraph",
@@ -140,16 +140,16 @@ export const blogPosts: BlogPost[] = [
       {
         type: "heading",
         level: 3,
-        content: "Stage 3: Prediction — \"What's likely to happen?\"",
+        content: "Stage 3: Prediction, \"What's likely to happen?\"",
       },
       {
         type: "paragraph",
-        content: "Statistical models. Machine learning. Demand forecasting. Churn prediction. This is where the shift from descriptive to prescriptive begins. Fewer than 15% of enterprises operate consistently at this level, despite the fact that the tooling has been available for over a decade. The barrier isn't technology — it's organizational trust in models over intuition.",
+        content: "Statistical models. Machine learning. Demand forecasting. Churn prediction. This is where the shift from descriptive to prescriptive begins. Fewer than 15% of enterprises operate consistently at this level, despite the fact that the tooling has been available for over a decade. The barrier isn't technology, it's organizational trust in models over intuition.",
       },
       {
         type: "heading",
         level: 3,
-        content: "Stage 4: Automation — \"Do it without asking.\"",
+        content: "Stage 4: Automation, \"Do it without asking.\"",
       },
       {
         type: "paragraph",
@@ -158,18 +158,18 @@ export const blogPosts: BlogPost[] = [
       {
         type: "heading",
         level: 3,
-        content: "Stage 5: Decision Systems — \"Decide and learn.\"",
+        content: "Stage 5: Decision Systems, \"Decide and learn.\"",
       },
       {
         type: "paragraph",
-        content: "The apex. Closed-loop systems that make decisions, measure outcomes, and refine their own logic. Reinforcement learning applied to business operations. The organization doesn't just react to data — it's governed by data. This is what Amazon, Netflix, and the most advanced fintech companies have built. It's also what's now becoming accessible to mid-market enterprises through AI-native architectures.",
+        content: "The apex. Closed-loop systems that make decisions, measure outcomes, and refine their own logic. Reinforcement learning applied to business operations. The organization doesn't just react to data, it's governed by data. This is what Amazon, Netflix, and the most advanced fintech companies have built. It's also what's now becoming accessible to mid-market enterprises through AI-first architectures.",
       },
       {
         type: "image",
         image: {
           src: dashboardsInline2,
           alt: "Complex data visualization showing interconnected network of glowing data points",
-          caption: "Decision systems don't just visualize data — they create feedback loops that continuously improve outcomes.",
+          caption: "Decision systems don't just visualize data, they create feedback loops that continuously improve outcomes.",
           credit: "Stephen Dawson",
           creditUrl: "https://unsplash.com/@dawson2406",
         },
@@ -181,7 +181,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "The honest answer? Somewhere between Stage 2 and Stage 3. Most organizations have invested heavily in monitoring — beautiful dashboards, well-structured data warehouses, competent BI teams — but haven't made the leap into prediction and automation.",
+        content: "The honest answer? Somewhere between Stage 2 and Stage 3. Most organizations have invested heavily in monitoring, beautiful dashboards, well-structured data warehouses, competent BI teams, but haven't made the leap into prediction and automation.",
       },
       {
         type: "paragraph",
@@ -225,7 +225,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "You cannot build prediction and automation on unreliable data. This means investing in data contracts, observability, lineage, and testing — the unglamorous infrastructure that separates production-grade data systems from science experiments.",
+        content: "You cannot build prediction and automation on unreliable data. This means investing in data contracts, observability, lineage, and testing, the unglamorous infrastructure that separates production-grade data systems from science experiments.",
       },
       {
         type: "heading",
@@ -234,7 +234,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "The hardest part isn't technical. It's cultural. Organizations that win are the ones where leadership actively pushes decision-making authority downstream — into systems, into algorithms, into automated workflows. Not blindly, but deliberately, with proper governance and feedback loops.",
+        content: "The hardest part isn't technical. It's cultural. Organizations that win are the ones where leadership actively pushes decision-making authority downstream, into systems, into algorithms, into automated workflows. Not blindly, but deliberately, with proper governance and feedback loops.",
       },
       {
         type: "quote",
@@ -247,7 +247,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "If your data strategy in 2026 still revolves around dashboard delivery, you're optimizing for the wrong outcome. Dashboards are infrastructure — they're necessary, but they're not differentiating. The real question isn't 'Can we see what's happening?' It's 'Can our systems act on what's happening — intelligently, reliably, and at speed?'",
+        content: "If your data strategy in 2026 still revolves around dashboard delivery, you're optimizing for the wrong outcome. Dashboards are infrastructure, they're necessary, but they're not differentiating. The real question isn't 'Can we see what's happening?' It's 'Can our systems act on what's happening, intelligently, reliably, and at speed?'",
       },
       {
         type: "paragraph",
@@ -316,14 +316,14 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "This isn't an edge case. In a 2025 survey by Atlan, 67% of data teams reported that critical business processes still depend on manual data exports from their warehouse — exports that bypass every governance, quality, and lineage control the team has built. The warehouse is the system of record in theory. Excel is the system of record in practice.",
+        content: "This isn't an edge case. In a 2025 survey by Atlan, 67% of data teams reported that critical business processes still depend on manual data exports from their warehouse, exports that bypass every governance, quality, and lineage control the team has built. The warehouse is the system of record in theory. Excel is the system of record in practice.",
       },
       {
         type: "image",
         image: {
           src: pipelinesInline1,
           alt: "Abstract network visualization with glowing nodes and connections representing data flow patterns",
-          caption: "Data pipelines are only as reliable as their weakest link — and that link is often a manual process nobody documented.",
+          caption: "Data pipelines are only as reliable as their weakest link, and that link is often a manual process nobody documented.",
           credit: "Shubham Dhage",
           creditUrl: "https://unsplash.com/@theshubhamdhage",
         },
@@ -335,11 +335,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "What counts as a 'customer'? Is it anyone with an account, anyone who's made a purchase, or anyone who's been active in the last 90 days? In most organizations, the answer depends on which team you ask. Marketing, sales, finance, and product each have subtly different definitions — and each has a pipeline that implements their version.",
+        content: "What counts as a 'customer'? Is it anyone with an account, anyone who's made a purchase, or anyone who's been active in the last 90 days? In most organizations, the answer depends on which team you ask. Marketing, sales, finance, and product each have subtly different definitions, and each has a pipeline that implements their version.",
       },
       {
         type: "paragraph",
-        content: "KPI drift is the slow divergence of metric definitions across an organization. It starts innocuously — a filter added here, a join condition modified there — and ends with the CEO seeing three different revenue numbers from three different teams, none of which match the general ledger. The ensuing 'data reconciliation' exercise consumes weeks of analyst time and erodes trust in the entire data function.",
+        content: "KPI drift is the slow divergence of metric definitions across an organization. It starts innocuously, a filter added here, a join condition modified there, and ends with the CEO seeing three different revenue numbers from three different teams, none of which match the general ledger. The ensuing 'data reconciliation' exercise consumes weeks of analyst time and erodes trust in the entire data function.",
       },
       {
         type: "paragraph",
@@ -360,7 +360,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "callout",
-        content: "Technical debt in data pipelines doesn't announce itself. It accumulates silently until a critical failure forces a reckoning — usually at the worst possible time, during a board meeting or regulatory audit.",
+        content: "Technical debt in data pipelines doesn't announce itself. It accumulates silently until a critical failure forces a reckoning, usually at the worst possible time, during a board meeting or regulatory audit.",
       },
       {
         type: "heading",
@@ -369,11 +369,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "When a number on an executive dashboard looks wrong, how long does it take your team to trace it back to its source? In organizations without data lineage, the answer is typically measured in days, not minutes. An analyst has to manually walk backward through transformations, joins, and source tables — often across multiple tools and platforms — to identify where the data originated and where it might have gone wrong.",
+        content: "When a number on an executive dashboard looks wrong, how long does it take your team to trace it back to its source? In organizations without data lineage, the answer is typically measured in days, not minutes. An analyst has to manually walk backward through transformations, joins, and source tables, often across multiple tools and platforms, to identify where the data originated and where it might have gone wrong.",
       },
       {
         type: "paragraph",
-        content: "Data lineage isn't a luxury feature for enterprises with regulatory requirements. It's foundational infrastructure that every data team needs. Without it, debugging is archaeology. Impact analysis for schema changes is guesswork. And when a source system changes its API without warning — which happens constantly — the blast radius is unknown until things start breaking.",
+        content: "Data lineage isn't a luxury feature for enterprises with regulatory requirements. It's foundational infrastructure that every data team needs. Without it, debugging is archaeology. Impact analysis for schema changes is guesswork. And when a source system changes its API without warning, which happens constantly, the blast radius is unknown until things start breaking.",
       },
       {
         type: "paragraph",
@@ -386,7 +386,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "Here's the irony that every data engineer appreciates: organizations invest heavily in monitoring their applications — uptime, latency, error rates, the full observability stack — but apply almost none of that discipline to the data pipelines that feed their most critical business decisions.",
+        content: "Here's the irony that every data engineer appreciates: organizations invest heavily in monitoring their applications, uptime, latency, error rates, the full observability stack, but apply almost none of that discipline to the data pipelines that feed their most critical business decisions.",
       },
       {
         type: "paragraph",
@@ -404,7 +404,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "Without these controls, failures are detected by end users — the CFO who notices the revenue number is from yesterday, the product manager whose A/B test results look suspiciously flat. By the time a human catches it, the damage is done: decisions have been made on stale or incorrect data.",
+        content: "Without these controls, failures are detected by end users, the CFO who notices the revenue number is from yesterday, the product manager whose A/B test results look suspiciously flat. By the time a human catches it, the damage is done: decisions have been made on stale or incorrect data.",
       },
       {
         type: "heading",
@@ -424,7 +424,7 @@ export const blogPosts: BlogPost[] = [
         items: [
           "Version control everything: Not just code, but data models, transformation logic, schema definitions, and metric specifications. dbt has made this the standard for analytics engineering, but the principle extends to orchestration, ingestion, and governance.",
           "Test data, not just code: Unit tests for transformations. Data quality checks at ingestion. Anomaly detection in production. Contract testing between data producers and consumers. The data warehouse should have a test suite as comprehensive as any application.",
-          "Automate deployment and rollback: Schema migrations, model changes, and pipeline configurations should deploy through CI/CD — not through manual execution of SQL scripts in production. And when something goes wrong, rolling back should be a one-click operation.",
+          "Automate deployment and rollback: Schema migrations, model changes, and pipeline configurations should deploy through CI/CD, not through manual execution of SQL scripts in production. And when something goes wrong, rolling back should be a one-click operation.",
           "Monitor proactively, not reactively: Data observability platforms should alert on freshness, volume, distribution, and schema changes before users notice. SLAs should be defined, tracked, and reported with the same rigor as application uptime.",
           "Treat incidents as learning opportunities: When a data quality issue reaches production, conduct a blameless post-mortem. Document the root cause. Implement preventive controls. Build institutional knowledge.",
         ],
@@ -458,7 +458,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "The path from 'almost reliable' to genuinely robust isn't a single initiative — it's a set of engineering practices that compound over time. At InclinedPlane, we approach this as a maturity journey with clear milestones:",
+        content: "The path from 'almost reliable' to genuinely robust isn't a single initiative, it's a set of engineering practices that compound over time. At InclinedPlane, we approach this as a maturity journey with clear milestones:",
       },
       {
         type: "heading",
@@ -467,7 +467,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "Implement data quality checks at every boundary — ingestion, transformation, and consumption. Deploy a monitoring layer that tracks freshness, volume, and schema stability. Establish SLAs for every critical pipeline.",
+        content: "Implement data quality checks at every boundary, ingestion, transformation, and consumption. Deploy a monitoring layer that tracks freshness, volume, and schema stability. Establish SLAs for every critical pipeline.",
       },
       {
         type: "heading",
@@ -494,11 +494,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        content: "If your data pipelines are 'almost reliable,' they're actively costing you — in team productivity, decision quality, stakeholder trust, and competitive agility. The silent nature of these failures makes them easy to deprioritize, but the cumulative cost is substantial.",
+        content: "If your data pipelines are 'almost reliable,' they're actively costing you, in team productivity, decision quality, stakeholder trust, and competitive agility. The silent nature of these failures makes them easy to deprioritize, but the cumulative cost is substantial.",
       },
       {
         type: "paragraph",
-        content: "The good news: the playbook exists. DevOps for Data isn't theoretical — it's a proven set of engineering practices with mature tooling and clear ROI. The organizations that adopt these practices don't just fix their data quality problems. They unlock the ability to build prediction, automation, and decision systems on a foundation they can actually trust.",
+        content: "The good news: the playbook exists. DevOps for Data isn't theoretical, it's a proven set of engineering practices with mature tooling and clear ROI. The organizations that adopt these practices don't just fix their data quality problems. They unlock the ability to build prediction, automation, and decision systems on a foundation they can actually trust.",
       },
       {
         type: "paragraph",
