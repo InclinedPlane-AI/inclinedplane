@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
@@ -119,7 +119,7 @@ const layerDetails = [
       description:
         "Every pipeline emits structured telemetry: row counts, schema diffs, freshness SLAs, and cost attribution. Column-level lineage traces every field from source to dashboard. Access control is policy-as-code, auditable and reproducible.",
       tools: ["Monte Carlo", "Atlan", "OpenLineage", "Apache Atlas", "dbt Docs"],
-      metrics: ["End-to-end column lineage", "Real-time freshness monitoring", "SOC 2 / GDPR compliant"],
+      metrics: ["End-to-end column lineage", "Real-time freshness monitoring"],
     },
   },
   {
@@ -642,7 +642,7 @@ const Thesis = () => {
       icon: Lock,
       title: "Security by Default",
       description:
-        "Encryption at rest and in transit. Least-privilege access. Row-level security. SOC 2 and GDPR-aware design patterns baked into every layer.",
+        "Encryption at rest and in transit. Least-privilege access. Row-level security. Privacy-aware design patterns baked into every layer.",
       example:
         "e.g. Marketing sees aggregated metrics; Finance sees row-level transactions, same warehouse, different policies",
     },

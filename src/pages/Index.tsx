@@ -1,4 +1,4 @@
-﻿import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -920,68 +920,6 @@ const Index = () => {
             </section>
           )}
 
-          {/* SLIDE 10 — TESTIMONIALS (Commented out) */}
-          {false && (
-            <section className="snap-section flex items-center relative">
-              <SectionGlow position="bottom-left" size={650} />
-              <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-                <motion.div {...fadeUp()}>
-                  <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4 text-center">
-                    What Leaders Say
-                  </p>
-                  <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-14 text-center">
-                    Trusted by <span className="text-gradient-orange">Decision Makers.</span>
-                  </h2>
-                </motion.div>
-                <div className="grid md:grid-cols-3 gap-6">
-                  {[
-                    {
-                      quote:
-                        "Inclined Plane didn't just build us a data platform — they built the foundation for our entire AI strategy. Our forecasting accuracy went from guesswork to 98%.",
-                      name: "Sarah Chen",
-                      title: "VP of Data, Retail Co.",
-                      metric: "98% forecast accuracy",
-                    },
-                    {
-                      quote:
-                        "Within 6 weeks, our sales team had real-time intelligence that previously took analysts days to compile. Pipeline velocity increased 3x.",
-                      name: "Marcus Williams",
-                      title: "CRO, B2B SaaS Platform",
-                      metric: "3x pipeline velocity",
-                    },
-                    {
-                      quote:
-                        "The observability layer they implemented caught a critical data quality issue that would have cost us $2M in bad decisions. It paid for itself day one.",
-                      name: "Dr. Priya Sharma",
-                      title: "Chief Data Officer, FinServ",
-                      metric: "$2M+ saved",
-                    },
-                  ].map(({ quote, name, title, metric }, i) => (
-                    <motion.div
-                      key={name}
-                      {...fadeUp(i * 0.1)}
-                      className="glass-panel rounded-xl p-7 flex flex-col justify-between group hover:glow-orange transition-shadow"
-                      data-cursor-hover
-                    >
-                      <div>
-                        <Quote size={20} className="text-primary/40 mb-4" />
-                        <p className="text-sm text-secondary-foreground leading-relaxed mb-6 text-justify">{quote}</p>
-                      </div>
-                      <div>
-                        <div className="border-t border-border pt-4 flex items-center justify-between">
-                          <div>
-                            <p className="text-sm font-semibold text-foreground">{name}</p>
-                            <p className="text-xs text-muted-foreground">{title}</p>
-                          </div>
-                          <span className="text-xs font-mono text-gradient-orange font-semibold">{metric}</span>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          )}
 
           {/* SLIDE 8 — CAREERS TEASER */}
           <section className="snap-section flex items-center relative overflow-hidden">
@@ -1076,7 +1014,7 @@ const Index = () => {
                   </Link>
                 </div>
                 <div className="mt-10 sm:mt-16 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-[10px] sm:text-xs font-mono text-muted-foreground/40">
-                  {["Snowflake Partner", "AWS Partner", "dbt Certified", "SOC 2 Ready"].map((badge) => (
+                  {["Snowflake Partner", "AWS Partner", "dbt Certified"].map((badge) => (
                     <span key={badge} className="flex items-center gap-1.5">
                       <CheckCircle2 size={10} className="text-primary/50" /> {badge}
                     </span>

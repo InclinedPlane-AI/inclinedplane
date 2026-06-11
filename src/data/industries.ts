@@ -1,4 +1,4 @@
-﻿import retailImg from "@/assets/industry-retail.jpg";
+import retailImg from "@/assets/industry-retail.jpg";
 import financeImg from "@/assets/industry-finance.jpg";
 import saasImg from "@/assets/industry-saas.jpg";
 import healthcareImg from "@/assets/industry-healthcare.jpg";
@@ -98,7 +98,6 @@ export const industries: IndustryData[] = [
       "Data vault modeling for regulatory-compliant historical data management",
       "Graph databases (Neo4j) for entity resolution and AML network analysis",
       "Federated learning for cross-institutional model training without data sharing",
-      "SOC 2 compliant cloud infrastructure with encryption at rest and in transit",
     ],
     useCases: [
       { title: "Risk Analytics", description: "Real-time VaR calculations, stress testing, and scenario analysis across multi-asset portfolios using Monte Carlo simulations and GPU-accelerated compute." },
@@ -200,7 +199,6 @@ export const industries: IndustryData[] = [
       "De-identification pipelines ensuring PHI protection across analytics layers",
       "Federated learning enabling multi-site model training without centralizing patient data",
       "Clinical NLP (Med-PaLM, BioBERT) for unstructured medical text extraction",
-      "HITRUST/SOC 2 certified infrastructure with role-based access and audit logging",
     ],
     useCases: [
       { title: "Clinical Analytics", description: "Population health dashboards providing real-time visibility into disease prevalence, treatment efficacy, and care gaps across patient populations." },
