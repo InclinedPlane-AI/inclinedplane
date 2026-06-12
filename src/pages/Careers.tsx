@@ -1,8 +1,9 @@
-﻿import PageLayout from "@/components/PageLayout";
+import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import SectionGlow from "@/components/SectionGlow";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import {
   Brain,
   Sparkles,
@@ -20,6 +21,8 @@ import {
   Code2,
   Handshake,
   Mail,
+  ChevronDown,
+  ExternalLink,
 } from "lucide-react";
 
 const fadeUp = {
@@ -86,6 +89,132 @@ const process = [
   },
 ];
 
+const openRoles = [
+  {
+    title: "HR & Accounts Executive",
+    department: "Operations",
+    location: "On-Site",
+    type: "Full-time",
+    about: "We are a growing startup looking for a resourceful HR & Accounts Executive who can seamlessly handle both people operations and financial management. This is a dual-function role built for someone who thrives in a lean team, loves ownership, and isn't afraid to build processes from scratch.",
+    responsibilities: [
+      "Manage end-to-end recruitment: job postings, screening, interviews, and offer letters",
+      "Handle onboarding/offboarding and maintain HRIS data/employee records",
+      "Administer attendance, leave management, and payroll inputs",
+      "Ensure compliance with labour laws (PF, ESI, Gratuity)",
+      "Handle day-to-day bookkeeping, vendor payments, and bank reconciliations",
+      "Prepare monthly MIS reports, P&L statements, and cash flow summaries",
+      "Ensure timely filing of GST, TDS, PF, ESI, and other statutory returns"
+    ],
+    requirements: [
+      "B.Com / M.Com / MBA (HR or Finance); CA Inter is a plus",
+      "2–5 years in a combined or dual HR + Accounts role (startup/SME preferred)",
+      "Proficiency in Tally ERP, Zoho Books, or similar",
+      "Familiarity with HRIS tools (Zoho People, Keka, etc.) and strong MS Excel skills"
+    ],
+    applyUrl: "https://www.linkedin.com/jobs/search-results/?currentJobId=4422911412&eBP=NON_CHARGEABLE_CHANNEL&refId=Lf1IYndWBdIQSECcxpdVyA%3D%3D&trackingId=OpuQ%2BSjsRRFq6nUzaXg74w%3D%3D&keywords=jobs&origin=COMPANY_PAGE_JOBS_CLUSTER_EXPANSION&originToLandingJobPostings=4422911412%2C4422354429&geoId=102713980&f_C=14651726",
+  },
+  {
+    title: "Oracle Analytics Cloud (OAC) Developer",
+    department: "Engineering",
+    location: "On-Site",
+    type: "Full-time",
+    about: "We are looking for an experienced OAC developer to design, build, and maintain Oracle Analytics reports and dashboards for our Data Lake environment. You will leverage JDE as the primary source system and utilize OAC's chatbot capabilities.",
+    responsibilities: [
+      "Develop interactive reports and dashboards on Oracle Analytics Cloud",
+      "Work closely with the senior data modeler to consume and extend data models",
+      "Build and configure OAC chatbot features for business user self-service analytics",
+      "Understand JDE business processes and reporting requirements",
+      "Support business stakeholders in defining KPIs and translating them into analytics solutions"
+    ],
+    requirements: [
+      "Hands-on experience developing reports and dashboards on Oracle Analytics Cloud (OAC)",
+      "Working knowledge of RPD / semantic model structure in OAC",
+      "Experience with OAC chatbot feature and conversational analytics",
+      "Familiarity with JDE (JD Edwards) as a source system",
+      "Strong analytical and problem-solving skills",
+      "Nice to have: Experience with Data Lake architectures"
+    ],
+    applyUrl: "https://www.linkedin.com/jobs/search-results/?currentJobId=4422354429&eBP=NON_CHARGEABLE_CHANNEL&refId=Lf1IYndWBdIQSECcxpdVyA%3D%3D&trackingId=27UBt1AL2DWhtATKN1AIRA%3D%3D&keywords=jobs&origin=COMPANY_PAGE_JOBS_CLUSTER_EXPANSION&originToLandingJobPostings=4422911412%2C4422354429&geoId=102713980&f_C=14651726",
+  }
+];
+
+const JobCard = ({ role, index }: { role: typeof openRoles[0], index: number }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <motion.div
+      {...fadeUp}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+      className="glass-panel rounded-2xl p-6 sm:p-8 flex flex-col"
+    >
+      <div
+        className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer group"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <div>
+          <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-gradient-orange transition-all">{role.title}</h3>
+          <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-muted-foreground/80">
+            <span className="bg-primary/10 text-primary px-2.5 py-1 rounded-md">{role.department}</span>
+            <span className="bg-white/5 px-2.5 py-1 rounded-md">{role.location}</span>
+            <span className="bg-white/5 px-2.5 py-1 rounded-md">{role.type}</span>
+          </div>
+        </div>
+        <button
+          className="w-10 h-10 rounded-full surface-3 flex items-center justify-center text-primary transition-transform duration-300 group-hover:bg-primary/10 flex-shrink-0"
+          style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+        >
+          <ChevronDown size={18} />
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0, marginTop: 0 }}
+            animate={{ height: "auto", opacity: 1, marginTop: 24 }}
+            exit={{ height: 0, opacity: 0, marginTop: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden border-t border-border"
+          >
+            <div className="pt-6 space-y-6">
+              <div>
+                <h4 className="text-sm font-semibold text-foreground mb-2">About the Role</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">{role.about}</p>
+              </div>
+              <div>
+                <h4 className="text-sm font-semibold text-foreground mb-2">Key Responsibilities</h4>
+                <ul className="list-disc list-outside ml-4 space-y-1.5 text-sm text-muted-foreground leading-relaxed">
+                  {role.responsibilities.map((req, i) => (
+                    <li key={i}>{req}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-sm font-semibold text-foreground mb-2">Requirements</h4>
+                <ul className="list-disc list-outside ml-4 space-y-1.5 text-sm text-muted-foreground leading-relaxed">
+                  {role.requirements.map((req, i) => (
+                    <li key={i}>{req}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="pt-4">
+                <a
+                  href={role.applyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-orange text-primary-foreground px-6 py-3 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity glow-orange"
+                >
+                  Apply on LinkedIn <ExternalLink size={16} />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
 const Careers = () => {
   return (
     <PageLayout>
@@ -105,6 +234,48 @@ const Careers = () => {
           }
           subtitle="We build the data and AI infrastructure that powers demanding enterprises. If you care about impact, craft, and outcomes, read on."
         />
+
+        {/* Open Roles Section */}
+        <section className="relative pt-4 pb-20 sm:pt-8 sm:pb-24">
+          <SectionGlow position="bottom-right" size={650} />
+          <div className="max-w-4xl mx-auto px-6 lg:px-8">
+            <motion.div {...fadeUp} className="mb-10 text-center">
+              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Open Roles</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                Join the <span className="text-gradient-orange">team.</span>
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                We're looking for exceptional people who care about craft, impact, and engineering rigor. Help us build the next generation of data systems.
+              </p>
+            </motion.div>
+
+            <div className="space-y-6 mb-16">
+              {openRoles.map((role, i) => (
+                <JobCard key={role.title} role={role} index={i} />
+              ))}
+            </div>
+
+            <motion.div
+              {...fadeUp}
+              className="glass-panel rounded-2xl p-8 text-center sm:text-left flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
+            >
+              <div>
+                <h3 className="font-semibold text-foreground text-lg mb-2">Don't see a fit?</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed max-w-xl">
+                  We're always interested in meeting exceptional engineers, architects, and AI builders.
+                  Introduce yourself, share what you've built, and tell us what you'd want to work on.
+                </p>
+              </div>
+              <a
+                href={`mailto:${CAREERS_EMAIL}?subject=Introduction — Talent Network`}
+                data-cursor-hover
+                className="inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-foreground px-6 py-3 rounded-lg font-medium text-sm hover:bg-white/10 transition-colors flex-shrink-0"
+              >
+                <Mail size={16} /> Join our talent network
+              </a>
+            </motion.div>
+          </div>
+        </section>
 
         {/* Philosophy / Values */}
         <section className="relative py-20 sm:py-24">
@@ -139,58 +310,6 @@ const Careers = () => {
                 </motion.div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* Talent Network — Not Currently Hiring */}
-        <section className="relative py-20 sm:py-24">
-          <SectionGlow position="bottom-right" size={650} />
-          <div className="max-w-5xl mx-auto px-6 lg:px-8">
-            <motion.div {...fadeUp} className="mb-10 text-center">
-              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Open Roles</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                No open positions <span className="text-gradient-orange">right now.</span>
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                We're not actively hiring at the moment, but we're always interested in meeting exceptional engineers,
-                architects, and AI builders. When the right person reaches out, we make room.
-              </p>
-            </motion.div>
-
-            <motion.div
-              {...fadeUp}
-              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-              className="glass-panel rounded-2xl p-8 sm:p-10"
-            >
-              <div className="grid sm:grid-cols-3 gap-6 sm:gap-8 mb-8">
-                {[
-                  { icon: Brain, title: "Data & AI Engineering", desc: "Snowflake, Databricks, dbt, LLMs, agents." },
-                  { icon: Shield, title: "Architecture & Strategy", desc: "Cloud-native platforms and AI roadmaps." },
-                  { icon: Zap, title: "Founding-Team Roles", desc: "Senior generalists who own outcomes." },
-                ].map(({ icon: Icon, title, desc }) => (
-                  <div key={title} className="flex flex-col">
-                    <div className="w-10 h-10 rounded-xl surface-3 flex items-center justify-center mb-3">
-                      <Icon size={16} className="text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-foreground text-sm mb-1.5">{title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="pt-6 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Introduce yourself, share what you've built, and tell us what you'd want to work on.
-                </p>
-                <a
-                  href={`mailto:${CAREERS_EMAIL}?subject=Introduction — Talent Network`}
-                  data-cursor-hover
-                  className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-5 py-2.5 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity flex-shrink-0"
-                >
-                  <Mail size={15} /> Join our talent network
-                </a>
-              </div>
-            </motion.div>
           </div>
         </section>
 

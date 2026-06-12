@@ -187,7 +187,7 @@ const pillars: ServicePillar[] = [
   },
   {
     number: "04",
-    title: "Predictive Layer",
+    title: "Predictive & AI Implementation Layer",
     shortTitle: "AI & ML Implementations",
     subtitle: "Predictive Layer",
     positioning: "AI, predictive & agentic implementation, from experimentation to production.",
@@ -221,7 +221,7 @@ const pillars: ServicePillar[] = [
   },
   {
     number: "05",
-    title: "Intelligence Layer",
+    title: "Automation & Decision Systems Layer",
     shortTitle: "Automation Systems",
     subtitle: "Intelligence Layer",
     positioning: "From dashboards to decision systems: automated intelligence.",
@@ -413,11 +413,10 @@ const ServicesPage = () => {
                 <button
                   key={p.number}
                   onClick={() => scrollTo(i)}
-                  className={`shrink-0 flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
-                    activeIndex === i
-                      ? "bg-primary/10 text-primary border border-primary/20"
-                      : "surface-2 text-muted-foreground border border-border/30"
-                  }`}
+                  className={`shrink-0 flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all ${activeIndex === i
+                    ? "bg-primary/10 text-primary border border-primary/20"
+                    : "surface-2 text-muted-foreground border border-border/30"
+                    }`}
                 >
                   <p.icon size={14} />
                   {p.shortTitle}
@@ -455,16 +454,14 @@ const ServicesPage = () => {
                         )}
                         <button
                           onClick={() => scrollTo(i)}
-                          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all duration-300 group ${
-                            active
-                              ? "glass-panel-strong text-foreground"
-                              : "text-muted-foreground/60 hover:text-muted-foreground hover:bg-muted/30"
-                          }`}
+                          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all duration-300 group ${active
+                            ? "glass-panel-strong text-foreground"
+                            : "text-muted-foreground/60 hover:text-muted-foreground hover:bg-muted/30"
+                            }`}
                         >
                           <div
-                            className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-                              active ? "bg-primary/15" : "surface-3 group-hover:bg-muted"
-                            }`}
+                            className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${active ? "bg-primary/15" : "surface-3 group-hover:bg-muted"
+                              }`}
                           >
                             <Icon size={15} className={active ? "text-primary" : "text-muted-foreground/50"} />
                           </div>
@@ -567,9 +564,9 @@ const ServicesPage = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3 pointer-events-none" />
               <div className="relative z-10">
                 <p className="font-mono text-[10px] uppercase tracking-widest text-primary/60 mb-3">Let's talk</p>
-                      <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-                        Find your starting point.
-                      </h2>
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
+                  Find your starting point.
+                </h2>
                 <p className="text-muted-foreground max-w-lg mx-auto mb-8 text-sm leading-relaxed">
                   Whether you need a solid data foundation or automated decision systems, we'll design the roadmap and
                   deliver results.
