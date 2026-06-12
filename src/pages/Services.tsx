@@ -221,7 +221,7 @@ const pillars: ServicePillar[] = [
   },
   {
     number: "05",
-    title: "Automation & Decision Systems Layer",
+    title: "Automation & Decision Systems",
     shortTitle: "Automation Systems",
     subtitle: "Intelligence Layer",
     positioning: "From dashboards to decision systems: automated intelligence.",
