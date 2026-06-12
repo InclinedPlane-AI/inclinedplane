@@ -187,7 +187,7 @@ const pillars: ServicePillar[] = [
   },
   {
     number: "04",
-    title: "Predictive & AI Implementation Layer",
+    title: "Predictive & AI Implementation",
     shortTitle: "AI & ML Implementations",
     subtitle: "Predictive Layer",
     positioning: "AI, predictive & agentic implementation, from experimentation to production.",
