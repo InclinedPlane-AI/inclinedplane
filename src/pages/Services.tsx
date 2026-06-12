@@ -187,7 +187,7 @@ const pillars: ServicePillar[] = [
   },
   {
     number: "04",
-    title: "Predictive & AI Implementation Layer",
+    title: "Predictive & AI Implementation",
     shortTitle: "AI & ML Implementations",
     subtitle: "Predictive Layer",
     positioning: "AI, predictive & agentic implementation, from experimentation to production.",
@@ -221,7 +221,7 @@ const pillars: ServicePillar[] = [
   },
   {
     number: "05",
-    title: "Automation & Decision Systems Layer",
+    title: "Automation & Decision Systems",
     shortTitle: "Automation Systems",
     subtitle: "Intelligence Layer",
     positioning: "From dashboards to decision systems: automated intelligence.",
