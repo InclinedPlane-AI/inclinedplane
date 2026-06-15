@@ -639,58 +639,51 @@ const Index = () => {
               <div className="grid sm:grid-cols-3 gap-6 mb-10">
                 {[
                   {
+                    value: 17,
+                    suffix: "%",
+                    prefix: "",
+                    label: "Inventory cost reduction",
+                    attribution: "India's foremost sunflower oil producer · FMCG",
+                    slug: "fmcg-edible-oil",
+                  },
+                  {
+                    value: 98,
+                    suffix: "%+",
+                    prefix: "",
+                    label: "Predictive maintenance accuracy",
+                    attribution: "Battery-as-a-Service operator · Mobility / IoT",
+                    slug: "ev-battery-predictive",
+                  },
+                  {
                     value: 24,
                     suffix: "%",
                     prefix: "",
-                    sector: "Global Manufacturer",
-                    desc: "Stock-out reduction through AI-powered demand forecasting",
+                    label: "Stock-out reduction",
+                    attribution: "E-Commerce · 100,000s of SKUs",
+                    slug: "ecom-inventory",
                   },
-                  {
-                    value: 3,
-                    suffix: "x",
-                    prefix: "",
-                    sector: "B2B SaaS",
-                    desc: "Pipeline velocity improvement for sales intelligence platform",
-                  },
-                  {
-                    value: 2,
-                    suffix: "M+",
-                    prefix: "$",
-                    sector: "Financial Services",
-                    desc: "In bad decisions prevented by observability layer catching critical data quality issue",
-                  },
-                ].map(({ value, suffix, prefix, sector, desc }, i) => (
+                ].map(({ value, suffix, prefix, label, attribution, slug }, i) => (
                   <motion.div
-                    key={sector}
+                    key={slug}
                     {...fadeUp(i * 0.08)}
-                    className="glass-panel rounded-xl p-8 text-center group hover:glow-orange transition-shadow flex flex-col justify-between"
                   >
-                    <div>
-                      <p className="text-4xl lg:text-5xl font-bold mb-4 text-gradient-orange">
-                        <AnimatedCounter end={value} suffix={suffix} prefix={prefix} />
-                      </p>
-                      <p className="text-sm text-foreground font-medium leading-relaxed mb-6">{desc}</p>
-                    </div>
-                    <p className="text-[10px] text-primary font-mono uppercase tracking-widest pt-4 border-t border-border/50">
-                      {sector}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-                {[
-                  { value: "Speed", label: "Time-to-insight reduction" },
-                  { value: "Accuracy", label: "Full pipeline automation" },
-                  { value: "Growth", label: "AI-driven strategic initiatives" },
-                  { value: "Scale", label: "Enterprise-grade architecture" },
-                ].map(({ value, label }, i) => (
-                  <motion.div
-                    key={label}
-                    {...fadeUp(0.3 + i * 0.05)}
-                    className="surface-2 rounded-lg px-5 py-4 text-center"
-                  >
-                    <p className="text-xl font-bold text-gradient-orange mb-1">{value}</p>
-                    <p className="text-[11px] text-muted-foreground">{label}</p>
+                    <Link
+                      to={`/case-studies/${slug}`}
+                      className="glass-panel rounded-xl p-8 text-center group hover:glow-orange transition-shadow flex flex-col justify-between h-full block"
+                    >
+                      <div>
+                        <p className="text-4xl lg:text-5xl font-bold mb-4 text-gradient-orange">
+                          <AnimatedCounter end={value} suffix={suffix} prefix={prefix} />
+                        </p>
+                        <p className="text-sm text-foreground font-medium leading-relaxed mb-6">{label}</p>
+                      </div>
+                      <div className="pt-4 border-t border-border/50 flex items-center justify-between gap-2">
+                        <p className="text-[10px] text-primary font-mono uppercase tracking-widest text-left">
+                          {attribution}
+                        </p>
+                        <ArrowRight size={12} className="text-primary shrink-0 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                      </div>
+                    </Link>
                   </motion.div>
                 ))}
               </div>
