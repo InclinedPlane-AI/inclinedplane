@@ -1,4 +1,4 @@
-﻿import PageLayout from "@/components/PageLayout";
+import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import SectionGlow from "@/components/SectionGlow";
@@ -26,6 +26,7 @@ import {
   Award,
   Telescope,
   Flag,
+  Linkedin,
 } from "lucide-react";
 
 const fadeUp = {
@@ -45,11 +46,10 @@ const stagger = {
 const TimelineDot = ({ active = false }: { active?: boolean }) => (
   <div className="relative flex items-center justify-center">
     <div
-      className={`w-4 h-4 rounded-full border-2 transition-all duration-500 ${
-        active
+      className={`w-4 h-4 rounded-full border-2 transition-all duration-500 ${active
           ? "border-primary bg-primary shadow-[0_0_18px_hsl(25_100%_50%/0.7)]"
           : "border-muted-foreground/40 bg-background"
-      }`}
+        }`}
     />
     {active && <div className="absolute w-8 h-8 rounded-full bg-primary/20 animate-pulse pointer-events-none" />}
   </div>
@@ -185,6 +185,222 @@ const About = () => {
                 and the partner enterprises trust to build it.
               </p>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ LEADERSHIP ═══════════════ */}
+      <section className="relative py-20 overflow-hidden">
+        <SectionGlow position="center" size={500} />
+        <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-[2]">
+          <motion.div {...fadeUp} className="mb-14">
+            <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Leadership</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
+              Our <span className="text-gradient-orange">People</span>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl">
+              Enterprise procurement diligence asks for key personnel credentials. Here is who leads our engagements.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Keerthana */}
+            <motion.div
+              {...fadeUp}
+              className="glass-panel rounded-2xl p-8 flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 flex-shrink-0">
+                      <span className="text-xl font-bold text-primary">KV</span>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-foreground">Keerthana Vayyasi</h3>
+                      <p className="text-sm text-primary font-mono mt-1">Founder & CEO</p>
+                    </div>
+                  </div>
+                  <a
+                    href="https://www.linkedin.com/in/keerthanavayyasi/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg bg-background/50 hover:bg-primary/20 text-muted-foreground hover:text-primary transition-colors border border-border/50"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                </div>
+                <p className="text-muted-foreground leading-relaxed mb-8">
+                  Leading platform modernizations for Fortune 500s with a decade of enterprise data delivery experience.
+                </p>
+              </div>
+
+              {/* Keerthana's Certifications */}
+              <div className="grid grid-cols-2 gap-3 mt-auto">
+                {[
+                  {
+                    name: "Databricks Certified",
+                    logo: "https://cdn.simpleicons.org/databricks/FF3621",
+                    detail: "Data Engineer & ML Professional",
+                    color: "from-[hsl(0_85%_55%/0.15)] to-[hsl(0_85%_55%/0.03)]",
+                  },
+                  {
+                    name: "Fabric Certified",
+                    logo: fabricLogo,
+                    detail: "Analytics Engineer & Data Engineer",
+                    color: "from-[hsl(25_90%_50%/0.15)] to-[hsl(25_90%_50%/0.03)]",
+                  },
+                ].map(({ name, logo, detail, color }, i) => (
+                  <div
+                    key={name}
+                    className="block glass-panel rounded-xl p-4 text-center relative overflow-hidden group hover:glow-orange transition-all duration-300 border border-border/40 hover:border-primary/30"
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-b ${color} pointer-events-none`} />
+                    <div className="relative z-10">
+                      <img
+                        src={logo}
+                        alt={name}
+                        className="w-8 h-8 object-contain mx-auto mb-2 opacity-85 group-hover:opacity-100 transition-opacity"
+                      />
+                      <h4 className="font-bold text-foreground text-xs mb-1">{name}</h4>
+                      <p className="text-[10px] text-muted-foreground leading-snug">{detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Mohan */}
+            <motion.div
+              {...fadeUp}
+              transition={{ delay: 0.1 }}
+              className="glass-panel rounded-2xl p-8 flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 flex-shrink-0">
+                      <span className="text-xl font-bold text-primary">MG</span>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-foreground">Mohan Gowda T</h3>
+                      <p className="text-sm text-primary font-mono mt-1">Senior Data Engineer</p>
+                    </div>
+                  </div>
+                  <a
+                    href="https://www.linkedin.com/in/mohangowdat/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg bg-background/50 hover:bg-primary/20 text-muted-foreground hover:text-primary transition-colors border border-border/50"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                </div>
+                <p className="text-muted-foreground leading-relaxed mb-8">
+                  Architecting high-throughput, fault-tolerant data pipelines with active AWS and Azure engineering certifications.
+                </p>
+              </div>
+
+              {/* Mohan's Certifications */}
+              <div className="grid grid-cols-2 gap-3 mt-auto">
+                {[
+                  {
+                    name: "AWS Certified",
+                    logo: awsLogo,
+                    detail: "Solutions Architect & Data Analytics",
+                    color: "from-[hsl(30_100%_50%/0.15)] to-[hsl(30_100%_50%/0.03)]",
+                  },
+                  {
+                    name: "Azure Certified",
+                    logo: azureLogo,
+                    detail: "Data Engineer & AI Engineer Associate",
+                    color: "from-[hsl(210_90%_55%/0.15)] to-[hsl(210_90%_55%/0.03)]",
+                  },
+                ].map(({ name, logo, detail, color }, i) => (
+                  <div
+                    key={name}
+                    className="block glass-panel rounded-xl p-4 text-center relative overflow-hidden group hover:glow-orange transition-all duration-300 border border-border/40 hover:border-primary/30"
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-b ${color} pointer-events-none`} />
+                    <div className="relative z-10">
+                      <img
+                        src={logo}
+                        alt={name}
+                        className="w-8 h-8 object-contain mx-auto mb-2 opacity-85 group-hover:opacity-100 transition-opacity"
+                      />
+                      <h4 className="font-bold text-foreground text-xs mb-1">{name}</h4>
+                      <p className="text-[10px] text-muted-foreground leading-snug">{detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ CULTURE ═══════════════ */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-[2]">
+          <motion.div {...fadeUp} className="mb-14">
+            <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">How We Work</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
+              Company <span className="text-gradient-orange">Culture</span>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl">
+              Process-driven. Engineering-first. Built for the long term.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              {
+                icon: Shield,
+                title: "Methodology over heroics",
+                text: "We don't rely on individuals to carry engagements. Every project runs on a defined framework: architecture reviews, quality gates, CI/CD workflows, and documented handoffs. The system is the safeguard, not the person.",
+              },
+              {
+                icon: Layers,
+                title: "Rigour at every layer",
+                text: "We apply the same engineering standards to a reporting pipeline as we do to a production ML system. Testing, versioning, observability, non-negotiable, regardless of project size or timeline pressure.",
+              },
+              {
+                icon: Zap,
+                title: "Transparent by default",
+                text: "No black boxes. No hidden complexity. Every system we build is documented, observable, and transferable. You should always know what you have, how it works, and why decisions were made.",
+              },
+              {
+                icon: Users,
+                title: "Built to last, not to impress",
+                text: "We optimise for systems that compound over time, not for delivery that looks good in a demo but degrades in production. The measure of our work is how it performs six months after we leave.",
+              },
+            ].map(({ icon: Icon, title, text }) => (
+              <motion.div
+                key={title}
+                {...fadeUp}
+                className="rounded-2xl p-8 relative overflow-hidden"
+                style={{
+                  background: "hsl(var(--card))",
+                  border: "1px solid hsl(25 100% 50% / 0.1)",
+                  boxShadow: "0 8px 32px -8px hsl(25 100% 50% / 0.08), inset 0 1px 0 hsl(0 0% 100% / 0.04)",
+                }}
+              >
+                <div
+                  className="absolute inset-0 pointer-events-none opacity-[0.04]"
+                  style={{
+                    background: "radial-gradient(ellipse at 70% 30%, hsl(25 100% 50%), transparent 60%)",
+                  }}
+                />
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <h3 className="font-bold text-foreground text-lg">{title}</h3>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">{text}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -455,162 +671,6 @@ const About = () => {
                     <h3 className="font-semibold text-foreground mb-2">{title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════ CERTIFICATIONS ═══════════════ */}
-      <section className="relative py-20 overflow-hidden">
-        <SectionGlow position="center" size={500} />
-        <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-[2]">
-          <motion.div {...fadeUp} className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 glass-panel rounded-full px-4 py-1.5 mb-6">
-              <Award className="w-3.5 h-3.5 text-primary" />
-              <span className="font-mono text-xs text-primary tracking-widest uppercase">Certified Expertise</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
-              Brains <span className="text-gradient-orange">&amp; Brawn</span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Our engineers don't just write code. They carry industry-recognized certifications that prove mastery
-              across every layer of the modern data stack.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-            {[
-              {
-                name: "AWS Certified",
-                logo: awsLogo,
-                detail: "Solutions Architect & Data Analytics",
-                color: "from-[hsl(30_100%_50%/0.15)] to-[hsl(30_100%_50%/0.03)]",
-              },
-              {
-                name: "Azure Certified",
-                logo: azureLogo,
-                detail: "Data Engineer & AI Engineer Associate",
-                color: "from-[hsl(210_90%_55%/0.15)] to-[hsl(210_90%_55%/0.03)]",
-              },
-              {
-                name: "Databricks Certified",
-                logo: "https://cdn.simpleicons.org/databricks/FF3621",
-                detail: "Data Engineer & ML Professional",
-                color: "from-[hsl(0_85%_55%/0.15)] to-[hsl(0_85%_55%/0.03)]",
-              },
-              {
-                name: "Fabric Certified",
-                logo: fabricLogo,
-                detail: "Analytics Engineer & Data Engineer",
-                color: "from-[hsl(25_90%_50%/0.15)] to-[hsl(25_90%_50%/0.03)]",
-              },
-            ].map(({ name, logo, detail, color }, i) => (
-              <motion.div
-                key={name}
-                {...stagger}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="glass-panel rounded-2xl p-6 text-center relative overflow-hidden group hover:glow-orange transition-all duration-300"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-b ${color} pointer-events-none`} />
-                <div className="relative z-10">
-                  <img
-                    src={logo}
-                    alt={name}
-                    className="w-10 h-10 object-contain mx-auto mb-3 opacity-85 group-hover:opacity-100 transition-opacity"
-                  />
-                  <h4 className="font-bold text-foreground text-sm mb-1">{name}</h4>
-                  <p className="text-[11px] text-muted-foreground leading-snug">{detail}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-            {[
-              { title: "Data Engineers", icon: Layers },
-              { title: "Data Analysts", icon: Eye },
-              { title: "System Architects", icon: Cpu },
-              { title: "System Designers", icon: Compass },
-              { title: "AI Engineers", icon: Sparkles },
-            ].map(({ title, icon: RoleIcon }, i) => (
-              <motion.div
-                key={title}
-                {...stagger}
-                transition={{ duration: 0.4, delay: 0.3 + i * 0.06 }}
-                className="glass-panel rounded-xl px-4 py-3 flex items-center gap-3 group hover:border-primary/20 transition-colors"
-              >
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/15 transition-colors">
-                  <RoleIcon className="w-4 h-4 text-primary" />
-                </div>
-                <span className="text-xs font-semibold text-foreground">{title}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════ CULTURE ═══════════════ */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-[2]">
-          <motion.div {...fadeUp} className="mb-14">
-            <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">How We Work</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
-              Company <span className="text-gradient-orange">Culture</span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl">
-              Process-driven. Engineering-first. Built for the long term.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              {
-                icon: Shield,
-                title: "Methodology over heroics",
-                text: "We don't rely on individuals to carry engagements. Every project runs on a defined framework: architecture reviews, quality gates, CI/CD workflows, and documented handoffs. The system is the safeguard, not the person.",
-              },
-              {
-                icon: Layers,
-                title: "Rigour at every layer",
-                text: "We apply the same engineering standards to a reporting pipeline as we do to a production ML system. Testing, versioning, observability, non-negotiable, regardless of project size or timeline pressure.",
-              },
-              {
-                icon: Zap,
-                title: "Transparent by default",
-                text: "No black boxes. No hidden complexity. Every system we build is documented, observable, and transferable. You should always know what you have, how it works, and why decisions were made.",
-              },
-              {
-                icon: Users,
-                title: "Built to last, not to impress",
-                text: "We optimise for systems that compound over time, not for delivery that looks good in a demo but degrades in production. The measure of our work is how it performs six months after we leave.",
-              },
-            ].map(({ icon: Icon, title, text }) => (
-              <motion.div
-                key={title}
-                {...fadeUp}
-                className="rounded-2xl p-8 relative overflow-hidden"
-                style={{
-                  background: "hsl(var(--card))",
-                  border: "1px solid hsl(25 100% 50% / 0.1)",
-                  boxShadow: "0 8px 32px -8px hsl(25 100% 50% / 0.08), inset 0 1px 0 hsl(0 0% 100% / 0.04)",
-                }}
-              >
-                <div
-                  className="absolute inset-0 pointer-events-none opacity-[0.04]"
-                  style={{
-                    background: "radial-gradient(ellipse at 70% 30%, hsl(25 100% 50%), transparent 60%)",
-                  }}
-                />
-                <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <h3 className="font-bold text-foreground text-lg">{title}</h3>
-                  </div>
-                  <p className="text-muted-foreground leading-relaxed">{text}</p>
                 </div>
               </motion.div>
             ))}
