@@ -22,6 +22,7 @@ import CookiePolicy from "./pages/CookiePolicy";
 import Blogs from "./pages/Blogs";
 import BlogPostPage from "./pages/BlogPost";
 import Careers from "./pages/Careers";
+import Referral from "./pages/Referral";
 import CookieConsent from "./components/CookieConsent";
 import ChatWidget from "./components/ChatWidget";
 import SplashScreen from "./components/SplashScreen";
@@ -92,6 +93,7 @@ const App = () => {
                   <Route path="/blog" element={<Blogs />} />
                   <Route path="/blog/:slug" element={<BlogPostPage />} />
                   <Route path="/careers" element={<Careers />} />
+                  <Route path="/referral" element={<Referral />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/privacy" element={<PrivacyPolicy />} />
                   <Route path="/terms" element={<Terms />} />

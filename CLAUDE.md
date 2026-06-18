@@ -404,3 +404,51 @@ These cannot be done from the codebase:
   parser, don't push back on the content change.
 - Keep guardrail comments at the top of pipeline files so a Lovable
   pass that "modernizes" them gets a clear "do not delete" signal.
+
+---
+
+## Referral Portal Design Contract
+
+If the form on the **Referral Portal** (`SubmitReferralTab` in `src/pages/Referral.tsx`) needs to be modified or recreated in the future, it **must** strictly adhere to the following 2-column layout design:
+
+### Layout Structure
+- **Candidate Details (Section 1)**
+  - Full name (Input, required)
+  - Email address (Input, required)
+  - Phone number (Input, optional)
+  - Applying for (Select Dropdown, required)
+- **Your Details (Referee) (Section 2)**
+  - Your name (Input, required)
+  - Your team / department (Input, required)
+  - Relationship to candidate (Select Dropdown, required, spans full width / 2 columns)
+
+### Aesthetics
+- The form fields must be laid out in a responsive CSS Grid (`grid-cols-1 sm:grid-cols-2`).
+- The Submit button must be right-aligned at the bottom of the form.
+- The "Resume Box" upload UI is deliberately excluded; rely on the user attaching it in their email client instead.
+
+---
+
+## Careers Page / Job Listing Design Contract
+
+If new job openings are added to the **Careers** page (`openRoles` array in `src/pages/Careers.tsx`), the data structure and UI must strictly follow these rules:
+
+### Data Schema (`openRoles` array)
+Each job position must be an object with the following fields:
+```typescript
+{
+  title: string;             // e.g. "HR & Accounts Executive"
+  department: string;        // e.g. "Operations"
+  location: string;          // e.g. "On-Site" or "Remote"
+  type: string;              // e.g. "Full-time"
+  about: string;             // A short paragraph introducing the role
+  responsibilities: string[]; // Array of strings (bullet points)
+  requirements: string[];     // Array of strings (bullet points)
+  applyUrl: string;          // External link (e.g., LinkedIn job post)
+}
+```
+
+### UI Aesthetics (`JobCard` component)
+- **Outer Card (Collapsed):** Should display the `title`, `department`, `location`, and `type`.
+- **Inner Card (Expanded):** When clicked, it expands to show the `about` section, bulleted lists for `responsibilities` and `requirements`, and an "Apply Now" button at the bottom.
+- **Interactivity:** It uses a smooth expanding accordion animation.

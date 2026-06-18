@@ -23,6 +23,7 @@ import {
   Mail,
   ChevronDown,
   ExternalLink,
+  Briefcase,
 } from "lucide-react";
 
 const fadeUp = {
@@ -211,11 +212,28 @@ const Careers = () => {
               </p>
             </motion.div>
 
-            <div className="space-y-6 mb-16">
-              {openRoles.map((role, i) => (
-                <JobCard key={role.title} role={role} index={i} />
-              ))}
-            </div>
+            {openRoles.length > 0 ? (
+              <div className="space-y-6 mb-16">
+                {openRoles.map((role, i) => (
+                  <JobCard key={role.title} role={role} index={i} />
+                ))}
+              </div>
+            ) : (
+              <motion.div
+                {...fadeUp}
+                className="mb-16 glass-panel rounded-2xl p-10 text-center flex flex-col items-center justify-center border-dashed border-2 border-white/5"
+              >
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-5">
+                  <Briefcase size={28} className="text-primary" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-3">
+                  No open roles right now
+                </h3>
+                <p className="text-muted-foreground max-w-md mx-auto leading-relaxed">
+                  We aren't actively hiring for any specific positions at the moment, but we're always eager to meet exceptional talent.
+                </p>
+              </motion.div>
+            )}
 
             <motion.div
               {...fadeUp}
