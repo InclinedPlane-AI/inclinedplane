@@ -89,54 +89,16 @@ const process = [
   },
 ];
 
-const openRoles = [
-  {
-    title: "HR & Accounts Executive",
-    department: "Operations",
-    location: "On-Site",
-    type: "Full-time",
-    about: "We are a growing startup looking for a resourceful HR & Accounts Executive who can seamlessly handle both people operations and financial management. This is a dual-function role built for someone who thrives in a lean team, loves ownership, and isn't afraid to build processes from scratch.",
-    responsibilities: [
-      "Manage end-to-end recruitment: job postings, screening, interviews, and offer letters",
-      "Handle onboarding/offboarding and maintain HRIS data/employee records",
-      "Administer attendance, leave management, and payroll inputs",
-      "Ensure compliance with labour laws (PF, ESI, Gratuity)",
-      "Handle day-to-day bookkeeping, vendor payments, and bank reconciliations",
-      "Prepare monthly MIS reports, P&L statements, and cash flow summaries",
-      "Ensure timely filing of GST, TDS, PF, ESI, and other statutory returns"
-    ],
-    requirements: [
-      "B.Com / M.Com / MBA (HR or Finance); CA Inter is a plus",
-      "2–5 years in a combined or dual HR + Accounts role (startup/SME preferred)",
-      "Proficiency in Tally ERP, Zoho Books, or similar",
-      "Familiarity with HRIS tools (Zoho People, Keka, etc.) and strong MS Excel skills"
-    ],
-    applyUrl: "https://www.linkedin.com/jobs/search-results/?currentJobId=4422911412&eBP=NON_CHARGEABLE_CHANNEL&refId=Lf1IYndWBdIQSECcxpdVyA%3D%3D&trackingId=OpuQ%2BSjsRRFq6nUzaXg74w%3D%3D&keywords=jobs&origin=COMPANY_PAGE_JOBS_CLUSTER_EXPANSION&originToLandingJobPostings=4422911412%2C4422354429&geoId=102713980&f_C=14651726",
-  },
-  {
-    title: "Oracle Analytics Cloud (OAC) Developer",
-    department: "Engineering",
-    location: "On-Site",
-    type: "Full-time",
-    about: "We are looking for an experienced OAC developer to design, build, and maintain Oracle Analytics reports and dashboards for our Data Lake environment. You will leverage JDE as the primary source system and utilize OAC's chatbot capabilities.",
-    responsibilities: [
-      "Develop interactive reports and dashboards on Oracle Analytics Cloud",
-      "Work closely with the senior data modeler to consume and extend data models",
-      "Build and configure OAC chatbot features for business user self-service analytics",
-      "Understand JDE business processes and reporting requirements",
-      "Support business stakeholders in defining KPIs and translating them into analytics solutions"
-    ],
-    requirements: [
-      "Hands-on experience developing reports and dashboards on Oracle Analytics Cloud (OAC)",
-      "Working knowledge of RPD / semantic model structure in OAC",
-      "Experience with OAC chatbot feature and conversational analytics",
-      "Familiarity with JDE (JD Edwards) as a source system",
-      "Strong analytical and problem-solving skills",
-      "Nice to have: Experience with Data Lake architectures"
-    ],
-    applyUrl: "https://www.linkedin.com/jobs/search-results/?currentJobId=4422354429&eBP=NON_CHARGEABLE_CHANNEL&refId=Lf1IYndWBdIQSECcxpdVyA%3D%3D&trackingId=27UBt1AL2DWhtATKN1AIRA%3D%3D&keywords=jobs&origin=COMPANY_PAGE_JOBS_CLUSTER_EXPANSION&originToLandingJobPostings=4422911412%2C4422354429&geoId=102713980&f_C=14651726",
-  }
-];
+export const openRoles: Array<{
+  title: string;
+  department: string;
+  location: string;
+  type: string;
+  about: string;
+  responsibilities: string[];
+  requirements: string[];
+  applyUrl: string;
+}> = [];
 
 const JobCard = ({ role, index }: { role: typeof openRoles[0], index: number }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -272,6 +234,26 @@ const Careers = () => {
                 className="inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-foreground px-6 py-3 rounded-lg font-medium text-sm hover:bg-white/10 transition-colors flex-shrink-0"
               >
                 <Mail size={16} /> Join our talent network
+              </a>
+            </motion.div>
+
+            {/* Employee Referrals Link */}
+            <motion.div
+              {...fadeUp}
+              className="mt-6 glass-panel rounded-2xl p-6 text-center flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
+            >
+              <div className="text-left">
+                <h3 className="font-semibold text-foreground text-md mb-1">Are you an employee?</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Help us build the team! Refer a friend or former colleague for an open position.
+                </p>
+              </div>
+              <a
+                href="/referral"
+                data-cursor-hover
+                className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary border border-primary/20 px-6 py-3 rounded-lg font-medium text-sm hover:bg-primary/20 transition-colors flex-shrink-0"
+              >
+                Employee Referral Portal
               </a>
             </motion.div>
           </div>
