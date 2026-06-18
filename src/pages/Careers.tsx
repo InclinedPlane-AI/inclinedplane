@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import SectionGlow from "@/components/SectionGlow";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Brain,
   Sparkles,
@@ -266,13 +267,13 @@ const Careers = () => {
                   Help us build the team! Refer a friend or former colleague for an open position.
                 </p>
               </div>
-              <a
-                href="/referral"
+              <Link
+                to="/referral"
                 data-cursor-hover
                 className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary border border-primary/20 px-6 py-3 rounded-lg font-medium text-sm hover:bg-primary/20 transition-colors flex-shrink-0"
               >
                 Employee Referral Portal
-              </a>
+              </Link>
             </motion.div>
           </div>
         </section>
