@@ -250,7 +250,7 @@ const Careers = () => {
               <a
                 href={`mailto:${CAREERS_EMAIL}?subject=Introduction — Talent Network`}
                 data-cursor-hover
-                className="inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-foreground px-6 py-3 rounded-lg font-medium text-sm hover:bg-white/10 transition-colors flex-shrink-0"
+                className="inline-flex items-center justify-center gap-2 bg-foreground/5 border border-foreground/10 text-foreground px-6 py-3 rounded-lg font-medium text-sm hover:bg-foreground/10 transition-colors flex-shrink-0"
               >
                 <Mail size={16} /> Join our talent network
               </a>
@@ -267,13 +267,22 @@ const Careers = () => {
                   Help us build the team! Refer a friend or former colleague for an open position.
                 </p>
               </div>
-              <Link
-                to="/referral"
-                data-cursor-hover
-                className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary border border-primary/20 px-6 py-3 rounded-lg font-medium text-sm hover:bg-primary/20 transition-colors flex-shrink-0"
-              >
-                Employee Referral Portal
-              </Link>
+              {openRoles.length > 0 ? (
+                <Link
+                  to="/referral"
+                  data-cursor-hover
+                  className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary border border-primary/20 px-6 py-3 rounded-lg font-medium text-sm hover:bg-primary/20 transition-colors flex-shrink-0"
+                >
+                  Employee Referral Portal
+                </Link>
+              ) : (
+                <button
+                  disabled
+                  className="inline-flex items-center justify-center gap-2 bg-primary/5 text-primary/40 border border-primary/10 px-6 py-3 rounded-lg font-medium text-sm flex-shrink-0 cursor-not-allowed"
+                >
+                  No open roles right now
+                </button>
+              )}
             </motion.div>
           </div>
         </section>

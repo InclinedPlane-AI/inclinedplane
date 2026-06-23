@@ -291,7 +291,7 @@ const EmailGate = ({ onVerified }: EmailGateProps) => {
             )}
             <button
               onClick={handleSendOTP}
-              disabled={sending}
+              disabled={sending || openRoles.length === 0}
               className="w-full inline-flex items-center justify-center gap-2 bg-gradient-orange text-primary-foreground px-6 py-3 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity glow-orange disabled:opacity-60"
             >
               {sending ? (
@@ -299,7 +299,7 @@ const EmailGate = ({ onVerified }: EmailGateProps) => {
               ) : (
                 <Send size={16} />
               )}
-              {sending ? "Sending…" : "Send verification code"}
+              {openRoles.length === 0 ? "No open roles right now" : sending ? "Sending…" : "Send verification code"}
             </button>
           </div>
         ) : (
@@ -402,10 +402,35 @@ const SubmitReferralTab = ({ refereeEmail }: { refereeEmail: string }) => {
     return errs;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const errs = validate();
     setErrors(errs);
     if (Object.keys(errs).length) return;
+
+    // Send data directly to Google Sheets via Apps Script
+    try {
+      const webhookUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+      if (webhookUrl) {
+        const formData = new FormData();
+        formData.append("candidateName", form.candidateName);
+        formData.append("candidateEmail", form.candidateEmail);
+        formData.append("candidatePhone", form.candidatePhone);
+        formData.append("position", form.position);
+        formData.append("refereeName", form.refereeName);
+        formData.append("refereeTeam", form.refereeTeam);
+        formData.append("refereeEmail", refereeEmail);
+        formData.append("relationship", form.relationship);
+
+        fetch(webhookUrl, {
+          method: "POST",
+          mode: "no-cors",
+          body: formData,
+        });
+      }
+    } catch (error) {
+      console.error("Failed to send referral data to Google Sheets:", error);
+    }
+
 
     const subject = encodeURIComponent(
       `[Referral] ${form.position} — ${form.candidateName} (referred by ${form.refereeName})`
@@ -570,7 +595,7 @@ Submitted via the InclinedPlane Referral Portal.`
             <FieldLabel required>Your name</FieldLabel>
             <input
               type="text"
-              placeholder="e.g. Anjani Kumar"
+              placeholder="e.g. Ajay Kumar"
               className={`${inputCls} ${errors.refereeName ? "border-red-500/60" : ""}`}
               {...field("refereeName")}
             />
