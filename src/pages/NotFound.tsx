@@ -15,7 +15,7 @@ const NotFound = () => {
     <PageLayout>
       <SEOHead
         title="Page Not Found"
-        description="The page you're looking for doesn't exist. Return to Inclined Plane's homepage."
+        description="The page you're looking for doesn't exist. Return to InclinedPlane's homepage."
         path={location.pathname}
         noIndex
       />

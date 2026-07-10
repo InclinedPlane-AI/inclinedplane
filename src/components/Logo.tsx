@@ -16,7 +16,7 @@ interface LogoProps {
  */
 const Logo = ({ className = "h-7 w-auto", forceVariant, eager = true }: LogoProps) => {
   const commonProps = {
-    alt: "Inclined Plane",
+    alt: "InclinedPlane",
     className,
     loading: eager ? ("eager" as const) : ("lazy" as const),
     decoding: "async" as const,

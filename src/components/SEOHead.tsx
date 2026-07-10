@@ -31,7 +31,7 @@
 import { useEffect } from "react";
 
 const SITE_URL = "https://inclinedplane.com";
-const SITE_NAME = "Inclined Plane";
+const SITE_NAME = "InclinedPlane";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 interface SEOHeadProps {

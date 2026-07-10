@@ -87,7 +87,7 @@ export function buildRssXml(routes, { buildDate = new Date() } = {}) {
     `    <title>${escapeXml(SITE_NAME)} — Blog</title>`,
     `    <link>${SITE_URL}/blog</link>`,
     `    <atom:link href="${SITE_URL}/rss.xml" rel="self" type="application/rss+xml" />`,
-    `    <description>Insights on data engineering, AI automation, DataOps, business intelligence, and building modern data platforms. By the Inclined Plane team.</description>`,
+    `    <description>Insights on data engineering, AI automation, DataOps, business intelligence, and building modern data platforms. By the InclinedPlane team.</description>`,
     `    <language>en-us</language>`,
     `    <lastBuildDate>${buildDate.toUTCString()}</lastBuildDate>`,
     ...items,

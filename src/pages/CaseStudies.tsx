@@ -1,4 +1,4 @@
-﻿import PageLayout from "@/components/PageLayout";
+import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
@@ -96,7 +96,7 @@ const CaseStudies = () => {
             description: active.summary,
             image: toAbsoluteUrl(active.image),
             url: `${SITE_URL}/case-studies?study=${active.id}`,
-            provider: { "@type": "Organization", name: "Inclined Plane", url: SITE_URL },
+            provider: { "@type": "Organization", name: "InclinedPlane", url: SITE_URL },
             ...(active.stack ? { keywords: active.stack } : {}),
           }}
         />

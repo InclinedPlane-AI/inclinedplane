@@ -175,19 +175,19 @@ const Contact = () => {
     <PageLayout>
       <SEOHead
         title="Contact Us"
-        description="Get in touch with Inclined Plane for data engineering consulting, AI automation, and cloud warehouse architecture. Book a discovery call today."
+        description="Get in touch with InclinedPlane for data engineering consulting, AI automation, and cloud warehouse architecture. Book a discovery call today."
         path="/contact"
         jsonLd={[
           {
             "@context": "https://schema.org",
             "@type": "ContactPage",
-            name: "Contact Inclined Plane",
+            name: "Contact InclinedPlane",
             url: "https://inclinedplane.com/contact",
           },
           {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
-            name: "Inclined Plane",
+            name: "InclinedPlane",
             description: "AI-native data engineering consultancy",
             email: "support@inclinedplane.com",
             url: "https://inclinedplane.com",

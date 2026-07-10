@@ -18,7 +18,7 @@ const Blogs = () => {
     <PageLayout>
       <SEOHead
         title="Blog — Insights on Data Engineering & AI"
-        description="Expert insights on data engineering, AI automation, DataOps, business intelligence, and building modern data platforms. By the Inclined Plane team."
+        description="Expert insights on data engineering, AI automation, DataOps, business intelligence, and building modern data platforms. By the InclinedPlane team."
         path="/blog"
       />
       <PageHero

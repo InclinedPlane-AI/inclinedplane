@@ -1,4 +1,4 @@
-﻿import {
+import {
   LegalLayout,
   Section,
   H3,
@@ -25,7 +25,7 @@ const toc: TocItem[] = [
 const cookieRows = [
   {
     name: "cookie_consent",
-    provider: "Inclined Plane",
+    provider: "InclinedPlane",
     purpose: "Stores your cookie consent preference (accept/reject)",
     duration: "1 year",
     type: "required" as const,
@@ -60,14 +60,14 @@ const cookieRows = [
 const CookiePolicy = () => (
   <LegalLayout
     seoTitle="Cookie Policy"
-    seoDescription="What cookies Inclined Plane uses, why, and how to manage your preferences."
+    seoDescription="What cookies InclinedPlane uses, why, and how to manage your preferences."
     seoPath="/cookies"
     title="Cookie Policy"
     meta={["Effective: 7 May 2026", "Last Updated: 7 May 2026"]}
     toc={toc}
   >
     <HighlightBox>
-      This Cookie Policy explains what cookies are, how Inclined Plane uses them on <strong>www.inclinedplane.com</strong>, and your choices regarding their use. By using our website, you consent to cookies in accordance with this policy.
+      This Cookie Policy explains what cookies are, how InclinedPlane uses them on <strong>www.inclinedplane.com</strong>, and your choices regarding their use. By using our website, you consent to cookies in accordance with this policy.
     </HighlightBox>
 
     <Section id="what-are-cookies" num="01" title="What Are Cookies?">

@@ -1,4 +1,4 @@
-﻿import PageLayout from "@/components/PageLayout";
+import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
@@ -388,7 +388,7 @@ const ServicesPage = () => {
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Service",
-          provider: { "@type": "Organization", name: "Inclined Plane" },
+          provider: { "@type": "Organization", name: "InclinedPlane" },
           serviceType: "Data Engineering Consulting",
           areaServed: "Worldwide",
           description:

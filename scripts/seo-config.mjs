@@ -97,7 +97,7 @@ export function breadcrumbSchema(path, title) {
 const staticRoutes = [
   {
     path: "/",
-    title: "InclinedPlane — AI-Native Data Engineering",
+    title: "InclinedPlane — Data Architecture & Analytics for the AI Era",
     description:
       "AI-ready data platforms, observability-first pipelines, and decision systems for modern enterprises. Data engineering consultancy.",
     titleTemplate: "raw", // homepage uses title verbatim, no " | InclinedPlane" suffix

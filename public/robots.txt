@@ -1,5 +1,5 @@
 # =============================================================================
-# robots.txt — Inclined Plane
+# robots.txt — InclinedPlane
 # Last reviewed: 2026-05-03
 #
 # Goal: be maximally discoverable. Every legitimate crawler is welcome,

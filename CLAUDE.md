@@ -32,7 +32,7 @@ The architectural decisions here are durable. The implementation details
 
 ## What this site is
 
-Marketing site for **Inclined Plane**, an AI-native data engineering
+Marketing site for **InclinedPlane**, an AI-native data engineering
 consultancy. Audience: potential clients (mid-to-large enterprises) and
 investors. Primary distribution channels:
 

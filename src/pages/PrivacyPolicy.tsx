@@ -1,4 +1,4 @@
-﻿import {
+import {
   LegalLayout,
   Section,
   H3,
@@ -31,18 +31,18 @@ const toc: TocItem[] = [
 const PrivacyPolicy = () => (
   <LegalLayout
     seoTitle="Privacy Policy"
-    seoDescription="How Inclined Plane collects, uses, and protects personal information."
+    seoDescription="How InclinedPlane collects, uses, and protects personal information."
     seoPath="/privacy"
     title="Privacy Policy"
     meta={["Effective: 7 May 2026", "Last Updated: 11 May 2026", "Jurisdiction: US & India"]}
     toc={toc}
   >
     <HighlightBox>
-      This Privacy Policy explains how Inclined Plane (<strong>"Inclined Plane"</strong>, <strong>"we"</strong>, <strong>"us"</strong>) collects, uses, and protects personal information when you visit our website or engage with our services. We take your privacy seriously.
+      This Privacy Policy explains how InclinedPlane (<strong>"InclinedPlane"</strong>, <strong>"we"</strong>, <strong>"us"</strong>) collects, uses, and protects personal information when you visit our website or engage with our services. We take your privacy seriously.
     </HighlightBox>
 
     <Section id="who-we-are" num="01" title="Who We Are">
-      <P>Inclined Plane is an AI-first data engineering consultancy. Our registered business addresses and contact details are listed in Section 14. We act as the data controller for personal data collected through this website.</P>
+      <P>InclinedPlane is an AI-first data engineering consultancy. Our registered business addresses and contact details are listed in Section 14. We act as the data controller for personal data collected through this website.</P>
       <P>We operate across the United States and India. Where applicable, we comply with global data protection standards, including relevant US state privacy laws such as the California Consumer Privacy Act (CCPA) as amended by the CPRA, and the UK/EU General Data Protection Regulation (GDPR) for visitors from those regions.</P>
     </Section>
 

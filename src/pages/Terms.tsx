@@ -1,4 +1,4 @@
-﻿import {
+import {
   LegalLayout,
   Section,
   H3,
@@ -31,29 +31,29 @@ const toc: TocItem[] = [
 const Terms = () => (
   <LegalLayout
     seoTitle="Terms of Service"
-    seoDescription="Terms governing the use of Inclined Plane's website and services."
+    seoDescription="Terms governing the use of InclinedPlane's website and services."
     seoPath="/terms"
     title="Terms of Service"
     meta={["Effective: 7 May 2026", "Last Updated: 11 May 2026", "Governing Law: England & Wales"]}
     toc={toc}
   >
     <HighlightBox>
-      These Terms of Service govern your use of the Inclined Plane website at <strong>www.inclinedplane.com</strong>. By accessing or using this website, you agree to be bound by these terms. If you do not agree, please do not use this site. Separate written agreements govern any engagement of our professional services. California residents should also review our <A href="/privacy#california">CCPA Privacy Notice</A>.
+      These Terms of Service govern your use of the InclinedPlane website at <strong>www.inclinedplane.com</strong>. By accessing or using this website, you agree to be bound by these terms. If you do not agree, please do not use this site. Separate written agreements govern any engagement of our professional services. California residents should also review our <A href="/privacy#california">CCPA Privacy Notice</A>.
     </HighlightBox>
 
     <Section id="acceptance" num="01" title="Acceptance of Terms">
       <P>By accessing or browsing our website, you confirm that you are at least 16 years of age (or the applicable age of digital consent in your jurisdiction), that you have read and understood these Terms of Service, and that you agree to comply with them and all applicable laws and regulations.</P>
-      <P>These terms apply to the website <strong>www.inclinedplane.com</strong> and any subdomains operated by Inclined Plane. They do not govern the terms of any professional services engagement. Those are subject to separate written contracts agreed between Inclined Plane and the client.</P>
+      <P>These terms apply to the website <strong>www.inclinedplane.com</strong> and any subdomains operated by InclinedPlane. They do not govern the terms of any professional services engagement. Those are subject to separate written contracts agreed between InclinedPlane and the client.</P>
     </Section>
 
     <Section id="about-us" num="02" title="About Us">
-      <P>This website is operated by <strong>Inclined Plane</strong>, an AI-first data engineering consultancy. Our contact and entity details are provided in Section 13.</P>
-      <P>References to "Inclined Plane", "we", "us", or "our" throughout these Terms refer to our operating entities.</P>
+      <P>This website is operated by <strong>InclinedPlane</strong>, an AI-first data engineering consultancy. Our contact and entity details are provided in Section 13.</P>
+      <P>References to "InclinedPlane", "we", "us", or "our" throughout these Terms refer to our operating entities.</P>
     </Section>
 
     <Section id="services" num="03" title="Website vs. Professional Services">
-      <P>This website is an informational and marketing platform. It allows potential clients, partners, and candidates to learn about Inclined Plane, contact us, and access our published content.</P>
-      <P>If you engage Inclined Plane for professional data engineering or AI consultancy services, those services are governed by a separate, bespoke written agreement. Nothing on this website constitutes an offer to provide professional services, and browsing this site does not create a client relationship.</P>
+      <P>This website is an informational and marketing platform. It allows potential clients, partners, and candidates to learn about InclinedPlane, contact us, and access our published content.</P>
+      <P>If you engage InclinedPlane for professional data engineering or AI consultancy services, those services are governed by a separate, bespoke written agreement. Nothing on this website constitutes an offer to provide professional services, and browsing this site does not create a client relationship.</P>
       <P>Information on this website, including case studies, statistics, and service descriptions, is provided for general informational purposes and may not reflect the precise scope of services available to any particular client.</P>
     </Section>
 
@@ -74,12 +74,12 @@ const Terms = () => (
 
     <Section id="ip" num="05" title="Intellectual Property">
       <H3>Our content</H3>
-      <P>All content on this website, including text, graphics, logos, icons, images, case studies, blog articles, code samples, and the overall design, is the property of Inclined Plane or its licensors and is protected by applicable intellectual property laws.</P>
+      <P>All content on this website, including text, graphics, logos, icons, images, case studies, blog articles, code samples, and the overall design, is the property of InclinedPlane or its licensors and is protected by applicable intellectual property laws.</P>
       <P>You may access and view content on this website for personal, non-commercial purposes. You may share links to our content. You must not reproduce, modify, distribute, or create derivative works from our content without our express written permission.</P>
       <H3>Your submissions</H3>
-      <P>If you submit any content to us via contact forms, email, or other channels (such as feedback, ideas, or enquiries), you grant Inclined Plane a non-exclusive, royalty-free licence to use that content for the purposes for which it was submitted. We will handle any personal data in accordance with our <A href="/privacy">Privacy Policy</A>.</P>
+      <P>If you submit any content to us via contact forms, email, or other channels (such as feedback, ideas, or enquiries), you grant InclinedPlane a non-exclusive, royalty-free licence to use that content for the purposes for which it was submitted. We will handle any personal data in accordance with our <A href="/privacy">Privacy Policy</A>.</P>
       <H3>Trademarks</H3>
-      <P>The name "Inclined Plane", "InclinedPlane", and associated logos are trademarks of Inclined Plane. You may not use these marks without our prior written consent.</P>
+      <P>The name "InclinedPlane", "InclinedPlane", and associated logos are trademarks of InclinedPlane. You may not use these marks without our prior written consent.</P>
     </Section>
 
     <Section id="disclaimers" num="06" title="Disclaimers">
@@ -99,7 +99,7 @@ const Terms = () => (
     </Section>
 
     <Section id="liability" num="07" title="Limitation of Liability">
-      <P>To the fullest extent permitted by applicable law, Inclined Plane shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising from:</P>
+      <P>To the fullest extent permitted by applicable law, InclinedPlane shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising from:</P>
       <ArrowList>
         <LI>Your use of, or inability to use, this website</LI>
         <LI>Reliance on any content or information provided on the site</LI>
@@ -117,7 +117,7 @@ const Terms = () => (
 
     <Section id="indemnification" num="09" title="Indemnification & Severability">
       <H3>Indemnification</H3>
-      <P>You agree to indemnify, defend, and hold harmless Inclined Plane and its directors, employees, and agents from any claims, liabilities, damages, judgments, awards, losses, costs, or expenses (including reasonable legal fees) arising out of or relating to your violation of these Terms of Service or your use of the website.</P>
+      <P>You agree to indemnify, defend, and hold harmless InclinedPlane and its directors, employees, and agents from any claims, liabilities, damages, judgments, awards, losses, costs, or expenses (including reasonable legal fees) arising out of or relating to your violation of these Terms of Service or your use of the website.</P>
       <H3>Severability</H3>
       <P>If any provision of these Terms is held by a court or other tribunal of competent jurisdiction to be invalid, illegal, or unenforceable for any reason, such provision shall be eliminated or limited to the minimum extent such that the remaining provisions of the Terms will continue in full force and effect.</P>
     </Section>
@@ -135,10 +135,10 @@ const Terms = () => (
       <ArrowList>
         <LI>Your privacy rights under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA) are respected and addressed in our <A href="/privacy#california">Privacy Policy</A></LI>
         <LI>Nothing in these website Terms of Service waives or overrides any statutory rights you hold under applicable US federal or state law</LI>
-        <LI>Any future professional services engagement between Inclined Plane and a US-based client will be governed by a separate written contract, which may specify US governing law, including California law, as mutually agreed</LI>
+        <LI>Any future professional services engagement between InclinedPlane and a US-based client will be governed by a separate written contract, which may specify US governing law, including California law, as mutually agreed</LI>
       </ArrowList>
       <H3>Dispute Resolution for US Users (Arbitration & Class Action Waiver)</H3>
-      <P>For users residing in the United States, any dispute, claim, or controversy arising out of or relating to your use of this website will be resolved by binding arbitration on an individual basis, rather than in court. By agreeing to these Terms, you and Inclined Plane expressly waive the right to participate in a class action lawsuit or class-wide arbitration.</P>
+      <P>For users residing in the United States, any dispute, claim, or controversy arising out of or relating to your use of this website will be resolved by binding arbitration on an individual basis, rather than in court. By agreeing to these Terms, you and InclinedPlane expressly waive the right to participate in a class action lawsuit or class-wide arbitration.</P>
       <WarningBox>
         // These website Terms apply to browsing and general use of www.inclinedplane.com only. They are not a services contract. Any data engineering or AI consultancy engagement will be subject to a separately negotiated written agreement with its own governing law clause.
       </WarningBox>

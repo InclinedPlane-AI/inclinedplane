@@ -85,7 +85,7 @@ const CaseStudyDetail = () => {
           url: `${SITE_URL}/case-studies/${detail.slug}`,
           provider: {
             "@type": "Organization",
-            name: "Inclined Plane",
+            name: "InclinedPlane",
             url: SITE_URL,
           },
           ...(cs.stack ? { keywords: cs.stack } : {}),

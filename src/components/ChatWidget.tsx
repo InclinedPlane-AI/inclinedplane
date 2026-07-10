@@ -350,7 +350,7 @@ const ChatWidget = () => {
                 <div className="chatwidget-logo-box w-9 h-9 rounded-xl flex items-center justify-center overflow-hidden p-1.5">
                   <img
                     src="/favicon.png"
-                    alt="Inclined Plane"
+                    alt="InclinedPlane"
                     className="w-full h-full object-contain"
                   />
                 </div>

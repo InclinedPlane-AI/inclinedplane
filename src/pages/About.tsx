@@ -125,7 +125,7 @@ const About = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="About Inclined Plane"
+        title="About InclinedPlane"
         description="Built for the AI Era — an engineering-first firm delivering production-grade data infrastructure and autonomous decision systems."
         path="/about"
       />

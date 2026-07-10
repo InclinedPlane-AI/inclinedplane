@@ -1,8 +1,8 @@
-# Inclined Plane — Marketing Site
+# InclinedPlane — Marketing Site
 
 Production: **https://www.inclinedplane.com**
 
-The website for **Inclined Plane**, an AI-native data engineering consultancy.
+The website for **InclinedPlane**, an AI-native data engineering consultancy.
 Built as a fully prerendered single-page React application so that humans get
 a fast, animated experience and crawlers (Google, Bing, GPTBot, ClaudeBot,
 PerplexityBot, social-link previewers) get full HTML content without

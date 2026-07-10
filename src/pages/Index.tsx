@@ -131,13 +131,13 @@ const Index = () => {
   return (
     <div className="bg-background">
       <SEOHead
-        title="Inclined Plane — AI-Native Data Engineering"
+        title="InclinedPlane — Data Architecture & Analytics for the AI Era"
         description="AI-ready data platforms, observability-first pipelines, and decision systems that turn complexity into operational intelligence. Data engineering consultancy for modern enterprises."
         path="/"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
-          name: "Inclined Plane",
+          name: "InclinedPlane",
           description:
             "AI-native data engineering consultancy specializing in cloud data warehouses, BI modernization, DataOps, and AI automation workflows.",
           url: "https://inclinedplane.com",

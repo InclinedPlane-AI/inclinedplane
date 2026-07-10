@@ -1,4 +1,4 @@
-﻿import { useParams, Navigate, Link } from "react-router-dom";
+import { useParams, Navigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock, CalendarDays, Share2, ArrowUp, Linkedin } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -135,7 +135,7 @@ const BlogPostPage = () => {
           },
           publisher: {
             "@type": "Organization",
-            name: "Inclined Plane",
+            name: "InclinedPlane",
             url: "https://inclinedplane.com",
           },
           mainEntityOfPage: `https://inclinedplane.com/blog/${post.slug}`,
