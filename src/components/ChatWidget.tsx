@@ -210,29 +210,65 @@ const ChatWidget = () => {
         if (!apiKey) throw new Error("Missing VITE_GEMINI_API_KEY");
 
         const { SYSTEM_PROMPT } = await import("../data/chatbotKnowledge");
-        const geminiMessages = newMessages.map((m) => ({
+
+        // Filter out system error messages from history so they don't degrade the model's answers
+        const cleanHistory = newMessages.filter(
+          (m) =>
+            !m.content.startsWith("I'm having trouble connecting") &&
+            !m.content.startsWith("I'm sorry, I couldn't process that"),
+        );
+
+        // Ensure the sequence starts with user role for Gemini API compliance
+        const firstUserIdx = cleanHistory.findIndex((m) => m.role === "user");
+        const validMessages = firstUserIdx >= 0 ? cleanHistory.slice(firstUserIdx) : cleanHistory;
+
+        const geminiMessages = validMessages.map((m) => ({
           role: m.role === "assistant" ? "model" : "user",
           parts: [{ text: m.content }],
         }));
 
-        const res = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-              contents: geminiMessages,
-              generationConfig: { temperature: 0.7, maxOutputTokens: 512 },
-            }),
-          },
-        );
-        if (!res.ok) {
-          const errBody = await res.text();
-          console.error("Gemini API Error Response:", errBody);
+        // Try supported Gemini models in order of preference
+        const models = ["gemini-3.6-flash", "gemini-flash-latest", "gemini-1.5-flash"];
+        let data: any = null;
+        let lastError = "";
+
+        for (const model of models) {
+          try {
+            const res = await fetch(
+              `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+                  contents: geminiMessages,
+                  generationConfig: {
+                    temperature: 0.3,
+                    topP: 0.9,
+                    topK: 40,
+                    maxOutputTokens: 2048,
+                  },
+                }),
+              },
+            );
+
+            if (res.ok) {
+              data = await res.json();
+              break;
+            } else {
+              lastError = await res.text();
+              console.warn(`Gemini API error with ${model}:`, lastError);
+            }
+          } catch (err) {
+            console.warn(`Gemini network error with ${model}:`, err);
+          }
+        }
+
+        if (!data) {
+          console.error("All Gemini model endpoints failed. Last response:", lastError);
           throw new Error("Gemini API error");
         }
-        const data = await res.json();
+
         replyText = data?.candidates?.[0]?.content?.parts?.[0]?.text || replyText;
 
         const botMsg: Message = {
