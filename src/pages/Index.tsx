@@ -44,6 +44,7 @@ import {
 
 import ServicesExplorer from "@/components/home/ServicesExplorer";
 import LiveHealthDemo from "@/components/home/LiveHealthDemo";
+import AIImperative from "@/components/home/AIImperative";
 import ProductsShowcase from "@/components/home/ProductsShowcase";
 import CaseStudyMedia from "@/components/case-study/CaseStudyMedia";
 import { caseStudies } from "@/data/caseStudies";
@@ -266,145 +267,13 @@ const Index = () => {
                 <p className="font-mono text-xs text-primary tracking-widest uppercase mb-2 text-center">
                   The AI Imperative — In Numbers
                 </p>
-                <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight text-center max-w-3xl mx-auto mb-4 lg:mb-6">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight tracking-tight text-center max-w-3xl mx-auto mb-6 lg:mb-8">
                   The opportunity is real. The intent is there.{" "}
                   <span className="text-gradient-orange">The infrastructure isn't.</span>
-                </p>
+                </h2>
               </motion.div>
 
-              {/* Three-column narrative: Opportunity → Intent → Gap */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-4">
-                {[
-                  {
-                    key: "opportunity",
-                    label: "The Opportunity",
-                    sub: "The prize is enormous.",
-                    dot: "bg-green-400",
-                    tint: "bg-primary/[0.10] border-primary/20",
-                    stats: [
-                      {
-                        num: "$15.7T",
-                        desc: "Projected AI contribution to global GDP by 2030.",
-                        src: "PwC, 2024",
-                        link: "https://www.pwc.com/gx/en/issues/analytics/assets/pwc-ai-analysis-sizing-the-prize-report.pdf",
-                      },
-                      {
-                        num: "25–40%",
-                        desc: "Maintenance cost reduction unlocked by enterprise AI adoption.",
-                        src: "McKinsey, 2025",
-                        link: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
-                      },
-                      {
-                        num: "370%",
-                        desc: "ROI for GenAI early adopters; top performers report up to 1030%.",
-                        src: "Industry Sources, 2025",
-                        link: "https://www.fullview.io/blog/ai-statistics",
-                      },
-                    ],
-                  },
-                  {
-                    key: "intent",
-                    label: "The Intent",
-                    sub: "Enterprises are moving.",
-                    dot: "bg-amber-400",
-                    tint: "bg-primary/[0.10] border-primary/20",
-                    stats: [
-                      {
-                        num: "78%",
-                        desc: "Of organizations now use AI in at least one business function.",
-                        src: "McKinsey, 2025",
-                        link: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
-                      },
-                      {
-                        num: "#1",
-                        desc: "AI/GenAI ranked the top digital supply chain investment priority.",
-                        src: "Gartner, 2024",
-                        link: "https://www.gartner.com/en/newsroom/press-releases/2024-10-30-gartner-survey-shows-ai-and-generative-ai-top-digital-supply-chain-investment-priorities",
-                      },
-                      {
-                        num: "$53B",
-                        desc: "Forecast spend on agentic AI in supply chain software by 2030.",
-                        src: "Gartner, 2026",
-                        link: "https://www.gartner.com/en/newsroom/press-releases/2026-04-07-gartner-forecasts-supply-chain-management-software-with-agentic-ai-will-grow-to-53-billion-in-spend-by-2030",
-                      },
-                    ],
-                  },
-                  {
-                    key: "gap",
-                    label: "The Gap",
-                    sub: "Most aren't ready.",
-                    dot: "bg-red-400",
-                    tint: "bg-primary/[0.10] border-primary/20",
-                    stats: [
-                      {
-                        num: "23%",
-                        desc: "Of supply chain organizations have a formal AI strategy.",
-                        src: "Gartner, 2025",
-                        link: "https://www.gartner.com/en/newsroom/2025-06-11-gartner-survey-shows-just-23-percent-of-supply-chain-organizations-have-a-formal-ai-strategy",
-                      },
-                      {
-                        num: "70–85%",
-                        desc: "Of AI projects fail to deliver expected business value.",
-                        src: "Industry Sources, 2025",
-                        link: "https://www.fullview.io/blog/ai-statistics",
-                      },
-                      {
-                        num: "1 in 5",
-                        desc: "Companies have mature AI governance in place.",
-                        src: "Deloitte, 2025",
-                        link: "https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html",
-                      },
-                    ],
-                  },
-                ].map((col, colIdx) => (
-                  <motion.div key={col.key} {...fadeUp(colIdx * 0.08)} className="flex flex-col gap-3">
-                    <div className={`glass-panel rounded-xl p-4 lg:p-5 ${col.tint}`}>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className={`w-2.5 h-2.5 rounded-full ${col.dot} shadow-[0_0_8px_currentColor]`} />
-                        <p className="font-mono tracking-widest uppercase text-xl font-semibold text-foreground">
-                          {col.label}
-                        </p>
-                      </div>
-                      <p className="text-base lg:text-lg text-secondary-foreground font-normal">{col.sub}</p>
-                    </div>
-                    {col.stats.map((s, i) => {
-                      const CardTag: any = s.link ? "a" : "div";
-                      const linkProps = s.link ? { href: s.link, target: "_blank", rel: "noopener noreferrer" } : {};
-                      return (
-                        <CardTag
-                          key={i}
-                          {...linkProps}
-                          className={`glass-panel rounded-xl p-2.5 lg:p-3 flex flex-col justify-between min-h-[4.5rem] lg:min-h-[5rem] transition-all duration-300 hover:-translate-y-1 hover:glow-orange hover:border-primary/40 ${s.link ? "group cursor-pointer" : "cursor-default"}`}
-                          data-cursor-hover
-                        >
-                          <div>
-                            <p className="text-base lg:text-lg xl:text-xl font-bold text-gradient-orange mb-1">
-                              {s.num}
-                            </p>
-                            <p className="text-[10px] text-secondary-foreground leading-snug">{s.desc}</p>
-                          </div>
-                          <div className="flex items-center justify-between mt-1.5 pt-1.5 border-t border-border/40">
-                            <span className="font-mono text-[8px] text-muted-foreground/60 uppercase">{s.src}</span>
-                            {s.link && (
-                              <span className="w-4 h-4 rounded surface-3 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                                <ArrowUpRight size={8} className="text-primary" />
-                              </span>
-                            )}
-                          </div>
-                        </CardTag>
-                      );
-                    })}
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Closing banner */}
-              <motion.div {...fadeUp(0.3)} className="mt-4 lg:mt-5 text-center">
-                <p className="text-base sm:text-lg lg:text-xl font-semibold text-foreground leading-relaxed max-w-3xl mx-auto">
-                  "The gap between AI ambition and AI reality almost always starts with data infrastructure.{" "}
-                  <span className="text-gradient-orange">We close that gap and build everything on top of it.</span>"
-                </p>
-              </motion.div>
+              <AIImperative />
             </div>
           </section>
 
