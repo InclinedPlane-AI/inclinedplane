@@ -151,6 +151,58 @@ const staticRoutes = [
     ],
   },
   {
+    // Mirrors src/pages/Products.tsx. Product facts come from the PipelineIQ
+    // project reference and the Inclever product walkthrough (claims register
+    // honoured: no client names, no unverified performance figures).
+    path: "/products",
+    title: "Products — PipelineIQ & Inclever",
+    description:
+      "PipelineIQ: read-only pipeline monitoring and ETL debugging. Inclever: governed AI analytics with an AI Readiness Control Tower that audits whether your data is fit for AI.",
+    noscriptSummary:
+      "InclinedPlane products. PipelineIQ is a read-only monitoring, alerting and ETL-debugging portal for enterprise data platforms: it merges failures from the run log, orchestrator and compute engine into one error history, separates root causes from cascaded failures, groups them into error signatures, and raises adaptive, self-resolving alerts. It installs nothing in the client estate, enforces read-only SQL in code, and is delivered through a forward-deployed engineering model: a stable core plus a client layer built for each estate. Inclever is governed AI analytics: people ask plain-English questions in Microsoft Teams and every question passes three gates (entitlement, answerability, assurance) before a number is given. Its AI Readiness Control Tower (ARCT) continuously audits data assets and business definitions against explicit rules, records Passed, Failed or Not evaluated verdicts with coverage, and issues or withholds readiness certificates. Every gap becomes a tracked task with a named owner and a clock.",
+    pageJsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: "PipelineIQ",
+        applicationCategory: "BusinessApplication",
+        applicationSubCategory: "Data pipeline observability",
+        operatingSystem: "Web",
+        url: `${SITE_URL}/products#pipelineiq`,
+        description:
+          "Read-only monitoring, alerting and ETL-debugging portal for enterprise data platforms. Merges failures across tools into root-cause error signatures with adaptive, self-resolving alerts.",
+        publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: "Inclever",
+        applicationCategory: "BusinessApplication",
+        applicationSubCategory: "Governed AI analytics",
+        operatingSystem: "Web",
+        url: `${SITE_URL}/products#inclever`,
+        description:
+          "Governed AI analytics. Plain-English questions in Microsoft Teams, answered only after entitlement, answerability and assurance checks, backed by an AI Readiness Control Tower that audits and certifies data for AI use.",
+        publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          ["Does Inclever replace our BI tool?", "No. It answers from your existing signed-off dashboards first, and only generates an answer when nothing already built covers the question."],
+          ["Can the AI make up a metric or a number?", "It is designed not to. The AI can only select from metrics, dimensions and time windows you have defined, and every selection is validated. Numbers come from your data through those definitions, not from the model."],
+          ["What happens when the data has a problem?", "The audit verdicts decide. A blocking issue stops Inclever answering on that data and names the failing check; lesser issues mean the answer is held for review or marked provisional. Each case raises a task for the data owner."],
+          ["Will someone learn anything about data they are not allowed to see?", "No. Permission is checked first, before anything about the data's state is read, so a refusal reveals nothing about the number."],
+          ["Can PipelineIQ break anything in our data platform?", "No. Every SQL statement passes a guard that refuses anything except SELECT or WITH, sessions never hold locks that could slow the ETL, and nothing is installed or deployed in the client estate."],
+        ].map(([q, a]) => ({
+          "@type": "Question",
+          name: q,
+          acceptedAnswer: { "@type": "Answer", text: a },
+        })),
+      },
+    ],
+  },
+  {
     path: "/industries",
     title: "Industries We Serve",
     description:
