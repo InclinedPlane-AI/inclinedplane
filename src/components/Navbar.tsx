@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, Check, ArrowRight } from "lucide-react";
@@ -7,6 +7,8 @@ import Logo from "./Logo";
 import { PRODUCTS } from "@/data/products";
 import { PRODUCT_ICONS } from "./products/icons";
 import { RequestDemoDialog } from "./products/RequestDemo";
+import { SERVICE_LAYERS } from "@/data/services";
+import { SERVICE_ICONS } from "./serviceIcons";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -102,18 +104,23 @@ const NavLinkItem = ({
   );
 };
 
-/* ── Products hover menu: briefs both products, links to each page ── */
-const ProductsMenu = ({
+/* ── Shared hover-menu wrapper: hover, focus, tap (chevron) and Escape ── */
+const HoverMenu = ({
   link,
   isActive,
   forceLight,
+  label,
+  widthClass,
+  children,
 }: {
   link: (typeof navLinks)[0];
   isActive: boolean;
   forceLight?: boolean;
+  label: string;
+  widthClass: string;
+  children: (close: () => void) => ReactNode;
 }) => {
   const [open, setOpen] = useState(false);
-  const [demoOpen, setDemoOpen] = useState(false);
   const closeTimer = useRef<number>();
   const { pathname } = useLocation();
 
@@ -128,9 +135,12 @@ const ProductsMenu = ({
     window.clearTimeout(closeTimer.current);
     closeTimer.current = window.setTimeout(() => setOpen(false), 140);
   };
+  const close = () => {
+    window.clearTimeout(closeTimer.current);
+    setOpen(false);
+  };
 
   return (
-    <>
     <div
       className="relative flex items-center"
       onMouseEnter={show}
@@ -139,7 +149,7 @@ const ProductsMenu = ({
         if (!e.currentTarget.contains(e.relatedTarget as Node)) hide();
       }}
       onKeyDown={(e) => {
-        if (e.key === "Escape") setOpen(false);
+        if (e.key === "Escape") close();
       }}
     >
       <NavLinkItem link={link} isActive={isActive} forceLight={forceLight} />
@@ -149,7 +159,7 @@ const ProductsMenu = ({
         onFocus={show}
         aria-expanded={open}
         aria-haspopup="true"
-        aria-label="Show products"
+        aria-label={label}
         className={`-ml-2 p-1 rounded ${forceLight ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground"}`}
       >
         <ChevronDown size={14} className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
@@ -162,8 +172,23 @@ const ProductsMenu = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.98 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="absolute left-1/2 top-full -translate-x-1/2 pt-3 w-[min(620px,calc(100vw-2rem))]"
+            className={`absolute left-1/2 top-full -translate-x-1/2 pt-3 ${widthClass}`}
           >
+            {children(close)}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+/* ── Products hover menu: briefs both products, links to each page ── */
+const ProductsMenu = ({ link, isActive, forceLight }: { link: (typeof navLinks)[0]; isActive: boolean; forceLight?: boolean }) => {
+  const [demoOpen, setDemoOpen] = useState(false);
+  return (
+    <>
+      <HoverMenu link={link} isActive={isActive} forceLight={forceLight} label="Show products" widthClass="w-[min(620px,calc(100vw-2rem))]">
+        {(close) => (
             <div className="rounded-2xl border border-border bg-background/95 backdrop-blur-xl shadow-2xl overflow-hidden">
               <div className="grid sm:grid-cols-2 gap-2 p-2">
                 {PRODUCTS.map((p) => {
@@ -209,7 +234,7 @@ const ProductsMenu = ({
                 <button
                   type="button"
                   onClick={() => {
-                    setOpen(false);
+                    close();
                     setDemoOpen(true);
                   }}
                   className="inline-flex items-center gap-1.5 bg-gradient-orange text-primary-foreground px-3.5 py-1.5 rounded-lg text-xs font-medium hover:opacity-90 transition-opacity"
@@ -218,14 +243,104 @@ const ProductsMenu = ({
                 </button>
               </div>
             </div>
-          </motion.div>
         )}
-      </AnimatePresence>
-    </div>
-    {/* Outside the hover wrapper: React bubbles portal events through the
-        component tree, so a nested dialog would re-open the menu on hover. */}
-    <RequestDemoDialog open={demoOpen} onOpenChange={setDemoOpen} />
+      </HoverMenu>
+      {/* Outside the hover wrapper: React bubbles portal events through the
+          component tree, so a nested dialog would re-open the menu on hover. */}
+      <RequestDemoDialog open={demoOpen} onOpenChange={setDemoOpen} />
     </>
+  );
+};
+
+/* ── Services hover menu: every layer, each scrolling to its section ── */
+const ServicesMenu = ({ link, isActive, forceLight }: { link: (typeof navLinks)[0]; isActive: boolean; forceLight?: boolean }) => {
+  const location = useLocation();
+  const advisory = SERVICE_LAYERS.filter((l) => l.group === "Advisory");
+  const delivery = SERVICE_LAYERS.filter((l) => l.group === "Delivery");
+
+  // Clicking the layer you're already on doesn't change the URL, so scroll manually.
+  const jump = (hash: string, close: () => void) => {
+    close();
+    if (location.pathname === "/services" && location.hash === `#${hash}`) {
+      const el = document.getElementById(hash);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 128, behavior: "smooth" });
+    }
+  };
+
+  return (
+    <HoverMenu link={link} isActive={isActive} forceLight={forceLight} label="Show services" widthClass="w-[min(780px,calc(100vw-2rem))]">
+      {(close) => (
+        <div className="rounded-2xl border border-border bg-background/95 backdrop-blur-xl shadow-2xl overflow-hidden">
+          <div className="grid sm:grid-cols-[0.85fr_1.15fr]">
+            {/* Advisory */}
+            <div className="p-2 sm:border-r border-border">
+              <p className="px-3 pt-2 pb-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Advisory</p>
+              {advisory.map((l) => {
+                const Icon = SERVICE_ICONS[l.number];
+                return (
+                  <Link
+                    key={l.hash}
+                    to={`/services#${l.hash}`}
+                    onClick={() => jump(l.hash, close)}
+                    style={{ "--layer": l.accent } as React.CSSProperties}
+                    className="group block rounded-xl p-4 border border-[hsl(var(--layer)/0.25)] bg-gradient-to-br from-[hsl(var(--layer)/0.14)] via-[hsl(var(--layer)/0.05)] to-transparent hover:border-[hsl(var(--layer)/0.5)] transition-colors"
+                  >
+                    <span className="w-10 h-10 mb-3 rounded-xl flex items-center justify-center bg-[hsl(var(--layer)/0.18)]">
+                      <Icon className="w-5 h-5 text-[hsl(var(--layer))]" />
+                    </span>
+                    <span className="block font-mono text-[10px] text-[hsl(var(--layer))] mb-0.5">
+                      {l.number} · {l.layer}
+                    </span>
+                    <span className="block text-base font-bold text-foreground mb-1">{l.name}</span>
+                    <span className="block text-xs text-muted-foreground leading-relaxed mb-3">{l.line}</span>
+                    <span className="block text-[11px] text-foreground/80 mb-3">Not sure where to start? Most engagements begin here.</span>
+                    <span className="inline-flex items-center gap-1 text-xs font-medium text-[hsl(var(--layer))]">
+                      Explore <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+            {/* Delivery */}
+            <div className="p-2">
+              <p className="px-3 pt-2 pb-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Delivery · five layers</p>
+              <div className="space-y-0.5">
+                {delivery.map((l) => {
+                  const Icon = SERVICE_ICONS[l.number];
+                  return (
+                    <Link
+                      key={l.hash}
+                      to={`/services#${l.hash}`}
+                      onClick={() => jump(l.hash, close)}
+                      style={{ "--layer": l.accent } as React.CSSProperties}
+                      className="group flex items-start gap-3 rounded-xl px-3 py-2.5 hover:bg-[hsl(var(--layer)/0.08)] transition-colors"
+                    >
+                      <span className="mt-0.5 w-8 h-8 shrink-0 rounded-lg flex items-center justify-center bg-[hsl(var(--layer)/0.14)]">
+                        <Icon className="w-4 h-4 text-[hsl(var(--layer))]" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="flex items-baseline gap-2">
+                          <span className="font-mono text-[10px] text-[hsl(var(--layer))]">{l.number}</span>
+                          <span className="text-sm font-semibold text-foreground">{l.name}</span>
+                          <span className="hidden md:inline text-[10px] text-muted-foreground">{l.layer}</span>
+                        </span>
+                        <span className="block text-[11px] text-muted-foreground leading-snug mt-0.5">{l.line}</span>
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3 border-t border-border bg-muted/40">
+            <p className="text-xs text-muted-foreground">Every layer is AI-enabled in delivery and AI-ready in design.</p>
+            <Link to="/services" onClick={close} className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline underline-offset-2">
+              See all services <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
+        </div>
+      )}
+    </HoverMenu>
   );
 };
 
@@ -283,6 +398,7 @@ const Navbar = ({
               : link.path === "/products"
                 ? location.pathname.startsWith("/products")
                 : location.pathname === link.path;
+            if (link.path === "/services") return <ServicesMenu key={link.path} link={link} isActive={active} forceLight={lightMode} />;
             return link.path === "/products" ? (
               <ProductsMenu key={link.path} link={link} isActive={active} forceLight={lightMode} />
             ) : (
@@ -333,6 +449,18 @@ const Navbar = ({
                   >
                     {link.label}
                   </Link>
+                  {link.path === "/services" && (
+                    <div className="ml-3 mb-1 pl-3 border-l border-border flex flex-col">
+                      {SERVICE_LAYERS.map((l) => (
+                        <Link key={l.hash} to={`/services#${l.hash}`} className="py-1.5 text-sm text-muted-foreground">
+                          <span className="font-mono text-[10px] mr-1.5" style={{ color: `hsl(${l.accent})` }}>
+                            {l.number}
+                          </span>
+                          {l.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                   {link.path === "/products" && (
                     <div className="ml-3 mb-1 pl-3 border-l border-border flex flex-col">
                       {PRODUCTS.map((p) => (
