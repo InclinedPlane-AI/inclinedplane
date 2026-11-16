@@ -25,9 +25,9 @@ export const SectionHeading = ({
 }) => (
   <motion.div {...fadeUp} className={`mb-10 sm:mb-12 ${center ? "text-center mx-auto" : ""} max-w-3xl`}>
     <Eyebrow>{eyebrow}</Eyebrow>
-    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight tracking-tight mb-4">
+    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight tracking-tight mb-4">
       {title}
-    </h3>
+    </h2>
     {intro && <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">{intro}</p>}
   </motion.div>
 );

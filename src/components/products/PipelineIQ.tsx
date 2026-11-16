@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ArrowRight,
+  ChevronRight,
   Activity,
   Bug,
   Map as MapIcon,
@@ -10,10 +10,6 @@ import {
   PackageX,
   Wallet,
   HardDrive,
-  ScrollText,
-  Workflow,
-  Cpu,
-  HelpCircle,
   Bell,
   RefreshCw,
   CheckCircle2,
@@ -34,35 +30,24 @@ import {
 import SectionGlow from "@/components/SectionGlow";
 import SignatureCollapse from "./SignatureCollapse";
 import SqlGuardDemo from "./SqlGuardDemo";
+import DebugTrailDemo from "./DebugTrailDemo";
+import AdaptiveThresholdDemo from "./AdaptiveThresholdDemo";
+import AlertStormDemo from "./AlertStormDemo";
+import { RequestDemoButton } from "./RequestDemo";
+import { ProductSubnav, ComparisonTable, AudienceStrip } from "./ProductChrome";
 import { fadeUp, Eyebrow, SectionHeading } from "./shared";
 
 /* ───────────────────────── data ───────────────────────── */
 
-const CLUES = [
-  {
-    icon: ScrollText,
-    where: "The run log",
-    knows: "That a load failed, when, and under which parent.",
-    lacks: "The error itself. Some rows are never closed and say “In progress” forever.",
-  },
-  {
-    icon: Workflow,
-    where: "The orchestrator",
-    knows: "Why it failed, in the activity output.",
-    lacks: "Buried several clicks deep per run, and kept for only about 45 days.",
-  },
-  {
-    icon: Cpu,
-    where: "The compute engine",
-    knows: "The full stack trace and notebook output.",
-    lacks: "One run at a time, in a separate workspace per environment.",
-  },
-  {
-    icon: HelpCircle,
-    where: "Nobody",
-    knows: "The patterns.",
-    lacks: "Which errors recur, which tables are late against their own rhythm, where environments drift, whether a release caused it.",
-  },
+const PIQ_SECTIONS = [
+  { id: "problem", label: "The problem" },
+  { id: "who", label: "Who it's for" },
+  { id: "error-index", label: "Error index" },
+  { id: "alerts", label: "Alerts" },
+  { id: "safety", label: "Safety" },
+  { id: "why", label: "Why PipelineIQ" },
+  { id: "delivery", label: "How it's delivered" },
+  { id: "roadmap", label: "Roadmap" },
 ];
 
 const PILLARS = [
@@ -74,12 +59,40 @@ const PILLARS = [
   {
     icon: Bug,
     title: "Debugging",
-    body: "A de-duplicated error history. Hundreds of failures collapse into a few signatures, each with the real stack trace, the root cause rather than its cascaded parents, and deep links into the source tools.",
+    body: "A de-duplicated error history: every failure with the real stack trace, the root cause rather than its cascaded parents, and deep links into the source tools.",
   },
   {
     icon: MapIcon,
     title: "Estate insight",
     body: "Every batch as a Gantt timeline, every table compared across environments, ingestion watermarks per source system, warehouse drift, and deployments classified even where the release log never closed.",
+  },
+];
+
+const PERSONAS = [
+  {
+    role: "Data engineer on support",
+    asks: ["What broke last night?", "What's the real error?", "Is it new or recurring?", "Has it recovered?"],
+    answers: "The overview, the error history (signature → failure → stack trace), alerts and batch timelines.",
+  },
+  {
+    role: "Platform lead",
+    asks: ["Are we finishing on time?", "Which tables fail most?", "Which stage breaks?"],
+    answers: "Finish time against the target, top failing tables with trends, failures by stage and the biggest incidents.",
+  },
+  {
+    role: "Release manager",
+    asks: ["Did a release cause this?", "Did that deployment actually finish?"],
+    answers: "Release markers on every chart, incidents with the release before them, and deployments classified even where the log never closed.",
+  },
+  {
+    role: "Ingestion owner",
+    asks: ["Is each source system loading?", "Are watermarks finalised?"],
+    answers: "Source systems with their tables and watermarks, each table's ingestion history, and ingestion-stalled alerts.",
+  },
+  {
+    role: "Warehouse owner",
+    asks: ["Was the warehouse rebuilt?", "Do our environments match?"],
+    answers: "Rebuild times per object, the load that built each one, and drift between environments.",
   },
 ];
 
@@ -112,6 +125,15 @@ const GUARANTEES = [
   { icon: HardDrive, title: "Data stays local", body: "Operational metadata only, never business data. Review copies are view-only and shared behind sign-in, never anonymously." },
 ];
 
+const COMPARISON = [
+  { label: "Fit to your estate", values: ["One generic shape; the estate is bent to fit the tool", "Connectors and semantics written for your services and conventions"] },
+  { label: "What it understands", values: ["Generic job statuses", "Your framework itself: its batches, watermarks, folder conventions and log quirks"] },
+  { label: "Changes to your estate", values: ["Agents, diagnostic settings or exports installed", "None. Read-only, with the engineer's own sign-in"] },
+  { label: "Alert quality", values: ["Thresholds per row, tuned later, if ever", "Tuned with the people who run the platform: 368 raw alerts became a handful of signals"] },
+  { label: "Getting started", values: ["Procurement, onboarding and an integration project", "An embedded engineer reads the estate as it is, with access you already grant"] },
+  { label: "What you get back", values: ["Dashboards", "Dashboards, plus findings about the platform itself"] },
+];
+
 const CORE = ["Portal & design system", "Collector framework", "Error index", "Alert engine", "Local store", "Safety principles"];
 const LAYERS = [
   { stack: "Azure Data Factory · Databricks · Synapse", status: "Live", live: true },
@@ -139,21 +161,13 @@ const FINDINGS = [
 ];
 
 const QUESTIONS = [
-  {
-    q: "What failed?",
-    state: "Live",
-    body: "The error index, alerts, batch timelines and entity views in today's portal.",
-  },
+  { q: "What failed?", state: "Live", body: "The error index, alerts, batch timelines and entity views in today's portal." },
   {
     q: "Why?",
     state: "Developing",
     body: "Plain-language root-cause analysis from the error, stack trace and run metadata, with names masked first. Switched on only with your consent. Plus incident reports with lessons learnt, shown the next time the same signature appears.",
   },
-  {
-    q: "What does it break?",
-    state: "Planned",
-    body: "Lineage and impact: when a table fails, every downstream fact, warehouse view and report that is now stale.",
-  },
+  { q: "What does it break?", state: "Planned", body: "Lineage and impact: when a table fails, every downstream fact, warehouse view and report that is now stale." },
   {
     q: "How do we fix it?",
     state: "Planned",
@@ -170,38 +184,43 @@ const STATE_STYLE: Record<string, string> = {
 
 const PipelineIQ = () => {
   const [q, setQ] = useState(0);
+  const [persona, setPersona] = useState(0);
 
   return (
-    <div id="pipelineiq" className="scroll-mt-28">
-      {/* ── Intro ── */}
-      <section className="relative py-20 sm:py-24 overflow-hidden">
+    <>
+      {/* ── Hero ── */}
+      <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-20 overflow-hidden">
         <SectionGlow position="top-left" size={600} />
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 relative z-[2]">
+          <nav className="flex items-center gap-1 text-xs text-muted-foreground mb-6" aria-label="Breadcrumb">
+            <Link to="/products" className="hover:text-primary transition-colors">
+              Products
+            </Link>
+            <ChevronRight className="w-3 h-3" />
+            <span className="text-foreground">PipelineIQ</span>
+          </nav>
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
             <motion.div {...fadeUp}>
-              <Eyebrow>Product 01 · Pipeline observability</Eyebrow>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight mb-4">
+              <Eyebrow>Pipeline observability</Eyebrow>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight mb-4">
                 Pipeline<span className="text-gradient-orange">IQ</span>
-              </h2>
+              </h1>
               <p className="text-xl sm:text-2xl font-semibold text-foreground mb-5">From what failed to why.</p>
               <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
-                A read-only monitoring, alerting and ETL-debugging portal for enterprise data platforms. It pulls
-                together the clues your run logs, orchestrator and compute engine each hold separately, shows you the
-                real root cause, and raises an alert only when something genuinely needs attention.
+                A read-only monitoring, alerting and ETL-debugging portal for enterprise data platforms. It pulls together
+                the clues your run logs, orchestrator and compute engine each hold separately, shows you the real root
+                cause, and raises an alert only when something genuinely needs attention.
               </p>
-              <div className="flex flex-wrap gap-2 mb-8">
-                {["Read-only by design", "Nothing installed", "Tailored to your estate", "Alerts that close themselves"].map((c) => (
-                  <span key={c} className="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-foreground/90 border border-primary/20">
-                    {c}
-                  </span>
-                ))}
+              <AudienceStrip product="pipelineiq" />
+              <div className="flex flex-wrap gap-3">
+                <RequestDemoButton products={["pipelineiq"]} />
+                <a
+                  href="#problem"
+                  className="inline-flex items-center justify-center gap-2 border border-border px-6 py-3 rounded-lg text-sm font-medium text-foreground hover:border-primary/50 transition-colors"
+                >
+                  See it in action
+                </a>
               </div>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-6 py-3 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity glow-orange"
-              >
-                Book a PipelineIQ walkthrough <ArrowRight className="w-4 h-4" />
-              </Link>
             </motion.div>
 
             {/* Stylised portal preview */}
@@ -230,9 +249,8 @@ const PipelineIQ = () => {
                     <motion.div
                       key={i}
                       initial={{ height: 0 }}
-                      whileInView={{ height: `${(h / 18) * 100}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.03 }}
+                      animate={{ height: `${(h / 18) * 100}%` }}
+                      transition={{ duration: 0.5, delay: 0.3 + i * 0.03 }}
                       className={`flex-1 rounded-sm ${h > 10 ? "bg-primary" : "bg-primary/35"}`}
                     />
                   ))}
@@ -257,34 +275,31 @@ const PipelineIQ = () => {
         </div>
       </section>
 
-      {/* ── The problem: scattered clues ── */}
-      <section className="relative py-16 sm:py-20">
+      <ProductSubnav product="pipelineiq" sections={PIQ_SECTIONS} />
+
+      {/* ── The problem ── */}
+      <section id="problem" className="relative py-16 sm:py-20 scroll-mt-32">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="The problem"
-            title={<>When a night fails, the evidence is <span className="text-gradient-orange">scattered</span></>}
-            intro="Diagnosing one failed batch means visiting four places, each holding one piece of the answer."
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {CLUES.map((c, i) => (
-              <motion.div
-                key={c.where}
-                {...fadeUp}
-                transition={{ duration: 0.45, delay: i * 0.08 }}
-                className={`rounded-2xl border p-5 ${i === 3 ? "border-dashed border-primary/40 bg-primary/5" : "border-border bg-card/40"}`}
-              >
-                <c.icon className="w-5 h-5 text-primary mb-3" />
-                <p className="text-sm font-semibold text-foreground mb-3">{c.where}</p>
-                <p className="font-mono text-[10px] uppercase tracking-wider text-emerald-500 mb-1">Knows</p>
-                <p className="text-sm text-muted-foreground mb-3">{c.knows}</p>
-                <p className="font-mono text-[10px] uppercase tracking-wider text-red-500 mb-1">Lacks</p>
-                <p className="text-sm text-muted-foreground">{c.lacks}</p>
-              </motion.div>
-            ))}
+          <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 items-start">
+            <motion.div {...fadeUp} className="lg:sticky lg:top-36">
+              <Eyebrow>The problem</Eyebrow>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight tracking-tight mb-4">
+                When a night fails, the evidence is <span className="text-gradient-orange">scattered</span>
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                The run log knows that a load failed. The orchestrator knows why, buried several clicks deep and kept for
+                only about 45 days. The compute engine holds the stack trace, one run at a time. And nobody holds the
+                patterns: which errors recur, which tables are late against their own rhythm, whether a release caused it.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">Follow one failed table through a normal morning, then flip the switch.</p>
+            </motion.div>
+            <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.1 }}>
+              <DebugTrailDemo />
+            </motion.div>
           </div>
-          <motion.div {...fadeUp} className="mt-8 grid md:grid-cols-3 gap-4">
-            {PILLARS.map((p) => (
-              <div key={p.title} className="glass-panel rounded-2xl p-6">
+          <div className="mt-12 grid md:grid-cols-3 gap-4">
+            {PILLARS.map((p, i) => (
+              <motion.div key={p.title} {...fadeUp} transition={{ duration: 0.4, delay: i * 0.08 }} className="glass-panel rounded-2xl p-6">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
                     <p.icon className="w-4 h-4 text-primary" />
@@ -292,25 +307,78 @@ const PipelineIQ = () => {
                   <p className="font-semibold text-foreground">{p.title}</p>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">{p.body}</p>
-              </div>
+              </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Who it's for ── */}
+      <section id="who" className="relative py-16 sm:py-20 scroll-mt-32">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Who it's for"
+            title={<>Built for the <span className="text-gradient-orange">engine room</span></>}
+            intro="PipelineIQ is a tool for technical teams: the data engineers and platform people who build, run and support the pipelines. Business users never need to open it; they just stop hearing about broken numbers. Each role brings different questions, and each has a page that answers them."
+          />
+          <motion.div {...fadeUp} className="glass-panel rounded-2xl p-4 sm:p-6">
+            <div className="flex flex-wrap gap-2 mb-5" role="tablist" aria-label="Roles">
+              {PERSONAS.map((p, i) => (
+                <button
+                  key={p.role}
+                  role="tab"
+                  aria-selected={persona === i}
+                  onClick={() => setPersona(i)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                    persona === i ? "border-primary/60 bg-primary/10 text-foreground" : "border-border text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {p.role}
+                </button>
+              ))}
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={persona}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.2 }}
+                className="grid md:grid-cols-2 gap-4"
+              >
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-2">The questions they bring</p>
+                  <div className="flex flex-wrap gap-2">
+                    {PERSONAS[persona].asks.map((a) => (
+                      <span key={a} className="rounded-xl rounded-bl-sm bg-muted px-3 py-2 text-sm text-foreground">
+                        {a}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-primary mb-2">Where PipelineIQ answers</p>
+                  <p className="text-base text-foreground leading-relaxed">{PERSONAS[persona].answers}</p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </motion.div>
         </div>
       </section>
 
-      {/* ── Noise to signal ── */}
-      <section className="relative py-16 sm:py-20 overflow-hidden">
+      {/* ── Error index ── */}
+      <section id="error-index" className="relative py-16 sm:py-20 overflow-hidden scroll-mt-32">
         <SectionGlow position="center" size={500} />
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 relative z-[2] grid lg:grid-cols-[0.8fr_1.2fr] gap-10 items-center">
           <motion.div {...fadeUp}>
             <Eyebrow>The error index</Eyebrow>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight tracking-tight mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight tracking-tight mb-4">
               Hundreds of failures. <span className="text-gradient-orange">A handful of problems.</span>
-            </h3>
+            </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              PipelineIQ merges failures from every tool into one history, separates the root cause from the parents
-              that failed only because a child did, and fingerprints each error so the same fault groups together
-              across runs, tables and environments.
+              PipelineIQ merges failures from every tool into one history, separates the root cause from the parents that
+              failed only because a child did, and fingerprints each error so the same fault groups together across runs,
+              tables and environments.
             </p>
             <p className="text-muted-foreground leading-relaxed">
               Each signature opens to the real stack trace, the table's last runs, the same error elsewhere, the last
@@ -324,56 +392,74 @@ const PipelineIQ = () => {
       </section>
 
       {/* ── Alerts ── */}
-      <section className="relative py-16 sm:py-20">
+      <section id="alerts" className="relative py-16 sm:py-20 scroll-mt-32">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Alerting"
             title={<>Signals, <span className="text-gradient-orange">not noise</span></>}
-            intro="The first alert run on a real estate produced 368 alerts. Nobody reads 368 alerts. So every rule became adaptive, judging each table against its own history, or rolled up to one alert per environment. Tuned with the people who run the platform, that became a handful of real signals."
+            intro="Every rule is either adaptive, judging each table against its own history, or rolled up to one alert per environment. One alert per problem, updated while it lasts, closed when it clears."
           />
-          <div className="grid lg:grid-cols-[1fr_auto] gap-6 items-start">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {ALERTS.map((a, i) => (
-                <motion.div
-                  key={a.name}
-                  {...fadeUp}
-                  transition={{ duration: 0.35, delay: (i % 6) * 0.04 }}
-                  className="rounded-xl border border-border bg-card/40 p-4"
-                >
-                  <div className="flex items-center justify-between gap-2 mb-1.5">
-                    <p className="text-sm font-semibold text-foreground">{a.name}</p>
-                    <span className={`px-2 py-0.5 rounded border text-[10px] font-medium ${SEV_STYLE[a.sev]}`}>{a.sev}</span>
+          <div className="grid lg:grid-cols-[auto_1fr] gap-10 items-start mb-16">
+            <motion.div {...fadeUp}>
+              <AlertStormDemo />
+            </motion.div>
+            <div>
+              <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3 mb-6">
+                {ALERTS.map((a, i) => (
+                  <motion.div key={a.name} {...fadeUp} transition={{ duration: 0.35, delay: (i % 6) * 0.04 }} className="rounded-xl border border-border bg-card/40 p-4">
+                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                      <p className="text-sm font-semibold text-foreground">{a.name}</p>
+                      <span className={`px-2 py-0.5 rounded border text-[10px] font-medium ${SEV_STYLE[a.sev]}`}>{a.sev}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{a.when}</p>
+                  </motion.div>
+                ))}
+              </div>
+              <motion.div {...fadeUp} className="glass-panel rounded-2xl p-5 grid sm:grid-cols-3 gap-4">
+                {[
+                  { icon: Bell, t: "Fires once", d: "Per problem, keyed by environment, rule and subject." },
+                  { icon: RefreshCw, t: "Updates", d: "While the problem lasts, instead of firing again every cycle." },
+                  { icon: CheckCircle2, t: "Closes itself", d: "When the condition clears: a successful rerun, a finished load, a working connection." },
+                ].map((s) => (
+                  <div key={s.t} className="flex gap-3">
+                    <div className="w-8 h-8 shrink-0 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center">
+                      <s.icon className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{s.t}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{s.d}</p>
+                    </div>
                   </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{a.when}</p>
-                </motion.div>
-              ))}
+                ))}
+              </motion.div>
             </div>
-            {/* Lifecycle */}
-            <motion.div {...fadeUp} className="glass-panel rounded-2xl p-6 lg:w-64">
-              <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-4">Alert lifecycle</p>
-              {[
-                { icon: Bell, t: "Fires", d: "Once per problem, keyed by environment, rule and subject." },
-                { icon: RefreshCw, t: "Updates", d: "While the problem lasts, instead of firing again every cycle." },
-                { icon: CheckCircle2, t: "Closes itself", d: "When the condition clears: a successful rerun, a finished load, a working connection." },
-              ].map((s, i, all) => (
-                <div key={s.t} className="relative flex gap-3 pb-5 last:pb-0">
-                  {i < all.length - 1 && <span className="absolute left-[15px] top-8 bottom-0 w-px bg-border" />}
-                  <div className="w-8 h-8 shrink-0 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center">
-                    <s.icon className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">{s.t}</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{s.d}</p>
-                  </div>
-                </div>
-              ))}
+          </div>
+
+          <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 items-center">
+            <motion.div {...fadeUp}>
+              <Eyebrow>Adaptive rules</Eyebrow>
+              <h3 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight tracking-tight mb-4">
+                Every table is judged <span className="text-gradient-orange">against its own history</span>
+              </h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                A 4-minute dimension table and an hour-long fact table can't share one alert threshold. Set it low and the fact
+                table pages you every night. Set it high and the dimension table can run five times slower than normal
+                without anyone noticing.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                PipelineIQ's Slow, Stuck and Stale rules compare each table with its own median, so the threshold moves with
+                the table.
+              </p>
+            </motion.div>
+            <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.1 }}>
+              <AdaptiveThresholdDemo />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ── Guarantees + SQL guard ── */}
-      <section className="relative py-16 sm:py-20 overflow-hidden">
+      {/* ── Safety ── */}
+      <section id="safety" className="relative py-16 sm:py-20 overflow-hidden scroll-mt-32">
         <SectionGlow position="bottom-right" size={500} />
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 relative z-[2]">
           <SectionHeading
@@ -398,8 +484,42 @@ const PipelineIQ = () => {
         </div>
       </section>
 
-      {/* ── Forward-deployed model ── */}
-      <section className="relative py-16 sm:py-20">
+      {/* ── Why PipelineIQ ── */}
+      <section id="why" className="relative py-16 sm:py-20 scroll-mt-32">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Why PipelineIQ"
+            title={<>A generic monitoring product vs <span className="text-gradient-orange">one built for your estate</span></>}
+            intro="Every data platform is different. A one-size-fits-all tool forces your estate into one generic shape and understands none of it deeply."
+          />
+          <ComparisonTable columns={["Generic monitoring product", "PipelineIQ"]} rows={COMPARISON} />
+
+          <div className="mt-14">
+            <motion.div {...fadeUp} className="mb-6 max-w-3xl">
+              <Eyebrow>What you get back</Eyebrow>
+              <h3 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight tracking-tight mb-3">
+                Findings a generic tool <span className="text-gradient-orange">never gives back</span>
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Because the engineer reads your estate as it really is, PipelineIQ surfaces problems in the platform itself.
+                These came out of its first deployment, all found by reading, without changing anything.
+              </p>
+            </motion.div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {FINDINGS.map((f, i) => (
+                <motion.div key={f.title} {...fadeUp} transition={{ duration: 0.4, delay: (i % 3) * 0.07 }} className="group rounded-2xl border border-border bg-card/40 p-5 hover:border-primary/40 transition-colors">
+                  <f.icon className="w-5 h-5 text-primary mb-3 transition-transform group-hover:scale-110" />
+                  <p className="text-sm font-semibold text-foreground mb-1.5">{f.title}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{f.body}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Delivery model ── */}
+      <section id="delivery" className="relative py-16 sm:py-20 scroll-mt-32">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="How it's delivered"
@@ -407,17 +527,11 @@ const PipelineIQ = () => {
             intro="PipelineIQ isn't a box you install and bend your platform to fit. It's a stable core plus an engineer embedded with your team, who builds the layer that understands your services, your statuses, your naming conventions and the quirks nobody documented."
           />
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-start">
-            {/* Layer diagram */}
             <motion.div {...fadeUp} className="glass-panel rounded-2xl p-5 sm:p-6">
               <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-3">Client layers · connectors, semantics, pages, alert tuning</p>
               <div className="grid grid-cols-2 gap-2 mb-3">
                 {LAYERS.map((l) => (
-                  <div
-                    key={l.stack}
-                    className={`rounded-xl p-3 text-xs ${
-                      l.live ? "border border-primary/50 bg-primary/10" : "border border-dashed border-border bg-background/40"
-                    }`}
-                  >
+                  <div key={l.stack} className={`rounded-xl p-3 text-xs ${l.live ? "border border-primary/50 bg-primary/10" : "border border-dashed border-border bg-background/40"}`}>
                     <span className={`inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider mb-1 ${l.live ? "text-emerald-500" : "text-muted-foreground"}`}>
                       {l.live && <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />}
                       {l.status}
@@ -442,8 +556,6 @@ const PipelineIQ = () => {
                 </div>
               </div>
             </motion.div>
-
-            {/* Engagement steps */}
             <ol className="space-y-3">
               {STEPS.map((s, i) => (
                 <motion.li key={s.title} {...fadeUp} transition={{ duration: 0.35, delay: i * 0.05 }} className="flex gap-4 rounded-xl border border-border bg-card/40 p-4">
@@ -461,28 +573,8 @@ const PipelineIQ = () => {
         </div>
       </section>
 
-      {/* ── Findings ── */}
-      <section className="relative py-16 sm:py-20">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="What you get back"
-            title={<>Findings a generic tool <span className="text-gradient-orange">never gives back</span></>}
-            intro="Because the engineer reads your estate as it really is, PipelineIQ surfaces problems in the platform itself. These came out of its first deployment, all found by reading, without changing anything."
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {FINDINGS.map((f, i) => (
-              <motion.div key={f.title} {...fadeUp} transition={{ duration: 0.4, delay: (i % 3) * 0.07 }} className="group rounded-2xl border border-border bg-card/40 p-5 hover:border-primary/40 transition-colors">
-                <f.icon className="w-5 h-5 text-primary mb-3 transition-transform group-hover:scale-110" />
-                <p className="text-sm font-semibold text-foreground mb-1.5">{f.title}</p>
-                <p className="text-sm text-muted-foreground leading-relaxed">{f.body}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Roadmap: the four questions ── */}
-      <section className="relative py-16 sm:py-20">
+      {/* ── Roadmap ── */}
+      <section id="roadmap" className="relative py-16 sm:py-20 scroll-mt-32">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Where it's heading"
@@ -497,9 +589,7 @@ const PipelineIQ = () => {
                   role="tab"
                   aria-selected={q === i}
                   onClick={() => setQ(i)}
-                  className={`relative text-left rounded-xl border p-3 sm:p-4 transition-colors ${
-                    q === i ? "border-primary/60 bg-primary/10" : "border-border hover:border-primary/30"
-                  }`}
+                  className={`relative text-left rounded-xl border p-3 sm:p-4 transition-colors ${q === i ? "border-primary/60 bg-primary/10" : "border-border hover:border-primary/30"}`}
                 >
                   <span className={`inline-block mb-2 px-2 py-0.5 rounded border text-[10px] font-medium ${STATE_STYLE[item.state]}`}>{item.state}</span>
                   <p className="text-sm sm:text-base font-semibold text-foreground">{item.q}</p>
@@ -521,7 +611,7 @@ const PipelineIQ = () => {
           </motion.div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

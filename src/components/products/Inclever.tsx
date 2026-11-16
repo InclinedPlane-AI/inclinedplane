@@ -2,9 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ArrowRight,
+  ChevronRight,
   MessageCircleWarning,
-  Ban,
   ListFilter,
   FileBadge,
   UserCheck,
@@ -22,9 +21,23 @@ import SectionGlow from "@/components/SectionGlow";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import QuestionFlowDemo from "./QuestionFlowDemo";
 import CertificateDemo from "./CertificateDemo";
+import TwoAssistantsDemo from "./TwoAssistantsDemo";
+import CircuitBreakerDemo from "./CircuitBreakerDemo";
+import { RequestDemoButton } from "./RequestDemo";
+import { ProductSubnav, ComparisonTable, AudienceStrip, type Mark } from "./ProductChrome";
 import { fadeUp, Eyebrow, SectionHeading } from "./shared";
 
 /* ───────────────────────── data ───────────────────────── */
+
+const SECTIONS = [
+  { id: "compare", label: "Two assistants" },
+  { id: "how-it-works", label: "Three gates" },
+  { id: "arct", label: "Readiness audit" },
+  { id: "blast-radius", label: "Circuit breaker" },
+  { id: "assurance", label: "Assurance" },
+  { id: "why", label: "Why Inclever" },
+  { id: "faq", label: "FAQ" },
+];
 
 const QUOTES = [
   "We built a chatbot on our warehouse and it confidently gave a finance director the wrong number.",
@@ -71,6 +84,16 @@ const TASKS = [
   { task: "Teach the word", when: "Wording nobody has defined a synonym for", owner: "Semantic layer author", clock: "72h" },
 ];
 
+const MATRIX: { label: string; values: Mark[] }[] = [
+  { label: "Answers plain-English questions", values: ["yes", "no", "yes"] },
+  { label: "Only uses metrics you've defined", values: ["no", "yes", "yes"] },
+  { label: "Knows whether the data is fit right now", values: ["no", "no", "yes"] },
+  { label: "Refuses with the specific reason", values: ["no", "no", "yes"] },
+  { label: "Checks permission before reading anything", values: ["partial", "yes", "yes"] },
+  { label: "Every answer traceable to its evidence", values: ["no", "partial", "yes"] },
+  { label: "Unanswered questions become owned work", values: ["no", "no", "yes"] },
+];
+
 const SURFACES = [
   { icon: MessagesSquare, name: "Inclever Ask", who: "Business users, in Teams", body: "Ask in plain English, get governed answers." },
   { icon: RadioTower, name: "AI Readiness Control Tower", who: "Data owners and governance", body: "Continuously audit data and definitions, certify readiness, manage remediation." },
@@ -103,39 +126,50 @@ const Inclever = () => {
   const [persona, setPersona] = useState(0);
 
   return (
-    <div id="inclever" className="scroll-mt-28">
-      {/* ── Intro ── */}
-      <section className="relative py-20 sm:py-24 overflow-hidden">
+    <>
+      {/* ── Hero ── */}
+      <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-20 overflow-hidden">
         <SectionGlow position="top-right" size={600} />
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 relative z-[2]">
+          <nav className="flex items-center gap-1 text-xs text-muted-foreground mb-6" aria-label="Breadcrumb">
+            <Link to="/products" className="hover:text-primary transition-colors">
+              Products
+            </Link>
+            <ChevronRight className="w-3 h-3" />
+            <span className="text-foreground">Inclever</span>
+          </nav>
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
             <motion.div {...fadeUp}>
-              <Eyebrow>Product 02 · Governed AI analytics</Eyebrow>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight mb-4">
+              <Eyebrow>Governed AI analytics</Eyebrow>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight mb-4">
                 In<span className="text-gradient-orange">clever</span>
-              </h2>
+              </h1>
               <p className="text-xl sm:text-2xl font-semibold text-foreground mb-5">AI answers you can audit.</p>
               <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
-                Most companies want to put an AI agent in front of their data. Almost none can say, with evidence,
-                whether that data is fit for an AI to answer from. Inclever solves both halves: it continuously audits
-                your data and the definitions on top of it, and lets people ask plain-English questions in Microsoft
-                Teams, answering only when the data has earned it. It never guesses.
+                Most companies want to put an AI agent in front of their data. Almost none can say, with evidence, whether
+                that data is fit for an AI to answer from. Inclever solves both halves: it continuously audits your data and
+                the definitions on top of it, and lets people ask plain-English questions in Microsoft Teams, answering only
+                when the data has earned it. It never guesses.
               </p>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-6 py-3 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity glow-orange"
-              >
-                Book an Inclever demo <ArrowRight className="w-4 h-4" />
-              </Link>
+              <AudienceStrip product="inclever" />
+              <div className="flex flex-wrap gap-3">
+                <RequestDemoButton products={["inclever"]} />
+                <a
+                  href="#compare"
+                  className="inline-flex items-center justify-center gap-2 border border-border px-6 py-3 rounded-lg text-sm font-medium text-foreground hover:border-primary/50 transition-colors"
+                >
+                  See it in action
+                </a>
+              </div>
             </motion.div>
-
             <div className="space-y-3">
               <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">What we kept hearing</p>
               {QUOTES.map((q, i) => (
                 <motion.blockquote
                   key={q}
-                  {...fadeUp}
-                  transition={{ duration: 0.45, delay: 0.1 + i * 0.1 }}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: 0.2 + i * 0.12 }}
                   className={`glass-panel rounded-2xl p-4 sm:p-5 flex gap-3 ${i === 1 ? "lg:ml-8" : i === 2 ? "lg:ml-4" : ""}`}
                 >
                   <Quote className="w-4 h-4 text-primary shrink-0 mt-0.5" />
@@ -147,10 +181,26 @@ const Inclever = () => {
         </div>
       </section>
 
-      {/* ── How a question flows ── */}
-      <section className="relative py-16 sm:py-20 overflow-hidden">
+      <ProductSubnav product="inclever" sections={SECTIONS} />
+
+      {/* ── Two assistants ── */}
+      <section id="compare" className="relative py-16 sm:py-20 overflow-hidden scroll-mt-32">
         <SectionGlow position="center" size={500} />
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 relative z-[2]">
+          <SectionHeading
+            eyebrow="The difference"
+            title={<>A chatbot on your warehouse will answer anything. <span className="text-gradient-orange">That's the problem.</span></>}
+            intro="It sums cumulative columns, adds currencies together, invents breakdowns and answers people who shouldn't see the number, all in the same confident tone. Pick a question and see what each one does."
+          />
+          <motion.div {...fadeUp}>
+            <TwoAssistantsDemo />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Three gates ── */}
+      <section id="how-it-works" className="relative py-16 sm:py-20 scroll-mt-32">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="How it works"
             title={<>Three gates <span className="text-gradient-orange">before every number</span></>}
@@ -159,14 +209,7 @@ const Inclever = () => {
           <motion.div {...fadeUp}>
             <QuestionFlowDemo />
           </motion.div>
-        </div>
-      </section>
-
-      {/* ── Four pillars ── */}
-      <section className="relative py-16 sm:py-20">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow="Built for governance" title={<>What makes it <span className="text-gradient-orange">different</span></>} />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {PILLARS.map((p, i) => (
               <motion.div key={p.title} {...fadeUp} transition={{ duration: 0.4, delay: i * 0.07 }} className="glass-panel rounded-2xl p-6">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4">
@@ -181,16 +224,14 @@ const Inclever = () => {
       </section>
 
       {/* ── ARCT ── */}
-      <section className="relative py-16 sm:py-20 overflow-hidden">
+      <section id="arct" className="relative py-16 sm:py-20 overflow-hidden scroll-mt-32">
         <SectionGlow position="bottom-left" size={600} />
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 relative z-[2]">
           <SectionHeading
             eyebrow="AI Readiness Control Tower (ARCT)"
             title={<>Know your data is AI-ready <span className="text-gradient-orange">before your AI does</span></>}
-            intro="ARCT never answers business questions. Its job is narrower and more important: run explicit rules against every data asset and every business definition, record a verdict for each, and decide whether that asset is ready for an AI to answer from unsupervised. Fix the data and Inclever's behavior changes automatically. Break it, and Inclever stops answering on it."
+            intro="ARCT never answers business questions. Its job is narrower and more important: run explicit rules against every data asset and every business definition, record a verdict for each, and decide whether that asset is ready for an AI to answer from unsupervised."
           />
-
-          {/* Seven-stage checklist */}
           <motion.div {...fadeUp} className="glass-panel rounded-2xl p-4 sm:p-6 mb-6">
             <p className="text-sm font-semibold text-foreground mb-4">The readiness methodology, in seven stages</p>
             <div className="flex gap-1.5 overflow-x-auto scrollbar-hide pb-1 mb-5" role="tablist" aria-label="Audit stages">
@@ -233,7 +274,6 @@ const Inclever = () => {
             </AnimatePresence>
           </motion.div>
 
-          {/* Verdicts */}
           <div className="space-y-6">
             <motion.div {...fadeUp} className="rounded-2xl border border-border bg-card/40 p-5 sm:p-6">
               <p className="text-sm font-semibold text-foreground mb-4">Verdicts with a strict vocabulary</p>
@@ -246,9 +286,9 @@ const Inclever = () => {
                 ))}
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Alongside the pass rate, ARCT reports <span className="text-foreground font-medium">coverage</span>: how
-                many rules were actually evaluated. That separates “is the data healthy?” from “is the audit itself
-                healthy?”. Evidence that has aged past its shelf life counts as no evidence, never as a pass.
+                Alongside the pass rate, ARCT reports <span className="text-foreground font-medium">coverage</span>: how many
+                rules were actually evaluated. That separates “is the data healthy?” from “is the audit itself healthy?”.
+                Evidence that has aged past its shelf life counts as no evidence, never as a pass.
               </p>
             </motion.div>
             <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.1 }}>
@@ -258,8 +298,22 @@ const Inclever = () => {
         </div>
       </section>
 
-      {/* ── Assurance levels + human queue ── */}
-      <section className="relative py-16 sm:py-20">
+      {/* ── Circuit breaker ── */}
+      <section id="blast-radius" className="relative py-16 sm:py-20 scroll-mt-32">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Live impact"
+            title={<>Break the data, and Inclever <span className="text-gradient-orange">stops answering on it</span></>}
+            intro="Inclever never re-checks data on its own: it reads the audit's latest verdicts. The moment a blocking rule fails, every question touching that asset, and every asset downstream of it, is held. Fix the data, re-run the audit, and answers come back automatically."
+          />
+          <motion.div {...fadeUp}>
+            <CircuitBreakerDemo />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Assurance + human queue ── */}
+      <section id="assurance" className="relative py-16 sm:py-20 scroll-mt-32">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10">
             <div>
@@ -283,7 +337,6 @@ const Inclever = () => {
                 ))}
               </div>
             </div>
-
             <div>
               <SectionHeading
                 eyebrow="Monitor & the human queue"
@@ -309,23 +362,27 @@ const Inclever = () => {
                 ))}
               </motion.div>
               <p className="mt-3 text-xs text-muted-foreground leading-relaxed">
-                Repeats of the same gap raise a counter on one task instead of flooding the queue. When an analyst
-                answers by hand, their working becomes the definition the next person inherits.
+                Repeats of the same gap raise a counter on one task instead of flooding the queue. When an analyst answers by
+                hand, their working becomes the definition the next person inherits.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Surfaces + personas ── */}
-      <section className="relative py-16 sm:py-20 overflow-hidden">
+      {/* ── Why Inclever ── */}
+      <section id="why" className="relative py-16 sm:py-20 overflow-hidden scroll-mt-32">
         <SectionGlow position="top-right" size={500} />
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 relative z-[2]">
           <SectionHeading
-            eyebrow="One platform"
-            title={<>Four surfaces, <span className="text-gradient-orange">one source of truth</span></>}
-            intro="Exposure is not registration, and registration is not trust. A table in your warehouse isn't usable until someone registers it, and isn't trusted until it passes its own audit."
+            eyebrow="Why Inclever"
+            title={<>The flexibility of a chatbot. <span className="text-gradient-orange">The discipline of a signed-off report.</span></>}
+            intro="Chatbots answer anything but can't tell you when they're wrong. Dashboards are trustworthy but only answer what someone built in advance. Inclever is built to give you both."
           />
+          <div className="mb-14">
+            <ComparisonTable columns={["Chatbot on your warehouse", "Dashboards", "Inclever"]} rows={MATRIX} />
+          </div>
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
             {SURFACES.map((s, i) => (
               <motion.div key={s.name} {...fadeUp} transition={{ duration: 0.4, delay: i * 0.07 }} className="rounded-2xl border border-border bg-card/40 p-5">
@@ -338,7 +395,10 @@ const Inclever = () => {
           </div>
 
           <motion.div {...fadeUp} className="glass-panel rounded-2xl p-4 sm:p-6">
-            <p className="text-sm font-semibold text-foreground mb-4">Who it's for</p>
+            <p className="text-sm font-semibold text-foreground mb-1">Who it's for</p>
+            <p className="text-xs text-muted-foreground mb-4">
+              Inclever is for the people who use the data: business users and analysts ask, leaders rely on the answers, and your data and audit teams keep it governed.
+            </p>
             <div className="flex flex-wrap gap-2 mb-5" role="tablist" aria-label="Personas">
               {PERSONAS.map((p, i) => (
                 <button
@@ -378,7 +438,7 @@ const Inclever = () => {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="relative py-16 sm:py-20">
+      <section id="faq" className="relative py-16 sm:py-20 scroll-mt-32">
         <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="FAQ" title={<>Questions buyers <span className="text-gradient-orange">ask first</span></>} />
           <Accordion type="single" collapsible className="w-full">
@@ -391,7 +451,7 @@ const Inclever = () => {
           </Accordion>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

@@ -7,7 +7,9 @@
 - [Homepage](https://inclinedplane.com/): Overview of services, thesis, and approach.
 - [Our Thesis](https://inclinedplane.com/thesis): Deep technical manifesto on why modern enterprises need engineering-grade data systems and decision platforms built from source to intelligence.
 - [Services](https://inclinedplane.com/services): Five layers of data infrastructure — Clarity (data and AI advisory), Data Architecture (foundation modernization), Reliability and Ops, Analytics and Intelligence, AI/ML Implementations, and Automation Systems.
-- [Products](https://inclinedplane.com/products): PipelineIQ (read-only pipeline monitoring, alerting and ETL debugging that collapses failures into root-cause error signatures, delivered on a forward-deployed engineering model) and Inclever (governed AI analytics in Microsoft Teams: three gates before every answer, plus an AI Readiness Control Tower that audits data and issues or withholds readiness certificates).
+- [Products](https://inclinedplane.com/products): Overview of InclinedPlane's two products.
+- [PipelineIQ](https://inclinedplane.com/products/pipelineiq): For data engineers and platform teams. Read-only pipeline monitoring, alerting and ETL debugging that collapses failures into root-cause error signatures, with adaptive, self-resolving alerts. Delivered on a forward-deployed engineering model.
+- [Inclever](https://inclinedplane.com/products/inclever): For business users and analysts. Governed AI analytics in Microsoft Teams: three gates before every answer, plus an AI Readiness Control Tower that audits data and issues or withholds readiness certificates.
 - [Industries](https://inclinedplane.com/industries): Vertical expertise in retail, finance, healthcare, manufacturing, energy, SaaS, BPO, and education.
 - [Case Studies](https://inclinedplane.com/case-studies): 14 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector, and renewables.
 - [About](https://inclinedplane.com/about): Company evolution from Sail Analytics to InclinedPlane and the team building decision systems for high-velocity enterprises.

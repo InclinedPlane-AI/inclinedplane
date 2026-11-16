@@ -86,7 +86,7 @@ npm run build
         │   For every route from getRoutes(), reads dist/index.html as a
         │   template, replaces a <!--SEO_HEAD--> placeholder with route-
         │   specific <title>, <meta>, canonical, OG/Twitter, JSON-LD,
-        │   writes dist/<path>/index.html. 34 routes today.
+        │   writes dist/<path>/index.html. 36 routes today.
         ├── PASS 2 — BODY SNAPSHOT (Playwright)
         │   Boots a tiny static server on a free port in 3000-3010.
         │   Launches headless Chromium via Playwright. For each route,
@@ -97,7 +97,7 @@ npm run build
         │   The merged <body> tag also gets `data-prerendered="true"`
         │   stamped on it (see "splash skip" below).
         └── PASS 3 — SITEMAP + RSS
-            Writes dist/sitemap.xml (31 indexable URLs, filters out
+            Writes dist/sitemap.xml (33 indexable URLs, filters out
             noIndex routes) and dist/rss.xml (blog posts, RFC 822 dates).
 ```
 
@@ -240,10 +240,15 @@ App uses `react-router-dom` BrowserRouter with these routes (defined in
 - `/` — homepage (`Index.tsx`)
 - `/thesis` — long-form manifesto
 - `/services` — 5 service layers
-- `/products` — PipelineIQ + Inclever product page (`src/pages/Products.tsx`,
-  sections and interactive demos in `src/components/products/`). Copy
-  follows the Inclever claims register and keeps the PipelineIQ client
-  confidential: no client names or unverified performance figures.
+- `/products` — hub for both products (`src/pages/Products.tsx`)
+- `/products/pipelineiq`, `/products/inclever` — product pages
+  (`src/pages/Product*.tsx`; sections and interactive demos in
+  `src/components/products/`). Product metadata (names, audience, demo
+  agenda) lives in `src/data/products.ts` and feeds the navbar Products
+  hover menu, the hub and the Request-a-demo dialog (posts to the same
+  Formspree form as /contact). Copy follows the Inclever claims register
+  and keeps the PipelineIQ client confidential: no client names or
+  unverified performance figures.
 - `/industries` — 8 verticals
 - `/case-studies` — index
 - `/case-studies/:slug` — 14 detail pages, slugs in
@@ -256,7 +261,7 @@ App uses `react-router-dom` BrowserRouter with these routes (defined in
 - `/privacy`, `/terms`, `/cookies` — noIndex, excluded from sitemap
 - `/*` — `NotFound.tsx`
 
-The total of 34 prerendered routes = 13 static + 14 case study details +
+The total of 36 prerendered routes = 15 static + 14 case study details +
 7 blog posts. If new content is added (more blog posts or case studies),
 the prerender pipeline picks it up automatically because
 `scripts/seo-config.mjs::getRoutes()` parses the data files at build time.
@@ -332,7 +337,7 @@ their role. Do not regenerate them without preserving the contract.
 When in doubt about whether the pipeline is healthy, run:
 
 ```bash
-# Full local build — should end with "Totals: 34 ok, 0 warn, 0 failed"
+# Full local build — should end with "Totals: 36 ok, 0 warn, 0 failed"
 npm run build
 
 # Confirm a sample of prerendered files have body content
@@ -343,7 +348,7 @@ grep -c "Inclined" dist/services/index.html
 node -e "const fs=require('fs');const m=fs.readFileSync('dist/services/index.html','utf8').match(/<script type=\"application\\/ld\\+json\">(.*?)<\\/script>/);console.log(JSON.parse(m[1].replace(/\\\\u003c/g,'<')).map(x=>x['@type']))"
 
 # Confirm sitemap + RSS exist
-test -f dist/sitemap.xml && grep -c "<loc>" dist/sitemap.xml  # expect 31
+test -f dist/sitemap.xml && grep -c "<loc>" dist/sitemap.xml  # expect 33
 test -f dist/rss.xml && grep -c "<item>" dist/rss.xml         # expect 7
 
 # Confirm body has the data-prerendered marker (splash-skip mechanism)
