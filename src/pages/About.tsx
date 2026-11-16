@@ -4,7 +4,6 @@ import PageHero from "@/components/PageHero";
 import SectionGlow from "@/components/SectionGlow";
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { useRef } from "react";
-import awsLogo from "@/assets/aws-logo.png";
 import azureLogo from "@/assets/azure-logo.png";
 import fabricLogo from "@/assets/fabric-logo.png";
 import {
@@ -229,43 +228,47 @@ const About = () => {
                     <Linkedin className="w-5 h-5" />
                   </a>
                 </div>
-                <p className="text-muted-foreground leading-relaxed mb-8">
-                  Leading platform modernizations for Fortune 500s with a decade of enterprise data delivery experience.
+                <p className="text-muted-foreground leading-relaxed mb-5">
+                  Keerthana founded InclinedPlane and sets its direction: the problems the firm takes on, how
+                  every engagement is run, and the standard a system has to meet before it ships. She brings a
+                  decade of enterprise data delivery, leading platform modernizations for Fortune 500s, and
+                  works directly with client leadership to turn data and AI ambitions into funded, sequenced
+                  programs of work.
                 </p>
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {["AI & data strategy", "Enterprise modernization", "Client leadership", "Team building"].map((f) => (
+                    <span
+                      key={f}
+                      className="px-2.5 py-1 rounded-md bg-primary/10 border border-primary/20 text-[11px] font-medium text-primary"
+                    >
+                      {f}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              {/* Keerthana's Certifications */}
-              <div className="grid grid-cols-2 gap-3 mt-auto">
-                {[
-                  {
-                    name: "Databricks Certified",
-                    logo: "https://cdn.simpleicons.org/databricks/FF3621",
-                    detail: "Data Engineer & ML Professional",
-                    color: "from-[hsl(0_85%_55%/0.15)] to-[hsl(0_85%_55%/0.03)]",
-                  },
-                  {
-                    name: "Fabric Certified",
-                    logo: fabricLogo,
-                    detail: "Analytics Engineer & Data Engineer",
-                    color: "from-[hsl(25_90%_50%/0.15)] to-[hsl(25_90%_50%/0.03)]",
-                  },
-                ].map(({ name, logo, detail, color }, i) => (
-                  <div
-                    key={name}
-                    className="block glass-panel rounded-xl p-4 text-center relative overflow-hidden group hover:glow-orange transition-all duration-300 border border-border/40 hover:border-primary/30"
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-b ${color} pointer-events-none`} />
-                    <div className="relative z-10">
-                      <img
-                        src={logo}
-                        alt={name}
-                        className="w-8 h-8 object-contain mx-auto mb-2 opacity-85 group-hover:opacity-100 transition-opacity"
-                      />
-                      <h4 className="font-bold text-foreground text-xs mb-1">{name}</h4>
-                      <p className="text-[10px] text-muted-foreground leading-snug">{detail}</p>
+              {/* Keerthana's leadership */}
+              <div className="mt-auto">
+                <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase mb-3">Leadership</p>
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { name: "Vision & Strategy", detail: "Sets the firm's direction and the engagements it takes on", Icon: Telescope },
+                    { name: "Executive Partner", detail: "Trusted counterpart to client leadership teams", Icon: Users },
+                    { name: "Delivery & Team", detail: "Builds the team and owns outcomes on every engagement", Icon: Flag },
+                  ].map(({ name, detail, Icon }) => (
+                    <div
+                      key={name}
+                      className="block glass-panel rounded-xl p-3 sm:p-4 text-center relative overflow-hidden group hover:glow-orange transition-all duration-300 border border-border/40 hover:border-primary/30"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(25_95%_53%/0.14)] to-[hsl(25_95%_53%/0.02)] pointer-events-none" />
+                      <div className="relative z-10">
+                        <Icon className="w-7 h-7 mx-auto mb-2 text-primary opacity-85 group-hover:opacity-100 transition-opacity" />
+                        <h4 className="font-bold text-foreground text-xs mb-1">{name}</h4>
+                        <p className="text-[10px] text-muted-foreground leading-snug">{detail}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </motion.div>
 
@@ -295,43 +298,65 @@ const About = () => {
                     <Linkedin className="w-5 h-5" />
                   </a>
                 </div>
-                <p className="text-muted-foreground leading-relaxed mb-8">
-                  Architecting high-throughput, fault-tolerant data pipelines with active AWS and Azure engineering certifications.
+                <p className="text-muted-foreground leading-relaxed mb-5">
+                  Mohan leads hands-on platform engineering at InclinedPlane. He designs and builds the
+                  lakehouses and pipelines behind client engagements: high-throughput, fault-tolerant ingestion
+                  and transformation on Microsoft Fabric, Databricks, and Azure, shipped with automated testing,
+                  observability, and CI/CD so systems keep performing long after handover.
                 </p>
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {["Lakehouse architecture", "Batch & streaming pipelines", "Data quality & observability", "DataOps & CI/CD"].map((f) => (
+                    <span
+                      key={f}
+                      className="px-2.5 py-1 rounded-md bg-primary/10 border border-primary/20 text-[11px] font-medium text-primary"
+                    >
+                      {f}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               {/* Mohan's Certifications */}
-              <div className="grid grid-cols-2 gap-3 mt-auto">
-                {[
-                  {
-                    name: "AWS Certified",
-                    logo: awsLogo,
-                    detail: "Solutions Architect & Data Analytics",
-                    color: "from-[hsl(30_100%_50%/0.15)] to-[hsl(30_100%_50%/0.03)]",
-                  },
-                  {
-                    name: "Azure Certified",
-                    logo: azureLogo,
-                    detail: "Data Engineer & AI Engineer Associate",
-                    color: "from-[hsl(210_90%_55%/0.15)] to-[hsl(210_90%_55%/0.03)]",
-                  },
-                ].map(({ name, logo, detail, color }, i) => (
-                  <div
-                    key={name}
-                    className="block glass-panel rounded-xl p-4 text-center relative overflow-hidden group hover:glow-orange transition-all duration-300 border border-border/40 hover:border-primary/30"
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-b ${color} pointer-events-none`} />
-                    <div className="relative z-10">
-                      <img
-                        src={logo}
-                        alt={name}
-                        className="w-8 h-8 object-contain mx-auto mb-2 opacity-85 group-hover:opacity-100 transition-opacity"
-                      />
-                      <h4 className="font-bold text-foreground text-xs mb-1">{name}</h4>
-                      <p className="text-[10px] text-muted-foreground leading-snug">{detail}</p>
+              <div className="mt-auto">
+                <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase mb-3">Certifications</p>
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    {
+                      name: "Fabric Certified",
+                      logo: fabricLogo,
+                      detail: "Data engineering on Microsoft Fabric",
+                      color: "from-[hsl(160_70%_40%/0.15)] to-[hsl(160_70%_40%/0.03)]",
+                    },
+                    {
+                      name: "Databricks Certified",
+                      logo: "https://cdn.simpleicons.org/databricks/FF3621",
+                      detail: "Lakehouse data engineering",
+                      color: "from-[hsl(0_85%_55%/0.15)] to-[hsl(0_85%_55%/0.03)]",
+                    },
+                    {
+                      name: "Azure Certified",
+                      logo: azureLogo,
+                      detail: "Data engineering on Azure",
+                      color: "from-[hsl(210_90%_55%/0.15)] to-[hsl(210_90%_55%/0.03)]",
+                    },
+                  ].map(({ name, logo, detail, color }) => (
+                    <div
+                      key={name}
+                      className="block glass-panel rounded-xl p-3 sm:p-4 text-center relative overflow-hidden group hover:glow-orange transition-all duration-300 border border-border/40 hover:border-primary/30"
+                    >
+                      <div className={`absolute inset-0 bg-gradient-to-b ${color} pointer-events-none`} />
+                      <div className="relative z-10">
+                        <img
+                          src={logo}
+                          alt={name}
+                          className="w-7 h-7 object-contain mx-auto mb-2 opacity-85 group-hover:opacity-100 transition-opacity"
+                        />
+                        <h4 className="font-bold text-foreground text-xs mb-1">{name}</h4>
+                        <p className="text-[10px] text-muted-foreground leading-snug">{detail}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </motion.div>
           </div>

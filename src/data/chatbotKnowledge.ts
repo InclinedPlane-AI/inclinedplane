@@ -62,7 +62,11 @@ InclinedPlane's delivery framework runs across five layers, from AI-Readiness Fo
 
 **Contact:** support@inclinedplane.com
 
-**Certifications:** AWS Certified (Solutions Architect & Data Analytics), Azure Certified (Data Engineer & AI Engineer Associate), Databricks Certified (Data Engineer & ML Professional), Fabric Certified (Analytics Engineer & Data Engineer)
+**Leadership:**
+- Keerthana Vayyasi, Founder & CEO: founded InclinedPlane and sets its strategy and direction, leads client executive partnerships, builds the team, and owns delivery outcomes. A decade of enterprise data delivery, leading platform modernizations for Fortune 500s.
+- Mohan Gowda T, Senior Data Engineer: leads hands-on platform engineering, designing and building lakehouses and high-throughput, fault-tolerant pipelines. Microsoft Fabric, Databricks, and Azure certified.
+
+**Certifications:** Microsoft Fabric, Databricks, and Azure certified data engineering
 
 **Team roles:** Data Engineers, Data Analysts, System Architects, System Designers, AI Engineers
 
