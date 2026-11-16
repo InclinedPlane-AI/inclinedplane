@@ -6,11 +6,11 @@
   This is the build template for every page on the site. Two build-time
   contracts depend on the markup here:
 
-    1. The SEO_HEAD placeholder marker (in <head>) is replaced by
+    1. The SEO_HEAD placeholder marker (in the head element) is replaced by
        scripts/prerender.mjs with route-specific title, meta, canonical,
        OG/Twitter tags, and JSON-LD.
 
-    2. The full prerendered body is written into <body> by the Puppeteer
+    2. The full prerendered body is written into the body element by the Puppeteer
        snapshot pass in scripts/prerender.mjs (via scripts/snapshot.mjs)
        so crawlers (Googlebot, GPTBot, ClaudeBot, PerplexityBot) can read
        the page prose without executing JavaScript.
