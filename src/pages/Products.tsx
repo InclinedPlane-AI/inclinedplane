@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ArrowRight, Check, Sparkles, Users, Wrench, LineChart } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
@@ -10,6 +10,7 @@ import { PRODUCTS, ProductId } from "@/data/products";
 import { PRODUCT_ICONS } from "@/components/products/icons";
 import { RequestDemoButton } from "@/components/products/RequestDemo";
 import { fadeUp, SectionHeading } from "@/components/products/shared";
+import { PipelinePreview, IncleverPreview } from "@/components/products/LivePreviews";
 
 const PROBLEMS: { text: string; fit: ProductId[]; why: string }[] = [
   {
@@ -41,6 +42,8 @@ const PROBLEMS: { text: string; fit: ProductId[]; why: string }[] = [
 
 const Products = () => {
   const [pick, setPick] = useState<number | null>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const cardsInView = useInView(cardsRef, { amount: 0.25 });
   const chosen = pick === null ? null : PROBLEMS[pick];
 
   return (
@@ -62,7 +65,7 @@ const Products = () => {
 
       {/* ── Product cards ── */}
       <section className="relative pb-16 sm:pb-20">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-6">
+        <div ref={cardsRef} className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-6">
           {PRODUCTS.map((p, i) => {
             const Icon = PRODUCT_ICONS[p.id];
             return (
@@ -88,10 +91,11 @@ const Products = () => {
                 </span>
                 <p className="text-lg font-semibold text-foreground mb-2">{p.tagline}</p>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-5">{p.brief}</p>
-                <ul className="space-y-2 mb-8">
+                <div className="mb-5">{p.id === "pipelineiq" ? <PipelinePreview run={cardsInView} /> : <IncleverPreview run={cardsInView} />}</div>
+                <ul className="flex flex-wrap gap-x-4 gap-y-1.5 mb-8">
                   {p.bullets.map((b) => (
-                    <li key={b} className="flex gap-2 text-sm text-foreground/90">
-                      <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> {b}
+                    <li key={b} className="flex gap-1.5 text-xs text-foreground/80">
+                      <Check className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" /> {b}
                     </li>
                   ))}
                 </ul>

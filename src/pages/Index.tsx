@@ -43,6 +43,7 @@ import {
 } from "lucide-react";
 
 import ServicesExplorer from "@/components/home/ServicesExplorer";
+import LiveHealthDemo from "@/components/home/LiveHealthDemo";
 import ProductsShowcase from "@/components/home/ProductsShowcase";
 import CaseStudyMedia from "@/components/case-study/CaseStudyMedia";
 import { caseStudies } from "@/data/caseStudies";
@@ -411,7 +412,7 @@ const Index = () => {
           <section className="snap-section flex items-center relative">
             <SectionGlow position="top-right" size={600} />
             <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full">
-              <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-5 sm:mb-10 lg:mb-12">
+              <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-5 sm:mb-8">
                 <p className="font-mono text-[10px] sm:text-xs text-primary tracking-widest uppercase mb-2 sm:mb-4">
                   Why This Matters
                 </p>
@@ -420,7 +421,7 @@ const Index = () => {
                 </h2>
                 <motion.p
                   {...fadeUp(0.05)}
-                  className="text-xs sm:text-base text-muted-foreground leading-relaxed mt-3 sm:mt-8 text-center font-normal lg:text-base"
+                  className="text-xs sm:text-base text-muted-foreground leading-relaxed mt-3 sm:mt-5 text-center font-normal lg:text-base"
                 >
                   Most organisations still treat data as a reporting function: static dashboards, fragile pipelines,
                   and analytics teams buried in ad-hoc requests. Meanwhile, your competitors are deploying automated
@@ -428,62 +429,10 @@ const Index = () => {
                   data infrastructure and those that don't is widening fast.
                 </motion.p>
               </motion.div>
-              <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-16 items-start">
-                <div className="space-y-1.5 sm:space-y-3 font-mono text-[10px] sm:text-sm">
-                  {[
-                    "[WARN] Pipeline failed: stale data, 47min lag",
-                    "[ERR]  Model drift detected, no retraining trigger",
-                    "[WARN] Dashboard refresh: manual, weekly cadence",
-                    "[ERR]  No observability, blind spot in pipeline health",
-                    "[INFO] Business asking: 'Can we predict demand?'",
-                    "[ERR]  68% of AI projects fail from bad data infra",
-                  ].map((log, i) => (
-                    <motion.div
-                      key={i}
-                      {...fadeUp(0.1 + i * 0.06)}
-                      className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded surface-2 ${log.includes("[ERR]") ? "text-destructive/80 border-l-2 border-destructive/50" : log.includes("[WARN]") ? "text-orange-300 border-l-2 border-orange-500/30" : "text-muted-foreground border-l-2 border-muted-foreground/40"}`}
-                    >
-                      {log}
-                    </motion.div>
-                  ))}
-                </div>
-                <motion.div {...fadeUp(0.15)} className="lg:max-w-md lg:ml-auto w-full">
-                  <div className="glass-panel rounded-2xl p-4 sm:p-5 lg:p-6">
-                    <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">Pipeline Health Score</p>
-                    <div className="space-y-2.5 sm:space-y-3.5">
-                      {[
-                        { label: "Data Freshness", value: 34 },
-                        { label: "Pipeline Reliability", value: 52 },
-                        { label: "Model Accuracy", value: 41 },
-                        { label: "Observability Coverage", value: 18 },
-                        { label: "AI Readiness", value: 12 },
-                      ].map(({ label, value }) => (
-                        <div key={label}>
-                          <div className="flex justify-between text-[11px] sm:text-sm mb-1 sm:mb-1.5">
-                            <span className="text-secondary-foreground">{label}</span>
-                            <span className="text-destructive/80 font-mono">{value}%</span>
-                          </div>
-                          <div className="h-1 sm:h-1.5 rounded-full surface-3">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              whileInView={{ width: `${value}%` }}
-                              transition={{ duration: 0.6, delay: 0.2 }}
-                              viewport={vp}
-                              className="h-full rounded-full bg-destructive/60"
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-border">
-                      <p className="text-[10px] sm:text-xs text-destructive/70 font-mono flex items-center gap-2">
-                        <Activity size={12} /> Overall: Critical. Infrastructure not AI-ready
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-              <motion.div {...fadeUp(0.3)} className="mt-5 sm:mt-10 lg:mt-12 text-center">
+              <motion.div {...fadeUp(0.1)}>
+                <LiveHealthDemo />
+              </motion.div>
+              <motion.div {...fadeUp(0.3)} className="mt-5 sm:mt-8 text-center">
                 <Link
                   to="/thesis"
                   className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full glass-panel text-foreground font-medium text-xs sm:text-sm hover:text-primary transition-colors"
