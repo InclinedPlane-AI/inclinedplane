@@ -9,7 +9,8 @@ import { useMemo, useState, useEffect } from "react";
 import { caseStudies, type CaseStudy } from "@/data/caseStudies";
 import { caseStudyDetails } from "@/data/caseStudyDetails";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Skeleton } from "@/components/ui/skeleton";
+import CaseStudyMedia from "@/components/case-study/CaseStudyMedia";
+import SectionGlow from "@/components/SectionGlow";
 
 const SITE_URL = "https://inclinedplane.com";
 const toAbsoluteUrl = (assetPath: string) =>
@@ -23,31 +24,6 @@ const weightOf = (c: CaseStudy) => {
     return acc + bodyLen + bulletsLen;
   }, 0);
   return sectionWeight + c.summary.length + (c.metrics?.length ?? 0) * 40;
-};
-
-// Image with skeleton placeholder while loading.
-const ImageWithSkeleton = ({
-  src,
-  alt,
-  className,
-}: {
-  src: string;
-  alt: string;
-  className?: string;
-}) => {
-  const [loaded, setLoaded] = useState(false);
-  return (
-    <>
-      {!loaded && <Skeleton className="absolute inset-0 w-full h-full rounded-none" />}
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        onLoad={() => setLoaded(true)}
-        className={`${className ?? ""} ${loaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
-      />
-    </>
-  );
 };
 
 const CaseStudies = () => {
@@ -123,8 +99,11 @@ const CaseStudies = () => {
         title={<>Proof in <span className="text-gradient-orange">Production.</span></>}
         subtitle="Real outcomes from production deployments. Not proofs of concept. Production systems that move the needle."
       />
-      <div className="pb-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative pb-24 overflow-x-clip">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.035] via-transparent to-primary/[0.04] pointer-events-none" />
+        <SectionGlow position="top-left" size={700} />
+        <SectionGlow position="bottom-right" size={700} />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
 
           {/* Aggregate stats strip */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
@@ -137,8 +116,9 @@ const CaseStudies = () => {
             ].map(({ value, label }, i) => (
               <motion.div key={label} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 + i * 0.1 }}
-                className="glass-panel rounded-xl px-5 py-6 text-center">
-                <p className="text-2xl font-bold text-gradient-orange text-glow-orange mb-1">{value}</p>
+                className="relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/[0.12] via-primary/[0.04] to-transparent px-5 py-6 text-center">
+                <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-orange" />
+                <p className="text-3xl font-bold text-gradient-orange mb-1">{value}</p>
                 <p className="text-xs text-muted-foreground">{label}</p>
               </motion.div>
             ))}
@@ -152,30 +132,23 @@ const CaseStudies = () => {
                 const displayNumber = String(i + 1).padStart(2, "0");
                 const hasDedicatedPage = !!caseStudyDetails[cs.id];
                 const cardClassName =
-                  "glass-panel rounded-2xl text-left group hover:glow-orange transition-all flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary/40 overflow-hidden";
+                  "rounded-2xl text-left group border border-border bg-card/80 shadow-sm hover:border-primary/40 hover:shadow-[0_24px_60px_-30px_hsl(25_100%_50%/0.5)] hover:-translate-y-1 transition-all duration-300 flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary/40 overflow-hidden";
                 const cardInner = (
                   <>
                     {/* Image banner */}
-                    <div className="relative h-40 overflow-hidden">
-                      <ImageWithSkeleton
-                        src={cs.image}
-                        alt={cs.title}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-                      <div className="absolute top-3 left-3 w-9 h-9 rounded-lg surface-3 backdrop-blur-md flex items-center justify-center border border-primary/20">
-                        <Icon size={16} className="text-primary" />
+                    <div className="relative">
+                      <CaseStudyMedia src={cs.image} alt={cs.title} className="h-44" shade />
+                      <div className="absolute top-3 left-3 w-9 h-9 rounded-lg bg-black/40 backdrop-blur-md flex items-center justify-center border border-white/15">
+                        <Icon size={16} className="text-[hsl(25_100%_62%)]" />
                       </div>
+                      <span className="absolute bottom-3 left-4 right-4 font-mono text-[10px] uppercase tracking-wider text-white/85 truncate">
+                        {cs.industry}
+                      </span>
                     </div>
 
                     <div className="p-6 flex flex-col flex-1">
                     {/* Top row: number + industry */}
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="font-mono text-[10px] text-primary/80 tracking-widest">{displayNumber}</span>
-                      <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider truncate max-w-[60%] text-right">
-                        {cs.industry}
-                      </span>
-                    </div>
+                    <span className="font-mono text-[10px] text-primary/80 tracking-widest mb-2">{displayNumber}</span>
 
                     {/* Title */}
                     <h2 className="text-base font-bold text-foreground leading-snug mb-3 group-hover:text-primary transition-colors">{cs.title}</h2>
@@ -189,7 +162,7 @@ const CaseStudies = () => {
                     {cs.metrics && cs.metrics.length > 0 && (
                       <div className={`grid gap-2 mb-4 ${cs.metrics.length === 1 ? "grid-cols-1" : cs.metrics.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
                         {cs.metrics.map((m) => (
-                          <div key={m.label} className="surface-2 rounded-lg p-3 text-center">
+                          <div key={m.label} className="rounded-lg border border-primary/15 bg-primary/[0.06] p-3 text-center">
                             <p className="text-base font-bold text-gradient-orange mb-0.5 leading-none">
                               {typeof m.value === "number" ? (
                                 <AnimatedCounter end={m.value} suffix={m.suffix || ""} prefix={m.prefix || ""} />
@@ -251,15 +224,16 @@ const CaseStudies = () => {
 
           {/* CTA section */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="glass-panel rounded-2xl p-10 text-center glow-orange">
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
+            className="relative overflow-hidden rounded-3xl bg-[#0b0908] text-white p-10 sm:p-14 text-center">
+            <div aria-hidden="true" className="absolute -top-24 left-1/2 -translate-x-1/2 h-64 w-[36rem] rounded-full bg-[hsl(25_100%_50%/0.25)] blur-[100px]" />
+            <h2 className="relative text-2xl sm:text-3xl font-bold mb-4">
               Ready to Build Your <span className="text-gradient-orange">Success Story?</span>
             </h2>
-            <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+            <p className="relative text-white/65 mb-8 max-w-lg mx-auto">
               The next phase of your data story starts here.
             </p>
             <Link to="/contact" data-cursor-hover
-              className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-8 py-3.5 rounded-lg font-medium hover:opacity-90 transition-opacity glow-orange">
+              className="relative inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-8 py-3.5 rounded-lg font-medium hover:opacity-90 transition-opacity glow-orange">
               Start a Conversation <ArrowRight size={16} />
             </Link>
           </motion.div>
@@ -272,14 +246,7 @@ const CaseStudies = () => {
           {active && (
             <>
               {/* Hero image */}
-              <div className="relative h-56 sm:h-64 overflow-hidden">
-                <ImageWithSkeleton
-                  src={active.image}
-                  alt={active.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/10" />
-              </div>
+              <CaseStudyMedia src={active.image} alt={active.title} className="h-56 sm:h-64" eager />
 
               <DialogHeader className="p-7 pb-5 border-b border-border/40 sticky top-0 z-10 backdrop-blur-xl bg-background/70">
                 <div className="flex items-start gap-4">

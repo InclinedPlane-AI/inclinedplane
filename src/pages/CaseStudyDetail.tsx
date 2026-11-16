@@ -4,25 +4,10 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
-import CaseStudyVideoHero from "@/components/case-study/CaseStudyVideoHero";
-import CaseStudyAnomalousHero from "@/components/case-study/CaseStudyAnomalousHero";
-import CaseStudyEVVideoHero from "@/components/case-study/CaseStudyEVVideoHero";
-import CaseStudyImageHero from "@/components/case-study/CaseStudyImageHero";
-import CaseStudyIntroStats from "@/components/case-study/CaseStudyIntroStats";
-import solarHeroImage from "@/assets/project-intelligence-solar.jpg";
-import fleetHeroImage from "@/assets/ai-driven-fleet.png";
-import fmcgVideoSrc from "@/assets/fmcg-sap-dms.mp4";
-import pharmaHeroImage from "@/assets/pharma-sales-process.jpeg";
-import engineHeroImage from "@/assets/02_Manufacturing_Demand_Forecasting.jpg";
-import energyHeroImage from "@/assets/08_Energy_&_Industrial_Energy.jpg";
-import edtechHeroImage from "@/assets/09_EdTech_VC-Funded_Educational_Products.jpg";
-import pharmaMncHeroImage from "@/assets/10_Pharmaceuticals_Pharmaceutical_MNC.jpg";
-import capitalHeroImage from "@/assets/11_Manufacturing_Leading_Capital_Equipment.jpg";
-import publicSectorHeroImage from "@/assets/13_Public_Sector_Cultural_Heritage.jpg";
-import erpHeroImage from "@/assets/14_Industrial_Manufacturing_ERP_Unification.jpg";
-import CaseStudySectionBackdrop from "@/components/case-study/CaseStudySectionBackdrop";
+import CaseStudyHero from "@/components/case-study/CaseStudyHero";
+import CaseStudyMedia from "@/components/case-study/CaseStudyMedia";
 import SectionNav from "@/components/case-study/SectionNav";
-import AnimatedCounter from "@/components/AnimatedCounter";
+import SectionGlow from "@/components/SectionGlow";
 import { caseStudies } from "@/data/caseStudies";
 import { caseStudyDetails } from "@/data/caseStudyDetails";
 
@@ -30,6 +15,12 @@ const SITE_URL = "https://inclinedplane.com";
 const toAbsoluteUrl = (assetPath: string) =>
   assetPath.startsWith("http") ? assetPath : `${SITE_URL}${assetPath.startsWith("/") ? "" : "/"}${assetPath}`;
 
+/*
+ * Every case study uses the same structure: CaseStudyHero (image, title,
+ * outcome metrics) → sticky section nav → Opportunity / Solution / Impact →
+ * more case studies → CTA. Content comes from src/data/caseStudies.ts and
+ * src/data/caseStudyDetails.ts; no per-slug layout branches.
+ */
 const CaseStudyDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
@@ -43,29 +34,19 @@ const CaseStudyDetail = () => {
 
   if (!detail || !cs) return null;
 
-  const useAnomalousStyle =
-    detail.slug === "ev-battery-predictive" ||
-    detail.slug === "ecom-inventory" ||
-    detail.slug === "solar-bi" ||
-    detail.slug === "ev-fleet-scheduling" ||
-    detail.slug === "fmcg-edible-oil" ||
-    detail.slug === "pharma-sales-bi" ||
-    detail.slug === "engine-demand-forecast" ||
-    detail.slug === "energy-audit" ||
-    detail.slug === "vc-edtech" ||
-    detail.slug === "pharma-mnc" ||
-    detail.slug === "capital-equipment" ||
-    detail.slug === "cultural-heritage" ||
-    detail.slug === "erp-unification";
-
   const navItems = detail.sections.map((s) => ({ id: s.id, label: s.label }));
 
   const scrollToFirstSection = () => {
     const el = document.getElementById(detail.sections[0].id);
     if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - 96;
+    const top = el.getBoundingClientRect().top + window.scrollY - 120;
     window.scrollTo({ top, behavior: "smooth" });
   };
+
+  // Next three studies that have their own page, wrapping around the list.
+  const withPages = caseStudies.filter((c) => caseStudyDetails[c.id]);
+  const at = withPages.findIndex((c) => c.id === cs.id);
+  const more = [1, 2, 3].map((k) => withPages[(at + k) % withPages.length]).filter((c) => c.id !== cs.id);
 
   return (
     <PageLayout forceLightNavbar>
@@ -92,195 +73,112 @@ const CaseStudyDetail = () => {
         }}
       />
 
-      {detail.slug === "ev-battery-predictive" ? (
-        <CaseStudyEVVideoHero title={detail.heroTitle} onPrimaryCta={scrollToFirstSection} />
-      ) : detail.slug === "fmcg-edible-oil" ? (
-        <CaseStudyEVVideoHero title={detail.heroTitle} videoSrc={fmcgVideoSrc} onPrimaryCta={scrollToFirstSection} />
-      ) : detail.slug === "solar-bi" ? (
-        <CaseStudyImageHero title={detail.heroTitle} imageSrc={solarHeroImage} onPrimaryCta={scrollToFirstSection} />
-      ) : detail.slug === "ev-fleet-scheduling" ? (
-        <CaseStudyImageHero title={detail.heroTitle} imageSrc={fleetHeroImage} onPrimaryCta={scrollToFirstSection} />
-      ) : detail.slug === "pharma-sales-bi" ? (
-        <CaseStudyImageHero title={detail.heroTitle} imageSrc={pharmaHeroImage} onPrimaryCta={scrollToFirstSection} />
-      ) : detail.slug === "engine-demand-forecast" ? (
-        <CaseStudyImageHero title={detail.heroTitle} imageSrc={engineHeroImage} onPrimaryCta={scrollToFirstSection} />
-      ) : detail.slug === "energy-audit" ? (
-        <CaseStudyImageHero title={detail.heroTitle} imageSrc={energyHeroImage} onPrimaryCta={scrollToFirstSection} />
-      ) : detail.slug === "vc-edtech" ? (
-        <CaseStudyImageHero title={detail.heroTitle} imageSrc={edtechHeroImage} onPrimaryCta={scrollToFirstSection} />
-      ) : detail.slug === "pharma-mnc" ? (
-        <CaseStudyImageHero
-          title={detail.heroTitle}
-          imageSrc={pharmaMncHeroImage}
-          onPrimaryCta={scrollToFirstSection}
-        />
-      ) : detail.slug === "capital-equipment" ? (
-        <CaseStudyImageHero title={detail.heroTitle} imageSrc={capitalHeroImage} onPrimaryCta={scrollToFirstSection} />
-      ) : detail.slug === "cultural-heritage" ? (
-        <CaseStudyImageHero
-          title={detail.heroTitle}
-          imageSrc={publicSectorHeroImage}
-          onPrimaryCta={scrollToFirstSection}
-        />
-      ) : detail.slug === "erp-unification" ? (
-        <CaseStudyImageHero title={detail.heroTitle} imageSrc={erpHeroImage} onPrimaryCta={scrollToFirstSection} />
-      ) : useAnomalousStyle ? (
-        <CaseStudyAnomalousHero
-          eyebrow={detail.heroEyebrow}
-          title={detail.heroTitle}
-          subtitle={detail.heroSubtitle}
-          onPrimaryCta={scrollToFirstSection}
-        />
-      ) : (
-        <CaseStudyVideoHero
-          videoUrl={detail.videoUrl}
-          poster={cs.image}
-          eyebrow={detail.heroEyebrow}
-          title={detail.heroTitle}
-          subtitle={detail.heroSubtitle}
-          onPrimaryCta={scrollToFirstSection}
-        />
-      )}
-
-      {useAnomalousStyle && cs.metrics && cs.metrics.length > 0 && (
-        <CaseStudyIntroStats
-          intro={detail.heroSubtitle}
-          stats={cs.metrics.map((m) => ({
-            value: m.value as number | string,
-            suffix: m.suffix,
-            prefix: m.prefix,
-            label: m.label,
-          }))}
-        />
-      )}
+      <CaseStudyHero cs={cs} title={detail.heroTitle} subtitle={detail.heroSubtitle} onPrimaryCta={scrollToFirstSection} />
 
       <SectionNav items={navItems} />
 
-      <article className={`mx-auto ${useAnomalousStyle ? "pt-0" : "max-w-7xl px-6 lg:px-8 pt-20"} pb-24`}>
-        {/* Metrics strip */}
-        {cs.metrics && cs.metrics.length > 0 && !useAnomalousStyle && (
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`grid gap-4 mb-20 ${
-              cs.metrics.length === 1
-                ? "grid-cols-1 max-w-sm mx-auto"
-                : cs.metrics.length === 2
-                  ? "grid-cols-2 max-w-2xl mx-auto"
-                  : "grid-cols-2 sm:grid-cols-3 max-w-4xl mx-auto"
-            }`}
-          >
-            {cs.metrics.map((m) => (
-              <div key={m.label} className="glass-panel rounded-2xl p-6 text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-gradient-orange text-glow-orange mb-2">
-                  {typeof m.value === "number" ? (
-                    <AnimatedCounter end={m.value} suffix={m.suffix || ""} prefix={m.prefix || ""} />
-                  ) : (
-                    <>
-                      {m.prefix || ""}
-                      {m.value}
-                      {m.suffix || ""}
-                    </>
-                  )}
-                </p>
-                <p className="text-xs text-muted-foreground">{m.label}</p>
-              </div>
-            ))}
-          </motion.div>
-        )}
+      <article className="relative overflow-x-clip pb-24">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] via-transparent to-primary/[0.04] pointer-events-none" />
 
-        {/* Sections */}
-        <div className={useAnomalousStyle ? "" : "space-y-28"}>
-          {detail.sections.map((s) => {
-            const inner = (
+        {detail.sections.map((s, si) => (
+          <section key={s.id} id={s.id} className={`relative scroll-mt-32 py-20 sm:py-24 ${si % 2 === 1 ? "bg-primary/[0.035]" : ""}`}>
+            {si === 0 && <SectionGlow position="top-right" size={600} />}
+            <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.55 }}
-                className="grid lg:grid-cols-12 gap-10"
+                className="grid lg:grid-cols-12 gap-10 lg:gap-14"
               >
                 <div className="lg:col-span-4">
-                  <span className="font-mono text-[11px] text-primary tracking-widest uppercase">
-                    {s.number}
-                  </span>
-                  <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-foreground leading-tight tracking-tight">
-                    <span className="text-gradient-orange">{s.label}</span>
-                  </h2>
+                  <div className="lg:sticky lg:top-40">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 border border-primary/25 font-mono text-xs text-primary">
+                        {s.number}
+                      </span>
+                      <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">{s.label}</span>
+                    </div>
+                    <h2 className="text-3xl sm:text-4xl font-bold text-foreground leading-tight tracking-tight">{s.heading}</h2>
+                    <div className="mt-6 h-1 w-16 rounded-full bg-gradient-orange" />
+                  </div>
                 </div>
                 <div className="lg:col-span-8">
-                  <p className="text-sm sm:text-base text-secondary-foreground leading-relaxed mb-6 max-w-3xl">
-                    {s.body}
-                  </p>
+                  <p className="text-base sm:text-lg text-foreground/85 leading-relaxed mb-8">{s.body}</p>
                   {s.bullets && (
-                    <ul className="space-y-4">
+                    <ul className="grid gap-3">
                       {s.bullets.map((b, idx) => (
-                        <li
+                        <motion.li
                           key={idx}
-                          className="flex gap-4 text-base text-secondary-foreground leading-relaxed border-l-2 border-primary/40 pl-5"
+                          initial={{ opacity: 0, x: 12 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.35, delay: idx * 0.05 }}
+                          className="group flex gap-4 rounded-2xl border border-border bg-card/70 p-4 sm:p-5 hover:border-primary/40 transition-colors"
                         >
-                          <span className="font-mono text-[11px] text-primary/70 mt-1 shrink-0">
-                            {String(idx + 1).padStart(2, "0")}
-                          </span>
-                          <span className="flex-1">{b}</span>
-                        </li>
+                          <span className="font-mono text-xs text-primary pt-0.5 shrink-0">{String(idx + 1).padStart(2, "0")}</span>
+                          <span className="text-sm sm:text-base text-secondary-foreground leading-relaxed">{b}</span>
+                        </motion.li>
                       ))}
                     </ul>
                   )}
                 </div>
               </motion.div>
-            );
+            </div>
+          </section>
+        ))}
 
-            if (useAnomalousStyle) {
-              return (
-                <section key={s.id} id={s.id} className="scroll-mt-28">
-                  <CaseStudySectionBackdrop eyebrow={`${s.number} — ${s.label}`} title={s.heading} />
-                  <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">{inner}</div>
-                </section>
-              );
-            }
+        {/* More case studies */}
+        <section className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-20">
+          <div className="flex items-end justify-between gap-4 mb-8">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary mb-2">Keep reading</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">More case studies</h2>
+            </div>
+            <Link to="/case-studies" className="hidden sm:inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <ArrowLeft size={14} /> All case studies
+            </Link>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5">
+            {more.map((m) => (
+              <Link
+                key={m.id}
+                to={`/case-studies/${m.id}`}
+                className="group rounded-2xl overflow-hidden border border-border bg-card/70 hover:border-primary/40 transition-colors"
+              >
+                <CaseStudyMedia src={m.image} alt={m.title} className="h-40" shade />
+                <div className="p-5">
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-primary mb-1.5">{m.industry}</p>
+                  <p className="text-sm font-semibold text-foreground leading-snug group-hover:text-primary transition-colors">{m.title}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
 
-            return (
-              <section key={s.id} id={s.id} className="scroll-mt-28">
-                {inner}
-              </section>
-            );
-          })}
-        </div>
-
-        <div className={useAnomalousStyle ? "max-w-7xl mx-auto px-6 lg:px-8" : ""}>
-          {/* CTA */}
+        {/* CTA */}
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-panel rounded-2xl p-10 text-center glow-orange mt-28"
+            className="relative mt-20 overflow-hidden rounded-3xl bg-[#0b0908] text-white p-10 sm:p-14 text-center"
           >
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-              Ready to build your <span className="text-gradient-orange">success story?</span>
-            </h2>
-            <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
-              The next phase of your data story starts here.
-            </p>
-            <Link
-              to="/contact"
-              data-cursor-hover
-              className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-8 py-3.5 rounded-lg font-medium hover:opacity-90 transition-opacity glow-orange"
-            >
-              Start a conversation <ArrowRight size={16} />
-            </Link>
+            <div aria-hidden="true" className="absolute -top-24 left-1/2 -translate-x-1/2 h-64 w-[36rem] rounded-full bg-[hsl(25_100%_50%/0.25)] blur-[100px]" />
+            <div className="relative">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4">
+                Ready to build your <span className="text-gradient-orange">success story?</span>
+              </h2>
+              <p className="text-white/65 mb-8 max-w-lg mx-auto">The next phase of your data story starts here.</p>
+              <Link
+                to="/contact"
+                data-cursor-hover
+                className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-8 py-3.5 rounded-lg font-medium hover:opacity-90 transition-opacity glow-orange"
+              >
+                Start a conversation <ArrowRight size={16} />
+              </Link>
+            </div>
           </motion.div>
-
-          <div className="mt-12 text-center">
-            <Link
-              to="/case-studies"
-              data-cursor-hover
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <ArrowLeft size={14} /> Back to all case studies
-            </Link>
-          </div>
         </div>
       </article>
     </PageLayout>
