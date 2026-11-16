@@ -1,11 +1,23 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Clock, CalendarDays, Share2, ArrowUp, Linkedin } from "lucide-react";
+import { ArrowLeft, Clock, CalendarDays, Share2, ArrowUp, Linkedin, Lightbulb } from "lucide-react";
 import { useState, useEffect } from "react";
 import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import { blogPosts, BlogSection, BlogImage } from "@/data/blogPosts";
 import { Badge } from "@/components/ui/badge";
+
+const ImageCredit = ({ image }: { image: BlogImage }) =>
+  image.credit ? (
+    <a
+      href={image.creditUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-primary hover:underline not-italic"
+    >
+      Photo by {image.credit}
+    </a>
+  ) : null;
 
 const ImageBlock = ({ image }: { image: BlogImage }) => (
   <figure className="my-8 sm:my-12 -mx-4 sm:mx-0">
@@ -18,16 +30,141 @@ const ImageBlock = ({ image }: { image: BlogImage }) => (
       />
     </div>
     <figcaption className="mt-3 px-4 sm:px-0 text-xs sm:text-sm text-muted-foreground italic leading-relaxed">
-      {image.caption}{" "}
-      <a
-        href={image.creditUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-primary hover:underline not-italic"
-      >
-        Photo by {image.credit}
-      </a>
+      {image.caption} <ImageCredit image={image} />
     </figcaption>
+  </figure>
+);
+
+const TakeawaysBlock = ({ section }: { section: BlogSection }) => (
+  <aside className="my-8 sm:my-10 rounded-xl border border-primary/30 bg-primary/[0.06] p-5 sm:p-7">
+    <p className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.18em] text-primary mb-4">
+      <Lightbulb size={14} /> {section.title ?? "Key takeaways"}
+    </p>
+    <ul className="space-y-3">
+      {section.items?.map((item, i) => (
+        <li key={i} className="flex gap-3 font-blog-body text-[15px] sm:text-base text-foreground leading-relaxed">
+          <span className="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-[11px] font-semibold text-primary-foreground">
+            {i + 1}
+          </span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </aside>
+);
+
+const ComparisonBlock = ({ section }: { section: BlogSection }) => {
+  const columns = section.columns ?? [];
+  return (
+    <figure className="my-8 sm:my-10">
+      {section.title && (
+        <figcaption className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground mb-3">
+          {section.title}
+        </figcaption>
+      )}
+      {/* Desktop: table */}
+      <div className="hidden sm:block overflow-hidden rounded-xl border border-border">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="bg-muted/60">
+              <th className="w-[22%] p-4" />
+              {columns.map((c, i) => (
+                <th
+                  key={c}
+                  className={`p-4 font-blog-heading text-base font-bold ${i === columns.length - 1 ? "text-primary" : "text-foreground"}`}
+                >
+                  {c}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {section.rows?.map((row) => (
+              <tr key={row.label} className="border-t border-border align-top">
+                <th className="p-4 text-xs font-mono uppercase tracking-wider text-muted-foreground font-medium">
+                  {row.label}
+                </th>
+                {row.values.map((v, i) => (
+                  <td key={i} className="p-4 font-blog-body text-[15px] text-secondary-foreground leading-relaxed">
+                    {v}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {/* Mobile: stacked cards */}
+      <div className="sm:hidden space-y-3">
+        {section.rows?.map((row) => (
+          <div key={row.label} className="rounded-xl border border-border p-4">
+            <p className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground mb-3">{row.label}</p>
+            <dl className="space-y-2.5">
+              {row.values.map((v, i) => (
+                <div key={i}>
+                  <dt className={`text-sm font-semibold ${i === columns.length - 1 ? "text-primary" : "text-foreground"}`}>
+                    {columns[i]}
+                  </dt>
+                  <dd className="font-blog-body text-[15px] text-secondary-foreground leading-relaxed">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        ))}
+      </div>
+    </figure>
+  );
+};
+
+const StepsBlock = ({ section }: { section: BlogSection }) => (
+  <ol className="my-8 sm:my-10 relative">
+    {section.entries?.map((entry, i, arr) => (
+      <li key={i} className="relative flex gap-4 sm:gap-5 pb-7 last:pb-0">
+        {i < arr.length - 1 && (
+          <span className="absolute left-[17px] top-10 bottom-0 w-px bg-border" aria-hidden />
+        )}
+        <span className="relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/50 bg-background font-mono text-sm font-semibold text-primary">
+          {String(i + 1).padStart(2, "0")}
+        </span>
+        <div className="pt-1">
+          <p className="font-blog-heading text-lg font-bold text-foreground mb-1.5">{entry.title}</p>
+          <p className="font-blog-body text-base sm:text-[17px] text-secondary-foreground leading-[1.75]">{entry.content}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+);
+
+const CardsBlock = ({ section }: { section: BlogSection }) => (
+  <div className="my-8 sm:my-10 grid gap-4 sm:grid-cols-2">
+    {section.entries?.map((entry, i) => (
+      <div
+        key={i}
+        className="group rounded-xl border border-border bg-muted/30 p-5 transition-colors hover:border-primary/40"
+      >
+        <span className="block h-[3px] w-8 rounded-full bg-gradient-orange mb-4 transition-all group-hover:w-14" />
+        <p className="font-blog-heading text-lg font-bold text-foreground mb-2">{entry.title}</p>
+        <p className="font-blog-body text-[15px] text-secondary-foreground leading-relaxed">{entry.content}</p>
+      </div>
+    ))}
+  </div>
+);
+
+const CodeBlock = ({ section }: { section: BlogSection }) => (
+  <figure className="my-8 sm:my-10 -mx-4 sm:mx-0 overflow-hidden sm:rounded-xl border-y sm:border border-border bg-muted/40">
+    <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
+      <span className="flex gap-1.5" aria-hidden>
+        <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
+        <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
+        <span className="h-2.5 w-2.5 rounded-full bg-primary/70" />
+      </span>
+      <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
+        {section.title ?? section.language}
+      </span>
+    </div>
+    <pre className="overflow-x-auto p-4 sm:p-5 text-[13px] leading-relaxed font-mono text-foreground">
+      <code>{section.content}</code>
+    </pre>
   </figure>
 );
 
@@ -78,6 +215,16 @@ const SectionBlock = ({ section }: { section: BlogSection }) => {
           </p>
         </div>
       );
+    case "takeaways":
+      return <TakeawaysBlock section={section} />;
+    case "comparison":
+      return <ComparisonBlock section={section} />;
+    case "steps":
+      return <StepsBlock section={section} />;
+    case "cards":
+      return <CardsBlock section={section} />;
+    case "code":
+      return <CodeBlock section={section} />;
     default:
       return null;
   }
@@ -101,6 +248,11 @@ const BlogPostPage = () => {
   }, []);
 
   if (!post) return <Navigate to="/blog" replace />;
+
+  const creditedImages = [
+    post.heroImage,
+    ...post.sections.filter((s) => s.image).map((s) => s.image!),
+  ].filter((img) => img.credit);
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -207,28 +359,37 @@ const BlogPostPage = () => {
         </header>
 
         {/* Hero image */}
-        <div className="max-w-4xl mx-auto px-0 sm:px-6 lg:px-8 mb-10">
-          <figure>
-            <div className="overflow-hidden sm:rounded-xl">
-              <img
-                src={post.heroImage.src}
-                alt={post.heroImage.alt}
-                className="w-full object-cover aspect-[2/1] sm:aspect-[21/9]"
-              />
-            </div>
-            <figcaption className="mt-3 px-6 sm:px-0 text-xs sm:text-sm text-muted-foreground italic leading-relaxed">
-              {post.heroImage.caption}{" "}
-              <a
-                href={post.heroImage.creditUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline not-italic"
-              >
-                Photo by {post.heroImage.credit}
-              </a>
-            </figcaption>
-          </figure>
-        </div>
+        {post.heroImage.layout === "artwork" ? (
+          <div className="max-w-3xl mx-auto px-6 lg:px-8 mb-10">
+            <figure>
+              <div className="mx-auto max-w-xl overflow-hidden rounded-xl border border-border shadow-[0_20px_60px_-25px_hsl(var(--primary)/0.45)]">
+                <img
+                  src={post.heroImage.src}
+                  alt={post.heroImage.alt}
+                  className="w-full h-auto block"
+                />
+              </div>
+              <figcaption className="mt-4 mx-auto max-w-xl text-center text-xs sm:text-sm text-muted-foreground italic leading-relaxed">
+                {post.heroImage.caption} <ImageCredit image={post.heroImage} />
+              </figcaption>
+            </figure>
+          </div>
+        ) : (
+          <div className="max-w-4xl mx-auto px-0 sm:px-6 lg:px-8 mb-10">
+            <figure>
+              <div className="overflow-hidden sm:rounded-xl">
+                <img
+                  src={post.heroImage.src}
+                  alt={post.heroImage.alt}
+                  className="w-full object-cover aspect-[2/1] sm:aspect-[21/9]"
+                />
+              </div>
+              <figcaption className="mt-3 px-6 sm:px-0 text-xs sm:text-sm text-muted-foreground italic leading-relaxed">
+                {post.heroImage.caption} <ImageCredit image={post.heroImage} />
+              </figcaption>
+            </figure>
+          </div>
+        )}
 
         {/* Body content */}
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
@@ -260,11 +421,12 @@ const BlogPostPage = () => {
             </div>
           </div>
 
-          {/* Image credits */}
+          {/* Image credits (only for credited third-party photos) */}
+          {creditedImages.length > 0 && (
           <div className="mt-12 pt-6 border-t border-border/50">
             <p className="text-xs text-muted-foreground mb-2 font-mono uppercase tracking-wider">Image Credits</p>
             <ul className="space-y-1">
-              {[post.heroImage, ...post.sections.filter(s => s.image).map(s => s.image!)].map((img, i) => (
+              {creditedImages.map((img, i) => (
                 <li key={i} className="text-xs text-muted-foreground">
                   <a href={img.creditUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                     {img.credit}
@@ -274,6 +436,7 @@ const BlogPostPage = () => {
               ))}
             </ul>
           </div>
+          )}
         </div>
       </article>
 

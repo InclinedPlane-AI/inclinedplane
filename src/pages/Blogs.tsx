@@ -10,9 +10,13 @@ import { blogPosts, allTags } from "@/data/blogPosts";
 const Blogs = () => {
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
+  // Newest first
+  const sorted = [...blogPosts].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
   const filtered = activeTag
-    ? blogPosts.filter((p) => p.tags.includes(activeTag))
-    : blogPosts;
+    ? sorted.filter((p) => p.tags.includes(activeTag))
+    : sorted;
 
   return (
     <PageLayout>
