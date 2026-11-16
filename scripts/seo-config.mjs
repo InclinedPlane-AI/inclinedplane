@@ -151,6 +151,88 @@ const staticRoutes = [
     ],
   },
   {
+    // Mirrors src/pages/Products.tsx (hub) and the two product pages below.
+    // Product facts come from the PipelineIQ project reference and the
+    // Inclever product walkthrough (claims register honoured: no client
+    // names, no unverified performance figures).
+    path: "/products",
+    title: "Products — PipelineIQ & Inclever",
+    description:
+      "PipelineIQ: read-only pipeline monitoring and ETL debugging. Inclever: governed AI analytics with an AI Readiness Control Tower that audits whether your data is fit for AI.",
+    noscriptSummary:
+      "InclinedPlane products. PipelineIQ is a read-only monitoring, alerting and ETL-debugging portal for data engineers and platform teams that turns hundreds of pipeline failures into a handful of root causes. Inclever is governed AI analytics for business users and analysts: people ask plain-English questions in Microsoft Teams and Inclever answers only when the data has earned it, backed by an AI Readiness Control Tower that audits and certifies data for AI.",
+    pageJsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "InclinedPlane products",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "PipelineIQ", url: `${SITE_URL}/products/pipelineiq` },
+          { "@type": "ListItem", position: 2, name: "Inclever", url: `${SITE_URL}/products/inclever` },
+        ],
+      },
+    ],
+  },
+  {
+    path: "/products/pipelineiq",
+    title: "PipelineIQ — Pipeline Monitoring & ETL Debugging",
+    description:
+      "PipelineIQ is a read-only monitoring, alerting and ETL-debugging portal that turns hundreds of pipeline failures into a handful of root causes, with adaptive alerts that close themselves.",
+    noscriptSummary:
+      "PipelineIQ is a read-only monitoring, alerting and ETL-debugging portal for enterprise data platforms, built for data engineers and platform teams: engineers on support, platform leads, release managers, ingestion and warehouse owners. It merges failures from the run log, orchestrator and compute engine into one error history, separates root causes from cascaded failures, and groups them into error signatures with the real stack trace and links to the exact run. Twelve kinds of alert, all adaptive (each table judged against its own history) or rolled up per environment, update while a problem lasts and close themselves when it clears. It installs nothing in the client estate, enforces read-only SQL in code, never scans warehouse table data, and keeps data local. It is delivered through a forward-deployed engineering model: a stable core plus a client layer built for each estate.",
+    pageJsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: "PipelineIQ",
+        applicationCategory: "BusinessApplication",
+        applicationSubCategory: "Data pipeline observability",
+        operatingSystem: "Web",
+        url: `${SITE_URL}/products/pipelineiq`,
+        description:
+          "Read-only monitoring, alerting and ETL-debugging portal for enterprise data platforms. Merges failures across tools into root-cause error signatures with adaptive, self-resolving alerts.",
+        publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+      },
+    ],
+  },
+  {
+    path: "/products/inclever",
+    title: "Inclever — Governed AI Analytics & AI Readiness",
+    description:
+      "Inclever answers plain-English data questions in Microsoft Teams only when your data has earned it, backed by an AI Readiness Control Tower that audits and certifies data for AI.",
+    noscriptSummary:
+      "Inclever is governed AI analytics, built for business users and analysts (with finance leadership, heads of data and audit teams relying on and governing it). People ask plain-English questions in Microsoft Teams; every question is matched only against defined metrics, confirmed with the user, then passes three gates in order (entitlement, answerability, assurance) before a number is given. Answers carry their evidence; otherwise Inclever holds the answer for a named reviewer or refuses with the specific failing check and routes a task to a named owner with a clock. Its AI Readiness Control Tower (ARCT) continuously audits data assets and business definitions in seven stages, records Passed, Failed or Not evaluated verdicts with coverage, and issues or withholds readiness certificates that expire automatically. When a blocking rule fails, every question downstream is held automatically.",
+    pageJsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: "Inclever",
+        applicationCategory: "BusinessApplication",
+        applicationSubCategory: "Governed AI analytics",
+        operatingSystem: "Web",
+        url: `${SITE_URL}/products/inclever`,
+        description:
+          "Governed AI analytics. Plain-English questions in Microsoft Teams, answered only after entitlement, answerability and assurance checks, backed by an AI Readiness Control Tower that audits and certifies data for AI use.",
+        publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          ["Does Inclever replace our BI tool?", "No. It answers from your existing signed-off dashboards first, and only generates an answer when nothing already built covers the question."],
+          ["Can the AI make up a metric or a number?", "It is designed not to. The AI can only select from metrics, dimensions and time windows you have defined, and every selection is validated. Numbers come from your data through those definitions, not from the model."],
+          ["What happens when the data has a problem?", "The audit verdicts decide. A blocking issue stops Inclever answering on that data and names the failing check; lesser issues mean the answer is held for review or marked provisional. Each case raises a task for the data owner."],
+          ["Will someone learn anything about data they are not allowed to see?", "No. Permission is checked first, before anything about the data's state is read, so a refusal reveals nothing about the number."],
+          ["Is every conversation auditable?", "Yes. Every question, gate decision, refusal, task and exception is written to a permanent decision record you can replay in Monitor."],
+        ].map(([q, a]) => ({
+          "@type": "Question",
+          name: q,
+          acceptedAnswer: { "@type": "Answer", text: a },
+        })),
+      },
+    ],
+  },
+  {
     path: "/industries",
     title: "Industries We Serve",
     description:

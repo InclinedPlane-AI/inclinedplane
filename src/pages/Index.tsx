@@ -42,7 +42,19 @@ import {
   Store,
 } from "lucide-react";
 
-const SLIDE_COUNT = 10;
+import ServicesExplorer from "@/components/home/ServicesExplorer";
+import ProductsShowcase from "@/components/home/ProductsShowcase";
+import CaseStudyMedia from "@/components/case-study/CaseStudyMedia";
+import { caseStudies } from "@/data/caseStudies";
+import { PRODUCTS } from "@/data/products";
+
+const SLIDE_COUNT = 11;
+
+// Results slide reads its numbers straight from the case study data so the
+// home page can never drift from what each case study actually says.
+const RESULT_STUDIES = ["engine-demand-forecast", "ev-battery-predictive", "ecom-inventory"]
+  .map((id) => caseStudies.find((c) => c.id === id))
+  .filter((c): c is (typeof caseStudies)[number] => !!c && !!c.metrics?.length);
 
 // Shared viewport config for all whileInView — only animate once
 const vp = { once: true, amount: 0.2 } as const;
@@ -115,13 +127,15 @@ const Index = () => {
       case 4:
         return "/services"; // Our Services
       case 5:
-        return "/case-studies"; // Proven Results
+        return "/products"; // Our Products
       case 6:
+        return "/case-studies"; // Proven Results
       case 7:
-        return "/about"; // Evolution + Why Us
       case 8:
-        return "/careers"; // Careers Teaser
+        return "/about"; // Evolution + Why Us
       case 9:
+        return "/careers"; // Careers Teaser
+      case 10:
         return "/contact"; // Final CTA
       default:
         return "/"; //close section
@@ -213,12 +227,19 @@ const Index = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.6, duration: 0.5 }}
-                  className="mt-8 sm:mt-12 flex flex-wrap items-center gap-4 sm:gap-6 text-xs font-mono text-muted-foreground"
+                  className="mt-8 sm:mt-12 flex flex-wrap items-center gap-2.5 pointer-events-auto"
                 >
-                  {["AWS", "Azure", "Snowflake", "Databricks", "dbt", "n8n"].map((t) => (
-                    <span key={t} className="opacity-50">
-                      {t}
-                    </span>
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mr-1">Our products</span>
+                  {PRODUCTS.map((p) => (
+                    <Link
+                      key={p.id}
+                      to={p.path}
+                      className="group inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3.5 py-1.5 text-xs text-foreground hover:border-primary/60 hover:bg-primary/10 transition-colors"
+                    >
+                      <span className="font-semibold">{p.name}</span>
+                      <span className="text-muted-foreground hidden sm:inline">{p.kicker}</span>
+                      <ArrowRight size={12} className="text-primary transition-transform group-hover:translate-x-0.5" />
+                    </Link>
                   ))}
                 </motion.div>
               </div>
@@ -553,62 +574,9 @@ const Index = () => {
                   in design.
                 </p>
               </motion.div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-5 sm:mb-8">
-                {[
-                  {
-                    title: "Data & AI Consultancy",
-                    label: "Clarity Layer",
-                    desc: "Know what to build, in what order, and why, before you spend a pound on infrastructure.",
-                    icon: Target,
-                  },
-                  {
-                    title: "Data Foundation & Architecture",
-                    label: "AI-Readiness Foundation",
-                    desc: "The base everything else sits on. Built for your current needs and your future AI ambitions.",
-                    icon: Database,
-                  },
-                  {
-                    title: "Data Reliability & DataOps",
-                    label: "Reliability Layer",
-                    desc: "Engineering-grade pipelines, observability, and CI/CD. If you can't trust it, you can't use it.",
-                    icon: Shield,
-                  },
-                  {
-                    title: "Analytics & BI",
-                    label: "Analytics Layer",
-                    desc: "From executive dashboards to self-serve analytics. Data your stakeholders stop questioning.",
-                    icon: BarChart3,
-                  },
-                  {
-                    title: "Predictive & AI Implementation",
-                    label: "Predictive Layer",
-                    desc: "Forecasting, risk scoring, ML in production. No science projects. Just production.",
-                    icon: TrendingUp,
-                  },
-                  {
-                    title: "Automation & Decision Systems",
-                    label: "Intelligence Layer",
-                    desc: "AI agents that monitor, reason, and act. From reading dashboards to receiving intelligence.",
-                    icon: Brain,
-                  },
-                ].map(({ title, label, desc, icon: Icon }, i) => (
-                  <motion.div
-                    key={title}
-                    {...fadeUp(i * 0.08)}
-                    className="glass-panel rounded-xl p-5 lg:p-6 group flex flex-col hover:glow-orange transition-shadow"
-                    data-cursor-hover
-                  >
-                    <div className="w-10 h-10 rounded-lg surface-3 flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
-                      <Icon size={18} className="text-primary" />
-                    </div>
-                    <p className="text-[10px] sm:text-xs text-primary font-mono mb-1.5 uppercase tracking-wider">
-                      {label}
-                    </p>
-                    <h3 className="font-semibold text-foreground text-base mb-2">{title}</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed flex-1">{desc}</p>
-                  </motion.div>
-                ))}
-              </div>
+              <motion.div {...fadeUp(0.1)} className="mb-5 sm:mb-8">
+                <ServicesExplorer />
+              </motion.div>
               <motion.div {...fadeUp(0.4)} className="text-center">
                 <Link
                   to="/services"
@@ -616,6 +584,32 @@ const Index = () => {
                 >
                   Explore all services{" "}
                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* SLIDE 5 — OUR PRODUCTS */}
+          <section className="snap-section flex items-center relative">
+            <SectionGlow position="top-left" size={650} />
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+              <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-6 sm:mb-10">
+                <p className="font-mono text-xs text-primary tracking-widest uppercase mb-2 sm:mb-3">OUR PRODUCTS</p>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3">
+                  Built in the field. <span className="text-gradient-orange">Proven on real estates.</span>
+                </h2>
+                <p className="text-sm sm:text-base text-muted-foreground">
+                  Two platforms that grew out of our delivery work: one for the engineers who keep data flowing, one for the
+                  people who make decisions with it.
+                </p>
+              </motion.div>
+              <ProductsShowcase />
+              <motion.div {...fadeUp(0.3)} className="mt-6 sm:mt-8 text-center">
+                <Link
+                  to="/products"
+                  className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full glass-panel text-foreground font-medium text-sm hover:text-primary transition-colors group"
+                >
+                  Compare both products <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
             </div>
@@ -637,55 +631,36 @@ const Index = () => {
                 </p>
               </motion.div>
               <div className="grid sm:grid-cols-3 gap-6 mb-10">
-                {[
-                  {
-                    value: 17,
-                    suffix: "%",
-                    prefix: "",
-                    label: "Inventory cost reduction",
-                    attribution: "India's foremost sunflower oil producer · FMCG",
-                    slug: "fmcg-edible-oil",
-                  },
-                  {
-                    value: 98,
-                    suffix: "%+",
-                    prefix: "",
-                    label: "Predictive maintenance accuracy",
-                    attribution: "Battery-as-a-Service operator · Mobility / IoT",
-                    slug: "ev-battery-predictive",
-                  },
-                  {
-                    value: 24,
-                    suffix: "%",
-                    prefix: "",
-                    label: "Stock-out reduction",
-                    attribution: "E-Commerce · 100,000s of SKUs",
-                    slug: "ecom-inventory",
-                  },
-                ].map(({ value, suffix, prefix, label, attribution, slug }, i) => (
-                  <motion.div
-                    key={slug}
-                    {...fadeUp(i * 0.08)}
-                  >
-                    <Link
-                      to={`/case-studies/${slug}`}
-                      className="glass-panel rounded-xl p-8 text-center group hover:glow-orange transition-shadow flex flex-col justify-between h-full block"
-                    >
-                      <div>
-                        <p className="text-4xl lg:text-5xl font-bold mb-4 text-gradient-orange">
-                          <AnimatedCounter end={value} suffix={suffix} prefix={prefix} />
-                        </p>
-                        <p className="text-sm text-foreground font-medium leading-relaxed mb-6">{label}</p>
-                      </div>
-                      <div className="pt-4 border-t border-border/50 flex items-center justify-between gap-2">
-                        <p className="text-[10px] text-primary font-mono uppercase tracking-widest text-left">
-                          {attribution}
-                        </p>
-                        <ArrowRight size={12} className="text-primary shrink-0 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
-                      </div>
-                    </Link>
-                  </motion.div>
-                ))}
+                {RESULT_STUDIES.map((cs, i) => {
+                  const m = cs.metrics![0];
+                  return (
+                    <motion.div key={cs.id} {...fadeUp(i * 0.08)}>
+                      <Link
+                        to={`/case-studies/${cs.id}`}
+                        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card/80 hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_24px_60px_-30px_hsl(25_100%_50%/0.5)] transition-all duration-300"
+                      >
+                        <div className="relative">
+                          <CaseStudyMedia src={cs.image} alt={cs.title} className="h-28 sm:h-32" shade />
+                          <span className="absolute bottom-2.5 left-4 font-mono text-[10px] uppercase tracking-wider text-white/85">{cs.industry}</span>
+                        </div>
+                        <div className="p-6 flex flex-1 flex-col">
+                          <p className="text-4xl lg:text-5xl font-bold mb-2 text-gradient-orange">
+                            {typeof m.value === "number" ? (
+                              <AnimatedCounter end={m.value} suffix={m.suffix || ""} prefix={m.prefix || ""} />
+                            ) : (
+                              <>{m.prefix || ""}{m.value}{m.suffix || ""}</>
+                            )}
+                          </p>
+                          <p className="text-sm text-foreground font-medium mb-4">{m.label}</p>
+                          <div className="mt-auto pt-4 border-t border-border/50 flex items-center justify-between gap-2">
+                            <p className="text-xs text-muted-foreground leading-snug line-clamp-2">{cs.title}</p>
+                            <ArrowRight size={14} className="text-primary shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                          </div>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </div>
               <motion.div {...fadeUp(0.4)} className="text-center">
                 <Link

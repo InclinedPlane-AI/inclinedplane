@@ -7,6 +7,9 @@
 - [Homepage](https://inclinedplane.com/): Overview of services, thesis, and approach.
 - [Our Thesis](https://inclinedplane.com/thesis): Deep technical manifesto on why modern enterprises need engineering-grade data systems and decision platforms built from source to intelligence.
 - [Services](https://inclinedplane.com/services): Five layers of data infrastructure — Clarity (data and AI advisory), Data Architecture (foundation modernization), Reliability and Ops, Analytics and Intelligence, AI/ML Implementations, and Automation Systems.
+- [Products](https://inclinedplane.com/products): Overview of InclinedPlane's two products.
+- [PipelineIQ](https://inclinedplane.com/products/pipelineiq): For data engineers and platform teams. Read-only pipeline monitoring, alerting and ETL debugging that collapses failures into root-cause error signatures, with adaptive, self-resolving alerts. Delivered on a forward-deployed engineering model.
+- [Inclever](https://inclinedplane.com/products/inclever): For business users and analysts. Governed AI analytics in Microsoft Teams: three gates before every answer, plus an AI Readiness Control Tower that audits data and issues or withholds readiness certificates.
 - [Industries](https://inclinedplane.com/industries): Vertical expertise in retail, finance, healthcare, manufacturing, energy, SaaS, BPO, and education.
 - [Case Studies](https://inclinedplane.com/case-studies): 14 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector, and renewables.
 - [About](https://inclinedplane.com/about): Company evolution from Sail Analytics to InclinedPlane and the team building decision systems for high-velocity enterprises.
@@ -17,6 +20,11 @@
 
 - [Dashboards Are Not a Competitive Advantage Anymore](https://inclinedplane.com/blog/dashboards-are-not-competitive-advantage): Why visibility alone won't move your business forward, and what the next generation of data-driven companies actually look like. By Keerthana Vayyasi, Founder & CEO. Published February 19, 2026.
 - [The Hidden Cost of 'Almost Reliable' Data Pipelines](https://inclinedplane.com/blog/hidden-cost-of-almost-reliable-data-pipelines): Silent failures are more dangerous than obvious ones. How "good enough" data infrastructure is quietly eroding competitive position. Published February 23, 2026.
+- [Synthetic Data: The Useful Myth](https://inclinedplane.com/blog/synthetic-data-the-useful-myth): Where synthetic data genuinely helps (test environments, privacy-safe sharing, rare-class rebalancing) and why it can never replace real-world validation. By Mohan Gowda T, Senior Data Engineer. Published March 17, 2026.
+- [Explainability: Why "The Model Said So" Isn't an Answer](https://inclinedplane.com/blog/explainability-why-the-model-said-so-isnt-an-answer): Tracing automated decisions back to their inputs, logic, and data, for affected people, operators, auditors, and engineers. By Mohan Gowda T, Senior Data Engineer. Published May 5, 2026.
+- [Data Contracts: The Upstream Team Changed a Column and Didn't Tell You](https://inclinedplane.com/blog/data-contracts-upstream-team-changed-a-column): How explicit, enforced agreements between data producers and consumers prevent silent schema and semantic breakages. By Mohan Gowda T, Senior Data Engineer. Published June 23, 2026.
+- [Data Gravity: Why Your Architecture Follows Your Data, Not the Other Way Around](https://inclinedplane.com/blog/data-gravity-architecture-follows-your-data): Why large datasets pull applications and AI workloads toward them, and how to design with that pull instead of against it. By Mohan Gowda T, Senior Data Engineer. Published August 11, 2026.
+- [Data Stewards vs. Data Engineers: Why Conflating the Two Roles Slows Everyone Down](https://inclinedplane.com/blog/data-stewards-vs-data-engineers): The difference between building data infrastructure and owning what data means, and why merging the roles means stewardship gets skipped. By Mohan Gowda T, Senior Data Engineer. Published October 6, 2026.
 
 ## Case studies
 

@@ -10,6 +10,9 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import Index from "./pages/Index";
 import Thesis from "./pages/Thesis";
 import ServicesPage from "./pages/Services";
+import Products from "./pages/Products";
+import ProductPipelineIQ from "./pages/ProductPipelineIQ";
+import ProductInclever from "./pages/ProductInclever";
 // import Industries from "./pages/Industries";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
@@ -86,6 +89,9 @@ const App = () => {
                   <Route path="/" element={<Index />} />
                   <Route path="/thesis" element={<Thesis />} />
                   <Route path="/services" element={<ServicesPage />} />
+                  <Route path="/products" element={<Products />} />
+                  <Route path="/products/pipelineiq" element={<ProductPipelineIQ />} />
+                  <Route path="/products/inclever" element={<ProductInclever />} />
                   {/* <Route path="/industries" element={<Industries />} /> */}
                   <Route path="/case-studies" element={<CaseStudies />} />
                   <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
