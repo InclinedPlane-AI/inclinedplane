@@ -5,7 +5,7 @@ is finished, what is in progress, what is left, and every decision already made,
 so nobody re-does or re-litigates work. Update it in the same commit as the work
 it describes.
 
-Last updated: 2026-11-21 (session 1)
+Last updated: 2026-11-21 (end of session 1)
 
 ---
 
@@ -110,58 +110,80 @@ Legend: [x] done · [~] in progress · [ ] not started
 
 ### Phase 0: setup and audit
 - [x] Branch `revamp` created from `feat/live-home-demos` and pushed to the org repo
-- [x] Branch protection on `revamp`
-- [x] Staging workflow + `scripts/vercel-output.mjs` written (unpushed, needs workflow scope)
-- [x] Brand assets exported to `public/`
-- [x] PROGRESS.md (this file), DESIGN_NOTES.md, CONTRIBUTING.md
-- [ ] Lighthouse baseline of current production (record in DESIGN_NOTES)
+- [x] Branch protection on `revamp` (PR + 1 approval, admin bypass)
+- [x] Staging workflow + `scripts/vercel-output.mjs` (workflow on local branch `ci/staging-workflow`, unpushed: needs `workflow` scope)
+- [x] Brand assets exported and trimmed in `public/brand/`
+- [x] PROGRESS.md, DESIGN_NOTES.md, CONTRIBUTING.md, CLAUDE.md updated
+- [ ] Lighthouse baseline of current production + after (record in DESIGN_NOTES §7)
 
 ### Phase 1: design system
-- [ ] Tokens (color, type, spacing, radii) in `src/index.css` + Tailwind
-- [ ] Self-hosted Google Sans Flex + IBM Plex Mono labels
-- [ ] Content files in `src/content/`
-- [ ] Site header (sticky, compact on scroll, mobile menu), footer with pattern strip
-- [ ] Buttons, section label, tags, stat (server-rendered values), CTA band, FAQ
-- [ ] Verification marker component + build guard
-- [ ] Booking dialog (form + Calendly), global open hook, `?book=1` deep link
-- [ ] Incline component (static + interactive, one entrance animation, reduced motion)
+- [x] Tokens (color, type, spacing, radii) in `src/index.css` + Tailwind `ip-*` colors
+- [x] Self-hosted Google Sans Flex (from the founder file) + IBM Plex Mono via @fontsource
+- [x] Content files in `src/content/` (site, stats, capabilities, tools, industries, caseStudyMeta, flags, verify, learn, assessment, inclever, pipelineiq)
+- [x] Header (sticky, mobile menu), footer with pattern strip, layout with skip link
+- [x] Primitives (buttons, labels, step tags, verify badge), sections (hero, CTA band, final CTA, proof strip, tools table, case study card, FAQ, IncLever card)
+- [x] Verification markers: badge on staging, hidden in production; prerender prints the count
+- [x] Booking dialog (form → Formspree, or Calendly), `?book=1` / `?book=calendar`, query-param prefill
+- [x] Incline component (home with one rise-in, interactive tabs, mini)
 
-### Phase 2: pages
-- [ ] Home (founder design, refined)
-- [ ] /capabilities overview (interactive incline)
-- [ ] /capabilities/context-engineering (+ "same question, two answers" widget)
-- [ ] /capabilities/ai-agent-readiness (+ IncLever block)
-- [ ] /capabilities/data-engineering-governance
-- [ ] /capabilities/agentic-analytics
-- [ ] /assessment (two-path booking, what you get, FAQ)
-- [ ] /products/inclever (restructure existing content, demo clip)
-- [ ] /products hub + /products/pipelineiq (restyle)
-- [ ] /case-studies index (filter by step + industry, featured large)
-- [ ] /case-studies/:slug template (Opportunity / Solution / Impact)
-- [ ] /industries (5 ICP industries, manufacturing first)
-- [ ] /about (story, name meaning, principles, leadership)
-- [ ] /learn index + first 3 explainers
-- [ ] /blog + /blog/:slug restyle (URLs kept; labeled "Insights")
-- [ ] /thesis restyle
-- [ ] /contact restyle (Formspree preserved)
-- [ ] /careers + /referral restyle (keep CLAUDE.md design contracts)
-- [ ] Legal pages + 404 restyle
-- [ ] Remove legacy components/assets no longer imported
+### Phase 2: pages (all built; screenshots checked at 1440 and 390)
+- [x] Home (founder design)
+- [x] /capabilities + four capability pages (context page has "same question, two answers")
+- [x] /assessment
+- [x] /products, /products/inclever, /products/pipelineiq
+- [x] /case-studies (filterable) + /case-studies/:slug template
+- [x] /industries
+- [x] /about
+- [x] /learn + 3 explainers + glossary
+- [x] /blog (Insights) + posts, /thesis
+- [x] /contact, /careers, /referral, legal pages, 404
+- [x] Legacy components, pages, media and unused packages removed (bundle ~1.5 MB → ~1.0 MB)
 
 ### Phase 3: SEO / AI indexing
-- [ ] `seo-config.mjs`: new routes, titles, descriptions, JSON-LD (Organization w/ alternateName, Service, SoftwareApplication, DefinedTerm, FAQPage only where real)
-- [ ] Redirects in `vercel.json` (/services → /capabilities, etc.)
-- [ ] `public/llms.txt`, `manifest.webmanifest`, OG image refresh
-- [ ] Switch production `deploy.yml` to `scripts/vercel-output.mjs` **at launch**
+- [x] `seo-config.mjs` for every route (titles, descriptions ≤155, Service/FAQPage/SoftwareApplication/Article/DefinedTermSet/ItemList JSON-LD; FAQs parsed from content files)
+- [x] Redirects in `vercel.json` (/services → /capabilities, /inclever → /products/inclever) + client-side `<Navigate>`
+- [x] `llms.txt`, manifest, icons, new 1200×630 `og-image.png`
+- [ ] Per-page OG images (currently one shared image)
+- [ ] Switch production `deploy.yml` packaging to `node scripts/vercel-output.mjs` **at launch** (else redirects won't apply in prod)
 
 ### Phase 4: QA
-- [ ] `npm run build` green; all routes prerendered with body
-- [ ] Screenshots 375 / 768 / 1440 for every page; anti-slop checklist
-- [ ] Forms tested end to end on staging
-- [ ] Lighthouse + accessibility pass
+- [x] `VITE_SITE_ENV=staging npm run build`: **45 ok, 0 warn, 0 failed**; all routes have `<noscript>`; sitemap 42 URLs; RSS 7
+- [x] Production-mode check: no verify badges, unverified stats hidden, one h1 per page, no runtime errors
+- [ ] Forms tested end to end on staging (assessment form, contact, demo request, referral)
+- [ ] Full anti-slop pass by a human reviewer on staging
+- [ ] Lighthouse + accessibility pass; code-split routes with React.lazy (check prerender still waits for content)
+
+## 6b. Open content items for the team (all badged on staging, hidden in production)
+
+- Calendly/HubSpot booking URL → `src/content/site.ts` `booking.calendlyUrl`, set `calendarConfigured: true`.
+- Proof strip figures, certified/partner list, "Offices in the United States and India", founder credentials.
+- Founder quote: her draft is shown verbatim (uses banned words); she's rewriting it. Headshot + team photos (December shoot). Should Mohan Gowda T appear in the delivery bench?
+- Capabilities to verify: MDM, ontologies, knowledge graphs, MCP, vector DBs; every tool in `src/content/tools.ts` is `verified: false`.
+- Context Engineering proof (EMEA canonical model reframed as Contextualize) and a Contextualize/Enable case study. Until then those steps have no case-study filter.
+- Case study headline values that are labels, not results (capital-equipment, vc-edtech, cultural-heritage, pharma-mnc, solar-bi): need measured figures from delivery leads.
+- Learn articles cite Cognizant, Gartner (D&A Summit 2026) and Cloudera/HBR figures from the brief: add source links or remove.
+- IncLever "how it runs" wording (in tenant, read-only); external demo link (claude.ai artifact) must be public.
+- PipelineIQ status line, "368 raw alerts" metric, first-deployment findings: confirm OK to publish.
+- Careers: "Remote-first" wording vs the Bengaluru delivery base; careers email; hiring timing.
+- Proposed blocks in `src/content/flags.ts` need founder sign-off (all on for staging).
+
+## 6c. Known technical notes
+
+- Commit `3222345` imports page files that only arrive in later commits (doesn't build on its own); every later commit builds.
+- `src/data/caseStudies.ts` still imports the old case images (not rendered); remove the `image` field and imports when convenient (seo-config regex doesn't use it).
+- Lint: remaining errors are pre-existing (`tailwind.config.ts` require, two shadcn `ui/` files).
+- Vercel custom events (`assessment_open`, `assessment_submit`) are only recorded on paid plans.
 
 ## 7. Change log
 
 | Date | Commit(s) | What |
 |---|---|---|
-| 2026-11-21 | (see `git log revamp`) | Setup: revamp branch, protection, staging workflow (local), assets, docs |
+| 2026-11-21 | `10a5f73` | Setup: assets, tracker, design notes, contributing |
+| 2026-11-21 | `0254853` | Design system, booking dialog, home, capability pages |
+| 2026-11-21 | `3222345` | SEO: capability routes, redirects, schema, llms.txt, OG image |
+| 2026-11-21 | `3f38262` | Assessment + products |
+| 2026-11-21 | `fdc0a76` | Case studies + industries |
+| 2026-11-21 | `0d5369e` | About, learn, contact |
+| 2026-11-21 | `0d9a5dc` | Insights, thesis, careers, referral, legal, 404 |
+| 2026-11-21 | `254019f` | SEO for all new pages, CTA analytics, CLAUDE.md |
+| 2026-11-21 | `cba74ef` | Legacy cleanup |
