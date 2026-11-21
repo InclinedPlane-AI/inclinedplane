@@ -1,123 +1,43 @@
-import PageLayout from "@/components/PageLayout";
-import SEOHead from "@/components/SEOHead";
-import PageHero from "@/components/PageHero";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useMemo, useCallback } from "react";
+/**
+ * /contact — restyled for the revamp. The submission logic is unchanged from
+ * the previous page: same Formspree endpoint (xwvnakbz), same JSON fields
+ * (name, email, country, company, phone, message), same required fields and
+ * native validation, same error toast. Only the markup and styling changed.
+ */
+import { useCallback, useMemo, useState } from "react";
 import { toast } from "sonner";
-import { ArrowRight, Check, Mail, MapPin, User, AtSign, Globe, Building2, Phone, MessageSquare } from "lucide-react";
 import { countryGroups, getCountryByCode } from "@/data/countries";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { site } from "@/content/site";
+import type { Verifiable } from "@/content/verify";
+import { SiteLayout } from "@/components/site/SiteLayout";
+import { useBooking } from "@/components/site/booking/BookingProvider";
+import { ArrowIcon, Button, Label, Verified, VerifyBadge, buttonClass } from "@/components/site/primitives";
+import { PageHero } from "@/components/site/sections";
 
 const inputClass =
-  "w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all";
+  "w-full font-sans text-[15px] min-h-[44px] px-3 py-2.5 border border-ip-rule-dashed rounded-[6px] bg-white text-black placeholder:text-ip-muted box-border focus:outline-2 focus:outline-ip-orange-ink focus:outline-offset-1 disabled:bg-ip-grey disabled:text-ip-muted";
 
-const offices = [
+const labelClass = "mb-1.5 block text-[15px] font-semibold text-black";
+
+/** Office addresses: shown as on the previous site, pending confirmation (brief §4.4). */
+const offices: ({ label: string; address: string } & Verifiable)[] = [
   {
-    flag: "🇮🇳",
     label: "Bengaluru, India",
     address: "InclinedPlane, Wework Salarpuria Symbiosis, Bannerghatta Road, Bengaluru, Karnataka 560076, India",
+    verified: false,
   },
-  {
-    flag: "🇺🇸",
-    label: "Dover, Delaware",
-    address: "838 Walker Rd, Suite 21-2, Dover, Delaware, 19904, US",
-  },
+  { label: "Dover, Delaware, US", address: "838 Walker Rd, Suite 21-2, Dover, Delaware, 19904, US", verified: false },
 ];
 
-const steps = [
-  {
-    num: "01",
-    title: "Discovery",
-    desc: "We review your message, understand your data landscape, and identify key opportunities.",
-  },
-  {
-    num: "02",
-    title: "Strategy Call",
-    desc: "A focused 30-minute call to align on goals, timelines, and technical requirements.",
-  },
-  {
-    num: "03",
-    title: "Proposal & Roadmap",
-    desc: "You receive a tailored proposal with a clear execution plan and deliverables.",
-  },
+const nextSteps = [
+  { title: "We read your message", desc: "A senior engineer reviews it and the data landscape you describe." },
+  { title: "A focused call", desc: "Thirty minutes to agree on goals, timelines and technical constraints." },
+  { title: "A written proposal", desc: "Scope, approach, deliverables and a plan you can take to your stakeholders." },
 ];
 
-/* ── Progress milestones ── */
-const milestones = [
-  { label: "Name", icon: User, key: "name" },
-  { label: "Email", icon: AtSign, key: "email" },
-  { label: "Country", icon: Globe, key: "country" },
-  { label: "Company", icon: Building2, key: "company" },
-  { label: "Message", icon: MessageSquare, key: "message" },
-] as const;
-
-/* ── Form Progress Bar ── */
-const FormProgress = ({ progress, filled }: { progress: number; filled: Record<string, boolean> }) => {
-  return (
-    <div className="mb-8">
-      <div className="flex items-center justify-between mb-3">
-        <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">Data Maturity Progress</p>
-        <motion.span
-          key={progress}
-          initial={{ scale: 1.3, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="text-xs font-mono font-semibold text-primary"
-        >
-          {progress}%
-        </motion.span>
-      </div>
-
-      {/* Bar */}
-      <div className="relative h-2 rounded-full bg-secondary overflow-hidden">
-        <motion.div
-          className="absolute inset-y-0 left-0 rounded-full bg-gradient-orange"
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ type: "spring", stiffness: 120, damping: 20 }}
-          style={{
-            boxShadow: progress > 0 ? "0 0 16px hsl(25 100% 50% / 0.4), 0 0 4px hsl(25 100% 50% / 0.6)" : "none",
-          }}
-        />
-      </div>
-
-      {/* Milestone dots */}
-      <div className="flex justify-between mt-3">
-        {milestones.map((m, i) => {
-          const reached = filled[m.key];
-          const Icon = m.icon;
-          return (
-            <div key={m.label} className="flex flex-col items-center gap-1.5">
-              <motion.div
-                animate={{
-                  scale: reached ? 1 : 0.85,
-                  backgroundColor: reached ? "hsl(25 100% 50%)" : "hsl(var(--secondary))",
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="w-7 h-7 rounded-full flex items-center justify-center"
-              >
-                <Icon size={13} className={reached ? "text-primary-foreground" : "text-muted-foreground"} />
-              </motion.div>
-              <span className={`text-[10px] font-mono ${reached ? "text-primary" : "text-muted-foreground"}`}>
-                {m.label}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
-/* ── Contact Page ── */
 const Contact = () => {
+  const { open } = useBooking();
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -133,488 +53,230 @@ const Contact = () => {
     return country?.dialCode ?? "";
   }, [selectedCountry]);
 
-  const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
-
-  const progress = useMemo(() => {
-    let p = 0;
-    if (name.trim().length >= 2) p += 20;
-    if (isValidEmail(email)) p += 20;
-    if (selectedCountry) p += 15;
-    if (company.trim().length > 0) p += 15;
-    if (message.trim().length > 0) p += 30;
-    return p;
-  }, [name, email, selectedCountry, company, message]);
-
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitting(true);
-    try {
-      const countryInfo = getCountryByCode(selectedCountry);
-      const res = await fetch("https://formspree.io/f/xwvnakbz", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          email: email.trim(),
-          country: countryInfo?.name ?? selectedCountry,
-          company: company.trim(),
-          phone: phone ? `${dialCode} ${phone}` : "",
-          message: message.trim(),
-        }),
-      });
-      if (!res.ok) throw new Error("Submission failed");
-      setSubmitted(true);
-    } catch {
-      toast.error("Something went wrong. Please try again or email us directly.");
-    } finally {
-      setSubmitting(false);
-    }
-  }, [name, email, selectedCountry, company, phone, dialCode, message]);
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      setSubmitting(true);
+      try {
+        const countryInfo = getCountryByCode(selectedCountry);
+        const res = await fetch("https://formspree.io/f/xwvnakbz", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: name.trim(),
+            email: email.trim(),
+            country: countryInfo?.name ?? selectedCountry,
+            company: company.trim(),
+            phone: phone ? `${dialCode} ${phone}` : "",
+            message: message.trim(),
+          }),
+        });
+        if (!res.ok) throw new Error("Submission failed");
+        setSubmitted(true);
+      } catch {
+        toast.error("Something went wrong. Please try again or email us directly.");
+      } finally {
+        setSubmitting(false);
+      }
+    },
+    [name, email, selectedCountry, company, phone, dialCode, message],
+  );
 
   return (
-    <PageLayout>
-      <SEOHead
-        title="Contact Us"
-        description="Get in touch with InclinedPlane for data engineering consulting, AI automation, and cloud warehouse architecture. Book a discovery call today."
-        path="/contact"
-        jsonLd={[
-          {
-            "@context": "https://schema.org",
-            "@type": "ContactPage",
-            name: "Contact InclinedPlane",
-            url: "https://inclinedplane.com/contact",
-          },
-          {
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            name: "InclinedPlane",
-            description: "AI-native data engineering consultancy",
-            email: "support@inclinedplane.com",
-            url: "https://inclinedplane.com",
-            address: [
-              {
-                "@type": "PostalAddress",
-                streetAddress: "Wework Salarpuria Symbiosis, Bannerghatta Road",
-                addressLocality: "Bengaluru",
-                addressRegion: "Karnataka",
-                postalCode: "560076",
-                addressCountry: "IN",
-              },
-              {
-                "@type": "PostalAddress",
-                streetAddress: "838 Walker Rd, Suite 21-2",
-                addressLocality: "Dover",
-                addressRegion: "Delaware",
-                postalCode: "19904",
-                addressCountry: "US",
-              },
-            ],
-          },
-        ]}
-      />
+    <SiteLayout
+      seo={{
+        title: "Contact us",
+        description:
+          "Talk to InclinedPlane about modernizing your data platform or getting it ready for AI agents. Send a message or book an AI Data Readiness Assessment.",
+        path: "/contact",
+      }}
+    >
       <PageHero
+        crumbs={[{ label: "Contact" }]}
         label="Contact"
-        title={
-          <>
-            Let's <span className="text-gradient-orange">Build</span> Together.
-          </>
-        }
-        subtitle="Have a project in mind or want to explore how data can transform your business? We'd love to hear from you."
+        title="Tell us about your data."
+        lead="Send a message about a platform, a migration or an AI use case. A senior engineer reads every one."
       />
 
-      {/* ── Contact Form ── */}
-      <div className="max-w-2xl mx-auto px-6 lg:px-8 mb-10 relative">
-        {/* Orange elevation glow behind card */}
-        <div
-          className="absolute -inset-4 rounded-3xl pointer-events-none -z-10 blur-[80px] opacity-[0.15]"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, hsl(var(--orange-start)), hsl(var(--orange-mid) / 0.5), transparent 70%)",
-          }}
-        />
-        <motion.div
-          className="absolute -inset-4 rounded-3xl pointer-events-none -z-10"
-          animate={{
-            opacity: [0.08, 0.18, 0.08],
-          }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          style={{
-            background: "radial-gradient(ellipse at 50% 80%, hsl(var(--orange-start) / 0.3), transparent 60%)",
-            filter: "blur(60px)",
-          }}
-        />
-
-        <AnimatePresence mode="wait">
-          {submitted ? (
-            <motion.div
-              key="success"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 150, damping: 20 }}
-              className="glass-panel rounded-2xl p-10 sm:p-14 text-center relative overflow-hidden"
-            >
-              {/* Ambient glow */}
-              <motion.div
-                className="absolute inset-0 pointer-events-none"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 1 }}
-                style={{
-                  background: "radial-gradient(ellipse at 50% 40%, hsl(var(--orange-start) / 0.12), transparent 70%)",
-                }}
-              />
-
-              {/* Check icon */}
-              <motion.div
-                initial={{ scale: 0, rotate: -90 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-                className="w-20 h-20 rounded-full bg-gradient-orange mx-auto mb-6 flex items-center justify-center glow-orange-strong relative"
-              >
-                <motion.div
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ delay: 0.5, duration: 0.4 }}
-                >
-                  <Check size={34} className="text-primary-foreground" strokeWidth={3} />
-                </motion.div>
-              </motion.div>
-
-              {/* Title */}
-              <motion.h2
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="text-2xl sm:text-3xl font-bold text-foreground mb-2"
-              >
-                Data Pipeline <span className="text-gradient-orange">Connected</span>
-              </motion.h2>
-
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="text-muted-foreground text-sm mb-8 max-w-xs mx-auto"
-              >
-                Your message has been successfully ingested into our pipeline.
-              </motion.p>
-
-              {/* Animated pipeline stages */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                className="space-y-3 max-w-sm mx-auto mb-8"
-              >
-                {[
-                  { label: "Data Received", delay: 0.7 },
-                  { label: "Validated & Enriched", delay: 1.0 },
-                  { label: "Routed to Team", delay: 1.3 },
-                  { label: "Response Queued", delay: 1.6 },
-                ].map((stage, i) => (
-                  <div key={stage.label} className="flex items-center gap-2 sm:gap-3">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ type: "spring", stiffness: 300, delay: stage.delay }}
-                      className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-orange flex items-center justify-center shrink-0"
-                    >
-                      <Check size={12} className="text-primary-foreground" strokeWidth={3} />
-                    </motion.div>
-                    <div className="flex-1 h-2 rounded-full bg-secondary overflow-hidden">
-                      <motion.div
-                        className="h-full rounded-full bg-gradient-orange"
-                        initial={{ width: 0 }}
-                        animate={{ width: "100%" }}
-                        transition={{ delay: stage.delay, duration: 0.5, ease: "easeOut" }}
-                        style={{
-                          boxShadow: "0 0 12px hsl(25 100% 50% / 0.5)",
-                        }}
-                      />
-                    </div>
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: stage.delay + 0.3 }}
-                      className="text-[10px] sm:text-xs font-mono text-foreground min-w-[100px] sm:min-w-[130px] text-left"
-                    >
-                      {stage.label}
-                    </motion.span>
+      <section className="bg-white">
+        <div className="ip-container ip-section grid gap-14 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
+          {/* Form */}
+          <div>
+            {submitted ? (
+              <div role="status" className="rounded-xl border border-ip-rule-strong border-t-4 border-t-ip-orange bg-white p-8 sm:p-10">
+                <Label small className="mb-3">
+                  Message sent
+                </Label>
+                <h2 className="m-0 text-[clamp(26px,2.6vw,32px)] font-semibold leading-[1.15] tracking-[-0.015em]">Thanks, {name.trim().split(" ")[0] || "we have it"}.</h2>
+                <p className="mt-4 mb-0 text-[17px] leading-[1.6] text-ip-body">
+                  We’ll reply to {email.trim() || "your email"}. If it’s urgent, write to{" "}
+                  <a className="ip-link font-medium" href={`mailto:${site.email}`}>
+                    {site.email}
+                  </a>
+                  .
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="contact-name" className={labelClass}>
+                      Name
+                    </label>
+                    <input id="contact-name" required autoComplete="name" className={inputClass} placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} />
                   </div>
-                ))}
-              </motion.div>
-
-              {/* ETA */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2.0 }}
-                className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-5 py-2.5"
-              >
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
-                </span>
-                <span className="text-xs font-mono text-primary font-semibold tracking-wide">
-                  ETA: Response within 24 hrs
-                </span>
-              </motion.div>
-            </motion.div>
-          ) : (
-            <motion.form
-              key="form"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ delay: 0.25, duration: 0.5 }}
-              onSubmit={handleSubmit}
-              className="glass-panel rounded-2xl p-5 sm:p-8 space-y-5"
-            >
-              <FormProgress
-                progress={progress}
-                filled={{
-                  name: name.trim().length >= 2,
-                  email: isValidEmail(email),
-                  country: !!selectedCountry,
-                  company: company.trim().length > 0,
-                  message: message.trim().length > 0,
-                }}
-              />
-
-              <div className="grid sm:grid-cols-2 gap-5">
-                <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
-                  <label className="block text-sm text-foreground mb-1.5">
-                    Name <span className="text-primary">*</span>
-                  </label>
-                  <input
-                    required
-                    className={inputClass}
-                    placeholder="Your name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </motion.div>
-                <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.35 }}>
-                  <label className="block text-sm text-foreground mb-1.5">
-                    Email <span className="text-primary">*</span>
-                  </label>
-                  <input
-                    required
-                    type="email"
-                    className={inputClass}
-                    placeholder="you@company.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </motion.div>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-5">
-                <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}>
-                  <label className="block text-sm text-foreground mb-1.5">
-                    Country <span className="text-primary">*</span>
-                  </label>
-                  <Select required value={selectedCountry} onValueChange={setSelectedCountry}>
-                    <SelectTrigger className="w-full bg-background border border-border rounded-lg px-4 py-3 h-auto text-sm text-foreground focus:ring-2 focus:ring-primary/50 focus:border-primary">
-                      <SelectValue placeholder="Select your country" />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-72 bg-popover border border-border z-50">
-                      {countryGroups.map((group) => (
-                        <SelectGroup key={group.continent}>
-                          <SelectLabel
-                            className={`text-xs font-semibold uppercase tracking-wider px-3 py-2 ${
-                              group.continent === "Featured" ? "text-primary" : "text-muted-foreground"
-                            }`}
-                          >
-                            {group.continent}
-                          </SelectLabel>
-                          {group.countries.map((country) => (
-                            <SelectItem key={country.code} value={country.code} className="text-sm">
-                              <span className="mr-2">{country.flag}</span>
-                              {country.name}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </motion.div>
-                <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.45 }}>
-                  <label className="block text-sm text-foreground mb-1.5">
-                    Company <span className="text-primary">*</span>
-                  </label>
-                  <input
-                    required
-                    className={inputClass}
-                    placeholder="Your company name"
-                    value={company}
-                    onChange={(e) => setCompany(e.target.value)}
-                  />
-                </motion.div>
-              </div>
-
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
-                <label className="block text-sm text-foreground mb-1.5">
-                  Contact Number <span className="text-muted-foreground text-xs">(optional)</span>
-                </label>
-                <div className="flex gap-2">
-                  <div className="flex items-center bg-background border border-border rounded-lg px-3 py-3 text-sm text-muted-foreground min-w-[80px] justify-center shrink-0">
-                    {dialCode || "—"}
+                  <div>
+                    <label htmlFor="contact-email" className={labelClass}>
+                      Work email
+                    </label>
+                    <input
+                      id="contact-email"
+                      required
+                      type="email"
+                      autoComplete="email"
+                      className={inputClass}
+                      placeholder="you@company.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
                   </div>
-                  <input
-                    type="tel"
-                    className={inputClass}
-                    placeholder={selectedCountry ? "Your phone number" : "Select country first"}
-                    disabled={!selectedCountry}
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                  />
                 </div>
-              </motion.div>
-
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}>
-                <label className="block text-sm text-foreground mb-1.5">
-                  Message <span className="text-primary">*</span>
-                </label>
-                <textarea
-                  required
-                  rows={5}
-                  className={`${inputClass} resize-none`}
-                  placeholder="Tell us about your project, timeline, and goals..."
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                />
-              </motion.div>
-
-              <motion.button
-                type="submit"
-                data-cursor-hover
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                disabled={submitting}
-                className="w-full bg-gradient-orange text-primary-foreground py-3.5 rounded-lg font-medium transition-opacity glow-orange flex items-center justify-center gap-2 text-sm disabled:opacity-60"
-              >
-                {submitting ? "Sending…" : "Send Message"} {!submitting && <ArrowRight size={16} />}
-              </motion.button>
-            </motion.form>
-          )}
-        </AnimatePresence>
-      </div>
-
-      {/* ── Or Email Us ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="max-w-2xl mx-auto px-6 lg:px-8 mb-28"
-      >
-        <div className="flex items-center gap-4 mb-6">
-          <div className="flex-1 h-px bg-border" />
-          <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">or</span>
-          <div className="flex-1 h-px bg-border" />
-        </div>
-
-        <a
-          href="mailto:support@inclinedplane.com"
-          data-cursor-hover
-          className="glass-panel rounded-2xl p-7 flex items-center gap-5 group hover:border-primary/20 transition-colors"
-        >
-          <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/15 transition-colors">
-            <Mail size={20} className="text-primary" />
-          </div>
-          <div className="flex-1">
-            <h3 className="text-sm font-semibold text-foreground mb-1">Prefer email?</h3>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Drop us a line and we'll get back to you within 24 hours.
-            </p>
-          </div>
-          <p className="text-sm text-primary font-medium group-hover:underline underline-offset-4 transition-all hidden sm:block">
-            support@inclinedplane.com
-          </p>
-        </a>
-      </motion.div>
-
-      {/* ── What Happens Next ── */}
-      <div className="max-w-5xl mx-auto px-6 lg:px-8 mb-28">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          className="text-center mb-14"
-        >
-          <p className="font-mono text-xs text-primary tracking-widest uppercase mb-3">What Happens Next</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-            From message to <span className="text-gradient-orange">momentum.</span>
-          </h2>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-6 relative">
-          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-y-1/2 z-0" />
-
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.num}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ delay: i * 0.12 }}
-              className="relative z-10"
-            >
-              <div className="glass-panel rounded-2xl p-7 h-full text-center group hover:border-primary/20 transition-colors">
-                <div className="w-12 h-12 rounded-full bg-gradient-orange mx-auto mb-5 flex items-center justify-center glow-orange text-primary-foreground font-mono font-bold text-sm">
-                  {step.num}
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{step.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Office Locations ── */}
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          className="text-center mb-12"
-        >
-          <p className="font-mono text-xs text-primary tracking-widest uppercase mb-3">Our Offices</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-            Where you can <span className="text-gradient-orange">find us.</span>
-          </h2>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {offices.map((office, i) => (
-            <motion.div
-              key={office.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ delay: i * 0.1 }}
-              className="glass-panel rounded-2xl p-8 group hover:border-primary/20 transition-colors"
-            >
-              <div className="flex items-center gap-4 mb-5">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-2xl">
-                  {office.flag}
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                  <div>
+                    <label id="contact-country-label" className={labelClass}>
+                      Country
+                    </label>
+                    <Select required value={selectedCountry} onValueChange={setSelectedCountry}>
+                      <SelectTrigger
+                        aria-labelledby="contact-country-label"
+                        className="h-auto min-h-[44px] rounded-[6px] border-ip-rule-dashed bg-white px-3 text-[15px] focus:ring-0 focus:outline-2 focus:outline-ip-orange-ink"
+                      >
+                        <SelectValue placeholder="Select your country" />
+                      </SelectTrigger>
+                      <SelectContent className="max-h-72 bg-white font-sans">
+                        {countryGroups.map((group) => (
+                          <SelectGroup key={group.continent}>
+                            <SelectLabel className="ip-label-sm px-3 py-2">{group.continent}</SelectLabel>
+                            {group.countries.map((country) => (
+                              <SelectItem key={country.code} value={country.code} className="text-[14px]">
+                                <span className="mr-2">{country.flag}</span>
+                                {country.name}
+                              </SelectItem>
+                            ))}
+                          </SelectGroup>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <label htmlFor="contact-company" className={labelClass}>
+                      Company
+                    </label>
+                    <input
+                      id="contact-company"
+                      required
+                      autoComplete="organization"
+                      className={inputClass}
+                      placeholder="Your company name"
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                    />
+                  </div>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground">{office.label}</h3>
-                  <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">Office</p>
+                  <label htmlFor="contact-phone" className={labelClass}>
+                    Phone <span className="font-normal text-ip-muted">(optional)</span>
+                  </label>
+                  <div className="flex gap-2">
+                    <div className="flex min-h-[44px] min-w-[72px] items-center justify-center rounded-[6px] border border-ip-rule-strong bg-ip-grey px-3 text-[15px] text-ip-body" aria-hidden="true">
+                      {dialCode || "+"}
+                    </div>
+                    <input
+                      id="contact-phone"
+                      type="tel"
+                      autoComplete="tel-national"
+                      className={inputClass}
+                      placeholder={selectedCountry ? "Your phone number" : "Select a country first"}
+                      disabled={!selectedCountry}
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </div>
                 </div>
+                <div>
+                  <label htmlFor="contact-message" className={labelClass}>
+                    Message
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    required
+                    rows={6}
+                    className={`${inputClass} resize-y`}
+                    placeholder="The platform you run, what you’re trying to change, and your timeline."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  />
+                </div>
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+                  <Button type="submit" disabled={submitting}>
+                    {submitting ? "Sending" : "Send message"}
+                    {!submitting && <ArrowIcon size={16} />}
+                  </Button>
+                  <span className="text-[14px] text-ip-muted">
+                    Or email{" "}
+                    <a className="ip-link text-[14px] font-medium" href={`mailto:${site.email}`}>
+                      {site.email}
+                    </a>
+                  </span>
+                </div>
+              </form>
+            )}
+          </div>
+
+          {/* Aside */}
+          <aside className="flex flex-col gap-10">
+            <div className="rounded-xl bg-black p-7 text-white sm:p-8">
+              <p className="m-0 text-[22px] font-semibold leading-[1.25]">Prefer to start with the assessment?</p>
+              <p className="mt-3 mb-0 text-[16px] leading-[1.55] text-ip-on-dark">
+                Answer five quick questions and pick a time for a 45-minute AI Data Readiness Assessment with a senior engineer.
+              </p>
+              <button type="button" onClick={() => open({ source: "contact" })} className={buttonClass("primary", "md", "mt-6")} data-cta="contact">
+                {site.cta.midButton}
+                <ArrowIcon size={16} />
+              </button>
+            </div>
+
+            <div>
+              <Label className="mb-4">What happens next</Label>
+              <ol className="m-0 list-none border-t-2 border-black p-0">
+                {nextSteps.map((s) => (
+                  <li key={s.title} className="border-b border-ip-rule-strong py-4">
+                    <p className="m-0 text-[17px] font-semibold">{s.title}</p>
+                    <p className="mt-1 mb-0 text-[15px] leading-[1.5] text-ip-body">{s.desc}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <div>
+              <Label className="mb-4">Offices</Label>
+              <div className="flex flex-col gap-5">
+                {offices.map((o) => (
+                  <Verified key={o.label} item={o} badge={false}>
+                    <div>
+                      <p className="m-0 flex flex-wrap items-center gap-2 text-[16px] font-semibold">
+                        {o.label} {!o.verified && <VerifyBadge />}
+                      </p>
+                      <address className="mt-1 text-[15px] not-italic leading-[1.5] text-ip-body">{o.address}</address>
+                    </div>
+                  </Verified>
+                ))}
               </div>
-              <div className="flex items-start gap-2.5">
-                <MapPin size={15} className="text-primary mt-0.5 shrink-0" />
-                <p className="text-sm text-muted-foreground leading-relaxed">{office.address}</p>
-              </div>
-            </motion.div>
-          ))}
+            </div>
+          </aside>
         </div>
-      </div>
-    </PageLayout>
+      </section>
+    </SiteLayout>
   );
 };
 
