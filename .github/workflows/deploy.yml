@@ -1,6 +1,6 @@
 # =============================================================================
 # GUARDRAIL — DO NOT REGENERATE THIS WORKFLOW
-# Last reviewed: 2026-05-03
+# Last reviewed: 2026-11-16
 # -----------------------------------------------------------------------------
 # This workflow is the ONLY way the production site gets deployed with full
 # body-prerendered HTML. Vercel's own build container cannot run a headless
@@ -25,7 +25,7 @@
 #   - Installs Chromium runtime libs (libnspr4, libnss3, libgbm1, plus the
 #     other Playwright deps) via apt — we have sudo here, unlike Vercel.
 #   - Runs `npm run build` end-to-end, including PASS 1 (head injection),
-#     PASS 2 (Playwright body snapshot of all 28 routes), PASS 3 (sitemap +
+#     PASS 2 (Playwright body snapshot of every route), PASS 3 (sitemap +
 #     RSS). Build fails if BODY PASS produces fewer than 28 successful
 #     snapshots — see the "Verify body prerender" step.
 #   - Hands the prebuilt dist/ to Vercel via `vercel deploy --prebuilt --prod`.
@@ -60,7 +60,11 @@ env:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    # Pinned: ubuntu-latest became Ubuntu 26.04 in Oct 2026, where Playwright
+    # 1.55 can't install Chromium ("does not support chromium on
+    # ubuntu26.04-x64"), which broke the prerender build. Move off 24.04 only
+    # after upgrading Playwright to a release that supports the newer image.
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
 
     steps:
@@ -86,7 +90,7 @@ jobs:
           VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
         run: npm run build
 
-      - name: Verify body prerender succeeded for ALL 28 routes
+      - name: Verify body prerender succeeded for ALL routes
         # Every successful body snapshot writes a <noscript> block alongside
         # the captured DOM. If a route fell back to head-only (Chromium
         # crashed, splash never completed, network hung, etc.) it will be
