@@ -1,8 +1,14 @@
-import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
-import PageLayout from "@/components/PageLayout";
-import SEOHead from "@/components/SEOHead";
-import { ArrowLeft } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { SiteLayout } from "@/components/site/SiteLayout";
+import { Label, buttonClass } from "@/components/site/primitives";
+
+const destinations = [
+  { to: "/", label: "Home", note: "What we do, in one page." },
+  { to: "/capabilities", label: "Capabilities", note: "The four steps from data foundation to AI agents." },
+  { to: "/case-studies", label: "Case studies", note: "Platforms and analytics we’ve delivered." },
+  { to: "/assessment", label: "AI Data Readiness Assessment", note: "Where most conversations start." },
+];
 
 const NotFound = () => {
   const location = useLocation();
@@ -12,31 +18,33 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <PageLayout>
-      <SEOHead
-        title="Page Not Found"
-        description="The page you're looking for doesn't exist. Return to InclinedPlane's homepage."
-        path={location.pathname}
-        noIndex
-      />
-      <section className="flex items-center justify-center min-h-[60vh] px-6">
-        <div className="text-center">
-          <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Error 404</p>
-          <h1 className="text-5xl sm:text-7xl font-bold text-foreground mb-4">
-            Page Not <span className="text-gradient-orange">Found</span>
-          </h1>
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-            The page you're looking for doesn't exist or has been moved.
+    <SiteLayout seo={{ title: "Page not found", description: "The page you’re looking for doesn’t exist. Return to InclinedPlane’s homepage.", path: location.pathname, noIndex: true }}>
+      <section className="relative overflow-hidden bg-white">
+        <div aria-hidden="true" className="ip-pattern-fade-left absolute inset-y-0 right-0 hidden w-[40%] md:block" />
+        <div className="ip-container relative py-[clamp(64px,10vw,128px)]">
+          <Label dot className="mb-6">
+            Error 404
+          </Label>
+          <h1 className="ip-h1-page m-0 max-w-[720px]">This page isn’t here.</h1>
+          <p className="ip-lead mt-5 mb-0 max-w-[560px]">
+            The link may be old, or the page may have moved during our redesign. These are good places to pick up from.
           </p>
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-6 py-3 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity glow-orange"
-          >
-            <ArrowLeft size={16} /> Back to Home
+          <ul className="m-0 mt-10 grid max-w-[880px] list-none grid-cols-1 border-t-2 border-black p-0 sm:grid-cols-2">
+            {destinations.map((d, i) => (
+              <li key={d.to} className={i % 2 === 1 ? "border-b border-ip-rule-strong sm:border-l sm:pl-6" : "border-b border-ip-rule-strong sm:pr-6"}>
+                <Link to={d.to} className="group block py-5 no-underline">
+                  <span className="block text-[19px] font-semibold text-black group-hover:underline underline-offset-4 decoration-1">{d.label}</span>
+                  <span className="mt-1 block text-[15px] text-ip-body">{d.note}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Link to="/" className={buttonClass("primary", "lg", "mt-10")}>
+            Back to the homepage
           </Link>
         </div>
       </section>
-    </PageLayout>
+    </SiteLayout>
   );
 };
 

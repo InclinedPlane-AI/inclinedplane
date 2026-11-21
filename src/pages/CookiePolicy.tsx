@@ -110,7 +110,7 @@ const CookiePolicy = () => (
               {["Cookie Name", "Provider", "Purpose", "Duration", "Type"].map((h) => (
                 <th
                   key={h}
-                  className="font-mono text-[10px] tracking-[0.1em] uppercase text-primary text-left px-3 py-2.5 border-b border-border bg-muted/30"
+                  className="font-mono text-[11px] tracking-[0.1em] uppercase text-ip-body text-left px-3 py-2.5 border-b-2 border-black bg-white"
                 >
                   {h}
                 </th>
@@ -120,18 +120,18 @@ const CookiePolicy = () => (
           <tbody>
             {cookieRows.map((row) => (
               <tr key={row.name}>
-                <td className="px-3 py-3 border-b border-border align-top text-muted-foreground">
+                <td className="px-3 py-3 border-b border-ip-rule align-top text-muted-foreground">
                   <code className="font-mono text-foreground">{row.name}</code>
                 </td>
-                <td className="px-3 py-3 border-b border-border align-top text-muted-foreground">{row.provider}</td>
-                <td className="px-3 py-3 border-b border-border align-top text-muted-foreground leading-[1.6]">{row.purpose}</td>
-                <td className="px-3 py-3 border-b border-border align-top text-muted-foreground">{row.duration}</td>
-                <td className="px-3 py-3 border-b border-border align-top">
+                <td className="px-3 py-3 border-b border-ip-rule align-top text-muted-foreground">{row.provider}</td>
+                <td className="px-3 py-3 border-b border-ip-rule align-top text-muted-foreground leading-[1.6]">{row.purpose}</td>
+                <td className="px-3 py-3 border-b border-ip-rule align-top text-muted-foreground">{row.duration}</td>
+                <td className="px-3 py-3 border-b border-ip-rule align-top">
                   <span
                     className={`inline-block font-mono text-[10px] tracking-[0.08em] uppercase px-2 py-0.5 rounded-sm ${
                       row.type === "required"
-                        ? "bg-primary/15 text-primary"
-                        : "bg-muted/40 text-muted-foreground"
+                        ? "bg-ip-orange-tint text-black"
+                        : "bg-ip-grey-100 text-ip-body"
                     }`}
                   >
                     {row.typeLabel}

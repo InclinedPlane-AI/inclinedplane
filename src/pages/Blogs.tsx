@@ -1,145 +1,143 @@
+/**
+ * /blog — labeled "Insights" in the UI (URL unchanged to protect rankings).
+ * Featured latest post, then a clean list filterable by tag. No thumbnail grid.
+ */
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowRight, Clock, Linkedin } from "lucide-react";
-import PageLayout from "@/components/PageLayout";
-import SEOHead from "@/components/SEOHead";
-import PageHero from "@/components/PageHero";
-import { blogPosts, allTags } from "@/data/blogPosts";
+import { blogPosts, allTags, type BlogPost } from "@/data/blogPosts";
+import { SiteLayout } from "@/components/site/SiteLayout";
+import { Label } from "@/components/site/primitives";
+import { FinalCta, PageHero } from "@/components/site/sections";
+import { cn } from "@/lib/utils";
+
+function Meta({ post }: { post: BlogPost }) {
+  return (
+    <p className="m-0 flex flex-wrap gap-x-5 gap-y-1 text-[14px] text-ip-muted">
+      <span>{post.author.name}</span>
+      <time dateTime={new Date(post.date).toISOString().slice(0, 10)}>{post.date}</time>
+      <span>{post.readTime}</span>
+    </p>
+  );
+}
 
 const Blogs = () => {
   const [activeTag, setActiveTag] = useState<string | null>(null);
-
-  // Newest first
-  const sorted = [...blogPosts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-  const filtered = activeTag
-    ? sorted.filter((p) => p.tags.includes(activeTag))
-    : sorted;
+  const sorted = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const [featured, ...rest] = sorted;
+  const filtered = activeTag ? sorted.filter((p) => p.tags.includes(activeTag)) : rest;
 
   return (
-    <PageLayout>
-      <SEOHead
-        title="Blog — Insights on Data Engineering & AI"
-        description="Expert insights on data engineering, AI automation, DataOps, business intelligence, and building modern data platforms. By the InclinedPlane team."
-        path="/blog"
-      />
+    <SiteLayout
+      seo={{
+        title: "Insights on data engineering and AI readiness",
+        description:
+          "Articles from InclinedPlane engineers on data platforms, pipelines, data contracts, context and getting enterprise data ready for AI agents.",
+        path: "/blog",
+      }}
+    >
       <PageHero
-        label="Blog"
-        title={<>Thinking in <span className="text-gradient-orange">Systems</span></>}
-        subtitle="Deep dives into data engineering, AI strategy, and the architecture of competitive advantage."
+        crumbs={[{ label: "Insights" }]}
+        label="Insights"
+        title="Notes from the engineering floor."
+        lead="What we learn building data platforms, pipelines and AI foundations for enterprises, written by the engineers who did the work."
       />
 
-      {/* Tag filter */}
-      <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-12">
-        <div className="flex flex-wrap gap-2 items-center">
-          <button
-            onClick={() => setActiveTag(null)}
-            className={`px-3.5 py-1 rounded-md text-xs font-medium transition-all ${
-              !activeTag
-                ? "bg-primary text-primary-foreground"
-                : "bg-muted text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            All
-          </button>
-          {allTags.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-              className={`px-3.5 py-1 rounded-md text-xs font-medium transition-all ${
-                activeTag === tag
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-muted text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Blog cards — Medium-style horizontal layout */}
-      <section className="max-w-4xl mx-auto px-6 lg:px-8 pb-24">
-        <div className="flex flex-col divide-y divide-border">
-          {filtered.map((post, i) => (
-            <motion.article
-              key={post.slug}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="py-7 first:pt-0"
-            >
-              <Link
-                to={`/blog/${post.slug}`}
-                className="group flex gap-5 sm:gap-8 items-start"
-              >
-                {/* Text */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-2 text-xs text-muted-foreground">
-                    <span className="font-medium text-foreground/80 flex items-center gap-1.5">
-                      {post.author.name}
-                      {post.author.linkedin && (
-                        <a href={post.author.linkedin} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="text-muted-foreground hover:text-primary transition-colors">
-                          <Linkedin size={12} />
-                        </a>
-                      )}
-                    </span>
-                    <span>·</span>
-                    <span>{post.date}</span>
-                  </div>
-
-                  <h2 className="text-lg sm:text-xl font-bold text-foreground mb-1.5 group-hover:text-primary transition-colors leading-snug line-clamp-2">
-                    {post.title}
-                  </h2>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-3 line-clamp-2 hidden sm:block">
-                    {post.subtitle}
-                  </p>
-
-                  <div className="flex items-center gap-3 flex-wrap">
-                    {post.tags.slice(0, 2).map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-0.5 rounded bg-muted text-[10px] font-medium text-muted-foreground tracking-wide uppercase"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    <span className="text-xs text-muted-foreground flex items-center gap-1">
-                      <Clock size={11} /> {post.readTime}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Thumbnail */}
-                <div className="shrink-0 w-24 h-24 sm:w-36 sm:h-28 rounded-lg overflow-hidden">
-                  <img
-                    src={post.heroImage.src}
-                    alt={post.heroImage.alt}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-              </Link>
-            </motion.article>
-          ))}
-        </div>
-
-        {filtered.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-muted-foreground">No posts found for this tag.</p>
-            <button
-              onClick={() => setActiveTag(null)}
-              className="mt-3 text-primary text-sm hover:underline"
-            >
-              Clear filter
-            </button>
+      {/* Featured */}
+      {featured && !activeTag && (
+        <section aria-label="Latest article" className="bg-white">
+          <div className="ip-container pt-[clamp(48px,6vw,80px)]">
+            <Link to={`/blog/${featured.slug}`} className="group grid gap-8 no-underline text-black md:grid-cols-[1.15fr_1fr] md:items-center">
+              <div className="overflow-hidden rounded-lg border border-ip-rule bg-ip-grey">
+                <img
+                  src={featured.heroImage.src}
+                  alt={featured.heroImage.alt}
+                  className="block aspect-[16/10] w-full object-cover"
+                  loading="eager"
+                />
+              </div>
+              <div>
+                <Label small className="mb-4">
+                  Latest
+                </Label>
+                <h2 className="m-0 text-[clamp(26px,3vw,38px)] font-semibold leading-[1.12] tracking-[-0.02em] group-hover:underline underline-offset-[6px] decoration-1">
+                  {featured.title}
+                </h2>
+                <p className="mt-4 mb-5 text-[17px] leading-[1.6] text-ip-body">{featured.subtitle}</p>
+                <Meta post={featured} />
+              </div>
+            </Link>
           </div>
-        )}
+        </section>
+      )}
+
+      {/* List */}
+      <section aria-label="All articles" className="bg-white">
+        <div className="ip-container ip-section">
+          <div className="mb-8 flex flex-wrap items-center gap-2" role="group" aria-label="Filter by topic">
+            <span className="ip-label-sm mr-2">Topics</span>
+            {[null, ...allTags].map((tag) => {
+              const active = activeTag === tag;
+              return (
+                <button
+                  key={tag ?? "all"}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => setActiveTag(tag)}
+                  className={cn(
+                    "min-h-[36px] rounded-full border px-3.5 text-[13px] transition-colors duration-150",
+                    active ? "border-black bg-black text-white" : "border-ip-rule-strong bg-white text-ip-body hover:border-black hover:text-black",
+                  )}
+                >
+                  {tag ?? "All"}
+                </button>
+              );
+            })}
+          </div>
+
+          <ul className="m-0 list-none border-t-2 border-black p-0">
+            {filtered.map((post) => (
+              <li key={post.slug} className="border-b border-ip-rule-strong">
+                <Link to={`/blog/${post.slug}`} className="group grid gap-3 py-7 no-underline text-black md:grid-cols-[1fr_260px] md:gap-10">
+                  <div>
+                    <h2 className="m-0 text-[clamp(21px,2vw,26px)] font-semibold leading-[1.2] tracking-[-0.01em] group-hover:underline underline-offset-4 decoration-1">
+                      {post.title}
+                    </h2>
+                    <p className="mt-2.5 mb-0 max-w-[720px] text-[16px] leading-[1.6] text-ip-body">{post.subtitle}</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {post.tags.slice(0, 3).map((t) => (
+                        <span key={t} className="ip-label-sm rounded border border-ip-rule-strong px-2 py-0.5 !tracking-[0.06em]">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="md:pt-1 md:text-right">
+                    <p className="m-0 text-[14px] leading-[1.7] text-ip-muted">
+                      <span className="block font-medium text-black">{post.author.name}</span>
+                      <time className="block" dateTime={new Date(post.date).toISOString().slice(0, 10)}>
+                        {post.date}
+                      </time>
+                      <span className="block">{post.readTime}</span>
+                    </p>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {filtered.length === 0 && (
+            <div className="py-16">
+              <p className="m-0 text-[17px] text-ip-body">No articles on this topic yet.</p>
+              <button type="button" onClick={() => setActiveTag(null)} className="ip-link mt-3 text-[15px]">
+                Show all articles
+              </button>
+            </div>
+          )}
+        </div>
       </section>
-    </PageLayout>
+
+      <FinalCta source="final-blog" />
+    </SiteLayout>
   );
 };
 

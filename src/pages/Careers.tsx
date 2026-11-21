@@ -1,94 +1,43 @@
-import PageLayout from "@/components/PageLayout";
-import SEOHead from "@/components/SEOHead";
-import PageHero from "@/components/PageHero";
-import SectionGlow from "@/components/SectionGlow";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+/**
+ * /careers — restyled for the revamp. Keeps the "Careers Page / Job Listing
+ * Design Contract" in CLAUDE.md: the openRoles schema below, and a JobCard
+ * whose collapsed state shows title, department, location and type, and whose
+ * expanded state shows about, responsibilities, requirements and an
+ * "Apply now" button, with a smooth accordion animation.
+ */
+import { useId, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Brain,
-  Sparkles,
-  Globe,
-  Heart,
-  Zap,
-  Shield,
-  GraduationCap,
-  Coffee,
-  Laptop,
-  TrendingUp,
-  Users,
-  MessageSquare,
-  ClipboardCheck,
-  Code2,
-  Handshake,
-  Mail,
-  ChevronDown,
-  ExternalLink,
-  Briefcase,
-} from "lucide-react";
-
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-60px" },
-  transition: { duration: 0.5, ease: "easeOut" as const },
-};
+import { SiteLayout } from "@/components/site/SiteLayout";
+import { Label, SectionIntro, buttonClass } from "@/components/site/primitives";
+import { PageHero } from "@/components/site/sections";
+import { cn } from "@/lib/utils";
 
 const CAREERS_EMAIL = "careers@inclinedplane.com";
 
 const values = [
   {
-    icon: Brain,
-    title: "Engineering Rigor",
-    desc: "We treat data systems like production software, versioned, observed, and tested. No band-aid pipelines, no hero culture.",
+    title: "Engineering rigor",
+    desc: "We treat data systems like production software: versioned, observed and tested. No band-aid pipelines, no hero culture.",
   },
   {
-    icon: Sparkles,
-    title: "AI-Native by Default",
-    desc: "Every architecture decision is made with AI in mind. We build for models, agents, and intelligence, not just dashboards.",
+    title: "AI in every decision",
+    desc: "Every architecture decision is made with AI in mind. We build for models, agents and intelligence, not just dashboards.",
   },
   {
-    icon: Heart,
-    title: "Ownership & Craft",
+    title: "Ownership and craft",
     desc: "You own outcomes, not tickets. We expect senior judgment and reward people who care about how the work is done.",
   },
   {
-    icon: Globe,
-    title: "Remote-First, Async-Friendly",
-    desc: "Distributed team across time zones. Documentation over meetings. Deep work over performative busy.",
+    title: "Remote-first, async-friendly",
+    desc: "A distributed team across time zones. Documentation over meetings. Deep work over looking busy.",
   },
-];
-
-const perks = [
-  { icon: Laptop, title: "Top-tier Hardware", desc: "MacBook Pro, monitor stipend, and the tools you need." },
-  { icon: GraduationCap, title: "Learning Budget", desc: "Annual budget for courses, books, and conferences." },
-  { icon: Coffee, title: "Flexible Hours", desc: "Work when you do your best work, async by default." },
-  { icon: TrendingUp, title: "Meaningful Equity", desc: "Real ownership in what we're building together." },
-  { icon: Heart, title: "Health & Wellness", desc: "Health stipend and four weeks of paid time off." },
-  { icon: Users, title: "Annual Offsites", desc: "We meet in person twice a year to build and ship together." },
 ];
 
 const process = [
-  {
-    icon: MessageSquare,
-    title: "Intro Conversation",
-    desc: "30-minute chat to understand your background, what you're looking for, and how we work.",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "Technical Deep-Dive",
-    desc: "Conversation about your past work, architecture decisions, trade-offs, and impact. No whiteboard puzzles.",
-  },
-  {
-    icon: Code2,
-    title: "Practical Exercise",
-    desc: "A short, take-home (or live pairing session) on a problem close to what you'd do day-one.",
-  },
-  {
-    icon: Handshake,
-    title: "Team & Offer",
-    desc: "Meet the team, ask anything, and we'll move quickly to an offer if it's a fit.",
-  },
+  { title: "Intro conversation", desc: "A 30-minute chat to understand your background, what you’re looking for and how we work." },
+  { title: "Technical deep-dive", desc: "A conversation about your past work, architecture decisions, trade-offs and impact. No whiteboard puzzles." },
+  { title: "Practical exercise", desc: "A short take-home or live pairing session on a problem close to what you’d do on day one." },
+  { title: "Team and offer", desc: "Meet the team, ask anything, and we move quickly to an offer if it’s a fit." },
 ];
 
 export const openRoles: Array<{
@@ -102,322 +51,195 @@ export const openRoles: Array<{
   applyUrl: string;
 }> = [];
 
-const JobCard = ({ role, index }: { role: typeof openRoles[0], index: number }) => {
+const JobCard = ({ role }: { role: (typeof openRoles)[0] }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const id = useId();
 
   return (
-    <motion.div
-      {...fadeUp}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-      className="glass-panel rounded-2xl p-6 sm:p-8 flex flex-col"
-    >
+    <div className={cn("rounded-[10px] border bg-white transition-colors duration-200", isOpen ? "border-black" : "border-ip-rule-strong hover:border-black")}>
+      <h3 className="m-0">
+        <button
+          type="button"
+          aria-expanded={isOpen}
+          aria-controls={`${id}-panel`}
+          onClick={() => setIsOpen((o) => !o)}
+          className="flex w-full flex-col gap-4 p-6 text-left sm:flex-row sm:items-center sm:justify-between sm:p-7"
+        >
+          <span>
+            <span className="block text-[21px] font-semibold leading-[1.25] tracking-[-0.01em]">{role.title}</span>
+            <span className="mt-3 flex flex-wrap gap-2">
+              <span className="ip-label-sm rounded bg-ip-orange-tint px-2.5 py-1 !text-black">{role.department}</span>
+              <span className="ip-label-sm rounded border border-ip-rule-strong px-2.5 py-1">{role.location}</span>
+              <span className="ip-label-sm rounded border border-ip-rule-strong px-2.5 py-1">{role.type}</span>
+            </span>
+          </span>
+          <span aria-hidden="true" className="relative h-4 w-4 shrink-0 self-end sm:self-center">
+            <span className="absolute left-0 top-1/2 h-0.5 w-4 -translate-y-1/2 bg-black" />
+            <span className={cn("absolute left-1/2 top-0 h-4 w-0.5 -translate-x-1/2 bg-black transition-transform duration-300", isOpen && "scale-y-0")} />
+          </span>
+        </button>
+      </h3>
+
+      {/* Smooth accordion: grid-rows 0fr → 1fr (no JS height measuring) */}
       <div
-        className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer group"
-        onClick={() => setIsOpen(!isOpen)}
+        id={`${id}-panel`}
+        role="region"
+        aria-label={role.title}
+        className={cn("grid transition-[grid-template-rows] duration-300 ease-out", isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}
       >
-        <div>
-          <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-gradient-orange transition-all">{role.title}</h3>
-          <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-muted-foreground/80">
-            <span className="bg-primary/10 text-primary px-2.5 py-1 rounded-md">{role.department}</span>
-            <span className="bg-white/5 px-2.5 py-1 rounded-md">{role.location}</span>
-            <span className="bg-white/5 px-2.5 py-1 rounded-md">{role.type}</span>
+        <div className="overflow-hidden" {...(isOpen ? {} : ({ inert: "" } as Record<string, string>))}>
+          <div className="mx-6 space-y-6 border-t border-ip-rule pt-6 pb-7 sm:mx-7">
+            <div>
+              <p className="ip-label-sm m-0 mb-2">About the role</p>
+              <p className="m-0 text-[16px] leading-[1.6] text-ip-body">{role.about}</p>
+            </div>
+            <div>
+              <p className="ip-label-sm m-0 mb-2">Key responsibilities</p>
+              <ul className="m-0 list-disc space-y-1.5 pl-5 text-[16px] leading-[1.55] text-ip-body">
+                {role.responsibilities.map((r, i) => (
+                  <li key={i}>{r}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="ip-label-sm m-0 mb-2">Requirements</p>
+              <ul className="m-0 list-disc space-y-1.5 pl-5 text-[16px] leading-[1.55] text-ip-body">
+                {role.requirements.map((r, i) => (
+                  <li key={i}>{r}</li>
+                ))}
+              </ul>
+            </div>
+            <a href={role.applyUrl} target="_blank" rel="noopener noreferrer" className={buttonClass("primary", "md")}>
+              Apply now
+            </a>
           </div>
         </div>
-        <button
-          className="w-10 h-10 rounded-full surface-3 flex items-center justify-center text-primary transition-transform duration-300 group-hover:bg-primary/10 flex-shrink-0"
-          style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
-        >
-          <ChevronDown size={18} />
-        </button>
       </div>
+    </div>
+  );
+};
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0, marginTop: 0 }}
-            animate={{ height: "auto", opacity: 1, marginTop: 24 }}
-            exit={{ height: 0, opacity: 0, marginTop: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden border-t border-border"
-          >
-            <div className="pt-6 space-y-6">
-              <div>
-                <h4 className="text-sm font-semibold text-foreground mb-2">About the Role</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">{role.about}</p>
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-foreground mb-2">Key Responsibilities</h4>
-                <ul className="list-disc list-outside ml-4 space-y-1.5 text-sm text-muted-foreground leading-relaxed">
-                  {role.responsibilities.map((req, i) => (
-                    <li key={i}>{req}</li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-foreground mb-2">Requirements</h4>
-                <ul className="list-disc list-outside ml-4 space-y-1.5 text-sm text-muted-foreground leading-relaxed">
-                  {role.requirements.map((req, i) => (
-                    <li key={i}>{req}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="pt-4">
-                <a
-                  href={role.applyUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-orange text-primary-foreground px-6 py-3 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity glow-orange"
-                >
-                  Apply on LinkedIn <ExternalLink size={16} />
-                </a>
-              </div>
-            </div>
-          </motion.div>
+const Careers = () => (
+  <SiteLayout
+    seo={{
+      title: "Careers: build data and AI foundations for enterprises",
+      description:
+        "Join InclinedPlane to build data platforms and AI foundations for enterprises. Ownership, engineering rigor and work that ships to production.",
+      path: "/careers",
+    }}
+  >
+    <PageHero
+      crumbs={[{ label: "Careers" }]}
+      label="Careers"
+      title="Build what comes next."
+      lead="We build the data and AI infrastructure that demanding enterprises run on. If you care about impact, craft and outcomes, read on."
+    />
+
+    {/* Open roles */}
+    <section className="bg-white">
+      <div className="ip-container ip-section">
+        <SectionIntro label="Open roles" title="Join the team.">
+          <p className="m-0">We’re looking for people who care about craft, impact and engineering rigor.</p>
+        </SectionIntro>
+
+        {openRoles.length > 0 ? (
+          <div className="flex flex-col gap-4">
+            {openRoles.map((role) => (
+              <JobCard key={role.title} role={role} />
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-[10px] border border-dashed border-ip-rule-dashed bg-ip-grey px-7 py-10">
+            <p className="m-0 text-[21px] font-semibold">No open roles right now</p>
+            <p className="mt-2 mb-0 max-w-[560px] text-[16px] leading-[1.6] text-ip-body">
+              We aren’t hiring for specific positions at the moment, but we’re always glad to meet exceptional engineers.
+            </p>
+          </div>
         )}
-      </AnimatePresence>
-    </motion.div>
-  );
-};
 
-const Careers = () => {
-  return (
-    <PageLayout>
-      <div className="overflow-x-clip">
-        <SEOHead
-          title="Careers — Build the Future of Data & AI | InclinedPlane"
-          description="Join InclinedPlane to build AI-native data systems for high-velocity enterprises. Remote-first, ownership-driven, engineering rigor."
-          path="/careers"
-        />
-
-        <PageHero
-          label="Careers"
-          title={
-            <>
-              Build What <span className="text-gradient-orange">Comes Next.</span>
-            </>
-          }
-          subtitle="We build the data and AI infrastructure that powers demanding enterprises. If you care about impact, craft, and outcomes, read on."
-        />
-
-        {/* Open Roles Section */}
-        <section className="relative pt-4 pb-20 sm:pt-8 sm:pb-24">
-          <SectionGlow position="bottom-right" size={650} />
-          <div className="max-w-4xl mx-auto px-6 lg:px-8">
-            <motion.div {...fadeUp} className="mb-10 text-center">
-              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Open Roles</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                Join the <span className="text-gradient-orange">team.</span>
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                We're looking for exceptional people who care about craft, impact, and engineering rigor. Help us build the next generation of data systems.
-              </p>
-            </motion.div>
-
+        <div className="mt-10 grid border-t-2 border-black md:grid-cols-2">
+          <div className="border-b border-ip-rule-strong py-7 md:pr-8">
+            <h3 className="ip-h3 m-0">Don’t see a fit?</h3>
+            <p className="mt-2 mb-5 text-[16px] leading-[1.6] text-ip-body">
+              We’re always interested in meeting engineers, architects and AI builders. Introduce yourself, share what you’ve built and tell us what you’d want to work on.
+            </p>
+            <a href={`mailto:${CAREERS_EMAIL}?subject=${encodeURIComponent("Introduction: talent network")}`} className={buttonClass("secondary", "md")}>
+              Join our talent network
+            </a>
+          </div>
+          <div className="border-b border-ip-rule-strong py-7 md:border-l md:pl-8">
+            <h3 className="ip-h3 m-0">Are you an employee?</h3>
+            <p className="mt-2 mb-5 text-[16px] leading-[1.6] text-ip-body">Refer a friend or former colleague for an open position.</p>
             {openRoles.length > 0 ? (
-              <div className="space-y-6 mb-16">
-                {openRoles.map((role, i) => (
-                  <JobCard key={role.title} role={role} index={i} />
-                ))}
-              </div>
+              <Link to="/referral" className={buttonClass("secondary", "md")}>
+                Employee referral portal
+              </Link>
             ) : (
-              <motion.div
-                {...fadeUp}
-                className="mb-16 glass-panel rounded-2xl p-10 text-center flex flex-col items-center justify-center border-dashed border-2 border-white/5"
-              >
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-5">
-                  <Briefcase size={28} className="text-primary" />
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-3">
-                  No open roles right now
-                </h3>
-                <p className="text-muted-foreground max-w-md mx-auto leading-relaxed">
-                  We aren't actively hiring for any specific positions at the moment, but we're always eager to meet exceptional talent.
-                </p>
-              </motion.div>
+              <button type="button" disabled className={buttonClass("secondary", "md")}>
+                No open roles right now
+              </button>
             )}
-
-            <motion.div
-              {...fadeUp}
-              className="glass-panel rounded-2xl p-8 text-center sm:text-left flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
-            >
-              <div>
-                <h3 className="font-semibold text-foreground text-lg mb-2">Don't see a fit?</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed max-w-xl">
-                  We're always interested in meeting exceptional engineers, architects, and AI builders.
-                  Introduce yourself, share what you've built, and tell us what you'd want to work on.
-                </p>
-              </div>
-              <a
-                href={`mailto:${CAREERS_EMAIL}?subject=Introduction — Talent Network`}
-                data-cursor-hover
-                className="inline-flex items-center justify-center gap-2 bg-foreground/5 border border-foreground/10 text-foreground px-6 py-3 rounded-lg font-medium text-sm hover:bg-foreground/10 transition-colors flex-shrink-0"
-              >
-                <Mail size={16} /> Join our talent network
-              </a>
-            </motion.div>
-
-            {/* Employee Referrals Link */}
-            <motion.div
-              {...fadeUp}
-              className="mt-6 glass-panel rounded-2xl p-6 text-center flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
-            >
-              <div className="text-left">
-                <h3 className="font-semibold text-foreground text-md mb-1">Are you an employee?</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Help us build the team! Refer a friend or former colleague for an open position.
-                </p>
-              </div>
-              {openRoles.length > 0 ? (
-                <Link
-                  to="/referral"
-                  data-cursor-hover
-                  className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary border border-primary/20 px-6 py-3 rounded-lg font-medium text-sm hover:bg-primary/20 transition-colors flex-shrink-0"
-                >
-                  Employee Referral Portal
-                </Link>
-              ) : (
-                <button
-                  disabled
-                  className="inline-flex items-center justify-center gap-2 bg-primary/5 text-primary/40 border border-primary/10 px-6 py-3 rounded-lg font-medium text-sm flex-shrink-0 cursor-not-allowed"
-                >
-                  No open roles right now
-                </button>
-              )}
-            </motion.div>
           </div>
-        </section>
-
-        {/* Philosophy / Values */}
-        <section className="relative py-20 sm:py-24">
-          <SectionGlow position="top-left" size={600} />
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <motion.div {...fadeUp} className="max-w-3xl mx-auto mb-14 text-center">
-              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Why InclinedPlane</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-5">
-                A team built for <span className="text-gradient-orange">leverage</span>, not headcount.
-              </h2>
-              <p className="text-muted-foreground leading-relaxed">
-                We don't optimize for size. We optimize for the quality of the engineers in the room. Every person here
-                is expected to set direction, ship production work, and raise the bar. In return, you get autonomy,
-                ownership, and the chance to work on problems that matter to the businesses we partner with.
-              </p>
-            </motion.div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {values.map(({ icon: Icon, title, desc }, i) => (
-                <motion.div
-                  key={title}
-                  {...fadeUp}
-                  transition={{ duration: 0.5, delay: i * 0.06, ease: "easeOut" }}
-                  className="glass-panel rounded-xl p-6 group hover:glow-orange transition-shadow"
-                  data-cursor-hover
-                >
-                  <div className="w-11 h-11 rounded-xl surface-3 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
-                    <Icon size={18} className="text-primary" />
-                  </div>
-                  <h3 className="font-semibold text-foreground text-sm mb-2">{title}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Perks — commented out for now
-        <section className="relative py-20 sm:py-24">
-          <SectionGlow position="top-right" size={600} />
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <motion.div {...fadeUp} className="text-center mb-14">
-              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Perks & Benefits</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-                Built to do your <span className="text-gradient-orange">best work.</span>
-              </h2>
-            </motion.div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {perks.map(({ icon: Icon, title, desc }, i) => (
-                <motion.div
-                  key={title}
-                  {...fadeUp}
-                  transition={{ duration: 0.5, delay: i * 0.05, ease: "easeOut" }}
-                  className="glass-panel rounded-xl p-6 group hover:glow-orange transition-shadow"
-                  data-cursor-hover
-                >
-                  <Icon size={20} className="text-primary mb-4" />
-                  <h3 className="font-semibold text-foreground text-sm mb-2">{title}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-        */}
-
-        {/* Hiring Process */}
-        <section className="relative py-20 sm:py-24">
-          <SectionGlow position="bottom-left" size={650} />
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <motion.div {...fadeUp} className="mb-14 text-center max-w-3xl mx-auto">
-              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-4">Hiring Process</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                Fast, respectful, <span className="text-gradient-orange">no theatre.</span>
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Four steps over two to three weeks. We respect your time and aim to give you a clear answer either way.
-              </p>
-            </motion.div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {process.map(({ icon: Icon, title, desc }, i) => (
-                <motion.div
-                  key={title}
-                  {...fadeUp}
-                  transition={{ duration: 0.5, delay: i * 0.07, ease: "easeOut" }}
-                  className="glass-panel rounded-xl p-6 relative group hover:glow-orange transition-shadow"
-                  data-cursor-hover
-                >
-                  <span className="absolute top-4 right-4 font-mono text-[10px] text-primary/60 tracking-widest">
-                    0{i + 1}
-                  </span>
-                  <div className="w-11 h-11 rounded-xl surface-3 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
-                    <Icon size={18} className="text-primary" />
-                  </div>
-                  <h3 className="font-semibold text-foreground text-sm mb-2">{title}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Final CTA */}
-        <section className="relative py-24 sm:py-32 overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute w-[500px] sm:w-[700px] h-[500px] sm:h-[700px] rounded-full opacity-[0.08] blur-[120px] bg-gradient-orange top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-          </div>
-          <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-8 text-center">
-            <motion.div {...fadeUp}>
-              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-5">Get In Touch</p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-5">
-                Think you'd be a <span className="text-gradient-orange">good fit?</span>
-              </h2>
-              <p className="text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
-                Send us a note with your background, what you're looking for, and a link to something you've built that
-                you're proud of. We read every email.
-              </p>
-              <a
-                href={`mailto:${CAREERS_EMAIL}?subject=Joining InclinedPlane`}
-                data-cursor-hover
-                className="inline-flex items-center gap-2 bg-gradient-orange text-primary-foreground px-8 py-4 rounded-lg font-medium text-base hover:opacity-90 transition-opacity glow-orange-strong"
-              >
-                <Mail size={18} /> {CAREERS_EMAIL}
-              </a>
-            </motion.div>
-          </div>
-        </section>
+        </div>
       </div>
-    </PageLayout>
-  );
-};
+    </section>
+
+    {/* Values */}
+    <section className="bg-ip-grey">
+      <div className="ip-container ip-section">
+        <SectionIntro label="Why InclinedPlane" title="A team built for leverage, not headcount.">
+          <p className="m-0">
+            We don’t optimize for size. We optimize for the quality of the engineers in the room. Everyone here sets direction, ships production work and raises the bar. In return you get autonomy, ownership and problems that matter to the businesses we work with.
+          </p>
+        </SectionIntro>
+        <div className="grid grid-cols-1 border-t-2 border-black sm:grid-cols-2 lg:grid-cols-4">
+          {values.map((v, i) => (
+            <div key={v.title} className={cn("border-b border-ip-rule-strong py-6 pr-6", i > 0 && "lg:border-l lg:pl-6", i % 2 === 1 && "sm:border-l sm:pl-6")}>
+              <h3 className="m-0 text-[18px] font-semibold">{v.title}</h3>
+              <p className="mt-2 mb-0 text-[15px] leading-[1.55] text-ip-body">{v.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Process (a real sequence) */}
+    <section className="bg-white">
+      <div className="ip-container ip-section">
+        <SectionIntro label="Hiring process" title="Fast, respectful, no theater.">
+          <p className="m-0">Four steps over two to three weeks. We respect your time and give you a clear answer either way.</p>
+        </SectionIntro>
+        <ol className="m-0 grid list-none grid-cols-1 border-t-2 border-black p-0 sm:grid-cols-2 lg:grid-cols-4">
+          {process.map((s, i) => (
+            <li key={s.title} className={cn("border-b border-ip-rule-strong py-6 pr-6", i > 0 && "lg:border-l lg:pl-6", i % 2 === 1 && "sm:border-l sm:pl-6")}>
+              <Label small className="mb-3">
+                Step {i + 1}
+              </Label>
+              <h3 className="m-0 text-[18px] font-semibold">{s.title}</h3>
+              <p className="mt-2 mb-0 text-[15px] leading-[1.55] text-ip-body">{s.desc}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    {/* Final */}
+    <section className="relative overflow-hidden border-t border-ip-rule bg-ip-grey">
+      <div aria-hidden="true" className="ip-pattern-fade-left absolute inset-y-0 right-0 hidden w-[42%] sm:block" />
+      <div className="ip-container relative py-[clamp(64px,9vw,112px)]">
+        <Label dot className="mb-5">
+          Get in touch
+        </Label>
+        <h2 className="m-0 max-w-[760px] text-[clamp(32px,4.4vw,56px)] font-semibold leading-[1.04] tracking-[-0.025em]">Think you’d be a good fit?</h2>
+        <p className="mt-5 mb-0 max-w-[580px] text-[18px] leading-[1.6] text-ip-body">
+          Send a note with your background, what you’re looking for and a link to something you’ve built that you’re proud of. We read every email.
+        </p>
+        <a href={`mailto:${CAREERS_EMAIL}?subject=${encodeURIComponent("Joining InclinedPlane")}`} className={buttonClass("primary", "lg", "mt-8")}>
+          {CAREERS_EMAIL}
+        </a>
+      </div>
+    </section>
+  </SiteLayout>
+);
 
 export default Careers;

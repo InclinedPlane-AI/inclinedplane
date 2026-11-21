@@ -1,6 +1,14 @@
+/**
+ * Legal page shell (privacy, terms, cookies). Restyled for the revamp; the
+ * exported API (LegalLayout, Section, H3, P, ArrowList, LI, HighlightBox,
+ * WarningBox, ContactBlock, A) is unchanged so the page files keep working.
+ * Legal pages stay noindex. Section numbers are kept because the documents
+ * cross-reference them ("see Section 14").
+ */
 import { ReactNode } from "react";
-import PageLayout from "@/components/PageLayout";
-import SEOHead from "@/components/SEOHead";
+import { SiteLayout } from "@/components/site/SiteLayout";
+import { Label } from "@/components/site/primitives";
+import { Breadcrumbs } from "@/components/site/sections";
 
 export interface TocItem {
   id: string;
@@ -18,63 +26,60 @@ interface LegalLayoutProps {
   children: ReactNode;
 }
 
-export const LegalLayout = ({
-  seoTitle,
-  seoDescription,
-  seoPath,
-  title,
-  meta,
-  toc,
-  children,
-}: LegalLayoutProps) => {
+export const LegalLayout = ({ seoTitle, seoDescription, seoPath, title, meta, toc, children }: LegalLayoutProps) => {
   return (
-    <PageLayout>
-      <SEOHead title={seoTitle} description={seoDescription} path={seoPath} noIndex />
-      <article className="max-w-[960px] mx-auto px-6 lg:px-10 pt-32 pb-20">
-        {/* Hero */}
-        <header className="pb-12 mb-12 border-b border-border">
-          <div className="flex items-center gap-3 mb-5">
-            <span className="block w-6 h-px bg-primary" />
-            <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-primary">
-              Legal
-            </span>
-          </div>
-          <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[1.05] mb-6 text-foreground">
-            {title}
-          </h1>
-          <div className="flex flex-wrap gap-x-8 gap-y-2 font-mono text-xs text-muted-foreground">
-            {meta.map((m) => (
-              <span key={m}>
-                <span className="text-primary">// </span>
-                {m}
-              </span>
-            ))}
-          </div>
-        </header>
+    <SiteLayout seo={{ title: seoTitle, description: seoDescription, path: seoPath, noIndex: true }}>
+      <header className="border-b border-ip-rule bg-white">
+        <div className="ip-container pt-[clamp(36px,5vw,64px)] pb-10">
+          <Breadcrumbs items={[{ label: typeof title === "string" ? title : "Legal" }]} />
+          <Label className="mb-5">Legal</Label>
+          <h1 className="ip-h1-page m-0">{title}</h1>
+          <dl className="mt-6 mb-0 flex flex-wrap gap-x-10 gap-y-3">
+            {meta.map((m) => {
+              const [k, ...rest] = m.split(":");
+              const v = rest.join(":").trim();
+              return (
+                <div key={m}>
+                  {v ? (
+                    <>
+                      <dt className="ip-label-sm">{k}</dt>
+                      <dd className="m-0 mt-1 text-[15px] text-black">{v}</dd>
+                    </>
+                  ) : (
+                    <dd className="m-0 text-[15px] text-black">{m}</dd>
+                  )}
+                </div>
+              );
+            })}
+          </dl>
+        </div>
+      </header>
 
-        {/* Layout grid */}
-        <div className="grid lg:grid-cols-[220px_1fr] gap-16 items-start">
-          <aside className="hidden lg:block sticky top-24">
-            <div className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground/70 mb-4">
-              Contents
-            </div>
-            <nav className="flex flex-col">
-              {toc.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className="font-mono text-[11px] text-muted-foreground hover:text-primary py-1.5 pl-3 border-l border-border hover:border-primary transition-colors tracking-wide"
-                >
-                  {item.num} — {item.label}
-                </a>
-              ))}
+      <div className="ip-container py-[clamp(40px,6vw,80px)]">
+        <div className="grid items-start gap-12 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+          <aside className="hidden lg:block lg:sticky lg:top-[110px]">
+            <p className="ip-label-sm m-0 mb-3">Contents</p>
+            <nav aria-label="Contents">
+              <ol className="m-0 list-none border-l border-ip-rule p-0">
+                {toc.map((item) => (
+                  <li key={item.id}>
+                    <a
+                      href={`#${item.id}`}
+                      className="-ml-px flex gap-2 border-l-2 border-transparent py-1.5 pl-4 text-[14px] leading-[1.4] text-ip-muted no-underline transition-colors hover:border-ip-orange hover:text-black"
+                    >
+                      <span className="font-mono text-[12px]">{item.num}</span>
+                      <span>{item.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
             </nav>
           </aside>
 
-          <main className="legal-content min-w-0">{children}</main>
+          <div className="min-w-0 max-w-[760px]">{children}</div>
         </div>
-      </article>
-    </PageLayout>
+      </div>
+    </SiteLayout>
   );
 };
 
@@ -87,72 +92,45 @@ interface SectionProps {
 }
 
 export const Section = ({ id, num, title, children, last }: SectionProps) => (
-  <section
-    id={id}
-    className={
-      last
-        ? "scroll-mt-32"
-        : "scroll-mt-32 mb-14 pb-14 border-b border-border"
-    }
-  >
-    <h2 className="flex items-baseline gap-3 font-bold text-2xl tracking-tight text-foreground mb-5">
-      <span className="font-mono text-[11px] font-normal text-primary tracking-wider">
-        {num}
-      </span>
+  <section id={id} className={last ? "scroll-mt-28" : "mb-12 scroll-mt-28 border-b border-ip-rule pb-12"}>
+    <h2 className="m-0 mb-5 flex items-baseline gap-3 text-[clamp(22px,2.2vw,26px)] font-semibold leading-[1.2] tracking-[-0.01em]">
+      <span className="font-mono text-[13px] font-normal text-ip-muted">{num}</span>
       <span>{title}</span>
     </h2>
-    <div className="space-y-4 text-[15px] leading-[1.8] text-muted-foreground">
-      {children}
-    </div>
+    <div className="space-y-4 text-[16px] leading-[1.7] text-ip-body">{children}</div>
   </section>
 );
 
-export const H3 = ({ children }: { children: ReactNode }) => (
-  <h3 className="font-semibold text-[15px] text-foreground mt-7 mb-2.5 tracking-tight">
-    {children}
-  </h3>
-);
+export const H3 = ({ children }: { children: ReactNode }) => <h3 className="mt-7 mb-2.5 text-[17px] font-semibold text-black">{children}</h3>;
 
-export const P = ({ children }: { children: ReactNode }) => (
-  <p className="text-[15px] leading-[1.8] text-muted-foreground">{children}</p>
-);
+export const P = ({ children }: { children: ReactNode }) => <p className="m-0 text-[16px] leading-[1.7] text-ip-body">{children}</p>;
 
-export const ArrowList = ({ children }: { children: ReactNode }) => (
-  <ul className="space-y-1.5 list-none p-0">{children}</ul>
-);
+export const ArrowList = ({ children }: { children: ReactNode }) => <ul className="m-0 list-none space-y-2 p-0">{children}</ul>;
 
 export const LI = ({ children }: { children: ReactNode }) => (
-  <li className="relative pl-5 text-[15px] leading-[1.7] text-muted-foreground before:content-['→'] before:absolute before:left-0 before:top-0 before:text-primary before:text-xs before:leading-[1.7] before:mt-[3px]">
+  <li className="relative pl-5 text-[16px] leading-[1.65] text-ip-body before:absolute before:left-0 before:top-[0.6em] before:h-1.5 before:w-1.5 before:bg-ip-orange before:content-['']">
     {children}
   </li>
 );
 
 export const HighlightBox = ({ children }: { children: ReactNode }) => (
-  <div className="rounded-lg border border-primary/25 bg-primary/10 px-6 py-5 my-6">
-    <p className="text-sm leading-[1.75] text-foreground">{children}</p>
+  <div className="mt-0 mb-10 border-l-[3px] border-ip-orange bg-ip-grey px-6 py-5">
+    <p className="m-0 text-[16px] leading-[1.7] text-black">{children}</p>
   </div>
 );
 
 export const WarningBox = ({ children }: { children: ReactNode }) => (
-  <div className="rounded-lg border border-border border-l-[3px] border-l-primary bg-muted/30 px-6 py-5 my-6">
-    <p className="font-mono text-[13px] leading-[1.7] text-muted-foreground">
-      {children}
-    </p>
+  <div className="my-6 rounded-[8px] border border-ip-rule-strong px-6 py-5">
+    <p className="m-0 text-[15px] leading-[1.7] text-ip-body">{children}</p>
   </div>
 );
 
 export const ContactBlock = ({ children }: { children: ReactNode }) => (
-  <div className="rounded-lg border border-border bg-card px-6 py-6 mt-6 space-y-2 [&_p]:font-mono [&_p]:text-xs [&_p]:text-muted-foreground [&_strong]:text-foreground">
-    {children}
-  </div>
+  <div className="mt-6 space-y-2 rounded-[8px] border border-ip-rule-strong bg-white px-6 py-6 [&_p]:text-[15px] [&_p]:text-ip-body [&_strong]:text-black">{children}</div>
 );
 
 export const A = ({ href, children, external }: { href: string; children: ReactNode; external?: boolean }) => (
-  <a
-    href={href}
-    {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-    className="text-primary hover:underline"
-  >
+  <a href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="ip-link font-medium">
     {children}
   </a>
 );

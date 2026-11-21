@@ -1,27 +1,15 @@
+/**
+ * /referral — internal referral portal (noindex). Restyled for the revamp;
+ * all logic (domain gate, EmailJS OTP, Google Sheets webhook, mailto draft)
+ * is unchanged. The form keeps the "Referral Portal Design Contract" in
+ * CLAUDE.md: two sections, `grid-cols-1 sm:grid-cols-2`, relationship select
+ * spanning both columns, submit right-aligned, no resume box.
+ */
 import { useState, useEffect, useRef } from "react";
-import PageLayout from "@/components/PageLayout";
-import SEOHead from "@/components/SEOHead";
-import SectionGlow from "@/components/SectionGlow";
-import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import {
-  Lock,
-  Send,
-  Trash2,
-  Plus,
-  CheckCircle2,
-  AlertCircle,
-  RefreshCw,
-  Shield,
-  Mail,
-  UserCheck,
-  Briefcase,
-  ListChecks,
-  Info,
-  ChevronRight,
-  Loader2,
-  BookOpen,
-} from "lucide-react";
+import { SiteLayout } from "@/components/site/SiteLayout";
+import { Label, buttonClass } from "@/components/site/primitives";
+import { cn } from "@/lib/utils";
 import { openRoles } from "./Careers";
 
 // ── EmailJS config ────────────────────────────────────────────────────────────
@@ -65,56 +53,21 @@ function formatCountdown(ms: number): string {
   return `${m}:${s}`;
 }
 
-// ── Motion variants ───────────────────────────────────────────────────────────
-const fadeUp = {
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -8 },
-  transition: { duration: 0.35, ease: "easeOut" as const },
-};
-
 // ── Sub-components ────────────────────────────────────────────────────────────
-const TabButton = ({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) => (
-  <button
-    onClick={onClick}
-    className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${active
-      ? "bg-primary text-primary-foreground shadow-sm"
-      : "text-muted-foreground hover:text-foreground hover:bg-white/5"
-      }`}
-  >
+const FieldLabel = ({ children, required, htmlFor }: { children: React.ReactNode; required?: boolean; htmlFor?: string }) => (
+  <label htmlFor={htmlFor} className="mb-1.5 block text-[15px] font-semibold text-black">
     {children}
-  </button>
-);
-
-const DomainPill = ({ domain }: { domain: string }) => (
-  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono">
-    <span className="w-1.5 h-1.5 rounded-full bg-primary/70" />@{domain}
-  </span>
-);
-
-const FieldLabel = ({
-  children,
-  required,
-}: {
-  children: React.ReactNode;
-  required?: boolean;
-}) => (
-  <label className="block text-xs font-semibold text-foreground/80 mb-1.5 uppercase tracking-wide">
-    {children}
-    {required && <span className="text-primary ml-1">*</span>}
+    {required ? <span className="sr-only"> (required)</span> : <span className="font-normal text-ip-muted"> (optional)</span>}
   </label>
 );
 
 const inputCls =
-  "w-full bg-white/5 border border-border rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-all [&_option]:bg-background [&_option]:text-foreground";
+  "w-full min-h-[44px] rounded-[6px] border border-ip-rule-dashed bg-white px-3 py-2 font-sans text-[15px] text-black placeholder:text-ip-muted focus:outline-2 focus:outline-ip-orange-ink focus:outline-offset-1 box-border";
+
+const errCls = "border-[#b42318]";
+
+const ErrorText = ({ children }: { children?: string }) =>
+  children ? <p className="mt-1 mb-0 text-[13px] text-[#b42318]">{children}</p> : null;
 
 // ── Email Gate ────────────────────────────────────────────────────────────────
 interface EmailGateProps {
@@ -160,9 +113,7 @@ const EmailGate = ({ onVerified }: EmailGateProps) => {
       return;
     }
     if (!isAllowedDomain(email.trim())) {
-      setDomainErr(
-        `Only @${ALLOWED_DOMAINS.join(" and @")} addresses are allowed.`
-      );
+      setDomainErr(`Only @${ALLOWED_DOMAINS.join(" and @")} addresses are allowed.`);
       return;
     }
 
@@ -179,9 +130,7 @@ const EmailGate = ({ onVerified }: EmailGateProps) => {
       setOtpErr("");
       setExpiresAt(Date.now() + OTP_EXPIRY_MS);
       setRemaining(OTP_EXPIRY_MS);
-      setSendErr(
-        `⚠️ EmailJS not configured — dev mode. Your code is: ${code}`
-      );
+      setSendErr(`EmailJS not configured (dev mode). Your code is: ${code}`);
       return;
     }
 
@@ -194,7 +143,7 @@ const EmailGate = ({ onVerified }: EmailGateProps) => {
           otp_code: code,
           expiry_minutes: "10",
         },
-        EMAILJS_PUBLIC_KEY
+        EMAILJS_PUBLIC_KEY,
       );
       setOtpSent(true);
       setOtpInput("");
@@ -202,9 +151,7 @@ const EmailGate = ({ onVerified }: EmailGateProps) => {
       setExpiresAt(Date.now() + OTP_EXPIRY_MS);
       setRemaining(OTP_EXPIRY_MS);
     } catch {
-      setSendErr(
-        "Failed to send the verification code. Please try again or contact IT."
-      );
+      setSendErr("Failed to send the verification code. Please try again or contact IT.");
     } finally {
       setSending(false);
     }
@@ -223,10 +170,7 @@ const EmailGate = ({ onVerified }: EmailGateProps) => {
     }
   };
 
-  const handleOtpKeyDown = (
-    idx: number,
-    e: React.KeyboardEvent<HTMLInputElement>
-  ) => {
+  const handleOtpKeyDown = (idx: number, e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Backspace" && !otpInput[idx] && idx > 0) {
       inputRefs.current[idx - 1]?.focus();
     }
@@ -247,131 +191,94 @@ const EmailGate = ({ onVerified }: EmailGateProps) => {
   };
 
   return (
-    <motion.div {...fadeUp} className="max-w-md mx-auto">
-      <div className="glass-panel rounded-2xl p-8 text-center">
-        {/* Lock icon */}
-        <div className="w-16 h-16 rounded-2xl surface-3 flex items-center justify-center mx-auto mb-5">
-          <Lock size={28} className="text-primary" />
-        </div>
-
-        <h2 className="text-xl font-bold text-foreground mb-1">
-          Team members only
-        </h2>
-        <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-          This portal is restricted to InclinedPlane and Sail
-          Analytics team members. Verify your work email to continue.
-        </p>
-
-        {/* Domain pills */}
-        <div className="flex flex-wrap justify-center gap-2 mb-7">
-          {ALLOWED_DOMAINS.map((d) => (
-            <DomainPill key={d} domain={d} />
-          ))}
-        </div>
-
-        {!otpSent ? (
-          /* Email input */
-          <div className="space-y-4">
-            <input
-              type="email"
-              placeholder="yourname@inclinedplane.com"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setDomainErr("");
-              }}
-              onKeyDown={(e) => e.key === "Enter" && handleSendOTP()}
-              className={inputCls}
-            />
-            {domainErr && (
-              <p className="flex items-center gap-1.5 text-xs text-red-400">
-                <AlertCircle size={13} />
-                {domainErr}
-              </p>
-            )}
-            <button
-              onClick={handleSendOTP}
-              disabled={sending || openRoles.length === 0}
-              className="w-full inline-flex items-center justify-center gap-2 bg-gradient-orange text-primary-foreground px-6 py-3 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity glow-orange disabled:opacity-60"
-            >
-              {sending ? (
-                <Loader2 size={16} className="animate-spin" />
-              ) : (
-                <Send size={16} />
-              )}
-              {openRoles.length === 0 ? "No open roles right now" : sending ? "Sending…" : "Send verification code"}
-            </button>
-          </div>
-        ) : (
-          /* OTP input */
-          <AnimatePresence mode="wait">
-            <motion.div {...fadeUp} className="space-y-5">
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">
-                  Code sent to{" "}
-                  <span className="text-foreground font-medium">{email}</span>
-                </p>
-                <p className="text-xs text-primary font-mono">
-                  Expires in {formatCountdown(remaining)}
-                </p>
-              </div>
-
-              {/* 6-digit input */}
-              <div className="flex gap-2 justify-center">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <input
-                    key={i}
-                    ref={(el) => { inputRefs.current[i] = el; }}
-                    type="text"
-                    inputMode="numeric"
-                    maxLength={1}
-                    value={otpInput[i] ?? ""}
-                    onChange={(e) => handleOtpDigit(i, e.target.value)}
-                    onKeyDown={(e) => handleOtpKeyDown(i, e)}
-                    className="w-11 h-12 text-center text-lg font-bold bg-white/5 border border-border rounded-lg focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-all text-foreground"
-                  />
-                ))}
-              </div>
-
-              {otpErr && (
-                <p className="flex items-center justify-center gap-1.5 text-xs text-red-400">
-                  <AlertCircle size={13} />
-                  {otpErr}
-                </p>
-              )}
-
-              <button
-                onClick={handleVerify}
-                className="w-full inline-flex items-center justify-center gap-2 bg-gradient-orange text-primary-foreground px-6 py-3 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity glow-orange"
-              >
-                <CheckCircle2 size={16} />
-                Verify &amp; continue
-              </button>
-
-              <button
-                onClick={() => {
-                  setOtpSent(false);
-                  setOtpInput("");
-                  setOtpErr("");
-                  setSendErr("");
-                  clearInterval(timerRef.current!);
-                }}
-                className="w-full flex items-center justify-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <RefreshCw size={12} />
-                Use a different email
-              </button>
-
-              {sendErr && (
-                <p className="text-xs text-amber-400 bg-amber-400/10 border border-amber-400/20 rounded-lg px-3 py-2">
-                  {sendErr}
-                </p>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        )}
+    <div className="mx-auto max-w-[460px] rounded-[10px] border border-ip-rule-strong border-t-4 border-t-ip-orange bg-white p-7 sm:p-8">
+      <h2 className="m-0 text-[22px] font-semibold">Team members only</h2>
+      <p className="mt-2 mb-5 text-[15px] leading-[1.55] text-ip-body">
+        This portal is restricted to InclinedPlane and Sail Analytics team members. Verify your work email to continue.
+      </p>
+      <div className="mb-6 flex flex-wrap gap-2">
+        {ALLOWED_DOMAINS.map((d) => (
+          <span key={d} className="rounded-full border border-ip-rule-strong px-3 py-1 font-mono text-[12px] text-ip-body">
+            @{d}
+          </span>
+        ))}
       </div>
-    </motion.div>
+
+      {!otpSent ? (
+        <div className="space-y-3">
+          <label htmlFor="referral-email" className="sr-only">
+            Work email
+          </label>
+          <input
+            id="referral-email"
+            type="email"
+            placeholder="yourname@inclinedplane.com"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setDomainErr("");
+            }}
+            onKeyDown={(e) => e.key === "Enter" && handleSendOTP()}
+            className={cn(inputCls, domainErr && errCls)}
+            aria-invalid={!!domainErr}
+          />
+          <ErrorText>{domainErr}</ErrorText>
+          <button type="button" onClick={handleSendOTP} disabled={sending || openRoles.length === 0} className={buttonClass("primary", "md", "w-full")}>
+            {openRoles.length === 0 ? "No open roles right now" : sending ? "Sending" : "Send verification code"}
+          </button>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          <div>
+            <p className="m-0 text-[15px] text-ip-body">
+              Code sent to <span className="font-semibold text-black">{email}</span>
+            </p>
+            <p className="mt-1 mb-0 font-mono text-[12px] text-ip-muted">Expires in {formatCountdown(remaining)}</p>
+          </div>
+
+          <div className="flex justify-between gap-2" role="group" aria-label="6-digit verification code">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <input
+                key={i}
+                ref={(el) => {
+                  inputRefs.current[i] = el;
+                }}
+                type="text"
+                inputMode="numeric"
+                maxLength={1}
+                aria-label={`Digit ${i + 1}`}
+                value={otpInput[i] ?? ""}
+                onChange={(e) => handleOtpDigit(i, e.target.value)}
+                onKeyDown={(e) => handleOtpKeyDown(i, e)}
+                className="h-12 w-11 rounded-[6px] border border-ip-rule-dashed bg-white text-center text-[18px] font-semibold text-black focus:outline-2 focus:outline-ip-orange-ink"
+              />
+            ))}
+          </div>
+
+          <ErrorText>{otpErr}</ErrorText>
+
+          <button type="button" onClick={handleVerify} className={buttonClass("primary", "md", "w-full")}>
+            Verify and continue
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setOtpSent(false);
+              setOtpInput("");
+              setOtpErr("");
+              setSendErr("");
+              clearInterval(timerRef.current!);
+            }}
+            className="ip-link w-full justify-center text-[14px] font-medium"
+          >
+            Use a different email
+          </button>
+
+          {sendErr && <p className="m-0 rounded-[6px] border border-dashed border-ip-rule-dashed bg-ip-grey px-3 py-2 text-[13px] text-black">{sendErr}</p>}
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -393,8 +300,7 @@ const SubmitReferralTab = ({ refereeEmail }: { refereeEmail: string }) => {
     const errs: Record<string, string> = {};
     if (!form.candidateName.trim()) errs.candidateName = "Required";
     if (!form.candidateEmail.trim()) errs.candidateEmail = "Required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.candidateEmail))
-      errs.candidateEmail = "Enter a valid email";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.candidateEmail)) errs.candidateEmail = "Enter a valid email";
     if (!form.position) errs.position = "Please select a position";
     if (!form.refereeName.trim()) errs.refereeName = "Required";
     if (!form.refereeTeam.trim()) errs.refereeTeam = "Required";
@@ -431,10 +337,7 @@ const SubmitReferralTab = ({ refereeEmail }: { refereeEmail: string }) => {
       console.error("Failed to send referral data to Google Sheets:", error);
     }
 
-
-    const subject = encodeURIComponent(
-      `[Referral] ${form.position} — ${form.candidateName} (referred by ${form.refereeName})`
-    );
+    const subject = encodeURIComponent(`[Referral] ${form.position} — ${form.candidateName} (referred by ${form.refereeName})`);
     const body = encodeURIComponent(
       `Hi,
 
@@ -455,7 +358,7 @@ Position: ${form.position}
 ──────────────────────────────────
 Please find the candidate's resume attached to this email.
 
-Submitted via the InclinedPlane Referral Portal.`
+Submitted via the InclinedPlane Referral Portal.`,
     );
 
     window.open(`mailto:${CAREERS_EMAIL}?subject=${subject}&body=${body}`);
@@ -464,22 +367,13 @@ Submitted via the InclinedPlane Referral Portal.`
 
   if (submitted) {
     return (
-      <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center py-8">
-        <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
-          <CheckCircle2 size={32} className="text-primary" />
-        </div>
-        <h3 className="text-lg font-bold text-foreground mb-2">
-          Referral draft opened!
-        </h3>
-        <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-          Your email client should have opened with all the details pre-filled.
-          Please{" "}
-          <span className="text-foreground font-medium">
-            attach the candidate's resume
-          </span>{" "}
-          and send.
+      <div className="mx-auto max-w-[640px] rounded-[10px] border border-ip-rule-strong border-t-4 border-t-ip-orange bg-white p-8" role="status">
+        <h3 className="m-0 text-[21px] font-semibold">Referral draft opened</h3>
+        <p className="mt-2 mb-6 text-[15px] leading-[1.6] text-ip-body">
+          Your email client should have opened with the details filled in. Please <strong className="text-black">attach the candidate’s resume</strong> and send.
         </p>
         <button
+          type="button"
           onClick={() => {
             setSubmitted(false);
             setForm({
@@ -492,84 +386,55 @@ Submitted via the InclinedPlane Referral Portal.`
               relationship: "",
             });
           }}
-          className="inline-flex items-center gap-2 bg-white/5 border border-white/10 text-foreground px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-white/10 transition-colors"
+          className={buttonClass("secondary", "md")}
         >
-          <RefreshCw size={14} />
           Submit another referral
         </button>
-      </motion.div>
+      </div>
     );
   }
 
   const field = (key: keyof typeof form) => ({
+    id: `ref-${key}`,
     value: form[key],
-    onChange: (
-      e: React.ChangeEvent<
-        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-      >
-    ) => {
+    "aria-invalid": !!errors[key],
+    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       setForm((f) => ({ ...f, [key]: e.target.value }));
       setErrors((er) => ({ ...er, [key]: "" }));
     },
   });
 
   return (
-    <motion.div {...fadeUp} className="max-w-3xl mx-auto space-y-10">
-
+    <div className="mx-auto max-w-[760px] space-y-10">
       {/* CANDIDATE DETAILS */}
-      <div className="space-y-6">
-        <h3 className="font-mono text-xs text-muted-foreground font-semibold tracking-widest uppercase mb-4 pb-2 border-b border-white/10">
-          Candidate Details
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {/* Full Name */}
+      <fieldset className="m-0 border-0 p-0">
+        <legend className="ip-label mb-5 w-full border-b-2 border-black pb-3">Candidate details</legend>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>
-            <FieldLabel required>Full name</FieldLabel>
-            <input
-              type="text"
-              placeholder="e.g. Ravi Shankar"
-              className={`${inputCls} ${errors.candidateName ? "border-red-500/60" : ""}`}
-              {...field("candidateName")}
-            />
-            {errors.candidateName && (
-              <p className="text-xs text-red-400 mt-1">{errors.candidateName}</p>
-            )}
+            <FieldLabel required htmlFor="ref-candidateName">
+              Full name
+            </FieldLabel>
+            <input type="text" placeholder="e.g. Ravi Shankar" className={cn(inputCls, errors.candidateName && errCls)} {...field("candidateName")} />
+            <ErrorText>{errors.candidateName}</ErrorText>
           </div>
-
-          {/* Email Address */}
           <div>
-            <FieldLabel required>Email address</FieldLabel>
-            <input
-              type="email"
-              placeholder="ravi@example.com"
-              className={`${inputCls} ${errors.candidateEmail ? "border-red-500/60" : ""}`}
-              {...field("candidateEmail")}
-            />
-            {errors.candidateEmail && (
-              <p className="text-xs text-red-400 mt-1">{errors.candidateEmail}</p>
-            )}
+            <FieldLabel required htmlFor="ref-candidateEmail">
+              Email address
+            </FieldLabel>
+            <input type="email" placeholder="ravi@example.com" className={cn(inputCls, errors.candidateEmail && errCls)} {...field("candidateEmail")} />
+            <ErrorText>{errors.candidateEmail}</ErrorText>
           </div>
-
-          {/* Phone Number */}
           <div>
-            <FieldLabel>Phone number</FieldLabel>
-            <input
-              type="tel"
-              placeholder="+91 9876543210"
-              className={inputCls}
-              {...field("candidatePhone")}
-            />
+            <FieldLabel htmlFor="ref-candidatePhone">Phone number</FieldLabel>
+            <input type="tel" placeholder="+91 9876543210" className={inputCls} {...field("candidatePhone")} />
           </div>
-
-          {/* Position */}
           <div>
-            <FieldLabel required>Applying for</FieldLabel>
-            <select
-              className={`${inputCls} ${errors.position ? "border-red-500/60" : ""}`}
-              {...field("position")}
-            >
+            <FieldLabel required htmlFor="ref-position">
+              Applying for
+            </FieldLabel>
+            <select className={cn(inputCls, errors.position && errCls)} {...field("position")}>
               <option value="" disabled>
-                — select a position —
+                Select a position
               </option>
               {openRoles.map((p) => (
                 <option key={`${p.title}-${p.department}`} value={p.title}>
@@ -577,78 +442,53 @@ Submitted via the InclinedPlane Referral Portal.`
                 </option>
               ))}
             </select>
-            {errors.position && (
-              <p className="text-xs text-red-400 mt-1">{errors.position}</p>
-            )}
+            <ErrorText>{errors.position}</ErrorText>
           </div>
         </div>
-      </div>
+      </fieldset>
 
       {/* YOUR DETAILS (REFEREE) */}
-      <div className="space-y-6">
-        <h3 className="font-mono text-xs text-muted-foreground font-semibold tracking-widest uppercase mb-4 pb-2 border-b border-white/10">
-          Your Details (Referee)
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {/* Your Name */}
+      <fieldset className="m-0 border-0 p-0">
+        <legend className="ip-label mb-5 w-full border-b-2 border-black pb-3">Your details (referee)</legend>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>
-            <FieldLabel required>Your name</FieldLabel>
-            <input
-              type="text"
-              placeholder="e.g. Ajay Kumar"
-              className={`${inputCls} ${errors.refereeName ? "border-red-500/60" : ""}`}
-              {...field("refereeName")}
-            />
-            {errors.refereeName && (
-              <p className="text-xs text-red-400 mt-1">{errors.refereeName}</p>
-            )}
+            <FieldLabel required htmlFor="ref-refereeName">
+              Your name
+            </FieldLabel>
+            <input type="text" placeholder="e.g. Ajay Kumar" className={cn(inputCls, errors.refereeName && errCls)} {...field("refereeName")} />
+            <ErrorText>{errors.refereeName}</ErrorText>
           </div>
-
-          {/* Your Team / Dept */}
           <div>
-            <FieldLabel required>Your team / department</FieldLabel>
-            <input
-              type="text"
-              placeholder="e.g. Data & Analytics"
-              className={`${inputCls} ${errors.refereeTeam ? "border-red-500/60" : ""}`}
-              {...field("refereeTeam")}
-            />
-            {errors.refereeTeam && (
-              <p className="text-xs text-red-400 mt-1">{errors.refereeTeam}</p>
-            )}
+            <FieldLabel required htmlFor="ref-refereeTeam">
+              Your team / department
+            </FieldLabel>
+            <input type="text" placeholder="e.g. Data & Analytics" className={cn(inputCls, errors.refereeTeam && errCls)} {...field("refereeTeam")} />
+            <ErrorText>{errors.refereeTeam}</ErrorText>
           </div>
-
-          {/* Relationship */}
           <div className="sm:col-span-2">
-            <FieldLabel required>Relationship to candidate</FieldLabel>
-            <select
-              className={`${inputCls} ${errors.relationship ? "border-red-500/60" : ""}`}
-              {...field("relationship")}
-            >
+            <FieldLabel required htmlFor="ref-relationship">
+              Relationship to candidate
+            </FieldLabel>
+            <select className={cn(inputCls, errors.relationship && errCls)} {...field("relationship")}>
               <option value="" disabled>
-                — select —
+                Select
               </option>
               <option value="Former Colleague">Former Colleague</option>
               <option value="Friend">Friend</option>
               <option value="School/University Alum">School/University Alum</option>
               <option value="Other">Other</option>
             </select>
-            {errors.relationship && (
-              <p className="text-xs text-red-400 mt-1">{errors.relationship}</p>
-            )}
+            <ErrorText>{errors.relationship}</ErrorText>
           </div>
         </div>
-      </div>
+      </fieldset>
 
-      <div className="flex justify-end pt-4 border-t border-white/10">
-        <button
-          onClick={handleSubmit}
-          className="inline-flex items-center justify-center gap-2 bg-foreground text-background px-6 py-2.5 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity"
-        >
+      <div className="flex justify-end border-t border-ip-rule pt-5">
+        <button type="button" onClick={handleSubmit} className={buttonClass("primary", "md")}>
           Submit referral
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -656,41 +496,32 @@ Submitted via the InclinedPlane Referral Portal.`
 const HowItWorksTab = () => {
   const steps = [
     {
-      icon: Shield,
-      title: "Domain restriction — how it works",
+      title: "Domain restriction: how it works",
       items: [
         "You enter your work email. The system checks the domain against the allowed list (@inclinedplane.com, @sail-analytics.com).",
-        "A 6-digit one-time code is sent to that inbox. Only someone who actually receives mail at that address can complete verification.",
-        "The verified email is stamped into every referral submission, creating a full audit trail of who referred whom.",
+        "A 6-digit one-time code is sent to that inbox. Only someone who receives mail at that address can complete verification.",
+        "The verified email is stamped into every referral submission, creating an audit trail of who referred whom.",
       ],
     },
     {
-      icon: Mail,
       title: "Referral submission flow",
       items: [
-        "After verification, fill in the candidate's details and select the open position.",
-        "Clicking Submit opens your email client with everything pre-filled — candidate info, position, your notes, and your verified email in the subject line.",
-        "Attach the candidate's resume and send. All referrals land in the careers inbox with a consistent, searchable format.",
+        "After verification, fill in the candidate’s details and select the open position.",
+        "Submitting opens your email client with everything filled in: candidate info, position and your verified email.",
+        "Attach the candidate’s resume and send. All referrals land in the careers inbox in a consistent, searchable format.",
       ],
     },
   ];
 
   return (
-    <motion.div {...fadeUp} className="max-w-2xl mx-auto space-y-6">
-      {steps.map(({ icon: Icon, title, items }) => (
-        <div key={title} className="glass-panel rounded-2xl p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-9 h-9 rounded-xl surface-3 flex items-center justify-center flex-shrink-0">
-              <Icon size={16} className="text-primary" />
-            </div>
-            <h3 className="text-sm font-bold text-foreground">{title}</h3>
-          </div>
-          <ol className="space-y-3">
+    <div className="mx-auto max-w-[680px] space-y-8">
+      {steps.map(({ title, items }) => (
+        <div key={title} className="border-t-2 border-black pt-5">
+          <h3 className="ip-h3 m-0">{title}</h3>
+          <ol className="mt-4 mb-0 list-none space-y-3 p-0">
             {items.map((item, i) => (
-              <li key={i} className="flex gap-3 text-sm text-muted-foreground">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/10 text-primary text-[10px] font-bold flex items-center justify-center mt-0.5">
-                  {i + 1}
-                </span>
+              <li key={i} className="grid grid-cols-[28px_1fr] gap-2 text-[15px] leading-[1.55] text-ip-body">
+                <span className="font-mono text-[12px] text-ip-muted">{String(i + 1).padStart(2, "0")}</span>
                 {item}
               </li>
             ))}
@@ -698,61 +529,38 @@ const HowItWorksTab = () => {
         </div>
       ))}
 
-      {/* EmailJS setup note */}
       {!EMAILJS_CONFIGURED && (
-        <div className="glass-panel rounded-2xl p-5 border border-amber-400/20">
-          <div className="flex items-start gap-3">
-            <Info size={16} className="text-amber-400 flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="text-sm font-semibold text-foreground mb-1">
-                EmailJS not yet configured
-              </p>
-              <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-                OTP emails are currently running in dev mode (codes appear in
-                the browser console). To enable real email delivery:
-              </p>
-              <ol className="text-xs text-muted-foreground space-y-1.5 list-decimal ml-4">
-                <li>
-                  Create a free account at{" "}
-                  <a
-                    href="https://emailjs.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    emailjs.com
-                  </a>
-                </li>
-                <li>
-                  Connect a Gmail or Outlook account as your email service
-                </li>
-                <li>
-                  Create a template with variables:{" "}
-                  <code className="font-mono bg-white/5 px-1 rounded">
-                    {"{{to_email}}"}
-                  </code>
-                  ,{" "}
-                  <code className="font-mono bg-white/5 px-1 rounded">
-                    {"{{otp_code}}"}
-                  </code>
-                </li>
-                <li>
-                  Copy the Service ID, Template ID, and Public Key into{" "}
-                  <code className="font-mono bg-white/5 px-1 rounded">.env</code>
-                </li>
-              </ol>
-            </div>
-          </div>
+        <div className="rounded-[10px] border border-dashed border-ip-rule-dashed bg-ip-grey p-5">
+          <p className="m-0 text-[15px] font-semibold">EmailJS not yet configured</p>
+          <p className="mt-1 mb-3 text-[14px] leading-[1.55] text-ip-body">
+            Verification codes are running in dev mode (they appear in the browser console). To send real emails:
+          </p>
+          <ol className="m-0 list-decimal space-y-1.5 pl-5 text-[14px] text-ip-body">
+            <li>
+              Create an account at{" "}
+              <a href="https://emailjs.com" target="_blank" rel="noopener noreferrer" className="ip-link text-[14px] font-medium">
+                emailjs.com
+              </a>
+            </li>
+            <li>Connect a Gmail or Outlook account as your email service</li>
+            <li>
+              Create a template with the variables <code className="rounded bg-white px-1 font-mono">{"{{to_email}}"}</code> and{" "}
+              <code className="rounded bg-white px-1 font-mono">{"{{otp_code}}"}</code>
+            </li>
+            <li>
+              Copy the Service ID, Template ID and Public Key into <code className="rounded bg-white px-1 font-mono">.env</code>
+            </li>
+          </ol>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 };
 
 // ── Main Page ─────────────────────────────────────────────────────────────────
-const TABS: { id: Tab; label: string; icon: React.ElementType }[] = [
-  { id: "submit", label: "Submit referral", icon: Send },
-  { id: "howto", label: "How it works", icon: BookOpen },
+const TABS: { id: Tab; label: string }[] = [
+  { id: "submit", label: "Submit referral" },
+  { id: "howto", label: "How it works" },
 ];
 
 const Referral = () => {
@@ -760,66 +568,48 @@ const Referral = () => {
   const [refereeEmail, setRefereeEmail] = useState<string | null>(null);
 
   return (
-    <PageLayout>
-      <div className="overflow-x-clip">
-        <SEOHead
-          title="Referral Portal — InclinedPlane"
-          description="Internal referral portal for InclinedPlane and Sail Analytics team members."
-          path="/referral"
-          noIndex
-        />
+    <SiteLayout
+      seo={{
+        title: "Referral portal",
+        description: "Internal referral portal for InclinedPlane and Sail Analytics team members.",
+        path: "/referral",
+        noIndex: true,
+      }}
+    >
+      <section className="bg-white">
+        <div className="ip-container py-[clamp(48px,7vw,96px)]">
+          <div className="mx-auto mb-10 max-w-[760px]">
+            <Label className="mb-4">Internal tool</Label>
+            <h1 className="ip-h1-page m-0">Referral portal</h1>
+            <p className="ip-lead mt-4 mb-0">Submit candidate referrals for open positions. Only InclinedPlane and Sail Analytics team members can refer.</p>
 
-        <section className="relative pt-16 pb-24 sm:pt-24 sm:pb-32">
-          <SectionGlow position="top-right" size={600} />
-
-          <div className="max-w-3xl mx-auto px-6 lg:px-8">
-            {/* Header */}
-            <motion.div {...fadeUp} className="mb-10 text-center">
-              <p className="font-mono text-xs text-primary tracking-widest uppercase mb-3">
-                Internal Tool
-              </p>
-              <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
-                Referral <span className="text-gradient-orange">portal</span>
-              </h1>
-              <p className="text-muted-foreground leading-relaxed">
-                Submit candidate referrals for open positions. Only
-                InclinedPlane &amp; Sail Analytics team members can refer.
-              </p>
-            </motion.div>
-
-            {/* Tab bar */}
-            <motion.div
-              {...fadeUp}
-              transition={{ delay: 0.05 }}
-              className="flex flex-wrap justify-center gap-2 p-1.5 glass-panel rounded-xl mb-8 w-fit mx-auto"
-            >
+            <div role="tablist" aria-label="Referral portal" className="mt-8 inline-flex rounded-[8px] border border-ip-rule-strong p-1 text-[14px]">
               {TABS.map(({ id, label }) => (
-                <TabButton
+                <button
                   key={id}
-                  active={activeTab === id}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === id}
+                  aria-controls={`referral-panel-${id}`}
                   onClick={() => setActiveTab(id)}
+                  className={cn(
+                    "min-h-[40px] rounded-[6px] px-4 font-medium transition-colors duration-150",
+                    activeTab === id ? "bg-black text-white" : "text-ip-body hover:bg-ip-grey",
+                  )}
                 >
                   {label}
-                </TabButton>
+                </button>
               ))}
-            </motion.div>
-
-            {/* Tab content */}
-            <AnimatePresence mode="wait">
-              <motion.div key={activeTab} {...fadeUp}>
-                {activeTab === "submit" &&
-                  (refereeEmail ? (
-                    <SubmitReferralTab refereeEmail={refereeEmail} />
-                  ) : (
-                    <EmailGate onVerified={setRefereeEmail} />
-                  ))}
-                {activeTab === "howto" && <HowItWorksTab />}
-              </motion.div>
-            </AnimatePresence>
+            </div>
           </div>
-        </section>
-      </div>
-    </PageLayout>
+
+          <div role="tabpanel" id={`referral-panel-${activeTab}`}>
+            {activeTab === "submit" && (refereeEmail ? <SubmitReferralTab refereeEmail={refereeEmail} /> : <EmailGate onVerified={setRefereeEmail} />)}
+            {activeTab === "howto" && <HowItWorksTab />}
+          </div>
+        </div>
+      </section>
+    </SiteLayout>
   );
 };
 
