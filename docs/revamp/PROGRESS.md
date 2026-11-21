@@ -34,22 +34,22 @@ Last updated: 2026-11-21 (end of session 1)
 | `main` | Production → inclinedplane.com via `.github/workflows/deploy.yml` (unchanged). |
 | `revamp` | Long-lived redesign branch. Protected: PR + 1 approval (admins can bypass). |
 | Feature work | `feat/<thing>` branched from `revamp` → PR into `revamp`. |
-| Staging deploy | `.github/workflows/deploy-staging.yml`: push to `revamp` → staging; PR → preview URL comment. Vercel project `inclinedplane-staging` in the **same Vercel account as production**, created on first run with the existing secrets. All staging responses are `noindex`. |
+| Staging deploy | (PR #11) `.github/workflows/deploy-staging.yml`: push to `revamp` → staging; PR → preview URL comment. Vercel project `inclinedplane-staging` in the **same Vercel account as production**, created on first run with the existing secrets. All staging responses are `noindex`. |
 | Lovable | Retired (user, 2026-11-21). No more direct writes to `main`. |
 | Old personal preview | `inclinedplane-lac.vercel.app` (user's personal Vercel Hobby account). Retire once staging is live. |
 
 ### Blocked on a human (do these, then tick)
 
-- [ ] **Grant `workflow` scope to the GitHub CLI** so workflow files can be pushed:
-      `gh auth refresh -h github.com -s workflow`. Until then, the two
-      workflow commits sit on the local branches `fix/ci-pin-ubuntu-24` and
-      `ci/staging-workflow` (unpushed).
-- [ ] Then push the CI fix and open its PR to `main` (production deploys have failed since 16 Nov 2026
-      because `ubuntu-latest` moved to 26.04; PR #9 content is not live).
-- [ ] Then push `ci/staging-workflow` → PR into `revamp` → merge. The first run creates the staging project.
-      If it fails with "Could not link/create Vercel project", the `VERCEL_TOKEN`
-      secret is project-scoped: create an account-scoped token at
-      vercel.com/account/tokens and run `gh secret set VERCEL_TOKEN -R InclinedPlane-AI/inclinedplane`.
+- [x] `workflow` scope granted to the GitHub CLI.
+- [ ] **Merge PR #10** (CI fix → `main`). Production deploys have failed since 16 Nov 2026
+      because `ubuntu-latest` moved to 26.04; PR #9's content is not live until this merges.
+- [x] PR #11 (staging workflow → `revamp`) opened; its first run passed: the existing
+      `VERCEL_TOKEN` is account-scoped, the `inclinedplane-staging` project now exists in the
+      production Vercel account, previews are public, `/services` 308s, `X-Robots-Tag: noindex` set.
+      First preview: https://inclinedplane-staging-co8o32k3j-inclined-planes-projects.vercel.app
+- [ ] **Approve + merge PR #11** (needs a human approval; Claude may not admin-bypass reviews).
+      The push to `revamp` then deploys the stable staging URL (the staging project's
+      production domain, expected `https://inclinedplane-staging.vercel.app`; confirm in the Actions summary).
 - [ ] Add the two engineers to the GitHub org with write access (start Monday 2026-11-23).
 - [ ] Protect `main` (PR + 1 approval) now that Lovable is retired.
 - [ ] After staging is live, add the staging build as a required status check on `revamp`.
