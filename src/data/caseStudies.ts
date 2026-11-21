@@ -71,7 +71,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Retail & Manufacturing Chain",
     industry: "Retail & Manufacturing",
     summary:
-      "Modernized data operations end-to-end, from real-time executive reporting to dealer intelligence, scheme automation, market basket analysis, and dealer attrition prediction.",
+      "Modernized data operations, from real-time executive reporting to dealer intelligence, scheme automation, market basket analysis, and dealer attrition prediction.",
     icon: Factory,
     image: imgRetailMfg,
     metrics: [{ value: 30, suffix: "%", label: "Reporting time freed" }],
@@ -81,8 +81,8 @@ export const caseStudies: CaseStudy[] = [
         bullets: [
           "Real-time reporting across Sales & Marketing, Inventory, and Production, freeing 30% of key personnel's time previously lost to manual reporting.",
           "Equipped front-line sales teams with rich, actionable dealer intelligence at the point of engagement, sharper conversations, faster closures, stronger relationships.",
-          "Automated end-to-end implementation of scheme benefit policies across the dealer and distributor network, eliminating manual errors and accelerating rollout.",
-          "Leveraged Market Basket Analysis to guide dealers toward the optimal product mix and smarter in-store placement, improving sell-through and customer satisfaction.",
+          "Automated implementation of scheme benefit policies across the dealer and distributor network, eliminating manual errors and accelerating rollout.",
+          "Used Market Basket Analysis to guide dealers toward the optimal product mix and smarter in-store placement, improving sell-through and customer satisfaction.",
           "Built a dealer attrition prediction model that identifies at-risk partners in advance, enabling targeted retention before revenue is impacted.",
         ],
       },
@@ -106,11 +106,11 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: "Our approach",
-        body: "We benchmarked ARIMA (classical), LSTM (deep learning), and ML ensembles against MAPE, RMSE, and MAD. DeepAR+ won, its ability to learn seasonal patterns and leverage correlated time series across product lines made it uniquely suited to the client's environment.",
+        body: "We benchmarked ARIMA (classical), LSTM (deep learning), and ML ensembles against MAPE, RMSE, and MAD. DeepAR+ won, its ability to learn seasonal patterns and use correlated time series across product lines made it uniquely suited to the client's environment.",
       },
       {
         heading: "Implementation",
-        body: "DeepAR+ deployed on AWS for scalability and seamless integration. Monthly forecasts feed production planning and procurement. A Power BI dashboard gives planners and ops teams real-time visibility into accuracy and inventory projections.",
+        body: "DeepAR+ deployed on AWS for scalability. Monthly forecasts feed production planning and procurement. A Power BI dashboard gives planners and ops teams real-time visibility into accuracy and inventory projections.",
       },
       {
         heading: "Results & road ahead",
@@ -151,7 +151,7 @@ export const caseStudies: CaseStudy[] = [
       {
         heading: "Results",
         bullets: [
-          "98%+ overall accuracy, best-in-class for imbalanced datasets.",
+          "98%+ overall accuracy on a heavily imbalanced dataset.",
           "Precision, Recall, F1 in the 0.78–0.82 range, real-world reliability without false-alarm overload.",
           "Conclusive proof: failures are predictable, enabling a shift from reactive to preemptive maintenance.",
         ],
@@ -184,7 +184,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: "Our solution",
-        body: "A unified Data Warehouse on AWS Redshift integrating SAP, DMS, and SFA. A robust data engineering pipeline ensured seamless flow. Tableau dashboards mirrored existing business processes, refreshed four times a day.",
+        body: "A unified Data Warehouse on AWS Redshift integrating SAP, DMS, and SFA. A data engineering pipeline loads all three sources on schedule. Tableau dashboards mirrored existing business processes, refreshed four times a day.",
       },
       {
         heading: "The impact",
@@ -220,7 +220,7 @@ export const caseStudies: CaseStudy[] = [
       {
         heading: "The constraints",
         bullets: [
-          "Battery sufficiency for full journey.",
+          "Battery sufficiency for the full trip.",
           "Driver working hours, every allocation within scheduled shift.",
           "Vehicle type compliance and campus-specific designations.",
           "Escort trips originate from campus; cab returns immediately after drop.",
@@ -252,7 +252,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Sales Process Optimization, Pharmaceutical",
     industry: "Pharmaceuticals",
     summary:
-      "Replaced manual, weekly Excel reporting with an automated Tableau BI platform, cutting cost, accelerating decisions, and unlocking field-force intelligence at the rep level.",
+      "Replaced manual, weekly Excel reporting with an automated Tableau BI platform, cutting cost, accelerating decisions, and giving managers field-force data down to each rep.",
     icon: BarChart3,
     image: imgPharmaSalesBi,
     stack: "Tableau",
@@ -274,7 +274,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: "Our solution",
-        body: "An end-to-end BI solution, requirement gathering, multi-source data integration, dynamic visualization, and automated refresh. Tableau served as the BI platform of choice, replacing static spreadsheets with living, actionable intelligence.",
+        body: "A full BI build: requirement gathering, multi-source data integration, dynamic visualization, and automated refresh. Tableau served as the BI platform of choice, replacing static spreadsheets with living, actionable intelligence.",
       },
       {
         heading: "Impact & benefits",
@@ -308,7 +308,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: "Our solution",
-        body: "A comprehensive Inventory Ageing and Purchase Order Dashboard. Data unified through a best-in-class warehouse on AWS, with a Power BI front-end delivering real-time visibility across procurement.",
+        body: "An Inventory Ageing and Purchase Order dashboard. Data unified in a warehouse on AWS, with a Power BI front-end delivering real-time visibility across procurement.",
         bullets: [
           "Sellable vs. non-sellable inventory at vendor and SKU level.",
           "Inventory ageing by quantity and cost, bucketed to prioritize action on slow-moving stock.",
@@ -345,12 +345,12 @@ export const caseStudies: CaseStudy[] = [
         heading: "What we delivered",
         bullets: [
           "An analytics-based decision-making framework deployed across leading oil refineries nationwide, addressing 11 distinct types of equipment aberrations and reducing losses tied to undetected failures.",
-          "A cutting-edge audio analytics infrastructure that automatically identifies leak type and size by analyzing ultrasound frequency patterns, real-time, non-invasive detection that replaces guesswork with precision.",
+          "An audio analytics system that automatically identifies leak type and size by analyzing ultrasound frequency patterns, real-time, non-invasive detection that replaces guesswork with precision.",
         ],
       },
       {
         heading: "How we executed it",
-        body: "We stood up scalable cloud infrastructure to consolidate over 30 years of unorganized data, spanning multiple formats and siloed across departments. We digitized capture across structured and unstructured sources (including audio), implemented rigorous data quality monitoring, and architected a robust data warehouse to serve as the analytics backbone. A Tableau-powered visualization environment shifted the organization's culture from instinct-driven to evidence-based.",
+        body: "We stood up scalable cloud infrastructure to consolidate over 30 years of unorganized data, spanning multiple formats and siloed across departments. We digitized capture across structured and unstructured sources (including audio), implemented rigorous data quality monitoring, and built a data warehouse to serve as the analytics backbone. A Tableau-powered visualization environment shifted the organization's culture from instinct-driven to evidence-based.",
       },
     ],
   },
@@ -394,14 +394,14 @@ export const caseStudies: CaseStudy[] = [
     title: "Pharmaceutical MNC, Sales ERP Analytics",
     industry: "Pharmaceuticals",
     summary:
-      "Built a robust analytics layer on top of Sales ERP, transforming raw transactional data into strategic intelligence across operations, tactics, and strategy.",
+      "Built an analytics layer on top of Sales ERP, turning raw transactional data into strategic intelligence across operations, tactics, and strategy.",
     icon: Pill,
     image: imgPharmaMnc,
     stack: "Tableau",
     sections: [
       {
         heading: "Data sourcing & management",
-        body: "Established seamless, reliable data pipelines directly from enterprise-grade Sales ERP systems, ensuring clean, consistent, and audit-ready data as the foundation for all analytics.",
+        body: "Established reliable data pipelines directly from enterprise-grade Sales ERP systems, ensuring clean, consistent, and audit-ready data as the foundation for all analytics.",
       },
       {
         heading: "Analytics",
@@ -433,15 +433,15 @@ export const caseStudies: CaseStudy[] = [
       {
         heading: "Data sourcing & management",
         bullets: [
-          "Led end-to-end ERP implementation across Inventory and Purchase, a structured, standardized approach to data capture from day one.",
+          "Led the ERP implementation across Inventory and Purchase, a structured, standardized approach to data capture from day one.",
           "Mapped existing capture processes, identifying critical gaps silently undermining operational accuracy and reporting reliability.",
         ],
       },
       {
         heading: "Analytics & data management",
         bullets: [
-          "Robust data storage and organization across Inventory, Purchase, and Manufacturing, coherent, scalable architecture for ops and reporting.",
-          "Comprehensive data sanitization using OpenRefine and Data Wrangler, cleansed, standardized, and enriched across departments.",
+          "Data storage and organization across Inventory, Purchase, and Manufacturing, coherent, scalable architecture for ops and reporting.",
+          "Data sanitization using OpenRefine and Data Wrangler, cleansed, standardized, and enriched across departments.",
           "Formal data governance: dedicated departmental stewards and structured audit processes, ongoing data quality owned and continuously improved at the source.",
         ],
       },
@@ -545,7 +545,7 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
-        heading: "The transformation",
+        heading: "What we built",
         body: "We evolved the existing Azure data architecture into a flexible, multi-ERP adaptive analytics platform, harmonizing diverse ERP ecosystems into a canonical sales and opportunity model.",
         bullets: [
           "Azure Data Factory for pipeline orchestration.",

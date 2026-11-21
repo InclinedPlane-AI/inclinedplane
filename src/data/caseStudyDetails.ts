@@ -26,13 +26,13 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
     heroEyebrow: "01 · Retail & Manufacturing",
     heroTitle: "How a national retail & manufacturing chain turned scattered data into real-time decisions",
     heroSubtitle:
-      "We modernized data operations end-to-end, from real-time executive reporting to dealer intelligence, scheme automation, market basket analysis, and dealer attrition prediction.",
+      "We modernized data operations, from real-time executive reporting to dealer intelligence, scheme automation, market basket analysis, and dealer attrition prediction.",
     sections: [
       {
         id: "opportunity",
         label: "The Opportunity",
         number: "01",
-        heading: "The prize is enormous.",
+        heading: "Weekly spreadsheets were running a national dealer network.",
         body: "Manual reporting was draining senior talent and slowing decisions across a national network spanning hundreds of dealers, multiple product lines, and complex multi-tier distribution. Across Sales & Marketing, Inventory and Production, leaders were waiting on weekly Excel cycles assembled by hand, a cadence fundamentally misaligned with the pace of the market. Roughly 30% of senior personnel's time was lost to reporting tasks, dealer conversations were happening without data context, scheme rollouts were error-prone with manual calculations across tiers, and at-risk dealers were only recognized after revenue had already moved away. In a market where dealer loyalty is fiercely contested and competitor switching costs are low, the inability to act in real time was not just an operational drag, it was a strategic vulnerability.",
         bullets: [
           "30% of senior personnel's bandwidth consumed by manual reporting, diverting strategic talent to data assembly.",
@@ -50,7 +50,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         bullets: [
           "Real-time reporting across Sales & Marketing, Inventory and Production, freeing 30% of key personnel's time previously lost to manual reporting.",
           "Front-line sales teams equipped with rich, actionable dealer intelligence at the point of engagement, sharper conversations, faster closures, stronger relationships.",
-          "Automated end-to-end implementation of scheme benefit policies across the dealer and distributor network, eliminating manual errors and accelerating rollout.",
+          "Automated implementation of scheme benefit policies across the dealer and distributor network, eliminating manual errors and accelerating rollout.",
           "Market Basket Analysis guiding dealers toward the optimal product mix and smarter in-store placement, improving sell-through and customer satisfaction.",
           "A dealer attrition prediction model identifying at-risk partners in advance, enabling targeted retention before revenue is impacted.",
           "Unified data governance framework ensuring consistent KPI definitions across all business units, one version of the truth from national rollup to individual dealer.",
@@ -65,7 +65,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         bullets: [
           "30% of senior personnel's reporting time freed and redirected to strategic work.",
           "Sharper, evidence-led dealer conversations driving faster closures.",
-          "Scheme rollout accelerated and de-risked through end-to-end automation.",
+          "Scheme rollout accelerated and de-risked through automation.",
           "Improved sell-through and customer satisfaction via Market Basket-led product placement.",
           "Proactive retention of at-risk dealers, protecting revenue before it moves.",
           "Review cadence shifted from weekly retrospection to daily, real-time operational steering.",
@@ -88,8 +88,8 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         id: "opportunity",
         label: "The Opportunity",
         number: "01",
-        heading: "The prize is enormous.",
-        body: "Operating at the scale of hundreds of thousands of SKUs, spanning private label, marketplace, and third-party brands, the company's procurement function was under immense pressure. Demand volatility driven by flash sales, seasonal peaks, and promotional campaigns made traditional reorder-point methods unreliable. Working capital was trapped in slow-moving and dead stock, while fast-moving SKUs faced recurrent stock-outs that directly impacted GMV and customer satisfaction. Vendor quality was inconsistent, with no systematic way to track sellable-vs-unsellable ratios at the supplier level. Inventory ageing costs were estimated but never precisely measured, making it impossible to quantify the true cost of overstock decisions.",
+        heading: "Cash tied up in slow stock while fast sellers ran out.",
+        body: "Operating at the scale of hundreds of thousands of SKUs, spanning private label, marketplace, and third-party brands, the company's procurement function was under constant pressure. Demand volatility driven by flash sales, seasonal peaks, and promotional campaigns made traditional reorder-point methods unreliable. Working capital was trapped in slow-moving and dead stock, while fast-moving SKUs faced recurrent stock-outs that directly impacted GMV and customer satisfaction. Vendor quality was inconsistent, with no systematic way to track sellable-vs-unsellable ratios at the supplier level. Inventory ageing costs were estimated but never precisely measured, making it impossible to quantify the true cost of overstock decisions.",
         bullets: [
           "Hundreds of thousands of active SKUs across private label and third-party brands, each with distinct demand patterns, lead times, and margin profiles.",
           "Working capital locked in slow-moving and dead inventory with no visibility into ageing cost at the SKU or vendor level.",
@@ -102,7 +102,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         label: "The Solution",
         number: "02",
         heading: "A unified Inventory Ageing & PO dashboard on AWS + Power BI.",
-        body: "We architected a comprehensive Inventory Ageing and Purchase Order analytics platform on AWS, ingesting transactional data from the company's OMS, WMS, and vendor systems into a purpose-built data warehouse. The engineering layer handled deduplication, SKU normalization across catalog variants, and time-series alignment for accurate ageing calculations. A Power BI front-end delivered real-time visibility across procurement, enabling category managers and procurement leads to move from reactive firefighting to strategic, data-informed purchasing decisions.",
+        body: "We built an Inventory Ageing and Purchase Order analytics platform on AWS, ingesting transactional data from the company's OMS, WMS, and vendor systems into a purpose-built data warehouse. The engineering layer handled deduplication, SKU normalization across catalog variants, and time-series alignment for accurate ageing calculations. A Power BI front-end delivered real-time visibility across procurement, enabling category managers and procurement leads to move from reactive firefighting to strategic, data-informed purchasing decisions.",
         bullets: [
           "Sellable vs. non-sellable inventory at vendor and SKU level.",
           "Inventory ageing by quantity and cost, bucketed to prioritize action on slow-moving stock.",
@@ -122,7 +122,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
           "Stock-outs reduced by 24% across the portfolio.",
           "Holding inventory value reduced by 17%, significant working capital freed.",
           "Procurement operations streamlined through automation, reactive firefighting replaced with proactive strategy.",
-          "Vendor negotiation leverage strengthened through transparent, data-backed performance scorecards.",
+          "Vendor negotiating position strengthened through transparent, data-backed performance scorecards.",
           "Dead stock identification accelerated from quarterly audits to continuous, automated flagging, enabling faster liquidation and markdown decisions.",
         ],
       },
@@ -198,7 +198,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         id: "opportunity",
         label: "The Opportunity",
         number: "01",
-        heading: "The prize is enormous.",
+        heading: "Millions of telemetry readings a day, and no early warning.",
         body: "A leading Battery-as-a-Service operator managing a growing fleet of EV battery packs faced a fundamental challenge: reactive maintenance was expensive, unpredictable, and dangerous. Each battery pack streamed continuous IoT telemetry, voltage, current, temperature, state of charge, recharge cycle counts, generating millions of data points daily. Despite this data richness, the operator had no systematic way to distinguish early-warning signals from normal operating variation. Field failures meant emergency swaps, stranded vehicles, customer dissatisfaction, and in worst-case scenarios, thermal safety events. The cost of a single unplanned failure, logistics, replacement hardware, downtime, and brand damage, far exceeded the cost of proactive intervention, but the operator lacked the predictive capability to know which batteries to pull before they failed.",
         bullets: [
           "Millions of IoT telemetry data points generated daily across the fleet, voltage, current, temperature, state of charge, and recharge cycles, with no systematic anomaly detection.",
@@ -228,10 +228,10 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         heading: "From reactive to preemptive battery maintenance.",
         body: "The model delivered conclusive proof that battery failures are predictable from IoT telemetry alone, enabling the operator to fundamentally restructure its maintenance strategy. Instead of waiting for field failures and dispatching emergency swaps, the operator could now identify at-risk batteries days to weeks in advance, schedule maintenance during low-demand windows, and rotate battery packs proactively. The shift from reactive to preemptive maintenance reduced per-incident costs, improved fleet uptime, and eliminated the safety exposure associated with undetected degradation.",
         bullets: [
-          "98%+ overall accuracy, best-in-class for imbalanced datasets.",
+          "98%+ overall accuracy on a heavily imbalanced dataset.",
           "Precision, Recall, F1 in the 0.78–0.82 range, real-world reliability without false-alarm overload.",
           "Conclusive proof: failures are predictable, enabling a shift from reactive to preemptive maintenance.",
-          "Maintenance scheduling transformed, at-risk batteries identified days to weeks before failure, enabling planned swaps during low-demand windows.",
+          "Maintenance scheduling changed: at-risk batteries identified days to weeks before failure, enabling planned swaps during low-demand windows.",
           "Safety exposure from thermal events materially reduced through early-warning detection of degradation precursors.",
           "Foundation laid for fleet-wide battery lifecycle optimization, extending pack life through data-informed rotation and charging strategies.",
         ],
@@ -310,7 +310,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         heading: "Every EV cab assignment is a multi-constraint decision.",
         body: "Allocating EV cabs across a continuous stream of pick-up and drop trips is fundamentally different from scheduling conventional vehicles. Battery charge is not just a constraint, it is the primary driver of every allocation decision. A cab cannot be assigned a trip it cannot physically complete, and charging downtime must be strategically scheduled to minimize fleet idle time. The operator managed a mixed fleet serving corporate campuses with strict SLA commitments, fixed pick-up windows, escort protocols, occupancy limits, and driver shift boundaries. Manual dispatch was reaching its limits: dispatchers juggled battery levels, driver hours, vehicle types, and campus rules simultaneously, leading to suboptimal utilization, excessive dead miles, and inequitable workload distribution across the fleet.",
         bullets: [
-          "Battery sufficiency for full journey.",
+          "Battery sufficiency for the full trip.",
           "Driver working hours, every allocation within scheduled shift.",
           "Vehicle type compliance and campus-specific designations.",
           "Escort trips originate from campus; cab returns immediately after drop.",
@@ -361,7 +361,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
     heroEyebrow: "06 · Pharmaceuticals",
     heroTitle: "Sales Process Optimization, from manual Excel to automated, rep-level Tableau intelligence",
     heroSubtitle:
-      "Replaced manual, weekly Excel reporting with an end-to-end Tableau BI platform, cutting cost, accelerating decisions, and unlocking field-force intelligence at the rep level.",
+      "Replaced manual, weekly Excel reporting with an automated Tableau BI platform, cutting cost, accelerating decisions, and giving managers field-force data down to each rep.",
     sections: [
       {
         id: "opportunity",
@@ -382,8 +382,8 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         id: "solution",
         label: "The Solution",
         number: "02",
-        heading: "An end-to-end BI platform on Tableau, living, actionable intelligence.",
-        body: "We delivered an end-to-end BI solution, from requirement gathering and KPI definition through multi-source data integration, dynamic visualization design, and automated refresh scheduling. Tableau served as the BI platform of choice, replacing static spreadsheets with living, actionable intelligence aligned to how the business actually runs. The data model was built to support the pharmaceutical sales hierarchy: national → regional → territory → rep, with therapy-area and product-line dimensions layered across every level. Refresh cadences were differentiated by use case, real-time for operational metrics like daily call activity, and scheduled for strategic metrics like quarterly target attainment, ensuring each audience received data at the right frequency for their decision horizon.",
+        heading: "A BI platform on Tableau, refreshed automatically.",
+        body: "We delivered the full BI build, from requirement gathering and KPI definition through multi-source data integration, dynamic visualization design, and automated refresh scheduling. Tableau served as the BI platform of choice, replacing static spreadsheets with living, actionable intelligence aligned to how the business actually runs. The data model was built to support the pharmaceutical sales hierarchy: national → regional → territory → rep, with therapy-area and product-line dimensions layered across every level. Refresh cadences were differentiated by use case, real-time for operational metrics like daily call activity, and scheduled for strategic metrics like quarterly target attainment, ensuring each audience received data at the right frequency for their decision horizon.",
         bullets: [
           "Multi-source data integration replacing manual Excel pulls.",
           "Dynamic Tableau visualizations modeled on real sales workflows.",
@@ -439,7 +439,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         heading: "DeepAR+ deployed on AWS",
         body: "We ran a rigorous model benchmarking exercise, evaluating ARIMA (classical statistical), LSTM (deep learning sequential), and ML ensemble methods against MAPE, RMSE, and MAD across the full product portfolio. DeepAR+ emerged as the clear winner: its ability to learn complex seasonal patterns, capture cross-product demand correlations, and produce probabilistic forecasts (confidence intervals rather than point estimates) made it uniquely suited to the client's multi-product, multi-season environment. The model was deployed on AWS SageMaker for scalability, with automated retraining pipelines ensuring the model continuously learns from the latest demand signals without manual intervention.",
         bullets: [
-          "DeepAR+ deployed on AWS for scalability and seamless integration.",
+          "DeepAR+ deployed on AWS, feeding production planning and procurement.",
           "Monthly forecasts feed production planning and procurement.",
           "A Power BI dashboard gives planners and ops teams real-time visibility into accuracy and inventory projections.",
           "Probabilistic forecasts providing confidence intervals, enabling procurement to plan for best-case and worst-case demand scenarios rather than single-point estimates.",
@@ -490,14 +490,14 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         label: "The Solution",
         number: "02",
         heading: "Analytics-based decision-making and Audio Analytics",
-        body: "We executed a two-pronged transformation: first, consolidating over 30 years of fragmented operational data into a scalable cloud infrastructure, digitizing paper records, normalizing legacy system exports, and structuring unstructured maintenance logs into a queryable analytical environment. Second, we implemented a cutting-edge audio analytics infrastructure that uses ultrasound frequency pattern analysis to detect, classify, and size leaks non-invasively. The system distinguishes between leak types, compressed air, steam, gas, and estimates leak magnitude based on frequency signatures, enabling maintenance teams to prioritize interventions by economic impact rather than discovery sequence.",
+        body: "We worked on two fronts: first, consolidating over 30 years of fragmented operational data into a scalable cloud infrastructure, digitizing paper records, normalizing legacy system exports, and structuring unstructured maintenance logs into a queryable analytical environment. Second, we implemented an audio analytics system that uses ultrasound frequency pattern analysis to detect, classify, and size leaks non-invasively. The system distinguishes between leak types, compressed air, steam, gas, and estimates leak magnitude based on frequency signatures, enabling maintenance teams to prioritize interventions by economic impact rather than discovery sequence.",
         bullets: [
           "Scalable cloud infrastructure consolidating 30+ years of data.",
           "Digitized capture across structured and unstructured sources.",
           "Tableau-powered visualization environment for evidence-based decision making.",
           "Real-time audio analytics for non-invasive leak detection.",
           "Leak classification by type (compressed air, steam, gas) and estimated magnitude, enabling prioritization by economic impact.",
-          "Historical trend analysis unlocked for the first time, 30 years of maintenance patterns made queryable and visualizable.",
+          "Historical trend analysis possible for the first time, 30 years of maintenance patterns made queryable and visualizable.",
         ],
       },
       {
@@ -505,7 +505,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         label: "The Impact",
         number: "03",
         heading: "From instinct-driven to evidence-based culture",
-        body: "The deployment transformed both the technical maintenance capability and the organizational culture around equipment management. Maintenance teams shifted from calendar-based routines to condition-based interventions, directing effort where data indicated the highest loss potential. The audio analytics system gave field teams a non-invasive, quantitative tool that replaced subjective assessments with measurable, repeatable diagnostics. Leadership gained, for the first time, a historical view of equipment performance trends that informed capital expenditure planning and preventive maintenance investment priorities.",
+        body: "The deployment changed both the technical maintenance capability and the organizational culture around equipment management. Maintenance teams shifted from calendar-based routines to condition-based interventions, directing effort where data indicated the highest loss potential. The audio analytics system gave field teams a non-invasive, quantitative tool that replaced subjective assessments with measurable, repeatable diagnostics. Leadership gained, for the first time, a historical view of equipment performance trends that informed capital expenditure planning and preventive maintenance investment priorities.",
         bullets: [
           "11 distinct types of equipment aberrations addressed.",
           "Significant reduction in losses tied to undetected infrastructure failures.",
@@ -559,7 +559,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         label: "The Impact",
         number: "03",
         heading: "From reactive guesswork to evidence-based strategy",
-        body: "The transformation from manual spreadsheets to real-time BI enabled leadership to act with speed and confidence on both student learning outcomes and business performance. Board and investor reporting shifted from a quarterly scramble to an always-ready capability, leadership could generate investor-grade reports in minutes rather than weeks. Cross-school benchmarking became possible for the first time, surfacing best practices from high-performing schools and identifying underperforming units that needed targeted intervention. The analytical backbone established during the engagement became a permanent organizational asset, scaling with the company as it continued to grow its school network.",
+        body: "The move from manual spreadsheets to real-time BI enabled leadership to act with speed and confidence on both student learning outcomes and business performance. Board and investor reporting shifted from a quarterly scramble to an always-ready capability, leadership could generate investor-grade reports in minutes rather than weeks. Cross-school benchmarking became possible for the first time, surfacing best practices from high-performing schools and identifying underperforming units that needed targeted intervention. The analytical backbone established during the engagement became a permanent organizational asset, scaling with the company as it continued to grow its school network.",
         bullets: [
           "Shifted from vanity metrics to decision-grade intelligence.",
           "Surfaced predictive insights into student learning and financial performance.",
@@ -578,7 +578,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
     heroEyebrow: "10 · Pharmaceuticals",
     heroTitle: "Pharmaceutical MNC, Sales ERP Analytics",
     heroSubtitle:
-      "Built a robust analytics layer on top of Sales ERP, transforming raw transactional data into strategic intelligence.",
+      "Built an analytics layer on top of Sales ERP, turning raw transactional data into strategic intelligence.",
     sections: [
       {
         id: "opportunity",
@@ -598,7 +598,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         label: "The Solution",
         number: "02",
         heading: "A unified Tableau analytics layer and route optimization",
-        body: "We established seamless, automated data pipelines from the Sales ERP into a unified analytics environment, extracting, transforming, and loading transactional data on a scheduled cadence that eliminated manual Excel pulls entirely. On top of this foundation, we built two intelligence layers that addressed the client's most pressing blind spots. First, route optimization algorithms that analyzed field-force movement patterns against outlet locations, call frequencies, and territory potential, identifying inefficiencies and recommending optimized beat plans. Second, a Sales vs. Efforts analysis framework that correlated rep-level activity data (calls, coverage, frequency) with revenue outcomes at the brand, territory, and therapy-area level, making it possible to distinguish effort problems from market problems. The entire solution was delivered as a browser-based, alert-driven monitoring system with threshold-based notifications that flagged deviations before they compounded.",
+        body: "We established automated data pipelines from the Sales ERP into a unified analytics environment, extracting, transforming, and loading transactional data on a scheduled cadence that eliminated manual Excel pulls entirely. On top of this foundation, we built two intelligence layers that addressed the client's most pressing blind spots. First, route optimization algorithms that analyzed field-force movement patterns against outlet locations, call frequencies, and territory potential, identifying inefficiencies and recommending optimized beat plans. Second, a Sales vs. Efforts analysis framework that correlated rep-level activity data (calls, coverage, frequency) with revenue outcomes at the brand, territory, and therapy-area level, making it possible to distinguish effort problems from market problems. The entire solution was delivered as a browser-based, alert-driven monitoring system with threshold-based notifications that flagged deviations before they compounded.",
         bullets: [
           "Enterprise Sales ERP data pipeline integration.",
           "Route optimization algorithms for peak field sales efficiency.",
@@ -613,7 +613,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         label: "The Impact",
         number: "03",
         heading: "From static transactions to alert-driven intelligence",
-        body: "The shift to a real-time, browser-based analytics platform transformed sales management from a retrospective exercise to a proactive, exception-driven discipline. Regional managers no longer waited for monthly reviews to discover underperformance, threshold-based alerts surfaced deviations in real time, enabling same-day intervention. Field forces operated with optimized routes and clear visibility into how their efforts translated to outcomes, creating a feedback loop that improved both productivity and morale. Brand-level intelligence, previously assembled manually and available only at quarter-end, became a continuous, drillable dimension across every dashboard.",
+        body: "The shift to a real-time, browser-based analytics platform changed sales management from a retrospective exercise to a proactive, exception-driven discipline. Regional managers no longer waited for monthly reviews to discover underperformance, threshold-based alerts surfaced deviations in real time, enabling same-day intervention. Field forces operated with optimized routes and clear visibility into how their efforts translated to outcomes, creating a feedback loop that improved both productivity and morale. Brand-level intelligence, previously assembled manually and available only at quarter-end, became a continuous, drillable dimension across every dashboard.",
         bullets: [
           "Eliminated manual overhead through automated ERP data ingestion.",
           "Enabled proactive response via intelligent threshold-based alerts.",
@@ -651,10 +651,10 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         id: "solution",
         label: "The Solution",
         number: "02",
-        heading: "ERP implementation and robust data governance",
-        body: "We led an end-to-end ERP implementation across Inventory and Purchase, not as a technology deployment, but as a business transformation initiative. The implementation began with deep process mapping: walking the factory floor, sitting with procurement teams, and documenting how information actually flowed versus how it was supposed to flow. This revealed silent operational gaps, processes that existed in tribal knowledge but had never been formalized, data entry points where quality degraded, and handoff moments where information was lost between departments. We cleansed years of legacy data using OpenRefine and Data Wrangler, standardized master data definitions across all facilities, and instituted formal governance structures, including departmental data stewards, periodic audit processes, and escalation protocols, to ensure that data quality was sustained beyond the project lifecycle.",
+        heading: "ERP implementation and data governance",
+        body: "We led the ERP implementation across Inventory and Purchase as a change to how the business works, not only a technology deployment. The implementation began with deep process mapping: walking the factory floor, sitting with procurement teams, and documenting how information actually flowed versus how it was supposed to flow. This revealed silent operational gaps, processes that existed in tribal knowledge but had never been formalized, data entry points where quality degraded, and handoff moments where information was lost between departments. We cleansed years of legacy data using OpenRefine and Data Wrangler, standardized master data definitions across all facilities, and instituted formal governance structures, including departmental data stewards, periodic audit processes, and escalation protocols, to ensure that data quality was sustained beyond the project lifecycle.",
         bullets: [
-          "End-to-end ERP implementation for Inventory and Purchase.",
+          "ERP implementation for Inventory and Purchase.",
           "Process mapping to identify and close silent operational gaps.",
           "Data sanitization using OpenRefine and Data Wrangler.",
           "Formal data governance with departmental stewards and audit processes.",
@@ -746,8 +746,8 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         id: "opportunity",
         label: "The Opportunity",
         number: "01",
-        heading: "ERP fragmentation crippling executive visibility across 80+ countries",
-        body: "A century-old global manufacturing conglomerate operating across 80+ countries faced increasing complexity within its EMEA division, a complexity born from decades of acquisitions, organic growth, and regional autonomy. While a portion of operating companies were aligned on modern ERP and CRM systems, many continued to operate on heterogeneous legacy platforms, JDE variants, Infor LN, region-specific systems, and in some cases bespoke solutions built decades ago. Each system had its own schema, master data definitions, and business logic, creating reporting silos that made consolidated executive visibility effectively impossible. Regional leadership faced 15–20 separate dashboards with inconsistent KPI definitions, manual Excel/email reporting workflows that consumed analyst bandwidth and introduced reconciliation errors, and prohibitive onboarding complexity for newly acquired entities. The technical debt was compounding: every new acquisition or system upgrade increased the fragmentation, and the cost of inaction was growing faster than the cost of transformation.",
+        heading: "ERP fragmentation was blocking executive visibility across 80+ countries",
+        body: "A century-old global manufacturing conglomerate operating across 80+ countries faced increasing complexity within its EMEA division, a complexity born from decades of acquisitions, organic growth, and regional autonomy. While a portion of operating companies were aligned on modern ERP and CRM systems, many continued to operate on heterogeneous legacy platforms, JDE variants, Infor LN, region-specific systems, and in some cases bespoke solutions built decades ago. Each system had its own schema, master data definitions, and business logic, creating reporting silos that made consolidated executive visibility effectively impossible. Regional leadership faced 15–20 separate dashboards with inconsistent KPI definitions, manual Excel/email reporting workflows that consumed analyst bandwidth and introduced reconciliation errors, and prohibitive onboarding complexity for newly acquired entities. The technical debt was compounding: every new acquisition or system upgrade increased the fragmentation, and the cost of inaction was growing faster than the cost of change.",
         bullets: [
           "25–30 operating companies required consolidated sales and opportunity reporting.",
           "15 operated on heterogeneous legacy ERP systems with significant schema variation.",
@@ -780,7 +780,7 @@ export const caseStudyDetails: Record<string, CaseStudyDetail> = {
         label: "The Impact",
         number: "03",
         heading: "From 20 dashboards to one executive view, at terabyte scale",
-        body: "The platform processes ~100 million rows daily across 3 ETL cycles, with ~150+ GB processed daily and a terabyte-scale warehouse footprint, delivering the kind of consolidated commercial visibility that had been impossible when data lived across 15+ disconnected systems. Leadership transitioned from fragmented data consumption, toggling between dashboards, reconciling numbers, and debating definitions, to centralized, trusted commercial intelligence accessible through a single Power BI interface. ERP onboarding was reduced to 2–3 weeks for previously integrated variants and 4–6 weeks for entirely new systems, transforming what had been a months-long integration project into a repeatable, sprint-based process. What began as a focused pilot initiative for a subset of EMEA operating companies evolved into a region-wide transformation program, and the platform now serves as the architectural blueprint for global rollout across South America, Asia, and Africa.",
+        body: "The platform processes ~100 million rows daily across 3 ETL cycles, with ~150+ GB processed daily and a terabyte-scale warehouse footprint, delivering the kind of consolidated commercial visibility that had been impossible when data lived across 15+ disconnected systems. Leadership transitioned from fragmented data consumption, toggling between dashboards, reconciling numbers, and debating definitions, to centralized, trusted commercial intelligence accessible through a single Power BI interface. ERP onboarding was reduced to 2–3 weeks for previously integrated variants and 4–6 weeks for entirely new systems, turning what had been a months-long integration project into a repeatable, sprint-based process. What began as a focused pilot initiative for a subset of EMEA operating companies grew into a region-wide program, and the platform now serves as the architectural blueprint for global rollout across South America, Asia, and Africa.",
         bullets: [
           "25–30 operating companies unified under a single reporting framework.",
           "~100 million rows processed daily across 3 ETL cycles.",

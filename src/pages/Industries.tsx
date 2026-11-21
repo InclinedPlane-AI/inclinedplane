@@ -1,262 +1,172 @@
-﻿import PageLayout from "@/components/PageLayout";
-import SEOHead from "@/components/SEOHead";
-import PageHero from "@/components/PageHero";
-import IndustryDetail from "@/components/IndustryDetail";
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { industries } from "@/data/industries";
-import { useNavigate } from "react-router-dom";
+﻿/**
+ * /industries (brief §7.8). Manufacturing and distribution leads (flag
+ * leadVertical), then FMCG, energy and utilities, logistics and retail. Each
+ * industry is an anchored section (home links to /industries#<id>): the data
+ * problems specific to it, the capabilities that address them, related work.
+ */
+import { Link } from "react-router-dom";
+import { capabilityById } from "@/content/capabilities";
+import { flags } from "@/content/flags";
+import { industries, type Industry } from "@/content/industries";
+import { SiteLayout } from "@/components/site/SiteLayout";
+import { Label } from "@/components/site/primitives";
 import {
-  ShoppingCart, TrendingUp, Cloud, Heart, Factory, Zap, Headphones, GraduationCap,
-  ArrowRight, Layers, Search, Lightbulb, Rocket, MessageSquare, ArrowUpRight
-} from "lucide-react";
+  BookCta,
+  CtaBand,
+  FinalCta,
+  PageHero,
+} from "@/components/site/sections";
+import { CaseRow, StepLink } from "@/components/site/cases/CaseRow";
+import { caseById } from "@/components/site/cases/caseData";
+import { cn } from "@/lib/utils";
 
-const iconMap: Record<string, React.ElementType> = {
-  ShoppingCart, TrendingUp, Cloud, Heart, Factory, Zap, Headphones, GraduationCap,
-};
-
-const transformationSteps = [
-  {
-    number: "01",
-    icon: Search,
-    title: "Discovery & Assessment",
-    description: "We begin with a deep-dive into your current data landscape: sources, quality, gaps, and maturity. No generic audits. We map your specific workflows, pain points, and opportunities to build a prioritized roadmap tailored to your business goals.",
-    detail: "Typical duration: 2–3 weeks",
-  },
-  {
-    number: "02",
-    icon: Lightbulb,
-    title: "Strategy & Architecture",
-    description: "Based on the assessment, we co-design a data and AI strategy with your leadership. This includes selecting the right technology stack, defining governance frameworks, and aligning every initiative to measurable business outcomes.",
-    detail: "Deliverable: Strategic roadmap & architecture blueprint",
-  },
-  {
-    number: "03",
-    icon: Rocket,
-    title: "Proof of Value",
-    description: "We pick the highest-impact use case and build a working prototype in 4–6 weeks. This isn't a slide deck. It's a deployed, functional solution demonstrating real ROI on your own data, so stakeholders can see the transformation in action.",
-    detail: "Timeline: 4–6 weeks to first results",
-  },
-  {
-    number: "04",
-    icon: MessageSquare,
-    title: "Let's Talk",
-    description: "Ready to explore what data and AI can do for your organization? Book a no-obligation strategy session with our domain experts. We'll discuss your challenges, ambitions, and the fastest path to measurable impact.",
-    detail: "30-minute call · No commitment",
-    isCTA: true,
-  },
-];
-
-const Industries = () => {
-  const navigate = useNavigate();
-  const [selected, setSelected] = useState<string | null>(null);
-  const activeIndustry = industries.find((i) => i.id === selected) ?? null;
-
+function IndustrySection({ ind, lead }: { ind: Industry; lead: boolean }) {
+  const cases = ind.caseStudyIds.map((id) => caseById[id]).filter(Boolean);
   return (
-    <PageLayout>
-      <SEOHead
-        title="Industries We Serve"
-        description="AI-native data engineering for retail, finance, healthcare, manufacturing, energy, SaaS, BPO, and education. Industry-specific data solutions."
-        path="/industries"
-      />
-      <PageHero
-        label="Industries"
-        title={<>Built for <span className="text-gradient-orange">Your Domain.</span></>}
-        subtitle="Deep vertical expertise meets world-class data engineering. We don't just understand your data. We understand your business."
-      />
-
-      <div className="pb-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {/* Industry Cards Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 relative z-[2]">
-            {industries.map((ind, i) => {
-              const Icon = iconMap[ind.icon] || Layers;
-              return (
-                <motion.button
-                  key={ind.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: i * 0.06 }}
-                  onClick={() => setSelected(ind.id)}
-                  data-cursor-hover
-                  className="group relative rounded-xl overflow-hidden text-left transition-all hover:scale-[1.02]"
-                  style={{
-                    background: "hsl(var(--card))",
-                    isolation: "isolate",
-                    border: "1px solid hsl(25 100% 50% / 0.15)",
-                    boxShadow: "0 8px 32px -8px hsl(25 100% 50% / 0.12), 0 2px 8px hsl(25 100% 50% / 0.08), inset 0 1px 0 hsl(25 100% 80% / 0.08)",
-                  }}
-                >
-                  {/* Subtle orange glow at top */}
-                  <div
-                    className="absolute inset-0 pointer-events-none z-0 opacity-[0.05]"
-                    style={{
-                      background: "radial-gradient(ellipse at 50% 0%, hsl(25 100% 50%), transparent 60%)",
-                    }}
-                  />
-
-                  {/* Image */}
-                  <div className="relative h-40 overflow-hidden z-[1]">
-                    <img
-                      src={ind.image}
-                      alt={ind.name}
-                      className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-                    <div
-                      className="absolute top-3 left-3 w-9 h-9 rounded-lg flex items-center justify-center glass-panel"
-                      style={{ borderColor: `hsl(${ind.color} / 0.3)` }}
-                    >
-                      <Icon className="w-4 h-4" style={{ color: `hsl(${ind.color})` }} />
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-5 relative z-[1]">
-                    <h3 className="font-bold text-foreground text-base mb-2 group-hover:text-primary transition-colors">
-                      {ind.name}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2 mb-4">
-                      {ind.tagline}
-                    </p>
-
-                    {/* Quick stats preview */}
-                    <div className="flex items-center gap-4 mb-3">
-                      {ind.impactMetrics.slice(0, 2).map((m) => (
-                        <div key={m.label} className="text-center">
-                          <p className="text-sm font-bold text-gradient-orange">{m.value}</p>
-                          <p className="text-[10px] text-muted-foreground leading-tight">{m.label}</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Use case pills */}
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {ind.useCases.slice(0, 3).map((uc) => (
-                        <span key={uc.title} className="px-2 py-0.5 rounded-full text-[10px] surface-2 text-secondary-foreground border border-border/30">
-                          {uc.title}
-                        </span>
-                      ))}
-                      {ind.useCases.length > 3 && (
-                        <span className="px-2 py-0.5 rounded-full text-[10px] text-muted-foreground">
-                          +{ind.useCases.length - 3} more
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="flex items-center gap-1 text-xs text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                      Explore <ArrowRight className="w-3 h-3" />
-                    </div>
-                  </div>
-                </motion.button>
-              );
-            })}
-          </div>
-
-          {/* Transformation Journey Section */}
-          <div className="mt-32">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase surface-2 text-primary border border-primary/20 mb-6">
-                Your Transformation Journey
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                Ready to Transform? <span className="text-gradient-orange">Here's How We Start.</span>
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                No matter your industry, the path to data-driven excellence follows a proven framework.
-                We meet you where you are and accelerate you to where you need to be.
-              </p>
-            </motion.div>
-
-            <div className="relative">
-              {/* Connecting line */}
-              <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/40 via-primary/20 to-transparent hidden sm:block" />
-
-              <div className="space-y-8 lg:space-y-12">
-                {transformationSteps.map((step, i) => (
-                  <motion.div
-                    key={step.number}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    className={`relative flex flex-col lg:flex-row items-start gap-6 ${
-                      i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                    }`}
+    <section
+      id={ind.id}
+      aria-labelledby={`${ind.id}-h`}
+      className={cn(
+        "scroll-mt-[calc(var(--ip-header-h)+24px)]",
+        lead ? "bg-ip-grey" : "bg-white border-t border-ip-rule",
+      )}
+    >
+      <div className="ip-container ip-section grid gap-x-16 gap-y-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+        <div>
+          <Label dot={lead} className="mb-4">
+            {lead ? "Where we start" : "Industry"}
+          </Label>
+          <h2
+            id={`${ind.id}-h`}
+            className={cn(
+              "m-0 font-semibold tracking-[-0.025em]",
+              lead ? "ip-h2-xl" : "ip-h2",
+            )}
+          >
+            {ind.name}
+          </h2>
+          <p className="mt-5 mb-0 max-w-[480px] text-[19px] font-medium leading-[1.5]">
+            {ind.short}
+          </p>
+          {lead && (
+            <p className="mt-4 mb-0 max-w-[480px] text-[17px] leading-[1.6] text-ip-body">
+              Multi-ERP estates are where our evidence lives: operating
+              companies across countries, each with its own codes, brought onto
+              one platform and one set of definitions.
+            </p>
+          )}
+          <div className="mt-8">
+            <p className="ip-label-sm m-0 mb-3">Capabilities that apply</p>
+            <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
+              {ind.steps.map((s) => (
+                <li key={s} className="flex items-center gap-3">
+                  <StepLink step={s} />
+                  <Link
+                    to={capabilityById[s].path}
+                    className="ip-link text-[15px] font-medium"
                   >
-                    {/* Step number circle */}
-                    <div className="absolute left-8 lg:left-1/2 -translate-x-1/2 hidden sm:flex">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold z-10 ${
-                        step.isCTA
-                          ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
-                          : "surface-2 text-foreground border border-border/50"
-                      }`}>
-                        {step.number}
-                      </div>
-                    </div>
-
-                    {/* Spacer for alternating layout */}
-                    <div className="hidden lg:block lg:w-1/2" />
-
-                    {/* Content card */}
-                    <div className={`w-full lg:w-1/2 ${i % 2 === 0 ? "lg:pr-12" : "lg:pl-12"} sm:pl-20 lg:pl-0`}>
-                      <div
-                        onClick={step.isCTA ? () => navigate("/contact") : undefined}
-                        className={`rounded-2xl p-6 sm:p-8 transition-all ${
-                          step.isCTA
-                            ? "cursor-pointer border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 hover:border-primary/50 hover:scale-[1.02]"
-                            : "glass-panel"
-                        }`}
-                        data-cursor-hover={step.isCTA || undefined}
-                      >
-                        <div className="flex items-start gap-4">
-                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${
-                            step.isCTA ? "bg-primary/10" : "surface-2"
-                          }`}>
-                            <step.icon className={`w-5 h-5 ${step.isCTA ? "text-primary" : "text-foreground"}`} />
-                          </div>
-                          <div className="flex-1">
-                            <span className="text-xs font-mono text-primary sm:hidden">
-                              {step.number}
-                            </span>
-                            <h3 className="text-lg font-bold text-foreground mb-2">{step.title}</h3>
-                            <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                              {step.description}
-                            </p>
-                            <p className={`text-xs font-medium ${step.isCTA ? "text-primary" : "text-muted-foreground/70"}`}>
-                              {step.detail}
-                            </p>
-                            {step.isCTA && (
-                              <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                                Book a Strategy Session <ArrowUpRight className="w-4 h-4" />
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+                    {capabilityById[s].name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </div>
 
-      <IndustryDetail
-        industry={activeIndustry}
-        open={!!selected}
-        onOpenChange={(v) => !v && setSelected(null)}
-      />
-    </PageLayout>
+        <div className="flex flex-col gap-10">
+          <div className="border-t-2 border-black pt-[18px]">
+            <p className="ip-label-sm m-0 mb-1">Where the data breaks</p>
+            <ul className="m-0 list-none p-0">
+              {ind.problems.map((p) => (
+                <li
+                  key={p}
+                  className="flex gap-4 border-b border-ip-rule py-4 text-[17px] leading-[1.55]"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="mt-[10px] h-2 w-2 shrink-0 bg-ip-orange"
+                  />
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {cases.length > 0 && (
+            <div>
+              <p className="ip-label-sm m-0 mb-1">Related work</p>
+              <ul
+                className="m-0 list-none border-t border-ip-rule-strong p-0"
+                aria-label={`${ind.name} case studies`}
+              >
+                {cases.map((e) => (
+                  <CaseRow key={e.id} entry={e} dense />
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const Industries = () => {
+  const ordered = flags.leadVertical
+    ? industries
+    : [...industries].sort((a, b) => a.name.localeCompare(b.name));
+  return (
+    <SiteLayout
+      seo={{
+        title: "Industries: manufacturing, FMCG, energy, logistics, retail",
+        description:
+          "Data engineering and AI readiness for multi-entity businesses in manufacturing and distribution, FMCG, energy, logistics and retail.",
+        path: "/industries",
+      }}
+    >
+      <PageHero
+        crumbs={[{ label: "Industries" }]}
+        label="Industries"
+        title="Built for complex, multi-entity businesses."
+        lead={
+          flags.leadVertical
+            ? "We work where enterprise data is hardest: many operating companies, many ERPs, years of acquisitions. Manufacturing and distribution comes first. The same problems, and the same fixes, show up in FMCG, energy, logistics and retail."
+            : "We work where enterprise data is hardest: many operating companies, many ERPs, years of acquisitions, across manufacturing, FMCG, energy, logistics and retail."
+        }
+      >
+        <BookCta source="hero-industries" />
+      </PageHero>
+
+      <nav
+        aria-label="Industries on this page"
+        className="border-b border-ip-rule bg-white"
+      >
+        <div className="ip-container">
+          <ul className="m-0 flex list-none gap-x-7 gap-y-2 overflow-x-auto p-0 py-4 text-[15px] scrollbar-hide">
+            {ordered.map((ind) => (
+              <li key={ind.id} className="shrink-0">
+                <a
+                  href={`#${ind.id}`}
+                  className="inline-flex min-h-[36px] items-center text-ip-body no-underline hover:text-black hover:underline underline-offset-4"
+                >
+                  {ind.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+
+      {ordered.map((ind, i) => (
+        <IndustrySection
+          key={ind.id}
+          ind={ind}
+          lead={flags.leadVertical && i === 0}
+        />
+      ))}
+
+      <CtaBand source="mid-industries" />
+      <FinalCta source="final-industries" />
+    </SiteLayout>
   );
 };
 

@@ -42,7 +42,7 @@ export const caseStudyMeta: Record<string, CaseStudyMeta> = {
     id: "fmcg-edible-oil",
     title: "An edible oil producer gets supply and delivery data working as one.",
     steps: ["build", "activate"],
-    headline: { value: "27%", label: "Faster fulfillment" },
+    headline: { value: "27%", label: "Faster order turnaround" },
     secondary: { value: "+25%", label: "Route adherence" },
     region: "India",
     featured: true,
