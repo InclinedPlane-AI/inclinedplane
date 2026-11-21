@@ -1,0 +1,167 @@
+# Website revamp: progress tracker
+
+**Read this first when you pick up the revamp in a new session.** It records what
+is finished, what is in progress, what is left, and every decision already made,
+so nobody re-does or re-litigates work. Update it in the same commit as the work
+it describes.
+
+Last updated: 2026-11-21 (session 1)
+
+---
+
+## 1. How to resume (for a new Claude / engineer session)
+
+1. Check out `revamp` and pull: `git checkout revamp && git pull`.
+2. Read, in this order:
+   - this file (status and decisions)
+   - `DESIGN_NOTES.md` (design decisions, route map, open questions)
+   - `CLAUDE.md` (build pipeline and SEO contracts; still authoritative)
+   - `CONTRIBUTING.md` (branch/PR/deploy workflow)
+3. Reference inputs (kept **outside** the repo; the repo is public, so internal
+   notes must not be committed). The user feeds these in:
+   - `inclinedplane-website-context.md`: the brief and **source of truth** for
+     messaging, voice, claims policy, design system and page specs
+   - `InclinedPlane_Homepage.html`: the founder's homepage, the visual base
+   - `InclinedPlane Design Docs/`: logo files (already exported into
+     `public/brand/`, see section 4)
+4. Pick the next unchecked item in section 6 and keep the checklist current.
+
+## 2. Repo, branches, deploys (current state)
+
+| Thing | State |
+|---|---|
+| Single repo | `InclinedPlane-AI/inclinedplane` (public). Everyone works here; no forks. |
+| `main` | Production → inclinedplane.com via `.github/workflows/deploy.yml` (unchanged). |
+| `revamp` | Long-lived redesign branch. Protected: PR + 1 approval (admins can bypass). |
+| Feature work | `feat/<thing>` branched from `revamp` → PR into `revamp`. |
+| Staging deploy | `.github/workflows/deploy-staging.yml`: push to `revamp` → staging; PR → preview URL comment. Vercel project `inclinedplane-staging` in the **same Vercel account as production**, created on first run with the existing secrets. All staging responses are `noindex`. |
+| Lovable | Retired (user, 2026-11-21). No more direct writes to `main`. |
+| Old personal preview | `inclinedplane-lac.vercel.app` (user's personal Vercel Hobby account). Retire once staging is live. |
+
+### Blocked on a human (do these, then tick)
+
+- [ ] **Grant `workflow` scope to the GitHub CLI** so workflow files can be pushed:
+      `gh auth refresh -h github.com -s workflow`. Until then, the two
+      workflow commits sit on the local branches `fix/ci-pin-ubuntu-24` and
+      `ci/staging-workflow` (unpushed).
+- [ ] Then push the CI fix and open its PR to `main` (production deploys have failed since 16 Nov 2026
+      because `ubuntu-latest` moved to 26.04; PR #9 content is not live).
+- [ ] Then push `ci/staging-workflow` → PR into `revamp` → merge. The first run creates the staging project.
+      If it fails with "Could not link/create Vercel project", the `VERCEL_TOKEN`
+      secret is project-scoped: create an account-scoped token at
+      vercel.com/account/tokens and run `gh secret set VERCEL_TOKEN -R InclinedPlane-AI/inclinedplane`.
+- [ ] Add the two engineers to the GitHub org with write access (start Monday 2026-11-23).
+- [ ] Protect `main` (PR + 1 approval) now that Lovable is retired.
+- [ ] After staging is live, add the staging build as a required status check on `revamp`.
+- [ ] Replace placeholder booking links in `src/content/site.ts` (`booking.calendlyUrl`).
+
+## 3. Decisions already made (don't re-ask)
+
+- **Source of truth:** `inclinedplane-website-context.md` + the founder's homepage HTML.
+  (Not the "Website_Rationale" files.)
+- **Pages/URLs:** Claude decides what's best for SEO/UX. Keep existing URLs where they
+  still fit; 301 anything renamed (via `vercel.json` redirects, which
+  `scripts/vercel-output.mjs` carries into prebuilt deploys). Route map: `DESIGN_NOTES.md`.
+- **Case studies:** use the existing 14 for now. Featured on home: EMEA multi-ERP
+  manufacturing platform (`erp-unification`) and the edible oil producer
+  (`fmcg-edible-oil`). All others are in the case studies index. A new set from
+  recent clients plus one large enterprise data unification case study comes later.
+- **Booking:** one dialog with two paths: (a) five qualifying questions posted to
+  the existing Formspree form (`xwvnakbz`), then an optional time pick; (b) pick a
+  time now via Calendly. Calendly URL is a placeholder in `src/content/site.ts`.
+- **Name spelling:** "IncLever" (capital L) per the brief, everywhere.
+- **Theme:** light only (founder decision). Dark surfaces only for deliberate moments.
+- **Chat widget:** removed (rationale drops the placeholder chatbot).
+- **Unverified claims:** wrapped with `verified: false` in content files. Staging
+  (`VITE_SITE_ENV=staging`) shows a "Verify before launch" badge; production
+  builds hide unverified items (see `src/content/verify.ts`).
+
+## 4. Brand assets (exported, in `public/`)
+
+| File | Source | Use |
+|---|---|---|
+| `brand/logo-primary.png` | `incpl_primarylogo_AW.png` | Header, light footer (the founder's template uses the stacked logo in the header) |
+| `brand/logo-primary-inverse.png` | `incpl_primarylogo_inverseAW.png` | On black surfaces |
+| `brand/logo-horizontal.png` | `incpl_logoHorizontal_fullcolourAW.png` | Compact/mobile header, emails |
+| `brand/logo-primary-large.png` | `incpl_primarylogo_AW.png` | OG images, About |
+| `brand/icon-{32,180,192,512}.png` | `incpl_favicon_AW.png` | Favicon, apple-touch, PWA |
+| `brand/pattern-light.png` | founder HTML | Interlocked "i" texture (light) |
+| `brand/pattern-strip.png` | founder HTML | Full-width hero/footer strip (dark + orange i) |
+| `media/inclever-demo.mp4` + poster | founder HTML | IncLever demo clip (labeled "sample data") |
+| `fonts/google-sans-flex.woff2` | founder HTML | Google Sans Flex (variable, subset), self-hosted |
+
+Not used on the web: `InclinedPlane_masterlogo_fullcolourAW.png` (carries the retired
+tagline "Data Leveraged. Growth Accelerated."), `incpl_primarylogo_fullcolourAW.jpg`
+(non-transparent print copy).
+
+## 5. Architecture of the revamp (where things live)
+
+- `src/content/`: content as data (site config, nav, stats with `verified`, capabilities,
+  case study tags/featured flags, tools, learn articles, feature flags).
+- `src/components/site/`: the new design system (header, footer, layout, buttons,
+  section label, incline, booking dialog, etc.). New pages use only these.
+- Old components (`src/components/*.tsx`, `home/`, `case-study/`, `products/`) are
+  legacy; delete each once nothing imports it.
+- SEO: `scripts/seo-config.mjs` static routes must mirror each page's title/description.
+
+## 6. Checklist
+
+Legend: [x] done · [~] in progress · [ ] not started
+
+### Phase 0: setup and audit
+- [x] Branch `revamp` created from `feat/live-home-demos` and pushed to the org repo
+- [x] Branch protection on `revamp`
+- [x] Staging workflow + `scripts/vercel-output.mjs` written (unpushed, needs workflow scope)
+- [x] Brand assets exported to `public/`
+- [x] PROGRESS.md (this file), DESIGN_NOTES.md, CONTRIBUTING.md
+- [ ] Lighthouse baseline of current production (record in DESIGN_NOTES)
+
+### Phase 1: design system
+- [ ] Tokens (color, type, spacing, radii) in `src/index.css` + Tailwind
+- [ ] Self-hosted Google Sans Flex + IBM Plex Mono labels
+- [ ] Content files in `src/content/`
+- [ ] Site header (sticky, compact on scroll, mobile menu), footer with pattern strip
+- [ ] Buttons, section label, tags, stat (server-rendered values), CTA band, FAQ
+- [ ] Verification marker component + build guard
+- [ ] Booking dialog (form + Calendly), global open hook, `?book=1` deep link
+- [ ] Incline component (static + interactive, one entrance animation, reduced motion)
+
+### Phase 2: pages
+- [ ] Home (founder design, refined)
+- [ ] /capabilities overview (interactive incline)
+- [ ] /capabilities/context-engineering (+ "same question, two answers" widget)
+- [ ] /capabilities/ai-agent-readiness (+ IncLever block)
+- [ ] /capabilities/data-engineering-governance
+- [ ] /capabilities/agentic-analytics
+- [ ] /assessment (two-path booking, what you get, FAQ)
+- [ ] /products/inclever (restructure existing content, demo clip)
+- [ ] /products hub + /products/pipelineiq (restyle)
+- [ ] /case-studies index (filter by step + industry, featured large)
+- [ ] /case-studies/:slug template (Opportunity / Solution / Impact)
+- [ ] /industries (5 ICP industries, manufacturing first)
+- [ ] /about (story, name meaning, principles, leadership)
+- [ ] /learn index + first 3 explainers
+- [ ] /blog + /blog/:slug restyle (URLs kept; labeled "Insights")
+- [ ] /thesis restyle
+- [ ] /contact restyle (Formspree preserved)
+- [ ] /careers + /referral restyle (keep CLAUDE.md design contracts)
+- [ ] Legal pages + 404 restyle
+- [ ] Remove legacy components/assets no longer imported
+
+### Phase 3: SEO / AI indexing
+- [ ] `seo-config.mjs`: new routes, titles, descriptions, JSON-LD (Organization w/ alternateName, Service, SoftwareApplication, DefinedTerm, FAQPage only where real)
+- [ ] Redirects in `vercel.json` (/services → /capabilities, etc.)
+- [ ] `public/llms.txt`, `manifest.webmanifest`, OG image refresh
+- [ ] Switch production `deploy.yml` to `scripts/vercel-output.mjs` **at launch**
+
+### Phase 4: QA
+- [ ] `npm run build` green; all routes prerendered with body
+- [ ] Screenshots 375 / 768 / 1440 for every page; anti-slop checklist
+- [ ] Forms tested end to end on staging
+- [ ] Lighthouse + accessibility pass
+
+## 7. Change log
+
+| Date | Commit(s) | What |
+|---|---|---|
+| 2026-11-21 | (see `git log revamp`) | Setup: revamp branch, protection, staging workflow (local), assets, docs |
