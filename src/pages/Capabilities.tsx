@@ -32,7 +32,7 @@ const Capabilities = () => (
     seo={{
       title: "Capabilities: from data foundation to AI agents",
       description:
-        "Data engineering and governance, enterprise context engineering, AI and agent readiness, and agentic analytics: four capabilities on one path to production AI.",
+        "Data engineering and governance, context engineering, AI and agent readiness, and agentic analytics: four capabilities on one path to production AI.",
       path: "/capabilities",
     }}
   >

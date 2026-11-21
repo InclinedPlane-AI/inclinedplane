@@ -1,50 +1,56 @@
 # InclinedPlane
 
-> AI-native data engineering consultancy. InclinedPlane builds cloud data warehouses, observability-first pipelines, BI platforms, and decision systems for modern enterprises. Services span data engineering, AI automation, business intelligence, cloud warehousing, and DataOps. Headquartered with operations across India and the United States.
+> InclinedPlane (formerly Sail Analytics) is a data engineering and AI readiness firm. We modernize enterprise data platforms on the stack clients already have (Microsoft Azure and Fabric, Databricks, AWS, Snowflake), then make the data trusted, contextualized and ready for AI agents. We work with CIOs, CDOs and heads of data at mid-to-large enterprises in the US, UK and Europe, from a delivery base in Bengaluru, India. Tagline: Data Engineered. Intelligence Deployed.
 
-## Core pages
+Only facts that appear on the website belong here. Unverified figures are deliberately left out.
 
-- [Homepage](https://inclinedplane.com/): Overview of services, thesis, and approach.
-- [Our Thesis](https://inclinedplane.com/thesis): Deep technical manifesto on why modern enterprises need engineering-grade data systems and decision platforms built from source to intelligence.
-- [Services](https://inclinedplane.com/services): Five layers of data infrastructure — Clarity (data and AI advisory), Data Architecture (foundation modernization), Reliability and Ops, Analytics and Intelligence, AI/ML Implementations, and Automation Systems.
-- [Products](https://inclinedplane.com/products): Overview of InclinedPlane's two products.
-- [PipelineIQ](https://inclinedplane.com/products/pipelineiq): For data engineers and platform teams. Read-only pipeline monitoring, alerting and ETL debugging that collapses failures into root-cause error signatures, with adaptive, self-resolving alerts. Delivered on a forward-deployed engineering model.
-- [Inclever](https://inclinedplane.com/products/inclever): For business users and analysts. Governed AI analytics in Microsoft Teams: three gates before every answer, plus an AI Readiness Control Tower that audits data and issues or withholds readiness certificates.
-- [Industries](https://inclinedplane.com/industries): Vertical expertise in retail, finance, healthcare, manufacturing, energy, SaaS, BPO, and education.
-- [Case Studies](https://inclinedplane.com/case-studies): 14 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, public sector, and renewables.
-- [About](https://inclinedplane.com/about): Company evolution from Sail Analytics to InclinedPlane and the team building decision systems for high-velocity enterprises.
-- [Careers](https://inclinedplane.com/careers): Open roles for data, analytics, ML, BI, and platform engineers. Remote-first, ownership-driven.
-- [Contact](https://inclinedplane.com/contact): support@inclinedplane.com — book a discovery call.
+## What we do: four capabilities on one path
 
-## Blog posts
+A recommended order, not a strict sequence. Most organizations work on several at once.
 
-- [Dashboards Are Not a Competitive Advantage Anymore](https://inclinedplane.com/blog/dashboards-are-not-competitive-advantage): Why visibility alone won't move your business forward, and what the next generation of data-driven companies actually look like. By Keerthana Vayyasi, Founder & CEO. Published February 19, 2026.
-- [The Hidden Cost of 'Almost Reliable' Data Pipelines](https://inclinedplane.com/blog/hidden-cost-of-almost-reliable-data-pipelines): Silent failures are more dangerous than obvious ones. How "good enough" data infrastructure is quietly eroding competitive position. Published February 23, 2026.
-- [Synthetic Data: The Useful Myth](https://inclinedplane.com/blog/synthetic-data-the-useful-myth): Where synthetic data genuinely helps (test environments, privacy-safe sharing, rare-class rebalancing) and why it can never replace real-world validation. By Mohan Gowda T, Senior Data Engineer. Published March 17, 2026.
-- [Explainability: Why "The Model Said So" Isn't an Answer](https://inclinedplane.com/blog/explainability-why-the-model-said-so-isnt-an-answer): Tracing automated decisions back to their inputs, logic, and data, for affected people, operators, auditors, and engineers. By Mohan Gowda T, Senior Data Engineer. Published May 5, 2026.
-- [Data Contracts: The Upstream Team Changed a Column and Didn't Tell You](https://inclinedplane.com/blog/data-contracts-upstream-team-changed-a-column): How explicit, enforced agreements between data producers and consumers prevent silent schema and semantic breakages. By Mohan Gowda T, Senior Data Engineer. Published June 23, 2026.
-- [Data Gravity: Why Your Architecture Follows Your Data, Not the Other Way Around](https://inclinedplane.com/blog/data-gravity-architecture-follows-your-data): Why large datasets pull applications and AI workloads toward them, and how to design with that pull instead of against it. By Mohan Gowda T, Senior Data Engineer. Published August 11, 2026.
-- [Data Stewards vs. Data Engineers: Why Conflating the Two Roles Slows Everyone Down](https://inclinedplane.com/blog/data-stewards-vs-data-engineers): The difference between building data infrastructure and owning what data means, and why merging the roles means stewardship gets skipped. By Mohan Gowda T, Senior Data Engineer. Published October 6, 2026.
+- [Data Engineering and Governance](https://inclinedplane.com/capabilities/data-engineering-governance) (Build): lakehouse and warehouse platforms, pipelines, ERP onboarding and multi-ERP harmonization, legacy modernization, with quality, lineage and access controls built in.
+- [Enterprise Context Engineering](https://inclinedplane.com/capabilities/context-engineering) (Contextualize): semantic layers, business metric definitions and enterprise context made explicit and machine-readable, so BI tools and AI agents give answers the business agrees with.
+- [AI and Agent Readiness](https://inclinedplane.com/capabilities/ai-agent-readiness) (Enable): data readiness assessments, governed access for agents, evaluations built from real questions, and monitoring after go-live. Accelerated by IncLever.
+- [Agentic Analytics and BI](https://inclinedplane.com/capabilities/agentic-analytics) (Activate): conversational analytics agents and agentic BI on governed semantic models; answers show their definition, source and freshness.
+- [All capabilities](https://inclinedplane.com/capabilities)
 
-## Case studies
+## Products (accelerators, not a platform pitch)
 
-- [Retail & Manufacturing Chain](https://inclinedplane.com/case-studies/retail-manufacturing-chain): Dealer-network analytics for a retail and manufacturing chain.
-- [Demand Forecasting — Engine & Power Solutions](https://inclinedplane.com/case-studies/engine-demand-forecast): Forecasting pipeline for engine and power-solutions manufacturer.
-- [Predictive Maintenance of EV Batteries](https://inclinedplane.com/case-studies/ev-battery-predictive): IoT-driven battery-failure prediction for an EV fleet operator.
-- [Primary, Secondary & Field Efforts — FMCG](https://inclinedplane.com/case-studies/fmcg-edible-oil): Distribution and field-effort analytics for an FMCG edible oil brand.
-- [AI-Driven Fleet Scheduling — Electric Cabs](https://inclinedplane.com/case-studies/ev-fleet-scheduling): Hybrid optimization (Genetic Algorithms + Tabu Search + Simulated Annealing) for real-time EV cab allocation.
-- [Sales Process Optimization — Pharmaceutical](https://inclinedplane.com/case-studies/pharma-sales-bi): Field-force BI for a pharma sales operation.
-- [Inventory & Procurement Optimization — E-Commerce](https://inclinedplane.com/case-studies/ecom-inventory): Inventory and procurement optimization on AWS for an e-commerce business.
-- [Energy Audit & Maintenance Engineering](https://inclinedplane.com/case-studies/energy-audit): Audio-analytics-driven energy-loss audit (compressed air, steam, gas).
-- [VC-Funded Educational Products Company](https://inclinedplane.com/case-studies/vc-edtech): Warehouse architecture and investor-grade reporting for a VC-backed EdTech.
-- [Pharma MNC](https://inclinedplane.com/case-studies/pharma-mnc): Multi-geography field-force coordination and brand-level intelligence for a pharma MNC.
-- [Capital Equipment](https://inclinedplane.com/case-studies/capital-equipment): BOM-complex ERP rollout for a capital-equipment manufacturer.
-- [Solar BI](https://inclinedplane.com/case-studies/solar-bi): Tableau modeling for a government solar project.
-- [Cultural Heritage](https://inclinedplane.com/case-studies/cultural-heritage): Geospatial analytics for a public-sector cultural heritage program.
-- [ERP Unification](https://inclinedplane.com/case-studies/erp-unification): Unified ERP rollout across global operations.
+- [IncLever](https://inclinedplane.com/products/inclever): our data readiness product. Audits, remediates and monitors datasets, semantic layers and metrics so AI agents and BI tools can rely on them. We deliver the work with or without it.
+- [PipelineIQ](https://inclinedplane.com/products/pipelineiq): read-only pipeline monitoring, alerting and ETL debugging that groups failures into root causes.
+- [Products overview](https://inclinedplane.com/products)
+
+## Start here
+
+- [AI Data Readiness Assessment](https://inclinedplane.com/assessment): a 45-minute assessment of data quality, context, access and governance against what AI agents need.
+
+## Learn (definitions and explainers)
+
+- [What is context engineering](https://inclinedplane.com/learn/what-is-context-engineering)
+- [Ontology vs semantic layer vs knowledge graph](https://inclinedplane.com/learn/ontology-vs-semantic-layer-vs-knowledge-graph)
+- [What AI readiness actually means](https://inclinedplane.com/learn/what-ai-readiness-means)
+- [Glossary](https://inclinedplane.com/learn)
+
+## Case studies (anonymized)
+
+- [One data platform for 25 to 30 business units across EMEA](https://inclinedplane.com/case-studies/erp-unification): multi-ERP platform for a global manufacturer; about 100 million rows a day; new ERPs onboarded in 2 to 6 weeks.
+- [An edible oil producer gets supply and delivery data working as one](https://inclinedplane.com/case-studies/fmcg-edible-oil): SAP, distributor and field-force data unified; 27% faster order fulfillment turnaround, 25% better route adherence.
+- [All case studies](https://inclinedplane.com/case-studies): 14 delivered projects across manufacturing, FMCG, energy, logistics, retail, pharmaceuticals and the public sector.
+
+## Industries
+
+- [Industries](https://inclinedplane.com/industries): manufacturing and distribution, FMCG, energy and utilities, logistics and supply chain, retail.
+
+## Company
+
+- [About](https://inclinedplane.com/about): story, the meaning of the name, principles ("Engineers, not consultants." "Methodology over heroics."), leadership. Founder and CEO: Keerthana Vayyasi.
+- [Our thesis](https://inclinedplane.com/thesis)
+- [Insights](https://inclinedplane.com/blog): articles by the team.
+- [Careers](https://inclinedplane.com/careers)
+- [Contact](https://inclinedplane.com/contact): support@inclinedplane.com
 
 ## Discovery
 
-- [Sitemap](https://inclinedplane.com/sitemap.xml): Machine-readable list of all indexable URLs.
-- [RSS feed](https://inclinedplane.com/rss.xml): Updates from the blog.
-- [LinkedIn](https://www.linkedin.com/company/inclinedplane): Company profile and updates.
+- [Sitemap](https://inclinedplane.com/sitemap.xml)
+- [RSS feed](https://inclinedplane.com/rss.xml)
+- [LinkedIn](https://www.linkedin.com/company/inclinedplane)

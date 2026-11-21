@@ -37,7 +37,7 @@
  *  Last reviewed: 2026-05-03
  * ========================================================================== */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "node:fs";
 import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -266,6 +266,22 @@ async function main() {
   writeRss(routes, { distDir });
 
   printSummary(results);
+
+  // Verification markers (revamp, 2026-11-21): content items with
+  // `verified: false` render with a badge on staging and are HIDDEN in
+  // production builds (src/content/verify.ts). Report the count so a launch
+  // never silently drops proof the founder expects to see.
+  try {
+    const contentDir = resolve(repoRoot, "src/content");
+    let unverified = 0;
+    for (const f of readdirSync(contentDir).filter((n) => n.endsWith(".ts"))) {
+      unverified += (readFileSync(resolve(contentDir, f), "utf8").match(/verified:\s*false/g) || []).length;
+    }
+    const env = process.env.VITE_SITE_ENV === "staging" ? "staging (shown with badges)" : "production (hidden)";
+    console.log(`[prerender] VERIFY: ${unverified} unverified content item(s) in src/content, build mode ${env}.`);
+  } catch {
+    /* non-fatal */
+  }
 
   // Exit 0 even on warns/failures so a single bad route doesn't fail the
   // build — the summary is the source of truth for review.

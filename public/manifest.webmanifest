@@ -1,22 +1,13 @@
 {
-  "name": "InclinedPlane — Data Architecture & Analytics for the AI Era",
+  "name": "InclinedPlane: Enterprise Data Foundations for the AI Era",
   "short_name": "InclinedPlane",
-  "description": "AI-ready data platforms, observability-first pipelines, and decision systems that turn complexity into operational intelligence.",
+  "description": "We engineer and modernize enterprise data platforms on the stack you already have, then make them trusted, contextualized and ready for AI agents.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0a0a",
-  "theme_color": "#FF6A00",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
   "icons": [
-    {
-      "src": "/favicon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/favicon.ico",
-      "sizes": "48x48",
-      "type": "image/x-icon"
-    }
+    { "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/brand/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ]
 }

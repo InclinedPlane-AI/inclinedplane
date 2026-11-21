@@ -5,6 +5,21 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/services",
+      "destination": "/capabilities",
+      "permanent": true
+    },
+    {
+      "source": "/inclever",
+      "destination": "/products/inclever",
+      "permanent": true
+    }
   ]
 }

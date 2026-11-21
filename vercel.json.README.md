@@ -1,6 +1,6 @@
 # vercel.json — guardrail
 
-**Last reviewed: 2026-05-03**
+**Last reviewed: 2026-11-21**
 
 `vercel.json` configures how Vercel serves the prerendered output of this site.
 It is intentionally minimal. **Do not add fields casually** — the build is
@@ -30,6 +30,15 @@ schema-validated at deploy time and unknown properties (including comment-style
   paths fall through to `/index.html` where the React SPA's `NotFound` route
   handles them. The negative lookahead `(?!api/)` reserves `/api/*` for any
   future Vercel Functions.
+
+- `redirects` (added 2026-11-21, revamp) — permanent redirects for renamed
+  pages: `/services` → `/capabilities`, `/inclever` → `/products/inclever`.
+  **`vercel deploy --prebuilt` ignores vercel.json**, so these only take effect
+  because `scripts/vercel-output.mjs` copies them into
+  `.vercel/output/config.json`. The staging workflow uses that script;
+  production's `deploy.yml` must switch to it when the revamp launches
+  (tracked in docs/revamp/PROGRESS.md). The SPA also redirects these paths
+  client-side (`<Navigate>` in src/App.tsx).
 
 ## What you must not do
 

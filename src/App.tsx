@@ -3,17 +3,19 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import Index from "./pages/Index";
 import Thesis from "./pages/Thesis";
-import ServicesPage from "./pages/Services";
 import Products from "./pages/Products";
 import ProductPipelineIQ from "./pages/ProductPipelineIQ";
 import ProductInclever from "./pages/ProductInclever";
-// import Industries from "./pages/Industries";
+import Industries from "./pages/Industries";
+import Assessment from "./pages/Assessment";
+import Learn from "./pages/Learn";
+import LearnArticle from "./pages/LearnArticle";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
 import About from "./pages/About";
@@ -90,13 +92,17 @@ const App = () => {
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/thesis" element={<Thesis />} />
-                  <Route path="/services" element={<ServicesPage />} />
+                  <Route path="/services" element={<Navigate to="/capabilities" replace />} />
+                  <Route path="/inclever" element={<Navigate to="/products/inclever" replace />} />
+                  <Route path="/assessment" element={<Assessment />} />
+                  <Route path="/learn" element={<Learn />} />
+                  <Route path="/learn/:slug" element={<LearnArticle />} />
                   <Route path="/capabilities" element={<Capabilities />} />
                   <Route path="/capabilities/:slug" element={<CapabilityPage />} />
                   <Route path="/products" element={<Products />} />
                   <Route path="/products/pipelineiq" element={<ProductPipelineIQ />} />
                   <Route path="/products/inclever" element={<ProductInclever />} />
-                  {/* <Route path="/industries" element={<Industries />} /> */}
+                  <Route path="/industries" element={<Industries />} />
                   <Route path="/case-studies" element={<CaseStudies />} />
                   <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
                   <Route path="/about" element={<About />} />

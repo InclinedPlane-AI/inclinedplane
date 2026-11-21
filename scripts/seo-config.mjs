@@ -49,10 +49,30 @@ export const orgSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: SITE_NAME,
+  alternateName: "Sail Analytics",
   url: SITE_URL,
-  logo: `${SITE_URL}/favicon.png`,
+  logo: `${SITE_URL}/brand/logo-primary-large.png`,
+  slogan: "Data Engineered. Intelligence Deployed.",
   description:
-    "AI-native data engineering consultancy building decision systems, observability-first pipelines, and cloud warehouse platforms.",
+    "InclinedPlane is a data engineering and AI readiness firm. We modernize enterprise data platforms on the stack clients already have, then make the data trusted, contextualized and ready for AI agents.",
+  founder: {
+    "@type": "Person",
+    name: "Keerthana Vayyasi",
+    jobTitle: "Founder and CEO",
+    sameAs: ["https://www.linkedin.com/in/keerthanavayyasi/"],
+  },
+  knowsAbout: [
+    "Data engineering",
+    "Data governance",
+    "Enterprise context engineering",
+    "Semantic layers",
+    "AI readiness",
+    "AI agent readiness",
+    "Agentic analytics",
+    "Microsoft Fabric",
+    "Databricks",
+    "Azure",
+  ],
   sameAs: ["https://www.linkedin.com/company/inclinedplane"],
   contactPoint: {
     "@type": "ContactPoint",
@@ -68,14 +88,22 @@ export const webSiteSchema = {
   url: SITE_URL,
 };
 
-export function breadcrumbSchema(path, title) {
+export function breadcrumbSchema(path, title, parent) {
   const items = [
     { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
   ];
-  if (path !== "/") {
+  if (parent) {
     items.push({
       "@type": "ListItem",
       position: 2,
+      name: parent.name,
+      item: `${SITE_URL}${parent.path}`,
+    });
+  }
+  if (path !== "/") {
+    items.push({
+      "@type": "ListItem",
+      position: items.length + 1,
       name: title,
       item: `${SITE_URL}${path}`,
     });
@@ -94,32 +122,122 @@ export function breadcrumbSchema(path, title) {
 // mirror here must be updated too.
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// Capability pages — parsed from src/content/capabilities.ts (same regex
+// approach as the data files below) so titles, descriptions and the FAQPage
+// JSON-LD always match what the pages render. FAQs tagged with a proposed
+// flag are included only when that flag is on in src/content/flags.ts.
+// ---------------------------------------------------------------------------
+
+const STR = '"((?:[^"\\\\]|\\\\.)*)"';
+
+function parseFlags() {
+  const src = readData("src/content/flags.ts");
+  const out = {};
+  for (const m of src.matchAll(/^\s*(\w+):\s*(true|false),/gm)) out[m[1]] = m[2] === "true";
+  return out;
+}
+
+function parseCapabilities() {
+  const src = readData("src/content/capabilities.ts");
+  const flags = parseFlags();
+  const body = src.slice(src.indexOf("export const capabilities"));
+  const blocks = body.split(/\n  \{\n    id: "/).slice(1);
+  return blocks.map((b) => {
+    const get = (key) => {
+      const m = b.match(new RegExp(`\\n    ${key}:\\s*\\n?\\s*${STR}`));
+      return m ? unescapeQuotes(m[1]) : "";
+    };
+    const seo = b.match(new RegExp(`seo:\\s*\\{\\s*title:\\s*${STR},\\s*description:\\s*\\n?\\s*${STR}`));
+    const faq = [];
+    for (const m of b.matchAll(new RegExp(`q:\\s*${STR},\\s*a:\\s*\\n?\\s*${STR},?(?:\\s*flag:\\s*"(\\w+)")?`, "g"))) {
+      if (m[3] && !flags[m[3]]) continue;
+      faq.push({ q: unescapeQuotes(m[1]), a: unescapeQuotes(m[2]) });
+    }
+    return {
+      id: b.slice(0, b.indexOf('"')),
+      step: get("step"),
+      name: get("name"),
+      path: get("path"),
+      short: get("short"),
+      promise: get("promise"),
+      problem: get("problem"),
+      outcome: get("outcome"),
+      seoTitle: seo ? unescapeQuotes(seo[1]) : get("name"),
+      seoDescription: seo ? unescapeQuotes(seo[2]) : get("promise"),
+      faq,
+    };
+  });
+}
+
+const CAPABILITIES = parseCapabilities();
+
+const CAPABILITY_OFFERS = CAPABILITIES.map((c) => ({
+  "@type": "Offer",
+  itemOffered: {
+    "@type": "Service",
+    name: c.name,
+    serviceType: c.name,
+    description: c.short,
+    url: `${SITE_URL}${c.path}`,
+    provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+  },
+}));
+
+const CAPABILITY_ROUTES = CAPABILITIES.map((c) => ({
+  path: c.path,
+  title: c.seoTitle,
+  description: c.seoDescription,
+  breadcrumbParent: { name: "Capabilities", path: "/capabilities" },
+  noscriptSummary: `${c.name} (${c.step}). ${c.promise} ${c.problem} Outcome: ${c.outcome}`,
+  pageJsonLd: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: c.name,
+      serviceType: c.name,
+      description: c.seoDescription,
+      url: `${SITE_URL}${c.path}`,
+      areaServed: ["United States", "United Kingdom", "Europe"],
+      provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+    },
+    ...(c.faq.length
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: c.faq.map(({ q, a }) => ({
+              "@type": "Question",
+              name: q,
+              acceptedAnswer: { "@type": "Answer", text: a },
+            })),
+          },
+        ]
+      : []),
+  ],
+}));
+
 const staticRoutes = [
   {
+    // Mirrors src/pages/Index.tsx (founder's homepage) and src/content/site.ts.
     path: "/",
-    title: "InclinedPlane — Data Architecture & Analytics for the AI Era",
+    title: "InclinedPlane: Enterprise Data Foundations for the AI Era",
     description:
-      "AI-ready data platforms, observability-first pipelines, and decision systems for modern enterprises. Data engineering consultancy.",
+      "We engineer and modernize enterprise data platforms on the stack you already have, then make them trusted, contextualized and ready for AI agents.",
     titleTemplate: "raw", // homepage uses title verbatim, no " | InclinedPlane" suffix
     noscriptSummary:
-      "InclinedPlane is an AI-native data engineering consultancy. We build cloud data warehouses, observability-first pipelines, BI platforms, and decision systems for modern enterprises. Services span data engineering, AI automation, business intelligence, cloud warehousing, and DataOps. Production case studies across retail, pharma, energy, EV, FMCG, manufacturing, e-commerce, and public sector.",
+      "InclinedPlane is a data engineering and AI readiness firm. We modernize enterprise data platforms on Microsoft Azure and Fabric, Databricks, AWS and Snowflake, then make the data trusted, contextualized and ready for AI agents. Four capabilities on one path: Data Engineering and Governance (Build), Enterprise Context Engineering (Contextualize), AI and Agent Readiness (Enable, accelerated by IncLever) and Agentic Analytics and BI (Activate). We work with CIOs, CDOs and heads of data at mid-to-large enterprises in the US, UK and Europe. Start with a 45-minute AI Data Readiness Assessment.",
     pageJsonLd: [
       {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
         name: SITE_NAME,
-        description:
-          "AI-native data engineering consultancy specializing in cloud data warehouses, BI modernization, DataOps, and AI automation workflows.",
         url: SITE_URL,
-        priceRange: "$$$$",
-        areaServed: "Worldwide",
-        serviceType: [
-          "Data Engineering",
-          "AI Automation",
-          "Business Intelligence",
-          "Cloud Data Warehousing",
-          "DataOps",
-        ],
+        slogan: "Data Engineered. Intelligence Deployed.",
+        description:
+          "Data engineering and AI readiness firm: modernizes enterprise data platforms on the client's existing stack and makes the data trusted, contextualized and ready for AI agents.",
+        areaServed: ["United States", "United Kingdom", "Europe"],
+        makesOffer: CAPABILITY_OFFERS,
       },
     ],
   },
@@ -132,24 +250,23 @@ const staticRoutes = [
       "Our thesis: data is infrastructure, intelligence is product. Modern enterprises need engineering-grade data systems with first-class observability, automated pipelines, governed warehouses, and decision systems built from source to intelligence. This page is a deep technical manifesto on how InclinedPlane builds them.",
   },
   {
-    path: "/services",
-    title: "Data Engineering Services",
+    // Mirrors src/pages/Capabilities.tsx. /services 301s here (vercel.json).
+    path: "/capabilities",
+    title: "Capabilities: from data foundation to AI agents",
     description:
-      "Cloud data warehousing, BI modernization, DataOps, AI automation workflows, and observability-first pipeline engineering. Enterprise-grade data services.",
+      "Data engineering and governance, context engineering, AI and agent readiness, and agentic analytics: four capabilities on one path to production AI.",
     noscriptSummary:
-      "Services: cloud data warehousing (Snowflake, BigQuery, Databricks, Microsoft Fabric), BI modernization (Power BI, Tableau, Looker), DataOps (CI/CD for data, lineage, quality), AI automation workflows, and observability-first pipeline engineering. End-to-end data engineering for enterprises.",
+      "Four capabilities on one path to production AI, in a recommended order rather than a strict sequence. Build: Data Engineering and Governance. Contextualize: Enterprise Context Engineering. Enable: AI and Agent Readiness, accelerated by IncLever. Activate: Agentic Analytics and BI. Engagements start with a free 45-minute AI data readiness conversation.",
     pageJsonLd: [
       {
         "@context": "https://schema.org",
-        "@type": "Service",
-        provider: { "@type": "Organization", name: SITE_NAME },
-        serviceType: "Data Engineering Consulting",
-        areaServed: "Worldwide",
-        description:
-          "End-to-end data engineering services including cloud warehouse architecture, BI modernization, DataOps, and AI automation.",
+        "@type": "OfferCatalog",
+        name: "InclinedPlane capabilities",
+        itemListElement: CAPABILITY_OFFERS,
       },
     ],
   },
+  ...CAPABILITY_ROUTES,
   {
     // Mirrors src/pages/Products.tsx (hub) and the two product pages below.
     // Product facts come from the PipelineIQ project reference and the
@@ -445,7 +562,7 @@ export function getRoutes() {
       jsonLd: [
         orgSchema,
         webSiteSchema,
-        breadcrumbSchema(r.path, r.title),
+        breadcrumbSchema(r.path, r.title, r.breadcrumbParent),
         ...(r.pageJsonLd ?? []),
       ],
     });
