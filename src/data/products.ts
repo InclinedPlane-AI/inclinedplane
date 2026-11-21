@@ -1,7 +1,7 @@
 /**
  * Product catalogue: the single source for the navbar Products menu, the
  * /products hub and the demo-request dialog. Copy follows the PipelineIQ
- * project reference (client kept confidential) and the Inclever product
+ * project reference (client kept confidential) and the IncLever product
  * walkthrough's claims register (no unverified performance figures).
  */
 
@@ -30,7 +30,7 @@ export const PRODUCTS: Product[] = [
     path: "/products/pipelineiq",
     kicker: "Pipeline observability",
     tagline: "From what failed to why.",
-    audience: "For data engineers & platform teams",
+    audience: "For data engineers and platform teams",
     audienceNote: "The people who build, run and support the pipelines, and get the call when a night fails.",
     roles: ["Data engineers on support", "Platform leads", "Release managers", "Ingestion owners", "Warehouse owners"],
     brief:
@@ -45,15 +45,15 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "inclever",
-    name: "Inclever",
+    name: "IncLever",
     path: "/products/inclever",
     kicker: "Governed AI analytics",
     tagline: "AI answers you can audit.",
-    audience: "For business users & analysts",
+    audience: "For business users and analysts",
     audienceNote: "The people who use data to make decisions, while your data team keeps it governed behind the scenes.",
-    roles: ["Business users", "Analysts & BI leads", "Finance leadership", "Heads of data", "Audit & risk"],
+    roles: ["Business users", "Analysts and BI leads", "Finance leadership", "Heads of data", "Audit and risk"],
     brief:
-      "Ask your data questions in Microsoft Teams. Inclever answers only when your data has earned it, and says exactly why when it hasn't.",
+      "Ask your data questions in Microsoft Teams. IncLever answers only when your data has earned it, and says exactly why when it hasn't.",
     bullets: ["Three gates before every number", "Readiness certificates for every data asset", "Every gap becomes owned, tracked work"],
     demoAgenda: [
       "Questions travelling through the three gates, live in Teams",
