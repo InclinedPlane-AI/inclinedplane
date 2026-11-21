@@ -27,9 +27,11 @@ import BlogPostPage from "./pages/BlogPost";
 import Careers from "./pages/Careers";
 import Referral from "./pages/Referral";
 import CookieConsent from "./components/CookieConsent";
-import ChatWidget from "./components/ChatWidget";
 import SplashScreen from "./components/SplashScreen";
 import ScrollToTop from "./components/ScrollToTop";
+import { BookingProvider } from "./components/site/booking/BookingProvider";
+import Capabilities from "./pages/Capabilities";
+import CapabilityPage from "./pages/CapabilityPage";
 
 const queryClient = new QueryClient();
 
@@ -82,13 +84,15 @@ const App = () => {
             <Sonner />
             <BrowserRouter>
               <ScrollToTop />
+              <BookingProvider>
               <CookieConsent />
-              <ChatWidget />
               <AnimatePresence mode="wait">
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/thesis" element={<Thesis />} />
                   <Route path="/services" element={<ServicesPage />} />
+                  <Route path="/capabilities" element={<Capabilities />} />
+                  <Route path="/capabilities/:slug" element={<CapabilityPage />} />
                   <Route path="/products" element={<Products />} />
                   <Route path="/products/pipelineiq" element={<ProductPipelineIQ />} />
                   <Route path="/products/inclever" element={<ProductInclever />} />
@@ -107,6 +111,7 @@ const App = () => {
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </AnimatePresence>
+              </BookingProvider>
             </BrowserRouter>
             <Analytics />
             <SpeedInsights />

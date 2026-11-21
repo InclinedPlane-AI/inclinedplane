@@ -14,10 +14,14 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
-        'blog-heading': ['Inter', 'system-ui', 'sans-serif'],
-        'blog-body': ['"Source Serif 4"', 'Georgia', 'serif'],
+        sans: ['"Google Sans Flex"', '"GSF Fallback"', 'system-ui', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+        'blog-heading': ['"Google Sans Flex"', '"GSF Fallback"', 'system-ui', 'sans-serif'],
+        'blog-body': ['"Google Sans Flex"', '"GSF Fallback"', 'system-ui', 'sans-serif'],
+      },
+      maxWidth: {
+        site: "1240px",
+        read: "720px",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -62,6 +66,21 @@ export default {
           "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
+        },
+        ip: {
+          orange: "var(--ip-orange)",
+          "orange-ink": "var(--ip-orange-ink)",
+          "orange-tint": "var(--ip-orange-tint)",
+          black: "var(--ip-black)",
+          body: "var(--ip-body)",
+          muted: "var(--ip-muted)",
+          grey: "var(--ip-grey-50)",
+          "grey-100": "var(--ip-grey-100)",
+          rule: "var(--ip-rule)",
+          "rule-strong": "var(--ip-rule-strong)",
+          "rule-dashed": "var(--ip-rule-dashed)",
+          "on-dark": "var(--ip-on-dark-muted)",
+          hover: "var(--ip-hover)",
         },
         orange: {
           500: "hsl(var(--orange-start))",

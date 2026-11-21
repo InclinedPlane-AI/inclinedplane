@@ -1,77 +1,73 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Cookie, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+/**
+ * Cookie notice (UK/EU visitors). Same storage key and behaviour as before;
+ * restyled to the brand system for the revamp. Not shown to automated
+ * browsers so prerender snapshots never capture it.
+ */
+const KEY = "cookie-consent";
 
 const CookieConsent = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem("cookie-consent");
+    if (typeof navigator !== "undefined" && navigator.webdriver) return;
+    let consent: string | null = null;
+    try {
+      consent = localStorage.getItem(KEY);
+    } catch {
+      /* storage blocked: show the notice */
+    }
     if (!consent) {
-      const timer = setTimeout(() => setVisible(true), 1500);
-      return () => clearTimeout(timer);
+      const t = setTimeout(() => setVisible(true), 1200);
+      return () => clearTimeout(t);
     }
   }, []);
 
-  const handleConsent = (accepted: boolean) => {
-    localStorage.setItem("cookie-consent", accepted ? "accepted" : "rejected");
+  const decide = (accepted: boolean) => {
+    try {
+      localStorage.setItem(KEY, accepted ? "accepted" : "rejected");
+    } catch {
+      /* ignore */
+    }
     setVisible(false);
   };
 
+  if (!visible) return null;
+
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="fixed bottom-6 left-6 right-6 md:left-auto md:right-6 md:max-w-md z-50"
+    <div
+      role="region"
+      aria-label="Cookie notice"
+      data-print-hidden
+      className="fixed bottom-4 left-4 right-4 z-[60] md:left-auto md:right-6 md:bottom-6 md:max-w-[420px] rounded-[10px] border border-ip-rule-strong bg-white p-5 font-sans text-black shadow-[0_18px_40px_-18px_rgba(0,0,0,0.35)] animate-in fade-in-0 slide-in-from-bottom-2 duration-300"
+    >
+      <p className="m-0 text-[15px] font-semibold">Cookies</p>
+      <p className="mt-1.5 mb-0 text-[14px] leading-[1.55] text-ip-body">
+        We use cookies to understand how the site is used. See our{" "}
+        <Link to="/cookies" className="ip-link text-[14px] font-medium">
+          cookie policy
+        </Link>
+        .
+      </p>
+      <div className="mt-4 flex gap-2.5">
+        <button
+          type="button"
+          onClick={() => decide(false)}
+          className="min-h-[40px] flex-1 rounded-[6px] border border-black bg-white px-4 text-[14px] font-medium hover:bg-ip-grey"
         >
-          <div className="glass-panel-strong rounded-2xl p-6 relative">
-            <button
-              onClick={() => handleConsent(false)}
-              className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Close"
-            >
-              <X className="w-4 h-4" />
-            </button>
-
-            <div className="flex items-start gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                <Cookie className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-foreground mb-1">We use cookies</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  We use cookies to enhance your experience. By continuing, you agree to our{" "}
-                  <Link to="/cookies" className="text-primary hover:underline">
-                    Cookie Policy
-                  </Link>
-                  .
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-3">
-              <button
-                onClick={() => handleConsent(false)}
-                className="flex-1 px-4 py-2 text-xs font-medium rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-colors"
-              >
-                Reject
-              </button>
-              <button
-                onClick={() => handleConsent(true)}
-                className="flex-1 px-4 py-2 text-xs font-medium rounded-lg bg-gradient-orange text-primary-foreground hover:opacity-90 transition-opacity glow-orange"
-              >
-                Accept
-              </button>
-            </div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          Reject
+        </button>
+        <button
+          type="button"
+          onClick={() => decide(true)}
+          className="min-h-[40px] flex-1 rounded-[6px] bg-ip-orange px-4 text-[14px] font-semibold text-black hover:bg-[#e36c15]"
+        >
+          Accept
+        </button>
+      </div>
+    </div>
   );
 };
 

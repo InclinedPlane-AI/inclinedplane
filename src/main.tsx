@@ -18,6 +18,9 @@
  * Last reviewed: 2026-05-03. */
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "@fontsource/ibm-plex-mono/600.css";
 import "./index.css";
 
 const rootEl = document.getElementById("root")!;
