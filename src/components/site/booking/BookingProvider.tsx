@@ -13,6 +13,7 @@ import { CalendarPanel } from "./CalendarPanel";
 import { Label } from "../primitives";
 import { booking } from "@/content/site";
 import { cn } from "@/lib/utils";
+import { track } from "@vercel/analytics";
 
 type Tab = "form" | "calendar";
 interface OpenOptions {
@@ -33,6 +34,9 @@ export function BookingProvider({ children }: { children: ReactNode }) {
   const [submitted, setSubmitted] = useState<AssessmentAnswers | null>(null);
 
   const open = useCallback((opts: OpenOptions = {}) => {
+    // Brief §11.6: assessment CTA clicks by location. (Vercel custom events
+    // are recorded on paid plans only; harmless no-op otherwise.)
+    track("assessment_open", { source: opts.source ?? "unknown", tab: opts.tab ?? "form" });
     setTab(opts.tab ?? "form");
     setSource(opts.source ?? "unknown");
     setSubmitted(null);
@@ -120,7 +124,13 @@ export function BookingProvider({ children }: { children: ReactNode }) {
                 <p className="mt-4 mb-0 text-[15px] leading-[1.55] text-ip-body">
                   So the call starts with your data, not with background. Only your role and work email are required.
                 </p>
-                <AssessmentForm source={source} onSubmitted={setSubmitted} />
+                <AssessmentForm
+                  source={source}
+                  onSubmitted={(a) => {
+                    track("assessment_submit", { source });
+                    setSubmitted(a);
+                  }}
+                />
               </>
             ) : (
               <div className="mt-4 flex flex-col gap-4">

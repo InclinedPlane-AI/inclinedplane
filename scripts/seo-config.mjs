@@ -172,6 +172,38 @@ function parseCapabilities() {
 
 const CAPABILITIES = parseCapabilities();
 
+/** FAQ items from `export const <name>: FaqItem[] = [...]` in a content file, flag-aware. */
+function parseFaq(relPath, exportName) {
+  const src = readData(relPath);
+  const start = src.indexOf(`export const ${exportName}`);
+  if (start < 0) return [];
+  const end = src.indexOf("\n];", start);
+  const body = src.slice(start, end);
+  const flags = parseFlags();
+  const out = [];
+  for (const m of body.matchAll(new RegExp(`q:\\s*${STR},\\s*a:\\s*\\n?\\s*${STR},?(?:\\s*flag:\\s*"(\\w+)")?`, "g"))) {
+    if (m[3] && !flags[m[3]]) continue;
+    out.push({ q: unescapeQuotes(m[1]), a: unescapeQuotes(m[2]) });
+  }
+  return out;
+}
+
+function faqPage(items) {
+  return items.length
+    ? [
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: items.map(({ q, a }) => ({
+            "@type": "Question",
+            name: q,
+            acceptedAnswer: { "@type": "Answer", text: a },
+          })),
+        },
+      ]
+    : [];
+}
+
 const CAPABILITY_OFFERS = CAPABILITIES.map((c) => ({
   "@type": "Offer",
   itemOffered: {
@@ -217,6 +249,74 @@ const CAPABILITY_ROUTES = CAPABILITIES.map((c) => ({
   ],
 }));
 
+// ---------------------------------------------------------------------------
+// Learn articles + glossary — parsed from src/content/learn.ts.
+// ---------------------------------------------------------------------------
+
+function parseLearn() {
+  const src = readData("src/content/learn.ts");
+  const arts = src.slice(src.indexOf("export const learnArticles"), src.indexOf("export const learnBySlug"));
+  const articles = arts.split(/\n  \{\n    slug: "/).slice(1).map((b) => {
+    const get = (key) => {
+      const m = b.match(new RegExp(`\\n    ${key}:\\s*\\n?\\s*${STR}`));
+      return m ? unescapeQuotes(m[1]) : "";
+    };
+    return {
+      slug: b.slice(0, b.indexOf('"')),
+      title: get("title"),
+      definition: get("definition"),
+      description: get("description"),
+      datePublished: get("datePublished"),
+      dateModified: get("dateModified"),
+    };
+  });
+  const gsrc = src.slice(src.indexOf("export const glossary"));
+  const glossary = [...gsrc.matchAll(new RegExp(`id:\\s*"([^"]+)",\\s*term:\\s*${STR},\\s*definition:\\s*\\n?\\s*${STR}`, "g"))].map(
+    (m) => ({ id: m[1], term: unescapeQuotes(m[2]), definition: unescapeQuotes(m[3]) }),
+  );
+  return { articles, glossary };
+}
+
+const LEARN = parseLearn();
+
+// Revamp titles for case studies (outcome-led, used as the page h1).
+function parseCaseMetaTitles() {
+  const src = readData("src/content/caseStudyMeta.ts");
+  return new Map(
+    [...src.matchAll(new RegExp(`"([a-z0-9-]+)":\\s*\\{\\s*id:\\s*"[^"]+",\\s*title:\\s*${STR}`, "g"))].map((m) => [
+      m[1],
+      unescapeQuotes(m[2]),
+    ]),
+  );
+}
+const CASE_META_TITLES = parseCaseMetaTitles();
+
+const LEARN_ROUTES = LEARN.articles.map((a) => ({
+  path: `/learn/${a.slug}`,
+  title: a.title,
+  description: a.description,
+  breadcrumbParent: { name: "Learn", path: "/learn" },
+  noscriptSummary: `${a.title} ${a.definition} ${a.description}`,
+  ogType: "article",
+  pageJsonLd: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: a.title,
+      description: a.description,
+      datePublished: a.datePublished,
+      dateModified: a.dateModified || a.datePublished,
+      author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+      publisher: {
+        "@type": "Organization",
+        name: SITE_NAME,
+        logo: { "@type": "ImageObject", url: `${SITE_URL}/brand/logo-primary-large.png` },
+      },
+      mainEntityOfPage: `${SITE_URL}/learn/${a.slug}`,
+    },
+  ],
+}));
+
 const staticRoutes = [
   {
     // Mirrors src/pages/Index.tsx (founder's homepage) and src/content/site.ts.
@@ -243,12 +343,13 @@ const staticRoutes = [
   },
   {
     path: "/thesis",
-    title: "Our Thesis — The Architecture of Intelligence",
+    title: "Our thesis: data is infrastructure, intelligence is product",
     description:
-      "Why modern enterprises need observable, automated data platforms. Our thesis on building decision systems from source to intelligence.",
+      "Why enterprises need observable, automated data platforms before AI can work, and how InclinedPlane builds them from source to decision.",
     noscriptSummary:
-      "Our thesis: data is infrastructure, intelligence is product. Modern enterprises need engineering-grade data systems with first-class observability, automated pipelines, governed warehouses, and decision systems built from source to intelligence. This page is a deep technical manifesto on how InclinedPlane builds them.",
+      "Our thesis: data is infrastructure and intelligence is product. Enterprises need observable, automated, governed data platforms before analytics or AI agents can be trusted. This long-form page explains the architecture layers and principles InclinedPlane builds on.",
   },
+
   {
     // Mirrors src/pages/Capabilities.tsx. /services 301s here (vercel.json).
     path: "/capabilities",
@@ -268,171 +369,189 @@ const staticRoutes = [
   },
   ...CAPABILITY_ROUTES,
   {
-    // Mirrors src/pages/Products.tsx (hub) and the two product pages below.
-    // Product facts come from the PipelineIQ project reference and the
-    // Inclever product walkthrough (claims register honoured: no client
-    // names, no unverified performance figures).
-    path: "/products",
-    title: "Products — PipelineIQ & Inclever",
+    path: "/assessment",
+    title: "AI Data Readiness Assessment",
     description:
-      "PipelineIQ: read-only pipeline monitoring and ETL debugging. Inclever: governed AI analytics with an AI Readiness Control Tower that audits whether your data is fit for AI.",
+      "A 45-minute AI Data Readiness Assessment with a senior engineer: quality, context, access and governance, checked against what your AI agents need.",
     noscriptSummary:
-      "InclinedPlane products. PipelineIQ is a read-only monitoring, alerting and ETL-debugging portal for data engineers and platform teams that turns hundreds of pipeline failures into a handful of root causes. Inclever is governed AI analytics for business users and analysts: people ask plain-English questions in Microsoft Teams and Inclever answers only when the data has earned it, backed by an AI Readiness Control Tower that audits and certifies data for AI.",
+      "The AI Data Readiness Assessment checks your data against what AI agents need: quality, context, access and governance. It starts with a free 45-minute conversation with a senior engineer. A fixed-scope assessment backed by IncLever produces a scored findings report with evidence and a roadmap. Book by answering five questions or picking a time.",
+    pageJsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "AI Data Readiness Assessment",
+        serviceType: "AI data readiness assessment",
+        url: `${SITE_URL}/assessment`,
+        areaServed: ["United States", "United Kingdom", "Europe"],
+        provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+      },
+      ...faqPage(parseFaq("src/content/assessment.ts", "assessmentFaq")),
+    ],
+  },
+  {
+    // Mirrors src/pages/Products.tsx (hub) and the two product pages below.
+    path: "/products",
+    title: "Products: the trust layer, from pipeline to answer",
+    description:
+      "PipelineIQ checks data arrives reliably. IncLever checks it is ready for any AI agent. Two accelerators built by the engineers who deliver our work.",
+    noscriptSummary:
+      "InclinedPlane builds two accelerators. PipelineIQ is read-only pipeline monitoring and ETL debugging that answers \"is the data arriving reliably?\". IncLever audits and certifies data readiness and answers \"is it ready for any agent?\". Together they cover the chain from ERP sources to any AI agent.",
     pageJsonLd: [
       {
         "@context": "https://schema.org",
         "@type": "ItemList",
         name: "InclinedPlane products",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "PipelineIQ", url: `${SITE_URL}/products/pipelineiq` },
-          { "@type": "ListItem", position: 2, name: "Inclever", url: `${SITE_URL}/products/inclever` },
+          { "@type": "ListItem", position: 1, name: "IncLever", url: `${SITE_URL}/products/inclever` },
+          { "@type": "ListItem", position: 2, name: "PipelineIQ", url: `${SITE_URL}/products/pipelineiq` },
         ],
       },
     ],
   },
   {
     path: "/products/pipelineiq",
-    title: "PipelineIQ — Pipeline Monitoring & ETL Debugging",
+    title: "PipelineIQ: pipeline monitoring and ETL debugging",
+    breadcrumbParent: { name: "Products", path: "/products" },
     description:
-      "PipelineIQ is a read-only monitoring, alerting and ETL-debugging portal that turns hundreds of pipeline failures into a handful of root causes, with adaptive alerts that close themselves.",
+      "Read-only pipeline monitoring, alerting and ETL debugging that turns hundreds of failures into a few root causes. Know each morning if data is safe to use.",
     noscriptSummary:
-      "PipelineIQ is a read-only monitoring, alerting and ETL-debugging portal for enterprise data platforms, built for data engineers and platform teams: engineers on support, platform leads, release managers, ingestion and warehouse owners. It merges failures from the run log, orchestrator and compute engine into one error history, separates root causes from cascaded failures, and groups them into error signatures with the real stack trace and links to the exact run. Twelve kinds of alert, all adaptive (each table judged against its own history) or rolled up per environment, update while a problem lasts and close themselves when it clears. It installs nothing in the client estate, enforces read-only SQL in code, never scans warehouse table data, and keeps data local. It is delivered through a forward-deployed engineering model: a stable core plus a client layer built for each estate.",
+      "PipelineIQ is read-only pipeline monitoring, alerting and ETL debugging, currently at MVP stage. It merges failures from every tool into one de-duplicated history, separates root causes from cascades, and raises one adaptive alert per problem that closes itself. It installs nothing, runs only SELECT statements and reads operational metadata, never business data. It is delivered as a stable core plus an engineer who builds the layer for your estate.",
     pageJsonLd: [
       {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         name: "PipelineIQ",
         applicationCategory: "BusinessApplication",
-        applicationSubCategory: "Data pipeline observability",
+        applicationSubCategory: "Pipeline monitoring and ETL debugging",
         operatingSystem: "Web",
         url: `${SITE_URL}/products/pipelineiq`,
-        description:
-          "Read-only monitoring, alerting and ETL-debugging portal for enterprise data platforms. Merges failures across tools into root-cause error signatures with adaptive, self-resolving alerts.",
         publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
       },
+      ...faqPage(parseFaq("src/content/pipelineiq.ts", "piqFaq")),
     ],
   },
   {
     path: "/products/inclever",
-    title: "Inclever — Governed AI Analytics & AI Readiness",
+    title: "IncLever: AI data readiness and governed analytics",
+    breadcrumbParent: { name: "Products", path: "/products" },
     description:
-      "Inclever answers plain-English data questions in Microsoft Teams only when your data has earned it, backed by an AI Readiness Control Tower that audits and certifies data for AI.",
+      "IncLever audits data and definitions against explicit rules, certifies readiness with evidence, and answers questions only on data that has passed.",
     noscriptSummary:
-      "Inclever is governed AI analytics, built for business users and analysts (with finance leadership, heads of data and audit teams relying on and governing it). People ask plain-English questions in Microsoft Teams; every question is matched only against defined metrics, confirmed with the user, then passes three gates in order (entitlement, answerability, assurance) before a number is given. Answers carry their evidence; otherwise Inclever holds the answer for a named reviewer or refuses with the specific failing check and routes a task to a named owner with a clock. Its AI Readiness Control Tower (ARCT) continuously audits data assets and business definitions in seven stages, records Passed, Failed or Not evaluated verdicts with coverage, and issues or withholds readiness certificates that expire automatically. When a blocking rule fails, every question downstream is held automatically.",
+      "IncLever is InclinedPlane's accelerator for context engineering and AI readiness. Its AI Readiness Control Tower audits data assets and business definitions in seven stages, records an evidenced verdict for every rule, and issues or withholds readiness certificates. IncLever Ask answers plain-English questions in Microsoft Teams only after entitlement, answerability and assurance checks, and turns every gap into owned work. With or without IncLever, the expertise is the same.",
     pageJsonLd: [
       {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        name: "Inclever",
+        name: "IncLever",
         applicationCategory: "BusinessApplication",
-        applicationSubCategory: "Governed AI analytics",
+        applicationSubCategory: "AI data readiness and governed AI analytics",
         operatingSystem: "Web",
         url: `${SITE_URL}/products/inclever`,
-        description:
-          "Governed AI analytics. Plain-English questions in Microsoft Teams, answered only after entitlement, answerability and assurance checks, backed by an AI Readiness Control Tower that audits and certifies data for AI use.",
         publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
       },
+      ...faqPage(parseFaq("src/content/inclever.ts", "incleverFaq")),
+    ],
+  },
+  {
+    path: "/industries",
+    title: "Industries: manufacturing, FMCG, energy, logistics, retail",
+    description:
+      "Data engineering and AI readiness for multi-entity businesses in manufacturing and distribution, FMCG, energy, logistics and retail.",
+    noscriptSummary:
+      "InclinedPlane works with multi-entity businesses where enterprise data is hardest: many operating companies, many ERPs, years of acquisitions. Manufacturing and distribution comes first, followed by FMCG, energy and utilities, logistics and supply chain, and retail. For each industry the page lists the typical data problems, the capabilities that apply and related case studies.",
+  },
+  {
+    path: "/case-studies",
+    title: "Case studies: enterprise data platforms in production",
+    description:
+      "Data platforms, multi-ERP models, BI and forecasting for manufacturing, FMCG, energy, logistics and retail, filterable by capability and industry.",
+    noscriptSummary:
+      "InclinedPlane case studies: 14 anonymized engagements across manufacturing, FMCG, energy, logistics, retail and other sectors. Featured: a multi-ERP Azure platform unifying 25 to 30 EMEA operating companies (about 100 million rows a day, new ERPs onboarded in 2 to 6 weeks) and an FMCG edible oil producer's unified sales warehouse (27% faster order turnaround, 25% better route adherence). Each case study covers the opportunity, the solution and measured impact.",
+    pageJsonLd: [
       {
         "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: [
-          ["Does Inclever replace our BI tool?", "No. It answers from your existing signed-off dashboards first, and only generates an answer when nothing already built covers the question."],
-          ["Can the AI make up a metric or a number?", "It is designed not to. The AI can only select from metrics, dimensions and time windows you have defined, and every selection is validated. Numbers come from your data through those definitions, not from the model."],
-          ["What happens when the data has a problem?", "The audit verdicts decide. A blocking issue stops Inclever answering on that data and names the failing check; lesser issues mean the answer is held for review or marked provisional. Each case raises a task for the data owner."],
-          ["Will someone learn anything about data they are not allowed to see?", "No. Permission is checked first, before anything about the data's state is read, so a refusal reveals nothing about the number."],
-          ["Is every conversation auditable?", "Yes. Every question, gate decision, refusal, task and exception is written to a permanent decision record you can replay in Monitor."],
-        ].map(([q, a]) => ({
-          "@type": "Question",
-          name: q,
-          acceptedAnswer: { "@type": "Answer", text: a },
+        "@type": "ItemList",
+        name: "InclinedPlane case studies",
+        itemListElement: parseCaseStudies().map((c, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: `${SITE_URL}/case-studies/${c.id}`,
+          name: (CASE_META_TITLES.get(c.id) ?? c.title).replace(/\.$/, ""),
         })),
       },
     ],
   },
   {
-    path: "/industries",
-    title: "Industries We Serve",
+    path: "/about",
+    title: "About us",
     description:
-      "AI-native data engineering for retail, finance, healthcare, manufacturing, energy, SaaS, BPO, and education. Industry-specific data solutions.",
+      "InclinedPlane is a data engineering and AI readiness firm. Who we are, what the name means, how we work, and who leads the firm.",
     noscriptSummary:
-      "Industries served: retail and e-commerce, finance, healthcare, manufacturing, energy and industrial, SaaS, BPO and customer operations, and education. Deep vertical expertise paired with engineering-grade data infrastructure.",
+      "InclinedPlane is a data engineering and AI readiness firm. We modernize enterprise data platforms on Microsoft Azure and Fabric, Databricks, AWS and Snowflake, then make the data trusted, contextualized and ready for AI agents. Formerly Sail Analytics, the firm began in Bengaluru as an analytics practice. Its principles: engineers, not consultants; methodology over heroics. Founder and CEO: Keerthana Vayyasi.",
     pageJsonLd: [
       {
         "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        name: "Industries We Serve",
-        url: `${SITE_URL}/industries`,
-        description:
-          "Vertical expertise areas served by InclinedPlane: retail, finance, healthcare, manufacturing, energy, SaaS, BPO, and education.",
-        about: [
-          "Retail",
-          "Finance",
-          "Healthcare",
-          "Manufacturing",
-          "Energy",
-          "SaaS",
-          "BPO",
-          "Education",
-        ].map((name) => ({ "@type": "Thing", name })),
+        "@type": "AboutPage",
+        name: "About InclinedPlane",
+        url: `${SITE_URL}/about`,
+        about: { "@type": "Organization", name: SITE_NAME, alternateName: "Sail Analytics", url: SITE_URL },
       },
     ],
   },
   {
-    path: "/case-studies",
-    title: "Case Studies",
+    path: "/learn",
+    title: "Learn: context engineering and AI readiness",
     description:
-      "14 production case studies across retail, pharma, energy, EV, FMCG, manufacturing, and e-commerce — real outcomes from AI-native data engineering.",
+      "Plain explanations of context engineering, semantic layers, ontologies and AI readiness, with worked examples and a glossary of the terms.",
     noscriptSummary:
-      "14 production case studies: retail and manufacturing chain analytics, EV battery predictive maintenance, EV fleet scheduling, FMCG distribution, pharma sales BI, pharma MNC field force, e-commerce inventory and procurement, energy audit, VC-funded EdTech, demand forecasting, capital equipment ERP, solar BI, cultural heritage public sector, and ERP unification.",
+      "Explainers on context engineering, the difference between ontologies, semantic layers and knowledge graphs, and what AI readiness means. Includes a glossary where each term is defined in one sentence.",
+    pageJsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "DefinedTermSet",
+        name: "InclinedPlane glossary",
+        url: `${SITE_URL}/learn`,
+        hasDefinedTerm: LEARN.glossary.map((g) => ({
+          "@type": "DefinedTerm",
+          name: g.term,
+          description: g.definition,
+          url: `${SITE_URL}/learn#${g.id}`,
+        })),
+      },
+    ],
   },
-  {
-    path: "/about",
-    title: "About InclinedPlane",
-    description:
-      "From Sail Analytics to InclinedPlane — our evolution into an AI-native data engineering firm. Meet the team building decision systems for modern enterprises.",
-    noscriptSummary:
-      "InclinedPlane evolved from Sail Analytics into an AI-native data engineering firm. Headquartered with operations across India and the United States, partnering with cloud platforms (AWS, Azure, Microsoft Fabric) to deliver decision systems for high-velocity enterprises.",
-  },
+  ...LEARN_ROUTES,
   {
     path: "/blog",
-    title: "Blog — Insights on Data Engineering & AI",
+    title: "Insights on data engineering and AI readiness",
     description:
-      "Expert insights on data engineering, AI automation, DataOps, business intelligence, and building modern data platforms. By the InclinedPlane team.",
+      "Articles from InclinedPlane engineers on data platforms, pipelines, data contracts, context and getting enterprise data ready for AI agents.",
     noscriptSummary:
-      "Long-form essays on data engineering strategy, AI automation, DataOps, business intelligence, observability, and the architecture of competitive advantage. Written by the InclinedPlane team.",
+      "Insights from the InclinedPlane team: articles on data platforms, pipeline reliability, data contracts, data gravity, stewardship, explainability and getting enterprise data ready for AI agents.",
   },
+
   {
     path: "/careers",
-    title: "Careers — Build the Future of Data & AI",
+    title: "Careers: build data and AI foundations for enterprises",
     description:
-      "Join InclinedPlane to build AI-native data systems for high-velocity enterprises. Remote-first, ownership-driven, engineering rigor.",
+      "Join InclinedPlane to build data platforms and AI foundations for enterprises. Ownership, engineering rigor and work that ships to production.",
     noscriptSummary:
-      "Careers at InclinedPlane. Remote-first, ownership-driven, engineering-rigor culture. We hire data engineers, analytics engineers, ML engineers, BI engineers, and platform engineers who want to build production AI-native data systems.",
+      "Careers at InclinedPlane. We hire data engineers, analytics engineers and platform engineers to build data platforms and AI foundations for enterprises, with ownership, engineering rigor and work that ships to production.",
   },
+
   {
     path: "/contact",
-    title: "Contact Us",
+    title: "Contact us",
     description:
-      "Get in touch with InclinedPlane for data engineering consulting, AI automation, and cloud warehouse architecture. Book a discovery call today.",
+      "Talk to InclinedPlane about modernizing your data platform or getting it ready for AI agents. Send a message or book an AI Data Readiness Assessment.",
     noscriptSummary:
-      "Contact InclinedPlane. Email support@inclinedplane.com for data engineering consulting, AI automation, cloud warehouse architecture, BI modernization, or DataOps engagements. Offices in India and Delaware, USA. Book a discovery call.",
+      "Contact InclinedPlane through the project enquiry form, or book a 45-minute AI Data Readiness Assessment instead. Email support@inclinedplane.com.",
     pageJsonLd: [
       {
         "@context": "https://schema.org",
         "@type": "ContactPage",
         name: "Contact InclinedPlane",
         url: `${SITE_URL}/contact`,
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        name: SITE_NAME,
-        url: SITE_URL,
-        email: "support@inclinedplane.com",
-        priceRange: "$$$$",
-        areaServed: "Worldwide",
-        description:
-          "Data engineering, AI automation, cloud warehouse architecture, BI modernization, and DataOps consultancy.",
       },
     ],
   },
@@ -536,6 +655,13 @@ function parseCaseStudyDetailSlugs() {
     .filter((s) => s !== "string");
 }
 
+/** Meta descriptions: clip to ~155 chars at a word boundary. */
+function clip(text, max = 155) {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:]$/, "")}…`;
+}
+
 function unescapeQuotes(s) {
   return s.replace(/\\"/g, '"').replace(/\\n/g, " ");
 }
@@ -557,7 +683,7 @@ export function getRoutes() {
       description: r.description,
       noscriptSummary: r.noscriptSummary ?? `${r.title}. ${r.description}`,
       ogImage,
-      ogType: "website",
+      ogType: r.ogType ?? "website",
       noIndex: !!r.noIndex,
       jsonLd: [
         orgSchema,
@@ -579,7 +705,7 @@ export function getRoutes() {
     routes.push({
       path,
       fullTitle,
-      description: post.subtitle,
+      description: clip(post.subtitle),
       noscriptSummary: `${post.title}. ${post.subtitle} Published ${post.date}. Tags: ${post.tags.join(", ")}.`,
       ogImage,
       ogType: "article",
@@ -629,12 +755,13 @@ export function getRoutes() {
     const cs = csById.get(slug);
     if (!cs) continue; // detail without matching summary → skip
     const path = `/case-studies/${slug}`;
-    // Same reasoning as blog posts — case study titles can be long.
-    const fullTitle = cs.title;
+    // Same reasoning as blog posts — case study titles can be long. Use the
+    // revamp's outcome-led title (the page h1) when there is one.
+    const fullTitle = (CASE_META_TITLES.get(slug) ?? cs.title).replace(/\.$/, "");
     routes.push({
       path,
       fullTitle,
-      description: cs.summary,
+      description: clip(cs.summary),
       noscriptSummary: `${cs.title}. Industry: ${cs.industry}. ${cs.summary}`,
       ogImage,
       ogType: "article",
@@ -642,12 +769,12 @@ export function getRoutes() {
       jsonLd: [
         orgSchema,
         webSiteSchema,
-        breadcrumbSchema(path, cs.title),
+        breadcrumbSchema(path, fullTitle, { name: "Case studies", path: "/case-studies" }),
         {
           "@context": "https://schema.org",
           "@type": "Article",
-          name: cs.title,
-          headline: cs.title,
+          name: fullTitle,
+          headline: fullTitle,
           about: cs.industry,
           description: cs.summary,
           url: `${SITE_URL}${path}`,

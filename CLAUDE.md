@@ -1,10 +1,18 @@
 # CLAUDE.md — Inclined Plane site
 
-**Last reviewed: 2026-11-16.** This file is the cross-session memory for
+**Last reviewed: 2026-11-21.** This file is the cross-session memory for
 Claude when working on this repo. Read it on session start, then verify
 anything here against the current code before acting on it.
 
 ---
+
+## Redesign in progress (branch `revamp`)
+
+A full redesign is under way on the long-lived `revamp` branch. **Read
+`docs/revamp/PROGRESS.md` first** (status, decisions, what's left), then
+`DESIGN_NOTES.md` (route map, tokens, sign-off items) and `CONTRIBUTING.md`
+(single-repo branch/PR/deploy flow). Since 2026-11-21 Lovable is retired: no
+tool writes to `main` directly any more; everything goes through PRs.
 
 ## IMPORTANT — before trusting anything in this file
 
@@ -216,6 +224,20 @@ Runs on every push to `main` on `InclinedPlane-AI/inclinedplane`. Steps:
    `buildCommand`) — wasteful, ~3 minutes of redundancy per run.
 10. `vercel deploy --prebuilt --prod --token=...` uploads the artifact.
 
+### Staging (revamp branch)
+
+`.github/workflows/deploy-staging.yml` builds the same way and deploys to a
+second Vercel project, `inclinedplane-staging`, in the same Vercel account as
+production: push to `revamp` → stable staging URL; PR into `revamp` → preview
+URL posted as a PR comment. It packages output with
+`scripts/vercel-output.mjs --noindex`, which also carries `vercel.json`
+redirects/headers into `.vercel/output/config.json` (`--prebuilt` ignores
+vercel.json). When the revamp ships, switch `deploy.yml`'s packaging step to
+`node scripts/vercel-output.mjs` so the redirects reach production.
+
+`ubuntu-latest` (26.04) can't install Playwright 1.55's Chromium; workflows are
+pinned to `ubuntu-24.04`.
+
 ### Three GitHub secrets the workflow needs
 
 These are configured on `InclinedPlane-AI/inclinedplane` settings →
@@ -233,6 +255,11 @@ If a future Claude is asked to set this up again, it's all in
 ---
 
 ## Routing
+
+> On the `revamp` branch the route map changed: `/capabilities` and
+> `/capabilities/:slug` (four pages) replace `/services` (301), plus
+> `/assessment`, `/learn`, `/learn/:slug`, and `/industries` is live again.
+> See DESIGN_NOTES.md §1. The list below describes `main`.
 
 App uses `react-router-dom` BrowserRouter with these routes (defined in
 `src/App.tsx`):
