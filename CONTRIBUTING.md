@@ -27,7 +27,8 @@ main ──────────────────► inclinedplane.com
 - Branch from `revamp` for redesign work: `git checkout revamp && git pull && git checkout -b feat/assessment-page`.
 - Open a PR into `revamp`. It needs one approval. The PR gets a preview link comment once the build finishes.
 - Keep PRs small: one page or one component per PR.
-- Never push to `main` directly. The redesign reaches production in one reviewed PR `revamp` → `main`.
+- Never push to `revamp` or `main` directly, and don't merge your own PR. A reviewer merges.
+- Production changes only once, at launch: one reviewed PR `revamp` → `main`, opened when the owner confirms everything is approved and final.
 - Hotfixes to the live site: branch from `main`, PR into `main`, then merge `main` into `revamp`.
 
 ## Before you open a PR
