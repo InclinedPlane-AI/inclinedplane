@@ -7,6 +7,20 @@
 import type { FaqItem } from "./capabilities";
 import type { Verifiable } from "./verify";
 
+/**
+ * The portal walkthrough clip (recorded 22 Nov 2026, trimmed to 27 s, encoded
+ * at 1.25×). Shown on a sample client, "Acme Manufacturing" (owner's decision,
+ * 22 Nov 2026: published unblurred, labeled demo data).
+ */
+export const piqVideo = {
+  src: "/media/pipelineiq-demo.mp4",
+  poster: "/media/pipelineiq-demo-poster.jpg",
+  tag: "Demo data · sample client",
+  label: "A walkthrough of the PipelineIQ portal on a sample client: overview, alerts, error history, process queue, sources and the roadmap",
+  caption: "The PipelineIQ portal on a sample client, Acme Manufacturing: health, incidents, failures by stage, alerts and the roadmap.",
+  aspect: "1440/798",
+};
+
 /** Proposed positioning line (brief §3.4 copy bank). */
 export const piqLine = "Know every morning whether your data is safe to use.";
 
