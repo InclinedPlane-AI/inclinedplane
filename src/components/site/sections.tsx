@@ -11,10 +11,8 @@ import { caseStudyMeta, type CaseStudyMeta } from "@/content/caseStudyMeta";
 import { caseStudies } from "@/data/caseStudies";
 import { capabilityById, type Capability, type FaqItem, type StepId } from "@/content/capabilities";
 import { flags } from "@/content/flags";
-import { visible, canShow, SHOW_UNVERIFIED } from "@/content/verify";
-import { clients } from "@/content/clients";
+import { visible, SHOW_UNVERIFIED } from "@/content/verify";
 import { useBooking } from "./booking/BookingProvider";
-import { ClientLogos } from "./social";
 import { ArrowIcon, Button, Label, SectionIntro, StepTag, Verified, VerifyBadge, buttonClass } from "./primitives";
 import { cn } from "@/lib/utils";
 
@@ -176,7 +174,7 @@ export function FinalCta({ source, title = site.cta.finalTitle, body = site.cta.
 export function ProofStrip() {
   const stats = visible(proofStats);
   const partners = visible(certifiedPlatforms);
-  if (!stats.length && !partners.length && !clients.some(canShow)) return null;
+  if (!stats.length && !partners.length) return null;
   return (
     <section aria-label="At a glance" className="bg-white border-b border-ip-rule">
       {stats.length > 0 && (
@@ -210,7 +208,6 @@ export function ProofStrip() {
           {partners.some((p) => !p.verified) && <VerifyBadge />}
         </div>
       )}
-      <ClientLogos compact className="ip-container pb-10" />
     </section>
   );
 }

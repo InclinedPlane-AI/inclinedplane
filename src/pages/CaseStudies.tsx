@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { capabilityById, type StepId } from "@/content/capabilities";
 import { SHOW_UNVERIFIED } from "@/content/verify";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { ClientsSection, Testimonials } from "@/components/site/social";
+import { TrustedBy, Testimonials } from "@/components/site/social";
 import { Label, SectionIntro, StepTag } from "@/components/site/primitives";
 import {
   CtaBand,
@@ -334,7 +334,7 @@ const CaseStudies = () => {
         </div>
       </section>
 
-      <ClientsSection />
+      <TrustedBy />
       <Testimonials tone="grey" />
       <CtaBand source="mid-case-studies" />
       <FinalCta source="final-case-studies" />

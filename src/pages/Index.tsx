@@ -12,7 +12,7 @@ import { industries } from "@/content/industries";
 import { flags } from "@/content/flags";
 import { SHOW_UNVERIFIED } from "@/content/verify";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { Testimonials } from "@/components/site/social";
+import { TrustedBy, Testimonials } from "@/components/site/social";
 import { InclineHome } from "@/components/site/Incline";
 import { Label, SectionIntro, Verified, VerifyBadge, buttonClass } from "@/components/site/primitives";
 import {
@@ -71,6 +71,8 @@ const Index = () => {
       </section>
 
       <ProofStrip />
+
+      <TrustedBy />
 
       {/* How we build: the incline */}
       <section id="approach" className="bg-ip-grey">

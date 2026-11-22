@@ -11,63 +11,88 @@ import { Label, SectionIntro, VerifyBadge } from "./primitives";
 import { cn } from "@/lib/utils";
 
 /**
- * Logo wall. Logos are shown as uniform black marks (brand restraint, no
- * rainbow of client colors) in a ruled grid, like the founder's industries
- * list. `compact` drops the heading for use inside the proof strip.
+ * Logo wall. Logos render as uniform marks (no rainbow of client colors) in a
+ * ruled grid. On the black "Trusted by" band they are white.
  */
-export function ClientLogos({ compact = false, className }: { compact?: boolean; className?: string }) {
+export function ClientLogos({ onDark = false, className }: { onDark?: boolean; className?: string }) {
   const shown = clients.filter((c) => canShow(c) && (c.logo || SHOW_UNVERIFIED));
   if (!shown.length) return null;
-  const anyUnverified = shown.some((c) => !c.verified);
-
   return (
-    <div className={className}>
-      <div className={cn("flex flex-wrap items-center justify-between gap-x-6 gap-y-2", compact ? "mb-4" : "mb-6")}>
-        <Label small={compact}>Trusted by</Label>
-        {anyUnverified && (
-          <span className="flex flex-wrap items-center gap-2 text-[13px] text-ip-muted">
-            <VerifyBadge /> Confirm each client’s permission before launch
-          </span>
-        )}
-      </div>
-      <ul
-        aria-label="Clients"
-        className="m-0 grid list-none grid-cols-2 border-l border-t border-ip-rule p-0 min-[480px]:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
-      >
-        {shown.map((c) => (
-          <li
-            key={c.name}
-            className="group flex h-[92px] items-center justify-center border-b border-r border-ip-rule px-4 sm:h-[104px] sm:px-5"
-          >
-            {c.logo ? (
-              <img
-                src={c.logo}
-                alt={c.name}
-                loading="lazy"
-                decoding="async"
-                className="block h-[var(--h-sm)] w-auto max-w-full object-contain opacity-[0.72] brightness-0 transition-opacity duration-200 group-hover:opacity-100 sm:h-[var(--h)]"
-                style={{ "--h": `${c.height}px`, "--h-sm": `${Math.round(c.height * 0.8)}px` } as React.CSSProperties}
-              />
-            ) : (
-              <span className="flex flex-col items-center gap-1 text-center">
-                <span className="text-[14px] font-semibold leading-[1.2] text-ip-body">{c.name}</span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.06em] text-[#b42318]">Logo file needed</span>
+    <ul
+      aria-label="Clients"
+      className={cn(
+        "m-0 grid list-none grid-cols-2 border-l border-t p-0 min-[480px]:grid-cols-3 md:grid-cols-4 lg:grid-cols-6",
+        onDark ? "border-white/15" : "border-ip-rule",
+        className,
+      )}
+    >
+      {shown.map((c) => (
+        <li
+          key={c.name}
+          className={cn(
+            "group flex h-[96px] items-center justify-center border-b border-r px-4 sm:h-[112px] sm:px-5",
+            onDark ? "border-white/15" : "border-ip-rule",
+          )}
+        >
+          {c.logo ? (
+            <img
+              src={c.logo}
+              alt={c.name}
+              loading="lazy"
+              decoding="async"
+              className={cn(
+                "block h-[var(--h-sm)] w-auto max-w-full object-contain transition-opacity duration-200 group-hover:opacity-100 sm:h-[var(--h)]",
+                onDark ? "opacity-80 brightness-0 invert" : "opacity-[0.72] brightness-0",
+              )}
+              style={{ "--h": `${c.height}px`, "--h-sm": `${Math.round(c.height * 0.8)}px` } as React.CSSProperties}
+            />
+          ) : (
+            <span className="flex flex-col items-center gap-1 text-center">
+              <span className={cn("text-[14px] font-semibold leading-[1.2]", onDark ? "text-white/85" : "text-ip-body")}>{c.name}</span>
+              <span className={cn("font-mono text-[10px] uppercase tracking-[0.06em]", onDark ? "text-ip-orange" : "text-[#b42318]")}>
+                Logo file needed
               </span>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
   );
 }
 
-/** Full-width section wrapper for pages other than the homepage proof strip. */
-export function ClientsSection({ tone = "white" }: { tone?: "white" | "grey" }) {
-  if (!clients.some((c) => canShow(c))) return null;
+/**
+ * The "Trusted by" band: its own black section (a deliberate dark moment),
+ * placed right after the homepage proof strip and on /case-studies.
+ * Renders nothing in production until at least one logo is verified.
+ */
+export function TrustedBy() {
+  const shown = clients.filter((c) => canShow(c) && (c.logo || SHOW_UNVERIFIED));
+  if (!shown.length) return null;
+  const anyUnverified = shown.some((c) => !c.verified);
   return (
-    <section aria-label="Clients" className={cn(tone === "grey" ? "bg-ip-grey" : "bg-white", "border-t border-ip-rule")}>
-      <div className="ip-container py-[clamp(48px,6vw,80px)]">
-        <ClientLogos />
+    <section aria-label="Trusted by" className="bg-black text-white">
+      <div className="ip-container py-[clamp(56px,7vw,96px)]">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-x-12 gap-y-5">
+          <div className="max-w-[720px]">
+            <Label dot onDark className="mb-4">
+              Trusted by
+            </Label>
+            <h2 className="m-0 text-[clamp(28px,3.4vw,42px)] font-semibold leading-[1.1] tracking-[-0.02em]">
+              Companies we’ve engineered data foundations for.
+            </h2>
+          </div>
+          <div className="flex max-w-[360px] flex-col gap-3">
+            <p className="m-0 text-[16px] leading-[1.55] text-ip-on-dark">
+              Across manufacturing, consumer goods, retail, hospitality and education.
+            </p>
+            {anyUnverified && (
+              <span className="flex flex-wrap items-center gap-2 text-[13px] text-ip-on-dark">
+                <VerifyBadge /> Confirm each client’s permission before launch
+              </span>
+            )}
+          </div>
+        </div>
+        <ClientLogos onDark />
       </div>
     </section>
   );
