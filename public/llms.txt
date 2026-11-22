@@ -4,6 +4,10 @@
 
 Only facts that appear on the website belong here. Unverified figures are deliberately left out.
 
+## Context engineering
+
+- [Context engineering, explained](https://inclinedplane.com/context-engineering): context engineering is making business meaning explicit and machine-readable (definitions, relationships, rules, permissions and freshness) for people and AI agents. Covers data modelling, ontology and when you need one, and the layers that fix wrong answers.
+
 ## What we do: four capabilities on one path
 
 A recommended order, not a strict sequence. Most organizations work on several at once.
@@ -14,11 +18,11 @@ A recommended order, not a strict sequence. Most organizations work on several a
 - [Agentic Analytics and BI](https://inclinedplane.com/capabilities/agentic-analytics) (Activate): conversational analytics agents and agentic BI on governed semantic models; answers show their definition, source and freshness.
 - [All capabilities](https://inclinedplane.com/capabilities)
 
-## Products (accelerators, not a platform pitch)
+## Solutions (accelerators, not a platform pitch)
 
 - [IncLever](https://inclinedplane.com/products/inclever): our data readiness product. Audits, remediates and monitors datasets, semantic layers and metrics so AI agents and BI tools can rely on them. We deliver the work with or without it.
 - [PipelineIQ](https://inclinedplane.com/products/pipelineiq): read-only pipeline monitoring, alerting and ETL debugging that groups failures into root causes.
-- [Products overview](https://inclinedplane.com/products)
+- [Solutions overview, with demos](https://inclinedplane.com/products)
 
 ## Start here
 
@@ -26,10 +30,12 @@ A recommended order, not a strict sequence. Most organizations work on several a
 
 ## Learn (definitions and explainers)
 
-- [What is context engineering](https://inclinedplane.com/learn/what-is-context-engineering)
+- [Why AI agents give wrong answers on enterprise data](https://inclinedplane.com/learn/why-ai-agents-give-wrong-answers)
 - [Ontology vs semantic layer vs knowledge graph](https://inclinedplane.com/learn/ontology-vs-semantic-layer-vs-knowledge-graph)
 - [What AI readiness actually means](https://inclinedplane.com/learn/what-ai-readiness-means)
 - [Glossary](https://inclinedplane.com/learn)
+- [AI data readiness checklist](https://inclinedplane.com/readiness-checklist): sixteen checks across quality, context, access and governance.
+- [Insights](https://inclinedplane.com/insights): industry figures on AI data readiness and agent adoption, each linked to its source.
 
 ## Case studies (anonymized)
 
@@ -47,7 +53,8 @@ A recommended order, not a strict sequence. Most organizations work on several a
 
 - [About](https://inclinedplane.com/about): story, the meaning of the name, principles ("Engineers, not consultants." "Methodology over heroics."), leadership. Founder and CEO: Keerthana Vayyasi.
 - [Our thesis](https://inclinedplane.com/thesis)
-- [Insights](https://inclinedplane.com/blog): articles by the team.
+- [Blog](https://inclinedplane.com/blog): articles by the team.
+- [Resources](https://inclinedplane.com/resources): everything above in one place.
 - [Careers](https://inclinedplane.com/careers)
 - [Contact](https://inclinedplane.com/contact): support@inclinedplane.com
 

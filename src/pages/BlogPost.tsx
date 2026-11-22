@@ -1,7 +1,7 @@
 /**
  * /blog/:slug — article template (brief §7.12): byline, date, reading time,
  * table of contents for long pieces, related articles, soft CTA.
- * Section is labeled "Insights" in the UI; URLs unchanged.
+ * Section is labeled "Blog" in the UI; URLs unchanged.
  * Crawler metadata (BlogPosting JSON-LD) comes from scripts/seo-config.mjs.
  */
 import { useMemo } from "react";
@@ -45,7 +45,7 @@ const BlogPostPage = () => {
       <article>
         <header className="border-b border-ip-rule bg-white">
           <div className="ip-container pt-[clamp(36px,5vw,64px)] pb-10">
-            <Breadcrumbs items={[{ label: "Insights", to: "/blog" }, { label: post.title }]} />
+            <Breadcrumbs items={[{ label: "Blog", to: "/blog" }, { label: post.title }]} />
             <div className="max-w-[880px]">
               <div className="mb-6 flex flex-wrap gap-2">
                 {post.tags.map((t) => (
@@ -156,10 +156,10 @@ const BlogPostPage = () => {
           <div className="ip-container ip-section">
             <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
               <h2 id="related-title" className="ip-h2 m-0">
-                Related insights
+                Related articles
               </h2>
               <Link to="/blog" className="ip-link text-[15px]">
-                All insights
+                All articles
               </Link>
             </div>
             <ul className="m-0 grid list-none grid-cols-1 border-t-2 border-black p-0 md:grid-cols-3">

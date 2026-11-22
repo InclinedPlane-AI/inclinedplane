@@ -109,20 +109,50 @@ export interface NavItem {
   to: string;
 }
 
-/** Founder's primary navigation (brief §5.2). */
-export const mainNav: NavItem[] = [
-  { label: "Context Engineering", to: "/capabilities/context-engineering" },
-  { label: "AI Readiness", to: "/capabilities/ai-agent-readiness" },
-  { label: "Capabilities", to: "/capabilities" },
-  { label: "IncLever", to: "/products/inclever" },
-  { label: "Case studies", to: "/case-studies" },
+export interface NavLinkItem extends NavItem {
+  /** One line shown in dropdowns and on hub pages. */
+  description: string;
+}
+
+export type MenuId = "capabilities" | "solutions" | "resources";
+
+export interface MainNavItem extends NavItem {
+  /** Opens a dropdown on hover/focus; the label itself still links to `to`. */
+  menu?: MenuId;
+}
+
+/**
+ * Primary navigation (restructured 2026-11-22 by Mohan's team, replacing the
+ * founder's draft in brief §5.2: "Context Engineering", "AI Readiness" and
+ * "Capabilities" all led to the same four pillar pages). Dropdown contents:
+ * capabilities from src/content/capabilities.ts, solutions from
+ * src/data/products.ts, resources from `resourcesNav` below.
+ */
+export const mainNav: MainNavItem[] = [
+  { label: "Context Engineering", to: "/context-engineering" },
+  { label: "Capabilities", to: "/capabilities", menu: "capabilities" },
+  { label: "Solutions", to: "/products", menu: "solutions" },
+  { label: "Resources", to: "/resources", menu: "resources" },
   { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
+];
+
+/** Everything under "Resources": the dropdown, the /resources hub and the footer. */
+export const resourcesNav: NavLinkItem[] = [
+  { label: "Case studies", to: "/case-studies", description: "Delivered projects, anonymized, with measured results." },
+  { label: "Industries", to: "/industries", description: "Where enterprise data is hardest, and what we do there." },
+  { label: "Learn", to: "/learn", description: "Interactive explainers on context, ontology and AI readiness." },
+  { label: "Insights", to: "/insights", description: "The numbers and shifts behind AI-ready data, with sources." },
+  { label: "Blog", to: "/blog", description: "Articles from our engineers on platforms, pipelines and context." },
+  { label: "Our thesis", to: "/thesis", description: "Why data is infrastructure and intelligence is product." },
+  { label: "Readiness checklist", to: "/readiness-checklist", description: "Sixteen checks to run before an agent touches your data." },
 ];
 
 export const footerNav: { title: string; links: NavItem[] }[] = [
   {
     title: "Capabilities",
     links: [
+      { label: "Context engineering, explained", to: "/context-engineering" },
       { label: "Data Engineering and Governance", to: "/capabilities/data-engineering-governance" },
       { label: "Enterprise Context Engineering", to: "/capabilities/context-engineering" },
       { label: "AI and Agent Readiness", to: "/capabilities/ai-agent-readiness" },
@@ -130,8 +160,9 @@ export const footerNav: { title: string; links: NavItem[] }[] = [
     ],
   },
   {
-    title: "Products",
+    title: "Solutions",
     links: [
+      { label: "All solutions", to: "/products" },
       { label: "IncLever", to: "/products/inclever" },
       { label: "PipelineIQ", to: "/products/pipelineiq" },
       { label: "AI Data Readiness Assessment", to: "/assessment" },
@@ -139,13 +170,7 @@ export const footerNav: { title: string; links: NavItem[] }[] = [
   },
   {
     title: "Resources",
-    links: [
-      { label: "Case studies", to: "/case-studies" },
-      { label: "Industries", to: "/industries" },
-      { label: "Learn", to: "/learn" },
-      { label: "Insights", to: "/blog" },
-      { label: "Our thesis", to: "/thesis" },
-    ],
+    links: resourcesNav.map(({ label, to }) => ({ label, to })),
   },
   {
     title: "Company",

@@ -41,7 +41,7 @@ const ProductPipelineIQ = () => (
     }}
   >
     <PageHero
-      crumbs={[{ label: "Products", to: "/products" }, { label: "PipelineIQ" }]}
+      crumbs={[{ label: "Solutions", to: "/products" }, { label: "PipelineIQ" }]}
       label="Pipeline reliability · MVP"
       title="PipelineIQ"
       lead={`${piqLine} ${piq.brief}`}
@@ -64,8 +64,8 @@ const ProductPipelineIQ = () => (
       </Link>
     </PageHero>
 
-    {/* The problem + incident view */}
-    <section className="bg-ip-grey">
+    {/* The problem + incident view (#demo: linked from the Solutions menu) */}
+    <section id="demo" className="bg-ip-grey scroll-mt-24">
       <div className="ip-container ip-section">
         <SectionIntro label="The problem" title="When a night fails, the evidence is scattered." titleClass="text-[clamp(28px,3.2vw,40px)] leading-[1.12] font-semibold tracking-[-0.02em]">
           <p className="m-0">

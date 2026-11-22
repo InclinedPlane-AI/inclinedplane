@@ -2,10 +2,16 @@
  * Sticky header (founder design): stacked logo, primary nav, "Book an
  * assessment". Height stays constant on scroll (no layout shift); it gains a
  * hairline shadow instead. Below 1024px the nav collapses into a menu panel.
+ *
+ * Capabilities, Solutions and Resources open a full-width panel on hover or
+ * focus (contents in NavMenus.tsx); the label itself still links to the hub
+ * page. The chevron button opens the panel for keyboard and touch users;
+ * Escape closes it. In the mobile menu each one is an accordion.
  */
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { mainNav, site } from "@/content/site";
+import { mainNav, site, type MainNavItem, type MenuId } from "@/content/site";
+import { MenuPanel, menuLinks } from "./NavMenus";
 import { useBooking } from "./booking/BookingProvider";
 import { buttonClass } from "./primitives";
 import { cn } from "@/lib/utils";
@@ -15,6 +21,41 @@ export function SiteHeader() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [panel, setPanel] = useState<MenuId | null>(null);
+  const [mobileOpen, setMobileOpen] = useState<MenuId | null>(null);
+  const closeTimer = useRef<number>();
+  const navRef = useRef<HTMLDivElement>(null);
+
+  const openPanel = useCallback((id: MenuId) => {
+    window.clearTimeout(closeTimer.current);
+    setPanel(id);
+  }, []);
+  const closePanelSoon = useCallback(() => {
+    window.clearTimeout(closeTimer.current);
+    closeTimer.current = window.setTimeout(() => setPanel(null), 140);
+  }, []);
+  const closePanel = useCallback(() => {
+    window.clearTimeout(closeTimer.current);
+    setPanel(null);
+  }, []);
+
+  useEffect(() => {
+    if (!panel) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      const trigger = navRef.current?.querySelector<HTMLButtonElement>(`[data-menu-trigger="${panel}"]`);
+      closePanel();
+      trigger?.focus();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [panel, closePanel]);
+
+  const isActive = (item: MainNavItem) => {
+    const p = location.pathname;
+    if (p === item.to || p.startsWith(`${item.to}/`)) return true;
+    return item.menu ? menuLinks(item.menu).some((l) => p === l.to || p.startsWith(`${l.to}/`)) : false;
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -23,7 +64,11 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setMenuOpen(false), [location.pathname]);
+  useEffect(() => {
+    setMenuOpen(false);
+    setPanel(null);
+    setMobileOpen(null);
+  }, [location.pathname]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -51,26 +96,68 @@ export function SiteHeader() {
           <img src="/brand/logo-primary.png" alt={site.name} width={115} height={34} className="block h-[30px] w-auto lg:h-[34px]" />
         </Link>
 
-        <nav aria-label="Main" className="hidden lg:flex items-center gap-6 text-[15px]">
-          {mainNav.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.to === "/capabilities"}
-              className={({ isActive }) =>
-                cn(
-                  "no-underline transition-colors duration-150 hover:text-black underline-offset-[6px] decoration-ip-orange decoration-2",
-                  isActive ? "text-black underline" : "text-ip-body",
-                )
+        <div
+          ref={navRef}
+          className="hidden lg:flex items-center gap-[clamp(14px,1.6vw,26px)]"
+          onMouseLeave={closePanelSoon}
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node | null)) closePanel();
+          }}
+        >
+          <nav aria-label="Main" className="flex items-center gap-[clamp(14px,1.6vw,26px)] text-[15px]">
+            {mainNav.map((item) => {
+              const active = isActive(item);
+              const linkCls = cn(
+                "no-underline whitespace-nowrap transition-colors duration-150 hover:text-black underline-offset-[6px] decoration-ip-orange decoration-2",
+                active ? "text-black underline" : "text-ip-body",
+              );
+              if (!item.menu) {
+                return (
+                  <NavLink key={item.to} to={item.to} className={linkCls} onMouseEnter={closePanelSoon}>
+                    {item.label}
+                  </NavLink>
+                );
               }
-            >
-              {item.label}
-            </NavLink>
-          ))}
-          <button type="button" onClick={() => open({ source: "header" })} className={buttonClass("primary", "md")} data-cta="header">
+              const id = item.menu;
+              const expanded = panel === id;
+              return (
+                <div key={item.to} className="flex items-center" onMouseEnter={() => openPanel(id)}>
+                  <Link to={item.to} className={cn(linkCls, expanded && "text-black")}>
+                    {item.label}
+                  </Link>
+                  <button
+                    type="button"
+                    data-menu-trigger={id}
+                    aria-expanded={expanded}
+                    aria-controls={`menu-${id}`}
+                    onClick={() => (expanded ? closePanel() : openPanel(id))}
+                    className="-mr-1 ml-0.5 flex h-8 w-6 items-center justify-center rounded text-ip-muted hover:text-black"
+                  >
+                    <span className="sr-only">{expanded ? `Close ${item.label} menu` : `Open ${item.label} menu`}</span>
+                    <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" className={cn("transition-transform duration-200", expanded && "rotate-180")}>
+                      <path d="M2.5 4.5L6 8l3.5-3.5" />
+                    </svg>
+                  </button>
+                </div>
+              );
+            })}
+          </nav>
+          <button type="button" onClick={() => open({ source: "header" })} className={buttonClass("primary", "md", "px-4 xl:px-5")} data-cta="header">
             {site.cta.header}
           </button>
-        </nav>
+
+          {panel && (
+            <div
+              id={`menu-${panel}`}
+              onMouseEnter={() => openPanel(panel)}
+              className="absolute inset-x-0 top-full border-b border-ip-rule bg-white shadow-[0_24px_40px_-28px_rgba(0,0,0,0.35)]"
+            >
+              <div className="ip-container py-8">
+                <MenuPanel id={panel} onNavigate={closePanel} />
+              </div>
+            </div>
+          )}
+        </div>
 
         <div className="flex lg:hidden items-center gap-2">
           <button type="button" onClick={() => open({ source: "header-mobile" })} className={buttonClass("primary", "md", "min-h-[40px] px-3.5 py-2 text-[14px]")} data-cta="header-mobile">
@@ -106,23 +193,51 @@ export function SiteHeader() {
       {menuOpen && (
         <div id="site-menu" className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 z-50 overflow-y-auto overscroll-contain bg-white border-t border-ip-rule">
           <nav aria-label="Main" className="ip-container flex flex-col py-4">
-            {mainNav.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                className={({ isActive }) =>
-                  cn("border-b border-ip-rule py-4 text-[20px] font-medium no-underline", isActive ? "text-black" : "text-ip-body")
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
-            <NavLink to="/industries" className="border-b border-ip-rule py-4 text-[20px] font-medium text-ip-body no-underline">
-              Industries
-            </NavLink>
-            <NavLink to="/contact" className="border-b border-ip-rule py-4 text-[20px] font-medium text-ip-body no-underline">
-              Contact
-            </NavLink>
+            {mainNav.map((item) => {
+              const rowCls = cn("py-4 text-[20px] font-medium no-underline", isActive(item) ? "text-black" : "text-ip-body");
+              if (!item.menu) {
+                return (
+                  <NavLink key={item.to} to={item.to} className={cn("border-b border-ip-rule", rowCls)}>
+                    {item.label}
+                  </NavLink>
+                );
+              }
+              const id = item.menu;
+              const expanded = mobileOpen === id;
+              return (
+                <div key={item.to} className="border-b border-ip-rule">
+                  <div className="flex items-center justify-between">
+                    <Link to={item.to} className={cn(rowCls, "grow")}>
+                      {item.label}
+                    </Link>
+                    <button
+                      type="button"
+                      aria-expanded={expanded}
+                      aria-controls={`m-menu-${id}`}
+                      onClick={() => setMobileOpen(expanded ? null : id)}
+                      className="flex h-11 w-11 items-center justify-center rounded-md text-ip-body hover:bg-ip-grey"
+                    >
+                      <span className="sr-only">{expanded ? `Hide ${item.label} links` : `Show ${item.label} links`}</span>
+                      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" className={cn("transition-transform duration-200", expanded && "rotate-180")}>
+                        <path d="M2.5 4.5L6 8l3.5-3.5" />
+                      </svg>
+                    </button>
+                  </div>
+                  {expanded && (
+                    <ul id={`m-menu-${id}`} className="m-0 mb-3 list-none border-l-2 border-ip-orange p-0 pl-4">
+                      {menuLinks(id).map((l) => (
+                        <li key={l.to}>
+                          <Link to={l.to} className="flex flex-col gap-0.5 py-2.5 no-underline">
+                            <span className="text-[16px] font-medium text-black">{l.label}</span>
+                            <span className="text-[14px] leading-[1.4] text-ip-muted">{l.description}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              );
+            })}
             <button
               type="button"
               onClick={() => {

@@ -20,22 +20,27 @@ checklist live in `docs/revamp/PROGRESS.md`.
 | `/capabilities/ai-agent-readiness` | (none) | Enable | Expanded capability, IncLever block |
 | `/capabilities/agentic-analytics` | (none) | Activate | Payoff on top |
 | `/services` | Six "layer" service page | **301 → `/capabilities`** | Layer names retired by founder; one concept, one URL |
-| `/products` | Product hub | Kept, restyled | Existing URL; hub for both products |
+| `/context-engineering` | (none) | **New (2026-11-22):** the general explainer, first item in the main nav | What it is, data modelling, ontology, the layers, interactive demos; ends on Solutions. The Contextualize pillar now covers delivery only, so the two don't compete in search |
+| `/products` | Product hub | Kept URL, labeled **"Solutions"** (2026-11-22): both products briefed on top, then each demo in full | Protect the ranking URL; the nav label matches what buyers look for |
 | `/products/inclever` | IncLever page | Kept, restructured to brief 7.4 | Existing URL ranks; `/inclever` 301s here |
 | `/inclever` | (none) | **301 → `/products/inclever`** | Short URL for nav/outbound |
 | `/products/pipelineiq` | PipelineIQ page | Kept, restyled; not in main nav | Brief: PipelineIQ is proposed, stays off main nav |
 | `/assessment` | (none) | New: the assessment page with both booking paths | Primary conversion page; every CTA can deep-link |
 | `/case-studies`, `/:slug` | 14 cases, dark heroes | Kept URLs, new index + template | Protect URLs; restructure to Opportunity/Solution/Impact |
 | `/industries` | Route disabled | Re-enabled: 5 ICP industries, manufacturing first | Brief 7.8; financial services removed |
-| `/learn`, `/learn/:slug` | (none) | New explainers (3 to start) | AI-assistant citation + search (brief 6.3) |
-| `/blog`, `/blog/:slug` | Blog | Kept URLs, labeled "Insights" in UI | Protect URLs; brief's "insights" naming in nav only |
+| `/learn`, `/learn/:slug` | (none) | Interactive explainers (context layers, ontology explorer, readiness simulator) + glossary | AI-assistant citation + search (brief 6.3) |
+| `/learn/what-is-context-engineering` | (new in revamp) | **301 → `/context-engineering`** | Merged into the explainer page |
+| `/insights` | (none) | **New:** industry figures by theme, each linked to its source; what leaders do about it | Brief §2.1 allows sourced industry figures on explainer pages (never home) |
+| `/resources` | (none) | **New:** hub for the Resources menu | The menu label always lands on a real page |
+| `/readiness-checklist` | (dialog only) | **New:** all 16 checks with a live score, plus the PDF download | Indexable lead magnet; the dialog still works |
+| `/blog`, `/blog/:slug` | Blog | Kept URLs, labeled **"Blog"** (was "Insights" until 2026-11-22; Insights is now `/insights`) | Protect URLs |
 | `/thesis` | Long manifesto | Kept, restyled | Rationale: reuse its strongest lines |
 | `/about`, `/contact`, `/careers`, `/referral` | | Kept, restyled | Contact + referral forms preserved |
 | `/privacy`, `/terms`, `/cookies` | | Kept, restyled, noindex | |
 | `/platforms`, `/security`, `/trust-layer` | (none) | **Not built yet** | Platforms content lives in the tools section of home + capability pages for now. Security/trust-layer are proposed pages awaiting founder sign-off |
 
-Main nav (founder's): Context Engineering · AI Readiness · Capabilities · IncLever · Case studies · About · **Book an assessment**.
-Footer carries Industries, Insights, Learn, Products, Careers, Contact, legal.
+Main nav (restructured by Mohan's team, 2026-11-22): **Context Engineering · Capabilities ▾ · Solutions ▾ · Resources ▾ · About · Contact · Book an assessment**.
+Footer: Capabilities (incl. the explainer), Solutions, Resources, Company, legal. See §3 "Navigation".
 
 ## 2. Design system (extracted from the founder's homepage)
 
@@ -86,6 +91,16 @@ transitions; `prefers-reduced-motion` respected.
 - Logos scroll edge to edge in an infinite loop (owner's request, 2026-11-22). This is a deliberate second motion moment beside the incline; it stays calm (~3.6s per logo), pauses on hover/focus, uses only transform, and becomes a static wrapped row for reduced-motion users. Logos are uniform white marks; the duplicate loop copy is hidden from screen readers.
 - All logos `verified: false` until each client's permission is on file; the band renders nothing in production until then.
 
+### Navigation and page flow (2026-11-22, Mohan's team)
+- **Problem:** "Context Engineering", "AI Readiness" and "Capabilities" all led to the same four pillar pages; IncLever sat alone in the nav; case studies, learn and insights were scattered.
+- **Nav:** Context Engineering (the concept) · Capabilities ▾ (four pillars + Learn) · Solutions ▾ (IncLever, PipelineIQ: brief, "How it works", "See the demo") · Resources ▾ (Case studies, Industries, Learn, Insights, Blog, Thesis, Readiness checklist) · About · Contact, plus the Book button. Dropdowns are full-width panels on hover/focus; the label still links to its hub page; a chevron button opens it for keyboard/touch, Escape closes. Phones get an accordion. Contents: `src/components/site/NavMenus.tsx`.
+- **"AI Readiness" left the nav;** its page stays as the Enable pillar.
+- **Concept vs delivery:** `/context-engineering` explains the idea; `/capabilities/context-engineering` is how we deliver it. One links to the other.
+- **No dead ends:** every page ends with a `NextSteps` block (or equivalent onward links). `scripts/check-flow.mjs` runs after prerender and fails the build on a page whose content links nowhere, or an indexable page nothing links to.
+- **Journey:** Home → Context Engineering → Capabilities → a pillar → Solutions → Case studies → Book.
+- **PipelineIQ in the Solutions menu** goes against brief §7.5 ("unlinked from main nav until approved"): owner's call on 2026-11-22; Keerthana's sign-off still needed (flag `pipelineIQ`).
+- Rejected: `/solutions` URLs with 301s (loses the ranking `/products` URLs for a label change).
+
 ### Removed from the old site
 - Chat widget ("Hey!" placeholder bot), splash-style dark aesthetic, aurora/glow/orbital/three.js decoration on marketing pages, the six "layer" names, generic industry statistics, the simulated pipeline dashboard.
 
@@ -96,7 +111,7 @@ transitions; `prefers-reduced-motion` respected.
 | `agentNeutrality` | on | "Copilot, Genie, Claude or ChatGPT: we make the agent you choose work on your data." + Agent fit block on Enable |
 | `twoTierAssessment` | on | Free 45-min conversation + paid fixed-scope assessment on `/assessment` |
 | `runService` | on | "Keep it ready" run service block |
-| `pipelineIQ` | on | PipelineIQ alongside IncLever as "the trust layer" (not in main nav) |
+| `pipelineIQ` | on | PipelineIQ alongside IncLever as "the trust layer"; also in the Solutions menu since 2026-11-22 |
 | `leadVertical` | on | Manufacturing and distribution first on Industries |
 
 ## 5. Verify before launch (all wrapped as `verified: false`)

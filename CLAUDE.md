@@ -293,8 +293,13 @@ If a future Claude is asked to set this up again, it's all in
 
 > On the `revamp` branch the route map changed: `/capabilities` and
 > `/capabilities/:slug` (four pages) replace `/services` (301), plus
-> `/assessment`, `/learn`, `/learn/:slug`, and `/industries` is live again.
-> See DESIGN_NOTES.md §1. The list below describes `main`.
+> `/assessment`, `/learn`, `/learn/:slug`, `/context-engineering`,
+> `/insights`, `/resources`, `/readiness-checklist`, and `/industries` is live
+> again. `/products` is labeled "Solutions"; `/blog` is labeled "Blog". The
+> revamp nav and its dropdowns live in `src/content/site.ts` +
+> `src/components/site/NavMenus.tsx`. `npm run build` also runs
+> `scripts/check-flow.mjs` (fails on pages with no onward links, or pages
+> nothing links to). See DESIGN_NOTES.md §1 and §3. The list below describes `main`.
 
 App uses `react-router-dom` BrowserRouter with these routes (defined in
 `src/App.tsx`):

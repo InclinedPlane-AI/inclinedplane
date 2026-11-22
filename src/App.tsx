@@ -35,6 +35,10 @@ import ScrollToTop from "./components/ScrollToTop";
 import { BookingProvider } from "./components/site/booking/BookingProvider";
 import Capabilities from "./pages/Capabilities";
 import CapabilityPage from "./pages/CapabilityPage";
+import ContextEngineering from "./pages/ContextEngineering";
+import Insights from "./pages/Insights";
+import Resources from "./pages/Resources";
+import ReadinessChecklist from "./pages/ReadinessChecklist";
 
 const queryClient = new QueryClient();
 
@@ -97,6 +101,11 @@ const App = () => {
                   <Route path="/inclever" element={<Navigate to="/products/inclever" replace />} />
                   <Route path="/assessment" element={<Assessment />} />
                   <Route path="/assessment/thank-you" element={<ThankYou />} />
+                  <Route path="/context-engineering" element={<ContextEngineering />} />
+                  <Route path="/insights" element={<Insights />} />
+                  <Route path="/resources" element={<Resources />} />
+                  <Route path="/readiness-checklist" element={<ReadinessChecklist />} />
+                  <Route path="/learn/what-is-context-engineering" element={<Navigate to="/context-engineering" replace />} />
                   <Route path="/learn" element={<Learn />} />
                   <Route path="/learn/:slug" element={<LearnArticle />} />
                   <Route path="/capabilities" element={<Capabilities />} />

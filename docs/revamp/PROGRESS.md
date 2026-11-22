@@ -5,7 +5,7 @@ is finished, what is in progress, what is left, and every decision already made,
 so nobody re-does or re-litigates work. Update it in the same commit as the work
 it describes.
 
-Last updated: 2026-11-22 (end of session 2)
+Last updated: 2026-11-22 (session 3)
 
 ---
 
@@ -41,13 +41,13 @@ Last updated: 2026-11-22 (end of session 2)
 ### Blocked on a human (do these, then tick)
 
 - [x] `workflow` scope granted to the GitHub CLI.
-- [ ] **Merge PR #10** (CI fix → `main`). Production deploys have failed since 16 Nov 2026
+- [x] **Merge PR #10** (CI fix → `main`), merged. Production deploys have failed since 16 Nov 2026
       because `ubuntu-latest` moved to 26.04; PR #9's content is not live until this merges.
 - [x] PR #11 (staging workflow → `revamp`) opened; its first run passed: the existing
       `VERCEL_TOKEN` is account-scoped, the `inclinedplane-staging` project now exists in the
       production Vercel account, previews are public, `/services` 308s, `X-Robots-Tag: noindex` set.
       First preview: https://inclinedplane-staging-co8o32k3j-inclined-planes-projects.vercel.app
-- [ ] **Approve + merge PR #11** (needs a human approval; Claude may not admin-bypass reviews).
+- [x] **Approve + merge PR #11**, merged; staging is live at https://inclinedplane-staging.vercel.app.
       The push to `revamp` then deploys the stable staging URL (the staging project's
       production domain, expected `https://inclinedplane-staging.vercel.app`; confirm in the Actions summary).
 - [ ] Add the two engineers to the GitHub org with write access (start Monday 2026-11-23).
@@ -115,16 +115,29 @@ tagline "Data Leveraged. Growth Accelerated."), `incpl_primarylogo_fullcolourAW.
 
 ## 5b. Where session 2 ended (2026-11-22)
 
-- Merged into `revamp`: PRs #11 to #16. **PR #17 (logo marquee) awaits merge.**
+- Merged into `revamp`: PRs #11 to #17.
 - Staging: https://inclinedplane-staging.vercel.app (auto-deploys on merge to `revamp`).
 - Production (`main`) is still the old design; it changes once, at launch (see the RULE in CLAUDE.md).
 - Next up, from the team's pending list:
   1. Case studies: recent clients + the enterprise data unification case study.
   2. PipelineIQ demo video (MP4 + poster, same `DemoFrame` treatment as IncLever) and page refresh.
   3. Navbar and page-flow restructure.
-  4. Logo files for Examly, GDi Partners, VSM Technologies, Noble Bioresources; client permissions; real testimonials.
+  4. ~~Logo files~~ (session 3: added GDi, VSM Software, Noble, Arenco, Examly). Still: client permissions; real testimonials.
   5. Keerthana's sign-offs (headshot, CEO note, checklist PDF, proposed blocks) and the claims in section 6b.
   6. Testing (real test booking, all forms), Lighthouse, protect `main`, add the two engineers.
+
+## 5c. Session 3: navigation and page flow (2026-11-22)
+
+Owner's brief: the nav items overlapped; make Solutions a dropdown, give context engineering its own page, put Learn inside Capabilities, add a Resources menu and an Insights evidence page, and make sure no page is a dead end. One PR.
+
+- **Nav:** Context Engineering · Capabilities ▾ · Solutions ▾ · Resources ▾ · About · Contact + Book. Details and rationale: DESIGN_NOTES §3 "Navigation and page flow".
+- **New pages:** `/context-engineering`, `/insights`, `/resources`, `/readiness-checklist`. `/learn/what-is-context-engineering` 301s to `/context-engineering`.
+- **Changed:** `/products` is labeled Solutions (both products on top, both demos); `/capabilities` has clickable pillar cards + a Learn section; the Contextualize pillar links to the explainer instead of repeating it; `/learn` opens with the interactive context-layers diagram; `/blog` is labeled Blog.
+- **Interactive pieces** (all sample data, all content in the HTML): context layers (`learn/ContextLayers.tsx`), ontology explorer (`learn/OntologyExplorer.tsx`), readiness check simulator (`learn/ReadinessSim.tsx`), live-scored checklist. Articles can embed them with a `widget` block in `learn.ts`.
+- **New explainer:** "Why AI agents give wrong answers on enterprise data" (brief §6.3 #4).
+- **Flow check:** `scripts/check-flow.mjs` runs at the end of `npm run build` and fails on dead ends or orphans. Build now ends "50 ok … 0 failed" then "[flow] 50 pages checked: 0 dead end(s), 0 orphan(s)".
+- **Decisions taken by default** (owner didn't answer; change if wanted): kept `/products` URLs under the "Solutions" label; Industries added to Resources.
+- **Needs sign-off:** PipelineIQ in the Solutions menu (brief §7.5 said off main nav until approved); every Insights figure (29, `verified: false`) needs a person to open its link; Gartner/McKinsey/Snowflake originals blocked automated checks, so they link to the reporting page plus the original.
 
 ## 5d. Session 3: featured case studies (2026-11-22)
 
@@ -167,6 +180,7 @@ Legend: [x] done · [~] in progress · [ ] not started
 - [x] /learn + 3 explainers + glossary
 - [x] /blog (Insights) + posts, /thesis
 - [x] /contact, /careers, /referral, legal pages, 404
+- [x] Session 3: /context-engineering, /insights, /resources, /readiness-checklist; Solutions hub; nav dropdowns; NextSteps on every page
 - [x] Legacy components, pages, media and unused packages removed (bundle ~1.5 MB → ~1.0 MB)
 
 ### Phase 3: SEO / AI indexing
@@ -174,10 +188,11 @@ Legend: [x] done · [~] in progress · [ ] not started
 - [x] Redirects in `vercel.json` (/services → /capabilities, /inclever → /products/inclever) + client-side `<Navigate>`
 - [x] `llms.txt`, manifest, icons, new 1200×630 `og-image.png`
 - [ ] Per-page OG images (currently one shared image)
+- [x] SEO entries for the four new routes (Article + FAQPage on /context-engineering; Article with verified citations on /insights; CollectionPage on /resources); llms.txt updated
 - [ ] Switch production `deploy.yml` packaging to `node scripts/vercel-output.mjs` **at launch** (else redirects won't apply in prod)
 
 ### Phase 4: QA
-- [x] `VITE_SITE_ENV=staging npm run build`: **45 ok, 0 warn, 0 failed**; all routes have `<noscript>`; sitemap 42 URLs; RSS 7
+- [x] `VITE_SITE_ENV=staging npm run build`: **46 ok, 0 warn, 0 failed**; all routes have `<noscript>`; sitemap 42 URLs; RSS 7
 - [x] Production-mode check: no verify badges, unverified stats hidden, one h1 per page, no runtime errors
 - [ ] Forms tested end to end on staging (assessment form, contact, demo request, referral)
 - [ ] Full anti-slop pass by a human reviewer on staging
@@ -198,7 +213,9 @@ Legend: [x] done · [~] in progress · [ ] not started
 - PipelineIQ status line, "368 raw alerts" metric, first-deployment findings: confirm OK to publish.
 - Careers: "Remote-first" wording vs the Bengaluru delivery base; careers email; hiring timing.
 - Proposed blocks in `src/content/flags.ts` need founder sign-off (all on for staging).
-- **Client logos** (`src/content/clients.ts`, files in `public/clients/`): 8 fetched from the companies' own sites (Revlon, Rotimatic, Duroflex, Cocoblu, Kanoria/KCIL, Tarasafe, Masoom, Golden Sands). Logo files still needed for Examly, GDi Partners, VSM Technologies, Noble Bioresources (official sites couldn't be identified/reached). All `verified: false` until each client's written permission is on file.
+- **Insights figures** (`src/content/insights.ts`): 29 sourced figures, all `verified: false`. Open each `url` (and `primaryUrl` where given) and set `verified: true`. Until then production shows the page without figures. Gartner's "two-thirds" may be 63% on gartner.com.
+- **PipelineIQ in the Solutions menu:** owner's call, founder sign-off pending.
+- **Client logos** (`src/content/clients.ts`, files in `public/clients/`): 12 logos. Seven from the companies' own sites (Revlon, Rotimatic, Duroflex, Cocoblu, Kanoria/KCIL, Tarasafe, Masoom); five supplied by Mohan's team on 2026-11-22 (Arenco, Global Development Initiative (GDi), VSM Software, Noble Bioresources, Examly). Supplied files were traced to single-colour SVG silhouettes; GDi's magenta 'G' keeps a knockout gap. Arenco's logo replaced the Golden Sands mark (same client, parent brand). The first VSM file was the wrong company and was replaced the same day. GDi = Global Development Initiative (confirmed by Mohan's team, 2026-11-22). All `verified: false` until each client's written permission is on file.
 - **Testimonials** (`src/content/testimonials.ts`): all three are PLACEHOLDERS written for layout. Replace with approved quotes before launch (hidden in production until then).
 
 ## 6c. Known technical notes
@@ -226,3 +243,6 @@ Legend: [x] done · [~] in progress · [ ] not started
 | 2026-11-22 | PR #15 | Mobile and responsive pass across all pages |
 | 2026-11-22 | PR #16 | Client logos and placeholder testimonials; new loading screen; 'Trusted by' as its own black band |
 | 2026-11-22 | PR #17 | Client logos as an edge-to-edge infinite scroll (pauses on hover, static for reduced motion) |
+| 2026-11-22 | PR #18 | Five more client logos (traced to SVG; VSM corrected, Examly added), Arenco replaces Golden Sands; tracker housekeeping |
+| 2026-11-22 | PR #19 | Navigation restructure: dropdowns, /context-engineering, /insights, /resources, /readiness-checklist, Solutions hub, interactive Learn, flow check |
+| 2026-11-22 | PR #20 | Case studies: EMEA platform rewritten, governed finance semantic layer (IncLever) and lead time report added; new featured pair as wide panels |
