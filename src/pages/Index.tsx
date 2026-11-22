@@ -18,8 +18,6 @@ import { Label, SectionIntro, Verified, VerifyBadge, buttonClass } from "@/compo
 import {
   BookCta,
   CapabilityFeature,
-  CaseStudyCard,
-  CaseStudyPlaceholder,
   CtaBand,
   FinalCta,
   IncleverCard,
@@ -28,6 +26,8 @@ import {
   ToolsTable,
   featuredCaseStudyIds,
 } from "@/components/site/sections";
+import { FeaturedCaseStudy } from "@/components/site/cases/FeaturedCase";
+import { caseEntries } from "@/components/site/cases/caseData";
 
 const Index = () => {
   const build = capabilityById.build;
@@ -160,15 +160,16 @@ const Index = () => {
       <section id="work" className="bg-white">
         <div className="ip-container ip-section !pt-0">
           <div className="border-t border-ip-rule pt-[var(--ip-section-y)]">
-            <SectionIntro label="Case studies" title="Proven at enterprise scale." />
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <SectionIntro label="Case studies" title="Proven at enterprise scale.">
+              <p className="m-0">A multi-ERP platform for a FTSE-listed group, and a governed finance layer an AI assistant can use. Client names withheld.</p>
+            </SectionIntro>
+            <div className="flex flex-col gap-6">
               {featuredCaseStudyIds().map((id) => (
-                <CaseStudyCard key={id} id={id} size="feature" />
+                <FeaturedCaseStudy key={id} id={id} />
               ))}
-              <CaseStudyPlaceholder />
             </div>
             <Link to="/case-studies" className="ip-link mt-7 inline-flex min-h-[44px] items-center text-base">
-              All case studies
+              All {caseEntries.length} case studies
             </Link>
           </div>
         </div>
