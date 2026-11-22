@@ -211,7 +211,7 @@ Legend: [x] done · [~] in progress · [ ] not started
 ## 6b. Open content items for the team (all badged on staging, hidden in production)
 
 - Founder review of the checklist PDF (`src/content/checklist.json`, draft v0.1).
-- Proof strip figures, certified/partner list, "Offices in the United States and India", founder credentials.
+- Proof strip figures, certified/partner list, founder credentials. (~~"Offices in the United States and India"~~ confirmed 2026-11-22.)
 - Founder quote: her draft is shown verbatim (uses banned words); she's rewriting it. Headshot + team photos (December shoot). Should Mohan Gowda T appear in the delivery bench?
 - Capabilities to verify: MDM, ontologies, knowledge graphs, MCP, vector DBs; every tool in `src/content/tools.ts` is `verified: false`.
 - ~~A Contextualize/Enable case study~~: the governed finance semantic layer (session 3) now backs both, and the Contextualize proof line. The EMEA platform keeps Contextualize as a proposed tag.
@@ -224,7 +224,7 @@ Legend: [x] done · [~] in progress · [ ] not started
 - Proposed blocks in `src/content/flags.ts` need founder sign-off (all on for staging).
 - **Insights figures** (`src/content/insights.ts`): 29 sourced figures, all `verified: false`. Open each `url` (and `primaryUrl` where given) and set `verified: true`. Until then production shows the page without figures. Gartner's "two-thirds" may be 63% on gartner.com.
 - **PipelineIQ in the Solutions menu:** owner's call, founder sign-off pending.
-- **Client logos** (`src/content/clients.ts`, files in `public/clients/`): 12 logos. Seven from the companies' own sites (Revlon, Rotimatic, Duroflex, Cocoblu, Kanoria/KCIL, Tarasafe, Masoom); five supplied by Mohan's team on 2026-11-22 (Arenco, Global Development Initiative (GDi), VSM Software, Noble Bioresources, Examly). Supplied files were traced to single-colour SVG silhouettes; GDi's magenta 'G' keeps a knockout gap. Arenco's logo replaced the Golden Sands mark (same client, parent brand). The first VSM file was the wrong company and was replaced the same day. GDi = Global Development Initiative (confirmed by Mohan's team, 2026-11-22). All `verified: false` until each client's written permission is on file.
+- **Client logos** (`src/content/clients.ts`, files in `public/clients/`): 12 logos. Seven from the companies' own sites (Revlon, Rotimatic, Duroflex, Cocoblu, Kanoria/KCIL, Tarasafe, Masoom); five supplied by Mohan's team on 2026-11-22 (Arenco, Global Development Initiative (GDi), VSM Software, Noble Bioresources, Examly). Supplied files were traced to single-colour SVG silhouettes; GDi's magenta 'G' keeps a knockout gap. Arenco's logo replaced the Golden Sands mark (same client, parent brand). The first VSM file was the wrong company and was replaced the same day. GDi = Global Development Initiative (confirmed by Mohan's team, 2026-11-22). Permission for all 12 confirmed by Mohan's team (2026-11-22): `verified: true`, shown in production.
 - **Testimonials** (`src/content/testimonials.ts`): all three are PLACEHOLDERS written for layout. Replace with approved quotes before launch (hidden in production until then).
 
 ## 6c. Known technical notes

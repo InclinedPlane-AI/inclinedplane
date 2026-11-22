@@ -89,7 +89,7 @@ transitions; `prefers-reduced-motion` respected.
 ### Client logos ("Trusted by")
 - Own black band right after the homepage proof strip (and on /case-studies), heading "Companies we've engineered data foundations for."
 - Logos scroll edge to edge in an infinite loop (owner's request, 2026-11-22). This is a deliberate second motion moment beside the incline; it stays calm (~3.6s per logo), pauses on hover/focus, uses only transform, and becomes a static wrapped row for reduced-motion users. Logos are uniform white marks; the duplicate loop copy is hidden from screen readers.
-- All logos `verified: false` until each client's permission is on file; the band renders nothing in production until then.
+- All 12 logos confirmed for publication by Mohan's team (2026-11-22). New logos start unverified (hidden in production) until permission is on file.
 
 ### Product pages (2026-11-22)
 - Each product page is told as a story with numbered chapters and a sticky chapter nav. PipelineIQ's spine is the four questions after a failed night, with "what failed" live today and the rest marked In development / Planned; IncLever's is check → define → answer → keep watch.
@@ -122,7 +122,7 @@ transitions; `prefers-reduced-motion` respected.
 ## 5. Verify before launch (all wrapped as `verified: false`)
 
 Proof strip: 20+ agents · 550+ TB · 600+ dashboards · 40+ countries · 2 to 6 weeks ERP onboarding.
-Footer: "Offices in the United States and India". Certified/partner badges. Capabilities and tools:
+Certified/partner badges. (Footer office line and all client logos confirmed 2026-11-22.) Capabilities and tools:
 MDM, business ontologies, knowledge graphs, Purview, Databricks Genie, Copilot in Fabric,
 Fabric semantic models, dbt Semantic Layer, MCP, vector databases. CEO quote must be rewritten
 in Keerthana's own words (current draft uses banned words, shown as placeholder).

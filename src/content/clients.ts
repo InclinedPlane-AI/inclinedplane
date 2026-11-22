@@ -4,10 +4,11 @@
  * Logos were taken from each company's own website or supplied by Mohan's
  * team (2026-11-22). Supplied files were low-resolution rasters, so they were
  * traced to single-colour SVG silhouettes (the band renders every logo as a
- * uniform white mark anyway). Every entry is
- * `verified: false` until written permission to show the logo is on file
- * (brief: client logos only with approval). Unverified logos show on staging
- * with a "Verify before launch" badge and are hidden in production.
+ * uniform white mark anyway).
+ *
+ * `verified: true`: permission to show every logo below was confirmed by
+ * Mohan's team on 2026-11-22. A new client starts as `verified: false`
+ * (staging badge, hidden in production) until its permission is on file.
  *
  * `logo: null` = we couldn't identify the company's official site/logo with
  * confidence; staging shows a "logo file needed" tile, production skips it.
@@ -28,22 +29,22 @@ export interface Client extends Verifiable {
 }
 
 export const clients: Client[] = [
-  { name: "Revlon", logo: "/clients/revlon.svg", height: 22, source: "revlon.com", verified: false },
-  { name: "Rotimatic", logo: "/clients/rotimatic.svg", height: 25, source: "rotimatic.com", verified: false },
-  { name: "Duroflex", logo: "/clients/duroflex.png", height: 24, source: "duroflexworld.com", verified: false },
-  { name: "Cocoblu (RattanIndia)", logo: "/clients/cocoblu.svg", height: 26, source: "cocoblu.in", verified: false },
-  { name: "Kanoria Chemicals (KCIL)", logo: "/clients/kanoria.png", height: 38, source: "kanoriachem.com", verified: false },
-  { name: "Tarasafe", logo: "/clients/tarasafe.svg", height: 26, source: "tarasafe.com", verified: false },
-  { name: "Masoom Group", logo: "/clients/masoom.png", height: 46, source: "masoom.in", verified: false },
-  { name: "Arenco Group", logo: "/clients/arenco.svg", height: 46, source: "supplied by Mohan's team", verified: false },
+  { name: "Revlon", logo: "/clients/revlon.svg", height: 22, source: "revlon.com", verified: true },
+  { name: "Rotimatic", logo: "/clients/rotimatic.svg", height: 25, source: "rotimatic.com", verified: true },
+  { name: "Duroflex", logo: "/clients/duroflex.png", height: 24, source: "duroflexworld.com", verified: true },
+  { name: "Cocoblu (RattanIndia)", logo: "/clients/cocoblu.svg", height: 26, source: "cocoblu.in", verified: true },
+  { name: "Kanoria Chemicals (KCIL)", logo: "/clients/kanoria.png", height: 38, source: "kanoriachem.com", verified: true },
+  { name: "Tarasafe", logo: "/clients/tarasafe.svg", height: 26, source: "tarasafe.com", verified: true },
+  { name: "Masoom Group", logo: "/clients/masoom.png", height: 46, source: "masoom.in", verified: true },
+  { name: "Arenco Group", logo: "/clients/arenco.svg", height: 46, source: "supplied by Mohan's team", verified: true },
   {
     name: "Global Development Initiative (GDi)",
     logo: "/clients/gdi.svg",
     height: 38,
     source: "supplied by Mohan's team",
-    verified: false,
+    verified: true,
   },
-  { name: "VSM Software", logo: "/clients/vsm.svg", height: 36, source: "supplied by Mohan's team", verified: false },
-  { name: "Examly", logo: "/clients/examly.svg", height: 30, source: "supplied by Mohan's team", verified: false },
-  { name: "Noble Bioresources", logo: "/clients/noble.svg", height: 37, source: "supplied by Mohan's team", verified: false },
+  { name: "VSM Software", logo: "/clients/vsm.svg", height: 36, source: "supplied by Mohan's team", verified: true },
+  { name: "Examly", logo: "/clients/examly.svg", height: 30, source: "supplied by Mohan's team", verified: true },
+  { name: "Noble Bioresources", logo: "/clients/noble.svg", height: 37, source: "supplied by Mohan's team", verified: true },
 ];
