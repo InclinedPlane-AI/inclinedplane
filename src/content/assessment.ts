@@ -33,7 +33,7 @@ export const tiers = {
     name: "Readiness conversation",
     price: "Free",
     format: "45 minutes, with a senior engineer",
-    body: "We review where your data stands against what your AI plans need, using your answers to the five questions as the starting point.",
+    body: "We review where your data stands against what your AI plans need, using your answers to the three booking questions as the starting point.",
     leaveWith: ["An outside view of your biggest readiness gaps", "The two or three things to fix first", "An honest view of whether a full assessment is worth it"],
   },
   assessment: {
@@ -46,7 +46,7 @@ export const tiers = {
 };
 
 export const steps = [
-  { title: "Answer five questions", body: "Role, company size, main platform, where AI is today and your biggest blocker. About a minute." },
+  { title: "Pick a time", body: "Choose a 45-minute slot, then answer three optional questions: your role, main data platform and biggest blocker." },
   { title: "Talk to a senior engineer", body: "45 minutes on your data, not on background, because we’ve read your answers first." },
   { title: "Run the assessment", body: "If it’s worth doing: agreed scope, read-only access to the datasets in scope, readiness checks and owner interviews.", tier: "assessment" as const },
   { title: "Walk through the findings", body: "A scored report, the evidence behind it, and a roadmap you can act on with or without us." },

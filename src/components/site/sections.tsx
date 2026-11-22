@@ -113,16 +113,34 @@ export function BookCta({
   );
 }
 
-/** Black mid-page band: "Not sure where your data stands?" */
+/** Founder's reassurance line under the main CTAs: "Free · 45 minutes · on your own data". */
+export function Reassure({ className, onDark = false }: { className?: string; onDark?: boolean }) {
+  return <p className={cn("m-0 text-[14px] leading-[1.5]", onDark ? "text-ip-on-dark" : "text-ip-body", className)}>{site.cta.reassure}</p>;
+}
+
+/** Opens the checklist download dialog. */
+export function ChecklistCta({ source, variant = "secondary", className }: { source: string; variant?: "secondary" | "onDark" | "text"; className?: string }) {
+  const { openChecklist } = useBooking();
+  return (
+    <Button variant={variant} size="lg" onClick={() => openChecklist({ source })} data-cta={source} className={className}>
+      {site.cta.checklistButton}
+    </Button>
+  );
+}
+
+/** Black mid-page band: "Not sure where your data stands?" + the checklist for people not ready to talk. */
 export function CtaBand({ source }: { source: string }) {
   return (
     <section aria-label="Assessment" className="bg-black text-white">
       <div className="ip-container flex flex-wrap items-center justify-between gap-x-10 gap-y-5 py-[clamp(40px,5vw,56px)]">
         <div className="basis-[520px] grow">
           <p className="m-0 text-[clamp(24px,2.6vw,32px)] font-semibold leading-[1.2] tracking-[-0.015em]">{site.cta.midTitle}</p>
-          <p className="mt-2.5 mb-0 text-[17px] leading-[1.55] text-ip-on-dark">{site.cta.midBody}</p>
+          <p className="mt-2.5 mb-0 max-w-[640px] text-[17px] leading-[1.55] text-ip-on-dark">{site.cta.midBody}</p>
         </div>
-        <BookCta source={source} label={site.cta.midButton} />
+        <div className="flex flex-wrap gap-3">
+          <BookCta source={source} label={site.cta.midButton} />
+          <ChecklistCta source={`${source}-checklist`} variant="onDark" />
+        </div>
       </div>
     </section>
   );
@@ -145,6 +163,7 @@ export function FinalCta({ source, title = site.cta.finalTitle, body = site.cta.
             What the assessment covers
           </Link>
         </div>
+        <Reassure className="mt-3" />
       </div>
     </section>
   );

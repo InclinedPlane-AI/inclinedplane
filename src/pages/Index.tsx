@@ -23,6 +23,7 @@ import {
   FinalCta,
   IncleverCard,
   ProofStrip,
+  Reassure,
   ToolsTable,
   featuredCaseStudyIds,
 } from "@/components/site/sections";
@@ -54,6 +55,7 @@ const Index = () => {
               <Link to="/case-studies" className={buttonClass("secondary")}>
                 See case studies
               </Link>
+              <Reassure className="basis-full" />
             </div>
           </div>
         </div>

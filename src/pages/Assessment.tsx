@@ -10,48 +10,49 @@ import { flags } from "@/content/flags";
 import { coverage, tiers, steps, assessmentFaq } from "@/content/assessment";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Label, SectionIntro, buttonClass } from "@/components/site/primitives";
-import { Faq, PageHero } from "@/components/site/sections";
-import { AssessmentForm, type AssessmentAnswers } from "@/components/site/booking/AssessmentForm";
-import { CalendarPanel } from "@/components/site/booking/CalendarPanel";
+import { Faq, PageHero, Reassure } from "@/components/site/sections";
+import { BookingFlow, stepLabel, stepTitles, type BookingStep } from "@/components/site/booking/BookingFlow";
+import { ChecklistDone, ChecklistForm } from "@/components/site/booking/ChecklistOffer";
 import { FindingsReport } from "@/components/site/products/FindingsReport";
 import { cn } from "@/lib/utils";
 
 function InlineBooking() {
-  const [submitted, setSubmitted] = useState<AssessmentAnswers | null>(null);
+  const [step, setStep] = useState<BookingStep>("time");
+  const [checklistDone, setChecklistDone] = useState(false);
   return (
     <section id="book" className="bg-white border-t border-ip-rule scroll-mt-24">
       <div className="ip-container ip-section">
-        <SectionIntro label="Book" title="Two ways to start.">
-          <p className="m-0">Share some context first so the call goes straight to your data, or pick a time now. Either way, a senior engineer joins the call.</p>
+        <SectionIntro label="Book" title="Pick a time. We’ll do the rest.">
+          <p className="m-0">Choose a slot, then answer three optional questions so the call goes straight to your data. A senior engineer joins the call.</p>
         </SectionIntro>
-        <div className="grid gap-6 lg:grid-cols-[1.15fr_1fr]">
+        <div className="grid gap-6 lg:grid-cols-[1.35fr_1fr]">
           <div className="rounded-xl border border-ip-rule-strong border-t-4 border-t-ip-orange bg-white p-6 sm:p-8">
             <Label small className="mb-2">
-              {submitted ? "Thanks. Now pick a time" : "Answer five questions"}
+              {stepLabel(step)}
             </Label>
-            {submitted ? (
-              <div className="mt-3 flex flex-col gap-4">
-                <p className="m-0 text-[15px] leading-[1.55] text-ip-body">
-                  We’ll review your answers before the call, so the {booking.durationMinutes} minutes go on your data, not on background.
-                </p>
-                <CalendarPanel email={submitted.email} />
-              </div>
+            <h3 className="m-0 text-[22px] font-semibold leading-[1.2]">{stepTitles[step]}</h3>
+            <BookingFlow source="assessment-page" calendarHeight={640} onStepChange={setStep} />
+          </div>
+          <div className="self-start rounded-xl border border-ip-rule-strong bg-ip-grey p-6 sm:p-8">
+            <Label small className="mb-2">
+              Not ready to talk yet?
+            </Label>
+            <h3 className="m-0 text-[22px] font-semibold leading-[1.2]">
+              {checklistDone ? "Your checklist is downloading" : "Run the checklist yourself first."}
+            </h3>
+            {checklistDone ? (
+              <ChecklistDone onBook={() => document.getElementById("book")?.scrollIntoView({ behavior: "smooth" })} />
             ) : (
               <>
-                <h3 className="m-0 text-[22px] font-semibold leading-[1.2]">So the call starts with your data.</h3>
-                <p className="mt-2 mb-0 text-[15px] leading-[1.55] text-ip-body">Only your role and work email are required.</p>
-                <AssessmentForm source="assessment-page" onSubmitted={setSubmitted} />
+                <p className="mt-3 mb-0 text-[15px] leading-[1.55] text-ip-body">
+                  One page, sixteen checks across quality, context, access and governance. The same checks we apply in the assessment.
+                </p>
+                <ChecklistForm source="assessment-page" onDone={() => setChecklistDone(true)} />
               </>
             )}
           </div>
-          <div className="rounded-xl border border-ip-rule-strong bg-ip-grey p-6 sm:p-8">
-            <Label small className="mb-2">
-              Or pick a time now
-            </Label>
-            <h3 className="m-0 mb-4 text-[22px] font-semibold leading-[1.2]">{booking.durationMinutes} minutes with a senior engineer.</h3>
-            <CalendarPanel height={560} />
-          </div>
         </div>
+        <Reassure className="mt-5" />
       </div>
     </section>
   );
@@ -159,7 +160,7 @@ const Assessment = () => {
       {/* How it works */}
       <section className="bg-white">
         <div className="ip-container ip-section">
-          <SectionIntro label="How it works" title="From five questions to a roadmap." />
+          <SectionIntro label="How it works" title="From a booked call to a roadmap." />
           <ol className="m-0 grid list-none grid-cols-1 border-t-2 border-black p-0 md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
             {shownSteps.map((s, i) => (
               <li key={s.title} className={cn("border-b border-ip-rule-strong py-7 md:pr-6", i > 0 && "md:border-l md:pl-6")}>
