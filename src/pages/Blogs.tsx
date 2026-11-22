@@ -1,5 +1,6 @@
 /**
- * /blog — labeled "Insights" in the UI (URL unchanged to protect rankings).
+ * /blog — the Blog (labeled "Insights" until 2026-11-22; Insights is now the
+ * evidence page at /insights). URL unchanged to protect rankings.
  * Featured latest post, then a clean list filterable by tag. No thumbnail grid.
  */
 import { useState } from "react";
@@ -29,15 +30,15 @@ const Blogs = () => {
   return (
     <SiteLayout
       seo={{
-        title: "Insights on data engineering and AI readiness",
+        title: "Blog: data engineering and AI readiness",
         description:
           "Articles from InclinedPlane engineers on data platforms, pipelines, data contracts, context and getting enterprise data ready for AI agents.",
         path: "/blog",
       }}
     >
       <PageHero
-        crumbs={[{ label: "Insights" }]}
-        label="Insights"
+        crumbs={[{ label: "Blog" }]}
+        label="Blog"
         title="Notes from the engineering floor."
         lead="What we learn building data platforms, pipelines and AI foundations for enterprises, written by the engineers who did the work."
       />
