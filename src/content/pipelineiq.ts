@@ -29,7 +29,8 @@ export const piqVideo = {
  * loaded only when a visitor presses Launch.
  */
 export const piqSandbox = {
-  src: "/demos/pipelineiq-demo.html#/",
+  // Deployed with clean URLs (no ".html"); Vite's dev server needs the extension.
+  src: import.meta.env.DEV ? "/demos/pipelineiq-demo.html#/" : "/demos/pipelineiq-demo#/",
   poster: "/media/pipelineiq-sandbox-poster.jpg",
   note: "The whole portal, running in your browser on simulated data for a fictional client. Every page, filter and chart works; nothing connects to a real system.",
   size: "about 800 KB",
