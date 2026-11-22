@@ -46,9 +46,9 @@ export function SiteHeader() {
       >
         Skip to content
       </a>
-      <div className="ip-container flex h-[76px] items-center justify-between gap-8">
-        <Link to="/" className="flex items-center shrink-0" aria-label={`${site.name} home`}>
-          <img src="/brand/logo-primary.png" alt={site.name} width={115} height={34} className="block h-[34px] w-auto" />
+      <div className="ip-container flex h-16 items-center justify-between gap-4 lg:h-[76px] lg:gap-8">
+        <Link to="/" className="flex min-h-[44px] shrink-0 items-center" aria-label={`${site.name} home`}>
+          <img src="/brand/logo-primary.png" alt={site.name} width={115} height={34} className="block h-[30px] w-auto lg:h-[34px]" />
         </Link>
 
         <nav aria-label="Main" className="hidden lg:flex items-center gap-6 text-[15px]">
@@ -73,8 +73,9 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex lg:hidden items-center gap-2">
-          <button type="button" onClick={() => open({ source: "header-mobile" })} className={buttonClass("primary", "md", "px-4 text-[14px] hidden sm:inline-flex")}>
-            {site.cta.header}
+          <button type="button" onClick={() => open({ source: "header-mobile" })} className={buttonClass("primary", "md", "min-h-[40px] px-3.5 py-2 text-[14px]")} data-cta="header-mobile">
+            <span className="hidden min-[400px]:inline">{site.cta.header}</span>
+            <span className="min-[400px]:hidden">Book</span>
           </button>
           <button
             type="button"
@@ -103,7 +104,7 @@ export function SiteHeader() {
       </div>
 
       {menuOpen && (
-        <div id="site-menu" className="lg:hidden fixed inset-x-0 top-[77px] bottom-0 z-50 overflow-y-auto bg-white border-t border-ip-rule">
+        <div id="site-menu" className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 z-50 overflow-y-auto overscroll-contain bg-white border-t border-ip-rule">
           <nav aria-label="Main" className="ip-container flex flex-col py-4">
             {mainNav.map((item) => (
               <NavLink

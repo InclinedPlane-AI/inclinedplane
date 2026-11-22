@@ -98,7 +98,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
           <Dialog.Overlay className="fixed inset-0 z-[100] bg-black/55 data-[state=open]:animate-in data-[state=open]:fade-in-0" />
           <Dialog.Content
             aria-describedby={undefined}
-            className="fixed left-1/2 top-1/2 z-[101] w-[calc(100%-32px)] max-w-[620px] max-h-[calc(100dvh-32px)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border-t-4 border-ip-orange bg-white p-6 sm:p-9 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.45)] font-sans text-black focus:outline-none data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[0.98]"
+            className="fixed inset-0 z-[101] h-[100dvh] w-full overflow-y-auto overscroll-contain border-t-4 border-ip-orange bg-white px-5 pt-6 pb-[max(24px,env(safe-area-inset-bottom))] sm:inset-auto sm:left-1/2 sm:top-1/2 sm:h-auto sm:max-h-[calc(100dvh-32px)] sm:w-[calc(100%-32px)] sm:max-w-[620px] sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl sm:p-9 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.45)] font-sans text-black focus:outline-none data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[0.98]"
           >
             <Dialog.Close
               aria-label="Close"

@@ -146,7 +146,7 @@ const Industries = () => {
               <li key={ind.id} className="shrink-0">
                 <a
                   href={`#${ind.id}`}
-                  className="inline-flex min-h-[36px] items-center text-ip-body no-underline hover:text-black hover:underline underline-offset-4"
+                  className="inline-flex min-h-[40px] items-center text-ip-body no-underline hover:text-black hover:underline underline-offset-4"
                 >
                   {ind.name}
                 </a>

@@ -178,7 +178,7 @@ export function VerifyBadge({ className }: { className?: string }) {
     <span
       data-verify-badge
       className={cn(
-        "inline-flex items-center gap-1 align-middle rounded-full border border-dashed border-[#b42318] bg-[#fef3f2] px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.06em] text-[#b42318] whitespace-nowrap",
+        "inline-flex items-center gap-1 align-middle rounded-full border border-dashed border-[#b42318] bg-[#fef3f2] px-2 py-0.5 max-w-full font-mono text-[11px] font-medium uppercase tracking-[0.05em] text-[#b42318] sm:whitespace-nowrap",
         className,
       )}
     >

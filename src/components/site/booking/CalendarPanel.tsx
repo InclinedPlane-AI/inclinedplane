@@ -65,8 +65,10 @@ export function CalendarPanel({
         title={`Pick a time for a ${booking.durationMinutes}-minute AI Data Readiness Assessment`}
         src={`${booking.calendlyUrl}?${params.toString()}`}
         loading="lazy"
-        className="w-full rounded-lg border border-ip-rule bg-white"
-        style={{ height }}
+        // Phones get a taller frame (Calendly stacks day + time picker) so visitors
+        // scroll the page, not a small box inside it.
+        className="h-[var(--cal-h)] w-full rounded-lg border border-ip-rule bg-white max-sm:h-[720px]"
+        style={{ "--cal-h": `${height}px` } as React.CSSProperties}
       />
     );
   }

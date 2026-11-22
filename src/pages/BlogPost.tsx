@@ -126,10 +126,10 @@ const BlogPostPage = () => {
               {credited.length > 0 && (
                 <div className="mt-10 max-w-[720px] border-t border-ip-rule pt-5">
                   <p className="ip-label-sm m-0 mb-2">Image credits</p>
-                  <ul className="m-0 list-none space-y-1 p-0 text-[13px] text-ip-muted">
+                  <ul className="m-0 list-none space-y-2.5 p-0 text-[13px] text-ip-muted">
                     {credited.map((img, i) => (
                       <li key={i}>
-                        <a href={img.creditUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-black">
+                        <a href={img.creditUrl} target="_blank" rel="noopener noreferrer" className="ip-hit relative underline underline-offset-2 hover:text-black">
                           {img.credit}
                         </a>
                         , {img.alt}, via Unsplash

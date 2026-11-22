@@ -70,7 +70,7 @@ function riseStyle(state: "static" | "pending" | "done", i: number): CSSProperti
 
 function IncleverPill({ asLink = true }: { asLink?: boolean }) {
   const cls =
-    "relative z-10 mt-auto self-start no-underline font-mono text-[11px] uppercase tracking-[0.08em] bg-black text-white px-2.5 py-1.5 rounded-full font-semibold";
+    "ip-hit relative z-10 mt-auto self-start no-underline font-mono text-[11px] uppercase tracking-[0.08em] bg-black text-white px-2.5 py-1.5 rounded-full font-semibold";
   return asLink ? (
     <Link to="/products/inclever" className={cn(cls, "hover:bg-[#222]")}>
       Accelerated by IncLever
@@ -237,7 +237,7 @@ export function InclineMini({ current }: { current: StepId }) {
             key={c.id}
             to={c.path}
             aria-current={lit ? "page" : undefined}
-            className="group flex w-[70px] sm:w-[104px] flex-col gap-1.5 no-underline"
+            className="group flex min-h-[48px] w-[70px] flex-col justify-end gap-1.5 no-underline sm:w-[104px]"
           >
             <span
               aria-hidden="true"
