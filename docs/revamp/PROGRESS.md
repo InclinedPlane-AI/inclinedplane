@@ -5,7 +5,7 @@ is finished, what is in progress, what is left, and every decision already made,
 so nobody re-does or re-litigates work. Update it in the same commit as the work
 it describes.
 
-Last updated: 2026-11-22 (session 2: founder's CTA update)
+Last updated: 2026-11-22 (end of session 2)
 
 ---
 
@@ -111,6 +111,19 @@ tagline "Data Leveraged. Growth Accelerated."), `incpl_primarylogo_fullcolourAW.
   legacy; delete each once nothing imports it.
 - SEO: `scripts/seo-config.mjs` static routes must mirror each page's title/description.
 
+## 5b. Where session 2 ended (2026-11-22)
+
+- Merged into `revamp`: PRs #11 to #16. **PR #17 (logo marquee) awaits merge.**
+- Staging: https://inclinedplane-staging.vercel.app (auto-deploys on merge to `revamp`).
+- Production (`main`) is still the old design; it changes once, at launch (see the RULE in CLAUDE.md).
+- Next up, from the team's pending list:
+  1. Case studies: recent clients + the enterprise data unification case study.
+  2. PipelineIQ demo video (MP4 + poster, same `DemoFrame` treatment as IncLever) and page refresh.
+  3. Navbar and page-flow restructure.
+  4. Logo files for Examly, GDi Partners, VSM Technologies, Noble Bioresources; client permissions; real testimonials.
+  5. Keerthana's sign-offs (headshot, CEO note, checklist PDF, proposed blocks) and the claims in section 6b.
+  6. Testing (real test booking, all forms), Lighthouse, protect `main`, add the two engineers.
+
 ## 6. Checklist
 
 Legend: [x] done · [~] in progress · [ ] not started
@@ -201,4 +214,5 @@ Legend: [x] done · [~] in progress · [ ] not started
 | 2026-11-22 | PR #12 | Founder CTA update: calendar-first booking, 3 questions, checklist PDF + instant download, reassurance line |
 | 2026-11-22 | PR #14 | Live Calendly embed (UTM-tagged), booking → /assessment/thank-you with the three questions (conversion page) |
 | 2026-11-22 | PR #15 | Mobile and responsive pass across all pages |
-| 2026-11-22 | PR (`feat/clients-testimonials`) | Client logo wall (home proof strip + case studies) and placeholder testimonials |
+| 2026-11-22 | PR #16 | Client logos and placeholder testimonials; new loading screen; 'Trusted by' as its own black band |
+| 2026-11-22 | PR #17 | Client logos as an edge-to-edge infinite scroll (pauses on hover, static for reduced motion) |
