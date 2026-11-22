@@ -36,8 +36,9 @@ export function readPrefill(): Partial<AssessmentAnswers> {
     return v ? (list.find((o) => o.toLowerCase() === v.toLowerCase()) ?? "") : "";
   };
   return {
-    name: p.get("name") ?? "",
-    email: p.get("email") ?? "",
+    // `invitee_*` are what Calendly appends when it redirects to our thank-you page.
+    name: p.get("name") ?? p.get("invitee_full_name") ?? "",
+    email: p.get("email") ?? p.get("invitee_email") ?? "",
     role: pick("role", booking.questions.role),
     platform: pick("platform", booking.questions.platform),
     blocker: pick("blocker", booking.questions.blocker),
@@ -195,7 +196,7 @@ export function AssessmentForm({
       )}
       <div className="mt-1.5 flex flex-wrap items-center gap-3">
         <Button type="submit" size="md" disabled={status === "sending"}>
-          {status === "sending" ? "Sending" : noSlot ? "Send my details" : "Confirm booking"}
+          {status === "sending" ? "Sending" : noSlot ? "Send my details" : "Send my answers"}
           <ArrowIcon size={16} />
         </Button>
         {onBack && (

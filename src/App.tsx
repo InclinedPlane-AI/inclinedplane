@@ -14,6 +14,7 @@ import ProductPipelineIQ from "./pages/ProductPipelineIQ";
 import ProductInclever from "./pages/ProductInclever";
 import Industries from "./pages/Industries";
 import Assessment from "./pages/Assessment";
+import ThankYou from "./pages/ThankYou";
 import Learn from "./pages/Learn";
 import LearnArticle from "./pages/LearnArticle";
 import CaseStudies from "./pages/CaseStudies";
@@ -95,6 +96,7 @@ const App = () => {
                   <Route path="/services" element={<Navigate to="/capabilities" replace />} />
                   <Route path="/inclever" element={<Navigate to="/products/inclever" replace />} />
                   <Route path="/assessment" element={<Assessment />} />
+                  <Route path="/assessment/thank-you" element={<ThankYou />} />
                   <Route path="/learn" element={<Learn />} />
                   <Route path="/learn/:slug" element={<LearnArticle />} />
                   <Route path="/capabilities" element={<Capabilities />} />
