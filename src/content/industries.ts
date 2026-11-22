@@ -25,7 +25,7 @@ export const industries: Industry[] = [
       "Copilot and other agents arrive on master data nobody has reconciled.",
     ],
     steps: ["build", "contextualize", "enable"],
-    caseStudyIds: ["erp-unification", "engine-demand-forecast", "capital-equipment"],
+    caseStudyIds: ["erp-unification", "governed-finance-semantic-layer", "global-lead-time", "engine-demand-forecast", "capital-equipment"],
   },
   {
     id: "fmcg",
