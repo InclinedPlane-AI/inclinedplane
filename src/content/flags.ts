@@ -10,7 +10,7 @@ export const flags = {
   twoTierAssessment: true,
   /** "Keep it ready" managed readiness operations after go-live */
   runService: true,
-  /** PipelineIQ shown alongside IncLever as the trust layer (never in main nav) */
+  /** PipelineIQ shown alongside IncLever as the trust layer, incl. the Solutions menu (owner's call 2026-11-22; founder sign-off pending) */
   pipelineIQ: true,
   /** Manufacturing and distribution first on Industries */
   leadVertical: true,
