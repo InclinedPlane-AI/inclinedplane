@@ -137,6 +137,14 @@ Owner's brief: the nav items overlapped; make Solutions a dropdown, give context
 - **Decisions taken by default** (owner didn't answer; change if wanted): kept `/products` URLs under the "Solutions" label; Industries added to Resources.
 - **Needs sign-off:** PipelineIQ in the Solutions menu (brief §7.5 said off main nav until approved); every Insights figure (29, `verified: false`) needs a person to open its link; Gartner/McKinsey/Snowflake originals blocked automated checks, so they link to the reporting page plus the original.
 
+## 5e. Session 3: product pages (2026-11-22)
+
+- **PipelineIQ** rebuilt as one story, the four questions after a failed night (what failed: live → why → what does it break → how do we fix it). Hero: the recorded portal walkthrough (`public/media/pipelineiq-demo.mp4`, 27 s trimmed, 1.25×, sample client "Acme Manufacturing", labeled demo data). Chapters with one interactive piece each, ported from the old site's demos into our visual language: debug trail, signature collapse, alert storm (existing incident view), adaptive thresholds, SQL guard, persona tabs, interactive roadmap.
+- **IncLever** rebuilt around four steps (check → define → answer → keep watch): demo clip in the hero, two-assistants comparison, readiness certificate, question-flow simulator (Teams chat + three gates), audit stages, tasks, surfaces, proof (finance semantic layer case study once PR #20 merges) and the trust layer with PipelineIQ.
+- **Solutions hub** shows the PipelineIQ clip beside IncLever's.
+- Shared kit: `src/components/site/products/demoKit.tsx` (demo frame, video player that plays only on screen with a pause button and no autoplay for reduced motion, sticky chapter nav).
+- **Owner's decision on the clip:** published unblurred as demo data. Some frames show real release names, Azure tenant/app IDs in error text and the real ERP list; listed in the PR for the reviewer.
+
 ## 6. Checklist
 
 Legend: [x] done · [~] in progress · [ ] not started
@@ -233,4 +241,5 @@ Legend: [x] done · [~] in progress · [ ] not started
 | 2026-11-22 | PR #15 | Mobile and responsive pass across all pages |
 | 2026-11-22 | PR #16 | Client logos and placeholder testimonials; new loading screen; 'Trusted by' as its own black band |
 | 2026-11-22 | PR #17 | Client logos as an edge-to-edge infinite scroll (pauses on hover, static for reduced motion) |
+| 2026-11-22 | PR #21 | Product pages: PipelineIQ and IncLever rebuilt as stories with interactive chapters; PipelineIQ demo clip on product and Solutions pages |
 | 2026-11-22 | PR #19 | Navigation restructure: dropdowns, /context-engineering, /insights, /resources, /readiness-checklist, Solutions hub, interactive Learn, flow check |

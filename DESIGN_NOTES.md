@@ -89,6 +89,11 @@ transitions; `prefers-reduced-motion` respected.
 - Logos scroll edge to edge in an infinite loop (owner's request, 2026-11-22). This is a deliberate second motion moment beside the incline; it stays calm (~3.6s per logo), pauses on hover/focus, uses only transform, and becomes a static wrapped row for reduced-motion users. Logos are uniform white marks; the duplicate loop copy is hidden from screen readers.
 - All logos `verified: false` until each client's permission is on file; the band renders nothing in production until then.
 
+### Product pages (2026-11-22)
+- Each product page is told as a story with numbered chapters and a sticky chapter nav. PipelineIQ's spine is the four questions after a failed night, with "what failed" live today and the rest marked In development / Planned; IncLever's is check → define → answer → keep watch.
+- One interactive piece per chapter, each explaining something real (brief §9): debug trail, signature collapse, adaptive thresholds and SQL guard for PipelineIQ; two assistants, readiness certificate and question flow for IncLever. All labeled sample data; all content in the HTML.
+- Demo clips loop muted, play only while on screen, have a pause button (WCAG 2.2.2) and don't autoplay for reduced-motion users.
+
 ### Navigation and page flow (2026-11-22, Mohan's team)
 - **Problem:** "Context Engineering", "AI Readiness" and "Capabilities" all led to the same four pillar pages; IncLever sat alone in the nav; case studies, learn and insights were scattered.
 - **Nav:** Context Engineering (the concept) · Capabilities ▾ (four pillars + Learn) · Solutions ▾ (IncLever, PipelineIQ: brief, "How it works", "See the demo") · Resources ▾ (Case studies, Industries, Learn, Insights, Blog, Thesis, Readiness checklist) · About · Contact, plus the Book button. Dropdowns are full-width panels on hover/focus; the label still links to its hub page; a chevron button opens it for keyboard/touch, Escape closes. Phones get an accordion. Contents: `src/components/site/NavMenus.tsx`.
