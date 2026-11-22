@@ -1,5 +1,6 @@
 /**
- * /case-studies (brief §7.7). The two featured case studies large, then every
+ * /case-studies (brief §7.7). The two featured case studies as wide panels
+ * (components/site/cases/FeaturedCase.tsx), then every
  * case study in a filterable list (capability step × industry). The full list
  * is in the prerendered HTML; filtering only hides rows. Filter state mirrors
  * to ?step=&industry= so a filtered view can be shared.
@@ -7,10 +8,9 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { capabilityById, type StepId } from "@/content/capabilities";
-import { SHOW_UNVERIFIED } from "@/content/verify";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { TrustedBy, Testimonials } from "@/components/site/social";
-import { Label, SectionIntro, StepTag } from "@/components/site/primitives";
+import { SectionIntro } from "@/components/site/primitives";
 import {
   CtaBand,
   FinalCta,
@@ -18,6 +18,7 @@ import {
   featuredCaseStudyIds,
 } from "@/components/site/sections";
 import { CaseRow } from "@/components/site/cases/CaseRow";
+import { FeaturedCaseStudy } from "@/components/site/cases/FeaturedCase";
 import {
   caseById,
   caseEntries,
@@ -26,67 +27,6 @@ import {
   type CaseEntry,
 } from "@/components/site/cases/caseData";
 import { cn } from "@/lib/utils";
-
-function FeaturedCase({ entry }: { entry: CaseEntry }) {
-  const { cs, meta } = entry;
-  const results = [meta.headline, meta.secondary].filter(Boolean) as {
-    value: string;
-    label: string;
-  }[];
-  return (
-    <article className="group relative flex flex-col rounded-xl border border-ip-rule-strong border-t-4 border-t-ip-orange bg-white p-[clamp(24px,3vw,40px)] transition-colors duration-200 hover:border-black hover:border-t-ip-orange">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <span className="ip-label-sm">
-          {cs.industry}
-          {meta.region ? `, ${meta.region}` : ""}
-        </span>
-        <span className="ip-label-sm !text-black">Featured</span>
-      </div>
-      <h3 className="mt-5 mb-0 text-[clamp(24px,2.4vw,32px)] font-semibold leading-[1.15] tracking-[-0.015em]">
-        <Link
-          to={`/case-studies/${entry.id}`}
-          className="no-underline after:absolute after:inset-0 after:rounded-xl after:content-[''] group-hover:underline underline-offset-4 decoration-1"
-        >
-          {meta.title}
-        </Link>
-      </h3>
-      <p className="mt-4 mb-0 max-w-[560px] text-[16px] leading-[1.6] text-ip-body">
-        {cs.summary}
-      </p>
-      <dl
-        className={cn(
-          "mt-7 grid border-t border-ip-rule",
-          results.length > 1 ? "grid-cols-2" : "grid-cols-1",
-        )}
-      >
-        {results.map((r, i) => (
-          <div
-            key={r.label}
-            className={cn(
-              "pt-4",
-              i > 0 ? "border-l border-ip-rule pl-4" : "pr-4",
-            )}
-          >
-            <dt className="ip-label-sm">{r.label}</dt>
-            <dd className="m-0 mt-2 text-[clamp(30px,3vw,40px)] font-semibold leading-none tracking-[-0.02em]">
-              {r.value}
-            </dd>
-          </div>
-        ))}
-      </dl>
-      <div className="relative z-10 mt-7 flex flex-wrap gap-2">
-        {meta.steps.map((s) => (
-          <StepTag key={s} step={s} />
-        ))}
-        {SHOW_UNVERIFIED &&
-          meta.proposedSteps?.map((s) => <StepTag key={s} step={s} proposed />)}
-      </div>
-      <span className="mt-auto pt-7 text-[15px] font-semibold">
-        Read the case study
-      </span>
-    </article>
-  );
-}
 
 function FilterButton({
   pressed,
@@ -187,11 +127,17 @@ const CaseStudies = () => {
         <div className="ip-container ip-section">
           <SectionIntro
             label="Featured"
-            title="Two platforms that show how we work."
-          />
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            title="Two engagements that show how we work."
+          >
+            <p className="m-0">
+              One platform that takes any ERP, for a FTSE-listed industrial
+              group. One finance rulebook that an AI assistant can be trusted
+              with.
+            </p>
+          </SectionIntro>
+          <div className="flex flex-col gap-6">
             {featured.map((e) => (
-              <FeaturedCase key={e.id} entry={e} />
+              <FeaturedCaseStudy key={e.id} id={e.id} />
             ))}
           </div>
         </div>

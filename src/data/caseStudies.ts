@@ -518,51 +518,112 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "erp-unification",
     number: "14",
-    title: "Unifying Fragmented ERP Ecosystems, Global Manufacturing",
+    title: "A Schema-Agnostic Sales Platform for a FTSE-Listed Industrial Group",
     industry: "Industrial Manufacturing",
     summary:
-      "Modernized and extended an Azure-based data architecture into a scalable, ERP-agnostic platform, unifying 25–30 EMEA operating companies under a single executive reporting framework, processing ~100 million rows daily.",
+      "For a FTSE-listed UK industrial group with revenue in the billions, we turned a single-ERP Azure platform into one that takes data from any ERP or CRM: 15 more EMEA operating companies onboarded, 80M+ rows per ETL cycle, and 20 dashboards replaced by one report.",
     icon: Globe,
     image: imgErpUnification,
-    stack: "Azure Data Factory, Databricks, Synapse Analytics, Power BI",
+    stack: "Azure Data Factory, Azure Databricks, Azure Synapse Analytics, Power BI, Azure DevOps",
     metrics: [
-      { value: "25–30", label: "Operating companies unified" },
-      { value: "~100M", label: "Rows processed daily" },
-      { value: "2–6", suffix: " wks", label: "ERP onboarding time" },
+      { value: "20 → 1", label: "Dashboards to one report" },
+      { value: "15", label: "Operating companies onboarded" },
+      { value: "80M+", label: "Rows per ETL cycle, 3× a day" },
+      { value: "2–3", suffix: " wks", label: "To onboard a known ERP" },
     ],
     sections: [
       {
         heading: "Client context",
-        body: "A century-old global manufacturing conglomerate operating across 80+ countries faced increasing complexity within its EMEA division due to ERP fragmentation. While some operating companies were aligned on modern ERP and CRM systems, many continued on heterogeneous legacy platforms, creating reporting silos and limiting executive visibility.",
+        body: "A FTSE-listed UK industrial group with revenue in the billions, operating in 80 to 90 countries through semi-autonomous operating companies, each running whichever ERP was common locally when it was set up.",
       },
       {
         heading: "The challenge",
         bullets: [
-          "25–30 operating companies required consolidated sales and opportunity reporting.",
-          "15 operated on heterogeneous legacy ERP systems with significant schema variation.",
-          "15–20 separate dashboards needed for regional performance review.",
-          "Inconsistent KPI definitions, manual Excel/email reporting, and limited cross-region comparability.",
+          "25 to 30 EMEA operating companies on five or more ERP and CRM systems, with no common data layer.",
+          "Regional leaders assembled sales performance from 15 to 20 dashboards, emailed reports and spreadsheets.",
+          "The existing platform was hard-coded to one ERP generation, so 10 to 15 operating companies were invisible to it.",
         ],
       },
       {
         heading: "What we built",
-        body: "We evolved the existing Azure data architecture into a flexible, multi-ERP adaptive analytics platform, harmonizing diverse ERP ecosystems into a canonical sales and opportunity model.",
-        bullets: [
-          "Azure Data Factory for pipeline orchestration.",
-          "Azure Databricks for transformation logic and schema harmonization.",
-          "Azure Synapse Analytics as the enterprise data warehouse.",
-          "Power BI unified semantic reporting layer.",
-          "CI/CD-first deployment model via Azure DevOps.",
-        ],
+        body: "A schema-agnostic medallion platform on Azure: one parameterized transformation framework maps any source into a canonical sales and opportunity model, feeding one Power BI report with row-level security.",
       },
       {
         heading: "Business impact",
         bullets: [
-          "25–30 operating companies unified under a single reporting framework.",
-          "~100 million rows processed daily across 3 ETL cycles.",
-          "ERP onboarding reduced to 2–6 weeks.",
-          "15–20 regional dashboards consolidated into a single executive view.",
-          "Platform now serves as a blueprint for expansion across additional continents.",
+          "20 reporting surfaces replaced by one report across all EMEA operating companies.",
+          "15 operating companies onboarded; 80M+ rows per ETL cycle, three cycles a day.",
+          "A new operating company onboards in 2 to 3 weeks on a known ERP, 4 to 6 weeks on a new one.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "global-lead-time",
+    number: "15",
+    title: "Consolidated Lead Time Report Across Four Supply Sites",
+    industry: "Industrial Manufacturing",
+    summary:
+      "For the same FTSE-listed UK industrial group, one engineer unified lead times from four supply sites on three different systems into one governed Power BI model: calendar days, one set of rules, five refreshes a day, live after about five weeks of build.",
+    icon: Layers,
+    image: imgCapitalIndus,
+    stack: "Azure Databricks, Synapse Serverless SQL, Power BI dataflows (Fabric), Power BI semantic model, Fabric SQL database",
+    metrics: [
+      { value: "4 → 1", label: "Supply sites, one report" },
+      { value: "~85%", label: "Faster model refresh" },
+      { value: "107", label: "Automated quality checks" },
+      { value: "0", label: "Failed test cases (73 run)" },
+    ],
+    sections: [
+      {
+        heading: "Client context",
+        body: "Sales companies across EMEA quote delivery dates to customers, but each of four supply sites held lead times in its own system, units and item codes.",
+      },
+      {
+        heading: "What we built",
+        body: "One governed Power BI model that stages every site into a common shape, matches each item to the product master, and applies the agreed rules at every refresh.",
+      },
+      {
+        heading: "Business impact",
+        bullets: [
+          "One source of truth for lead times, in calendar days, with the same rules everywhere.",
+          "Model refresh cut from about 47 minutes to 6 to 8.",
+          "Released to production after change-board approval, with no issues reported.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "governed-finance-semantic-layer",
+    number: "16",
+    title: "A Governed Finance Semantic Layer, Audited by IncLever",
+    industry: "Industrial Manufacturing",
+    summary:
+      "For a listed Indian engineering manufacturer, we turned finance logic that lived in dashboard formulas and people's heads into a governed semantic layer, then put IncLever on top to audit the data and answer finance questions without inventing its own logic.",
+    icon: Database,
+    image: imgEngineForecast,
+    stack: "SAP (OData), AWS S3, AWS Glue, Amazon Redshift, Power BI, OSI semantic layer (YAML), IncLever",
+    metrics: [
+      { value: "20", label: "Finance metrics, each with evidence" },
+      { value: "134", label: "Audit rules generated from the layer" },
+      { value: "100%", label: "Formula match on 16,603 rows" },
+      { value: "52M+", label: "SAP line items in scope" },
+    ],
+    sections: [
+      {
+        heading: "Client context",
+        body: "A listed engineering manufacturer with 6 business groups, 21 business units and 334 profit centers, whose monthly management P&L we had already automated from SAP to Power BI.",
+      },
+      {
+        heading: "What we built",
+        body: "An evidence-first semantic layer: 20 finance metrics, each claim tied to its evidence, with unsafe metrics blocked rather than guessed. IncLever audits the data and the layer, and answers questions inside it.",
+      },
+      {
+        heading: "Business impact",
+        bullets: [
+          "Finance logic made explicit and governed, readable by dashboards and AI agents alike.",
+          "134 audit rules generated from the layer, each resolving to a named human owner.",
+          "Questions an AI can't answer safely are refused and logged, not answered wrong.",
         ],
       },
     ],

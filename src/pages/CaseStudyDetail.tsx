@@ -5,7 +5,6 @@
  * Stories come from src/data/caseStudyDetails.ts; tags and titles from
  * src/content/caseStudyMeta.ts.
  */
-import { useParams } from "react-router-dom";
 import { capabilityById } from "@/content/capabilities";
 import { SHOW_UNVERIFIED } from "@/content/verify";
 import { SiteLayout } from "@/components/site/SiteLayout";
@@ -13,6 +12,9 @@ import { Label } from "@/components/site/primitives";
 import { BookCta, Breadcrumbs, CaseStudyCard, FinalCta } from "@/components/site/sections";
 import { StepLink } from "@/components/site/cases/CaseRow";
 import { caseById, formatMetric, relatedCases } from "@/components/site/cases/caseData";
+import { CaseFlow } from "@/components/site/cases/FeaturedCase";
+import { caseStories } from "@/content/caseStudyStories";
+import { Link, useParams } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import NotFound from "./NotFound";
 
@@ -31,7 +33,9 @@ const CaseStudyDetailPage = () => {
     ? detail.sections.map((s) => ({ id: s.id, label: sectionLabel[s.id] ?? s.label, heading: s.heading, body: s.body, bullets: s.bullets }))
     : cs.sections.map((s, i) => ({ id: `section-${i}`, label: s.heading, heading: "", body: s.body, bullets: s.bullets }));
   const lead = detail?.heroSubtitle ?? cs.summary;
-  const related = relatedCases(entry, 3);
+  const story = caseStories[entry.id];
+  const sameClient = story?.sameClient ? caseById[story.sameClient.id] : undefined;
+  const related = relatedCases(entry, 3).filter((r) => r.id !== sameClient?.id);
 
   return (
     <SiteLayout seo={{ title: meta.title.replace(/\.$/, ""), description: cs.summary, path: `/case-studies/${entry.id}` }}>
@@ -46,7 +50,11 @@ const CaseStudyDetailPage = () => {
           </Label>
           <h1 className="ip-h1-page m-0 max-w-[920px]">{meta.title}</h1>
           <p className="ip-lead mt-6 mb-0 max-w-[700px]">{lead}</p>
-          <p className="mt-4 mb-0 text-[14px] text-ip-muted">Case study: {cs.title}</p>
+          {story ? (
+            <p className="mt-5 mb-0 font-mono text-[12.5px] uppercase leading-[1.5] tracking-[0.04em] text-ip-muted">{story.context}</p>
+          ) : (
+            <p className="mt-4 mb-0 text-[14px] text-ip-muted">Case study: {cs.title}</p>
+          )}
         </div>
       </section>
 
@@ -67,6 +75,26 @@ const CaseStudyDetailPage = () => {
           </dl>
         </div>
       </section>
+
+      {/* At a glance + how the pieces connect (case studies with a story entry) */}
+      {story && (
+        <section aria-label="At a glance" className="border-b border-ip-rule bg-ip-grey">
+          <div className="ip-container ip-section grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+            <div>
+              <Label className="mb-5">At a glance</Label>
+              <dl className="m-0 border-t-2 border-black">
+                {story.glance.map(([k, v]) => (
+                  <div key={k} className="grid grid-cols-[110px_1fr] gap-4 border-b border-ip-rule-strong py-3.5 sm:grid-cols-[130px_1fr]">
+                    <dt className="ip-label-sm pt-0.5">{k}</dt>
+                    <dd className="m-0 text-[15.5px] leading-[1.5] text-black">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+            <CaseFlow story={story} />
+          </div>
+        </section>
+      )}
 
       {/* Story */}
       <section className="bg-white">
@@ -114,6 +142,13 @@ const CaseStudyDetailPage = () => {
                         </a>
                       </li>
                     ))}
+                    {story?.challenges && (
+                      <li>
+                        <a href="#challenges" className="text-ip-body no-underline hover:text-black hover:underline underline-offset-4">
+                          How we solved it
+                        </a>
+                      </li>
+                    )}
                   </ul>
                 </nav>
               )}
@@ -142,6 +177,37 @@ const CaseStudyDetailPage = () => {
                 )}
               </section>
             ))}
+
+            {story?.challenges && (
+              <section id="challenges" aria-labelledby="challenges-h" className="mt-14 border-t border-ip-rule pt-12">
+                <Label className="mb-4">How we solved it</Label>
+                <h2 id="challenges-h" className="m-0 text-[clamp(26px,2.8vw,36px)] font-semibold leading-[1.12] tracking-[-0.02em]">
+                  The hard parts, and what we did about them
+                </h2>
+                <div className="mt-6 border-t-2 border-black">
+                  {story.challenges.map(([c, sol]) => (
+                    <div key={c} className="grid gap-2 border-b border-ip-rule-strong py-4 sm:grid-cols-2 sm:gap-8">
+                      <p className="m-0 text-[16px] font-semibold leading-[1.45] text-black">{c}</p>
+                      <p className="m-0 flex gap-3 text-[16px] leading-[1.5] text-ip-body">
+                        <span aria-hidden="true" className="mt-[9px] h-2 w-2 shrink-0 bg-ip-orange" />
+                        {sol}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {sameClient && story?.sameClient && (
+              <Link
+                to={`/case-studies/${sameClient.id}`}
+                className="group mt-10 flex flex-col gap-1.5 rounded-xl border border-ip-orange p-6 no-underline transition-colors hover:border-black sm:p-7"
+              >
+                <span className="ip-label-sm">Same client</span>
+                <span className="text-[20px] font-semibold leading-[1.3] text-black group-hover:underline underline-offset-4 decoration-1">{sameClient.meta.title}</span>
+                <span className="text-[15px] text-ip-body">{story.sameClient.label}</span>
+              </Link>
+            )}
 
             <div className="mt-14 flex flex-wrap items-center justify-between gap-5 rounded-xl border border-ip-rule-strong bg-ip-grey p-6 sm:p-8">
               <p className="m-0 max-w-[420px] text-[19px] font-semibold leading-[1.35]">Facing something similar? Start with a 45-minute readiness assessment.</p>
