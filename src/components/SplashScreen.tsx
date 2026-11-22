@@ -1,82 +1,84 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Logo from "./Logo";
+/**
+ * Loading screen. Shown only when a page is NOT prerendered (local dev, or a
+ * route the prerender didn't bake); production pages skip it entirely (see
+ * the splash-skip guardrail in src/App.tsx and CLAUDE.md).
+ *
+ * Contract: call onComplete() once, after contentReady. App.tsx sets
+ * html[data-app-ready="true"] on completion, which the prerender snapshot
+ * waits for, so keep this short: it runs once per route at build time.
+ *
+ * Design (revamp): the current stacked logo, once, centered on white, with a
+ * thin orange progress line. No duplicate/clipped logo layers.
+ */
+import { useEffect, useRef, useState } from "react";
 
 interface SplashScreenProps {
   contentReady: boolean;
   onComplete: () => void;
 }
 
+const MIN_VISIBLE_MS = 450;
+
 const SplashScreen = ({ contentReady, onComplete }: SplashScreenProps) => {
   const [progress, setProgress] = useState(0);
-  const [dismissed, setDismissed] = useState(false);
+  const [leaving, setLeaving] = useState(false);
+  const started = useRef(Date.now());
+  const done = useRef(false);
+  const reduced =
+    typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
-  // Animate progress: fast to 85%, then pause until contentReady
+  // Ease toward 85% while the app loads.
   useEffect(() => {
-    const start = Date.now();
-    const fakeDuration = 1200; // ms to reach ~85%
-
+    let raf = 0;
     const tick = () => {
-      const elapsed = Date.now() - start;
-      const p = Math.min(elapsed / fakeDuration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      const value = eased * 85;
-      setProgress(value);
-
-      if (p < 1) {
-        requestAnimationFrame(tick);
-      }
+      const p = Math.min((Date.now() - started.current) / 700, 1);
+      setProgress((prev) => Math.max(prev, (1 - Math.pow(1 - p, 3)) * 85));
+      if (p < 1) raf = requestAnimationFrame(tick);
     };
-
-    requestAnimationFrame(tick);
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, []);
 
-  // When content is ready, fill to 100% and dismiss
+  // Once content is ready (and after a short minimum), fill, fade, finish.
   useEffect(() => {
-    if (contentReady && progress >= 50) {
+    if (!contentReady || done.current) return;
+    const wait = Math.max(0, MIN_VISIBLE_MS - (Date.now() - started.current));
+    const t1 = setTimeout(() => {
       setProgress(100);
-      const timer = setTimeout(() => setDismissed(true), 400);
-      return () => clearTimeout(timer);
-    }
-  }, [contentReady, progress]);
-
-  useEffect(() => {
-    if (dismissed) onComplete();
-  }, [dismissed, onComplete]);
+      setLeaving(true);
+    }, wait);
+    const t2 = setTimeout(() => {
+      done.current = true;
+      onComplete();
+    }, wait + (reduced ? 0 : 260));
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [contentReady, onComplete, reduced]);
 
   return (
-    <AnimatePresence>
-      {!dismissed && (
-        <motion.div
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background"
-        >
-          {/* Logo text */}
-          <div className="relative select-none">
-            {/* Dim base logo */}
-            <div className="opacity-25">
-              <Logo className="h-12 md:h-20 w-auto" />
-            </div>
-            {/* Bright logo clipped by progress (left-to-right reveal) */}
-            <div
-              className="absolute inset-0 overflow-hidden"
-              style={{ clipPath: `inset(0 ${100 - progress}% 0 0)` }}
-            >
-              <Logo className="h-12 md:h-20 w-auto" />
-            </div>
-          </div>
-
-          {/* Bottom progress bar */}
-          <div className="absolute bottom-0 left-0 right-0 h-1 bg-border/30">
-            <div
-              className="h-full bg-gradient-orange transition-[width] duration-300 ease-out"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div
+      role="status"
+      aria-label="Loading InclinedPlane"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white transition-opacity duration-[250ms] ease-out"
+      style={{ opacity: leaving ? 0 : 1 }}
+    >
+      <img
+        src="/brand/logo-primary.png"
+        alt="InclinedPlane"
+        width={163}
+        height={48}
+        className="block h-10 w-auto select-none md:h-12"
+        draggable={false}
+      />
+      <div aria-hidden="true" className="mt-7 h-[3px] w-[120px] overflow-hidden rounded-full bg-[#E4E4E5]">
+        <div
+          className="h-full bg-[#F47920] transition-[width] duration-200 ease-out"
+          style={{ width: `${reduced ? 100 : progress}%` }}
+        />
+      </div>
+    </div>
   );
 };
 

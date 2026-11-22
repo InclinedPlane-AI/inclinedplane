@@ -12,6 +12,7 @@ import { industries } from "@/content/industries";
 import { flags } from "@/content/flags";
 import { SHOW_UNVERIFIED } from "@/content/verify";
 import { SiteLayout } from "@/components/site/SiteLayout";
+import { TrustedBy, Testimonials } from "@/components/site/social";
 import { InclineHome } from "@/components/site/Incline";
 import { Label, SectionIntro, Verified, VerifyBadge, buttonClass } from "@/components/site/primitives";
 import {
@@ -70,6 +71,8 @@ const Index = () => {
       </section>
 
       <ProofStrip />
+
+      <TrustedBy />
 
       {/* How we build: the incline */}
       <section id="approach" className="bg-ip-grey">
@@ -171,8 +174,10 @@ const Index = () => {
         </div>
       </section>
 
+      <Testimonials tone="grey" />
+
       {/* Industries */}
-      <section id="industries" className="bg-ip-grey">
+      <section id="industries" className="bg-white border-t border-ip-rule">
         <div className="ip-container ip-section">
           <SectionIntro label="Industries" title="Built for complex, multi-entity businesses." />
           <div className="grid grid-cols-1 border-t-2 border-black sm:grid-cols-2 lg:grid-cols-5">
@@ -191,7 +196,7 @@ const Index = () => {
       </section>
 
       {/* CEO note */}
-      <section id="about" className="bg-white">
+      <section id="about" className="bg-white border-t border-ip-rule">
         <div className="ip-container ip-section flex flex-wrap items-center gap-12">
           {SHOW_UNVERIFIED && (
             <div

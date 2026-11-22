@@ -208,17 +208,6 @@ export function ProofStrip() {
           {partners.some((p) => !p.verified) && <VerifyBadge />}
         </div>
       )}
-      {SHOW_UNVERIFIED && (
-        <div className="ip-container pb-10">
-          <div
-            role="note"
-            className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 rounded-lg border border-dashed border-ip-rule-dashed bg-ip-grey px-6 py-5"
-          >
-            <span className="ip-label-sm">Trusted by</span>
-            <span className="text-[15px] text-ip-muted">Client logos, each linking to its case study. Added only once each client approves.</span>
-          </div>
-        </div>
-      )}
     </section>
   );
 }
