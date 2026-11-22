@@ -100,7 +100,7 @@ const ProductInclever = () => (
               ))}
             </div>
           </div>
-          <div className="flex min-w-0 flex-col gap-3">
+          <div id="demo" className="flex min-w-0 scroll-mt-32 flex-col gap-3">
             <IncleverDemoFrame />
           </div>
         </div>

@@ -11,7 +11,7 @@
  */
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { piqLine, piqStatus, piqPillars, piqPersonas, piqAlerts, piqGuarantees, piqSteps, piqLayers, piqFindings, piqAlertNoise, piqFaq, piqVideo, type Severity } from "@/content/pipelineiq";
+import { piqLine, piqStatus, piqPillars, piqPersonas, piqAlerts, piqGuarantees, piqSteps, piqLayers, piqFindings, piqAlertNoise, piqFaq, piqVideo, piqSandbox, type Severity } from "@/content/pipelineiq";
 import { PRODUCTS } from "@/data/products";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Breadcrumbs, Faq } from "@/components/site/sections";
@@ -20,6 +20,7 @@ import { IncidentView } from "@/components/site/products/IncidentView";
 import { DemoRequest } from "@/components/site/products/DemoRequest";
 import { TrustChain } from "@/components/site/products/diagrams";
 import { ChapterNav, DemoVideo } from "@/components/site/products/demoKit";
+import { SandboxDemo } from "@/components/site/products/SandboxDemo";
 import { DebugTrail } from "@/components/site/products/piq/DebugTrail";
 import { SignatureCollapse } from "@/components/site/products/piq/SignatureCollapse";
 import { AdaptiveThreshold } from "@/components/site/products/piq/AdaptiveThreshold";
@@ -31,6 +32,7 @@ import { cn } from "@/lib/utils";
 const piq = PRODUCTS.find((p) => p.id === "pipelineiq")!;
 
 const chapters = [
+  { id: "demo", label: "Try it", plain: true },
   { id: "morning", label: "The morning after" },
   { id: "error-index", label: "Error index" },
   { id: "alerts", label: "Alerts" },
@@ -121,8 +123,8 @@ const ProductPipelineIQ = () => (
             <h1 className="m-0 text-[clamp(40px,4.4vw,62px)] font-semibold leading-[1.02] tracking-[-0.03em]">{piqLine}</h1>
             <p className="ip-lead mt-6 mb-0 max-w-[560px]">{piq.brief} Read-only, built around your estate, and watching before anyone opens a report.</p>
             <div className="mt-8 flex flex-wrap items-center gap-3.5">
-              <a href="#morning" className={buttonClass("primary")}>
-                See how it works
+              <a href="#demo" className={buttonClass("primary")}>
+                Try the interactive demo
               </a>
               <a href="#demo-request" className={buttonClass("secondary")}>
                 Request a live demo
@@ -147,6 +149,24 @@ const ProductPipelineIQ = () => (
     </section>
 
     <ChapterNav chapters={chapters} />
+
+    {/* Interactive sandbox (#demo: linked from the Solutions menu and hub) */}
+    <section id="demo" className="scroll-mt-32 bg-white">
+      <div className="ip-container ip-section">
+        <div className="mb-8 grid gap-6 md:grid-cols-2 md:items-end">
+          <div>
+            <Label dot className="mb-5">
+              Interactive demo
+            </Label>
+            <h2 className={h2}>Try the portal yourself.</h2>
+          </div>
+          <p className="m-0 text-[17px] leading-[1.6] text-ip-body">
+            Click through every page a support engineer uses: the overview, alerts you can acknowledge and resolve, the error history, batch timelines, entities and sources. A rerun is in progress, so press Collect now and watch it move.
+          </p>
+        </div>
+        <SandboxDemo src={piqSandbox.src} poster={piqSandbox.poster} title="PipelineIQ interactive demo" note={piqSandbox.note} size={piqSandbox.size} />
+      </div>
+    </section>
 
     {/* 01 The morning after */}
     <section id="morning" className="scroll-mt-32 bg-ip-grey">

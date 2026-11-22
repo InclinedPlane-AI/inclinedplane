@@ -67,8 +67,8 @@ function ProductSection({ p, tone }: { p: Product; tone: "white" | "grey" }) {
               <DemoVideo src={piqVideo.src} poster={piqVideo.poster} title="PipelineIQ portal" tag="Demo data" label={piqVideo.label} aspect={piqVideo.aspect} />
               <p className="m-0 text-[14px] text-ip-body">
                 {piqVideo.caption}{" "}
-                <Link to="/products/pipelineiq#alerts" className="ip-link text-[14px]">
-                  Try the interactive alert storm
+                <Link to="/products/pipelineiq#demo" className="ip-link text-[14px]">
+                  Try the interactive demo
                 </Link>
               </p>
             </>

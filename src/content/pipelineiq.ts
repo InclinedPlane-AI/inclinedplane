@@ -21,6 +21,20 @@ export const piqVideo = {
   aspect: "1440/798",
 };
 
+/**
+ * The interactive sandbox: the whole portal on simulated data for a fictional
+ * client (Aldermoor Thermal Group), as one self-contained file built in the
+ * PipelineIQ repo (demo/build.py, which refuses to write anything that
+ * identifies the real client). Copied to public/demos/ with a noindex tag;
+ * loaded only when a visitor presses Launch.
+ */
+export const piqSandbox = {
+  src: "/demos/pipelineiq-demo.html#/",
+  poster: "/media/pipelineiq-sandbox-poster.jpg",
+  note: "The whole portal, running in your browser on simulated data for a fictional client. Every page, filter and chart works; nothing connects to a real system.",
+  size: "about 800 KB",
+};
+
 /** Proposed positioning line (brief §3.4 copy bank). */
 export const piqLine = "Know every morning whether your data is safe to use.";
 

@@ -182,7 +182,7 @@ export function DemoVideo({
   );
 }
 
-export function ChapterNav({ chapters, label = "On this page" }: { chapters: { id: string; label: string }[]; label?: string }) {
+export function ChapterNav({ chapters, label = "On this page" }: { chapters: { id: string; label: string; plain?: boolean }[]; label?: string }) {
   const [active, setActive] = useState(chapters[0]?.id);
   useEffect(() => {
     const els = chapters.map((c) => document.getElementById(c.id)).filter(Boolean) as HTMLElement[];
@@ -202,7 +202,9 @@ export function ChapterNav({ chapters, label = "On this page" }: { chapters: { i
     <nav aria-label={label} className="sticky top-16 z-30 border-b border-ip-rule bg-white/95 backdrop-blur lg:top-[76px]">
       <div className="ip-container">
         <ol className="m-0 flex list-none gap-1 overflow-x-auto p-0 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {chapters.map((c, i) => (
+          {chapters.map((c) => {
+            const n = c.plain ? 0 : chapters.filter((x) => !x.plain).indexOf(c) + 1;
+            return (
             <li key={c.id} className="shrink-0">
               <a
                 href={`#${c.id}`}
@@ -212,11 +214,12 @@ export function ChapterNav({ chapters, label = "On this page" }: { chapters: { i
                   active === c.id ? "bg-black text-white" : "text-ip-body hover:bg-ip-grey hover:text-black",
                 )}
               >
-                <span className={cn("font-mono text-[11px]", active === c.id ? "text-ip-orange" : "text-ip-muted")}>{String(i + 1).padStart(2, "0")}</span>
+                {n > 0 && <span className={cn("font-mono text-[11px]", active === c.id ? "text-ip-orange" : "text-ip-muted")}>{String(n).padStart(2, "0")}</span>}
                 {c.label}
               </a>
             </li>
-          ))}
+            );
+          })}
         </ol>
       </div>
     </nav>
