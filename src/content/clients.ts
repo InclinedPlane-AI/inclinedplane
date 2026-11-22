@@ -43,6 +43,7 @@ export const clients: Client[] = [
     source: "supplied by Mohan's team",
     verified: false,
   },
-  { name: "VSM Technologies", logo: "/clients/vsm.svg", height: 33, source: "supplied by Mohan's team", verified: false },
+  { name: "VSM Software", logo: "/clients/vsm.svg", height: 36, source: "supplied by Mohan's team", verified: false },
+  { name: "Examly", logo: "/clients/examly.svg", height: 30, source: "supplied by Mohan's team", verified: false },
   { name: "Noble Bioresources", logo: "/clients/noble.svg", height: 37, source: "supplied by Mohan's team", verified: false },
 ];
