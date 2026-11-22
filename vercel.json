@@ -20,6 +20,11 @@
       "source": "/inclever",
       "destination": "/products/inclever",
       "permanent": true
+    },
+    {
+      "source": "/learn/what-is-context-engineering",
+      "destination": "/context-engineering",
+      "permanent": true
     }
   ]
 }

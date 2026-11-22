@@ -124,6 +124,19 @@ tagline "Data Leveraged. Growth Accelerated."), `incpl_primarylogo_fullcolourAW.
   5. Keerthana's sign-offs (headshot, CEO note, checklist PDF, proposed blocks) and the claims in section 6b.
   6. Testing (real test booking, all forms), Lighthouse, protect `main`, add the two engineers.
 
+## 5c. Session 3: navigation and page flow (2026-11-22)
+
+Owner's brief: the nav items overlapped; make Solutions a dropdown, give context engineering its own page, put Learn inside Capabilities, add a Resources menu and an Insights evidence page, and make sure no page is a dead end. One PR.
+
+- **Nav:** Context Engineering · Capabilities ▾ · Solutions ▾ · Resources ▾ · About · Contact + Book. Details and rationale: DESIGN_NOTES §3 "Navigation and page flow".
+- **New pages:** `/context-engineering`, `/insights`, `/resources`, `/readiness-checklist`. `/learn/what-is-context-engineering` 301s to `/context-engineering`.
+- **Changed:** `/products` is labeled Solutions (both products on top, both demos); `/capabilities` has clickable pillar cards + a Learn section; the Contextualize pillar links to the explainer instead of repeating it; `/learn` opens with the interactive context-layers diagram; `/blog` is labeled Blog.
+- **Interactive pieces** (all sample data, all content in the HTML): context layers (`learn/ContextLayers.tsx`), ontology explorer (`learn/OntologyExplorer.tsx`), readiness check simulator (`learn/ReadinessSim.tsx`), live-scored checklist. Articles can embed them with a `widget` block in `learn.ts`.
+- **New explainer:** "Why AI agents give wrong answers on enterprise data" (brief §6.3 #4).
+- **Flow check:** `scripts/check-flow.mjs` runs at the end of `npm run build` and fails on dead ends or orphans. Build now ends "50 ok … 0 failed" then "[flow] 50 pages checked: 0 dead end(s), 0 orphan(s)".
+- **Decisions taken by default** (owner didn't answer; change if wanted): kept `/products` URLs under the "Solutions" label; Industries added to Resources.
+- **Needs sign-off:** PipelineIQ in the Solutions menu (brief §7.5 said off main nav until approved); every Insights figure (29, `verified: false`) needs a person to open its link; Gartner/McKinsey/Snowflake originals blocked automated checks, so they link to the reporting page plus the original.
+
 ## 6. Checklist
 
 Legend: [x] done · [~] in progress · [ ] not started
@@ -158,6 +171,7 @@ Legend: [x] done · [~] in progress · [ ] not started
 - [x] /learn + 3 explainers + glossary
 - [x] /blog (Insights) + posts, /thesis
 - [x] /contact, /careers, /referral, legal pages, 404
+- [x] Session 3: /context-engineering, /insights, /resources, /readiness-checklist; Solutions hub; nav dropdowns; NextSteps on every page
 - [x] Legacy components, pages, media and unused packages removed (bundle ~1.5 MB → ~1.0 MB)
 
 ### Phase 3: SEO / AI indexing
@@ -165,6 +179,7 @@ Legend: [x] done · [~] in progress · [ ] not started
 - [x] Redirects in `vercel.json` (/services → /capabilities, /inclever → /products/inclever) + client-side `<Navigate>`
 - [x] `llms.txt`, manifest, icons, new 1200×630 `og-image.png`
 - [ ] Per-page OG images (currently one shared image)
+- [x] SEO entries for the four new routes (Article + FAQPage on /context-engineering; Article with verified citations on /insights; CollectionPage on /resources); llms.txt updated
 - [ ] Switch production `deploy.yml` packaging to `node scripts/vercel-output.mjs` **at launch** (else redirects won't apply in prod)
 
 ### Phase 4: QA
@@ -188,6 +203,8 @@ Legend: [x] done · [~] in progress · [ ] not started
 - PipelineIQ status line, "368 raw alerts" metric, first-deployment findings: confirm OK to publish.
 - Careers: "Remote-first" wording vs the Bengaluru delivery base; careers email; hiring timing.
 - Proposed blocks in `src/content/flags.ts` need founder sign-off (all on for staging).
+- **Insights figures** (`src/content/insights.ts`): 29 sourced figures, all `verified: false`. Open each `url` (and `primaryUrl` where given) and set `verified: true`. Until then production shows the page without figures. Gartner's "two-thirds" may be 63% on gartner.com.
+- **PipelineIQ in the Solutions menu:** owner's call, founder sign-off pending.
 - **Client logos** (`src/content/clients.ts`, files in `public/clients/`): 12 logos. Seven from the companies' own sites (Revlon, Rotimatic, Duroflex, Cocoblu, Kanoria/KCIL, Tarasafe, Masoom); five supplied by Mohan's team on 2026-11-22 (Arenco, Global Development Initiative (GDi), VSM Software, Noble Bioresources, Examly). Supplied files were traced to single-colour SVG silhouettes; GDi's magenta 'G' keeps a knockout gap. Arenco's logo replaced the Golden Sands mark (same client, parent brand). The first VSM file was the wrong company and was replaced the same day. GDi = Global Development Initiative (confirmed by Mohan's team, 2026-11-22). All `verified: false` until each client's written permission is on file.
 - **Testimonials** (`src/content/testimonials.ts`): all three are PLACEHOLDERS written for layout. Replace with approved quotes before launch (hidden in production until then).
 
@@ -217,3 +234,4 @@ Legend: [x] done · [~] in progress · [ ] not started
 | 2026-11-22 | PR #16 | Client logos and placeholder testimonials; new loading screen; 'Trusted by' as its own black band |
 | 2026-11-22 | PR #17 | Client logos as an edge-to-edge infinite scroll (pauses on hover, static for reduced motion) |
 | 2026-11-22 | PR #18 | Five more client logos (traced to SVG; VSM corrected, Examly added), Arenco replaces Golden Sands; tracker housekeeping |
+| 2026-11-22 | PR #19 | Navigation restructure: dropdowns, /context-engineering, /insights, /resources, /readiness-checklist, Solutions hub, interactive Learn, flow check |

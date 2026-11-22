@@ -11,7 +11,6 @@ import { site } from "@/content/site";
 import { visible } from "@/content/verify";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { InclineMini } from "@/components/site/Incline";
-import { TwoAnswers } from "@/components/site/TwoAnswers";
 import { Label, SectionIntro, Verified, VerifyBadge } from "@/components/site/primitives";
 import { BookCta, CaseStudyCard, Faq, FinalCta, IncleverCard, PageHero, Reassure, ToolsTable } from "@/components/site/sections";
 import { cn } from "@/lib/utils";
@@ -170,20 +169,27 @@ const CapabilityPage = () => {
         </div>
       </section>
 
-      {/* Signature: Contextualize */}
+      {/* Contextualize: the concept lives on /context-engineering; this page is how we deliver it */}
       {cap.id === "contextualize" && (
         <section className="bg-white">
           <div className="ip-container ip-section">
-            <SectionIntro label="Why it matters" title="What goes wrong without context, and which layer fixes it.">
-              <p className="m-0">Ask an agent a normal business question on raw tables, then ask it again through governed context. Switch between the two answers.</p>
-            </SectionIntro>
-            <TwoAnswers />
-            <p className="mt-5 mb-0 text-[15px] text-ip-body">
-              New to the terms?{" "}
-              <Link to="/learn/what-is-context-engineering" className="ip-link text-[15px]">
-                What context engineering is, with a worked example
-              </Link>
-            </p>
+            <Link
+              to="/context-engineering"
+              className="group grid gap-6 rounded-xl border border-ip-orange p-6 no-underline transition-colors hover:border-black sm:p-9 md:grid-cols-[1fr_auto] md:items-center"
+            >
+              <span className="flex flex-col gap-2">
+                <span className="ip-label">New to the concept?</span>
+                <span className="text-[clamp(24px,2.6vw,32px)] font-semibold leading-[1.15] tracking-[-0.015em] text-black group-hover:underline decoration-1 underline-offset-4">
+                  Context engineering, explained
+                </span>
+                <span className="max-w-[640px] text-[17px] leading-[1.55] text-ip-body">
+                  The worked example (one question, two answers), the layers, data modelling and an interactive ontology explorer.
+                </span>
+              </span>
+              <span className="text-[15px] font-semibold text-black">
+                Read the explainer <span aria-hidden="true">→</span>
+              </span>
+            </Link>
           </div>
         </section>
       )}

@@ -279,6 +279,22 @@ function parseLearn() {
 
 const LEARN = parseLearn();
 
+// Insights figures (src/content/insights.ts): verified entries become the
+// Article's citations, matching what production renders.
+function parseInsightCitations() {
+  const src = readData("src/content/insights.ts");
+  const body = src.slice(src.indexOf("export const insightStats"));
+  return [...body.matchAll(/\{[^{}]*?\}/gs)]
+    .map((m) => m[0])
+    .filter((b) => /verified:\s*true/.test(b))
+    .map((b) => ({
+      name: (b.match(new RegExp(`source:\\s*${STR}`)) || [])[1],
+      url: (b.match(new RegExp(`url:\\s*${STR}`)) || [])[1],
+    }))
+    .filter((c) => c.name && c.url)
+    .map((c) => ({ "@type": "CreativeWork", name: unescapeQuotes(c.name), url: c.url }));
+}
+
 // Revamp titles for case studies (outcome-led, used as the page h1).
 function parseCaseMetaTitles() {
   const src = readData("src/content/caseStudyMeta.ts");
@@ -369,6 +385,42 @@ const staticRoutes = [
   },
   ...CAPABILITY_ROUTES,
   {
+    // Mirrors src/pages/ContextEngineering.tsx + src/content/contextEngineering.ts (ceSeo, ceFaq).
+    // /learn/what-is-context-engineering 301s here (vercel.json).
+    path: "/context-engineering",
+    title: "What is context engineering? Data modelling and ontology for AI",
+    description:
+      "Context engineering makes business meaning explicit and machine-readable for AI agents. Data modelling, ontology and the layers that fix wrong answers.",
+    ogType: "article",
+    noscriptSummary:
+      "Context engineering is making business meaning explicit and machine-readable: definitions, relationships, rules, permissions and freshness, delivered to people and AI agents when they ask a question. This page explains why it matters now (the consumer of enterprise data changed from an analyst to an AI agent), works through one question on raw tables and through governed context, describes the layers (semantic layer, ontology, master data, permissions, freshness), the four levels of data modelling, what an ontology is and when you need one, what good looks like, and where InclinedPlane's capabilities and products fit.",
+    pageJsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: "What is context engineering? Data modelling and ontology for AI",
+        description:
+          "Context engineering makes business meaning explicit and machine-readable for AI agents. Data modelling, ontology and the layers that fix wrong answers.",
+        datePublished: "2026-11-21",
+        dateModified: "2026-11-22",
+        author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        publisher: {
+          "@type": "Organization",
+          name: SITE_NAME,
+          logo: { "@type": "ImageObject", url: `${SITE_URL}/brand/logo-primary-large.png` },
+        },
+        mainEntityOfPage: `${SITE_URL}/context-engineering`,
+        about: {
+          "@type": "DefinedTerm",
+          name: "Context engineering",
+          description:
+            "Making business meaning explicit and machine-readable: definitions, relationships, rules, permissions and freshness, delivered to people and AI agents when they ask a question.",
+        },
+      },
+      ...faqPage(parseFaq("src/content/contextEngineering.ts", "ceFaq")),
+    ],
+  },
+  {
     path: "/assessment",
     title: "AI Data Readiness Assessment",
     description:
@@ -398,18 +450,18 @@ const staticRoutes = [
     noIndex: true,
   },
   {
-    // Mirrors src/pages/Products.tsx (hub) and the two product pages below.
+    // Mirrors src/pages/Products.tsx ("Solutions" hub) and the two product pages below.
     path: "/products",
-    title: "Products: the trust layer, from pipeline to answer",
+    title: "Solutions: IncLever and PipelineIQ, the trust layer",
     description:
-      "PipelineIQ checks data arrives reliably. IncLever checks it is ready for any AI agent. Two accelerators built by the engineers who deliver our work.",
+      "IncLever checks your data is ready for any AI agent. PipelineIQ checks it arrives reliably. Two products built by the engineers who deliver our work.",
     noscriptSummary:
       "InclinedPlane builds two accelerators. PipelineIQ is read-only pipeline monitoring and ETL debugging that answers \"is the data arriving reliably?\". IncLever audits and certifies data readiness and answers \"is it ready for any agent?\". Together they cover the chain from ERP sources to any AI agent.",
     pageJsonLd: [
       {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        name: "InclinedPlane products",
+        name: "InclinedPlane solutions",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "IncLever", url: `${SITE_URL}/products/inclever` },
           { "@type": "ListItem", position: 2, name: "PipelineIQ", url: `${SITE_URL}/products/pipelineiq` },
@@ -420,7 +472,7 @@ const staticRoutes = [
   {
     path: "/products/pipelineiq",
     title: "PipelineIQ: pipeline monitoring and ETL debugging",
-    breadcrumbParent: { name: "Products", path: "/products" },
+    breadcrumbParent: { name: "Solutions", path: "/products" },
     description:
       "Read-only pipeline monitoring, alerting and ETL debugging that turns hundreds of failures into a few root causes. Know each morning if data is safe to use.",
     noscriptSummary:
@@ -442,7 +494,7 @@ const staticRoutes = [
   {
     path: "/products/inclever",
     title: "IncLever: AI data readiness and governed analytics",
-    breadcrumbParent: { name: "Products", path: "/products" },
+    breadcrumbParent: { name: "Solutions", path: "/products" },
     description:
       "IncLever audits data and definitions against explicit rules, certifies readiness with evidence, and answers questions only on data that has passed.",
     noscriptSummary:
@@ -513,7 +565,7 @@ const staticRoutes = [
     description:
       "Plain explanations of context engineering, semantic layers, ontologies and AI readiness, with worked examples and a glossary of the terms.",
     noscriptSummary:
-      "Explainers on context engineering, the difference between ontologies, semantic layers and knowledge graphs, and what AI readiness means. Includes a glossary where each term is defined in one sentence.",
+      "Interactive explainers on the layers of context between a question and a correct answer, the difference between ontologies, semantic layers and knowledge graphs, what AI readiness means and why AI agents give wrong answers on enterprise data. Includes a glossary where each term is defined in one sentence.",
     pageJsonLd: [
       {
         "@context": "https://schema.org",
@@ -531,12 +583,65 @@ const staticRoutes = [
   },
   ...LEARN_ROUTES,
   {
+    // Mirrors src/pages/Insights.tsx; figures in src/content/insights.ts.
+    path: "/insights",
+    title: "Insights: why enterprise AI stalls on data, in numbers",
+    description:
+      "AI readiness gaps, agent failure rates, the cost of poor data and the market shifts reshaping data foundations, every figure linked to its source.",
+    breadcrumbParent: { name: "Resources", path: "/resources" },
+    ogType: "article",
+    noscriptSummary:
+      "Insights: the evidence behind AI-ready data. Enterprises are committing to AI agents, but most say their data is not ready, and data readiness rather than model capability is the most common reason agent projects stall. The page groups industry figures into the commitment, the readiness gap, where projects stall, what context changes, the cost of waiting and how the market is moving, each linked to its source, then lists what leaders do about it: measure readiness, write the business meaning down, build on the platform they already have, and keep it ready after go-live.",
+    pageJsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: "Why enterprise AI stalls on data, in numbers",
+        description:
+          "AI readiness gaps, agent failure rates, the cost of poor data and the market shifts reshaping data foundations, every figure linked to its source.",
+        datePublished: "2026-11-22",
+        dateModified: "2026-11-22",
+        author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+        mainEntityOfPage: `${SITE_URL}/insights`,
+        citation: parseInsightCitations(),
+      },
+    ],
+  },
+  {
+    // Mirrors src/pages/Resources.tsx (links: resourcesNav in src/content/site.ts).
+    path: "/resources",
+    title: "Resources: case studies, explainers, insights and tools",
+    description:
+      "Case studies, industries, interactive explainers, industry insights with sources, our blog and thesis, and a free AI data readiness checklist.",
+    noscriptSummary:
+      "Resources from InclinedPlane: case studies and industries (proof), interactive explainers on context engineering, ontology and AI readiness (Learn), industry figures with sources (Insights), the blog and our thesis, and a free 16-point AI data readiness checklist.",
+    pageJsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "InclinedPlane resources",
+        url: `${SITE_URL}/resources`,
+      },
+    ],
+  },
+  {
+    // Mirrors src/pages/ReadinessChecklist.tsx (content: src/content/checklist.json).
+    path: "/readiness-checklist",
+    title: "AI data readiness checklist: 16 checks before agents",
+    description:
+      "Sixteen checks to run before an AI agent touches your data, across quality, context, access and governance. Score yourself, then download the PDF.",
+    breadcrumbParent: { name: "Resources", path: "/resources" },
+    noscriptSummary:
+      "The AI data readiness checklist: sixteen checks to run before an AI agent touches your data, in four areas: quality, context, access and governance. Tick only what you can show evidence for. 14 to 16 means ready to pilot an agent on this data; 9 to 13 means close the unticked checks before go-live, starting with access; 8 or fewer means start with the data foundation. A one-page PDF is available for download.",
+  },
+  {
     path: "/blog",
-    title: "Insights on data engineering and AI readiness",
+    title: "Blog: data engineering and AI readiness",
     description:
       "Articles from InclinedPlane engineers on data platforms, pipelines, data contracts, context and getting enterprise data ready for AI agents.",
     noscriptSummary:
-      "Insights from the InclinedPlane team: articles on data platforms, pipeline reliability, data contracts, data gravity, stewardship, explainability and getting enterprise data ready for AI agents.",
+      "The InclinedPlane blog: articles on data platforms, pipeline reliability, data contracts, data gravity, stewardship, explainability and getting enterprise data ready for AI agents.",
   },
 
   {

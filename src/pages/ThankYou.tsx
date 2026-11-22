@@ -145,7 +145,7 @@ const ThankYou = () => {
             <Link to="/case-studies" className={buttonClass("secondary", "md")}>
               Case studies
             </Link>
-            <Link to="/capabilities/context-engineering" className={buttonClass("secondary", "md")}>
+            <Link to="/context-engineering" className={buttonClass("secondary", "md")}>
               Context engineering
             </Link>
           </div>

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/prerender.mjs",
+    "build": "vite build && node scripts/prerender.mjs && node scripts/check-flow.mjs",
     "build:dev": "vite build --mode development && node scripts/prerender.mjs",
     "prerender": "node scripts/prerender.mjs",
     "install:chromium": "playwright install chromium",

@@ -8,6 +8,9 @@
  * Inline markup supported in text: [link text](/path) and **bold**.
  * Industry figures are attributed to their source and used only here, never on
  * the homepage (brief §2.1). Verify source links before launch.
+ *
+ * "What is context engineering?" moved to its own page, /context-engineering
+ * (2026-11-22); /learn/what-is-context-engineering 301s there.
  */
 
 export type LearnBlock =
@@ -16,7 +19,9 @@ export type LearnBlock =
   | { type: "ol"; items: string[] }
   | { type: "h3"; text: string }
   | { type: "table"; caption: string; head: string[]; rows: string[][] }
-  | { type: "quote"; text: string; source?: string };
+  | { type: "quote"; text: string; source?: string }
+  /** An interactive widget, rendered by components/site/learn/RichText.tsx. */
+  | { type: "widget"; name: "ontology-explorer" | "readiness-sim" | "two-answers" | "context-layers"; caption: string };
 
 export interface LearnSection {
   id: string;
@@ -40,140 +45,6 @@ export interface LearnArticle {
 
 export const learnArticles: LearnArticle[] = [
   {
-    slug: "what-is-context-engineering",
-    title: "What is context engineering?",
-    definition:
-      "Context engineering is making business meaning explicit and machine-readable: definitions, relationships, rules, permissions and freshness, delivered to people and AI agents when they ask a question.",
-    description:
-      "Context engineering makes business meaning explicit and machine-readable. A worked example of what goes wrong without each layer, and what good looks like.",
-    datePublished: "2026-11-21",
-    dateModified: "2026-11-21",
-    capability: { label: "Enterprise Context Engineering", to: "/capabilities/context-engineering" },
-    related: ["ontology-vs-semantic-layer-vs-knowledge-graph", "what-ai-readiness-means"],
-    sections: [
-      {
-        id: "why-now",
-        heading: "Why it matters now",
-        blocks: [
-          {
-            type: "p",
-            text: "For thirty years the consumer of enterprise data was a human analyst. Analysts carried the missing meaning in their heads: intercompany sales are excluded, a distributor counts as a customer, “last quarter” means the fiscal quarter. When a table was wrong, they noticed and fixed the query.",
-          },
-          {
-            type: "p",
-            text: "The new consumer is an AI agent. It knows none of this. It reads whichever table it finds first, applies the most literal interpretation of the question, and returns a confident, well-formatted answer. Meaning that lived in people’s heads now has to be written down, governed and readable by a machine.",
-          },
-          {
-            type: "p",
-            text: "The industry has reached the same conclusion. Across more than 50 agentic engagements, Cognizant found that context readiness, not model capability, keeps agents out of production. Gartner expects 60% of agentic analytics projects that rely only on MCP to fail by 2028 without a semantic layer.",
-          },
-        ],
-      },
-      {
-        id: "worked-example",
-        heading: "A worked example",
-        blocks: [
-          {
-            type: "p",
-            text: "Take one ordinary question: **“Who are our top 10 customers in France by margin last quarter?”** Here is what an agent does with each layer of context missing, and what it does when the layer is in place. The company and figures are fictional.",
-          },
-          {
-            type: "table",
-            caption: "What each layer of context changes in the answer",
-            head: ["Layer", "Without it, the agent…", "With it, the agent…"],
-            rows: [
-              [
-                "Definitions (semantic layer)",
-                "Calculates margin as revenue minus list price, adds GBP to EUR, and uses the calendar quarter.",
-                "Uses Group Finance’s gross margin definition, converts currency at monthly average rates, and uses the fiscal quarter.",
-              ],
-              [
-                "Relationships (ontology)",
-                "Counts the company’s own French subsidiary as its biggest customer.",
-                "Knows an intercompany entity is not a customer, and that a distributor is.",
-              ],
-              [
-                "Master data",
-                "Lists one distributor twice, once under each ERP’s customer ID.",
-                "Treats both records as one customer, so its margin is counted once and in full.",
-              ],
-              [
-                "Permissions",
-                "Shows a regional sales lead the margin on accounts outside their region.",
-                "Returns only the rows that person, or that agent, is allowed to see.",
-              ],
-              [
-                "Freshness",
-                "Answers from a sales table that stopped loading on Tuesday, without saying so.",
-                "States the data timestamp, and declines to answer if the table breaks its freshness rule.",
-              ],
-            ],
-          },
-          {
-            type: "p",
-            text: "Five errors, none of them caused by the model. Each one is fixed by context the agent can read before it answers. You can switch between both answers in the [interactive version on our context engineering page](/capabilities/context-engineering).",
-          },
-        ],
-      },
-      {
-        id: "what-context-covers",
-        heading: "The five things context covers",
-        blocks: [
-          {
-            type: "ul",
-            items: [
-              "**Definitions.** What each business term means: margin, active customer, net revenue, last quarter. Defined once, with a formula, a grain, filters and an owner.",
-              "**Relationships.** How business entities connect and the rules between them. A customer places orders; an order is booked by an operating company; intercompany is not a customer.",
-              "**Master data.** Which records across systems are the same real-world customer, product or supplier.",
-              "**Permissions.** Who, or which agent, may see which rows and columns, enforced in the data platform rather than in a prompt.",
-              "**Freshness.** How current each source is, and the rule that says when it is too old to answer from.",
-            ],
-          },
-        ],
-      },
-      {
-        id: "related-terms",
-        heading: "How it relates to other terms",
-        blocks: [
-          {
-            type: "p",
-            text: "A **semantic layer** is one part of context engineering: metrics and dimensions defined once and reused everywhere. An **ontology** describes the business entities, how they relate and the rules that apply, bound to the actual data. A **knowledge graph** connects actual records according to an ontology. The three are compared in [ontology vs semantic layer vs knowledge graph](/learn/ontology-vs-semantic-layer-vs-knowledge-graph).",
-          },
-          {
-            type: "p",
-            text: "**MCP** (Model Context Protocol) is a standard way for agents to call tools and data. It carries context to the agent; it does not create the meaning. **Grounding** is making an AI answer come from governed enterprise data, with sources, which is only possible once that context exists.",
-          },
-        ],
-      },
-      {
-        id: "what-good-looks-like",
-        heading: "What good looks like",
-        blocks: [
-          {
-            type: "ul",
-            items: [
-              "Every metric a use case touches has one definition, one owner and a change process.",
-              "The entities that cause wrong answers (customer, product, operating company) are modeled, with their rules written down and bound to tables.",
-              "Each customer, product and supplier has one trusted record across ERPs.",
-              "Agents have their own identities and inherit the same permissions as people.",
-              "Every answer can state its definition, its source and how fresh the data is.",
-            ],
-          },
-        ],
-      },
-      {
-        id: "where-we-fit",
-        heading: "Where InclinedPlane fits",
-        blocks: [
-          {
-            type: "p",
-            text: "We build and steward the semantic and context layers on the platform a client already runs, and we supply what platform features can’t: the business meaning across many ERPs and operating companies, and a routine that keeps it current. See [Enterprise Context Engineering](/capabilities/context-engineering).",
-          },
-        ],
-      },
-    ],
-  },
-  {
     slug: "ontology-vs-semantic-layer-vs-knowledge-graph",
     title: "Ontology vs semantic layer vs knowledge graph",
     definition:
@@ -183,7 +54,7 @@ export const learnArticles: LearnArticle[] = [
     datePublished: "2026-11-21",
     dateModified: "2026-11-21",
     capability: { label: "Enterprise Context Engineering", to: "/capabilities/context-engineering" },
-    related: ["what-is-context-engineering", "what-ai-readiness-means"],
+    related: ["why-ai-agents-give-wrong-answers", "what-ai-readiness-means"],
     sections: [
       {
         id: "one-example",
@@ -220,6 +91,11 @@ export const learnArticles: LearnArticle[] = [
           {
             type: "p",
             text: "These rules are exactly what an analyst used to apply from memory. Written down, an agent can apply them too, which is why an ontology prevents errors a semantic layer alone can’t, such as counting your own subsidiary as a customer.",
+          },
+          {
+            type: "widget",
+            name: "ontology-explorer",
+            caption: "Select an entity to see its definition, its rules and where it lives in two fictional ERPs.",
           },
         ],
       },
@@ -291,7 +167,7 @@ export const learnArticles: LearnArticle[] = [
     datePublished: "2026-11-21",
     dateModified: "2026-11-21",
     capability: { label: "AI and Agent Readiness", to: "/capabilities/ai-agent-readiness" },
-    related: ["what-is-context-engineering", "ontology-vs-semantic-layer-vs-knowledge-graph"],
+    related: ["why-ai-agents-give-wrong-answers", "ontology-vs-semantic-layer-vs-knowledge-graph"],
     sections: [
       {
         id: "evidence-not-a-feeling",
@@ -335,6 +211,21 @@ export const learnArticles: LearnArticle[] = [
           {
             type: "p",
             text: "**What it checks:** any number can be traced back to its source. **Ready looks like:** lineage runs from the semantic model to the source field, step by step. **A typical failure:** audit asks where a figure in a board answer came from, and nobody can say.",
+          },
+        ],
+      },
+      {
+        id: "try-it",
+        heading: "Try it: run the checks",
+        blocks: [
+          {
+            type: "p",
+            text: "Here are the five checks run against one fictional sales table. Fix a failing check, or break a passing one, and watch the score and the agent’s verdict change.",
+          },
+          {
+            type: "widget",
+            name: "readiness-sim",
+            caption: "A readiness gate decides whether an agent may answer. Sample data.",
           },
         ],
       },
@@ -389,6 +280,93 @@ export const learnArticles: LearnArticle[] = [
       },
     ],
   },
+  {
+    slug: "why-ai-agents-give-wrong-answers",
+    title: "Why AI agents give wrong answers on enterprise data",
+    definition:
+      "AI agents give wrong answers on enterprise data mostly because the business meaning isn’t written down where they can read it: definitions, relationships, duplicate records, permissions and freshness.",
+    description:
+      "Most wrong answers from AI agents on enterprise data aren’t model errors. The five causes, how to spot each one, and the layer that fixes it.",
+    datePublished: "2026-11-22",
+    dateModified: "2026-11-22",
+    capability: { label: "Enterprise Context Engineering", to: "/capabilities/context-engineering" },
+    related: ["ontology-vs-semantic-layer-vs-knowledge-graph", "what-ai-readiness-means"],
+    sections: [
+      {
+        id: "not-the-model",
+        heading: "It’s rarely the model",
+        blocks: [
+          {
+            type: "p",
+            text: "When an agent gets a business question wrong, the first instinct is to blame the model and try a bigger one. On enterprise data that seldom helps. The model did what it was asked: it read the tables it could reach and took the most literal meaning of the question. What it lacked was the meaning your analysts carry in their heads.",
+          },
+          {
+            type: "p",
+            text: "That is why the fix is in the data, not the prompt. Each class of wrong answer maps to one missing layer of context, and each layer can be built, tested and owned. The full picture is on [context engineering, explained](/context-engineering).",
+          },
+        ],
+      },
+      {
+        id: "five-causes",
+        heading: "The five causes",
+        blocks: [
+          {
+            type: "table",
+            caption: "Five causes of wrong answers and the layer that fixes each",
+            head: ["Cause", "What you see", "The layer that fixes it"],
+            rows: [
+              ["Undefined metrics", "Margin differs between the agent, finance and the dashboard.", "Semantic layer: one definition, one owner."],
+              ["Missing business rules", "Your own subsidiary appears as a top customer.", "Ontology: intercompany is not a customer."],
+              ["Duplicate records", "One distributor is listed twice, under two ERP IDs.", "Master data: one golden record across systems."],
+              ["Loose permissions", "A regional lead sees accounts outside their region.", "Governed access: the agent inherits the asker’s permissions."],
+              ["Stale data", "The answer is confident, and three days out of date.", "Freshness rules: the agent states the timestamp, or declines."],
+            ],
+          },
+        ],
+      },
+      {
+        id: "see-it",
+        heading: "See all five in one answer",
+        blocks: [
+          {
+            type: "p",
+            text: "One ordinary question, “Who are our top 10 customers in France by margin last quarter?”, can hit all five at once. Switch between the raw answer and the governed one.",
+          },
+          {
+            type: "widget",
+            name: "two-answers",
+            caption: "The same question on raw tables and through governed context. Fictional company and figures.",
+          },
+        ],
+      },
+      {
+        id: "how-to-spot",
+        heading: "How to find them in your own data",
+        blocks: [
+          {
+            type: "ol",
+            items: [
+              "Collect 20 to 30 real questions your people ask, with answers finance or the business would sign off.",
+              "Ask them through the agent and record every wrong or unexplained answer.",
+              "Trace each error to its cause: a definition, a rule, a duplicate, a permission or a stale table.",
+              "Fix the layer, not the question. A fixed definition corrects every future question that uses it.",
+              "Keep the questions as an evaluation set and rerun it whenever data, definitions or the agent change.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "where-we-fit",
+        heading: "Where InclinedPlane fits",
+        blocks: [
+          {
+            type: "p",
+            text: "We do this tracing on a client’s own questions and data, then build the missing layers on the platform they already run. See [Enterprise Context Engineering](/capabilities/context-engineering) and [AI and Agent Readiness](/capabilities/ai-agent-readiness).",
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export const learnBySlug = Object.fromEntries(learnArticles.map((a) => [a.slug, a])) as Record<string, LearnArticle>;
@@ -398,7 +376,10 @@ export interface GlossaryTerm {
   id: string;
   term: string;
   definition: string;
+  /** Learn article slug (/learn/<slug>)… */
   article?: string;
+  /** …or any page that explains the term. */
+  href?: string;
 }
 
 export const glossary: GlossaryTerm[] = [
@@ -412,7 +393,7 @@ export const glossary: GlossaryTerm[] = [
     term: "Context engineering",
     definition:
       "Making business meaning explicit and machine-readable: definitions, relationships, rules, permissions and freshness, delivered to people and AI agents when they ask a question.",
-    article: "what-is-context-engineering",
+    href: "/context-engineering",
   },
   {
     id: "semantic-layer",
@@ -462,6 +443,7 @@ export function readingMinutes(a: LearnArticle): number {
   for (const s of a.sections) {
     words += s.heading.split(/\s+/).length;
     for (const b of s.blocks) {
+      if (b.type === "widget") continue;
       const text =
         b.type === "p" || b.type === "h3" || b.type === "quote"
           ? b.text
