@@ -175,6 +175,8 @@ Legend: [x] done · [~] in progress · [ ] not started
 - PipelineIQ status line, "368 raw alerts" metric, first-deployment findings: confirm OK to publish.
 - Careers: "Remote-first" wording vs the Bengaluru delivery base; careers email; hiring timing.
 - Proposed blocks in `src/content/flags.ts` need founder sign-off (all on for staging).
+- **Client logos** (`src/content/clients.ts`, files in `public/clients/`): 8 fetched from the companies' own sites (Revlon, Rotimatic, Duroflex, Cocoblu, Kanoria/KCIL, Tarasafe, Masoom, Golden Sands). Logo files still needed for Examly, GDi Partners, VSM Technologies, Noble Bioresources (official sites couldn't be identified/reached). All `verified: false` until each client's written permission is on file.
+- **Testimonials** (`src/content/testimonials.ts`): all three are PLACEHOLDERS written for layout. Replace with approved quotes before launch (hidden in production until then).
 
 ## 6c. Known technical notes
 
@@ -198,4 +200,5 @@ Legend: [x] done · [~] in progress · [ ] not started
 | 2026-11-21 | `cba74ef` | Legacy cleanup |
 | 2026-11-22 | PR #12 | Founder CTA update: calendar-first booking, 3 questions, checklist PDF + instant download, reassurance line |
 | 2026-11-22 | PR #14 | Live Calendly embed (UTM-tagged), booking → /assessment/thank-you with the three questions (conversion page) |
-| 2026-11-22 | PR (`feat/responsive-pass`) | Mobile and responsive pass across all pages |
+| 2026-11-22 | PR #15 | Mobile and responsive pass across all pages |
+| 2026-11-22 | PR (`feat/clients-testimonials`) | Client logo wall (home proof strip + case studies) and placeholder testimonials |

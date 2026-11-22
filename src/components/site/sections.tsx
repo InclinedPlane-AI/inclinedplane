@@ -11,8 +11,10 @@ import { caseStudyMeta, type CaseStudyMeta } from "@/content/caseStudyMeta";
 import { caseStudies } from "@/data/caseStudies";
 import { capabilityById, type Capability, type FaqItem, type StepId } from "@/content/capabilities";
 import { flags } from "@/content/flags";
-import { visible, SHOW_UNVERIFIED } from "@/content/verify";
+import { visible, canShow, SHOW_UNVERIFIED } from "@/content/verify";
+import { clients } from "@/content/clients";
 import { useBooking } from "./booking/BookingProvider";
+import { ClientLogos } from "./social";
 import { ArrowIcon, Button, Label, SectionIntro, StepTag, Verified, VerifyBadge, buttonClass } from "./primitives";
 import { cn } from "@/lib/utils";
 
@@ -174,7 +176,7 @@ export function FinalCta({ source, title = site.cta.finalTitle, body = site.cta.
 export function ProofStrip() {
   const stats = visible(proofStats);
   const partners = visible(certifiedPlatforms);
-  if (!stats.length && !partners.length) return null;
+  if (!stats.length && !partners.length && !clients.some(canShow)) return null;
   return (
     <section aria-label="At a glance" className="bg-white border-b border-ip-rule">
       {stats.length > 0 && (
@@ -208,17 +210,7 @@ export function ProofStrip() {
           {partners.some((p) => !p.verified) && <VerifyBadge />}
         </div>
       )}
-      {SHOW_UNVERIFIED && (
-        <div className="ip-container pb-10">
-          <div
-            role="note"
-            className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 rounded-lg border border-dashed border-ip-rule-dashed bg-ip-grey px-6 py-5"
-          >
-            <span className="ip-label-sm">Trusted by</span>
-            <span className="text-[15px] text-ip-muted">Client logos, each linking to its case study. Added only once each client approves.</span>
-          </div>
-        </div>
-      )}
+      <ClientLogos compact className="ip-container pb-10" />
     </section>
   );
 }
