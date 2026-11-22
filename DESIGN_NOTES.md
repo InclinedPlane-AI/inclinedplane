@@ -76,7 +76,9 @@ transitions; `prefers-reduced-motion` respected.
 - `?book=1` opens the booking, `?checklist=1` the checklist; `?name=&email=&role=&platform=&blocker=` prefill.
 
 ### Case studies
-- Home features two (founder's choice), large. Index: featured pair on top, then a filterable list (step + industry). Cards show title, industry, step tags, one headline result. No numbered markers (anti-slop).
+- Home features two, as wide panels: title, an anonymized context line, four key numbers, step tags, and a source-to-outcome flow diagram on the right. Index: the same featured pair on top, then a filterable list (step + industry). No numbered markers (anti-slop).
+- Featured since 2026-11-22: the EMEA multi-ERP platform (FTSE-listed UK industrial group) and the governed finance semantic layer with IncLever, chosen by Mohan's team. The second is the first case study that proves Contextualize and Enable.
+- One engagement, one page: when a richer write-up arrives for work already on the site, it replaces the old page at the same URL rather than adding a duplicate.
 - Step tags per case study are editorial calls, listed in `src/content/caseStudyMeta.ts` for delivery leads to correct.
 
 ### Client logos ("Trusted by")

@@ -64,10 +64,12 @@ Last updated: 2026-11-22 (end of session 2)
 - **Pages/URLs:** Claude decides what's best for SEO/UX. Keep existing URLs where they
   still fit; 301 anything renamed (via `vercel.json` redirects, which
   `scripts/vercel-output.mjs` carries into prebuilt deploys). Route map: `DESIGN_NOTES.md`.
-- **Case studies:** use the existing 14 for now. Featured on home: EMEA multi-ERP
-  manufacturing platform (`erp-unification`) and the edible oil producer
-  (`fmcg-edible-oil`). All others are in the case studies index. A new set from
-  recent clients plus one large enterprise data unification case study comes later.
+- **Case studies (updated 2026-11-22, session 3):** 16 case studies. Featured on home and
+  at the top of /case-studies: the schema-agnostic EMEA platform for a FTSE-listed UK
+  industrial group (`erp-unification`, rewritten from the team's new EMEA platform write-up; same URL)
+  and the governed finance semantic layer with IncLever (`governed-finance-semantic-layer`,
+  new). Also new: `global-lead-time` (same FTSE-listed client). Edible oil is no longer
+  featured. All anonymized: no client or internal system names.
 - **Booking (revised 2026-11-22 from the founder's updated homepage file):** calendar
   first (Calendly free plan, inline embed), then three optional questions (role,
   platform, blocker) posted to Formspree (`xwvnakbz`) with the booking IDs, then
@@ -123,6 +125,13 @@ tagline "Data Leveraged. Growth Accelerated."), `incpl_primarylogo_fullcolourAW.
   4. Logo files for Examly, GDi Partners, VSM Technologies, Noble Bioresources; client permissions; real testimonials.
   5. Keerthana's sign-offs (headshot, CEO note, checklist PDF, proposed blocks) and the claims in section 6b.
   6. Testing (real test booking, all forms), Lighthouse, protect `main`, add the two engineers.
+
+## 5d. Session 3: featured case studies (2026-11-22)
+
+- `erp-unification` rewritten from the team's EMEA platform write-up (FTSE-listed UK industrial group, revenue in the billions; no client, platform or table names). Kept the URL instead of adding a duplicate page for the same engagement.
+- New: `governed-finance-semantic-layer` (listed Indian engineering manufacturer; Contextualize + Enable) and `global-lead-time` (same FTSE-listed group; Build, Contextualize proposed).
+- Featured: those two (EMEA platform + finance layer). Shown as wide panels with key numbers and a source-to-outcome flow (`components/site/cases/FeaturedCase.tsx`), on home and /case-studies.
+- Detail pages with a story entry (`src/content/caseStudyStories.ts`) add an "At a glance" band, the flow diagram, a challenges table and a "same client" link.
 
 ## 6. Checklist
 
@@ -181,7 +190,8 @@ Legend: [x] done · [~] in progress · [ ] not started
 - Proof strip figures, certified/partner list, "Offices in the United States and India", founder credentials.
 - Founder quote: her draft is shown verbatim (uses banned words); she's rewriting it. Headshot + team photos (December shoot). Should Mohan Gowda T appear in the delivery bench?
 - Capabilities to verify: MDM, ontologies, knowledge graphs, MCP, vector DBs; every tool in `src/content/tools.ts` is `verified: false`.
-- Context Engineering proof (EMEA canonical model reframed as Contextualize) and a Contextualize/Enable case study. Until then those steps have no case-study filter.
+- ~~A Contextualize/Enable case study~~: the governed finance semantic layer (session 3) now backs both, and the Contextualize proof line. The EMEA platform keeps Contextualize as a proposed tag.
+- **New case study figures** come from the delivery teams' documents (EMEA platform write-up and "Case Studies – Detailed", Nov 2026). The old EMEA page said "~100M rows a day"; the new write-up says 80M+ rows per ETL cycle, three cycles a day, and that figure is now used everywhere. Delivery leads should confirm.
 - Case study headline values that are labels, not results (capital-equipment, vc-edtech, cultural-heritage, pharma-mnc, solar-bi): need measured figures from delivery leads.
 - Learn articles cite Cognizant, Gartner (D&A Summit 2026) and Cloudera/HBR figures from the brief: add source links or remove.
 - IncLever "how it runs" wording (in tenant, read-only); external demo link (claude.ai artifact) must be public.
