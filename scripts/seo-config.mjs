@@ -475,7 +475,7 @@ const staticRoutes = [
     description:
       "Data platforms, multi-ERP models, BI and forecasting for manufacturing, FMCG, energy, logistics and retail, filterable by capability and industry.",
     noscriptSummary:
-      "InclinedPlane case studies: 14 anonymized engagements across manufacturing, FMCG, energy, logistics, retail and other sectors. Featured: a multi-ERP Azure platform unifying 25 to 30 EMEA operating companies (about 100 million rows a day, new ERPs onboarded in 2 to 6 weeks) and an FMCG edible oil producer's unified sales warehouse (27% faster order turnaround, 25% better route adherence). Each case study covers the opportunity, the solution and measured impact.",
+      "InclinedPlane case studies: 16 anonymized engagements across manufacturing, FMCG, energy, logistics, retail and other sectors. Featured: a schema-agnostic Azure platform for a FTSE-listed UK industrial group that onboarded 15 more EMEA operating companies on five-plus ERPs, processes 80 million rows or more per ETL cycle and replaced 20 dashboards with one report; and a governed finance semantic layer for a listed Indian engineering manufacturer, with 20 evidence-backed metrics and 134 audit rules, audited by IncLever so an AI assistant answers only inside it. Each case study covers the opportunity, the solution and measured impact.",
     pageJsonLd: [
       {
         "@context": "https://schema.org",

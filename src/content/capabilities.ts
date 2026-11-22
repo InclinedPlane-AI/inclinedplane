@@ -112,9 +112,9 @@ export const capabilities: Capability[] = [
     ],
     outcome: "One platform, one set of pipelines, and numbers people stop double-checking.",
     proof: {
-      text: "A multi-ERP platform for 25 to 30 operating companies across EMEA, processing about 100 million rows a day.",
+      text: "A schema-agnostic platform for 25 to 30 EMEA operating companies on five-plus ERPs, processing 80 million rows or more per ETL cycle, three times a day.",
       verified: true,
-      caseStudyIds: ["erp-unification", "fmcg-edible-oil"],
+      caseStudyIds: ["erp-unification", "global-lead-time", "fmcg-edible-oil"],
     },
     faq: [
       {
@@ -200,9 +200,9 @@ export const capabilities: Capability[] = [
     ],
     outcome: "One shared definition of every metric, readable by your BI tools and your AI agents alike.",
     proof: {
-      text: "A canonical sales and opportunity model across 25 to 30 operating companies on different ERPs, with KPI definitions harmonized into one executive view.",
-      verified: false,
-      caseStudyIds: ["erp-unification"],
+      text: "A governed finance semantic layer for a listed engineering manufacturer: 20 metrics, each claim tied to its evidence, unsafe ones blocked, audited by IncLever.",
+      verified: true,
+      caseStudyIds: ["governed-finance-semantic-layer", "erp-unification"],
     },
     faq: [
       {
@@ -291,7 +291,7 @@ export const capabilities: Capability[] = [
     proof: {
       text: "20+ conversational analytics agents deployed on governed enterprise data.",
       verified: false,
-      caseStudyIds: [],
+      caseStudyIds: ["governed-finance-semantic-layer"],
     },
     faq: [
       {

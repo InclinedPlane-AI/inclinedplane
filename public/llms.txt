@@ -33,9 +33,11 @@ A recommended order, not a strict sequence. Most organizations work on several a
 
 ## Case studies (anonymized)
 
-- [One data platform for 25 to 30 business units across EMEA](https://inclinedplane.com/case-studies/erp-unification): multi-ERP platform for a global manufacturer; about 100 million rows a day; new ERPs onboarded in 2 to 6 weeks.
+- [One sales view for 25 to 30 operating companies running five-plus ERPs](https://inclinedplane.com/case-studies/erp-unification): schema-agnostic Azure platform for a FTSE-listed UK industrial group; 15 operating companies onboarded, 80M+ rows per ETL cycle three times a day, 20 dashboards replaced by one report, 2 to 3 weeks to onboard an operating company on a known ERP.
+- [Hidden finance logic turned into a governed layer an AI assistant can use](https://inclinedplane.com/case-studies/governed-finance-semantic-layer): evidence-first semantic layer for a listed Indian engineering manufacturer; 20 finance metrics with evidence, 4 blocked rather than guessed, 134 audit rules; IncLever audits the layer and answers only inside it.
+- [One lead time across four supply sites](https://inclinedplane.com/case-studies/global-lead-time): one governed Power BI model for the same FTSE-listed group; calendar days and one rulebook, about 85% faster refresh, 107 automated checks.
 - [An edible oil producer gets supply and delivery data working as one](https://inclinedplane.com/case-studies/fmcg-edible-oil): SAP, distributor and field-force data unified; 27% faster order fulfillment turnaround, 25% better route adherence.
-- [All case studies](https://inclinedplane.com/case-studies): 14 delivered projects across manufacturing, FMCG, energy, logistics, retail, pharmaceuticals and the public sector.
+- [All case studies](https://inclinedplane.com/case-studies): 16 delivered projects across manufacturing, FMCG, energy, logistics, retail, pharmaceuticals and the public sector.
 
 ## Industries
 
