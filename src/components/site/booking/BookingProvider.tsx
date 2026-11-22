@@ -1,15 +1,16 @@
 /**
  * Global booking dialog (founder's homepage, 22 Nov 2026). Two modes:
  *
- *   assess     pick a time (Calendly) → three optional questions → booked
- *              (see BookingFlow; "Can't find a time?" fallback included)
+ *   assess     pick a time (Calendly) → /assessment/thank-you, where the three
+ *              optional questions are asked (see BookingFlow; "Can't find a
+ *              time?" fallback included)
  *   checklist  work email → instant PDF download → offer the assessment
  *
  * Every "Book an assessment" CTA calls useBooking().open({ source }); the
  * checklist CTAs call openChecklist({ source }).
  * Deep links: `?book=1` opens the assessment, `?checklist=1` the checklist.
  */
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useLocation, useNavigate } from "react-router-dom";
 import { track } from "@vercel/analytics";
@@ -55,6 +56,16 @@ export function BookingProvider({ children }: { children: ReactNode }) {
 
   const open = useCallback((opts?: OpenOptions) => show("assess", opts), [show]);
   const openChecklist = useCallback((opts?: OpenOptions) => show("checklist", opts), [show]);
+
+  // Close the dialog whenever the page changes (e.g. after a booking, the flow
+  // navigates to the thank-you page).
+  const lastPath = useRef(location.pathname);
+  useEffect(() => {
+    if (location.pathname !== lastPath.current) {
+      lastPath.current = location.pathname;
+      setOpen(false);
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     const p = new URLSearchParams(location.search);

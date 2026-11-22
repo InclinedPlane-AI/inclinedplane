@@ -54,7 +54,8 @@ Last updated: 2026-11-22 (session 2: founder's CTA update)
 - [ ] Protect `main` (PR + 1 approval) now that Lovable is retired.
 - [ ] Retire the personal-account preview project (`inclinedplane-lac.vercel.app`) and delete the local `.vercel/` link to it.
 - [ ] After staging is live, add the staging build as a required status check on `revamp`.
-- [ ] Replace placeholder booking links in `src/content/site.ts` (`booking.calendlyUrl`).
+- [x] Calendly connected: `calendly.com/keerthana-inclinedplane/ai-data-readiness-assessment` (2026-11-22).
+- [ ] Optional: Calendly event → confirmation page → redirect to `https://inclinedplane.com/assessment/thank-you` (pass event details) for bookings made outside the site. Only after launch; may need a paid Calendly plan.
 
 ## 3. Decisions already made (don't re-ask)
 
@@ -136,6 +137,7 @@ Legend: [x] done · [~] in progress · [ ] not started
 - [x] Home (founder design)
 - [x] /capabilities + four capability pages (context page has "same question, two answers")
 - [x] /assessment
+- [x] /assessment/thank-you (booking conversion page, noindex)
 - [x] /products, /products/inclever, /products/pipelineiq
 - [x] /case-studies (filterable) + /case-studies/:slug template
 - [x] /industries
@@ -161,7 +163,6 @@ Legend: [x] done · [~] in progress · [ ] not started
 
 ## 6b. Open content items for the team (all badged on staging, hidden in production)
 
-- Calendly event URL (one 45-minute event type on the free plan) → `src/content/site.ts` `booking.calendlyUrl`, set `calendarConfigured: true`.
 - Founder review of the checklist PDF (`src/content/checklist.json`, draft v0.1).
 - Proof strip figures, certified/partner list, "Offices in the United States and India", founder credentials.
 - Founder quote: her draft is shown verbatim (uses banned words); she's rewriting it. Headshot + team photos (December shoot). Should Mohan Gowda T appear in the delivery bench?
@@ -194,4 +195,5 @@ Legend: [x] done · [~] in progress · [ ] not started
 | 2026-11-21 | `0d9a5dc` | Insights, thesis, careers, referral, legal, 404 |
 | 2026-11-21 | `254019f` | SEO for all new pages, CTA analytics, CLAUDE.md |
 | 2026-11-21 | `cba74ef` | Legacy cleanup |
-| 2026-11-22 | (PR `feat/booking-flow-v2`) | Founder CTA update: calendar-first booking, 3 questions, checklist PDF + instant download, reassurance line |
+| 2026-11-22 | PR #12 | Founder CTA update: calendar-first booking, 3 questions, checklist PDF + instant download, reassurance line |
+| 2026-11-22 | PR (`feat/calendly-live`) | Live Calendly embed (UTM-tagged), booking → /assessment/thank-you with the three questions (conversion page) |

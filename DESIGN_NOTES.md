@@ -66,12 +66,13 @@ transitions; `prefers-reduced-motion` respected.
 - Refinement: on `/capabilities`, steps are buttons (tabs); selecting one reveals scope, deliverables and related case studies. On capability pages a small incline shows the current step lit.
 
 ### Booking (updated 2026-11-22 to the founder's revised homepage)
-- **Calendar first, questions after.** Pick a 45-minute slot in a Calendly inline embed (collects name + work email), then three *optional* questions (role, main data platform, biggest blocker), then "You're booked". Company size and AI stage were dropped by the founder.
-- **How answers reach us without paid tools:** the Calendly embed posts `calendly.event_scheduled` to the page (works on Calendly's free plan; no webhook). The flow then asks the questions plus "the work email you booked with" and posts them to Formspree with the Calendly event/invitee IDs. Match answers to bookings by email. Skipping the questions keeps the booking.
+- **Calendar first.** Every "Book an assessment" CTA opens the dialog with the founder's Calendly event embedded inline (`calendly.com/keerthana-inclinedplane/ai-data-readiness-assessment`), which collects name + work email. Calendly's own header is hidden (our dialog shows title and duration); each booking carries `utm_source=website`, `utm_medium=cta`, `utm_content=<button>` so the Calendly booking shows which CTA it came from.
+- **Thank-you page on our domain.** When the embed posts `calendly.event_scheduled` (free plan, no webhook), the site navigates to `/assessment/thank-you`: "You're booked", what happens next, and the three *optional* questions (role, main data platform, biggest blocker) plus the email used to book, posted to Formspree with the Calendly event/invitee IDs. Every booking is a page view on our domain, so conversions are countable in Vercel Web Analytics (page views are free; custom events need a paid plan). Not indexed, not in the sitemap.
+- **Bookings made outside the site** (someone opens the Calendly link from an email) still see Calendly's confirmation. Optional: in Calendly's event settings, set the confirmation page to redirect to `https://inclinedplane.com/assessment/thank-you` with "pass event details" on (may need a paid Calendly plan; only useful after launch, since that URL only exists on production then). The page pre-fills from Calendly's `invitee_email` / `invitee_full_name`.
 - **Fallback:** "Can't find a time? Send us your details instead" → name, email, the three questions, a note → Formspree.
-- **Second offer for people not ready to talk:** the one-page *AI data readiness checklist* (draft v0.1, `src/content/checklist.json` → `public/downloads/…pdf` via `scripts/build-checklist-pdf.mjs`). Work email → Formspree lead → instant download (no email automation needed). Entry points: mid-page band's second button, /assessment side card, footer link, `?checklist=1`.
+- **Second offer for people not ready to talk:** the one-page *AI data readiness checklist* (draft v0.1, `src/content/checklist.json` → `public/downloads/…pdf` via `scripts/build-checklist-pdf.mjs`). Work email → Formspree lead → instant download. Entry points: mid-page band, /assessment, footer, thank-you page, `?checklist=1`.
 - Founder's reassurance line "Free · 45 minutes · on your own data" under the hero, final CTA, capability heroes and the /assessment booking block.
-- Rejected: form-first then redirect to Calendly (guaranteed answers, but puts friction before the calendar, which is what the founder removed); HubSpot (not needed, costs money for the useful parts).
+- Rejected: form-first then redirect to Calendly (puts friction before the calendar, which the founder removed); Calendly's popup widget snippet (can't hand back to our flow); HubSpot (not needed).
 - `?book=1` opens the booking, `?checklist=1` the checklist; `?name=&email=&role=&platform=&blocker=` prefill.
 
 ### Case studies
@@ -101,7 +102,7 @@ in Keerthana's own words (current draft uses banned words, shown as placeholder)
 
 ## 6. Open questions
 
-- Real Calendly event URL (placeholder now). Formspree's free plan has a monthly submission cap shared by contact, assessment answers, checklist downloads and demo requests: watch it.
+- Formspree's free plan has a monthly submission cap shared by contact, assessment answers, checklist downloads and demo requests: watch it.
 - Founder review of the checklist PDF (draft v0.1).
 - Keerthana's headshot + team photos (December shoot): placeholders until then.
 - IncLever product screenshots (only the founder's demo clip is used now).

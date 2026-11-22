@@ -23,7 +23,7 @@ function InlineBooking() {
     <section id="book" className="bg-white border-t border-ip-rule scroll-mt-24">
       <div className="ip-container ip-section">
         <SectionIntro label="Book" title="Pick a time. We’ll do the rest.">
-          <p className="m-0">Choose a slot, then answer three optional questions so the call goes straight to your data. A senior engineer joins the call.</p>
+          <p className="m-0">Choose a slot. Once you’re booked, three optional questions help the call go straight to your data. A senior engineer joins the call.</p>
         </SectionIntro>
         <div className="grid gap-6 lg:grid-cols-[1.35fr_1fr]">
           <div className="rounded-xl border border-ip-rule-strong border-t-4 border-t-ip-orange bg-white p-6 sm:p-8">

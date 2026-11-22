@@ -389,6 +389,15 @@ const staticRoutes = [
     ],
   },
   {
+    // Where completed bookings land (src/pages/ThankYou.tsx). Not indexed.
+    path: "/assessment/thank-you",
+    title: "You’re booked: AI Data Readiness Assessment",
+    description:
+      "Your AI Data Readiness Assessment is booked. What happens next, and three optional questions to make the call count.",
+    breadcrumbParent: { name: "AI Data Readiness Assessment", path: "/assessment" },
+    noIndex: true,
+  },
+  {
     // Mirrors src/pages/Products.tsx (hub) and the two product pages below.
     path: "/products",
     title: "Products: the trust layer, from pipeline to answer",

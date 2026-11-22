@@ -80,14 +80,16 @@ export const site = {
  * Formspree with the booking's IDs, then a confirmation. Fallback for people
  * who can't find a slot: the same questions + name/email, no calendar.
  *
- * To go live: paste the public Calendly event URL (45-minute event type) into
- * calendlyUrl and set calendarConfigured: true. Calendly's free plan is enough:
- * the embed tells the page when a booking is made (no webhooks needed).
+ * Calendly event: the founder's 45-minute "AI Data Readiness Assessment"
+ * (connected 2026-11-22). Calendly's free plan is enough: the embed tells the
+ * page when a booking is made (no webhooks needed). Each booking carries UTM
+ * tags (utm_source=website, utm_medium=cta, utm_content=<button>) so the
+ * Calendly booking shows which call to action it came from.
  */
 export const booking = {
   formEndpoint: "https://formspree.io/f/xwvnakbz", // same Formspree form as /contact
-  calendlyUrl: "https://calendly.com/inclinedplane/ai-data-readiness-assessment", // PLACEHOLDER
-  calendarConfigured: false,
+  calendlyUrl: "https://calendly.com/keerthana-inclinedplane/ai-data-readiness-assessment",
+  calendarConfigured: true,
   durationMinutes: 45,
   questions: {
     role: ["CIO or CTO", "CDO or Head of Data", "CISO or security leader", "Data or analytics leader", "Other"],

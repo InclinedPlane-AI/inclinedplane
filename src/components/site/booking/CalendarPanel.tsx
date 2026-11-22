@@ -22,11 +22,14 @@ export function CalendarPanel({
   email,
   name,
   height = 620,
+  source,
   onScheduled,
 }: {
   email?: string;
   name?: string;
   height?: number;
+  /** Which CTA opened the calendar; sent to Calendly as utm_content. */
+  source?: string;
   onScheduled?: (e: ScheduledEvent) => void;
 }) {
   useEffect(() => {
@@ -43,7 +46,17 @@ export function CalendarPanel({
   }, [onScheduled]);
 
   if (booking.calendarConfigured) {
-    const params = new URLSearchParams({ hide_gdpr_banner: "1", primary_color: "f47920", embed_type: "Inline" });
+    const params = new URLSearchParams({
+      hide_gdpr_banner: "1",
+      // Our dialog already shows the title and duration; drop Calendly's repeat of them.
+      hide_landing_page_details: "1",
+      hide_event_type_details: "1",
+      primary_color: "f47920", // honored on paid Calendly plans; ignored on free
+      embed_type: "Inline",
+      utm_source: "website",
+      utm_medium: "cta",
+    });
+    if (source) params.set("utm_content", source);
     if (typeof window !== "undefined") params.set("embed_domain", window.location.host);
     if (email) params.set("email", email);
     if (name) params.set("name", name);
