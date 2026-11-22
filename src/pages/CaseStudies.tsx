@@ -296,7 +296,7 @@ const CaseStudies = () => {
                     setStep("all");
                     setGroup("all");
                   }}
-                  className="ip-link min-h-[36px] text-[14px]"
+                  className="ip-link min-h-[40px] text-[14px]"
                 >
                   Clear filters
                 </button>

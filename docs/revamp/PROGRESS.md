@@ -159,6 +159,7 @@ Legend: [x] done · [~] in progress · [ ] not started
 - [x] Production-mode check: no verify badges, unverified stats hidden, one h1 per page, no runtime errors
 - [ ] Forms tested end to end on staging (assessment form, contact, demo request, referral)
 - [ ] Full anti-slop pass by a human reviewer on staging
+- [x] Responsive pass (2026-11-22): every route audited at 320/375/414/768/1024 for horizontal overflow (0 remaining), tap targets (≥40px or enlarged invisible hit areas), and iOS input zoom (form text 16px on phones). Phones get a compact header with a Book button, a full-screen booking dialog and a taller calendar.
 - [ ] Lighthouse + accessibility pass; code-split routes with React.lazy (check prerender still waits for content)
 
 ## 6b. Open content items for the team (all badged on staging, hidden in production)
@@ -196,4 +197,5 @@ Legend: [x] done · [~] in progress · [ ] not started
 | 2026-11-21 | `254019f` | SEO for all new pages, CTA analytics, CLAUDE.md |
 | 2026-11-21 | `cba74ef` | Legacy cleanup |
 | 2026-11-22 | PR #12 | Founder CTA update: calendar-first booking, 3 questions, checklist PDF + instant download, reassurance line |
-| 2026-11-22 | PR (`feat/calendly-live`) | Live Calendly embed (UTM-tagged), booking → /assessment/thank-you with the three questions (conversion page) |
+| 2026-11-22 | PR #14 | Live Calendly embed (UTM-tagged), booking → /assessment/thank-you with the three questions (conversion page) |
+| 2026-11-22 | PR (`feat/responsive-pass`) | Mobile and responsive pass across all pages |

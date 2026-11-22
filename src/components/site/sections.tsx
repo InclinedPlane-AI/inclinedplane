@@ -50,7 +50,7 @@ export function PageHero({
             {lead && <p className="ip-lead mt-6 mb-0 max-w-[660px]">{lead}</p>}
             {children && <div className="mt-8 flex flex-wrap items-center gap-3.5">{children}</div>}
           </div>
-          {aside && <div className="shrink-0">{aside}</div>}
+          {aside && <div className="w-full min-w-0 sm:w-auto sm:shrink-0">{aside}</div>}
         </div>
       </div>
     </section>
@@ -431,12 +431,12 @@ export function CaseStudyCard({ id, size = "default" }: { id: string; size?: "de
       <div className={cn("grid border-t border-ip-rule", meta.secondary ? "grid-cols-2" : "grid-cols-1")}>
         <div className="pt-4 pr-3">
           <div className="ip-label-sm">{meta.headline.label}</div>
-          <div className="mt-2 text-[32px] font-semibold tracking-[-0.02em]">{meta.headline.value}</div>
+          <div className="mt-2 whitespace-nowrap text-[clamp(24px,2.4vw,32px)] font-semibold tracking-[-0.02em]">{meta.headline.value}</div>
         </div>
         {meta.secondary && (
           <div className="border-l border-ip-rule pt-4 pl-3">
             <div className="ip-label-sm">{meta.secondary.label}</div>
-            <div className="mt-2 text-[32px] font-semibold tracking-[-0.02em]">{meta.secondary.value}</div>
+            <div className="mt-2 whitespace-nowrap text-[clamp(24px,2.4vw,32px)] font-semibold tracking-[-0.02em]">{meta.secondary.value}</div>
           </div>
         )}
       </div>

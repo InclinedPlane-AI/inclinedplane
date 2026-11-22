@@ -32,10 +32,10 @@ export function SiteFooter() {
           {footerNav.map((group) => (
             <div key={group.title}>
               <p className="ip-label-sm m-0 mb-3">{group.title}</p>
-              <ul className="m-0 flex list-none flex-col gap-2.5 p-0 text-[14px]">
+              <ul className="m-0 flex list-none flex-col gap-0 p-0 text-[15px] sm:gap-2.5 sm:text-[14px]">
                 {group.links.map((l) => (
                   <li key={l.to}>
-                    <Link to={l.to} className="text-ip-body no-underline hover:text-black hover:underline underline-offset-4">
+                    <Link to={l.to} className="inline-flex min-h-[40px] items-center text-ip-body no-underline hover:text-black hover:underline underline-offset-4 sm:min-h-0">
                       {l.label}
                     </Link>
                   </li>
@@ -45,7 +45,7 @@ export function SiteFooter() {
                     <button
                       type="button"
                       onClick={() => openChecklist({ source: "footer" })}
-                      className="p-0 text-left text-ip-body hover:text-black hover:underline underline-offset-4"
+                      className="inline-flex min-h-[40px] items-center p-0 text-left text-ip-body hover:text-black hover:underline underline-offset-4 sm:min-h-0"
                     >
                       AI readiness checklist
                     </button>
@@ -61,13 +61,13 @@ export function SiteFooter() {
         <p className="ip-label-sm m-0 !text-ip-muted">
           © {year} {site.name}
         </p>
-        <div className="flex flex-wrap items-center gap-5 text-[13px]">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-0 text-[13px]">
           {legalNav.map((l) => (
-            <Link key={l.to} to={l.to} className="text-ip-muted no-underline hover:text-black">
+            <Link key={l.to} to={l.to} className="inline-flex min-h-[40px] items-center text-ip-muted no-underline hover:text-black">
               {l.label}
             </Link>
           ))}
-          <a href={site.linkedin} target="_blank" rel="noopener" className="text-ip-muted no-underline hover:text-black">
+          <a href={site.linkedin} target="_blank" rel="noopener" className="inline-flex min-h-[40px] items-center text-ip-muted no-underline hover:text-black">
             LinkedIn
           </a>
         </div>

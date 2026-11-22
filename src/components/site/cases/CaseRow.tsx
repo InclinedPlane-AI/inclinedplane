@@ -94,7 +94,7 @@ export function StepLink({
   return (
     <Link
       to={cap.path}
-      className="relative z-10 rounded no-underline transition-opacity hover:opacity-80"
+      className="ip-hit relative z-10 rounded no-underline transition-opacity hover:opacity-80"
       title={`${cap.step}: ${cap.name}`}
     >
       <StepTag step={step} proposed={proposed} />
