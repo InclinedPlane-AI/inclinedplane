@@ -11,52 +11,55 @@ import { Label, SectionIntro, VerifyBadge } from "./primitives";
 import { cn } from "@/lib/utils";
 
 /**
- * Logo wall. Logos render as uniform marks (no rainbow of client colors) in a
- * ruled grid. On the black "Trusted by" band they are white.
+ * Client logos as an edge-to-edge infinite scroll. Logos render as uniform
+ * white marks on the black band (no rainbow of client colors). The list is
+ * rendered twice; the second copy is hidden from assistive tech so screen
+ * readers hear each client once. Reduced-motion users get a static row.
  */
-export function ClientLogos({ onDark = false, className }: { onDark?: boolean; className?: string }) {
+function LogoItem({ c, decorative }: { c: (typeof clients)[number]; decorative: boolean }) {
+  return (
+    <li className="flex h-[72px] shrink-0 items-center justify-center px-7 sm:h-[88px] sm:px-10">
+      {c.logo ? (
+        <img
+          src={c.logo}
+          alt={decorative ? "" : c.name}
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+          className="block h-[var(--h-sm)] w-auto max-w-[180px] select-none object-contain opacity-80 brightness-0 invert transition-opacity duration-200 hover:opacity-100 sm:h-[var(--h)]"
+          style={{ "--h": `${c.height}px`, "--h-sm": `${Math.round(c.height * 0.8)}px` } as React.CSSProperties}
+        />
+      ) : (
+        // Staging only: clients still waiting for a logo file show as a name.
+        <span className="flex flex-col items-center gap-1 whitespace-nowrap text-center">
+          <span className="text-[15px] font-semibold text-white/85">{c.name}</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.06em] text-ip-orange">Logo file needed</span>
+        </span>
+      )}
+    </li>
+  );
+}
+
+export function ClientMarquee() {
   const shown = clients.filter((c) => canShow(c) && (c.logo || SHOW_UNVERIFIED));
   if (!shown.length) return null;
+  // ~3.6s per logo keeps the pace calm regardless of how many clients there are.
+  const duration = `${Math.max(24, shown.length * 3.6)}s`;
   return (
-    <ul
-      aria-label="Clients"
-      className={cn(
-        "m-0 grid list-none grid-cols-2 border-l border-t p-0 min-[480px]:grid-cols-3 md:grid-cols-4 lg:grid-cols-6",
-        onDark ? "border-white/15" : "border-ip-rule",
-        className,
-      )}
-    >
-      {shown.map((c) => (
-        <li
-          key={c.name}
-          className={cn(
-            "group flex h-[96px] items-center justify-center border-b border-r px-4 sm:h-[112px] sm:px-5",
-            onDark ? "border-white/15" : "border-ip-rule",
-          )}
-        >
-          {c.logo ? (
-            <img
-              src={c.logo}
-              alt={c.name}
-              loading="lazy"
-              decoding="async"
-              className={cn(
-                "block h-[var(--h-sm)] w-auto max-w-full object-contain transition-opacity duration-200 group-hover:opacity-100 sm:h-[var(--h)]",
-                onDark ? "opacity-80 brightness-0 invert" : "opacity-[0.72] brightness-0",
-              )}
-              style={{ "--h": `${c.height}px`, "--h-sm": `${Math.round(c.height * 0.8)}px` } as React.CSSProperties}
-            />
-          ) : (
-            <span className="flex flex-col items-center gap-1 text-center">
-              <span className={cn("text-[14px] font-semibold leading-[1.2]", onDark ? "text-white/85" : "text-ip-body")}>{c.name}</span>
-              <span className={cn("font-mono text-[10px] uppercase tracking-[0.06em]", onDark ? "text-ip-orange" : "text-[#b42318]")}>
-                Logo file needed
-              </span>
-            </span>
-          )}
-        </li>
-      ))}
-    </ul>
+    <div className="ip-marquee overflow-hidden border-y border-white/15" style={{ "--ip-marquee-duration": duration } as React.CSSProperties}>
+      <div className="ip-marquee-track flex w-max">
+        <ul aria-label="Clients" className="m-0 flex list-none items-center p-0">
+          {shown.map((c) => (
+            <LogoItem key={c.name} c={c} decorative={false} />
+          ))}
+        </ul>
+        <ul aria-hidden="true" className="ip-marquee-copy m-0 flex list-none items-center p-0">
+          {shown.map((c) => (
+            <LogoItem key={`copy-${c.name}`} c={c} decorative />
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
 
@@ -71,7 +74,7 @@ export function TrustedBy() {
   const anyUnverified = shown.some((c) => !c.verified);
   return (
     <section aria-label="Trusted by" className="bg-black text-white">
-      <div className="ip-container py-[clamp(56px,7vw,96px)]">
+      <div className="ip-container pt-[clamp(56px,7vw,96px)]">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-x-12 gap-y-5">
           <div className="max-w-[720px]">
             <Label dot onDark className="mb-4">
@@ -92,8 +95,10 @@ export function TrustedBy() {
             )}
           </div>
         </div>
-        <ClientLogos onDark />
       </div>
+      {/* Full-bleed: runs edge to edge, outside the page container */}
+      <ClientMarquee />
+      <div className="h-[clamp(56px,7vw,96px)]" aria-hidden="true" />
     </section>
   );
 }
