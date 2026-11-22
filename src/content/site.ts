@@ -33,8 +33,12 @@ export const site = {
     primary: "Book an AI Data Readiness Assessment",
     header: "Book an assessment",
     midTitle: "Not sure where your data stands?",
-    midBody: "Answer five quick questions and pick a time for a 45-minute AI Data Readiness Assessment.",
+    midBody:
+      "Book a free 45-minute AI Data Readiness Assessment on your own data. Not ready to talk yet? Get our one-page checklist instead.",
     midButton: "Start the assessment",
+    /** Founder's reassurance line under the main CTAs. */
+    reassure: "Free · 45 minutes · on your own data",
+    checklistButton: "Get the readiness checklist",
     finalTitle: "Start with a 45-minute AI Data Readiness Assessment.",
     finalBody:
       "We look at your data estate through the lens of what AI agents need: quality, context, access and governance. You leave with a clear view of the gaps, the risks and the fastest path to production AI.",
@@ -71,8 +75,14 @@ export const site = {
 } as const;
 
 /**
- * Booking. Both paths open from the same dialog (see components/site/booking).
- * Replace calendlyUrl with the real event link; set configured: true.
+ * Booking (founder's flow, 22 Nov 2026): pick a time first (Calendly embed,
+ * which collects name + work email), then three OPTIONAL questions sent to
+ * Formspree with the booking's IDs, then a confirmation. Fallback for people
+ * who can't find a slot: the same questions + name/email, no calendar.
+ *
+ * To go live: paste the public Calendly event URL (45-minute event type) into
+ * calendlyUrl and set calendarConfigured: true. Calendly's free plan is enough:
+ * the embed tells the page when a booking is made (no webhooks needed).
  */
 export const booking = {
   formEndpoint: "https://formspree.io/f/xwvnakbz", // same Formspree form as /contact
@@ -81,9 +91,7 @@ export const booking = {
   durationMinutes: 45,
   questions: {
     role: ["CIO or CTO", "CDO or Head of Data", "CISO or security leader", "Data or analytics leader", "Other"],
-    companySize: ["Under 1,000 employees", "1,000 to 5,000", "5,000 to 20,000", "Over 20,000"],
     platform: ["Azure or Microsoft Fabric", "Databricks", "Snowflake", "AWS", "Google Cloud", "Mixed or on-premises"],
-    aiStage: ["Exploring", "Pilots running", "Some in production", "Scaling across the business"],
     blocker: [
       "Data quality",
       "Inconsistent metric definitions",

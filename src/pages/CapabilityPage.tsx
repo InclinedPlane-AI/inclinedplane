@@ -13,7 +13,7 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { InclineMini } from "@/components/site/Incline";
 import { TwoAnswers } from "@/components/site/TwoAnswers";
 import { Label, SectionIntro, Verified, VerifyBadge } from "@/components/site/primitives";
-import { BookCta, CaseStudyCard, Faq, FinalCta, IncleverCard, PageHero, ToolsTable } from "@/components/site/sections";
+import { BookCta, CaseStudyCard, Faq, FinalCta, IncleverCard, PageHero, Reassure, ToolsTable } from "@/components/site/sections";
 import { cn } from "@/lib/utils";
 import NotFound from "./NotFound";
 
@@ -105,6 +105,7 @@ const CapabilityPage = () => {
         aside={<InclineMini current={cap.id} />}
       >
         <BookCta source={`hero-${cap.id}`} />
+        <Reassure className="basis-full" />
       </PageHero>
 
       {/* The problem */}

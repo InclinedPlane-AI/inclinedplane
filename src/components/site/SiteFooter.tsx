@@ -5,9 +5,11 @@
 import { Link } from "react-router-dom";
 import { footerNav, legalNav, site } from "@/content/site";
 import { Verified } from "./primitives";
+import { useBooking } from "./booking/BookingProvider";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
+  const { openChecklist } = useBooking();
   return (
     <footer data-site-footer className="bg-white border-t border-ip-rule">
       <div className="ip-container flex flex-wrap justify-between gap-x-12 gap-y-10 py-12 md:py-16">
@@ -38,6 +40,17 @@ export function SiteFooter() {
                     </Link>
                   </li>
                 ))}
+                {group.title === "Resources" && (
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => openChecklist({ source: "footer" })}
+                      className="p-0 text-left text-ip-body hover:text-black hover:underline underline-offset-4"
+                    >
+                      AI readiness checklist
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
           ))}

@@ -65,10 +65,14 @@ transitions; `prefers-reduced-motion` respected.
 - C. Horizontal timeline: reads as a strict sequence, contradicting "recommended order, not a strict sequence". Rejected.
 - Refinement: on `/capabilities`, steps are buttons (tabs); selecting one reveals scope, deliverables and related case studies. On capability pages a small incline shows the current step lit.
 
-### Booking
-- **Dialog with two paths** (form → optional calendar, or calendar now). The form keeps leads qualified (founder's rationale); the calendar path removes friction for warm prospects. The Calendly script loads only when that tab opens.
-- Also available as a full page at `/assessment` (crawlable, linkable from outbound).
-- `?book=1` on any URL opens the dialog (for outbound emails/LinkedIn).
+### Booking (updated 2026-11-22 to the founder's revised homepage)
+- **Calendar first, questions after.** Pick a 45-minute slot in a Calendly inline embed (collects name + work email), then three *optional* questions (role, main data platform, biggest blocker), then "You're booked". Company size and AI stage were dropped by the founder.
+- **How answers reach us without paid tools:** the Calendly embed posts `calendly.event_scheduled` to the page (works on Calendly's free plan; no webhook). The flow then asks the questions plus "the work email you booked with" and posts them to Formspree with the Calendly event/invitee IDs. Match answers to bookings by email. Skipping the questions keeps the booking.
+- **Fallback:** "Can't find a time? Send us your details instead" → name, email, the three questions, a note → Formspree.
+- **Second offer for people not ready to talk:** the one-page *AI data readiness checklist* (draft v0.1, `src/content/checklist.json` → `public/downloads/…pdf` via `scripts/build-checklist-pdf.mjs`). Work email → Formspree lead → instant download (no email automation needed). Entry points: mid-page band's second button, /assessment side card, footer link, `?checklist=1`.
+- Founder's reassurance line "Free · 45 minutes · on your own data" under the hero, final CTA, capability heroes and the /assessment booking block.
+- Rejected: form-first then redirect to Calendly (guaranteed answers, but puts friction before the calendar, which is what the founder removed); HubSpot (not needed, costs money for the useful parts).
+- `?book=1` opens the booking, `?checklist=1` the checklist; `?name=&email=&role=&platform=&blocker=` prefill.
 
 ### Case studies
 - Home features two (founder's choice), large. Index: featured pair on top, then a filterable list (step + industry). Cards show title, industry, step tags, one headline result. No numbered markers (anti-slop).
@@ -97,7 +101,8 @@ in Keerthana's own words (current draft uses banned words, shown as placeholder)
 
 ## 6. Open questions
 
-- Real Calendly/HubSpot booking URL (placeholder now).
+- Real Calendly event URL (placeholder now). Formspree's free plan has a monthly submission cap shared by contact, assessment answers, checklist downloads and demo requests: watch it.
+- Founder review of the checklist PDF (draft v0.1).
 - Keerthana's headshot + team photos (December shoot): placeholders until then.
 - IncLever product screenshots (only the founder's demo clip is used now).
 - A context engineering / AI readiness case study (biggest proof gap).

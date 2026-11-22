@@ -1,27 +1,33 @@
 /**
- * Global booking dialog. Every "Book an assessment" button calls
- * `useBooking().open({ source })`. Two paths in one dialog:
- *   1. "Answer five questions" → Formspree → then pick a time
- *   2. "Pick a time now"       → calendar straight away
- * Deep links: add `?book=1` (form) or `?book=calendar` to any URL.
+ * Global booking dialog (founder's homepage, 22 Nov 2026). Two modes:
+ *
+ *   assess     pick a time (Calendly) → three optional questions → booked
+ *              (see BookingFlow; "Can't find a time?" fallback included)
+ *   checklist  work email → instant PDF download → offer the assessment
+ *
+ * Every "Book an assessment" CTA calls useBooking().open({ source }); the
+ * checklist CTAs call openChecklist({ source }).
+ * Deep links: `?book=1` opens the assessment, `?checklist=1` the checklist.
  */
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AssessmentForm, type AssessmentAnswers } from "./AssessmentForm";
-import { CalendarPanel } from "./CalendarPanel";
-import { Label } from "../primitives";
-import { booking } from "@/content/site";
-import { cn } from "@/lib/utils";
 import { track } from "@vercel/analytics";
+import { BookingFlow, stepLabel, stepTitles, type BookingStep } from "./BookingFlow";
+import { ChecklistDone, ChecklistForm } from "./ChecklistOffer";
+import { Label } from "../primitives";
 
-type Tab = "form" | "calendar";
+type Mode = "assess" | "checklist";
 interface OpenOptions {
   source?: string;
-  tab?: Tab;
 }
 
-const BookingContext = createContext<{ open: (opts?: OpenOptions) => void }>({ open: () => {} });
+interface Ctx {
+  open: (opts?: OpenOptions) => void;
+  openChecklist: (opts?: OpenOptions) => void;
+}
+
+const BookingContext = createContext<Ctx>({ open: () => {}, openChecklist: () => {} });
 
 export const useBooking = () => useContext(BookingContext);
 
@@ -29,39 +35,52 @@ export function BookingProvider({ children }: { children: ReactNode }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [isOpen, setOpen] = useState(false);
-  const [tab, setTab] = useState<Tab>("form");
+  const [mode, setMode] = useState<Mode>("assess");
   const [source, setSource] = useState("unknown");
-  const [submitted, setSubmitted] = useState<AssessmentAnswers | null>(null);
+  const [step, setStep] = useState<BookingStep>("time");
+  const [checklistDone, setChecklistDone] = useState(false);
+  const [session, setSession] = useState(0); // remounts the flow on each open
 
-  const open = useCallback((opts: OpenOptions = {}) => {
-    // Brief §11.6: assessment CTA clicks by location. (Vercel custom events
-    // are recorded on paid plans only; harmless no-op otherwise.)
-    track("assessment_open", { source: opts.source ?? "unknown", tab: opts.tab ?? "form" });
-    setTab(opts.tab ?? "form");
+  const show = useCallback((m: Mode, opts: OpenOptions = {}) => {
+    // Brief §11.6: CTA clicks by location. (Vercel custom events are recorded
+    // on paid plans only; harmless no-op otherwise.)
+    track(m === "assess" ? "assessment_open" : "checklist_open", { source: opts.source ?? "unknown" });
+    setMode(m);
     setSource(opts.source ?? "unknown");
-    setSubmitted(null);
+    setStep("time");
+    setChecklistDone(false);
+    setSession((s) => s + 1);
     setOpen(true);
   }, []);
 
+  const open = useCallback((opts?: OpenOptions) => show("assess", opts), [show]);
+  const openChecklist = useCallback((opts?: OpenOptions) => show("checklist", opts), [show]);
+
   useEffect(() => {
-    const b = new URLSearchParams(location.search).get("book");
-    if (b) open({ source: "link", tab: b === "calendar" ? "calendar" : "form" });
-  }, [location.search, open]);
+    const p = new URLSearchParams(location.search);
+    if (p.get("book")) open({ source: "link" });
+    else if (p.get("checklist")) openChecklist({ source: "link" });
+  }, [location.search, open, openChecklist]);
 
   const onOpenChange = (next: boolean) => {
     setOpen(next);
     if (!next) {
       const params = new URLSearchParams(location.search);
-      if (params.has("book")) {
+      if (params.has("book") || params.has("checklist")) {
         params.delete("book");
+        params.delete("checklist");
         const q = params.toString();
         navigate({ pathname: location.pathname, search: q ? `?${q}` : "", hash: location.hash }, { replace: true });
       }
     }
   };
 
+  const label = mode === "assess" ? stepLabel(step) : "Free download";
+  const title =
+    mode === "assess" ? stepTitles[step] : checklistDone ? "Your checklist is downloading" : "AI data readiness checklist";
+
   return (
-    <BookingContext.Provider value={{ open }}>
+    <BookingContext.Provider value={{ open, openChecklist }}>
       {children}
       <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
         <Dialog.Portal>
@@ -80,93 +99,26 @@ export function BookingProvider({ children }: { children: ReactNode }) {
               </svg>
             </Dialog.Close>
 
-            <Label small className="mb-2">
-              AI Data Readiness Assessment · {booking.durationMinutes} minutes
+            <Label small className="mb-2 pr-10">
+              {label}
             </Label>
-            <Dialog.Title className="m-0 pr-10 text-[26px] font-semibold leading-[1.15] tracking-[-0.015em]">
-              {submitted ? "Thanks. Now pick a time." : tab === "form" ? "Five quick questions" : "Pick a time that suits you"}
-            </Dialog.Title>
+            <Dialog.Title className="m-0 pr-10 text-[26px] font-semibold leading-[1.15] tracking-[-0.015em]">{title}</Dialog.Title>
 
-            {!submitted && (
-              <div role="tablist" aria-label="How would you like to book?" className="mt-5 inline-flex rounded-[8px] border border-ip-rule-strong p-1 text-[14px]">
-                {(
-                  [
-                    ["form", "Answer five questions"],
-                    ["calendar", "Pick a time now"],
-                  ] as const
-                ).map(([id, label]) => (
-                  <button
-                    key={id}
-                    role="tab"
-                    type="button"
-                    aria-selected={tab === id}
-                    onClick={() => setTab(id)}
-                    className={cn(
-                      "min-h-[40px] rounded-[6px] px-4 font-medium transition-colors duration-150",
-                      tab === id ? "bg-black text-white" : "text-ip-body hover:bg-ip-grey",
-                    )}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {submitted ? (
-              <div className="mt-4 flex flex-col gap-4">
-                <p className="m-0 text-[15px] leading-[1.55] text-ip-body">
-                  We’ll review your answers before the call, so the {booking.durationMinutes} minutes go on your data, not on background.
-                </p>
-                <CalendarPanel email={submitted.email} />
-              </div>
-            ) : tab === "form" ? (
+            {mode === "assess" ? (
+              <BookingFlow key={session} source={source} calendarHeight={560} onStepChange={setStep} onClose={() => onOpenChange(false)} />
+            ) : checklistDone ? (
+              <ChecklistDone onBook={() => open({ source: "checklist-done" })} />
+            ) : (
               <>
                 <p className="mt-4 mb-0 text-[15px] leading-[1.55] text-ip-body">
-                  So the call starts with your data, not with background. Only your role and work email are required.
+                  One page to check whether your data is ready for AI agents: quality, context, access and governance. Free, no call needed.
                 </p>
-                <AssessmentForm
-                  source={source}
-                  onSubmitted={(a) => {
-                    track("assessment_submit", { source });
-                    setSubmitted(a);
-                  }}
-                />
+                <ChecklistForm source={source} onDone={() => setChecklistDone(true)} />
               </>
-            ) : (
-              <div className="mt-4 flex flex-col gap-4">
-                <p className="m-0 text-[15px] leading-[1.55] text-ip-body">
-                  A senior engineer joins the call. Prefer to share some context first?{" "}
-                  <button type="button" className="ip-link text-[15px] min-h-0" onClick={() => setTab("form")}>
-                    Answer five questions
-                  </button>
-                  .
-                </p>
-                <CalendarPanel />
-              </div>
             )}
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
     </BookingContext.Provider>
-  );
-}
-
-/** A button that opens the booking dialog. */
-export function BookButton({
-  source,
-  children,
-  className,
-  tab,
-}: {
-  source: string;
-  children: ReactNode;
-  className?: string;
-  tab?: Tab;
-}) {
-  const { open } = useBooking();
-  return (
-    <button type="button" className={className} onClick={() => open({ source, tab })} data-cta={source}>
-      {children}
-    </button>
   );
 }

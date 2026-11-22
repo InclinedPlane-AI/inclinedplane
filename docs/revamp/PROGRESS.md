@@ -5,7 +5,7 @@ is finished, what is in progress, what is left, and every decision already made,
 so nobody re-does or re-litigates work. Update it in the same commit as the work
 it describes.
 
-Last updated: 2026-11-21 (end of session 1)
+Last updated: 2026-11-22 (session 2: founder's CTA update)
 
 ---
 
@@ -66,9 +66,14 @@ Last updated: 2026-11-21 (end of session 1)
   manufacturing platform (`erp-unification`) and the edible oil producer
   (`fmcg-edible-oil`). All others are in the case studies index. A new set from
   recent clients plus one large enterprise data unification case study comes later.
-- **Booking:** one dialog with two paths: (a) five qualifying questions posted to
-  the existing Formspree form (`xwvnakbz`), then an optional time pick; (b) pick a
-  time now via Calendly. Calendly URL is a placeholder in `src/content/site.ts`.
+- **Booking (revised 2026-11-22 from the founder's updated homepage file):** calendar
+  first (Calendly free plan, inline embed), then three optional questions (role,
+  platform, blocker) posted to Formspree (`xwvnakbz`) with the booking IDs, then
+  "You're booked". Fallback "Can't find a time?" form. No HubSpot. Calendly URL is a
+  placeholder in `src/content/site.ts`; set `calendarConfigured: true` when real.
+- **Checklist lead magnet:** one-page PDF (draft v0.1, founder reviewing), email →
+  instant download. Edit `src/content/checklist.json`, rebuild with
+  `node scripts/build-checklist-pdf.mjs`, commit the PDF.
 - **Name spelling:** "IncLever" (capital L) per the brief, everywhere.
 - **Theme:** light only (founder decision). Dark surfaces only for deliberate moments.
 - **Chat widget:** removed (rationale drops the placeholder chatbot).
@@ -155,7 +160,8 @@ Legend: [x] done · [~] in progress · [ ] not started
 
 ## 6b. Open content items for the team (all badged on staging, hidden in production)
 
-- Calendly/HubSpot booking URL → `src/content/site.ts` `booking.calendlyUrl`, set `calendarConfigured: true`.
+- Calendly event URL (one 45-minute event type on the free plan) → `src/content/site.ts` `booking.calendlyUrl`, set `calendarConfigured: true`.
+- Founder review of the checklist PDF (`src/content/checklist.json`, draft v0.1).
 - Proof strip figures, certified/partner list, "Offices in the United States and India", founder credentials.
 - Founder quote: her draft is shown verbatim (uses banned words); she's rewriting it. Headshot + team photos (December shoot). Should Mohan Gowda T appear in the delivery bench?
 - Capabilities to verify: MDM, ontologies, knowledge graphs, MCP, vector DBs; every tool in `src/content/tools.ts` is `verified: false`.
@@ -187,3 +193,4 @@ Legend: [x] done · [~] in progress · [ ] not started
 | 2026-11-21 | `0d9a5dc` | Insights, thesis, careers, referral, legal, 404 |
 | 2026-11-21 | `254019f` | SEO for all new pages, CTA analytics, CLAUDE.md |
 | 2026-11-21 | `cba74ef` | Legacy cleanup |
+| 2026-11-22 | (PR `feat/booking-flow-v2`) | Founder CTA update: calendar-first booking, 3 questions, checklist PDF + instant download, reassurance line |

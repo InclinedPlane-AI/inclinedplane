@@ -374,7 +374,7 @@ const staticRoutes = [
     description:
       "A 45-minute AI Data Readiness Assessment with a senior engineer: quality, context, access and governance, checked against what your AI agents need.",
     noscriptSummary:
-      "The AI Data Readiness Assessment checks your data against what AI agents need: quality, context, access and governance. It starts with a free 45-minute conversation with a senior engineer. A fixed-scope assessment backed by IncLever produces a scored findings report with evidence and a roadmap. Book by answering five questions or picking a time.",
+      "The AI Data Readiness Assessment checks your data against what AI agents need: quality, context, access and governance. It starts with a free 45-minute conversation with a senior engineer. A fixed-scope assessment backed by IncLever produces a scored findings report with evidence and a roadmap. Book by picking a time, then answering three optional questions. Not ready to talk? A free one-page readiness checklist is available.",
     pageJsonLd: [
       {
         "@context": "https://schema.org",

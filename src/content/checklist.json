@@ -1,0 +1,62 @@
+{
+  "_note": "Source for the one-page AI data readiness checklist (public/downloads/*.pdf, built by scripts/build-checklist-pdf.mjs) and the checklist offer on the site. DRAFT v0.1 awaiting founder review. Edit here, then run: node scripts/build-checklist-pdf.mjs",
+  "version": "v0.1 draft, November 2026",
+  "status": "draft",
+  "file": "/downloads/inclinedplane-ai-data-readiness-checklist.pdf",
+  "title": "AI data readiness checklist",
+  "subtitle": "Sixteen checks to run before an AI agent touches your data. Tick only what you can show evidence for, not what you believe to be true.",
+  "howTo": "Pick one AI use case and the data it needs. Answer each check for that data only. A tick needs evidence: a test result, a document, a log.",
+  "sections": [
+    {
+      "area": "Quality",
+      "question": "Is the data complete, fresh and consistent enough to answer from?",
+      "checks": [
+        "The tables this use case needs are identified, and each one has a named owner.",
+        "Required fields are populated, and you know the null and default rate of each.",
+        "Every table has a freshness rule (for example, loaded by 06:00 UTC) and someone is alerted when it is missed.",
+        "Figures agree across systems: the same order or invoice totals match in the ERP, the warehouse and the reports."
+      ]
+    },
+    {
+      "area": "Context",
+      "question": "Does the data mean the same thing to every system and every agent?",
+      "checks": [
+        "Each metric the use case needs (margin, revenue, active customer) has one written definition, agreed with finance and the business.",
+        "Those definitions are implemented once, in a semantic layer that BI tools and agents both read.",
+        "Customers, products and suppliers held in several systems resolve to one record, with the matching rules written down.",
+        "Rules an analyst “just knows” are written down: who counts as a customer, intercompany exclusions, the fiscal calendar."
+      ]
+    },
+    {
+      "area": "Access",
+      "question": "Can an agent reach the right data, and only the right data?",
+      "checks": [
+        "Agents run under their own identities, not a shared service account or a person’s credentials.",
+        "Row- and column-level permissions are enforced in the data platform, not in the prompt.",
+        "Sensitive fields (personal data, pricing, salaries) are classified, and masked where the use case doesn’t need them.",
+        "Every agent query is logged: who asked, what data was read and what came back."
+      ]
+    },
+    {
+      "area": "Governance",
+      "question": "Can you show where an answer came from, and who owns it?",
+      "checks": [
+        "Lineage runs from every report and agent answer back to the source fields.",
+        "Changes to schemas and definitions go through an agreed change process, such as data contracts.",
+        "An evaluation set of real questions with known-correct answers runs before go-live and after every change.",
+        "A named person monitors answers after go-live and has a route to get problems fixed."
+      ]
+    }
+  ],
+  "scoring": [
+    { "range": "14 to 16", "meaning": "Ready to pilot an agent on this data." },
+    { "range": "9 to 13", "meaning": "Close the unticked checks before go-live, starting with Access." },
+    { "range": "8 or fewer", "meaning": "Start with the data foundation before the agent." }
+  ],
+  "cta": {
+    "title": "Want a second opinion?",
+    "body": "In a free 45-minute AI Data Readiness Assessment, a senior engineer runs these checks against your own data and shows you what to fix first.",
+    "url": "inclinedplane.com/assessment",
+    "email": "support@inclinedplane.com"
+  }
+}
