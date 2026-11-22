@@ -5,6 +5,17 @@
 import { Fragment, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import type { LearnBlock } from "@/content/learn";
+import { TwoAnswers } from "../TwoAnswers";
+import { ContextLayers } from "./ContextLayers";
+import { OntologyExplorer } from "./OntologyExplorer";
+import { ReadinessSim } from "./ReadinessSim";
+
+const widgets = {
+  "ontology-explorer": OntologyExplorer,
+  "readiness-sim": ReadinessSim,
+  "two-answers": TwoAnswers,
+  "context-layers": ContextLayers,
+} as const;
 
 const TOKEN = /(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g;
 
@@ -72,6 +83,16 @@ export function Blocks({ blocks }: { blocks: LearnBlock[] }) {
             {b.source && <span className="mt-2 block text-[15px] font-normal text-ip-muted">{b.source}</span>}
           </blockquote>
         );
+      case "widget": {
+        const Widget = widgets[b.name];
+        // Widgets use the full article column (wider than the 720px text measure).
+        return (
+          <figure key={i} className="not-prose !my-8 xl:w-[calc(100%+156px)]">
+            <Widget />
+            <figcaption className="mt-2.5 text-[14px] leading-[1.5] text-ip-muted">{b.caption}</figcaption>
+          </figure>
+        );
+      }
       case "table":
         return (
           <div key={i} className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">

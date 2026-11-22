@@ -280,7 +280,9 @@
     mask-image: linear-gradient(90deg, transparent 0%, #000 60%);
   }
 
-  /* Long-form reading (blog, learn, legal, thesis). */
+  /* Long-form reading (blog, learn, legal, thesis). Element rules skip
+     anything inside .not-prose (interactive widgets embedded in articles)
+     and carry class-level specificity, so utilities still win. */
   .ip-prose {
     max-width: 720px;
     font-size: 18px;
@@ -290,7 +292,7 @@
   .ip-prose > * + * {
     margin-top: 1.1em;
   }
-  .ip-prose h2 {
+  .ip-prose :where(h2):not(:where(.not-prose, .not-prose *)) {
     margin-top: 2.2em;
     font-size: clamp(26px, 2.6vw, 32px);
     line-height: 1.15;
@@ -298,71 +300,71 @@
     letter-spacing: -0.015em;
     color: #000;
   }
-  .ip-prose h3 {
+  .ip-prose :where(h3):not(:where(.not-prose, .not-prose *)) {
     margin-top: 1.8em;
     font-size: 21px;
     line-height: 1.25;
     font-weight: 600;
     color: #000;
   }
-  .ip-prose strong {
+  .ip-prose :where(strong):not(:where(.not-prose, .not-prose *)) {
     color: #000;
     font-weight: 600;
   }
-  .ip-prose a {
+  .ip-prose :where(a):not(:where(.not-prose, .not-prose *)) {
     color: #000;
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-color: var(--ip-orange);
   }
-  .ip-prose a:hover {
+  .ip-prose :where(a):not(:where(.not-prose, .not-prose *)):hover {
     color: var(--ip-hover);
   }
-  .ip-prose ul,
-  .ip-prose ol {
+  .ip-prose :where(ul):not(:where(.not-prose, .not-prose *)),
+  .ip-prose :where(ol):not(:where(.not-prose, .not-prose *)) {
     padding-left: 1.25em;
   }
-  .ip-prose ul {
+  .ip-prose :where(ul):not(:where(.not-prose, .not-prose *)) {
     list-style: disc;
   }
-  .ip-prose ol {
+  .ip-prose :where(ol):not(:where(.not-prose, .not-prose *)) {
     list-style: decimal;
   }
-  .ip-prose li + li {
+  .ip-prose :where(li + li):not(:where(.not-prose, .not-prose *)) {
     margin-top: 0.4em;
   }
-  .ip-prose li::marker {
+  .ip-prose :where(li):not(:where(.not-prose, .not-prose *))::marker {
     color: var(--ip-muted);
   }
-  .ip-prose blockquote {
+  .ip-prose :where(blockquote):not(:where(.not-prose, .not-prose *)) {
     border-left: 3px solid var(--ip-orange);
     padding-left: 1em;
     color: #000;
     font-weight: 500;
   }
-  .ip-prose img {
+  .ip-prose :where(img):not(:where(.not-prose, .not-prose *)) {
     border-radius: 8px;
   }
-  .ip-prose code {
+  .ip-prose :where(code):not(:where(.not-prose, .not-prose *)) {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
     font-size: 0.88em;
     background: var(--ip-grey-50);
     padding: 0.1em 0.35em;
     border-radius: 4px;
   }
-  .ip-prose table {
+  .ip-prose :where(table):not(:where(.not-prose, .not-prose *)) {
     width: 100%;
     border-collapse: collapse;
     font-size: 16px;
   }
-  .ip-prose th,
-  .ip-prose td {
+  .ip-prose :where(th):not(:where(.not-prose, .not-prose *)),
+  .ip-prose :where(td):not(:where(.not-prose, .not-prose *)) {
     text-align: left;
     padding: 10px 12px 10px 0;
     border-bottom: 1px solid var(--ip-rule);
     vertical-align: top;
   }
-  .ip-prose th {
+  .ip-prose :where(th):not(:where(.not-prose, .not-prose *)) {
     color: #000;
     font-weight: 600;
   }

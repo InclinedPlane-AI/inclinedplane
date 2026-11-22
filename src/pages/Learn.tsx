@@ -1,13 +1,23 @@
 /**
  * /learn — explainers and glossary (brief §6.3, §7.12). Definition first,
  * quotable, every term anchored (#term-id) so other pages can link to it.
+ * Opens with the interactive "big picture" (context layers) and a strip of
+ * the hands-on widgets, each linking to the page that explains it.
  */
 import { Link } from "react-router-dom";
 import { glossary, learnArticles, readingMinutes } from "@/content/learn";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { SectionIntro } from "@/components/site/primitives";
+import { Label, SectionIntro } from "@/components/site/primitives";
 import { site } from "@/content/site";
 import { CtaBand, PageHero } from "@/components/site/sections";
+import { ContextLayers } from "@/components/site/learn/ContextLayers";
+import { NextSteps } from "@/components/site/NextSteps";
+
+const tryIt = [
+  { kind: "Simulation", title: "Run a readiness check", body: "Fix failing checks and watch an agent’s verdict change.", to: "/learn/what-ai-readiness-means#try-it" },
+  { kind: "Explorer", title: "Click through an ontology", body: "See how Customer, Order and Operating company connect, and the rules between them.", to: "/learn/ontology-vs-semantic-layer-vs-knowledge-graph#ontology" },
+  { kind: "Worked example", title: "Same question, two answers", body: "One business question on raw tables and through governed context.", to: "/context-engineering#two-answers" },
+];
 
 const Learn = () => (
   <SiteLayout
@@ -22,12 +32,42 @@ const Learn = () => (
       crumbs={[{ label: "Learn" }]}
       label="Learn"
       title="The terms behind AI-ready data, explained plainly."
-      lead="Short explainers with worked examples, written for CIOs, heads of data and the engineers who work for them. Each one starts with a definition you can quote."
+      lead="Short explainers with worked examples and things to click, written for CIOs, heads of data and the engineers who work for them. Each one starts with a definition you can quote."
     />
 
     <section className="bg-white">
       <div className="ip-container ip-section">
-        <SectionIntro label="Explainers" title="Start here." />
+        <SectionIntro label="The big picture" title="Every layer between a question and a correct answer.">
+          <p className="m-0">
+            Start here: select a layer to see what it does and what breaks without it. The full story, with data modelling and ontology, is on{" "}
+            <Link to="/context-engineering" className="ip-link">
+              context engineering, explained
+            </Link>
+            .
+          </p>
+        </SectionIntro>
+        <ContextLayers />
+      </div>
+    </section>
+
+    <section className="bg-ip-grey">
+      <div className="ip-container ip-section">
+        <SectionIntro label="Try it" title="Learn it by breaking it." />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {tryIt.map((t) => (
+            <Link key={t.to} to={t.to} className="group flex flex-col gap-2 rounded-lg border border-ip-rule-strong bg-white p-6 no-underline transition-colors hover:border-black">
+              <Label small>{t.kind}</Label>
+              <span className="text-[21px] font-semibold leading-[1.25] text-black group-hover:underline decoration-1 underline-offset-4">{t.title}</span>
+              <span className="text-[15.5px] leading-[1.55] text-ip-body">{t.body}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section className="bg-white">
+      <div className="ip-container ip-section">
+        <SectionIntro label="Explainers" title="Read the explainers." />
         <ul className="m-0 list-none border-t-2 border-black p-0">
           {learnArticles.map((a) => (
             <li key={a.slug} className="border-b border-ip-rule-strong">
@@ -62,10 +102,10 @@ const Learn = () => (
               <dt className="text-[19px] font-semibold leading-[1.3] text-black">{t.term}</dt>
               <dd className="m-0 mt-2 text-[16px] leading-[1.6] text-ip-body">
                 {t.definition}
-                {t.article && (
+                {(t.href || t.article) && (
                   <>
                     {" "}
-                    <Link to={`/learn/${t.article}`} className="ip-link text-[15px]">
+                    <Link to={t.href ?? `/learn/${t.article}`} className="ip-link text-[15px]">
                       Read the explainer
                     </Link>
                   </>
@@ -83,6 +123,14 @@ const Learn = () => (
         </p>
       </div>
     </section>
+
+    <NextSteps
+      steps={[
+        { kicker: "Capabilities", title: "Put the concepts to work", body: "The four capabilities that take your data from foundation to agents.", to: "/capabilities" },
+        { kicker: "Insights", title: "What the industry numbers say", body: "Readiness gaps, failure rates and market shifts, with sources.", to: "/insights" },
+        { kicker: "Solutions", title: "IncLever and PipelineIQ", body: "Products that check your data is reliable and ready for any agent.", to: "/products" },
+      ]}
+    />
 
     <CtaBand source="mid-learn" />
   </SiteLayout>
