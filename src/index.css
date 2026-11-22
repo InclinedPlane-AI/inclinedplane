@@ -402,6 +402,50 @@
   }
 }
 
+/* Client logo marquee (Trusted by band). Two identical copies of the list sit
+   side by side; moving the track by -50% loops seamlessly. Pauses on hover or
+   keyboard focus; disabled entirely for reduced-motion users (static row). */
+@keyframes ip-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.ip-marquee {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+.ip-marquee-track {
+  animation: ip-marquee var(--ip-marquee-duration, 40s) linear infinite;
+  will-change: transform;
+}
+.ip-marquee:hover .ip-marquee-track,
+.ip-marquee:focus-within .ip-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ip-marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .ip-marquee-track {
+    animation: none;
+    transform: none;
+    width: 100% !important;
+  }
+  .ip-marquee-track > ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding-block: 12px;
+  }
+  .ip-marquee-copy {
+    display: none !important;
+  }
+}
+
 @media print {
   header[data-site-header],
   footer[data-site-footer],

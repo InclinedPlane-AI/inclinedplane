@@ -79,6 +79,11 @@ transitions; `prefers-reduced-motion` respected.
 - Home features two (founder's choice), large. Index: featured pair on top, then a filterable list (step + industry). Cards show title, industry, step tags, one headline result. No numbered markers (anti-slop).
 - Step tags per case study are editorial calls, listed in `src/content/caseStudyMeta.ts` for delivery leads to correct.
 
+### Client logos ("Trusted by")
+- Own black band right after the homepage proof strip (and on /case-studies), heading "Companies we've engineered data foundations for."
+- Logos scroll edge to edge in an infinite loop (owner's request, 2026-11-22). This is a deliberate second motion moment beside the incline; it stays calm (~3.6s per logo), pauses on hover/focus, uses only transform, and becomes a static wrapped row for reduced-motion users. Logos are uniform white marks; the duplicate loop copy is hidden from screen readers.
+- All logos `verified: false` until each client's permission is on file; the band renders nothing in production until then.
+
 ### Removed from the old site
 - Chat widget ("Hey!" placeholder bot), splash-style dark aesthetic, aurora/glow/orbital/three.js decoration on marketing pages, the six "layer" names, generic industry statistics, the simulated pipeline dashboard.
 
