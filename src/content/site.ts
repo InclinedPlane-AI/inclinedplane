@@ -47,7 +47,7 @@ export const site = {
 
   office: {
     line: "Offices in the United States and India.",
-    verified: false,
+    verified: true, // confirmed by Mohan's team, 2026-11-22
   },
 
   founder: {

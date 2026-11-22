@@ -13,7 +13,8 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { Label, SectionIntro, buttonClass } from "@/components/site/primitives";
 import { IncleverDemoFrame, PageHero } from "@/components/site/sections";
 import { TrustChain } from "@/components/site/products/diagrams";
-import { IncidentView } from "@/components/site/products/IncidentView";
+import { DemoVideo } from "@/components/site/products/demoKit";
+import { piqVideo } from "@/content/pipelineiq";
 import { DemoRequest } from "@/components/site/products/DemoRequest";
 import { NextSteps } from "@/components/site/NextSteps";
 import { cn } from "@/lib/utils";
@@ -58,8 +59,20 @@ function ProductSection({ p, tone }: { p: Product; tone: "white" | "grey" }) {
           </div>
         </div>
         <div className="flex min-w-0 flex-col gap-3">
-          <p className="ip-label-sm m-0">{isInclever ? "Demo" : "Try it: one night of alerts, before and after"}</p>
-          {isInclever ? <IncleverDemoFrame /> : <IncidentView />}
+          <p className="ip-label-sm m-0">{isInclever ? "Demo · sample data" : "Demo · sample client"}</p>
+          {isInclever ? (
+            <IncleverDemoFrame />
+          ) : (
+            <>
+              <DemoVideo src={piqVideo.src} poster={piqVideo.poster} title="PipelineIQ portal" tag="Demo data" label={piqVideo.label} aspect={piqVideo.aspect} />
+              <p className="m-0 text-[14px] text-ip-body">
+                {piqVideo.caption}{" "}
+                <Link to="/products/pipelineiq#demo" className="ip-link text-[14px]">
+                  Try the interactive demo
+                </Link>
+              </p>
+            </>
+          )}
         </div>
       </div>
     </section>

@@ -7,6 +7,35 @@
 import type { FaqItem } from "./capabilities";
 import type { Verifiable } from "./verify";
 
+/**
+ * The portal walkthrough clip (recorded 22 Nov 2026, trimmed to 27 s, encoded
+ * at 1.25×). Shown on a sample client, "Acme Manufacturing" (owner's decision,
+ * 22 Nov 2026: published unblurred, labeled demo data).
+ */
+export const piqVideo = {
+  src: "/media/pipelineiq-demo.mp4",
+  poster: "/media/pipelineiq-demo-poster.jpg",
+  tag: "Demo data · sample client",
+  label: "A walkthrough of the PipelineIQ portal on a sample client: overview, alerts, error history, process queue, sources and the roadmap",
+  caption: "The PipelineIQ portal on a sample client, Acme Manufacturing: health, incidents, failures by stage, alerts and the roadmap.",
+  aspect: "1440/798",
+};
+
+/**
+ * The interactive sandbox: the whole portal on simulated data for a fictional
+ * client (Aldermoor Thermal Group), as one self-contained file built in the
+ * PipelineIQ repo (demo/build.py, which refuses to write anything that
+ * identifies the real client). Copied to public/demos/ with a noindex tag;
+ * loaded only when a visitor presses Launch.
+ */
+export const piqSandbox = {
+  // Deployed with clean URLs (no ".html"); Vite's dev server needs the extension.
+  src: import.meta.env.DEV ? "/demos/pipelineiq-demo.html#/" : "/demos/pipelineiq-demo#/",
+  poster: "/media/pipelineiq-sandbox-poster.jpg",
+  note: "The whole portal, running in your browser on simulated data for a fictional client. Every page, filter and chart works; nothing connects to a real system.",
+  size: "about 800 KB",
+};
+
 /** Proposed positioning line (brief §3.4 copy bank). */
 export const piqLine = "Know every morning whether your data is safe to use.";
 

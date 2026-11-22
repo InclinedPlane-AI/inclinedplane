@@ -15,6 +15,7 @@ import { visible, SHOW_UNVERIFIED } from "@/content/verify";
 import { useBooking } from "./booking/BookingProvider";
 import { ArrowIcon, Button, Label, SectionIntro, StepTag, Verified, VerifyBadge, buttonClass } from "./primitives";
 import { cn } from "@/lib/utils";
+import { DemoVideo } from "./products/demoKit";
 
 /* ------------------------------------------------------------ Page hero */
 
@@ -319,23 +320,13 @@ export function IncleverCard({ connector = true }: { connector?: boolean }) {
 export function IncleverDemoFrame() {
   return (
     <>
-      <div className="overflow-hidden rounded-[10px] border border-ip-rule-strong bg-white shadow-[0_22px_44px_-22px_rgba(0,0,0,0.35)]">
-        <div className="flex items-center justify-between gap-3 border-b border-ip-rule bg-ip-grey px-3.5 py-[9px] text-[12px] text-ip-body">
-          <span className="font-semibold text-black">IncLever demo</span>
-          <span>Sample data</span>
-        </div>
-        <video
-          src="/media/inclever-demo.mp4"
-          poster="/media/inclever-demo-poster.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-          aria-label="Short clip of the IncLever demo: an audit run, the problems it found, and AI questions being checked"
-          className="block aspect-[16/10] h-auto w-full bg-ip-grey object-cover"
-        />
-      </div>
+      <DemoVideo
+        src="/media/inclever-demo.mp4"
+        poster="/media/inclever-demo-poster.jpg"
+        title="IncLever demo"
+        tag="Demo data · sample data"
+        label="Short clip of the IncLever demo: an audit run, the problems it found, and AI questions being checked"
+      />
       <p className="m-0 text-[14px] text-ip-body">Interactive demo, about 5 minutes, sample data, nothing to install.</p>
     </>
   );

@@ -146,6 +146,15 @@ Owner's brief: the nav items overlapped; make Solutions a dropdown, give context
 - Featured: those two (EMEA platform + finance layer). Shown as wide panels with key numbers and a source-to-outcome flow (`components/site/cases/FeaturedCase.tsx`), on home and /case-studies.
 - Detail pages with a story entry (`src/content/caseStudyStories.ts`) add an "At a glance" band, the flow diagram, a challenges table and a "same client" link.
 
+## 5e. Session 3: product pages (2026-11-22)
+
+- **PipelineIQ** rebuilt as one story, the four questions after a failed night (what failed: live → why → what does it break → how do we fix it). Hero: the recorded portal walkthrough (`public/media/pipelineiq-demo.mp4`, 27 s trimmed, 1.25×, sample client "Acme Manufacturing", labeled demo data). Chapters with one interactive piece each, ported from the old site's demos into our visual language: debug trail, signature collapse, alert storm (existing incident view), adaptive thresholds, SQL guard, persona tabs, interactive roadmap.
+- **IncLever** rebuilt around four steps (check → define → answer → keep watch): demo clip in the hero, two-assistants comparison, readiness certificate, question-flow simulator (Teams chat + three gates), audit stages, tasks, surfaces, proof (finance semantic layer case study once PR #20 merges) and the trust layer with PipelineIQ.
+- **Solutions hub** shows the PipelineIQ clip beside IncLever's.
+- **PipelineIQ interactive sandbox** (`public/demos/pipelineiq-demo.html`, ~790 KB, self-contained, fictional client "Aldermoor Thermal Group", noindex): built in the PipelineIQ repo (`demo/build.py`, which blocks real-client words) and copied here. The page shows a screenshot and a Launch button; the file loads only on click (prefetched on hover) into a sandboxed iframe, with "open in a new tab". Rebuild there and copy again to update it. Its About page credits two team members by name (open item: team names on the site).
+- Shared kit: `src/components/site/products/demoKit.tsx` (demo frame, video player that plays only on screen with a pause button and no autoplay for reduced motion, sticky chapter nav).
+- **Owner's decision on the clip:** published unblurred as demo data. Some frames show real release names, Azure tenant/app IDs in error text and the real ERP list; listed in the PR for the reviewer.
+
 ## 6. Checklist
 
 Legend: [x] done · [~] in progress · [ ] not started
@@ -202,7 +211,7 @@ Legend: [x] done · [~] in progress · [ ] not started
 ## 6b. Open content items for the team (all badged on staging, hidden in production)
 
 - Founder review of the checklist PDF (`src/content/checklist.json`, draft v0.1).
-- Proof strip figures, certified/partner list, "Offices in the United States and India", founder credentials.
+- Proof strip figures, certified/partner list, founder credentials. (~~"Offices in the United States and India"~~ confirmed 2026-11-22.)
 - Founder quote: her draft is shown verbatim (uses banned words); she's rewriting it. Headshot + team photos (December shoot). Should Mohan Gowda T appear in the delivery bench?
 - Capabilities to verify: MDM, ontologies, knowledge graphs, MCP, vector DBs; every tool in `src/content/tools.ts` is `verified: false`.
 - ~~A Contextualize/Enable case study~~: the governed finance semantic layer (session 3) now backs both, and the Contextualize proof line. The EMEA platform keeps Contextualize as a proposed tag.
@@ -215,7 +224,7 @@ Legend: [x] done · [~] in progress · [ ] not started
 - Proposed blocks in `src/content/flags.ts` need founder sign-off (all on for staging).
 - **Insights figures** (`src/content/insights.ts`): 29 sourced figures, all `verified: false`. Open each `url` (and `primaryUrl` where given) and set `verified: true`. Until then production shows the page without figures. Gartner's "two-thirds" may be 63% on gartner.com.
 - **PipelineIQ in the Solutions menu:** owner's call, founder sign-off pending.
-- **Client logos** (`src/content/clients.ts`, files in `public/clients/`): 12 logos. Seven from the companies' own sites (Revlon, Rotimatic, Duroflex, Cocoblu, Kanoria/KCIL, Tarasafe, Masoom); five supplied by Mohan's team on 2026-11-22 (Arenco, Global Development Initiative (GDi), VSM Software, Noble Bioresources, Examly). Supplied files were traced to single-colour SVG silhouettes; GDi's magenta 'G' keeps a knockout gap. Arenco's logo replaced the Golden Sands mark (same client, parent brand). The first VSM file was the wrong company and was replaced the same day. GDi = Global Development Initiative (confirmed by Mohan's team, 2026-11-22). All `verified: false` until each client's written permission is on file.
+- **Client logos** (`src/content/clients.ts`, files in `public/clients/`): 12 logos. Seven from the companies' own sites (Revlon, Rotimatic, Duroflex, Cocoblu, Kanoria/KCIL, Tarasafe, Masoom); five supplied by Mohan's team on 2026-11-22 (Arenco, Global Development Initiative (GDi), VSM Software, Noble Bioresources, Examly). Supplied files were traced to single-colour SVG silhouettes; GDi's magenta 'G' keeps a knockout gap. Arenco's logo replaced the Golden Sands mark (same client, parent brand). The first VSM file was the wrong company and was replaced the same day. GDi = Global Development Initiative (confirmed by Mohan's team, 2026-11-22). Permission for all 12 confirmed by Mohan's team (2026-11-22): `verified: true`, shown in production.
 - **Testimonials** (`src/content/testimonials.ts`): all three are PLACEHOLDERS written for layout. Replace with approved quotes before launch (hidden in production until then).
 
 ## 6c. Known technical notes
@@ -246,3 +255,4 @@ Legend: [x] done · [~] in progress · [ ] not started
 | 2026-11-22 | PR #18 | Five more client logos (traced to SVG; VSM corrected, Examly added), Arenco replaces Golden Sands; tracker housekeeping |
 | 2026-11-22 | PR #19 | Navigation restructure: dropdowns, /context-engineering, /insights, /resources, /readiness-checklist, Solutions hub, interactive Learn, flow check |
 | 2026-11-22 | PR #20 | Case studies: EMEA platform rewritten, governed finance semantic layer (IncLever) and lead time report added; new featured pair as wide panels |
+| 2026-11-22 | PR #21 | Product pages: PipelineIQ and IncLever rebuilt as stories with interactive chapters; PipelineIQ demo clip on product and Solutions pages |

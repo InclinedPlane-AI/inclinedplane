@@ -1,6 +1,6 @@
 # InclinedPlane
 
-> InclinedPlane (formerly Sail Analytics) is a data engineering and AI readiness firm. We modernize enterprise data platforms on the stack clients already have (Microsoft Azure and Fabric, Databricks, AWS, Snowflake), then make the data trusted, contextualized and ready for AI agents. We work with CIOs, CDOs and heads of data at mid-to-large enterprises in the US, UK and Europe, from a delivery base in Bengaluru, India. Tagline: Data Engineered. Intelligence Deployed.
+> InclinedPlane (formerly Sail Analytics) is a data engineering and AI readiness firm. We modernize enterprise data platforms on the stack clients already have (Microsoft Azure and Fabric, Databricks, AWS, Snowflake), then make the data trusted, contextualized and ready for AI agents. We work with CIOs, CDOs and heads of data at mid-to-large enterprises in the US, UK and Europe, from a delivery base in Bengaluru, India. Offices in the United States and India. Tagline: Data Engineered. Intelligence Deployed.
 
 Only facts that appear on the website belong here. Unverified figures are deliberately left out.
 
