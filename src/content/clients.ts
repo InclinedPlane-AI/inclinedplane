@@ -1,7 +1,10 @@
 /**
  * Client logos ("Trusted by"). List supplied by the founder on 2026-11-22.
  *
- * Logos were taken from each company's own website. Every entry is
+ * Logos were taken from each company's own website or supplied by Mohan's
+ * team (2026-11-22). Supplied files were low-resolution rasters, so they were
+ * traced to single-colour SVG silhouettes (the band renders every logo as a
+ * uniform white mark anyway). Every entry is
  * `verified: false` until written permission to show the logo is on file
  * (brief: client logos only with approval). Unverified logos show on staging
  * with a "Verify before launch" badge and are hidden in production.
@@ -32,15 +35,14 @@ export const clients: Client[] = [
   { name: "Kanoria Chemicals (KCIL)", logo: "/clients/kanoria.png", height: 38, source: "kanoriachem.com", verified: false },
   { name: "Tarasafe", logo: "/clients/tarasafe.svg", height: 26, source: "tarasafe.com", verified: false },
   { name: "Masoom Group", logo: "/clients/masoom.png", height: 46, source: "masoom.in", verified: false },
+  { name: "Arenco Group", logo: "/clients/arenco.svg", height: 46, source: "supplied by Mohan's team", verified: false },
   {
-    name: "Arenco Group (Golden Sands)",
-    logo: "/clients/goldensands.png",
-    height: 50,
-    source: "goldensandsdubai.com",
+    name: "Global Development Initiative (GDi)",
+    logo: "/clients/gdi.svg",
+    height: 38,
+    source: "supplied by Mohan's team",
     verified: false,
   },
-  { name: "Examly", logo: null, height: 28, verified: false },
-  { name: "GDi Partners", logo: null, height: 28, verified: false },
-  { name: "VSM Technologies", logo: null, height: 28, verified: false },
-  { name: "Noble Bioresources", logo: null, height: 28, verified: false },
+  { name: "VSM Technologies", logo: "/clients/vsm.svg", height: 33, source: "supplied by Mohan's team", verified: false },
+  { name: "Noble Bioresources", logo: "/clients/noble.svg", height: 37, source: "supplied by Mohan's team", verified: false },
 ];
