@@ -52,6 +52,7 @@ Last updated: 2026-11-22 (session 2: founder's CTA update)
       vercel.com/account/tokens and run `gh secret set VERCEL_TOKEN -R InclinedPlane-AI/inclinedplane`.
 - [ ] Add the two engineers to the GitHub org with write access (start Monday 2026-11-23).
 - [ ] Protect `main` (PR + 1 approval) now that Lovable is retired.
+- [ ] Retire the personal-account preview project (`inclinedplane-lac.vercel.app`) and delete the local `.vercel/` link to it.
 - [ ] After staging is live, add the staging build as a required status check on `revamp`.
 - [ ] Replace placeholder booking links in `src/content/site.ts` (`booking.calendlyUrl`).
 
