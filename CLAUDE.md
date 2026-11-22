@@ -1,6 +1,6 @@
 # CLAUDE.md — Inclined Plane site
 
-**Last reviewed: 2026-11-21.** This file is the cross-session memory for
+**Last reviewed: 2026-11-22.** This file is the cross-session memory for
 Claude when working on this repo. Read it on session start, then verify
 anything here against the current code before acting on it.
 
@@ -13,6 +13,41 @@ A full redesign is under way on the long-lived `revamp` branch. **Read
 `DESIGN_NOTES.md` (route map, tokens, sign-off items) and `CONTRIBUTING.md`
 (single-repo branch/PR/deploy flow). Since 2026-11-21 Lovable is retired: no
 tool writes to `main` directly any more; everything goes through PRs.
+
+## RULE — every change goes through a PR into `revamp`; `main` only at launch
+
+This is the team's working agreement (set by the repo owner, 2026-11-22).
+Follow it on every task, however small, including docs and one-line fixes.
+
+1. **Start from the latest `revamp`:**
+   `git fetch upstream && git checkout -b <type>/<short-name> upstream/revamp`
+   (`feat/…`, `fix/…`, `content/…`, `docs/…`). One logical change per branch.
+2. **Never push to `revamp` or `main` directly**, even though admin rights
+   would allow it. Push the branch and open a PR **into `revamp`**.
+3. **Never merge, approve or admin-bypass a PR yourself.** A human reviews
+   and merges. Don't use `gh pr merge --admin` or change branch protection to
+   get around a review.
+4. Before opening the PR: `npx tsc --noEmit -p tsconfig.app.json`,
+   `npm run lint`, and for anything that touches pages or the pipeline
+   `VITE_SITE_ENV=staging npm run build` (must end "0 failed"). Screenshot
+   changed pages at 390 and 1440 wide.
+5. The PR gets a preview link automatically (staging workflow). Put what
+   changed, how it was checked and anything a reviewer must decide in the PR
+   description. Update `docs/revamp/PROGRESS.md` in the same PR.
+6. Merged PRs redeploy **staging** (https://inclinedplane-staging.vercel.app).
+   That is where the founder and reviewers sign off.
+7. **Production (`main`) changes only once, at launch:** a single reviewed PR
+   from `revamp` into `main`, opened only when the owner says everything is
+   approved and final (all "Verify before launch" items resolved, flags
+   decided). Don't open or suggest a `revamp` → `main` PR before that.
+   Before it merges, switch `deploy.yml`'s packaging step to
+   `node scripts/vercel-output.mjs` so redirects reach production.
+8. The only exception is an urgent fix to the live site: branch from `main`,
+   PR into `main` (human merges), then PR `main` into `revamp` to keep them
+   in step. Ask the owner first.
+9. All deploys use the company GitHub org and company Vercel account via
+   GitHub Actions. Never deploy from a personal Vercel account or the CLI on
+   a laptop.
 
 ## IMPORTANT — before trusting anything in this file
 
@@ -431,15 +466,18 @@ These cannot be done from the codebase:
 
 ## Working philosophy on this repo
 
-- **Lovable owns content and design.** Don't gratuitously refactor JSX
-  or CSS that Lovable might have authored unless asked.
+- **Every change is a PR into `revamp`**, reviewed and merged by a human
+  (see the RULE section at the top). Production changes once, at launch.
+- **Lovable is retired (2026-11-21).** Content and design changes now come
+  from the team and Claude through PRs. Don't gratuitously refactor JSX or
+  CSS others authored unless asked.
 - **Claude owns infrastructure** — build pipeline, SEO, deploy
   automation, structured data. Defend the contracts described above.
-- When the two collide (e.g., Lovable refactors a data file shape and
-  breaks `seo-config.mjs`'s parser), the parser is the bug. Update the
-  parser, don't push back on the content change.
-- Keep guardrail comments at the top of pipeline files so a Lovable
-  pass that "modernizes" them gets a clear "do not delete" signal.
+- When a content change breaks a parser (e.g. a data file shape changes
+  and breaks `seo-config.mjs`), the parser is the bug. Update the parser,
+  don't push back on the content change.
+- Keep guardrail comments at the top of pipeline files so anyone who
+  "modernizes" them gets a clear "do not delete" signal.
 
 ---
 
