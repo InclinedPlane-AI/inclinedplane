@@ -57,18 +57,21 @@ one PR per small change. Full process and the round log: `docs/revamp/REVIEW.md`
 
 - Each round is one PR, **"Review round N"**, from `review/round-N` (based on
   the latest `revamp`). The PR's preview link (posted by the staging workflow)
-  is her review link. Don't push to the branch while she's reviewing.
+  is her review link and stays fixed for the round.
 - She comments with **Vercel Comments** on that preview. Mohan shares it with
   her (Toolbar → Share → her email). The company Vercel account is on the
   **Hobby (free) plan**: no team seats, one outside collaborator per
   deployment, and comments only work on *preview* deployments (the stable
   staging URL is a production deployment of the staging project).
-- When Mohan says "round N done": collect every comment (from Mohan's
-  signed-in browser via the toolbar, or pasted), apply them all in one batch
-  on the same branch, run the PR checks, push, then give Mohan the new
-  preview link and a comment-by-comment list of fixes. Update the log in
-  `REVIEW.md`. She verifies on the new link and continues there.
-- Round accepted → Mohan merges → the next round branches from `revamp`.
+- **During a round, apply her changes as LOCAL commits only** on
+  `review/round-N`, shown on localhost (main folder on that branch).
+  **Do not push** until Mohan says "round N done": every push makes a new
+  preview link.
+- On "round N done": run the PR checks, push once, write a comment-by-comment
+  change list in the PR description, update the log in `REVIEW.md`. Mohan
+  approves and merges. Then open `review/round-N+1` from `revamp` as the next
+  PR; its preview link is her next review link (she checks the last round's
+  changes there and adds new comments).
 - Her wording wins for copy, but flag conflicts with the brief's voice rules,
   banned words or claims policy instead of silently changing her text. Keep
   `scripts/seo-config.mjs` in step with any title or description change.
