@@ -79,6 +79,7 @@ Last updated: 2026-11-22 (session 3)
   instant download. Edit `src/content/checklist.json`, rebuild with
   `node scripts/build-checklist-pdf.mjs`, commit the PDF.
 - **Name spelling:** "IncLever" (capital L) per the brief, everywhere.
+- **Founder review (2026-11-23):** in batches, one PR per round with one review link; Vercel comments on the PR preview; process and log in `docs/revamp/REVIEW.md`.
 - **Theme:** light only (founder decision). Dark surfaces only for deliberate moments.
 - **Chat widget:** removed (rationale drops the placeholder chatbot).
 - **Unverified claims:** wrapped with `verified: false` in content files. Staging
