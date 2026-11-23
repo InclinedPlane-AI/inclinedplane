@@ -1,6 +1,6 @@
 # CLAUDE.md — Inclined Plane site
 
-**Last reviewed: 2026-11-22.** This file is the cross-session memory for
+**Last reviewed: 2026-11-23.** This file is the cross-session memory for
 Claude when working on this repo. Read it on session start, then verify
 anything here against the current code before acting on it.
 
@@ -10,8 +10,9 @@ anything here against the current code before acting on it.
 
 A full redesign is under way on the long-lived `revamp` branch. **Read
 `docs/revamp/PROGRESS.md` first** (status, decisions, what's left), then
-`DESIGN_NOTES.md` (route map, tokens, sign-off items) and `CONTRIBUTING.md`
-(single-repo branch/PR/deploy flow). Since 2026-11-21 Lovable is retired: no
+`DESIGN_NOTES.md` (route map, tokens, sign-off items), `CONTRIBUTING.md`
+(single-repo branch/PR/deploy flow) and `docs/revamp/REVIEW.md` (founder
+review rounds, below). Since 2026-11-21 Lovable is retired: no
 tool writes to `main` directly any more; everything goes through PRs.
 
 ## RULE — every change goes through a PR into `revamp`; `main` only at launch
@@ -48,6 +49,46 @@ Follow it on every task, however small, including docs and one-line fixes.
 9. All deploys use the company GitHub org and company Vercel account via
    GitHub Actions. Never deploy from a personal Vercel account or the CLI on
    a laptop.
+
+## Founder review rounds (since 2026-11-23)
+
+Keerthana (founder) reviews content, grammar and wording **in batches**, not
+one PR per small change. Full process and the round log: `docs/revamp/REVIEW.md`.
+
+- Each round is one PR, **"Review round N"**, from `review/round-N` (based on
+  the latest `revamp`). The PR's preview link (posted by the staging workflow)
+  is her review link. Don't push to the branch while she's reviewing.
+- She comments with **Vercel Comments** on that preview. Mohan shares it with
+  her (Toolbar → Share → her email). The company Vercel account is on the
+  **Hobby (free) plan**: no team seats, one outside collaborator per
+  deployment, and comments only work on *preview* deployments (the stable
+  staging URL is a production deployment of the staging project).
+- When Mohan says "round N done": collect every comment (from Mohan's
+  signed-in browser via the toolbar, or pasted), apply them all in one batch
+  on the same branch, run the PR checks, push, then give Mohan the new
+  preview link and a comment-by-comment list of fixes. Update the log in
+  `REVIEW.md`. She verifies on the new link and continues there.
+- Round accepted → Mohan merges → the next round branches from `revamp`.
+- Her wording wins for copy, but flag conflicts with the brief's voice rules,
+  banned words or claims policy instead of silently changing her text. Keep
+  `scripts/seo-config.mjs` in step with any title or description change.
+  Layout or structural requests go back to Mohan, not into a round.
+
+## Working notes (learned 2026-11-22/23)
+
+- **PRs that each touch `docs/revamp/PROGRESS.md` conflict** when merged one
+  after another (the change log and the section above "## 6. Checklist").
+  When several PRs are open at once, chain them (each branch merges the one
+  before it) and tell Mohan the merge order. Use merge commits; force-pushes
+  are blocked by the permission check.
+- **Localhost** (`npx vite --host 127.0.0.1 --port 8080`) shows whatever
+  branch the main folder has checked out. Keep it on the branch Mohan is
+  reviewing; don't switch it away silently.
+- Keep `revamp` in step with `main`: if a hotfix lands on `main`, open a
+  "merge main into revamp" PR (see rule 8).
+- Never commit client-identifying material (the repo and previews are public):
+  client and internal system names, table names, tenant IDs. Videos and demos
+  get checked frame by frame before they're added.
 
 ## IMPORTANT — before trusting anything in this file
 
