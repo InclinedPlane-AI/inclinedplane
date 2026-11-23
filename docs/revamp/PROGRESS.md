@@ -256,3 +256,4 @@ Legend: [x] done · [~] in progress · [ ] not started
 | 2026-11-22 | PR #19 | Navigation restructure: dropdowns, /context-engineering, /insights, /resources, /readiness-checklist, Solutions hub, interactive Learn, flow check |
 | 2026-11-22 | PR #20 | Case studies: EMEA platform rewritten, governed finance semantic layer (IncLever) and lead time report added; new featured pair as wide panels |
 | 2026-11-22 | PR #21 | Product pages: PipelineIQ and IncLever rebuilt as stories with interactive chapters; PipelineIQ demo clip on product and Solutions pages |
+| 2026-11-23 | PR #22 | Merge `main` into `revamp`: keeps PR #10's `ubuntu-24.04` pin in `deploy.yml`, so the launch PR doesn't undo it |
