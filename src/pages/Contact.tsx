@@ -20,14 +20,14 @@ const inputClass =
 
 const labelClass = "mb-1.5 block text-[15px] font-semibold text-black";
 
-/** Office addresses: shown as on the previous site, pending confirmation (brief §4.4). */
+/** Office addresses: confirmed correct by Mohan's team (2026-11-23). */
 const offices: ({ label: string; address: string } & Verifiable)[] = [
   {
     label: "Bengaluru, India",
     address: "InclinedPlane, Wework Salarpuria Symbiosis, Bannerghatta Road, Bengaluru, Karnataka 560076, India",
-    verified: false,
+    verified: true,
   },
-  { label: "Dover, Delaware, US", address: "838 Walker Rd, Suite 21-2, Dover, Delaware, 19904, US", verified: false },
+  { label: "Dover, Delaware, US", address: "838 Walker Rd, Suite 21-2, Dover, Delaware, 19904, US", verified: true },
 ];
 
 const nextSteps = [
