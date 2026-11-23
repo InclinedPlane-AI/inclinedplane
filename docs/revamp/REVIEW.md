@@ -40,4 +40,4 @@ being made inside a review round.
 
 | Round | PR | Review link | Status |
 |---|---|---|---|
-| 1 | (this PR) | see the PR's preview comment | Waiting for her comments |
+| 1 | #23 | see the PR's preview comment (first link: inclinedplane-staging-4kuennxy0) | Waiting for her comments |
