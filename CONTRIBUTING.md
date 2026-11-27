@@ -59,3 +59,7 @@ Checklist (from the brief's anti-slop list):
 
 Sentence-case, imperative, scoped: `Assessment: add Calendly path to booking dialog`.
 One logical change per commit.
+
+## Keerthana's changes
+
+Keerthana edits the site through Claude Code ("Keerthana mode"): her own `content/keerthana-…` branch, a local preview, and one PR into `revamp` per batch with a plain-English change list. Playbook: `docs/revamp/FOUNDER_MODE.md`; start a session with `/keerthana`. Her PRs don't update `PROGRESS.md`.

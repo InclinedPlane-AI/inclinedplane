@@ -23,7 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
-.claude/
+# Claude Code: keep local files out; share the project's slash commands.
+.claude/*
+!.claude/commands/
 inclinedplane-main/
 .env
 

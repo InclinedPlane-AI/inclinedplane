@@ -1,6 +1,6 @@
 # CLAUDE.md — Inclined Plane site
 
-**Last reviewed: 2026-11-23.** This file is the cross-session memory for
+**Last reviewed: 2026-11-27.** This file is the cross-session memory for
 Claude when working on this repo. Read it on session start, then verify
 anything here against the current code before acting on it.
 
@@ -11,8 +11,8 @@ anything here against the current code before acting on it.
 A full redesign is under way on the long-lived `revamp` branch. **Read
 `docs/revamp/PROGRESS.md` first** (status, decisions, what's left), then
 `DESIGN_NOTES.md` (route map, tokens, sign-off items), `CONTRIBUTING.md`
-(single-repo branch/PR/deploy flow) and `docs/revamp/REVIEW.md` (founder
-review rounds, below). Since 2026-11-21 Lovable is retired: no
+(single-repo branch/PR/deploy flow) and `docs/revamp/FOUNDER_MODE.md`
+(Keerthana mode, below). Since 2026-11-21 Lovable is retired: no
 tool writes to `main` directly any more; everything goes through PRs.
 
 ## RULE — every change goes through a PR into `revamp`; `main` only at launch
@@ -34,7 +34,8 @@ Follow it on every task, however small, including docs and one-line fixes.
    changed pages at 390 and 1440 wide.
 5. The PR gets a preview link automatically (staging workflow). Put what
    changed, how it was checked and anything a reviewer must decide in the PR
-   description. Update `docs/revamp/PROGRESS.md` in the same PR.
+   description. Update `docs/revamp/PROGRESS.md` in the same PR (except
+   Keerthana's PRs: see Keerthana mode below).
 6. Merged PRs redeploy **staging** (https://inclinedplane-staging.vercel.app).
    That is where the founder and reviewers sign off.
 7. **Production (`main`) changes only once, at launch:** a single reviewed PR
@@ -50,32 +51,34 @@ Follow it on every task, however small, including docs and one-line fixes.
    GitHub Actions. Never deploy from a personal Vercel account or the CLI on
    a laptop.
 
-## Founder review rounds (since 2026-11-23)
+## Keerthana mode: the founder edits through Claude Code (since 2026-11-27)
 
-Keerthana (founder) reviews content, grammar and wording **in batches**, not
-one PR per small change. Full process and the round log: `docs/revamp/REVIEW.md`.
+Keerthana (founder and CEO) changes the site herself by asking Claude Code.
+She isn't technical. **If she's the one at the keyboard** (she runs
+`/keerthana` or says she's Keerthana), **read and follow
+`docs/revamp/FOUNDER_MODE.md`.** In short:
 
-- Each round is one PR, **"Review round N"**, from `review/round-N` (based on
-  the latest `revamp`). The PR's preview link (posted by the staging workflow)
-  is her review link and stays fixed for the round.
-- She comments with **Vercel Comments** on that preview. Mohan shares it with
-  her (Toolbar → Share → her email). The company Vercel account is on the
-  **Hobby (free) plan**: no team seats, one outside collaborator per
-  deployment, and comments only work on *preview* deployments (the stable
-  staging URL is a production deployment of the staging project).
-- **During a round, apply her changes as LOCAL commits only** on
-  `review/round-N`, shown on localhost (main folder on that branch).
-  **Do not push** until Mohan says "round N done": every push makes a new
-  preview link.
-- On "round N done": run the PR checks, push once, write a comment-by-comment
-  change list in the PR description, update the log in `REVIEW.md`. Mohan
-  approves and merges. Then open `review/round-N+1` from `revamp` as the next
-  PR; its preview link is her next review link (she checks the last round's
-  changes there and adds new comments).
-- Her wording wins for copy, but flag conflicts with the brief's voice rules,
-  banned words or claims policy instead of silently changing her text. Keep
-  `scripts/seo-config.mjs` in step with any title or description change.
-  Layout or structural requests go back to Mohan, not into a round.
+- Plain, short English, no jargon. After every change say what changed and
+  where to look on her local preview (http://localhost:8080, which Claude
+  starts for her).
+- She can change anything. When a request clashes with the team's rules (unproven
+  claims, client names, banned words, design departures), explain once and
+  kindly, then do what she decides and note it for Mohan in the PR.
+- Her work goes on her own branch, `content/keerthana-YYYY-MM-DD`, from the
+  latest `revamp` (or from her previous branch if that PR isn't merged yet).
+  Commit on your own every 2–3 small changes or after each big one. Don't push
+  while she works.
+- At end of day, after ~30–40 changes, or when she asks: run the checks, push,
+  open a PR into `revamp` with every change listed in plain words (old → new
+  for wording), anything flagged for Mohan, and the preview link. Then start
+  her next branch. Mohan reviews and merges; staging redeploys.
+- Her PRs don't update `docs/revamp/PROGRESS.md`; the PR description is the
+  record. Never merge, push to `revamp`/`main`, or force-push.
+- First session on her laptop: the playbook's section 2 checks Node, git, the
+  GitHub CLI login and her org access, clones the repo, and briefs her on how
+  Mohan has set things up.
+
+The earlier review-rounds process (Vercel comments on a round PR) is retired.
 
 ## Working notes (learned 2026-11-22/23)
 
