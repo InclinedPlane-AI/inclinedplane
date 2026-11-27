@@ -79,7 +79,7 @@ Last updated: 2026-11-22 (session 3)
   instant download. Edit `src/content/checklist.json`, rebuild with
   `node scripts/build-checklist-pdf.mjs`, commit the PDF.
 - **Name spelling:** "IncLever" (capital L) per the brief, everywhere.
-- **Founder review (2026-11-23):** in batches, one PR per round with one review link; Vercel comments on the PR preview; process and log in `docs/revamp/REVIEW.md`.
+- **Founder edits (2026-11-27):** Keerthana changes the site herself through Claude Code ("Keerthana mode", `docs/revamp/FOUNDER_MODE.md`, command `/keerthana`): her own branch, local preview, a PR into `revamp` per batch with a plain-English change list. Her PRs don't update this file. Replaces the review-rounds process (PR #23 closed; its one change, the confirmed Contact addresses, is PR #26).
 - **Theme:** light only (founder decision). Dark surfaces only for deliberate moments.
 - **Chat widget:** removed (rationale drops the placeholder chatbot).
 - **Unverified claims:** wrapped with `verified: false` in content files. Staging
